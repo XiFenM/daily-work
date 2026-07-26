@@ -1,0 +1,25 @@
+{
+  "title": "DAILY / AI",
+  "subtitle": "可复用的自媒体生产线",
+  "backgroundColor": "#07111F",
+  "primaryColor": "#4ADE80",
+  "textColor": "#F8FAFC",
+  "footer": "@your-handle",
+  "scenes": [
+    {
+      "heading": "IDEA",
+      "body": "从一个明确观点开始",
+      "durationSeconds": 4
+    },
+    {
+      "heading": "GENERATE",
+      "body": "用 ZenMux 生成和理解素材",
+      "durationSeconds": 4
+    },
+    {
+      "heading": "COMPOSE",
+      "body": "用 Remotion 精确控制节奏",
+      "durationSeconds": 4
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    name: Check (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Validate Windows bootstrap
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: ./scripts/bootstrap-windows.ps1 -CheckOnly
+      - name: Validate Linux bootstrap
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          bash -n scripts/bootstrap-linux.sh
+          bash scripts/bootstrap-linux.sh --check-only
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm doctor
+      - run: pnpm check

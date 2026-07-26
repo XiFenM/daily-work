@@ -1,0 +1,26 @@
+{
+  "name": "@daily-work/video",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio --no-open",
+    "render": "remotion render DailyBrief ../../outputs/videos/daily-brief.mp4",
+    "still": "remotion still DailyBrief ../../outputs/videos/daily-brief-still.png --frame=120",
+    "smoke": "remotion still DailyBrief ../../outputs/videos/smoke.png --frame=30 --scale=0.25 --props=./examples/daily-brief.json",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@remotion/zod-types": "4.0.499",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "remotion": "4.0.499",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@remotion/cli": "4.0.499",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3"
+  }
+}

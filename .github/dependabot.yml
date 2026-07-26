@@ -1,0 +1,25 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      remotion:
+        patterns:
+          - "remotion"
+          - "@remotion/*"
+      tooling:
+        patterns:
+          - "eslint"
+          - "@eslint/*"
+          - "typescript"
+          - "typescript-eslint"
+          - "vitest"
+          - "tsx"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

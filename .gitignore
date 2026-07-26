@@ -1,0 +1,35 @@
+# Dependencies and caches
+node_modules/
+.pnpm-store/
+.cache/
+coverage/
+dist/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Generated and transient media
+outputs/**
+!outputs/.gitkeep
+work/**
+!work/.gitkeep
+apps/video/out/
+apps/video/.remotion/
+apps/video/public/generated/
+
+# Browser automation
+.playwright-cli/
+playwright-report/
+test-results/
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
