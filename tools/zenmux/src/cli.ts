@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { mkdir, writeFile } from "node:fs/promises";
 import { basename, dirname, extname, resolve } from "node:path";
-import { Command } from "commander";
+import { Command, InvalidArgumentError } from "commander";
 import { ZenMuxClient, type VideoJob } from "./client.js";
 import {
   downloadToFile,
@@ -12,6 +12,12 @@ import {
   toDataUrl,
   writeJson,
 } from "./files.js";
+import {
+  compressLocalVideo,
+  parseVideoCompressionLevel,
+  resolveCompressionRequest,
+  type VideoCompressionLevel,
+} from "./video-compression.js";
 
 type JsonRecord = Record<string, unknown>;
 
@@ -26,6 +32,16 @@ const parseJsonObject = (value: string): JsonRecord => {
     throw new Error("--extra must be a JSON object.");
   }
   return parsed as JsonRecord;
+};
+
+const parseCompressionOption = (value: string): VideoCompressionLevel => {
+  try {
+    return parseVideoCompressionLevel(value);
+  } catch (error) {
+    throw new InvalidArgumentError(
+      error instanceof Error ? error.message : String(error),
+    );
+  }
 };
 
 const requiredModel = (
@@ -320,26 +336,61 @@ program
   .requiredOption("-p, --prompt <text>", "analysis prompt")
   .option("-m, --model <slug>", "multimodal provider/model slug")
   .option("-o, --out <path>", "save response text")
+  .option(
+    "--compress <level>",
+    "local video compression: none, light, balanced, or strong",
+    parseCompressionOption,
+    "none",
+  )
+  .option(
+    "--compressed-out <path>",
+    "path for the compressed MP4 copy (never overwrites the input)",
+  )
   .option("--max-local-mb <number>", "maximum local file size to inline", "50")
   .option("--extra <json>", "additional request fields", parseJsonObject, {})
-  .option("--dry-run", "print the request without calling the API", false)
+  .option(
+    "--dry-run",
+    "perform requested local compression and print the request without calling the API",
+    false,
+  )
   .action(
     async (options: {
       input: string;
       prompt: string;
       model?: string;
       out?: string;
+      compress: VideoCompressionLevel;
+      compressedOut?: string;
       maxLocalMb: string;
       extra: JsonRecord;
       dryRun: boolean;
     }) => {
+      const compressionRequest = resolveCompressionRequest({
+        input: options.input,
+        level: options.compress,
+        output: options.compressedOut,
+      });
+      const model = requiredModel(options.model, "ZENMUX_UNDERSTAND_MODEL");
+      const maxLocalMb = Number.parseFloat(options.maxLocalMb);
+      if (!Number.isFinite(maxLocalMb) || maxLocalMb <= 0) {
+        throw new Error(
+          "--max-local-mb must be a finite number greater than 0.",
+        );
+      }
+      if (!options.dryRun) {
+        requireApiKey();
+      }
+
+      const understandingInput = compressionRequest
+        ? (await compressLocalVideo(compressionRequest)).outputPath
+        : options.input;
       const fileData = await toDataUrl(
-        options.input,
-        Number.parseFloat(options.maxLocalMb) * 1024 * 1024,
+        understandingInput,
+        maxLocalMb * 1024 * 1024,
       );
       const payload = {
         ...options.extra,
-        model: requiredModel(options.model, "ZENMUX_UNDERSTAND_MODEL"),
+        model,
         messages: [
           {
             role: "user",
@@ -348,7 +399,7 @@ program
               {
                 type: "file",
                 file: {
-                  filename: inputFilename(options.input),
+                  filename: inputFilename(understandingInput),
                   file_data: fileData,
                 },
               },

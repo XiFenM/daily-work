@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { basename, dirname, extname, parse, resolve } from "node:path";
 import { lookup } from "mime-types";
 import type { ImageResponse } from "./client.js";
@@ -24,17 +24,21 @@ export async function toDataUrl(
   if (isRemoteInput(input)) {
     return input;
   }
+  if (!Number.isFinite(maxBytes) || maxBytes <= 0) {
+    throw new Error("The local input byte limit must be greater than 0.");
+  }
 
   const absolutePath = resolve(input);
-  const buffer = await readFile(absolutePath);
-  if (buffer.byteLength > maxBytes) {
+  const fileStats = await stat(absolutePath);
+  if (fileStats.size > maxBytes) {
     throw new Error(
-      `${input} is ${(buffer.byteLength / 1024 / 1024).toFixed(1)} MB; ` +
+      `${input} is ${(fileStats.size / 1024 / 1024).toFixed(1)} MB; ` +
         `the local input limit is ${(maxBytes / 1024 / 1024).toFixed(1)} MB. ` +
-        "Use a hosted URL or raise --max-local-mb intentionally.",
+        "For videos, choose a stronger --compress level; otherwise use a hosted URL or raise --max-local-mb intentionally.",
     );
   }
 
+  const buffer = await readFile(absolutePath);
   const mime = lookup(absolutePath) || "application/octet-stream";
   return `data:${mime};base64,${buffer.toString("base64")}`;
 }

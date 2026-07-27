@@ -127,6 +127,22 @@ pnpm bootstrap -- --with-browser-deps
 
 `--with-browser-deps` 只允许在 Linux 使用，并可能调用系统包管理器。
 
+## 视频理解前压缩
+
+`pnpm zenmux understand` 默认不改变输入。大视频可先用 FFmpeg 创建压缩副本，再将副本内联到 ZenMux 请求：
+
+```powershell
+# 推荐先尝试 balanced
+pnpm zenmux understand --input work/input.mp4 --prompt "生成详细课程笔记" --compress balanced --out outputs/demo/analysis.md
+
+# 强压缩，并指定衍生文件位置
+pnpm zenmux understand --input work/input.mp4 --prompt "生成详细课程笔记" --compress strong --compressed-out work/input-for-understanding.mp4 --out outputs/demo/analysis.md
+```
+
+三个档位依次为 `light`（最高 1080p/25 fps）、`balanced`（最高 720p/15 fps）和 `strong`（最高 540p/10 fps）。工具不会放大源画面或提高源帧率，也不会覆盖原视频或已有压缩文件。省略 `--compressed-out` 时，副本写入 `work/zenmux-compressed/`。
+
+该功能要求 `ffmpeg` 与 `ffprobe` 均在 `PATH` 中；Windows 和 Linux 初始化脚本已经安装或检查它们。本地文件默认最多内联 50 MB，并在压缩完成后检查。`--dry-run` 不调用 ZenMux API，但显式选择压缩时仍会转码并创建本地副本。CRF 压缩无法保证固定体积；副本仍超限时可换用更强档位、明确提高 `--max-local-mb`，或使用可访问 URL。
+
 ## Linux 服务器运行模式
 
 ### 浏览器

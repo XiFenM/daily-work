@@ -37,7 +37,7 @@ daily-work/
 
 推荐：
 
-- FFmpeg（包含 `ffprobe`），用于最终媒体检查
+- FFmpeg（包含 `ffprobe`），用于视频理解前的可选压缩和最终媒体检查
 - Windows/Linux 桌面环境中的 Chrome 或 Edge，用于接管正在使用的浏览器
 - Playwright CLI 自带浏览器，用于无需个人登录态的隔离自动化
 
@@ -76,6 +76,7 @@ pnpm bootstrap
 pnpm zenmux models
 pnpm zenmux image --help
 pnpm zenmux video --help
+pnpm zenmux understand --help
 ```
 
 验证图片请求但不计费：
@@ -108,7 +109,25 @@ pnpm zenmux video-status <job-id> --out outputs/demo/clip.mp4
 pnpm zenmux understand --input work/input.mp4 --prompt "按时间线总结画面、对白、转场和可剪辑亮点" --out outputs/demo/analysis.md
 ```
 
-本地文件默认最多内联 50 MB；更大的文件优先使用可访问 URL，避免把超大 base64 请求留在内存中。
+大视频可在理解前创建压缩副本；原视频不会被修改：
+
+```powershell
+pnpm zenmux understand --input work/input.mp4 --prompt "生成详细课程笔记" --compress balanced --out outputs/demo/analysis.md
+
+pnpm zenmux understand --input work/input.mp4 --prompt "生成详细课程笔记" --compress strong --compressed-out work/input-for-understanding.mp4 --out outputs/demo/analysis.md
+```
+
+`--compress` 默认是 `none`，可选档位如下：
+
+| 档位       | 画面上限  | 帧率上限 | 视频 CRF | 音频                | 适合场景                 |
+| ---------- | --------- | -------- | -------- | ------------------- | ------------------------ |
+| `light`    | 1920×1080 | 25 fps   | 24       | AAC 96k，最多双声道 | 画面细节或运动较多       |
+| `balanced` | 1280×720  | 15 fps   | 26       | AAC 64k，单声道     | 通用视频理解，建议优先用 |
+| `strong`   | 960×540   | 10 fps   | 28       | AAC 48k，单声道     | 课件、访谈和超大输入     |
+
+压缩不会放大分辨率或提高源帧率。未指定 `--compressed-out` 时，副本保存到 `work/zenmux-compressed/<原文件名>-<档位>.mp4`；若目标已存在，命令会停止而不是覆盖。`--dry-run` 不调用 ZenMux API，但选择压缩时仍会执行本地转码并写入副本。
+
+本地文件默认最多内联 50 MB，这一限制在压缩完成后检查。CRF 档位不保证固定文件大小；若副本仍超限，可选更强档位、明确提高 `--max-local-mb`，或改用可访问 URL，避免把超大 Base64 请求留在内存中。
 
 ### 浏览器
 
