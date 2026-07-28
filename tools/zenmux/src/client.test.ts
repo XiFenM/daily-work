@@ -70,4 +70,46 @@ describe("ZenMuxClient", () => {
 
     await expect(client.listModels()).rejects.toBeInstanceOf(ZenMuxHttpError);
   });
+
+  it("aggregates streamed chat deltas and final usage", async () => {
+    const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(
+      new Response(
+        [
+          'data: {"id":"generation-1","created":7,"model":"test/model","choices":[{"index":0,"delta":{"role":"assistant","content":"Hello"}}]}',
+          "",
+          'data: {"id":"generation-1","created":7,"model":"test/model","choices":[{"index":0,"delta":{"content":" world"},"finish_reason":"stop"}]}',
+          "",
+          'data: {"id":"generation-1","created":7,"model":"test/model","choices":[],"usage":{"prompt_tokens":3,"completion_tokens":2,"total_tokens":5}}',
+          "",
+          "data: [DONE]",
+          "",
+        ].join("\n"),
+        {
+          status: 200,
+          headers: { "Content-Type": "text/event-stream" },
+        },
+      ),
+    );
+    const client = new ZenMuxClient({ apiKey: "test", fetchImpl });
+    const deltas: string[] = [];
+
+    const response = await client.chatStream(
+      {
+        model: "test/model",
+        stream: true,
+        stream_options: { include_usage: true },
+        messages: [{ role: "user", content: "test" }],
+      },
+      (delta) => deltas.push(delta),
+    );
+
+    expect(response.id).toBe("generation-1");
+    expect(response.choices[0]?.message.content).toBe("Hello world");
+    expect(response.usage).toEqual({
+      prompt_tokens: 3,
+      completion_tokens: 2,
+      total_tokens: 5,
+    });
+    expect(deltas).toEqual(["Hello", " world"]);
+  });
 });

@@ -62,6 +62,7 @@ export type VideoJob = z.infer<typeof videoJobSchema>;
 export type ChatResponse = z.infer<typeof chatResponseSchema>;
 
 type FetchLike = typeof fetch;
+type ChatStreamDeltaHandler = (content: string) => void;
 
 export class ZenMuxHttpError extends Error {
   public readonly status: number;
@@ -116,6 +117,116 @@ export class ZenMuxClient {
       body: JSON.stringify(payload),
     });
     return chatResponseSchema.parse(response);
+  }
+
+  public async chatStream(
+    payload: Record<string, unknown>,
+    onDelta?: ChatStreamDeltaHandler,
+  ): Promise<ChatResponse> {
+    const response = await this.#fetch(`${this.#baseUrl}/chat/completions`, {
+      method: "POST",
+      headers: this.#headers({ Accept: "text/event-stream" }),
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      throw new ZenMuxHttpError(
+        response.status,
+        await this.#readResponseBody(response),
+      );
+    }
+    if (!response.body) {
+      throw new Error("ZenMux streaming response has no body.");
+    }
+
+    const decoder = new TextDecoder();
+    const reader = response.body.getReader();
+    const eventDataLines: string[] = [];
+    let lineBuffer = "";
+    let content = "";
+    let id = response.headers.get("x-generation-id") ?? undefined;
+    let created: number | undefined;
+    let model: string | undefined;
+    let usage: unknown;
+    let finishReason: unknown = null;
+
+    const flushEvent = (): void => {
+      if (eventDataLines.length === 0) return;
+      const data = eventDataLines.splice(0).join("\n");
+      if (data === "[DONE]") return;
+
+      let chunk: unknown;
+      try {
+        chunk = JSON.parse(data);
+      } catch (error) {
+        throw new Error(`Invalid ZenMux SSE data: ${data.slice(0, 200)}`, {
+          cause: error,
+        });
+      }
+      if (typeof chunk !== "object" || chunk === null) return;
+      const record = chunk as Record<string, unknown>;
+      if (typeof record.id === "string") id = record.id;
+      if (typeof record.created === "number") created = record.created;
+      if (typeof record.model === "string") model = record.model;
+      if (record.usage !== undefined && record.usage !== null) {
+        usage = record.usage;
+      }
+      const choices = Array.isArray(record.choices) ? record.choices : [];
+      const choice =
+        typeof choices[0] === "object" && choices[0] !== null
+          ? (choices[0] as Record<string, unknown>)
+          : undefined;
+      if (!choice) return;
+      if (choice.finish_reason !== undefined && choice.finish_reason !== null) {
+        finishReason = choice.finish_reason;
+      }
+      const delta =
+        typeof choice.delta === "object" && choice.delta !== null
+          ? (choice.delta as Record<string, unknown>)
+          : undefined;
+      if (typeof delta?.content === "string") {
+        content += delta.content;
+        onDelta?.(delta.content);
+      }
+    };
+
+    const processLine = (rawLine: string): void => {
+      const line = rawLine.endsWith("\r") ? rawLine.slice(0, -1) : rawLine;
+      if (line === "") {
+        flushEvent();
+        return;
+      }
+      if (line.startsWith("data:")) {
+        eventDataLines.push(line.slice(5).trimStart());
+      }
+    };
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      lineBuffer += decoder.decode(value, { stream: true });
+      const lines = lineBuffer.split("\n");
+      lineBuffer = lines.pop() ?? "";
+      for (const line of lines) processLine(line);
+    }
+    lineBuffer += decoder.decode();
+    if (lineBuffer) processLine(lineBuffer);
+    flushEvent();
+
+    return chatResponseSchema.parse({
+      id,
+      object: "chat.completion",
+      created,
+      model,
+      choices: [
+        {
+          index: 0,
+          message: { role: "assistant", content },
+          finish_reason: finishReason,
+        },
+      ],
+      usage,
+      streamed: true,
+    });
   }
 
   public async generateImage(
@@ -181,28 +292,34 @@ export class ZenMuxClient {
   async #request(path: string, init: RequestInit): Promise<unknown> {
     const response = await this.#fetch(`${this.#baseUrl}${path}`, {
       ...init,
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${this.#apiKey}`,
-        "Content-Type": "application/json",
-        ...init.headers,
-      },
+      headers: this.#headers(init.headers),
     });
 
-    const text = await response.text();
-    let body: unknown = text;
-    if (text) {
-      try {
-        body = JSON.parse(text);
-      } catch {
-        body = text;
-      }
-    }
+    const body = await this.#readResponseBody(response);
 
     if (!response.ok) {
       throw new ZenMuxHttpError(response.status, body);
     }
 
     return body;
+  }
+
+  #headers(headers?: HeadersInit): HeadersInit {
+    return {
+      Accept: "application/json",
+      Authorization: `Bearer ${this.#apiKey}`,
+      "Content-Type": "application/json",
+      ...headers,
+    };
+  }
+
+  async #readResponseBody(response: Response): Promise<unknown> {
+    const text = await response.text();
+    if (!text) return text;
+    try {
+      return JSON.parse(text);
+    } catch {
+      return text;
+    }
   }
 }

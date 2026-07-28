@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, dirname, extname, resolve } from "node:path";
 import { Command, InvalidArgumentError } from "commander";
 import { ZenMuxClient, type VideoJob } from "./client.js";
@@ -67,6 +67,19 @@ const requireApiKey = (): string => {
   return key;
 };
 
+const loadPrompt = async (
+  prompt: string | undefined,
+  promptFile: string | undefined,
+): Promise<string> => {
+  if ((prompt === undefined) === (promptFile === undefined)) {
+    throw new Error("Specify exactly one of --prompt or --prompt-file.");
+  }
+  if (prompt !== undefined) {
+    return prompt;
+  }
+  return readFile(resolve(promptFile!), "utf8");
+};
+
 const createClient = (): ZenMuxClient =>
   new ZenMuxClient({
     apiKey: requireApiKey(),
@@ -91,6 +104,24 @@ const dryRunOrClient = (
   return createClient();
 };
 
+const addStreamingOptions = (
+  payload: JsonRecord,
+  stream: boolean,
+): JsonRecord => {
+  if (!stream) return payload;
+  const existing =
+    typeof payload.stream_options === "object" &&
+    payload.stream_options !== null &&
+    !Array.isArray(payload.stream_options)
+      ? (payload.stream_options as JsonRecord)
+      : {};
+  return {
+    ...payload,
+    stream: true,
+    stream_options: { ...existing, include_usage: true },
+  };
+};
+
 program
   .command("models")
   .description("List the live ZenMux model catalog")
@@ -106,32 +137,40 @@ program
 program
   .command("chat")
   .description("Send a text chat-completion request")
-  .requiredOption("-p, --prompt <text>", "user prompt")
+  .option("-p, --prompt <text>", "user prompt")
+  .option("--prompt-file <path>", "read the user prompt from a UTF-8 file")
   .option("-m, --model <slug>", "provider/model slug")
   .option("-s, --system <text>", "optional system message")
   .option("-o, --out <path>", "save response text")
+  .option("--stream", "stream and aggregate the response", false)
   .option("--extra <json>", "additional request fields", parseJsonObject, {})
   .option("--dry-run", "print the request without calling the API", false)
   .action(
     async (options: {
-      prompt: string;
+      prompt?: string;
+      promptFile?: string;
       model?: string;
       system?: string;
       out?: string;
+      stream: boolean;
       extra: JsonRecord;
       dryRun: boolean;
     }) => {
+      const prompt = await loadPrompt(options.prompt, options.promptFile);
       const messages = [
         ...(options.system
           ? [{ role: "system", content: options.system }]
           : []),
-        { role: "user", content: options.prompt },
+        { role: "user", content: prompt },
       ];
-      const payload = {
-        ...options.extra,
-        model: requiredModel(options.model, "ZENMUX_CHAT_MODEL"),
-        messages,
-      };
+      const payload = addStreamingOptions(
+        {
+          ...options.extra,
+          model: requiredModel(options.model, "ZENMUX_CHAT_MODEL"),
+          messages,
+        },
+        options.stream,
+      );
       const client = dryRunOrClient(
         options.dryRun,
         `${process.env.ZENMUX_BASE_URL ?? "https://zenmux.ai/api/v1"}/chat/completions`,
@@ -139,7 +178,9 @@ program
       );
       if (!client) return;
 
-      const response = await client.chat(payload);
+      const response = options.stream
+        ? await client.chatStream(payload)
+        : await client.chat(payload);
       const text = response.choices[0]?.message.content ?? "";
       process.stdout.write(`${text}\n`);
       if (options.out) {
@@ -333,7 +374,8 @@ program
     "Analyze an image, audio file, PDF, or video through chat completions",
   )
   .requiredOption("-i, --input <path-or-url>", "media input")
-  .requiredOption("-p, --prompt <text>", "analysis prompt")
+  .option("-p, --prompt <text>", "analysis prompt")
+  .option("--prompt-file <path>", "read the analysis prompt from a UTF-8 file")
   .option("-m, --model <slug>", "multimodal provider/model slug")
   .option("-o, --out <path>", "save response text")
   .option(
@@ -347,6 +389,7 @@ program
     "path for the compressed MP4 copy (never overwrites the input)",
   )
   .option("--max-local-mb <number>", "maximum local file size to inline", "50")
+  .option("--stream", "stream and aggregate the response", false)
   .option("--extra <json>", "additional request fields", parseJsonObject, {})
   .option(
     "--dry-run",
@@ -356,15 +399,18 @@ program
   .action(
     async (options: {
       input: string;
-      prompt: string;
+      prompt?: string;
+      promptFile?: string;
       model?: string;
       out?: string;
       compress: VideoCompressionLevel;
       compressedOut?: string;
       maxLocalMb: string;
+      stream: boolean;
       extra: JsonRecord;
       dryRun: boolean;
     }) => {
+      const prompt = await loadPrompt(options.prompt, options.promptFile);
       const compressionRequest = resolveCompressionRequest({
         input: options.input,
         level: options.compress,
@@ -388,25 +434,28 @@ program
         understandingInput,
         maxLocalMb * 1024 * 1024,
       );
-      const payload = {
-        ...options.extra,
-        model,
-        messages: [
-          {
-            role: "user",
-            content: [
-              { type: "text", text: options.prompt },
-              {
-                type: "file",
-                file: {
-                  filename: inputFilename(understandingInput),
-                  file_data: fileData,
+      const payload = addStreamingOptions(
+        {
+          ...options.extra,
+          model,
+          messages: [
+            {
+              role: "user",
+              content: [
+                { type: "text", text: prompt },
+                {
+                  type: "file",
+                  file: {
+                    filename: inputFilename(understandingInput),
+                    file_data: fileData,
+                  },
                 },
-              },
-            ],
-          },
-        ],
-      };
+              ],
+            },
+          ],
+        },
+        options.stream,
+      );
       const client = dryRunOrClient(
         options.dryRun,
         `${process.env.ZENMUX_BASE_URL ?? "https://zenmux.ai/api/v1"}/chat/completions`,
@@ -414,7 +463,9 @@ program
       );
       if (!client) return;
 
-      const response = await client.chat(payload);
+      const response = options.stream
+        ? await client.chatStream(payload)
+        : await client.chat(payload);
       const text = response.choices[0]?.message.content ?? "";
       process.stdout.write(`${text}\n`);
       if (options.out) {

@@ -13,7 +13,7 @@
     "doctor": "tsx tools/ops/src/doctor.ts",
     "skills:update": "node scripts/update-skills.mjs",
     "skills:check": "node scripts/validate-skills.mjs",
-    "zenmux": "tsx tools/zenmux/src/cli.ts",
+    "zenmux": "node scripts/run-zenmux.mjs",
     "browser": "playwright-cli",
     "browser:install": "playwright-cli install-browser",
     "media:probe": "tsx tools/media/src/probe.ts",
