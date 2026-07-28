@@ -20,7 +20,7 @@ const program = new Command()
 
 const commandVersion = (
   command: string,
-  args = ["--version"],
+  args: readonly string[] = ["--version"],
 ): string | null => {
   if (command === "pnpm") {
     const version =
@@ -49,13 +49,13 @@ program.action(({ strict }: { strict: boolean }) => {
     detail: process.version,
   });
 
-  for (const [name, command, required] of [
-    ["pnpm", "pnpm", true],
-    ["Git", "git", true],
-    ["FFmpeg", "ffmpeg", false],
-    ["FFprobe", "ffprobe", false],
+  for (const [name, command, args, required] of [
+    ["pnpm", "pnpm", ["--version"], true],
+    ["Git", "git", ["--version"], true],
+    ["FFmpeg", "ffmpeg", ["-version"], false],
+    ["FFprobe", "ffprobe", ["-version"], false],
   ] as const) {
-    const version = commandVersion(command);
+    const version = commandVersion(command, args);
     checks.push({
       level: version ? "ok" : required ? "fail" : "warn",
       name,
@@ -133,7 +133,9 @@ program.action(({ strict }: { strict: boolean }) => {
     checks.push({
       level: found ? "ok" : "fail",
       name: `Skill ${skill}`,
-      detail: found ? "installed" : "missing; run pnpm skills:install",
+      detail: found
+        ? "installed"
+        : "missing from checkout; restore the committed project skills",
     });
   }
 

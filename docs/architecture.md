@@ -13,7 +13,7 @@
 
 ## 平台边界
 
-`scripts/bootstrap.mjs` 是 Windows 与 Linux 共用的初始化核心，只处理 Node workspace、`.env`、skills 和 doctor。`bootstrap-windows.ps1` 与 `bootstrap-linux.sh` 处理系统包、Shell 和权限差异，再调用同一个核心入口。
+`scripts/bootstrap.mjs` 是 Windows 与 Linux 共用的初始化核心，只处理 Node workspace、`.env`、已提交 skills 的验证和 doctor。第三方 skill 更新是独立、显式且需要审阅的操作，不属于环境初始化。`bootstrap-windows.ps1` 与 `bootstrap-linux.sh` 处理系统包、Shell 和权限差异，再调用同一个核心入口。
 
 业务工具必须通过 `pnpm` scripts 暴露，内部路径使用 Node.js `path` API。Windows 盘符、PowerShell、`apt-get`、`chmod`、SSH tunnel 等平台细节只出现在对应初始化脚本或文档中。CI 同时在 Windows 与 Ubuntu 上执行 `pnpm check`，Remotion 冒烟渲染在 Ubuntu 上验证 headless 和 Linux 字体。
 

@@ -15,11 +15,11 @@
 
 ## 首次准备
 
-从仓库根目录安装依赖和 skills：
+项目 skills 已随仓库提交。从仓库根目录安装依赖并验证 skills：
 
 ```powershell
 pnpm install
-pnpm skills:install
+pnpm skills:check
 pnpm doctor
 pnpm browser --help
 ```

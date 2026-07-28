@@ -11,8 +11,7 @@
   "scripts": {
     "bootstrap": "node scripts/bootstrap.mjs",
     "doctor": "tsx tools/ops/src/doctor.ts",
-    "skills:install": "node scripts/install-skills.mjs",
-    "skills:update": "pnpm dlx skills@latest update -p -y && playwright-cli install --skills=agents",
+    "skills:update": "node scripts/update-skills.mjs",
     "skills:check": "node scripts/validate-skills.mjs",
     "zenmux": "tsx tools/zenmux/src/cli.ts",
     "browser": "playwright-cli",

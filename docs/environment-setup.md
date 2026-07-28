@@ -40,7 +40,7 @@ Set-ExecutionPolicy -Scope Process Bypass
 1. 验证 Node.js 24+、pnpm、Git 和 FFmpeg；
 2. 在缺少全局 pnpm 时临时使用锁定版本；
 3. 创建本地 `.env`；
-4. 安装 workspace 依赖和项目 skills；
+4. 安装 workspace 依赖并验证仓库中已提交的项目 skills；
 5. 运行 `pnpm doctor`。
 
 ### 首次配置新 Windows 机器
@@ -205,11 +205,13 @@ pnpm check
 
 ```text
 pnpm install --frozen-lockfile
-pnpm skills:install
+pnpm skills:check
 pnpm doctor
 pnpm check
 pnpm video:smoke
 ```
+
+初始化不会联网更新第三方 skills。需要主动更新 ZenMux、Remotion 和 Playwright skills 时，单独运行 `pnpm skills:update`，检查 Git diff 后再提交。
 
 Playwright 升级后重新运行浏览器安装；远程服务器还应检查磁盘空间、可用内存、字体和 FFmpeg：
 

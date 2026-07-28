@@ -207,16 +207,21 @@ pnpm media:probe -- outputs/demo/clip.mp4 --expect-ratio 9:16 --expect-duration 
 - Playwright：微软官方 `playwright-cli`，负责快照、交互、会话、调试和接管现有浏览器
 - 本仓库：`creator-workflow`，负责把研究、生成、合成和 QA 串起来
 
-重新安装或更新：
+项目 skills 已提交到 Git，克隆仓库后无需联网重新安装。验证当前副本：
 
 ```powershell
-pnpm skills:install
-pnpm skills:update
 pnpm skills:check
 ```
 
-更新第三方 skill 后应先查看 Git diff。第三方 skill 是可执行指令，不应无审查地自动信任。
-Playwright skill 不跟随 GitHub `main` 分支，而由锁定的 `@playwright/cli` 包生成，避免 CLI 与 skill 版本错配；升级 CLI 依赖后运行 `pnpm skills:install` 或 `pnpm skills:update` 即可刷新。
+只有明确准备审阅第三方变更时才更新：
+
+```powershell
+pnpm skills:update
+```
+
+更新命令要求 `.agents/skills` 和 `skills-lock.json` 没有未提交修改，然后拉取最新的 ZenMux skills、全部 Remotion skills，并从锁定的本地 `@playwright/cli` 重新生成 Playwright skill。完成后会运行 `skills:check`；仍应检查 Git diff 再决定是否提交。第三方 skill 是可执行指令，不应无审查地自动信任。
+
+Playwright skill 不跟随 GitHub `main` 分支，而由锁定的 `@playwright/cli` 包生成，避免 CLI 与 skill 版本错配；升级 CLI 依赖后运行 `pnpm skills:update` 即可刷新。
 
 ## 项目工作流
 

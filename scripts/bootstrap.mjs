@@ -52,7 +52,7 @@ if (!existsSync(envPath)) {
 }
 
 run(["install"]);
-run(["skills:install"]);
+run(["skills:check"]);
 
 if (withBrowserDeps) {
   run(["browser:install", "--with-deps"]);

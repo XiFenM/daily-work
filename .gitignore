@@ -22,6 +22,7 @@ apps/video/.remotion/
 apps/video/public/generated/
 
 # Browser automation
+.playwright/
 .playwright-cli/
 playwright-report/
 test-results/
