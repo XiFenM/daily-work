@@ -1,0 +1,2073 @@
+{
+  "version": 1,
+  "scannedAt": "2026-07-28T07:26:09.127Z",
+  "sourceDirectory": "work/algorithm-interview-course-notes/source-videos",
+  "summary": {
+    "expectedLessons": 70,
+    "discoveredFiles": 70,
+    "matchedItems": 70,
+    "videos": 67,
+    "articles": 3,
+    "totalBytes": 6533729898,
+    "totalVideoDurationSeconds": 66665.617,
+    "anomalyCount": 0
+  },
+  "anomalies": [],
+  "items": [
+    {
+      "lessonId": "1-1",
+      "order": 1,
+      "chapterId": "1",
+      "expectedTitle": "算法面试不仅仅是正确的回答问题",
+      "fileTitle": "算法面试不仅仅是正确的回答问题",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/1-1 算法面试不仅仅是正确的回答问题_慕课网.mp4",
+      "sizeBytes": 109488926,
+      "declaredDurationSeconds": null,
+      "actualDurationSeconds": 1180.28,
+      "durationDeltaSeconds": null,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1180.28,
+        "sizeBytes": 109488926,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "1-2",
+      "order": 2,
+      "chapterId": "1",
+      "expectedTitle": "算法面试只是面试的一部分",
+      "fileTitle": "算法面试只是面试的一部分",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/1-2 算法面试只是面试的一部分_慕课网.mp4",
+      "sizeBytes": 84828365,
+      "declaredDurationSeconds": 891,
+      "actualDurationSeconds": 891.76,
+      "durationDeltaSeconds": 0.76,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 891.76,
+        "sizeBytes": 84828365,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "1-3",
+      "order": 3,
+      "chapterId": "1",
+      "expectedTitle": "如何准备算法面试",
+      "fileTitle": "如何准备算法面试",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/1-3 如何准备算法面试_慕课网.mp4",
+      "sizeBytes": 89986582,
+      "declaredDurationSeconds": 1058,
+      "actualDurationSeconds": 1058.4,
+      "durationDeltaSeconds": 0.4,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1058.4,
+        "sizeBytes": 89986582,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "1-4",
+      "order": 4,
+      "chapterId": "1",
+      "expectedTitle": "如何回答算法面试问题",
+      "fileTitle": "如何回答算法面试问题",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/1-4 如何回答算法面试问题_慕课网.mp4",
+      "sizeBytes": 77122233,
+      "declaredDurationSeconds": 820,
+      "actualDurationSeconds": 824.44,
+      "durationDeltaSeconds": 4.44,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 824.44,
+        "sizeBytes": 77122233,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "2-1",
+      "order": 5,
+      "chapterId": "2",
+      "expectedTitle": "究竟什么是大O（Big O）",
+      "fileTitle": "究竟什么是大O（Big O）",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/2-1 究竟什么是大O（Big O）_慕课网.mp4",
+      "sizeBytes": 115576199,
+      "declaredDurationSeconds": 1192,
+      "actualDurationSeconds": 1195.6,
+      "durationDeltaSeconds": 3.6,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1195.6,
+        "sizeBytes": 115576199,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "2-2",
+      "order": 6,
+      "chapterId": "2",
+      "expectedTitle": "对数据规模有一个概念",
+      "fileTitle": "对数据规模有一个概念",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/2-2 对数据规模有一个概念_慕课网.mp4",
+      "sizeBytes": 61120341,
+      "declaredDurationSeconds": 686,
+      "actualDurationSeconds": 686.28898,
+      "durationDeltaSeconds": 0.289,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 686.28898,
+        "sizeBytes": 61120341,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "2-3",
+      "order": 7,
+      "chapterId": "2",
+      "expectedTitle": "简单的复杂度分析",
+      "fileTitle": "简单的复杂度分析",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/2-3 简单的复杂度分析_慕课网.mp4",
+      "sizeBytes": 105343280,
+      "declaredDurationSeconds": 1160,
+      "actualDurationSeconds": 1160.56,
+      "durationDeltaSeconds": 0.56,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1160.56,
+        "sizeBytes": 105343280,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "2-4",
+      "order": 8,
+      "chapterId": "2",
+      "expectedTitle": "亲自试验自己算法的时间复杂度",
+      "fileTitle": "亲自试验自己算法的时间复杂度",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/2-4 亲自试验自己算法的时间复杂度_慕课网.mp4",
+      "sizeBytes": 95812039,
+      "declaredDurationSeconds": 893,
+      "actualDurationSeconds": 893.48,
+      "durationDeltaSeconds": 0.48,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 893.48,
+        "sizeBytes": 95812039,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "2-5",
+      "order": 9,
+      "chapterId": "2",
+      "expectedTitle": "递归算法的复杂度分析",
+      "fileTitle": "递归算法的复杂度分析",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/2-5 递归算法的复杂度分析_慕课网.mp4",
+      "sizeBytes": 83484753,
+      "declaredDurationSeconds": 886,
+      "actualDurationSeconds": 886.44,
+      "durationDeltaSeconds": 0.44,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 886.44,
+        "sizeBytes": 83484753,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "2-6",
+      "order": 10,
+      "chapterId": "2",
+      "expectedTitle": "均摊时间复杂度分析（Amortized Time Analysis）",
+      "fileTitle": "均摊时间复杂度分析（Amortized Time Analysis）",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/2-6 均摊时间复杂度分析（Amortized Time Analysis）_慕课网.mp4",
+      "sizeBytes": 92439540,
+      "declaredDurationSeconds": 916,
+      "actualDurationSeconds": 916.28,
+      "durationDeltaSeconds": 0.28,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 916.28,
+        "sizeBytes": 92439540,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "2-7",
+      "order": 11,
+      "chapterId": "2",
+      "expectedTitle": "避免复杂度的震荡",
+      "fileTitle": "避免复杂度的震荡",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/2-7 避免复杂度的震荡_慕课网.mp4",
+      "sizeBytes": 62884375,
+      "declaredDurationSeconds": 685,
+      "actualDurationSeconds": 689.888073,
+      "durationDeltaSeconds": 4.888,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 689.888073,
+        "sizeBytes": 62884375,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "3-1",
+      "order": 12,
+      "chapterId": "3",
+      "expectedTitle": "从二分查找法看如何写出正确的程序",
+      "fileTitle": "从二分查找法看如何写出正确的程序",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/3-1 从二分查找法看如何写出正确的程序_慕课网.mp4",
+      "sizeBytes": 111396599,
+      "declaredDurationSeconds": 927,
+      "actualDurationSeconds": 930.52,
+      "durationDeltaSeconds": 3.52,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 930.52,
+        "sizeBytes": 111396599,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "3-2",
+      "order": 13,
+      "chapterId": "3",
+      "expectedTitle": "改变变量定义，依然可以写出正确的算法",
+      "fileTitle": "改变变量定义，依然可以写出正确的算法",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/3-2 改变变量定义，依然可以写出正确的算法_慕课网.mp4",
+      "sizeBytes": 59465250,
+      "declaredDurationSeconds": 726,
+      "actualDurationSeconds": 726.48,
+      "durationDeltaSeconds": 0.48,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 726.48,
+        "sizeBytes": 59465250,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "3-3",
+      "order": 14,
+      "chapterId": "3",
+      "expectedTitle": "在LeetCode上解决第一个问题 Move Zeros",
+      "fileTitle": "在LeetCode上解决第一个问题 Move Zeros",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/3-3 在LeetCode上解决第一个问题 Move Zeros_慕课网.mp4",
+      "sizeBytes": 76744479,
+      "declaredDurationSeconds": 807,
+      "actualDurationSeconds": 807.52,
+      "durationDeltaSeconds": 0.52,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 807.52,
+        "sizeBytes": 76744479,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "3-4",
+      "order": 15,
+      "chapterId": "3",
+      "expectedTitle": "即使简单的问题，也有很多优化的思路",
+      "fileTitle": "即使简单的问题，也有很多优化的思路",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/3-4 即使简单的问题，也有很多优化的思路_慕课网.mp4",
+      "sizeBytes": 87393677,
+      "declaredDurationSeconds": 930,
+      "actualDurationSeconds": 930.48,
+      "durationDeltaSeconds": 0.48,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 930.48,
+        "sizeBytes": 87393677,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "3-5",
+      "order": 16,
+      "chapterId": "3",
+      "expectedTitle": "三路快排partition思路的应用 Sort Color",
+      "fileTitle": "三路快排partition思路的应用 Sort Color",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/3-5 三路快排partition思路的应用 Sort Color_慕课网.mp4",
+      "sizeBytes": 124208700,
+      "declaredDurationSeconds": 1346,
+      "actualDurationSeconds": 1346.64,
+      "durationDeltaSeconds": 0.64,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1346.64,
+        "sizeBytes": 124208700,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "3-6",
+      "order": 17,
+      "chapterId": "3",
+      "expectedTitle": "对撞指针 Two Sum II - Input Array is Sorted",
+      "fileTitle": "对撞指针 Two Sum II - Input Array is Sorted",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/3-6 对撞指针 Two Sum II - Input Array is Sorted_慕课网.mp4",
+      "sizeBytes": 111331953,
+      "declaredDurationSeconds": 1184,
+      "actualDurationSeconds": 1184.28,
+      "durationDeltaSeconds": 0.28,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1184.28,
+        "sizeBytes": 111331953,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "3-7",
+      "order": 18,
+      "chapterId": "3",
+      "expectedTitle": "滑动窗口 Minimum Size Subarray Sum",
+      "fileTitle": "滑动窗口 Minimum Size Subarray Sum",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/3-7 滑动窗口 Minimum Size Subarray Sum_慕课网.mp4",
+      "sizeBytes": 84282965,
+      "declaredDurationSeconds": 849,
+      "actualDurationSeconds": 849.92,
+      "durationDeltaSeconds": 0.92,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 849.92,
+        "sizeBytes": 84282965,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "3-8",
+      "order": 19,
+      "chapterId": "3",
+      "expectedTitle": "在滑动窗口中做记录 Longest Substring Without Repeating Characters",
+      "fileTitle": "在滑动窗口中做记录 Longest Substring Without Repeating Characters",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/3-8 在滑动窗口中做记录 Longest Substring Without Repeating Characters_慕课网.mp4",
+      "sizeBytes": 87172256,
+      "declaredDurationSeconds": 920,
+      "actualDurationSeconds": 924.68,
+      "durationDeltaSeconds": 4.68,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 924.68,
+        "sizeBytes": 87172256,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "4-1",
+      "order": 20,
+      "chapterId": "4",
+      "expectedTitle": "set的使用 Intersection of Two Arrays",
+      "fileTitle": "set的使用 Intersection of Two Arrays",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/4-1 set的使用 Intersection of Two Arrays_慕课网.mp4",
+      "sizeBytes": 84064312,
+      "declaredDurationSeconds": 672,
+      "actualDurationSeconds": 675.282721,
+      "durationDeltaSeconds": 3.283,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 675.282721,
+        "sizeBytes": 84064312,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "4-2",
+      "order": 21,
+      "chapterId": "4",
+      "expectedTitle": "map的使用 Intersection of Two Arrays II",
+      "fileTitle": "map的使用 Intersection of Two Arrays II",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/4-2 map的使用 Intersection of Two Arrays II_慕课网.mp4",
+      "sizeBytes": 71689206,
+      "declaredDurationSeconds": 785,
+      "actualDurationSeconds": 785.96,
+      "durationDeltaSeconds": 0.96,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 785.96,
+        "sizeBytes": 71689206,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "4-3",
+      "order": 22,
+      "chapterId": "4",
+      "expectedTitle": "set和map不同底层实现的区别",
+      "fileTitle": "set和map不同底层实现的区别",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/4-3 set和map不同底层实现的区别_慕课网.mp4",
+      "sizeBytes": 110888888,
+      "declaredDurationSeconds": 1140,
+      "actualDurationSeconds": 1140.12,
+      "durationDeltaSeconds": 0.12,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1140.12,
+        "sizeBytes": 110888888,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "4-4",
+      "order": 23,
+      "chapterId": "4",
+      "expectedTitle": "使用查找表的经典问题 Two Sum",
+      "fileTitle": "使用查找表的经典问题 Two Sum",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/4-4 使用查找表的经典问题 Two Sum_慕课网.mp4",
+      "sizeBytes": 102777622,
+      "declaredDurationSeconds": 1016,
+      "actualDurationSeconds": 1017,
+      "durationDeltaSeconds": 1,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1017,
+        "sizeBytes": 102777622,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "4-5",
+      "order": 24,
+      "chapterId": "4",
+      "expectedTitle": "灵活选择键值 4Sum II",
+      "fileTitle": "灵活选择键值 4Sum II",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/4-5 灵活选择键值 4Sum II_慕课网.mp4",
+      "sizeBytes": 78928946,
+      "declaredDurationSeconds": 805,
+      "actualDurationSeconds": 805.2,
+      "durationDeltaSeconds": 0.2,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 805.2,
+        "sizeBytes": 78928946,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "4-6",
+      "order": 25,
+      "chapterId": "4",
+      "expectedTitle": "灵活选择键值 Number of Boomerangs",
+      "fileTitle": "灵活选择键值 Number of Boomerangs",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/4-6 灵活选择键值 Number of Boomerangs_慕课网.mp4",
+      "sizeBytes": 82825690,
+      "declaredDurationSeconds": 885,
+      "actualDurationSeconds": 885.6,
+      "durationDeltaSeconds": 0.6,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 885.6,
+        "sizeBytes": 82825690,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "4-7",
+      "order": 26,
+      "chapterId": "4",
+      "expectedTitle": "查找表和滑动窗口 Contain Duplicate II",
+      "fileTitle": "查找表和滑动窗口 Contain Duplicate II",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/4-7 查找表和滑动窗口 Contain Duplicate II_慕课网.mp4",
+      "sizeBytes": 74223843,
+      "declaredDurationSeconds": 680,
+      "actualDurationSeconds": 680.483991,
+      "durationDeltaSeconds": 0.484,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 680.483991,
+        "sizeBytes": 74223843,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "4-8",
+      "order": 27,
+      "chapterId": "4",
+      "expectedTitle": "二分搜索树底层实现的顺序性 Contain Duplicate III",
+      "fileTitle": "二分搜索树底层实现的顺序性 Contain Duplicate III",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/4-8 二分搜索树底层实现的顺序性 Contain Duplicate III_慕课网.mp4",
+      "sizeBytes": 70500442,
+      "declaredDurationSeconds": 650,
+      "actualDurationSeconds": 654.28,
+      "durationDeltaSeconds": 4.28,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 654.28,
+        "sizeBytes": 70500442,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "5-1",
+      "order": 28,
+      "chapterId": "5",
+      "expectedTitle": "链表，在节点间穿针引线 Reverse Linked List",
+      "fileTitle": "链表，在节点间穿针引线 Reverse Linked List",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/5-1 链表，在节点间穿针引线 Reverse Linked List_慕课网.mp4",
+      "sizeBytes": 93008374,
+      "declaredDurationSeconds": 944,
+      "actualDurationSeconds": 947.52,
+      "durationDeltaSeconds": 3.52,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 947.52,
+        "sizeBytes": 93008374,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "5-2",
+      "order": 29,
+      "chapterId": "5",
+      "expectedTitle": "测试你的链表程序",
+      "fileTitle": "测试你的链表程序",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/5-2 测试你的链表程序_慕课网.mp4",
+      "sizeBytes": 88546875,
+      "declaredDurationSeconds": 986,
+      "actualDurationSeconds": 986.96,
+      "durationDeltaSeconds": 0.96,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 986.96,
+        "sizeBytes": 88546875,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "5-3",
+      "order": 30,
+      "chapterId": "5",
+      "expectedTitle": "设立链表的虚拟头结点 Remove Linked List Elements",
+      "fileTitle": "设立链表的虚拟头结点 Remove Linked List Elements",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/5-3 设立链表的虚拟头结点 Remove Linked List Elements_慕课网.mp4",
+      "sizeBytes": 97772560,
+      "declaredDurationSeconds": 1028,
+      "actualDurationSeconds": 1028.8,
+      "durationDeltaSeconds": 0.8,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1028.8,
+        "sizeBytes": 97772560,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "5-4",
+      "order": 31,
+      "chapterId": "5",
+      "expectedTitle": "复杂的穿针引线 Swap Nodes in Pairs",
+      "fileTitle": "复杂的穿针引线 Swap Nodes in Pairs",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/5-4 复杂的穿针引线 Swap Nodes in Pairs_慕课网.mp4",
+      "sizeBytes": 72670030,
+      "declaredDurationSeconds": 810,
+      "actualDurationSeconds": 810.72,
+      "durationDeltaSeconds": 0.72,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 810.72,
+        "sizeBytes": 72670030,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "5-5",
+      "order": 32,
+      "chapterId": "5",
+      "expectedTitle": "不仅仅是穿针引线 Delete Node in a Linked List",
+      "fileTitle": "不仅仅是穿针引线 Delete Node in a Linked List",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/5-5 不仅仅是穿针引线 Delete Node in a Linked List_慕课网.mp4",
+      "sizeBytes": 49912216,
+      "declaredDurationSeconds": 449,
+      "actualDurationSeconds": 449.96,
+      "durationDeltaSeconds": 0.96,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 449.96,
+        "sizeBytes": 49912216,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "5-6",
+      "order": 33,
+      "chapterId": "5",
+      "expectedTitle": "链表与双指针 Remove Nth Node Form End of List",
+      "fileTitle": "链表与双指针 Remove Nth Node Form End of List",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/5-6 链表与双指针 Remove Nth Node Form End of List_慕课网.mp4",
+      "sizeBytes": 102267349,
+      "declaredDurationSeconds": 1009,
+      "actualDurationSeconds": 1013.52,
+      "durationDeltaSeconds": 4.52,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1013.52,
+        "sizeBytes": 102267349,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "6-1",
+      "order": 34,
+      "chapterId": "6",
+      "expectedTitle": "栈的基础应用 Valid Parentheses",
+      "fileTitle": "栈的基础应用 Valid Parentheses",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/6-1 栈的基础应用 Valid Parentheses_慕课网.mp4",
+      "sizeBytes": 104686824,
+      "declaredDurationSeconds": 970,
+      "actualDurationSeconds": 973.44,
+      "durationDeltaSeconds": 3.44,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 973.44,
+        "sizeBytes": 104686824,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "6-2",
+      "order": 35,
+      "chapterId": "6",
+      "expectedTitle": "栈和递归的紧密关系 Binary Tree Preorder, Inorder and Postorder Traversal",
+      "fileTitle": "栈和递归的紧密关系 Binary Tree Preorder, Inorder and Postorder Traversal",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/6-2 栈和递归的紧密关系 Binary Tree Preorder, Inorder and Postorder Traversal_慕课网.mp4",
+      "sizeBytes": 99777215,
+      "declaredDurationSeconds": 963,
+      "actualDurationSeconds": 963.68,
+      "durationDeltaSeconds": 0.68,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 963.68,
+        "sizeBytes": 99777215,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "6-3",
+      "order": 36,
+      "chapterId": "6",
+      "expectedTitle": "运用栈模拟递归",
+      "fileTitle": "运用栈模拟递归",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/6-3 运用栈模拟递归_慕课网.mp4",
+      "sizeBytes": 108006903,
+      "declaredDurationSeconds": 1173,
+      "actualDurationSeconds": 1173.12,
+      "durationDeltaSeconds": 0.12,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1173.12,
+        "sizeBytes": 108006903,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "6-4",
+      "order": 37,
+      "chapterId": "6",
+      "expectedTitle": "队列的典型应用 Binary Tree Level Order Traversal",
+      "fileTitle": "队列的典型应用 Binary Tree Level Order Traversal",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/6-4 队列的典型应用 Binary Tree Level Order Traversal_慕课网.mp4",
+      "sizeBytes": 67142410,
+      "declaredDurationSeconds": 626,
+      "actualDurationSeconds": 626.32,
+      "durationDeltaSeconds": 0.32,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 626.32,
+        "sizeBytes": 67142410,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "6-5",
+      "order": 38,
+      "chapterId": "6",
+      "expectedTitle": "BFS和图的最短路径 Perfect Squares",
+      "fileTitle": "BFS和图的最短路径 Perfect Squares",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/6-5 BFS和图的最短路径 Perfect Squares_慕课网.mp4",
+      "sizeBytes": 142735072,
+      "declaredDurationSeconds": 1280,
+      "actualDurationSeconds": 1280.88,
+      "durationDeltaSeconds": 0.88,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1280.88,
+        "sizeBytes": 142735072,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "6-6",
+      "order": 39,
+      "chapterId": "6",
+      "expectedTitle": "优先队列",
+      "fileTitle": "优先队列",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/6-6 优先队列_慕课网.mp4",
+      "sizeBytes": 94701482,
+      "declaredDurationSeconds": 669,
+      "actualDurationSeconds": 669.04,
+      "durationDeltaSeconds": 0.04,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 669.04,
+        "sizeBytes": 94701482,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "6-7",
+      "order": 40,
+      "chapterId": "6",
+      "expectedTitle": "优先队列相关的算法问题 Top K Frequent Elements",
+      "fileTitle": "优先队列相关的算法问题 Top K Frequent Elements",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/6-7 优先队列相关的算法问题 Top K Frequent Elements_慕课网.mp4",
+      "sizeBytes": 86178347,
+      "declaredDurationSeconds": 937,
+      "actualDurationSeconds": 941.685261,
+      "durationDeltaSeconds": 4.685,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 941.685261,
+        "sizeBytes": 86178347,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "6-8",
+      "order": 41,
+      "chapterId": "6",
+      "expectedTitle": "两种关于 topK 问题求解思路的套路",
+      "fileTitle": "两种关于 topK 问题求解思路的套路",
+      "contentType": "article",
+      "path": "work/algorithm-interview-course-notes/source-videos/6-8 两种关于 topK 问题求解思路的套路.md",
+      "sizeBytes": 973,
+      "declaredDurationSeconds": null,
+      "actualDurationSeconds": null,
+      "durationDeltaSeconds": null,
+      "status": "matched",
+      "media": null
+    },
+    {
+      "lessonId": "7-1",
+      "order": 42,
+      "chapterId": "7",
+      "expectedTitle": "二叉树天然的递归结构",
+      "fileTitle": "二叉树天然的递归结构",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/7-1 二叉树天然的递归结构_慕课网.mp4",
+      "sizeBytes": 100812490,
+      "declaredDurationSeconds": 958,
+      "actualDurationSeconds": 961.24,
+      "durationDeltaSeconds": 3.24,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 961.24,
+        "sizeBytes": 100812490,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "7-2",
+      "order": 43,
+      "chapterId": "7",
+      "expectedTitle": "一个简单的二叉树问题引发的血案 Invert Binary Tree",
+      "fileTitle": "一个简单的二叉树问题引发的血案 Invert Binary Tree",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/7-2 一个简单的二叉树问题引发的血案 Invert Binary Tree_慕课网.mp4",
+      "sizeBytes": 56246992,
+      "declaredDurationSeconds": 548,
+      "actualDurationSeconds": 549,
+      "durationDeltaSeconds": 1,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 549,
+        "sizeBytes": 56246992,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "7-3",
+      "order": 44,
+      "chapterId": "7",
+      "expectedTitle": "不会翻转二叉树的大神",
+      "fileTitle": "不会翻转二叉树的大神",
+      "contentType": "article",
+      "path": "work/algorithm-interview-course-notes/source-videos/7-3 不会翻转二叉树的大神.md",
+      "sizeBytes": 12798,
+      "declaredDurationSeconds": null,
+      "actualDurationSeconds": null,
+      "durationDeltaSeconds": null,
+      "status": "matched",
+      "media": null
+    },
+    {
+      "lessonId": "7-4",
+      "order": 45,
+      "chapterId": "7",
+      "expectedTitle": "注意递归的终止条件 Path Sum",
+      "fileTitle": "注意递归的终止条件 Path Sum",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/7-4 注意递归的终止条件 Path Sum_慕课网.mp4",
+      "sizeBytes": 70637336,
+      "declaredDurationSeconds": 724,
+      "actualDurationSeconds": 724.2,
+      "durationDeltaSeconds": 0.2,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 724.2,
+        "sizeBytes": 70637336,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "7-5",
+      "order": 46,
+      "chapterId": "7",
+      "expectedTitle": "定义递归问题 Binary Tree Path",
+      "fileTitle": "定义递归问题 Binary Tree Path",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/7-5 定义递归问题 Binary Tree Path_慕课网.mp4",
+      "sizeBytes": 86306524,
+      "declaredDurationSeconds": 814,
+      "actualDurationSeconds": 814.881088,
+      "durationDeltaSeconds": 0.881,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 814.881088,
+        "sizeBytes": 86306524,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "7-6",
+      "order": 47,
+      "chapterId": "7",
+      "expectedTitle": "稍复杂的递归逻辑 Path Sum III",
+      "fileTitle": "稍复杂的递归逻辑 Path Sum III",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/7-6 稍复杂的递归逻辑 Path Sum III_慕课网.mp4",
+      "sizeBytes": 89004194,
+      "declaredDurationSeconds": 851,
+      "actualDurationSeconds": 851.16,
+      "durationDeltaSeconds": 0.16,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 851.16,
+        "sizeBytes": 89004194,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "7-7",
+      "order": 48,
+      "chapterId": "7",
+      "expectedTitle": "二分搜索树中的问题 Lowest Common Ancestor of a Binary Search Tree",
+      "fileTitle": "二分搜索树中的问题 Lowest Common Ancestor of a Binary Search Tree",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/7-7 二分搜索树中的问题 Lowest Common Ancestor of a Binary Search Tree_慕课网.mp4",
+      "sizeBytes": 100100306,
+      "declaredDurationSeconds": 1066,
+      "actualDurationSeconds": 1070.44,
+      "durationDeltaSeconds": 4.44,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1070.44,
+        "sizeBytes": 100100306,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "8-1",
+      "order": 49,
+      "chapterId": "8",
+      "expectedTitle": "树形问题 Letter Combinations of a Phone Number",
+      "fileTitle": "树形问题 Letter Combinations of a Phone Number",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/8-1 树形问题 Letter Combinations of a Phone Number_慕课网.mp4",
+      "sizeBytes": 111207567,
+      "declaredDurationSeconds": 1089,
+      "actualDurationSeconds": 1092.522086,
+      "durationDeltaSeconds": 3.522,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1092.522086,
+        "sizeBytes": 111207567,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "8-2",
+      "order": 50,
+      "chapterId": "8",
+      "expectedTitle": "什么是回溯",
+      "fileTitle": "什么是回溯",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/8-2 什么是回溯_慕课网.mp4",
+      "sizeBytes": 94123635,
+      "declaredDurationSeconds": 1096,
+      "actualDurationSeconds": 1096.16,
+      "durationDeltaSeconds": 0.16,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1096.16,
+        "sizeBytes": 94123635,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "8-3",
+      "order": 51,
+      "chapterId": "8",
+      "expectedTitle": "排列问题 Permutations",
+      "fileTitle": "排列问题 Permutations",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/8-3 排列问题 Permutations_慕课网.mp4",
+      "sizeBytes": 125177443,
+      "declaredDurationSeconds": 1142,
+      "actualDurationSeconds": 1142.12,
+      "durationDeltaSeconds": 0.12,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1142.12,
+        "sizeBytes": 125177443,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "8-4",
+      "order": 52,
+      "chapterId": "8",
+      "expectedTitle": "组合问题 Combinations",
+      "fileTitle": "组合问题 Combinations",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/8-4 组合问题 Combinations_慕课网.mp4",
+      "sizeBytes": 96584742,
+      "declaredDurationSeconds": 867,
+      "actualDurationSeconds": 867.84,
+      "durationDeltaSeconds": 0.84,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 867.84,
+        "sizeBytes": 96584742,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "8-5",
+      "order": 53,
+      "chapterId": "8",
+      "expectedTitle": "回溯法解决组合问题的优化",
+      "fileTitle": "回溯法解决组合问题的优化",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/8-5 回溯法解决组合问题的优化_慕课网.mp4",
+      "sizeBytes": 99138557,
+      "declaredDurationSeconds": 1049,
+      "actualDurationSeconds": 1049.08,
+      "durationDeltaSeconds": 0.08,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1049.08,
+        "sizeBytes": 99138557,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "8-6",
+      "order": 54,
+      "chapterId": "8",
+      "expectedTitle": "二维平面上的回溯法 Word Search",
+      "fileTitle": "二维平面上的回溯法 Word Search",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/8-6 二维平面上的回溯法 Word Search_慕课网.mp4",
+      "sizeBytes": 142391066,
+      "declaredDurationSeconds": 1305,
+      "actualDurationSeconds": 1305.16,
+      "durationDeltaSeconds": 0.16,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1305.16,
+        "sizeBytes": 142391066,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "8-7",
+      "order": 55,
+      "chapterId": "8",
+      "expectedTitle": "floodfill算法，一类经典问题 Number of Islands",
+      "fileTitle": "floodfill算法，一类经典问题 Number of Islands-",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/8-7 floodfill算法，一类经典问题 Number of Islands-_慕课网.mp4",
+      "sizeBytes": 127276874,
+      "declaredDurationSeconds": 1287,
+      "actualDurationSeconds": 1287.48,
+      "durationDeltaSeconds": 0.48,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1287.48,
+        "sizeBytes": 127276874,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "8-8",
+      "order": 56,
+      "chapterId": "8",
+      "expectedTitle": "回溯法是经典人工智能的基础 N Queens",
+      "fileTitle": "回溯法是经典人工智能的基础 N Queens",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/8-8 回溯法是经典人工智能的基础 N Queens_慕课网.mp4",
+      "sizeBytes": 142188143,
+      "declaredDurationSeconds": 1517,
+      "actualDurationSeconds": 1521.96,
+      "durationDeltaSeconds": 4.96,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1521.96,
+        "sizeBytes": 142188143,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "9-1",
+      "order": 57,
+      "chapterId": "9",
+      "expectedTitle": "什么是动态规划",
+      "fileTitle": "什么是动态规划",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/9-1 什么是动态规划_慕课网.mp4",
+      "sizeBytes": 110762225,
+      "declaredDurationSeconds": 1227,
+      "actualDurationSeconds": 1230.96,
+      "durationDeltaSeconds": 3.96,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1230.96,
+        "sizeBytes": 110762225,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "9-2",
+      "order": 58,
+      "chapterId": "9",
+      "expectedTitle": "第一个动态规划问题 Climbing Stairs",
+      "fileTitle": "第一个动态规划问题 Climbing Stairs",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/9-2 第一个动态规划问题 Climbing Stairs_慕课网.mp4",
+      "sizeBytes": 77312259,
+      "declaredDurationSeconds": 842,
+      "actualDurationSeconds": 842.68,
+      "durationDeltaSeconds": 0.68,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 842.68,
+        "sizeBytes": 77312259,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "9-3",
+      "order": 59,
+      "chapterId": "9",
+      "expectedTitle": "发现重叠子问题 Integer Break",
+      "fileTitle": "发现重叠子问题 Integer Break",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/9-3 发现重叠子问题 Integer Break_慕课网.mp4",
+      "sizeBytes": 149163502,
+      "declaredDurationSeconds": 1510,
+      "actualDurationSeconds": 1511,
+      "durationDeltaSeconds": 1,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1511,
+        "sizeBytes": 149163502,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "9-4",
+      "order": 60,
+      "chapterId": "9",
+      "expectedTitle": "状态的定义和状态转移 House Robber",
+      "fileTitle": "状态的定义和状态转移 House Robber",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/9-4 状态的定义和状态转移 House Robber_慕课网.mp4",
+      "sizeBytes": 150851075,
+      "declaredDurationSeconds": 1639,
+      "actualDurationSeconds": 1639.12,
+      "durationDeltaSeconds": 0.12,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1639.12,
+        "sizeBytes": 150851075,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "9-5",
+      "order": 61,
+      "chapterId": "9",
+      "expectedTitle": "0-1背包问题",
+      "fileTitle": "0-1背包问题",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/9-5 0-1背包问题_慕课网.mp4",
+      "sizeBytes": 199824394,
+      "declaredDurationSeconds": 1957,
+      "actualDurationSeconds": 1957.92,
+      "durationDeltaSeconds": 0.92,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1957.92,
+        "sizeBytes": 199824394,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "9-6",
+      "order": 62,
+      "chapterId": "9",
+      "expectedTitle": "0-1背包问题的优化和变种",
+      "fileTitle": "0-1背包问题的优化和变种",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/9-6 0-1背包问题的优化和变种_慕课网.mp4",
+      "sizeBytes": 107683137,
+      "declaredDurationSeconds": 1218,
+      "actualDurationSeconds": 1218.36,
+      "durationDeltaSeconds": 0.36,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1218.36,
+        "sizeBytes": 107683137,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "9-7",
+      "order": 63,
+      "chapterId": "9",
+      "expectedTitle": "面试中的0-1背包问题 Partition Equal Subset Sum",
+      "fileTitle": "面试中的0-1背包问题 Partition Equal Subset Sum",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/9-7 面试中的0-1背包问题 Partition Equal Subset Sum_慕课网.mp4",
+      "sizeBytes": 150623041,
+      "declaredDurationSeconds": 1654,
+      "actualDurationSeconds": 1654.653968,
+      "durationDeltaSeconds": 0.654,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1654.653968,
+        "sizeBytes": 150623041,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "9-8",
+      "order": 64,
+      "chapterId": "9",
+      "expectedTitle": "LIS问题 Longest Increasing Subsequence",
+      "fileTitle": "LIS问题 Longest Increasing Subsequence",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/9-8 LIS问题 Longest Increasing Subsequence_慕课网.mp4",
+      "sizeBytes": 144004085,
+      "declaredDurationSeconds": 1512,
+      "actualDurationSeconds": 1512.083447,
+      "durationDeltaSeconds": 0.083,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1512.083447,
+        "sizeBytes": 144004085,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "9-9",
+      "order": 65,
+      "chapterId": "9",
+      "expectedTitle": "LCS，最短路，求动态规划的具体解以及更多",
+      "fileTitle": "LCS，最短路，求动态规划的具体解以及更多",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/9-9 LCS，最短路，求动态规划的具体解以及更多_慕课网.mp4",
+      "sizeBytes": 114557918,
+      "declaredDurationSeconds": 1260,
+      "actualDurationSeconds": 1264.76771,
+      "durationDeltaSeconds": 4.768,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1264.76771,
+        "sizeBytes": 114557918,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "9-10",
+      "order": 66,
+      "chapterId": "9",
+      "expectedTitle": "动态规划的经典问题",
+      "fileTitle": "动态规划的经典问题",
+      "contentType": "article",
+      "path": "work/algorithm-interview-course-notes/source-videos/9-10 动态规划的经典问题.md",
+      "sizeBytes": 1115,
+      "declaredDurationSeconds": null,
+      "actualDurationSeconds": null,
+      "durationDeltaSeconds": null,
+      "status": "matched",
+      "media": null
+    },
+    {
+      "lessonId": "10-1",
+      "order": 67,
+      "chapterId": "10",
+      "expectedTitle": "贪心基础 Assign Cookies",
+      "fileTitle": "贪心基础 Assign Cookies",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/10-1 贪心基础 Assign Cookies_慕课网.mp4",
+      "sizeBytes": 70420069,
+      "declaredDurationSeconds": 732,
+      "actualDurationSeconds": 735.44,
+      "durationDeltaSeconds": 3.44,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 735.44,
+        "sizeBytes": 70420069,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "10-2",
+      "order": 68,
+      "chapterId": "10",
+      "expectedTitle": "贪心算法与动态规划的关系 Non-overlapping Intervals",
+      "fileTitle": "贪心算法与动态规划的关系 Non-overlapping Intervals",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/10-2 贪心算法与动态规划的关系 Non-overlapping Intervals_慕课网.mp4",
+      "sizeBytes": 115535100,
+      "declaredDurationSeconds": 1078,
+      "actualDurationSeconds": 1078.68,
+      "durationDeltaSeconds": 0.68,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 1078.68,
+        "sizeBytes": 115535100,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "10-3",
+      "order": 69,
+      "chapterId": "10",
+      "expectedTitle": "贪心选择性质的证明",
+      "fileTitle": "贪心选择性质的证明",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/10-3 贪心选择性质的证明_慕课网.mp4",
+      "sizeBytes": 85296594,
+      "declaredDurationSeconds": 919,
+      "actualDurationSeconds": 923.32,
+      "durationDeltaSeconds": 4.32,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 923.32,
+        "sizeBytes": 85296594,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    },
+    {
+      "lessonId": "11-1",
+      "order": 70,
+      "chapterId": "11",
+      "expectedTitle": "结语",
+      "fileTitle": "结语",
+      "contentType": "video",
+      "path": "work/algorithm-interview-course-notes/source-videos/11-1 结语_慕课网.mp4",
+      "sizeBytes": 13098626,
+      "declaredDurationSeconds": 165,
+      "actualDurationSeconds": 169.88,
+      "durationDeltaSeconds": 4.88,
+      "status": "probed",
+      "media": {
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "durationSeconds": 169.88,
+        "sizeBytes": 13098626,
+        "video": {
+          "codec": "h264",
+          "width": 1920,
+          "height": 1080,
+          "frameRate": "25/1"
+        },
+        "audio": {
+          "codec": "aac",
+          "sampleRate": "44100",
+          "channels": 2
+        }
+      }
+    }
+  ]
+}

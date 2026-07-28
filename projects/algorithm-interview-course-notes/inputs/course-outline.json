@@ -1,0 +1,734 @@
+{
+  "courseTitle": "算法面试视频课程",
+  "source": "user-provided outline, supplemented by supplied course materials",
+  "expectedChapterCount": 11,
+  "expectedLessonCount": 70,
+  "defaultContentType": "video",
+  "unknownVideoDurationLessonIds": ["1-1"],
+  "articleLessonIds": ["6-8", "7-3", "9-10"],
+  "outlineAnomalies": [
+    {
+      "type": "missing_duration",
+      "lessonId": "1-1",
+      "detail": "原始大纲没有时长，标题尾部的“最近学习”疑似界面状态文本，未纳入标题。"
+    },
+    {
+      "type": "resolved_as_article",
+      "lessonId": "6-8",
+      "detail": "上传内容确认本节为 Markdown 文章，因此没有视频时长。"
+    },
+    {
+      "type": "resolved_numbering_gap",
+      "chapterId": "7",
+      "lessonId": "7-3",
+      "detail": "上传内容包含 7-3《不会翻转二叉树的大神》，为 Markdown 文章。"
+    },
+    {
+      "type": "additional_material",
+      "chapterId": "9",
+      "lessonId": "9-10",
+      "detail": "上传内容包含用户大纲未列出的 9-10《动态规划的经典问题》，为 Markdown 文章。"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "1",
+      "title": "算法面试到底是什么鬼?",
+      "lessons": [
+        {
+          "id": "1-1",
+          "order": 1,
+          "title": "算法面试不仅仅是正确的回答问题",
+          "declaredDuration": null,
+          "declaredDurationSeconds": null,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "1-2",
+          "order": 2,
+          "title": "算法面试只是面试的一部分",
+          "declaredDuration": "14:51",
+          "declaredDurationSeconds": 891,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "1-3",
+          "order": 3,
+          "title": "如何准备算法面试",
+          "declaredDuration": "17:38",
+          "declaredDurationSeconds": 1058,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "1-4",
+          "order": 4,
+          "title": "如何回答算法面试问题",
+          "declaredDuration": "13:40",
+          "declaredDurationSeconds": 820,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "面试中的复杂度分析",
+      "lessons": [
+        {
+          "id": "2-1",
+          "order": 5,
+          "title": "究竟什么是大O（Big O）",
+          "declaredDuration": "19:52",
+          "declaredDurationSeconds": 1192,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "2-2",
+          "order": 6,
+          "title": "对数据规模有一个概念",
+          "declaredDuration": "11:26",
+          "declaredDurationSeconds": 686,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "2-3",
+          "order": 7,
+          "title": "简单的复杂度分析",
+          "declaredDuration": "19:20",
+          "declaredDurationSeconds": 1160,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "2-4",
+          "order": 8,
+          "title": "亲自试验自己算法的时间复杂度",
+          "declaredDuration": "14:53",
+          "declaredDurationSeconds": 893,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "2-5",
+          "order": 9,
+          "title": "递归算法的复杂度分析",
+          "declaredDuration": "14:46",
+          "declaredDurationSeconds": 886,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "2-6",
+          "order": 10,
+          "title": "均摊时间复杂度分析（Amortized Time Analysis）",
+          "declaredDuration": "15:16",
+          "declaredDurationSeconds": 916,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "2-7",
+          "order": 11,
+          "title": "避免复杂度的震荡",
+          "declaredDuration": "11:25",
+          "declaredDurationSeconds": 685,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "数组中的问题其实最常见",
+      "lessons": [
+        {
+          "id": "3-1",
+          "order": 12,
+          "title": "从二分查找法看如何写出正确的程序",
+          "declaredDuration": "15:27",
+          "declaredDurationSeconds": 927,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "3-2",
+          "order": 13,
+          "title": "改变变量定义，依然可以写出正确的算法",
+          "declaredDuration": "12:06",
+          "declaredDurationSeconds": 726,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "3-3",
+          "order": 14,
+          "title": "在LeetCode上解决第一个问题 Move Zeros",
+          "declaredDuration": "13:27",
+          "declaredDurationSeconds": 807,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "3-4",
+          "order": 15,
+          "title": "即使简单的问题，也有很多优化的思路",
+          "declaredDuration": "15:30",
+          "declaredDurationSeconds": 930,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "3-5",
+          "order": 16,
+          "title": "三路快排partition思路的应用 Sort Color",
+          "declaredDuration": "22:26",
+          "declaredDurationSeconds": 1346,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "3-6",
+          "order": 17,
+          "title": "对撞指针 Two Sum II - Input Array is Sorted",
+          "declaredDuration": "19:44",
+          "declaredDurationSeconds": 1184,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "3-7",
+          "order": 18,
+          "title": "滑动窗口 Minimum Size Subarray Sum",
+          "declaredDuration": "14:09",
+          "declaredDurationSeconds": 849,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "3-8",
+          "order": 19,
+          "title": "在滑动窗口中做记录 Longest Substring Without Repeating Characters",
+          "declaredDuration": "15:20",
+          "declaredDurationSeconds": 920,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "查找表相关问题",
+      "lessons": [
+        {
+          "id": "4-1",
+          "order": 20,
+          "title": "set的使用 Intersection of Two Arrays",
+          "declaredDuration": "11:12",
+          "declaredDurationSeconds": 672,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "4-2",
+          "order": 21,
+          "title": "map的使用 Intersection of Two Arrays II",
+          "declaredDuration": "13:05",
+          "declaredDurationSeconds": 785,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "4-3",
+          "order": 22,
+          "title": "set和map不同底层实现的区别",
+          "declaredDuration": "19:00",
+          "declaredDurationSeconds": 1140,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "4-4",
+          "order": 23,
+          "title": "使用查找表的经典问题 Two Sum",
+          "declaredDuration": "16:56",
+          "declaredDurationSeconds": 1016,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "4-5",
+          "order": 24,
+          "title": "灵活选择键值 4Sum II",
+          "declaredDuration": "13:25",
+          "declaredDurationSeconds": 805,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "4-6",
+          "order": 25,
+          "title": "灵活选择键值 Number of Boomerangs",
+          "declaredDuration": "14:45",
+          "declaredDurationSeconds": 885,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "4-7",
+          "order": 26,
+          "title": "查找表和滑动窗口 Contain Duplicate II",
+          "declaredDuration": "11:20",
+          "declaredDurationSeconds": 680,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "4-8",
+          "order": 27,
+          "title": "二分搜索树底层实现的顺序性 Contain Duplicate III",
+          "declaredDuration": "10:50",
+          "declaredDurationSeconds": 650,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "title": "在链表中穿针引线",
+      "lessons": [
+        {
+          "id": "5-1",
+          "order": 28,
+          "title": "链表，在节点间穿针引线 Reverse Linked List",
+          "declaredDuration": "15:44",
+          "declaredDurationSeconds": 944,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "5-2",
+          "order": 29,
+          "title": "测试你的链表程序",
+          "declaredDuration": "16:26",
+          "declaredDurationSeconds": 986,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "5-3",
+          "order": 30,
+          "title": "设立链表的虚拟头结点 Remove Linked List Elements",
+          "declaredDuration": "17:08",
+          "declaredDurationSeconds": 1028,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "5-4",
+          "order": 31,
+          "title": "复杂的穿针引线 Swap Nodes in Pairs",
+          "declaredDuration": "13:30",
+          "declaredDurationSeconds": 810,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "5-5",
+          "order": 32,
+          "title": "不仅仅是穿针引线 Delete Node in a Linked List",
+          "declaredDuration": "07:29",
+          "declaredDurationSeconds": 449,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "5-6",
+          "order": 33,
+          "title": "链表与双指针 Remove Nth Node Form End of List",
+          "declaredDuration": "16:49",
+          "declaredDurationSeconds": 1009,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "title": "栈，队列，优先队列",
+      "lessons": [
+        {
+          "id": "6-1",
+          "order": 34,
+          "title": "栈的基础应用 Valid Parentheses",
+          "declaredDuration": "16:10",
+          "declaredDurationSeconds": 970,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "6-2",
+          "order": 35,
+          "title": "栈和递归的紧密关系 Binary Tree Preorder, Inorder and Postorder Traversal",
+          "declaredDuration": "16:03",
+          "declaredDurationSeconds": 963,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "6-3",
+          "order": 36,
+          "title": "运用栈模拟递归",
+          "declaredDuration": "19:33",
+          "declaredDurationSeconds": 1173,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "6-4",
+          "order": 37,
+          "title": "队列的典型应用 Binary Tree Level Order Traversal",
+          "declaredDuration": "10:26",
+          "declaredDurationSeconds": 626,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "6-5",
+          "order": 38,
+          "title": "BFS和图的最短路径 Perfect Squares",
+          "declaredDuration": "21:20",
+          "declaredDurationSeconds": 1280,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "6-6",
+          "order": 39,
+          "title": "优先队列",
+          "declaredDuration": "11:09",
+          "declaredDurationSeconds": 669,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "6-7",
+          "order": 40,
+          "title": "优先队列相关的算法问题 Top K Frequent Elements",
+          "declaredDuration": "15:37",
+          "declaredDurationSeconds": 937,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "6-8",
+          "order": 41,
+          "title": "两种关于 topK 问题求解思路的套路",
+          "contentType": "article",
+          "declaredDuration": null,
+          "declaredDurationSeconds": null,
+          "sourceFile": "work/algorithm-interview-course-notes/source-videos/6-8 两种关于 topK 问题求解思路的套路.md",
+          "status": "matched"
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "title": "二叉树和递归",
+      "lessons": [
+        {
+          "id": "7-1",
+          "order": 42,
+          "title": "二叉树天然的递归结构",
+          "declaredDuration": "15:58",
+          "declaredDurationSeconds": 958,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "7-2",
+          "order": 43,
+          "title": "一个简单的二叉树问题引发的血案 Invert Binary Tree",
+          "declaredDuration": "09:08",
+          "declaredDurationSeconds": 548,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "7-3",
+          "order": 44,
+          "title": "不会翻转二叉树的大神",
+          "contentType": "article",
+          "declaredDuration": null,
+          "declaredDurationSeconds": null,
+          "sourceFile": "work/algorithm-interview-course-notes/source-videos/7-3 不会翻转二叉树的大神.md",
+          "status": "matched"
+        },
+        {
+          "id": "7-4",
+          "order": 45,
+          "title": "注意递归的终止条件 Path Sum",
+          "declaredDuration": "12:04",
+          "declaredDurationSeconds": 724,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "7-5",
+          "order": 46,
+          "title": "定义递归问题 Binary Tree Path",
+          "declaredDuration": "13:34",
+          "declaredDurationSeconds": 814,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "7-6",
+          "order": 47,
+          "title": "稍复杂的递归逻辑 Path Sum III",
+          "declaredDuration": "14:11",
+          "declaredDurationSeconds": 851,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "7-7",
+          "order": 48,
+          "title": "二分搜索树中的问题 Lowest Common Ancestor of a Binary Search Tree",
+          "declaredDuration": "17:46",
+          "declaredDurationSeconds": 1066,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "title": "递归和回溯法",
+      "lessons": [
+        {
+          "id": "8-1",
+          "order": 49,
+          "title": "树形问题 Letter Combinations of a Phone Number",
+          "declaredDuration": "18:09",
+          "declaredDurationSeconds": 1089,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "8-2",
+          "order": 50,
+          "title": "什么是回溯",
+          "declaredDuration": "18:16",
+          "declaredDurationSeconds": 1096,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "8-3",
+          "order": 51,
+          "title": "排列问题 Permutations",
+          "declaredDuration": "19:02",
+          "declaredDurationSeconds": 1142,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "8-4",
+          "order": 52,
+          "title": "组合问题 Combinations",
+          "declaredDuration": "14:27",
+          "declaredDurationSeconds": 867,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "8-5",
+          "order": 53,
+          "title": "回溯法解决组合问题的优化",
+          "declaredDuration": "17:29",
+          "declaredDurationSeconds": 1049,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "8-6",
+          "order": 54,
+          "title": "二维平面上的回溯法 Word Search",
+          "declaredDuration": "21:45",
+          "declaredDurationSeconds": 1305,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "8-7",
+          "order": 55,
+          "title": "floodfill算法，一类经典问题 Number of Islands",
+          "declaredDuration": "21:27",
+          "declaredDurationSeconds": 1287,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "8-8",
+          "order": 56,
+          "title": "回溯法是经典人工智能的基础 N Queens",
+          "declaredDuration": "25:17",
+          "declaredDurationSeconds": 1517,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "title": "动态规划基础",
+      "lessons": [
+        {
+          "id": "9-1",
+          "order": 57,
+          "title": "什么是动态规划",
+          "declaredDuration": "20:27",
+          "declaredDurationSeconds": 1227,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "9-2",
+          "order": 58,
+          "title": "第一个动态规划问题 Climbing Stairs",
+          "declaredDuration": "14:02",
+          "declaredDurationSeconds": 842,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "9-3",
+          "order": 59,
+          "title": "发现重叠子问题 Integer Break",
+          "declaredDuration": "25:10",
+          "declaredDurationSeconds": 1510,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "9-4",
+          "order": 60,
+          "title": "状态的定义和状态转移 House Robber",
+          "declaredDuration": "27:19",
+          "declaredDurationSeconds": 1639,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "9-5",
+          "order": 61,
+          "title": "0-1背包问题",
+          "declaredDuration": "32:37",
+          "declaredDurationSeconds": 1957,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "9-6",
+          "order": 62,
+          "title": "0-1背包问题的优化和变种",
+          "declaredDuration": "20:18",
+          "declaredDurationSeconds": 1218,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "9-7",
+          "order": 63,
+          "title": "面试中的0-1背包问题 Partition Equal Subset Sum",
+          "declaredDuration": "27:34",
+          "declaredDurationSeconds": 1654,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "9-8",
+          "order": 64,
+          "title": "LIS问题 Longest Increasing Subsequence",
+          "declaredDuration": "25:12",
+          "declaredDurationSeconds": 1512,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "9-9",
+          "order": 65,
+          "title": "LCS，最短路，求动态规划的具体解以及更多",
+          "declaredDuration": "21:00",
+          "declaredDurationSeconds": 1260,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "9-10",
+          "order": 66,
+          "title": "动态规划的经典问题",
+          "contentType": "article",
+          "declaredDuration": null,
+          "declaredDurationSeconds": null,
+          "sourceFile": "work/algorithm-interview-course-notes/source-videos/9-10 动态规划的经典问题.md",
+          "status": "matched"
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "title": "贪心算法",
+      "lessons": [
+        {
+          "id": "10-1",
+          "order": 67,
+          "title": "贪心基础 Assign Cookies",
+          "declaredDuration": "12:12",
+          "declaredDurationSeconds": 732,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "10-2",
+          "order": 68,
+          "title": "贪心算法与动态规划的关系 Non-overlapping Intervals",
+          "declaredDuration": "17:58",
+          "declaredDurationSeconds": 1078,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        },
+        {
+          "id": "10-3",
+          "order": 69,
+          "title": "贪心选择性质的证明",
+          "declaredDuration": "15:19",
+          "declaredDurationSeconds": 919,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "title": "课程结语",
+      "lessons": [
+        {
+          "id": "11-1",
+          "order": 70,
+          "title": "结语",
+          "declaredDuration": "02:45",
+          "declaredDurationSeconds": 165,
+          "sourceFile": null,
+          "status": "awaiting_video"
+        }
+      ]
+    }
+  ]
+}

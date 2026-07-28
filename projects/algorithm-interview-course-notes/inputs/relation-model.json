@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "description": "课程知识关系的数据约束；顺序相邻不自动等于语义上的先修关系。",
+  "nodeTypes": [
+    "course",
+    "chapter",
+    "lesson",
+    "concept",
+    "technique",
+    "data_structure",
+    "problem",
+    "complexity_pattern"
+  ],
+  "relationTypes": {
+    "contains": "课程、章节与课程节次之间的结构包含关系",
+    "introduces": "某节首次系统引入一个概念或方法",
+    "deepens": "在已有概念上增加条件、证明、实现细节或难度",
+    "applies": "把概念、技巧或数据结构用于具体问题",
+    "prerequisite_for": "理解源节点是掌握目标节点的重要前置条件",
+    "generalizes": "目标节点是源节点的更一般形式",
+    "specializes": "目标节点是源节点在特定约束下的特例",
+    "contrasts_with": "两个方法在选择条件、性能或思路上形成对照",
+    "alternative_to": "两个方法可解决同一任务但有不同权衡",
+    "optimizes": "目标节点在明确指标上改进源节点",
+    "same_pattern_as": "两个问题共享可陈述的解题模式",
+    "uses": "算法或问题依赖某种数据结构、技巧或复杂度模式",
+    "explicitly_references": "讲师在源视频中明确提到目标视频或目标概念"
+  },
+  "evidenceSources": {
+    "video_explicit": "讲师在视频中明确说出，必须有 lesson ID 和时间戳",
+    "video_observed": "从画面、代码或演示直接观察，必须有 lesson ID 和时间戳",
+    "outline_structural": "只由用户提供的大纲结构支持，不能描述成讲师观点",
+    "cross_note_inference": "比较两份已复核笔记得到，必须同时引用两端证据"
+  },
+  "confidenceLevels": {
+    "high": "证据直接且两端身份明确",
+    "medium": "关系合理但有一处语义或证据需要复核",
+    "low": "仅作为回查线索，不进入正式学习路线"
+  },
+  "edgeRequiredFields": [
+    "id",
+    "from",
+    "to",
+    "type",
+    "evidenceSource",
+    "evidence",
+    "confidence",
+    "rationale"
+  ],
+  "evidenceItemFields": ["lessonId", "timestamp", "notePath", "summary"],
+  "rules": [
+    "每条边有方向；对称关系也要明确记录或由消费者按类型解释。",
+    "prerequisite_for 不能仅因课程顺序相邻而创建。",
+    "cross_note_inference 必须有源、目标两端的已复核证据。",
+    "low 置信度边只保留在候选区，不进入正式 edges。",
+    "讲师未明确表达的联系不得标为 video_explicit。",
+    "同一概念使用稳定的英文 kebab-case ID，并保留中文显示名和别名。"
+  ]
+}
