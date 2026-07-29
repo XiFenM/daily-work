@@ -1,0 +1,936 @@
+{
+  "schemaVersion": 1,
+  "allowedTypes": [
+    "prerequisite_of",
+    "recommended_before",
+    "extends",
+    "revisits",
+    "applies",
+    "contrasts_with",
+    "alternative_to",
+    "same_pattern_as",
+    "same_problem_family_as",
+    "uses_data_structure",
+    "implements_algorithm",
+    "solves_problem",
+    "addresses_pitfall"
+  ],
+  "edges": [
+    {
+      "id": "edge:outline:01-01:01-02",
+      "from": "lesson:01-01",
+      "to": "lesson:01-02",
+      "type": "extends",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "01-01 先澄清算法面试不等于答对每题或完整技术面试，01-02 开头明确回顾并把讨论扩展到技术面试和整体招聘评价。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "01-01",
+          "assetId": "asset:video-01-01",
+          "startMs": 175000,
+          "endMs": 326000,
+          "locator": "ev-003 · 02:55-05:26"
+        },
+        {
+          "lessonId": "01-02",
+          "assetId": "asset:video-01-02",
+          "startMs": 0,
+          "endMs": 223000,
+          "locator": "ev-001 · 00:00-03:43"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-01-review-v1"
+    },
+    {
+      "id": "edge:outline:01-02:01-03",
+      "from": "lesson:01-02",
+      "to": "lesson:01-03",
+      "type": "recommended_before",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "01-02 结尾从面试全貌过渡到算法准备；01-03 开头明确承接上一小节，先区分“准备面试”与“准备算法面试”，再给出准备范围。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "01-02",
+          "assetId": "asset:video-01-02",
+          "startMs": 877000,
+          "endMs": 891760,
+          "locator": "ev-005 · 14:37-14:51"
+        },
+        {
+          "lessonId": "01-03",
+          "assetId": "asset:video-01-03",
+          "startMs": 0,
+          "endMs": 39000,
+          "locator": "ev-001 · 00:00-00:39"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-01-review-v1"
+    },
+    {
+      "id": "edge:outline:01-03:01-04",
+      "from": "lesson:01-03",
+      "to": "lesson:01-04",
+      "type": "recommended_before",
+      "strength": "medium",
+      "status": "provisional",
+      "rationale": "从面试前准备进入面试现场的回答方法。",
+      "confidence": 0.86,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:video:01-03:01-01",
+      "from": "lesson:01-03",
+      "to": "lesson:01-01",
+      "type": "revisits",
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "01-01 以“不必啃完《算法导论》”帮助学习者降低畏惧；01-03 再次回到这一点，并用具体内容说明算法面试准备不需要完整掌握该书。",
+      "confidence": 0.93,
+      "evidence": [
+        {
+          "lessonId": "01-01",
+          "assetId": "asset:video-01-01",
+          "startMs": 46000,
+          "endMs": 175000,
+          "locator": "ev-002 · 00:46-02:55"
+        },
+        {
+          "lessonId": "01-03",
+          "assetId": "asset:video-01-03",
+          "startMs": 39000,
+          "endMs": 235000,
+          "locator": "ev-002 · 00:39-03:55"
+        }
+      ],
+      "createdBy": "chapter-01-review-v1"
+    },
+    {
+      "id": "edge:video:01-04:02-01",
+      "from": "lesson:01-04",
+      "to": "lesson:02-01",
+      "type": "recommended_before",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "01-04 结尾明确预告下一章将系统介绍算法的时间复杂度，形成从面试回答框架到 Big O 分析工具的课程过渡。",
+      "confidence": 0.97,
+      "evidence": [
+        {
+          "lessonId": "01-04",
+          "assetId": "asset:video-01-04",
+          "startMs": 749000,
+          "endMs": 824440,
+          "locator": "ev-008 · 12:29-13:40（片尾至实测 13:44.44）"
+        }
+      ],
+      "createdBy": "chapter-01-review-v1"
+    },
+    {
+      "id": "edge:video-outline:01-04:02-02",
+      "from": "lesson:01-04",
+      "to": "lesson:02-02",
+      "type": "extends",
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "01-04 已用 n≈10000、n=100 与 O(n²)/O(n³) 做规模可行性判断；02-02 将这种判断系统化为 1 秒时间预算下不同复杂度可处理的数据数量级。",
+      "confidence": 0.96,
+      "evidence": [
+        {
+          "lessonId": "01-04",
+          "assetId": "asset:video-01-04",
+          "startMs": 25000,
+          "endMs": 383000,
+          "locator": "ev-002–ev-004 · 00:25-06:23"
+        },
+        {
+          "lessonId": "02-02",
+          "assetId": "asset:video-02-02",
+          "startMs": 266000,
+          "endMs": 523000,
+          "locator": "ev-003 · 04:26-08:43"
+        }
+      ],
+      "createdBy": "chapter-02-preflight-v1; verified-by chapter-02-review-v1"
+    },
+    {
+      "id": "edge:video-outline:01-04:02-03",
+      "from": "lesson:01-04",
+      "to": "lesson:02-03",
+      "type": "extends",
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "01-04 用 LeetCode 3 的 O(n³) 暴力法示范规模判断和瓶颈定位；02-03 进一步用顺序、固定次数、嵌套和按比例缩小等代码结构系统化复杂度推导。",
+      "confidence": 0.94,
+      "evidence": [
+        {
+          "lessonId": "01-04",
+          "assetId": "asset:video-01-04",
+          "startMs": 205000,
+          "endMs": 623000,
+          "locator": "ev-004–ev-005 · 03:25-10:23"
+        },
+        {
+          "lessonId": "02-03",
+          "assetId": "asset:video-02-03",
+          "startMs": 30000,
+          "endMs": 391000,
+          "locator": "ev-002–ev-004 · 00:30-06:31"
+        }
+      ],
+      "createdBy": "chapter-02-preflight-v1; verified-by chapter-02-review-v1"
+    },
+    {
+      "id": "edge:video-outline:01-04:03-08",
+      "from": "lesson:01-04",
+      "to": "lesson:03-08",
+      "type": "same_problem_family_as",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "01-04 用 LeetCode 3 的暴力解法说明“先得到基线再优化”，03-08 的目录显示将完整讲解同一题；待处理 03-08 后确认具体解法承接关系。",
+      "confidence": 0.92,
+      "evidence": [
+        {
+          "lessonId": "01-04",
+          "assetId": "asset:video-01-04",
+          "startMs": 205000,
+          "endMs": 383000,
+          "locator": "ev-004 · 03:25-06:23"
+        }
+      ],
+      "createdBy": "chapter-01-review-v1"
+    },
+    {
+      "id": "edge:video-outline:03-05:01-01",
+      "from": "lesson:03-05",
+      "to": "lesson:01-01",
+      "type": "revisits",
+      "strength": "medium",
+      "status": "provisional",
+      "rationale": "01-01 以大量重复元素为约束提及三路快排，03-05 的目录显示将专题应用三路 partition；待处理 03-05 后确认其是否回访本课的约束驱动选型思想。",
+      "confidence": 0.83,
+      "evidence": [
+        {
+          "lessonId": "01-01",
+          "assetId": "asset:video-01-01",
+          "startMs": 326000,
+          "endMs": 1010000,
+          "locator": "ev-004 · 05:26-16:50"
+        }
+      ],
+      "createdBy": "chapter-01-review-v1"
+    },
+    {
+      "id": "edge:outline:07-03:01-01",
+      "from": "lesson:07-03",
+      "to": "lesson:01-01",
+      "type": "revisits",
+      "strength": "medium",
+      "status": "provisional",
+      "rationale": "07-03 的配套文本重新讨论算法题表现与工程、用户价值之间的关系。",
+      "confidence": 0.85,
+      "evidence": [],
+      "createdBy": "text-inventory-v1"
+    },
+    {
+      "id": "edge:outline:07-03:01-02",
+      "from": "lesson:07-03",
+      "to": "lesson:01-02",
+      "type": "revisits",
+      "strength": "medium",
+      "status": "provisional",
+      "rationale": "07-03 的配套文本再次强调算法能力只是工程师面试评价的一部分。",
+      "confidence": 0.88,
+      "evidence": [],
+      "createdBy": "text-inventory-v1"
+    },
+    {
+      "id": "edge:outline:02-01:02-02",
+      "from": "lesson:02-01",
+      "to": "lesson:02-02",
+      "type": "recommended_before",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "02-01 建立 Big O 与增长量级的含义；02-02 开头明确回顾该概念，再把它用于可处理数据规模和空间成本判断。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "02-01",
+          "assetId": "asset:video-02-01",
+          "startMs": 38000,
+          "endMs": 109000,
+          "locator": "ev-002 · 00:38-01:49"
+        },
+        {
+          "lessonId": "02-02",
+          "assetId": "asset:video-02-02",
+          "startMs": 0,
+          "endMs": 61000,
+          "locator": "ev-001 · 00:00-01:01"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-02-review-v1"
+    },
+    {
+      "id": "edge:outline:02-02:02-03",
+      "from": "lesson:02-02",
+      "to": "lesson:02-03",
+      "type": "recommended_before",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "02-02 建立数据规模、时间预算和空间复杂度概念；02-03 随即把这些概念落实到常见代码结构的逐例分析。",
+      "confidence": 0.97,
+      "evidence": [
+        {
+          "lessonId": "02-02",
+          "assetId": "asset:video-02-02",
+          "startMs": 266000,
+          "endMs": 523000,
+          "locator": "ev-003 · 04:26-08:43"
+        },
+        {
+          "lessonId": "02-03",
+          "assetId": "asset:video-02-03",
+          "startMs": 0,
+          "endMs": 30000,
+          "locator": "ev-001 · 00:00-00:30"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-02-review-v1"
+    },
+    {
+      "id": "edge:outline:02-01:02-03",
+      "from": "lesson:02-01",
+      "to": "lesson:02-03",
+      "type": "recommended_before",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "02-01 给出 Big O 的语义、常数省略和增长阶；02-03 直接使用这些规则分析 O(1)、O(n)、O(n²)、O(log n)、O(n log n) 与 O(√n) 代码模式。",
+      "confidence": 0.96,
+      "evidence": [
+        {
+          "lessonId": "02-01",
+          "assetId": "asset:video-02-01",
+          "startMs": 38000,
+          "endMs": 767000,
+          "locator": "ev-002–ev-007 · 00:38-12:47"
+        },
+        {
+          "lessonId": "02-03",
+          "assetId": "asset:video-02-03",
+          "startMs": 0,
+          "endMs": 1160560,
+          "locator": "ev-001–ev-009 · 00:00-19:20"
+        }
+      ],
+      "createdBy": "chapter-02-preflight-v1; verified-by chapter-02-review-v1"
+    },
+    {
+      "id": "edge:outline:02-03:02-04",
+      "from": "lesson:02-03",
+      "to": "lesson:02-04",
+      "type": "applies",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "把静态复杂度分析应用到运行时间实验，检查观测增长趋势是否与理论预期一致。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "02-03",
+          "assetId": "asset:video-02-03",
+          "startMs": 0,
+          "endMs": 1160560,
+          "locator": "ev-001–ev-009 · 00:00-19:20"
+        },
+        {
+          "lessonId": "02-04",
+          "assetId": "asset:video-02-04",
+          "startMs": 0,
+          "endMs": 144000,
+          "locator": "ev-001–ev-002 · 00:00-02:24"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; refined-by chapter-02-preflight-v1; verified-by chapter-02-review-v1"
+    },
+    {
+      "id": "edge:outline:02-03:02-05",
+      "from": "lesson:02-03",
+      "to": "lesson:02-05",
+      "type": "extends",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "02-03 分析普通循环与顺序代码；02-05 开头明确继续深入时间复杂度，并扩展到必须结合递归深度或递归树计算总成本的递归算法。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "02-03",
+          "assetId": "asset:video-02-03",
+          "startMs": 0,
+          "endMs": 1160560,
+          "locator": "ev-001–ev-009 · 00:00-19:20"
+        },
+        {
+          "lessonId": "02-05",
+          "assetId": "asset:video-02-05",
+          "startMs": 0,
+          "endMs": 45000,
+          "locator": "ev-001 · 00:00-00:45"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-02-review-v1"
+    },
+    {
+      "id": "edge:outline:02-03:02-06",
+      "from": "lesson:02-03",
+      "to": "lesson:02-06",
+      "type": "extends",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "02-03 针对一次算法执行分析复杂度；02-06 开头明确将分析单位扩展为一串操作，把偶发的 O(n) 扩容成本均摊到多次 O(1) 插入中。",
+      "confidence": 0.97,
+      "evidence": [
+        {
+          "lessonId": "02-03",
+          "assetId": "asset:video-02-03",
+          "startMs": 0,
+          "endMs": 132000,
+          "locator": "ev-001–ev-002 · 00:00-02:12"
+        },
+        {
+          "lessonId": "02-06",
+          "assetId": "asset:video-02-06",
+          "startMs": 0,
+          "endMs": 44000,
+          "locator": "ev-001 · 00:00-00:44"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-02-review-v1"
+    },
+    {
+      "id": "edge:outline:02-06:02-07",
+      "from": "lesson:02-06",
+      "to": "lesson:02-07",
+      "type": "applies",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "02-06 证明 2 倍扩容下 push_back 的均摊 O(1)，并在结尾抛出缩容问题；02-07 随即分析临界点扩缩容震荡，并用延迟缩容恢复均摊 O(1)。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "02-06",
+          "assetId": "asset:video-02-06",
+          "startMs": 600000,
+          "endMs": 916280,
+          "locator": "ev-006–ev-008 · 10:00-15:16"
+        },
+        {
+          "lessonId": "02-07",
+          "assetId": "asset:video-02-07",
+          "startMs": 133000,
+          "endMs": 416000,
+          "locator": "ev-002–ev-005 · 02:13-06:56"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; refined-by chapter-02-preflight-v1; verified-by chapter-02-review-v1"
+    },
+    {
+      "id": "edge:outline:02-03:03-01",
+      "from": "lesson:02-03",
+      "to": "lesson:03-01",
+      "type": "applies",
+      "strength": "medium",
+      "status": "provisional",
+      "rationale": "二分查找是后续核查对数复杂度分析如何应用到具体代码的高价值候选。",
+      "confidence": 0.78,
+      "evidence": [],
+      "createdBy": "chapter-02-preflight-v1"
+    },
+    {
+      "id": "edge:outline:02-05:06-02",
+      "from": "lesson:02-05",
+      "to": "lesson:06-02",
+      "type": "recommended_before",
+      "strength": "medium",
+      "status": "provisional",
+      "rationale": "递归复杂度和调用栈空间可能为后续理解栈与递归的关系提供分析背景。",
+      "confidence": 0.8,
+      "evidence": [
+        {
+          "lessonId": "02-05",
+          "assetId": "asset:video-02-05",
+          "startMs": 409000,
+          "endMs": 657000,
+          "locator": "ev-005 · 06:49-10:57"
+        }
+      ],
+      "createdBy": "chapter-02-preflight-v1; reviewed-by chapter-02-review-v1"
+    },
+    {
+      "id": "edge:outline:03-01:03-02",
+      "from": "lesson:03-01",
+      "to": "lesson:03-02",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "改变变量定义仍保持程序正确性，延伸二分查找中的不变量思想。",
+      "confidence": 0.94,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:03-03:03-04",
+      "from": "lesson:03-03",
+      "to": "lesson:03-04",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "围绕 Move Zeros 从基本解法进入多种优化。",
+      "confidence": 0.94,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:03-04:03-05",
+      "from": "lesson:03-04",
+      "to": "lesson:03-05",
+      "type": "same_pattern_as",
+      "strength": "medium",
+      "status": "provisional",
+      "rationale": "原地数组操作与 partition 思路形成连续题型簇。",
+      "confidence": 0.78,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:03-06:04-04",
+      "from": "lesson:03-06",
+      "to": "lesson:04-04",
+      "type": "contrasts_with",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "同属 Two Sum 题族，有序数组的双指针与查找表方案形成关键对照。",
+      "confidence": 0.96,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:03-07:03-08",
+      "from": "lesson:03-07",
+      "to": "lesson:03-08",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从基本滑动窗口扩展到在窗口内维护状态。",
+      "confidence": 0.96,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:03-08:04-07",
+      "from": "lesson:03-08",
+      "to": "lesson:04-07",
+      "type": "applies",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "将窗口状态记录与 set/map 查找结构结合。",
+      "confidence": 0.92,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:04-07:04-08",
+      "from": "lesson:04-07",
+      "to": "lesson:04-08",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从无序查找表窗口扩展到利用有序查找结构。",
+      "confidence": 0.9,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:04-01:04-02",
+      "from": "lesson:04-01",
+      "to": "lesson:04-02",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从 set 的存在性记录扩展到 map 的计数或映射。",
+      "confidence": 0.95,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:04-02:04-03",
+      "from": "lesson:04-02",
+      "to": "lesson:04-03",
+      "type": "extends",
+      "strength": "medium",
+      "status": "provisional",
+      "rationale": "从容器使用进入底层实现与顺序性差异。",
+      "confidence": 0.9,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:04-04:04-05",
+      "from": "lesson:04-04",
+      "to": "lesson:04-05",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从经典查找表问题扩展到灵活设计键值。",
+      "confidence": 0.91,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:04-05:04-06",
+      "from": "lesson:04-05",
+      "to": "lesson:04-06",
+      "type": "same_pattern_as",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "两课都强调通过转换表示来设计查找表键。",
+      "confidence": 0.92,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:05-01:05-03",
+      "from": "lesson:05-01",
+      "to": "lesson:05-03",
+      "type": "recommended_before",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "基本指针改链是理解虚拟头结点删除逻辑的基础。",
+      "confidence": 0.88,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:05-03:05-04",
+      "from": "lesson:05-03",
+      "to": "lesson:05-04",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从虚拟头结点和简单改链进入更复杂的成对交换。",
+      "confidence": 0.91,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:03-06:05-06",
+      "from": "lesson:03-06",
+      "to": "lesson:05-06",
+      "type": "same_pattern_as",
+      "strength": "medium",
+      "status": "provisional",
+      "rationale": "双指针模式从数组迁移到链表，但指针语义不同。",
+      "confidence": 0.84,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:06-02:06-03",
+      "from": "lesson:06-02",
+      "to": "lesson:06-03",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从递归调用栈的关系进入显式栈模拟递归。",
+      "confidence": 0.97,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:06-04:06-05",
+      "from": "lesson:06-04",
+      "to": "lesson:06-05",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从树的层序遍历扩展到图上的 BFS 最短路。",
+      "confidence": 0.95,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:06-06:06-07",
+      "from": "lesson:06-06",
+      "to": "lesson:06-07",
+      "type": "applies",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "优先队列基础直接应用于 Top K Frequent Elements。",
+      "confidence": 0.98,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:06-07:06-08",
+      "from": "lesson:06-07",
+      "to": "lesson:06-08",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从单题进入两类 Top K 通用套路。",
+      "confidence": 0.96,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:06-02:07-01",
+      "from": "lesson:06-02",
+      "to": "lesson:07-01",
+      "type": "recommended_before",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "树遍历与递归关系为二叉树递归结构铺垫。",
+      "confidence": 0.92,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:07-04:07-05",
+      "from": "lesson:07-04",
+      "to": "lesson:07-05",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从递归终止条件进入递归问题和返回值的定义。",
+      "confidence": 0.93,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:07-05:07-06",
+      "from": "lesson:07-05",
+      "to": "lesson:07-06",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从基本递归定义进入更复杂的递归组合逻辑。",
+      "confidence": 0.94,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:07-01:08-01",
+      "from": "lesson:07-01",
+      "to": "lesson:08-01",
+      "type": "recommended_before",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "递归树结构为树形搜索问题铺垫。",
+      "confidence": 0.91,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:08-01:08-02",
+      "from": "lesson:08-01",
+      "to": "lesson:08-02",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从具体树形问题抽象出回溯方法。",
+      "confidence": 0.94,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:08-04:08-05",
+      "from": "lesson:08-04",
+      "to": "lesson:08-05",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "在组合问题基础上加入剪枝优化。",
+      "confidence": 0.98,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:08-06:08-07",
+      "from": "lesson:08-06",
+      "to": "lesson:08-07",
+      "type": "same_pattern_as",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "二维网格上的回溯与 flood fill 共享状态搜索结构。",
+      "confidence": 0.9,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:06-05:08-07",
+      "from": "lesson:06-05",
+      "to": "lesson:08-07",
+      "type": "alternative_to",
+      "strength": "medium",
+      "status": "provisional",
+      "rationale": "BFS 与 DFS/flood fill 可形成图搜索策略对照。",
+      "confidence": 0.8,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:02-05:09-01",
+      "from": "lesson:02-05",
+      "to": "lesson:09-01",
+      "type": "recommended_before",
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "02-05 用重复的双分支递归推导 O(2^n)，并明确指出可用剪枝或动态规划把指数级成本降为多项式级，为第 9 章的动态规划动机提供直接背景。",
+      "confidence": 0.96,
+      "evidence": [
+        {
+          "lessonId": "02-05",
+          "assetId": "asset:video-02-05",
+          "startMs": 409000,
+          "endMs": 657000,
+          "locator": "ev-005 · 06:49-10:57"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-02-review-v1"
+    },
+    {
+      "id": "edge:outline:09-01:09-02",
+      "from": "lesson:09-01",
+      "to": "lesson:09-02",
+      "type": "applies",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从动态规划概念进入第一个具体问题。",
+      "confidence": 0.97,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:09-02:09-03",
+      "from": "lesson:09-02",
+      "to": "lesson:09-03",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从入门问题进入重叠子问题的识别。",
+      "confidence": 0.93,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:09-03:09-04",
+      "from": "lesson:09-03",
+      "to": "lesson:09-04",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从发现重叠子问题进入状态定义和状态转移。",
+      "confidence": 0.96,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:09-04:09-05",
+      "from": "lesson:09-04",
+      "to": "lesson:09-05",
+      "type": "recommended_before",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "通用状态定义能力是理解 0-1 背包建模的基础。",
+      "confidence": 0.91,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:09-05:09-06",
+      "from": "lesson:09-05",
+      "to": "lesson:09-06",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从标准 0-1 背包进入空间优化和变种。",
+      "confidence": 0.98,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:09-06:09-07",
+      "from": "lesson:09-06",
+      "to": "lesson:09-07",
+      "type": "applies",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "将背包模型及其优化迁移到面试题。",
+      "confidence": 0.98,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:09-04:09-08",
+      "from": "lesson:09-04",
+      "to": "lesson:09-08",
+      "type": "applies",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "状态定义和转移思想应用于 LIS。",
+      "confidence": 0.92,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:09-08:09-09",
+      "from": "lesson:09-08",
+      "to": "lesson:09-09",
+      "type": "extends",
+      "strength": "medium",
+      "status": "provisional",
+      "rationale": "从 LIS 扩展到 LCS、最短路和具体解恢复等主题。",
+      "confidence": 0.83,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:09-01:10-02",
+      "from": "lesson:09-01",
+      "to": "lesson:10-02",
+      "type": "contrasts_with",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "动态规划与贪心的适用条件形成课程中的核心对照。",
+      "confidence": 0.95,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:10-01:10-02",
+      "from": "lesson:10-01",
+      "to": "lesson:10-02",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从贪心基础进入与动态规划的关系。",
+      "confidence": 0.96,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    },
+    {
+      "id": "edge:outline:10-02:10-03",
+      "from": "lesson:10-02",
+      "to": "lesson:10-03",
+      "type": "extends",
+      "strength": "strong",
+      "status": "provisional",
+      "rationale": "从算法选择进入贪心选择性质的证明。",
+      "confidence": 0.96,
+      "evidence": [],
+      "createdBy": "outline-analysis-v1"
+    }
+  ]
+}

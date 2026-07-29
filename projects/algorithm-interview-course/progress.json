@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-07-29T09:38:25.000Z",
+  "summary": {
+    "expectedLessons": 70,
+    "knownDurationLessons": 67,
+    "unknownDurationLessons": ["06-08", "07-03", "09-10"],
+    "discoveredAssets": 70,
+    "discoveredVideos": 67,
+    "discoveredTexts": 3,
+    "catalogedAssets": 11,
+    "mappedLessons": 70,
+    "hashVerifiedLessons": 11,
+    "probedLessons": 11,
+    "understoodLessons": 11,
+    "synthesizedLessons": 11,
+    "verifiedLessons": 11,
+    "synthesizedChapters": 2,
+    "verifiedRelationshipEdges": 14
+  },
+  "defaultLessonState": {
+    "sourceMapping": "awaiting-source",
+    "mediaProbe": "not-started",
+    "videoEvidence": "not-started",
+    "textEvidence": "not-started",
+    "lessonNote": "not-started",
+    "relationshipReview": "not-started",
+    "qa": "not-started"
+  },
+  "lessons": {
+    "01-01": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed"
+    },
+    "01-02": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed"
+    },
+    "01-03": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed"
+    },
+    "01-04": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "notes": "目录标称 13:40；FFprobe 实际 13:44.44，相差约 4.44 秒。"
+    },
+    "02-01": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "notes": "目录标称 19:52；FFprobe 实际 19:55.60，相差约 3.60 秒。",
+      "understandingAttempts": 1,
+      "rejectedAttempts": 0,
+      "transportFailures": 0,
+      "acceptedAttemptId": "02-01-understanding-001"
+    },
+    "02-02": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "understandingAttempts": 1,
+      "rejectedAttempts": 0,
+      "transportFailures": 0,
+      "acceptedAttemptId": "02-02-understanding-001"
+    },
+    "02-03": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "understandingAttempts": 1,
+      "rejectedAttempts": 0,
+      "transportFailures": 0,
+      "acceptedAttemptId": "02-03-understanding-001"
+    },
+    "02-04": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "understandingAttempts": 9,
+      "rejectedAttempts": 1,
+      "transportFailures": 7,
+      "acceptedAttemptId": "02-04-understanding-009",
+      "notes": "首次模型生成因时间戳越界和对象结构错误被拒绝；经 Prompt v1.3 与 json_object 输出模式校准后通过。另有 5 次 HTTP 400 和 2 次网络失败，均未产出可用响应。"
+    },
+    "02-05": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "understandingAttempts": 1,
+      "rejectedAttempts": 0,
+      "transportFailures": 0,
+      "acceptedAttemptId": "02-05-understanding-001"
+    },
+    "02-06": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "understandingAttempts": 1,
+      "rejectedAttempts": 0,
+      "transportFailures": 0,
+      "acceptedAttemptId": "02-06-understanding-001"
+    },
+    "02-07": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "notes": "目录标称 11:25；FFprobe 实际 11:29.888，相差约 4.888 秒。",
+      "understandingAttempts": 1,
+      "rejectedAttempts": 0,
+      "transportFailures": 0,
+      "acceptedAttemptId": "02-07-understanding-001"
+    }
+  }
+}
