@@ -187,11 +187,11 @@
       "id": "edge:video-outline:01-04:03-08",
       "from": "lesson:01-04",
       "to": "lesson:03-08",
-      "type": "same_problem_family_as",
+      "type": "extends",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "01-04 用 LeetCode 3 的暴力解法说明“先得到基线再优化”，03-08 的目录显示将完整讲解同一题；待处理 03-08 后确认具体解法承接关系。",
-      "confidence": 0.92,
+      "status": "verified",
+      "rationale": "01-04 以 LeetCode 3 的 O(n³) 暴力法建立可行基线；03-08 回到同一题，使用滑动窗口和 freq[256] 完成线性扫描解法，形成从宏观优化方法到完整实现的明确延伸。",
+      "confidence": 0.99,
       "evidence": [
         {
           "lessonId": "01-04",
@@ -199,19 +199,26 @@
           "startMs": 205000,
           "endMs": 383000,
           "locator": "ev-004 · 03:25-06:23"
+        },
+        {
+          "lessonId": "03-08",
+          "assetId": "asset:video-03-08",
+          "startMs": 0,
+          "endMs": 586000,
+          "locator": "ev-001–ev-003 · 00:00-09:46"
         }
       ],
-      "createdBy": "chapter-01-review-v1"
+      "createdBy": "chapter-01-review-v1; verified-by chapter-03-review-v1"
     },
     {
       "id": "edge:video-outline:03-05:01-01",
       "from": "lesson:03-05",
       "to": "lesson:01-01",
       "type": "revisits",
-      "strength": "medium",
-      "status": "provisional",
-      "rationale": "01-01 以大量重复元素为约束提及三路快排，03-05 的目录显示将专题应用三路 partition；待处理 03-05 后确认其是否回访本课的约束驱动选型思想。",
-      "confidence": 0.83,
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "01-01 用重复元素等数据特征说明排序算法应由约束驱动选择；03-05 具体应用三路快排 partition 处理只有 0、1、2 三种取值的 Sort Colors，回访并落实这一选型思想。",
+      "confidence": 0.96,
       "evidence": [
         {
           "lessonId": "01-01",
@@ -219,9 +226,16 @@
           "startMs": 326000,
           "endMs": 1010000,
           "locator": "ev-004 · 05:26-16:50"
+        },
+        {
+          "lessonId": "03-05",
+          "assetId": "asset:video-03-05",
+          "startMs": 27000,
+          "endMs": 816000,
+          "locator": "ev-001–ev-006 · 00:27-13:36"
         }
       ],
-      "createdBy": "chapter-01-review-v1"
+      "createdBy": "chapter-01-review-v1; verified-by chapter-03-review-v1"
     },
     {
       "id": "edge:outline:07-03:01-01",
@@ -441,12 +455,27 @@
       "from": "lesson:02-03",
       "to": "lesson:03-01",
       "type": "applies",
-      "strength": "medium",
-      "status": "provisional",
-      "rationale": "二分查找是后续核查对数复杂度分析如何应用到具体代码的高价值候选。",
-      "confidence": 0.78,
-      "evidence": [],
-      "createdBy": "chapter-02-preflight-v1"
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "02-03 用“每轮排除一半”推导二分查找 O(log n)；03-01 将同一算法落实为闭区间状态、循环条件和边界更新的完整实现。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "02-03",
+          "assetId": "asset:video-02-03",
+          "startMs": 391000,
+          "endMs": 541000,
+          "locator": "ev-005 · 06:31-09:01"
+        },
+        {
+          "lessonId": "03-01",
+          "assetId": "asset:video-03-01",
+          "startMs": 210000,
+          "endMs": 820000,
+          "locator": "ev-004–ev-005 · 03:30-13:40"
+        }
+      ],
+      "createdBy": "chapter-02-preflight-v1; verified-by chapter-03-review-v1"
     },
     {
       "id": "edge:outline:02-05:06-02",
@@ -474,11 +503,26 @@
       "to": "lesson:03-02",
       "type": "extends",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "改变变量定义仍保持程序正确性，延伸二分查找中的不变量思想。",
-      "confidence": 0.94,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "03-01 用闭区间 [l,r] 建立二分查找不变量并预告把 r 改为 n；03-02 明确改用半开区间 [l,r)，同步推导 r=n、l<r 与 r=mid。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "03-01",
+          "assetId": "asset:video-03-01",
+          "startMs": 900000,
+          "endMs": 927000,
+          "locator": "ev-007 · 15:00-15:27"
+        },
+        {
+          "lessonId": "03-02",
+          "assetId": "asset:video-03-02",
+          "startMs": 0,
+          "endMs": 233000,
+          "locator": "ev-001–ev-002 · 00:00-03:53"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-03-review-v1"
     },
     {
       "id": "edge:outline:03-03:03-04",
@@ -486,23 +530,60 @@
       "to": "lesson:03-04",
       "type": "extends",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "围绕 Move Zeros 从基本解法进入多种优化。",
-      "confidence": 0.94,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "03-03 给出 Move Zeros 的 O(n) 辅助向量基线并明确提出下一课优化；03-04 开头直接回顾该方案，再把空间降到 O(1) 并继续减少补零和自交换操作。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "03-03",
+          "assetId": "asset:video-03-03",
+          "startMs": 742000,
+          "endMs": 807520,
+          "locator": "ev-010 · 12:22-13:27"
+        },
+        {
+          "lessonId": "03-04",
+          "assetId": "asset:video-03-04",
+          "startMs": 0,
+          "endMs": 560000,
+          "locator": "ev-001–ev-005 · 00:00-09:20"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-03-review-v1"
     },
     {
       "id": "edge:outline:03-04:03-05",
       "from": "lesson:03-04",
       "to": "lesson:03-05",
-      "type": "same_pattern_as",
-      "strength": "medium",
-      "status": "provisional",
-      "rationale": "原地数组操作与 partition 思路形成连续题型簇。",
-      "confidence": 0.78,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "type": "extends",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "03-04 通过 k 划分“已处理非零前缀”和待处理区间，并在总结中回指快排特殊情形；03-05 把这种区间不变量扩展成 zero、i、two 三个边界的三路 partition。",
+      "confidence": 0.96,
+      "evidence": [
+        {
+          "lessonId": "03-04",
+          "assetId": "asset:video-03-04",
+          "startMs": 0,
+          "endMs": 159000,
+          "locator": "ev-001 · 00:00-02:39"
+        },
+        {
+          "lessonId": "03-04",
+          "assetId": "asset:video-03-04",
+          "startMs": 560000,
+          "endMs": 670000,
+          "locator": "ev-006 · 09:20-11:10"
+        },
+        {
+          "lessonId": "03-05",
+          "assetId": "asset:video-03-05",
+          "startMs": 545000,
+          "endMs": 1163000,
+          "locator": "ev-005–ev-007 · 09:05-19:23"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-03-review-v1"
     },
     {
       "id": "edge:outline:03-06:04-04",
@@ -522,11 +603,216 @@
       "to": "lesson:03-08",
       "type": "extends",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "从基本滑动窗口扩展到在窗口内维护状态。",
-      "confidence": 0.96,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "03-07 建立左右边界、扩张与收缩的基础滑动窗口并明确预告下一例；03-08 延续窗口框架，新增 freq[256] 记录窗口字符频次以维持“无重复”约束。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "03-07",
+          "assetId": "asset:video-03-07",
+          "startMs": 794000,
+          "endMs": 849920,
+          "locator": "ev-007 · 13:14-14:09"
+        },
+        {
+          "lessonId": "03-08",
+          "assetId": "asset:video-03-08",
+          "startMs": 154000,
+          "endMs": 586000,
+          "locator": "ev-002–ev-003 · 02:34-09:46"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-03-review-v1"
+    },
+    {
+      "id": "edge:video:01-03:03-03",
+      "from": "lesson:01-03",
+      "to": "lesson:03-03",
+      "type": "applies",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "01-03 推荐使用面试题导向的 LeetCode 进行专项练习；03-03 将这一准备建议落实为课程第一次完整的题目查找、语言模板、本地实现、在线运行和提交。",
+      "confidence": 0.97,
+      "evidence": [
+        {
+          "lessonId": "01-03",
+          "assetId": "asset:video-01-03",
+          "startMs": 634000,
+          "endMs": 814000,
+          "locator": "ev-007–ev-008 · 10:34-13:34"
+        },
+        {
+          "lessonId": "03-03",
+          "assetId": "asset:video-03-03",
+          "startMs": 0,
+          "endMs": 45000,
+          "locator": "ev-001 · 00:00-00:45"
+        },
+        {
+          "lessonId": "03-03",
+          "assetId": "asset:video-03-03",
+          "startMs": 200000,
+          "endMs": 678000,
+          "locator": "ev-003–ev-008 · 03:20-11:18"
+        }
+      ],
+      "createdBy": "chapter-03-review-v1"
+    },
+    {
+      "id": "edge:video:03-02:03-04",
+      "from": "lesson:03-02",
+      "to": "lesson:03-04",
+      "type": "applies",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "03-02 总结先定义变量和区间语义、再维护循环不变量；03-04 把该方法用于 Move Zeros，以 k 定义已处理非零前缀 [0,k)，并据此推导覆写、交换和自交换优化。",
+      "confidence": 0.97,
+      "evidence": [
+        {
+          "lessonId": "03-02",
+          "assetId": "asset:video-03-02",
+          "startMs": 0,
+          "endMs": 323000,
+          "locator": "ev-001–ev-003 · 00:00-05:23"
+        },
+        {
+          "lessonId": "03-02",
+          "assetId": "asset:video-03-02",
+          "startMs": 499000,
+          "endMs": 726480,
+          "locator": "ev-006 · 08:19-12:06"
+        },
+        {
+          "lessonId": "03-04",
+          "assetId": "asset:video-03-04",
+          "startMs": 0,
+          "endMs": 560000,
+          "locator": "ev-001–ev-005 · 00:00-09:20"
+        }
+      ],
+      "createdBy": "chapter-03-review-v1"
+    },
+    {
+      "id": "edge:video:01-04:03-06",
+      "from": "lesson:01-04",
+      "to": "lesson:03-06",
+      "type": "applies",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "01-04 提出从题目条件读取算法暗示、以暴力法为起点并针对瓶颈优化；03-06 在有序 Two Sum 中完整应用该流程，从 O(n²) 暴力，经 O(n log n) 二分，优化到 O(n) 对撞指针。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "01-04",
+          "assetId": "asset:video-01-04",
+          "startMs": 25000,
+          "endMs": 623000,
+          "locator": "ev-002–ev-005 · 00:25-10:23"
+        },
+        {
+          "lessonId": "03-06",
+          "assetId": "asset:video-03-06",
+          "startMs": 0,
+          "endMs": 576000,
+          "locator": "ev-001–ev-004 · 00:00-09:36"
+        }
+      ],
+      "createdBy": "chapter-03-review-v1"
+    },
+    {
+      "id": "edge:video:03-01:03-06",
+      "from": "lesson:03-01",
+      "to": "lesson:03-06",
+      "type": "applies",
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "03-01 建立有序数组上的二分查找实现；03-06 把它作为 Two Sum II 的中间优化，为每个 numbers[i] 在后续有序区间查找 target-numbers[i]。",
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "lessonId": "03-01",
+          "assetId": "asset:video-03-01",
+          "startMs": 210000,
+          "endMs": 820000,
+          "locator": "ev-004–ev-005 · 03:30-13:40"
+        },
+        {
+          "lessonId": "03-06",
+          "assetId": "asset:video-03-06",
+          "startMs": 276000,
+          "endMs": 418000,
+          "locator": "ev-003 · 04:36-06:58"
+        }
+      ],
+      "createdBy": "chapter-03-review-v1"
+    },
+    {
+      "id": "edge:video:03-05:03-06",
+      "from": "lesson:03-05",
+      "to": "lesson:03-06",
+      "type": "same_pattern_as",
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "03-05 用 zero、i、two 维护并收缩多个数组区域；03-06 明确指出对撞指针与两路、三路快排 partition 有思路联系。两者共享“边界定义驱动的原地分区/淘汰”模式，但状态和目标不同。",
+      "confidence": 0.97,
+      "evidence": [
+        {
+          "lessonId": "03-05",
+          "assetId": "asset:video-03-05",
+          "startMs": 545000,
+          "endMs": 1163000,
+          "locator": "ev-005–ev-007 · 09:05-19:23"
+        },
+        {
+          "lessonId": "03-06",
+          "assetId": "asset:video-03-06",
+          "startMs": 828000,
+          "endMs": 871000,
+          "locator": "ev-008 · 13:48-14:31"
+        }
+      ],
+      "createdBy": "chapter-03-review-v1"
+    },
+    {
+      "id": "edge:video:03-06:03-07",
+      "from": "lesson:03-06",
+      "to": "lesson:03-07",
+      "type": "extends",
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "03-06 引入从两端向中间收缩的对撞指针；03-07 以“Two Pointer / 滑动窗口”开场，把双索引技术扩展为维护连续区间并按窗口和动态扩张、收缩。",
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "lessonId": "03-06",
+          "assetId": "asset:video-03-06",
+          "startMs": 419000,
+          "endMs": 576000,
+          "locator": "ev-004 · 06:59-09:36"
+        },
+        {
+          "lessonId": "03-06",
+          "assetId": "asset:video-03-06",
+          "startMs": 828000,
+          "endMs": 871000,
+          "locator": "ev-008 · 13:48-14:31"
+        },
+        {
+          "lessonId": "03-07",
+          "assetId": "asset:video-03-07",
+          "startMs": 0,
+          "endMs": 43000,
+          "locator": "ev-001 · 00:00-00:43"
+        },
+        {
+          "lessonId": "03-07",
+          "assetId": "asset:video-03-07",
+          "startMs": 339000,
+          "endMs": 476000,
+          "locator": "ev-005 · 05:39-07:56"
+        }
+      ],
+      "createdBy": "chapter-03-review-v1"
     },
     {
       "id": "edge:outline:03-08:04-07",
