@@ -13,26 +13,23 @@ import {
   writeJson,
 } from "./files.js";
 import {
+  addStreamingOptions,
+  buildUnderstandingPayload,
+  loadJsonObject,
+  parseJsonObject,
+  type JsonRecord,
+} from "./request-options.js";
+import {
   compressLocalVideo,
   parseVideoCompressionLevel,
   resolveCompressionRequest,
   type VideoCompressionLevel,
 } from "./video-compression.js";
 
-type JsonRecord = Record<string, unknown>;
-
 const program = new Command()
   .name("zenmux")
   .description("Safe, scriptable ZenMux media and multimodal operations")
   .showHelpAfterError();
-
-const parseJsonObject = (value: string): JsonRecord => {
-  const parsed: unknown = JSON.parse(value);
-  if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) {
-    throw new Error("--extra must be a JSON object.");
-  }
-  return parsed as JsonRecord;
-};
 
 const parseCompressionOption = (value: string): VideoCompressionLevel => {
   try {
@@ -102,24 +99,6 @@ const dryRunOrClient = (
     return undefined;
   }
   return createClient();
-};
-
-const addStreamingOptions = (
-  payload: JsonRecord,
-  stream: boolean,
-): JsonRecord => {
-  if (!stream) return payload;
-  const existing =
-    typeof payload.stream_options === "object" &&
-    payload.stream_options !== null &&
-    !Array.isArray(payload.stream_options)
-      ? (payload.stream_options as JsonRecord)
-      : {};
-  return {
-    ...payload,
-    stream: true,
-    stream_options: { ...existing, include_usage: true },
-  };
 };
 
 program
@@ -390,7 +369,11 @@ program
   )
   .option("--max-local-mb <number>", "maximum local file size to inline", "50")
   .option("--stream", "stream and aggregate the response", false)
-  .option("--extra <json>", "additional request fields", parseJsonObject, {})
+  .option("--extra <json>", "additional request fields", parseJsonObject)
+  .option(
+    "--extra-file <path>",
+    "read additional request fields from a UTF-8 JSON object file",
+  )
   .option(
     "--dry-run",
     "perform requested local compression and print the request without calling the API",
@@ -407,10 +390,12 @@ program
       compressedOut?: string;
       maxLocalMb: string;
       stream: boolean;
-      extra: JsonRecord;
+      extra?: JsonRecord;
+      extraFile?: string;
       dryRun: boolean;
     }) => {
       const prompt = await loadPrompt(options.prompt, options.promptFile);
+      const extra = await loadJsonObject(options.extra, options.extraFile);
       const compressionRequest = resolveCompressionRequest({
         input: options.input,
         level: options.compress,
@@ -434,28 +419,14 @@ program
         understandingInput,
         maxLocalMb * 1024 * 1024,
       );
-      const payload = addStreamingOptions(
-        {
-          ...options.extra,
-          model,
-          messages: [
-            {
-              role: "user",
-              content: [
-                { type: "text", text: prompt },
-                {
-                  type: "file",
-                  file: {
-                    filename: inputFilename(understandingInput),
-                    file_data: fileData,
-                  },
-                },
-              ],
-            },
-          ],
-        },
-        options.stream,
-      );
+      const payload = buildUnderstandingPayload({
+        extra,
+        model,
+        prompt,
+        filename: inputFilename(understandingInput),
+        fileData,
+        stream: options.stream,
+      });
       const client = dryRunOrClient(
         options.dryRun,
         `${process.env.ZENMUX_BASE_URL ?? "https://zenmux.ai/api/v1"}/chat/completions`,
