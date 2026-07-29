@@ -195,7 +195,7 @@ pnpm --filter @daily-work/video exec remotion render DailyBrief ../../outputs/vi
 ### 媒体检查
 
 ```powershell
-pnpm media:probe -- outputs/demo/clip.mp4 --expect-ratio 9:16 --expect-duration 5
+pnpm media:probe outputs/demo/clip.mp4 --expect-ratio 9:16 --expect-duration 5
 ```
 
 ## Agent Skills

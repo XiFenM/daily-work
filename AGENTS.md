@@ -61,5 +61,5 @@
 - 代码改动：`pnpm check`
 - 环境诊断：`pnpm doctor`
 - Remotion 静帧：`pnpm video:smoke`
-- 音视频元数据：`pnpm media:probe -- <file>`
+- 音视频元数据：`pnpm media:probe <file>`
 - 交付时说明已验证项、未验证项、输出绝对路径和外部调用情况。
