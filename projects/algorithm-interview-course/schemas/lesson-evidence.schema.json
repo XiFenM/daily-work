@@ -102,6 +102,12 @@
         "$ref": "#/$defs/codeArtifact"
       }
     },
+    "stateModels": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/stateModel"
+      }
+    },
     "correctness": {
       "$ref": "#/$defs/correctness"
     },
@@ -172,6 +178,41 @@
       "$ref": "#/$defs/provenance"
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "provenance": {
+            "properties": {
+              "promptVersion": {
+                "const": "video-evidence-v1.4"
+              }
+            },
+            "required": ["promptVersion"]
+          }
+        },
+        "required": ["provenance"]
+      },
+      "then": {
+        "required": ["stateModels"],
+        "properties": {
+          "solutionProgression": {
+            "items": {
+              "required": ["id", "codeArtifactIds", "stateModelIds"]
+            }
+          },
+          "codeArtifacts": {
+            "items": {
+              "required": ["id", "solutionStageId", "completeness"]
+            }
+          },
+          "correctness": {
+            "required": ["stateModelIds", "obligations"]
+          }
+        }
+      }
+    }
+  ],
   "$defs": {
     "evidenceIds": {
       "type": "array",
@@ -200,7 +241,26 @@
         "evidenceIds": {
           "$ref": "#/$defs/evidenceIds"
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "sourceClass": {
+                "const": "course_direct"
+              }
+            },
+            "required": ["sourceClass"]
+          },
+          "then": {
+            "properties": {
+              "evidenceIds": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
     },
     "timelineSegment": {
       "type": "object",
@@ -318,6 +378,10 @@
         "evidenceIds"
       ],
       "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^solution-[0-9]{3,}$"
+        },
         "stage": {
           "enum": [
             "baseline",
@@ -342,6 +406,22 @@
             "type": "string"
           }
         },
+        "codeArtifactIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^code-[0-9]{3,}$"
+          },
+          "uniqueItems": true
+        },
+        "stateModelIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^state-[0-9]{3,}$"
+          },
+          "uniqueItems": true
+        },
         "evidenceIds": {
           "$ref": "#/$defs/evidenceIds"
         }
@@ -359,6 +439,14 @@
         "evidenceIds"
       ],
       "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^code-[0-9]{3,}$"
+        },
+        "solutionStageId": {
+          "type": ["string", "null"],
+          "pattern": "^solution-[0-9]{3,}$"
+        },
         "language": {
           "type": ["string", "null"]
         },
@@ -368,6 +456,9 @@
         "code": {
           "type": "string"
         },
+        "completeness": {
+          "enum": ["complete", "partial", "uncertain"]
+        },
         "ocrUncertainties": {
           "type": "array",
           "items": {
@@ -376,6 +467,175 @@
         },
         "verification": {
           "enum": ["not_run", "compiled", "tested", "failed"]
+        },
+        "evidenceIds": {
+          "$ref": "#/$defs/evidenceIds"
+        }
+      }
+    },
+    "stateVariable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["symbol", "role", "meaning", "updateRule", "evidenceIds"],
+      "properties": {
+        "symbol": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "meaning": {
+          "type": "string"
+        },
+        "updateRule": {
+          "type": ["string", "null"]
+        },
+        "evidenceIds": {
+          "$ref": "#/$defs/evidenceIds"
+        }
+      }
+    },
+    "stateRegion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["notation", "meaning", "evidenceIds"],
+      "properties": {
+        "notation": {
+          "type": "string"
+        },
+        "meaning": {
+          "type": "string"
+        },
+        "evidenceIds": {
+          "$ref": "#/$defs/evidenceIds"
+        }
+      }
+    },
+    "stateTransition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["condition", "updates", "preserves", "evidenceIds"],
+      "properties": {
+        "condition": {
+          "type": "string"
+        },
+        "updates": {
+          "type": "string"
+        },
+        "preserves": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/sourcedStatement"
+            }
+          ]
+        },
+        "evidenceIds": {
+          "$ref": "#/$defs/evidenceIds"
+        }
+      }
+    },
+    "stateModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "solutionStageId",
+        "kind",
+        "variables",
+        "regions",
+        "invariant",
+        "transitions",
+        "termination",
+        "evidenceIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^state-[0-9]{3,}$"
+        },
+        "solutionStageId": {
+          "type": ["string", "null"],
+          "pattern": "^solution-[0-9]{3,}$"
+        },
+        "kind": {
+          "enum": [
+            "search_interval",
+            "partition",
+            "two_pointer",
+            "sliding_window",
+            "other"
+          ]
+        },
+        "variables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stateVariable"
+          }
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stateRegion"
+          }
+        },
+        "invariant": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/sourcedStatement"
+            }
+          ]
+        },
+        "transitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stateTransition"
+          }
+        },
+        "termination": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/sourcedStatement"
+            }
+          ]
+        },
+        "evidenceIds": {
+          "$ref": "#/$defs/evidenceIds"
+        }
+      }
+    },
+    "proofObligation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["phase", "statement", "sourceClass", "evidenceIds"],
+      "properties": {
+        "phase": {
+          "enum": [
+            "initialization",
+            "preservation",
+            "termination",
+            "postcondition",
+            "boundary_safety"
+          ]
+        },
+        "statement": {
+          "type": "string"
+        },
+        "sourceClass": {
+          "enum": [
+            "course_direct",
+            "course_text",
+            "editorial_inference",
+            "supplemental"
+          ]
         },
         "evidenceIds": {
           "$ref": "#/$defs/evidenceIds"
@@ -404,6 +664,20 @@
           "type": "array",
           "items": {
             "$ref": "#/$defs/sourcedStatement"
+          }
+        },
+        "stateModelIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^state-[0-9]{3,}$"
+          },
+          "uniqueItems": true
+        },
+        "obligations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proofObligation"
           }
         }
       }
@@ -437,6 +711,9 @@
       "properties": {
         "symbol": {
           "type": "string"
+        },
+        "role": {
+          "type": ["string", "null"]
         },
         "meaning": {
           "type": ["string", "null"]
@@ -609,7 +886,7 @@
           "type": ["string", "null"]
         },
         "inputSize": {
-          "type": ["string", "null"]
+          "type": ["string", "number", "null"]
         },
         "observedValue": {
           "type": ["string", "number", "null"]

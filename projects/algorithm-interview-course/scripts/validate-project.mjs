@@ -178,6 +178,12 @@ for (const attempt of manifest.attempts ?? []) {
       attempt.validation?.status === "passed",
       `${attempt.attemptId} is accepted without passed validation.`,
     );
+    if (attempt.promptVersion === "video-evidence-v1.4") {
+      check(
+        attempt.validation?.qaStatus === "completed",
+        `${attempt.attemptId} is an accepted v1.4 attempt without completed QA.`,
+      );
+    }
     check(
       attempt.eligibleForSynthesis === true,
       `${attempt.attemptId} is accepted but not eligible for synthesis.`,
@@ -335,11 +341,16 @@ const completedLessons = Object.entries(progress.lessons ?? {})
   .filter(([, state]) => state.lessonNote === "completed")
   .map(([lessonId]) => lessonId);
 for (const lessonId of completedLessons) {
+  const lessonState = progress.lessons[lessonId];
   try {
     await access(resolve(projectRoot, `notes/lessons/${lessonId}.md`));
   } catch {
     errors.push(`Completed lesson ${lessonId} has no formal note.`);
   }
+  check(
+    lessonState.qa === "completed",
+    `Completed lesson ${lessonId} does not have completed QA.`,
+  );
   check(
     normalizedByLesson.has(lessonId),
     `Completed video lesson ${lessonId} has no normalized evidence.`,

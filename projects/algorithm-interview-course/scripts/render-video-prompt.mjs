@@ -30,6 +30,14 @@ const lessonId = argumentsMap.lesson;
 if (!lessonId) {
   throw new Error("Specify --lesson <lesson-id>, for example --lesson 01-03.");
 }
+const promptVersion = argumentsMap["prompt-version"] ?? "video-evidence-v1.4";
+if (
+  !new Set(["video-evidence-v1.3", "video-evidence-v1.4"]).has(promptVersion)
+) {
+  throw new Error(
+    "Unsupported --prompt-version. Use video-evidence-v1.3 or video-evidence-v1.4.",
+  );
+}
 
 const modelId =
   argumentsMap.model ?? process.env.ZENMUX_UNDERSTAND_MODEL ?? undefined;
@@ -139,7 +147,7 @@ const replacements = {
 const templatePath = resolve(
   projectRoot,
   "prompts",
-  "video-evidence-v1.3.template.md",
+  `${promptVersion}.template.md`,
 );
 let renderedPrompt = await readFile(templatePath, "utf8");
 for (const [key, value] of Object.entries(replacements)) {
@@ -157,7 +165,7 @@ if (unresolvedPlaceholders.length > 0) {
 const outputPath = resolve(
   repositoryRoot,
   argumentsMap.out ??
-    `work/algorithm-interview-course/prompts/${lessonId}-video-evidence-v1.3.md`,
+    `work/algorithm-interview-course/prompts/${lessonId}-${promptVersion}.md`,
 );
 await mkdir(dirname(outputPath), { recursive: true });
 await writeFile(outputPath, renderedPrompt, "utf8");

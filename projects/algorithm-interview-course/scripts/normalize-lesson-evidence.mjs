@@ -1,5 +1,8 @@
+import Ajv2020 from "ajv/dist/2020.js";
+import addFormats from "ajv-formats";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const parseArguments = (argumentsList) => {
   const parsed = {};
@@ -30,14 +33,108 @@ const readJson = async (path) =>
   JSON.parse(await readFile(resolve(path), "utf8"));
 const rawEvidence = await readJson(argumentsMap.input);
 const apiResponse = await readJson(argumentsMap.response);
+const canonicalSchema = await readJson(
+  fileURLToPath(
+    new URL("../schemas/lesson-evidence.schema.json", import.meta.url),
+  ),
+);
+const schemaValidator = new Ajv2020({
+  allErrors: true,
+  strict: false,
+  validateFormats: true,
+});
+addFormats(schemaValidator);
+const validateCanonicalSchema = schemaValidator.compile(canonicalSchema);
+const assertCanonicalSchema = (value, phase) => {
+  if (validateCanonicalSchema(value)) return;
+  const details = (validateCanonicalSchema.errors ?? [])
+    .map(
+      (error) =>
+        `${error.instancePath || "/"} ${error.message ?? error.keyword}`,
+    )
+    .join("; ");
+  throw new Error(`${phase} evidence failed canonical schema: ${details}`);
+};
 const promptVersion =
   argumentsMap["prompt-version"] ??
   rawEvidence.provenance?.promptVersion ??
   "unknown";
-const strictExtraction = promptVersion === "video-evidence-v1.3";
+const strictV13 = promptVersion === "video-evidence-v1.3";
+const strictV14 = promptVersion === "video-evidence-v1.4";
+const strictExtraction = strictV13 || strictV14;
+if (
+  strictExtraction &&
+  rawEvidence.provenance?.promptVersion !== promptVersion
+) {
+  throw new Error(
+    `Raw promptVersion ${rawEvidence.provenance?.promptVersion ?? "missing"} does not match ${promptVersion}.`,
+  );
+}
+if (strictV14) {
+  assertCanonicalSchema(rawEvidence, "Raw");
+}
+
+const isPlainObject = (value) =>
+  value !== null && typeof value === "object" && !Array.isArray(value);
+
+const assertExactKeys = (value, expectedKeys, path) => {
+  if (!isPlainObject(value)) {
+    throw new Error(`${path} must be an object.`);
+  }
+  const expected = new Set(expectedKeys);
+  const missing = expectedKeys.filter((key) => !Object.hasOwn(value, key));
+  const extra = Object.keys(value).filter((key) => !expected.has(key));
+  if (missing.length > 0 || extra.length > 0) {
+    throw new Error(
+      `${path} has invalid fields; missing=[${missing.join(",")}], extra=[${extra.join(",")}].`,
+    );
+  }
+};
+
+const assertStringArray = (value, path) => {
+  if (!Array.isArray(value) || value.some((item) => typeof item !== "string")) {
+    throw new Error(`${path} must be an array of strings.`);
+  }
+};
+
+const assertIdArray = (value, pattern, path, { nonEmpty = false } = {}) => {
+  if (
+    !Array.isArray(value) ||
+    (nonEmpty && value.length === 0) ||
+    value.some((item) => typeof item !== "string" || !pattern.test(item)) ||
+    new Set(value).size !== value.length
+  ) {
+    throw new Error(`${path} must contain unique, valid IDs.`);
+  }
+};
+
+const evidenceIdPattern = /^ev-[0-9]{3,}$/;
+const solutionIdPattern = /^solution-[0-9]{3,}$/;
+const codeIdPattern = /^code-[0-9]{3,}$/;
+const stateIdPattern = /^state-[0-9]{3,}$/;
+const rawSourceClasses = new Set([
+  "course_direct",
+  "course_text",
+  "editorial_inference",
+  "supplemental",
+]);
+
+const assertRawSourcedStatement = (value, path) => {
+  assertExactKeys(value, ["statement", "sourceClass", "evidenceIds"], path);
+  if (
+    typeof value.statement !== "string" ||
+    value.statement.length === 0 ||
+    !rawSourceClasses.has(value.sourceClass)
+  ) {
+    throw new Error(`${path} is not a valid sourced statement.`);
+  }
+  assertIdArray(value.evidenceIds, evidenceIdPattern, `${path}.evidenceIds`, {
+    nonEmpty: value.sourceClass === "course_direct",
+  });
+};
 
 if (strictExtraction) {
-  for (const field of [
+  const requiredTopLevelFields = [
     "schemaVersion",
     "lessonId",
     "chapterId",
@@ -63,7 +160,15 @@ if (strictExtraction) {
     "evidence",
     "uncertainties",
     "provenance",
-  ]) {
+  ];
+  if (strictV14) {
+    requiredTopLevelFields.splice(
+      requiredTopLevelFields.indexOf("correctness"),
+      0,
+      "stateModels",
+    );
+  }
+  for (const field of requiredTopLevelFields) {
     if (!Object.hasOwn(rawEvidence, field)) {
       throw new Error(`Strict extraction is missing top-level field ${field}.`);
     }
@@ -121,6 +226,379 @@ if (strictExtraction) {
       (concept.definition !== null && typeof concept.definition !== "string")
     ) {
       throw new Error("Strict extraction has an invalid concept definition.");
+    }
+  }
+
+  if (strictV14) {
+    assertExactKeys(rawEvidence, requiredTopLevelFields, "root");
+    if (rawEvidence.schemaVersion !== "1.0") {
+      throw new Error("video-evidence-v1.4 requires schemaVersion 1.0.");
+    }
+
+    if (rawEvidence.problem !== null) {
+      assertExactKeys(
+        rawEvidence.problem,
+        [
+          "platform",
+          "problemId",
+          "titleObserved",
+          "statement",
+          "constraints",
+          "clarifyingQuestions",
+          "evidenceIds",
+        ],
+        "problem",
+      );
+      for (const field of [
+        "platform",
+        "problemId",
+        "titleObserved",
+        "statement",
+      ]) {
+        if (
+          rawEvidence.problem[field] !== null &&
+          typeof rawEvidence.problem[field] !== "string"
+        ) {
+          throw new Error(`problem.${field} must be a string or null.`);
+        }
+      }
+      assertStringArray(rawEvidence.problem.constraints, "problem.constraints");
+      assertStringArray(
+        rawEvidence.problem.clarifyingQuestions,
+        "problem.clarifyingQuestions",
+      );
+      assertIdArray(
+        rawEvidence.problem.evidenceIds,
+        evidenceIdPattern,
+        "problem.evidenceIds",
+        { nonEmpty: true },
+      );
+    }
+
+    if (!Array.isArray(rawEvidence.solutionProgression)) {
+      throw new Error("solutionProgression must be an array.");
+    }
+    for (const [index, solution] of rawEvidence.solutionProgression.entries()) {
+      const path = `solutionProgression[${index}]`;
+      assertExactKeys(
+        solution,
+        [
+          "id",
+          "stage",
+          "idea",
+          "timeComplexity",
+          "spaceComplexity",
+          "limitations",
+          "codeArtifactIds",
+          "stateModelIds",
+          "evidenceIds",
+        ],
+        path,
+      );
+      if (!solutionIdPattern.test(solution.id)) {
+        throw new Error(`${path}.id is invalid.`);
+      }
+      if (
+        !new Set([
+          "baseline",
+          "observation",
+          "intermediate",
+          "optimized",
+          "alternative",
+        ]).has(solution.stage) ||
+        typeof solution.idea !== "string" ||
+        solution.idea.length === 0
+      ) {
+        throw new Error(`${path} has an invalid stage or idea.`);
+      }
+      for (const field of ["timeComplexity", "spaceComplexity"]) {
+        if (solution[field] !== null && typeof solution[field] !== "string") {
+          throw new Error(`${path}.${field} must be a string or null.`);
+        }
+      }
+      assertStringArray(solution.limitations, `${path}.limitations`);
+      assertIdArray(
+        solution.codeArtifactIds,
+        codeIdPattern,
+        `${path}.codeArtifactIds`,
+      );
+      assertIdArray(
+        solution.stateModelIds,
+        stateIdPattern,
+        `${path}.stateModelIds`,
+      );
+      assertIdArray(
+        solution.evidenceIds,
+        evidenceIdPattern,
+        `${path}.evidenceIds`,
+        { nonEmpty: true },
+      );
+    }
+
+    if (!Array.isArray(rawEvidence.codeArtifacts)) {
+      throw new Error("codeArtifacts must be an array.");
+    }
+    for (const [index, artifact] of rawEvidence.codeArtifacts.entries()) {
+      const path = `codeArtifacts[${index}]`;
+      assertExactKeys(
+        artifact,
+        [
+          "id",
+          "solutionStageId",
+          "language",
+          "sourceKind",
+          "completeness",
+          "code",
+          "ocrUncertainties",
+          "verification",
+          "evidenceIds",
+        ],
+        path,
+      );
+      if (
+        !codeIdPattern.test(artifact.id) ||
+        (artifact.solutionStageId !== null &&
+          !solutionIdPattern.test(artifact.solutionStageId)) ||
+        (artifact.language !== null && typeof artifact.language !== "string") ||
+        artifact.sourceKind !== "shown_in_video" ||
+        !new Set(["complete", "partial", "uncertain"]).has(
+          artifact.completeness,
+        ) ||
+        typeof artifact.code !== "string" ||
+        artifact.code.length === 0 ||
+        artifact.verification !== "not_run"
+      ) {
+        throw new Error(`${path} is invalid.`);
+      }
+      assertStringArray(artifact.ocrUncertainties, `${path}.ocrUncertainties`);
+      assertIdArray(
+        artifact.evidenceIds,
+        evidenceIdPattern,
+        `${path}.evidenceIds`,
+        { nonEmpty: true },
+      );
+    }
+
+    if (!Array.isArray(rawEvidence.stateModels)) {
+      throw new Error("stateModels must be an array.");
+    }
+    for (const [index, stateModel] of rawEvidence.stateModels.entries()) {
+      const path = `stateModels[${index}]`;
+      assertExactKeys(
+        stateModel,
+        [
+          "id",
+          "solutionStageId",
+          "kind",
+          "variables",
+          "regions",
+          "invariant",
+          "transitions",
+          "termination",
+          "evidenceIds",
+        ],
+        path,
+      );
+      if (
+        !stateIdPattern.test(stateModel.id) ||
+        (stateModel.solutionStageId !== null &&
+          !solutionIdPattern.test(stateModel.solutionStageId)) ||
+        !new Set([
+          "search_interval",
+          "partition",
+          "two_pointer",
+          "sliding_window",
+          "other",
+        ]).has(stateModel.kind)
+      ) {
+        throw new Error(`${path} has an invalid ID, link, or kind.`);
+      }
+      if (!Array.isArray(stateModel.variables)) {
+        throw new Error(`${path}.variables must be an array.`);
+      }
+      for (const [variableIndex, variable] of stateModel.variables.entries()) {
+        const variablePath = `${path}.variables[${variableIndex}]`;
+        assertExactKeys(
+          variable,
+          ["symbol", "role", "meaning", "updateRule", "evidenceIds"],
+          variablePath,
+        );
+        if (
+          typeof variable.symbol !== "string" ||
+          typeof variable.role !== "string" ||
+          typeof variable.meaning !== "string" ||
+          (variable.updateRule !== null &&
+            typeof variable.updateRule !== "string")
+        ) {
+          throw new Error(`${variablePath} is invalid.`);
+        }
+        assertIdArray(
+          variable.evidenceIds,
+          evidenceIdPattern,
+          `${variablePath}.evidenceIds`,
+          { nonEmpty: true },
+        );
+      }
+      if (!Array.isArray(stateModel.regions)) {
+        throw new Error(`${path}.regions must be an array.`);
+      }
+      for (const [regionIndex, region] of stateModel.regions.entries()) {
+        const regionPath = `${path}.regions[${regionIndex}]`;
+        assertExactKeys(
+          region,
+          ["notation", "meaning", "evidenceIds"],
+          regionPath,
+        );
+        if (
+          typeof region.notation !== "string" ||
+          typeof region.meaning !== "string"
+        ) {
+          throw new Error(`${regionPath} is invalid.`);
+        }
+        assertIdArray(
+          region.evidenceIds,
+          evidenceIdPattern,
+          `${regionPath}.evidenceIds`,
+          { nonEmpty: true },
+        );
+      }
+      if (stateModel.invariant !== null) {
+        assertRawSourcedStatement(stateModel.invariant, `${path}.invariant`);
+      }
+      if (!Array.isArray(stateModel.transitions)) {
+        throw new Error(`${path}.transitions must be an array.`);
+      }
+      for (const [
+        transitionIndex,
+        transition,
+      ] of stateModel.transitions.entries()) {
+        const transitionPath = `${path}.transitions[${transitionIndex}]`;
+        assertExactKeys(
+          transition,
+          ["condition", "updates", "preserves", "evidenceIds"],
+          transitionPath,
+        );
+        if (
+          typeof transition.condition !== "string" ||
+          typeof transition.updates !== "string"
+        ) {
+          throw new Error(`${transitionPath} is invalid.`);
+        }
+        if (transition.preserves !== null) {
+          assertRawSourcedStatement(
+            transition.preserves,
+            `${transitionPath}.preserves`,
+          );
+        }
+        assertIdArray(
+          transition.evidenceIds,
+          evidenceIdPattern,
+          `${transitionPath}.evidenceIds`,
+          { nonEmpty: true },
+        );
+      }
+      if (stateModel.termination !== null) {
+        assertRawSourcedStatement(
+          stateModel.termination,
+          `${path}.termination`,
+        );
+      }
+      assertIdArray(
+        stateModel.evidenceIds,
+        evidenceIdPattern,
+        `${path}.evidenceIds`,
+        { nonEmpty: true },
+      );
+    }
+
+    assertExactKeys(
+      rawEvidence.correctness,
+      ["method", "claims", "stateModelIds", "obligations"],
+      "correctness",
+    );
+    if (!Array.isArray(rawEvidence.correctness.claims)) {
+      throw new Error("correctness.claims must be an array.");
+    }
+    rawEvidence.correctness.claims.forEach((claim, index) =>
+      assertRawSourcedStatement(claim, `correctness.claims[${index}]`),
+    );
+    assertIdArray(
+      rawEvidence.correctness.stateModelIds,
+      stateIdPattern,
+      "correctness.stateModelIds",
+    );
+    if (!Array.isArray(rawEvidence.correctness.obligations)) {
+      throw new Error("correctness.obligations must be an array.");
+    }
+    for (const [
+      index,
+      obligation,
+    ] of rawEvidence.correctness.obligations.entries()) {
+      const path = `correctness.obligations[${index}]`;
+      assertExactKeys(
+        obligation,
+        ["phase", "statement", "sourceClass", "evidenceIds"],
+        path,
+      );
+      if (
+        !new Set([
+          "initialization",
+          "preservation",
+          "termination",
+          "postcondition",
+          "boundary_safety",
+        ]).has(obligation.phase)
+      ) {
+        throw new Error(`${path}.phase is invalid.`);
+      }
+      assertRawSourcedStatement(
+        {
+          statement: obligation.statement,
+          sourceClass: obligation.sourceClass,
+          evidenceIds: obligation.evidenceIds,
+        },
+        path,
+      );
+    }
+
+    if (!Array.isArray(rawEvidence.evidence)) {
+      throw new Error("evidence must be an array.");
+    }
+    for (const [index, evidence] of rawEvidence.evidence.entries()) {
+      const path = `evidence[${index}]`;
+      assertExactKeys(
+        evidence,
+        [
+          "id",
+          "sourceType",
+          "startMs",
+          "endMs",
+          "assetId",
+          "locator",
+          "observation",
+          "confidence",
+        ],
+        path,
+      );
+      if (
+        !evidenceIdPattern.test(evidence.id) ||
+        !new Set([
+          "video_audio",
+          "video_visual",
+          "video_combined",
+          "text",
+          "editorial_inference",
+        ]).has(evidence.sourceType) ||
+        (evidence.assetId !== null && typeof evidence.assetId !== "string") ||
+        (evidence.locator !== null && typeof evidence.locator !== "string") ||
+        typeof evidence.observation !== "string" ||
+        evidence.observation.length === 0 ||
+        typeof evidence.confidence !== "number" ||
+        evidence.confidence < 0 ||
+        evidence.confidence > 1
+      ) {
+        throw new Error(`${path} is invalid.`);
+      }
     }
   }
 }
@@ -214,11 +692,165 @@ if (!allowedCorrectnessMethods.has(normalized.correctness.method)) {
   );
 }
 if (
+  !strictV14 &&
   normalized.problem === null &&
   normalized.correctness.claims.length === 0 &&
   normalized.correctness.method === "unknown"
 ) {
   normalized.correctness.method = "not_applicable";
+}
+
+if (strictV14) {
+  const uniqueIds = (items, path) => {
+    const ids = items.map((item) => item.id);
+    if (new Set(ids).size !== ids.length) {
+      throw new Error(`${path} IDs must be unique.`);
+    }
+    return new Set(ids);
+  };
+
+  const solutionIds = uniqueIds(
+    normalized.solutionProgression,
+    "solutionProgression",
+  );
+  const codeIds = uniqueIds(normalized.codeArtifacts, "codeArtifacts");
+  const stateIds = uniqueIds(normalized.stateModels, "stateModels");
+  const codeById = new Map(
+    normalized.codeArtifacts.map((artifact) => [artifact.id, artifact]),
+  );
+  const stateById = new Map(
+    normalized.stateModels.map((stateModel) => [stateModel.id, stateModel]),
+  );
+  const solutionById = new Map(
+    normalized.solutionProgression.map((solution) => [solution.id, solution]),
+  );
+
+  for (const solution of normalized.solutionProgression) {
+    for (const codeId of solution.codeArtifactIds) {
+      const artifact = codeById.get(codeId);
+      if (!artifact) {
+        throw new Error(`${solution.id} references unknown code ${codeId}.`);
+      }
+      if (artifact.solutionStageId !== solution.id) {
+        throw new Error(
+          `${solution.id} and ${codeId} do not reference each other.`,
+        );
+      }
+    }
+    for (const stateId of solution.stateModelIds) {
+      const stateModel = stateById.get(stateId);
+      if (!stateModel) {
+        throw new Error(`${solution.id} references unknown state ${stateId}.`);
+      }
+    }
+  }
+
+  for (const artifact of normalized.codeArtifacts) {
+    if (
+      artifact.solutionStageId !== null &&
+      !solutionIds.has(artifact.solutionStageId)
+    ) {
+      throw new Error(
+        `${artifact.id} references unknown solution ${artifact.solutionStageId}.`,
+      );
+    }
+    if (
+      artifact.solutionStageId !== null &&
+      !solutionById
+        .get(artifact.solutionStageId)
+        .codeArtifactIds.includes(artifact.id)
+    ) {
+      throw new Error(
+        `${artifact.id} is missing from ${artifact.solutionStageId}.codeArtifactIds.`,
+      );
+    }
+  }
+
+  for (const stateModel of normalized.stateModels) {
+    if (
+      stateModel.solutionStageId !== null &&
+      !solutionIds.has(stateModel.solutionStageId)
+    ) {
+      throw new Error(
+        `${stateModel.id} references unknown solution ${stateModel.solutionStageId}.`,
+      );
+    }
+    if (
+      stateModel.solutionStageId !== null &&
+      !solutionById
+        .get(stateModel.solutionStageId)
+        .stateModelIds.includes(stateModel.id)
+    ) {
+      throw new Error(
+        `${stateModel.id} is missing from ${stateModel.solutionStageId}.stateModelIds.`,
+      );
+    }
+  }
+
+  for (const stateId of normalized.correctness.stateModelIds) {
+    if (!stateIds.has(stateId)) {
+      throw new Error(`correctness references unknown state ${stateId}.`);
+    }
+  }
+
+  if (normalized.correctness.method === "loop_invariant") {
+    if (normalized.correctness.stateModelIds.length === 0) {
+      throw new Error("loop_invariant requires a linked state model.");
+    }
+    const linkedStates = normalized.correctness.stateModelIds.map((stateId) =>
+      stateById.get(stateId),
+    );
+    if (
+      !linkedStates.some(
+        (stateModel) =>
+          stateModel.invariant?.sourceClass === "course_direct" &&
+          stateModel.invariant.evidenceIds.length > 0,
+      )
+    ) {
+      throw new Error("loop_invariant requires an evidence-backed invariant.");
+    }
+    const requiredPhases = [
+      "initialization",
+      "preservation",
+      "termination",
+      "postcondition",
+    ];
+    for (const phase of requiredPhases) {
+      const hasDirectObligation = normalized.correctness.obligations.some(
+        (candidate) =>
+          candidate.phase === phase &&
+          candidate.sourceClass === "course_direct" &&
+          candidate.evidenceIds.length > 0,
+      );
+      if (!hasDirectObligation) {
+        throw new Error(
+          `loop_invariant requires a course_direct ${phase} obligation.`,
+        );
+      }
+    }
+  }
+
+  if (
+    normalized.correctness.method === "state_transition" &&
+    (normalized.correctness.stateModelIds.length === 0 ||
+      !normalized.correctness.stateModelIds.some(
+        (stateId) => stateById.get(stateId).transitions.length > 0,
+      ))
+  ) {
+    throw new Error(
+      "state_transition requires a linked state model with transitions.",
+    );
+  }
+
+  if (
+    normalized.correctness.method === "not_applicable" &&
+    (normalized.correctness.stateModelIds.length > 0 ||
+      normalized.correctness.obligations.length > 0)
+  ) {
+    throw new Error(
+      "not_applicable correctness cannot include states or obligations.",
+    );
+  }
 }
 
 normalized.complexityAnalyses ??= [];
@@ -465,12 +1097,17 @@ for (const experiment of normalized.experiments) {
 }
 
 const evidenceIds = new Set();
+const evidenceById = new Map();
 const durationToleranceMs = strictExtraction ? 0 : 1000;
 const validateTimestamp = (value, field) => {
   if (value !== null && (!Number.isInteger(value) || value < 0)) {
     throw new Error(`${field} must be a non-negative integer or null.`);
   }
 };
+const timestampExceedsDuration = (value) =>
+  typeof normalized.actualDurationSeconds === "number" &&
+  typeof value === "number" &&
+  value > normalized.actualDurationSeconds * 1000 + durationToleranceMs;
 for (const segment of normalized.timeline ?? []) {
   validateTimestamp(segment.startMs, `Timeline ${segment.topic} startMs`);
   validateTimestamp(segment.endMs, `Timeline ${segment.topic} endMs`);
@@ -482,10 +1119,8 @@ for (const segment of normalized.timeline ?? []) {
     throw new Error(`Timeline segment "${segment.topic}" is inverted.`);
   }
   if (
-    typeof normalized.actualDurationSeconds === "number" &&
-    typeof segment.endMs === "number" &&
-    segment.endMs >
-      normalized.actualDurationSeconds * 1000 + durationToleranceMs
+    timestampExceedsDuration(segment.startMs) ||
+    timestampExceedsDuration(segment.endMs)
   ) {
     throw new Error(`Timeline segment "${segment.topic}" exceeds duration.`);
   }
@@ -499,6 +1134,7 @@ for (const evidence of normalized.evidence ?? []) {
     throw new Error("Evidence IDs must be present and unique.");
   }
   evidenceIds.add(evidence.id);
+  evidenceById.set(evidence.id, evidence);
   validateTimestamp(evidence.startMs, `Evidence ${evidence.id} startMs`);
   validateTimestamp(evidence.endMs, `Evidence ${evidence.id} endMs`);
   if (
@@ -517,16 +1153,19 @@ for (const evidence of normalized.evidence ?? []) {
     );
   }
   if (
-    typeof normalized.actualDurationSeconds === "number" &&
-    typeof evidence.endMs === "number" &&
-    evidence.endMs >
-      normalized.actualDurationSeconds * 1000 + durationToleranceMs
+    timestampExceedsDuration(evidence.startMs) ||
+    timestampExceedsDuration(evidence.endMs)
   ) {
     throw new Error(`Evidence ${evidence.id} exceeds the media duration.`);
   }
 }
 
 const referencedEvidenceIds = [];
+const directCourseEvidenceTypes = new Set([
+  "video_audio",
+  "video_visual",
+  "video_combined",
+]);
 const collectEvidenceIds = (value, path = "root") => {
   if (Array.isArray(value)) {
     for (let index = 0; index < value.length; index += 1) {
@@ -543,6 +1182,19 @@ const collectEvidenceIds = (value, path = "root") => {
       (value.sourceClass === "course_direct" && value.evidenceIds.length === 0)
     ) {
       throw new Error(`Invalid sourced statement at ${path}.`);
+    }
+    if (value.sourceClass === "course_direct") {
+      for (const evidenceId of value.evidenceIds) {
+        const supportingEvidence = evidenceById.get(evidenceId);
+        if (
+          supportingEvidence &&
+          !directCourseEvidenceTypes.has(supportingEvidence.sourceType)
+        ) {
+          throw new Error(
+            `course_direct statement at ${path} references non-video evidence ${evidenceId}.`,
+          );
+        }
+      }
     }
   }
   for (const [key, child] of Object.entries(value)) {
@@ -597,6 +1249,10 @@ for (const codeArtifact of normalized.codeArtifacts ?? []) {
       "Video extraction code artifacts must have verification=not_run.",
     );
   }
+}
+
+if (strictExtraction) {
+  assertCanonicalSchema(normalized, "Normalized");
 }
 
 const outputPath = resolve(argumentsMap.out);
