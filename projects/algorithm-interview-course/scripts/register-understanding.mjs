@@ -31,6 +31,12 @@ for (const requiredArgument of ["lesson", "prompt", "compressed"]) {
 }
 
 const lessonId = argumentsMap.lesson;
+const qaReviewedValue = argumentsMap["qa-reviewed"];
+if (qaReviewedValue !== "true") {
+  throw new Error(
+    "Registration requires an explicit --qa-reviewed true after manual QA.",
+  );
+}
 const toRepositoryPath = (path) =>
   relative(repositoryRoot, resolve(path)).replaceAll("\\", "/");
 const readJson = async (path) => JSON.parse(await readFile(path, "utf8"));
@@ -153,6 +159,7 @@ manifest.attempts.push({
     status: "passed",
     validator: "normalize-lesson-evidence.mjs",
     errors: [],
+    qaStatus: "completed",
   },
   eligibleForSynthesis: true,
   billingStatus: "reported_by_usage",
@@ -199,7 +206,7 @@ manifest.generations.push({
   },
   notes: `单次调用成功；严格本地门禁核对 ${Math.round(
     asset.media.durationSeconds * 1000,
-  )} ms 时长、证据引用、对象结构与代码 verification 后通过。`,
+  )} ms 时长、证据引用、对象结构与代码 verification 后通过；人工代码/OCR QA 已完成。`,
 });
 
 progress.lessons[lessonId] ??= structuredClone(progress.defaultLessonState);
@@ -234,5 +241,6 @@ process.stdout.write(
     compressedSha256,
     compressedBytes: compressedStat.size,
     totalTokens: usageRecord.totalTokens,
+    qaStatus: lessonState.qa,
   })}\n`,
 );
