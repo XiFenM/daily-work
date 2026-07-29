@@ -1,0 +1,909 @@
+{
+  "schemaVersion": 1,
+  "courseTitle": "算法面试课程",
+  "chapterCount": 11,
+  "lessonCount": 70,
+  "knownDurationLessonCount": 66,
+  "knownDurationSeconds": 65379,
+  "unknownDurationLessonIds": ["01-01", "06-08", "07-03", "09-10"],
+  "normalizationNotes": [
+    {
+      "lessonId": "01-01",
+      "note": "目录原文末尾的“最近学习”疑似网站状态标签，规范标题暂不包含该词。"
+    },
+    {
+      "lessonId": "05-06",
+      "note": "目录中的英文题名为“Remove Nth Node Form End of List”，可能存在拼写问题，待课程素材确认。"
+    },
+    {
+      "lessonId": "07-05",
+      "note": "目录中的英文题名为“Binary Tree Path”，保留原文，待课程素材确认是否应为复数形式。"
+    },
+    {
+      "lessonId": "08-07",
+      "note": "目录原文在 Number of Islands 后带有连字符，规范标题暂时去除该排版符号。"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "01",
+      "number": 1,
+      "title": "算法面试到底是什么鬼?",
+      "knownDurationSeconds": 3954.88,
+      "lessons": [
+        {
+          "id": "01-01",
+          "displayId": "1-1",
+          "orderInChapter": 1,
+          "sourceLine": "1-1 算法面试不仅仅是正确的回答问题最近学习",
+          "titleRaw": "算法面试不仅仅是正确的回答问题最近学习",
+          "titleNormalized": "算法面试不仅仅是正确的回答问题",
+          "durationText": null,
+          "durationSeconds": null,
+          "actualDurationSeconds": 1180.28,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-01-01"]
+        },
+        {
+          "id": "01-02",
+          "displayId": "1-2",
+          "orderInChapter": 2,
+          "sourceLine": "1-2 算法面试只是面试的一部分(14:51)",
+          "titleRaw": "算法面试只是面试的一部分",
+          "titleNormalized": "算法面试只是面试的一部分",
+          "durationText": "14:51",
+          "durationSeconds": 891,
+          "actualDurationSeconds": 891.76,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-01-02"]
+        },
+        {
+          "id": "01-03",
+          "displayId": "1-3",
+          "orderInChapter": 3,
+          "sourceLine": "1-3 如何准备算法面试(17:38)",
+          "titleRaw": "如何准备算法面试",
+          "titleNormalized": "如何准备算法面试",
+          "durationText": "17:38",
+          "durationSeconds": 1058,
+          "actualDurationSeconds": 1058.4,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-01-03"]
+        },
+        {
+          "id": "01-04",
+          "displayId": "1-4",
+          "orderInChapter": 4,
+          "sourceLine": "1-4 如何回答算法面试问题(13:40)",
+          "titleRaw": "如何回答算法面试问题",
+          "titleNormalized": "如何回答算法面试问题",
+          "durationText": "13:40",
+          "durationSeconds": 820,
+          "actualDurationSeconds": 824.44,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-01-04"]
+        }
+      ]
+    },
+    {
+      "id": "02",
+      "number": 2,
+      "title": "面试中的复杂度分析",
+      "knownDurationSeconds": 6428.537,
+      "lessons": [
+        {
+          "id": "02-01",
+          "displayId": "2-1",
+          "orderInChapter": 1,
+          "sourceLine": "2-1 究竟什么是大O（Big O）(19:52)",
+          "titleRaw": "究竟什么是大O（Big O）",
+          "titleNormalized": "究竟什么是大 O（Big O）",
+          "durationText": "19:52",
+          "durationSeconds": 1192,
+          "actualDurationSeconds": 1195.6,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-02-01"]
+        },
+        {
+          "id": "02-02",
+          "displayId": "2-2",
+          "orderInChapter": 2,
+          "sourceLine": "2-2 对数据规模有一个概念(11:26)",
+          "titleRaw": "对数据规模有一个概念",
+          "titleNormalized": "对数据规模有一个概念",
+          "durationText": "11:26",
+          "durationSeconds": 686,
+          "actualDurationSeconds": 686.289,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-02-02"]
+        },
+        {
+          "id": "02-03",
+          "displayId": "2-3",
+          "orderInChapter": 3,
+          "sourceLine": "2-3 简单的复杂度分析(19:20)",
+          "titleRaw": "简单的复杂度分析",
+          "titleNormalized": "简单的复杂度分析",
+          "durationText": "19:20",
+          "durationSeconds": 1160,
+          "actualDurationSeconds": 1160.56,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-02-03"]
+        },
+        {
+          "id": "02-04",
+          "displayId": "2-4",
+          "orderInChapter": 4,
+          "sourceLine": "2-4 亲自试验自己算法的时间复杂度(14:53)",
+          "titleRaw": "亲自试验自己算法的时间复杂度",
+          "titleNormalized": "亲自试验自己算法的时间复杂度",
+          "durationText": "14:53",
+          "durationSeconds": 893,
+          "actualDurationSeconds": 893.48,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-02-04"]
+        },
+        {
+          "id": "02-05",
+          "displayId": "2-5",
+          "orderInChapter": 5,
+          "sourceLine": "2-5 递归算法的复杂度分析(14:46)",
+          "titleRaw": "递归算法的复杂度分析",
+          "titleNormalized": "递归算法的复杂度分析",
+          "durationText": "14:46",
+          "durationSeconds": 886,
+          "actualDurationSeconds": 886.44,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-02-05"]
+        },
+        {
+          "id": "02-06",
+          "displayId": "2-6",
+          "orderInChapter": 6,
+          "sourceLine": "2-6 均摊时间复杂度分析（Amortized Time Analysis）(15:16)",
+          "titleRaw": "均摊时间复杂度分析（Amortized Time Analysis）",
+          "titleNormalized": "均摊时间复杂度分析（Amortized Time Analysis）",
+          "durationText": "15:16",
+          "durationSeconds": 916,
+          "actualDurationSeconds": 916.28,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-02-06"]
+        },
+        {
+          "id": "02-07",
+          "displayId": "2-7",
+          "orderInChapter": 7,
+          "sourceLine": "2-7 避免复杂度的震荡(11:25)",
+          "titleRaw": "避免复杂度的震荡",
+          "titleNormalized": "避免复杂度的震荡",
+          "durationText": "11:25",
+          "durationSeconds": 685,
+          "actualDurationSeconds": 689.888,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-02-07"]
+        }
+      ]
+    },
+    {
+      "id": "03",
+      "number": 3,
+      "title": "数组中的问题其实最常见",
+      "knownDurationSeconds": 7689,
+      "lessons": [
+        {
+          "id": "03-01",
+          "displayId": "3-1",
+          "orderInChapter": 1,
+          "sourceLine": "3-1 从二分查找法看如何写出正确的程序(15:27)",
+          "titleRaw": "从二分查找法看如何写出正确的程序",
+          "titleNormalized": "从二分查找法看如何写出正确的程序",
+          "durationText": "15:27",
+          "durationSeconds": 927,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "03-02",
+          "displayId": "3-2",
+          "orderInChapter": 2,
+          "sourceLine": "3-2 改变变量定义，依然可以写出正确的算法(12:06)",
+          "titleRaw": "改变变量定义，依然可以写出正确的算法",
+          "titleNormalized": "改变变量定义，依然可以写出正确的算法",
+          "durationText": "12:06",
+          "durationSeconds": 726,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "03-03",
+          "displayId": "3-3",
+          "orderInChapter": 3,
+          "sourceLine": "3-3 在LeetCode上解决第一个问题 Move Zeros(13:27)",
+          "titleRaw": "在LeetCode上解决第一个问题 Move Zeros",
+          "titleNormalized": "在 LeetCode 上解决第一个问题 Move Zeros",
+          "durationText": "13:27",
+          "durationSeconds": 807,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "03-04",
+          "displayId": "3-4",
+          "orderInChapter": 4,
+          "sourceLine": "3-4 即使简单的问题，也有很多优化的思路(15:30)",
+          "titleRaw": "即使简单的问题，也有很多优化的思路",
+          "titleNormalized": "即使简单的问题，也有很多优化的思路",
+          "durationText": "15:30",
+          "durationSeconds": 930,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "03-05",
+          "displayId": "3-5",
+          "orderInChapter": 5,
+          "sourceLine": "3-5 三路快排partition思路的应用 Sort Color(22:26)",
+          "titleRaw": "三路快排partition思路的应用 Sort Color",
+          "titleNormalized": "三路快排 partition 思路的应用 Sort Color",
+          "durationText": "22:26",
+          "durationSeconds": 1346,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "03-06",
+          "displayId": "3-6",
+          "orderInChapter": 6,
+          "sourceLine": "3-6 对撞指针 Two Sum II - Input Array is Sorted(19:44)",
+          "titleRaw": "对撞指针 Two Sum II - Input Array is Sorted",
+          "titleNormalized": "对撞指针 Two Sum II - Input Array is Sorted",
+          "durationText": "19:44",
+          "durationSeconds": 1184,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "03-07",
+          "displayId": "3-7",
+          "orderInChapter": 7,
+          "sourceLine": "3-7 滑动窗口 Minimum Size Subarray Sum(14:09)",
+          "titleRaw": "滑动窗口 Minimum Size Subarray Sum",
+          "titleNormalized": "滑动窗口 Minimum Size Subarray Sum",
+          "durationText": "14:09",
+          "durationSeconds": 849,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "03-08",
+          "displayId": "3-8",
+          "orderInChapter": 8,
+          "sourceLine": "3-8 在滑动窗口中做记录 Longest Substring Without Repeating Characters(15:20)",
+          "titleRaw": "在滑动窗口中做记录 Longest Substring Without Repeating Characters",
+          "titleNormalized": "在滑动窗口中做记录 Longest Substring Without Repeating Characters",
+          "durationText": "15:20",
+          "durationSeconds": 920,
+          "contentKind": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "04",
+      "number": 4,
+      "title": "查找表相关问题",
+      "knownDurationSeconds": 6633,
+      "lessons": [
+        {
+          "id": "04-01",
+          "displayId": "4-1",
+          "orderInChapter": 1,
+          "sourceLine": "4-1 set的使用 Intersection of Two Arrays(11:12)",
+          "titleRaw": "set的使用 Intersection of Two Arrays",
+          "titleNormalized": "set 的使用 Intersection of Two Arrays",
+          "durationText": "11:12",
+          "durationSeconds": 672,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "04-02",
+          "displayId": "4-2",
+          "orderInChapter": 2,
+          "sourceLine": "4-2 map的使用 Intersection of Two Arrays II(13:05)",
+          "titleRaw": "map的使用 Intersection of Two Arrays II",
+          "titleNormalized": "map 的使用 Intersection of Two Arrays II",
+          "durationText": "13:05",
+          "durationSeconds": 785,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "04-03",
+          "displayId": "4-3",
+          "orderInChapter": 3,
+          "sourceLine": "4-3 set和map不同底层实现的区别(19:00)",
+          "titleRaw": "set和map不同底层实现的区别",
+          "titleNormalized": "set 和 map 不同底层实现的区别",
+          "durationText": "19:00",
+          "durationSeconds": 1140,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "04-04",
+          "displayId": "4-4",
+          "orderInChapter": 4,
+          "sourceLine": "4-4 使用查找表的经典问题 Two Sum(16:56)",
+          "titleRaw": "使用查找表的经典问题 Two Sum",
+          "titleNormalized": "使用查找表的经典问题 Two Sum",
+          "durationText": "16:56",
+          "durationSeconds": 1016,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "04-05",
+          "displayId": "4-5",
+          "orderInChapter": 5,
+          "sourceLine": "4-5 灵活选择键值 4Sum II(13:25)",
+          "titleRaw": "灵活选择键值 4Sum II",
+          "titleNormalized": "灵活选择键值 4Sum II",
+          "durationText": "13:25",
+          "durationSeconds": 805,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "04-06",
+          "displayId": "4-6",
+          "orderInChapter": 6,
+          "sourceLine": "4-6 灵活选择键值 Number of Boomerangs(14:45)",
+          "titleRaw": "灵活选择键值 Number of Boomerangs",
+          "titleNormalized": "灵活选择键值 Number of Boomerangs",
+          "durationText": "14:45",
+          "durationSeconds": 885,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "04-07",
+          "displayId": "4-7",
+          "orderInChapter": 7,
+          "sourceLine": "4-7 查找表和滑动窗口 Contain Duplicate II(11:20)",
+          "titleRaw": "查找表和滑动窗口 Contain Duplicate II",
+          "titleNormalized": "查找表和滑动窗口 Contain Duplicate II",
+          "durationText": "11:20",
+          "durationSeconds": 680,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "04-08",
+          "displayId": "4-8",
+          "orderInChapter": 8,
+          "sourceLine": "4-8 二分搜索树底层实现的顺序性 Contain Duplicate III(10:50)",
+          "titleRaw": "二分搜索树底层实现的顺序性 Contain Duplicate III",
+          "titleNormalized": "二分搜索树底层实现的顺序性 Contain Duplicate III",
+          "durationText": "10:50",
+          "durationSeconds": 650,
+          "contentKind": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "05",
+      "number": 5,
+      "title": "在链表中穿针引线",
+      "knownDurationSeconds": 5226,
+      "lessons": [
+        {
+          "id": "05-01",
+          "displayId": "5-1",
+          "orderInChapter": 1,
+          "sourceLine": "5-1 链表，在节点间穿针引线 Reverse Linked List(15:44)",
+          "titleRaw": "链表，在节点间穿针引线 Reverse Linked List",
+          "titleNormalized": "链表，在节点间穿针引线 Reverse Linked List",
+          "durationText": "15:44",
+          "durationSeconds": 944,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "05-02",
+          "displayId": "5-2",
+          "orderInChapter": 2,
+          "sourceLine": "5-2 测试你的链表程序(16:26)",
+          "titleRaw": "测试你的链表程序",
+          "titleNormalized": "测试你的链表程序",
+          "durationText": "16:26",
+          "durationSeconds": 986,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "05-03",
+          "displayId": "5-3",
+          "orderInChapter": 3,
+          "sourceLine": "5-3 设立链表的虚拟头结点 Remove Linked List Elements(17:08)",
+          "titleRaw": "设立链表的虚拟头结点 Remove Linked List Elements",
+          "titleNormalized": "设立链表的虚拟头结点 Remove Linked List Elements",
+          "durationText": "17:08",
+          "durationSeconds": 1028,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "05-04",
+          "displayId": "5-4",
+          "orderInChapter": 4,
+          "sourceLine": "5-4 复杂的穿针引线 Swap Nodes in Pairs(13:30)",
+          "titleRaw": "复杂的穿针引线 Swap Nodes in Pairs",
+          "titleNormalized": "复杂的穿针引线 Swap Nodes in Pairs",
+          "durationText": "13:30",
+          "durationSeconds": 810,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "05-05",
+          "displayId": "5-5",
+          "orderInChapter": 5,
+          "sourceLine": "5-5 不仅仅是穿针引线 Delete Node in a Linked List(07:29)",
+          "titleRaw": "不仅仅是穿针引线 Delete Node in a Linked List",
+          "titleNormalized": "不仅仅是穿针引线 Delete Node in a Linked List",
+          "durationText": "07:29",
+          "durationSeconds": 449,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "05-06",
+          "displayId": "5-6",
+          "orderInChapter": 6,
+          "sourceLine": "5-6 链表与双指针 Remove Nth Node Form End of List(16:49)",
+          "titleRaw": "链表与双指针 Remove Nth Node Form End of List",
+          "titleNormalized": "链表与双指针 Remove Nth Node Form End of List",
+          "durationText": "16:49",
+          "durationSeconds": 1009,
+          "contentKind": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "06",
+      "number": 6,
+      "title": "栈，队列，优先队列",
+      "knownDurationSeconds": 6618,
+      "lessons": [
+        {
+          "id": "06-01",
+          "displayId": "6-1",
+          "orderInChapter": 1,
+          "sourceLine": "6-1 栈的基础应用 Valid Parentheses(16:10)",
+          "titleRaw": "栈的基础应用 Valid Parentheses",
+          "titleNormalized": "栈的基础应用 Valid Parentheses",
+          "durationText": "16:10",
+          "durationSeconds": 970,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "06-02",
+          "displayId": "6-2",
+          "orderInChapter": 2,
+          "sourceLine": "6-2 栈和递归的紧密关系 Binary Tree Preorder, Inorder and Postorder Traversal(16:03)",
+          "titleRaw": "栈和递归的紧密关系 Binary Tree Preorder, Inorder and Postorder Traversal",
+          "titleNormalized": "栈和递归的紧密关系 Binary Tree Preorder, Inorder and Postorder Traversal",
+          "durationText": "16:03",
+          "durationSeconds": 963,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "06-03",
+          "displayId": "6-3",
+          "orderInChapter": 3,
+          "sourceLine": "6-3 运用栈模拟递归(19:33)",
+          "titleRaw": "运用栈模拟递归",
+          "titleNormalized": "运用栈模拟递归",
+          "durationText": "19:33",
+          "durationSeconds": 1173,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "06-04",
+          "displayId": "6-4",
+          "orderInChapter": 4,
+          "sourceLine": "6-4 队列的典型应用 Binary Tree Level Order Traversal(10:26)",
+          "titleRaw": "队列的典型应用 Binary Tree Level Order Traversal",
+          "titleNormalized": "队列的典型应用 Binary Tree Level Order Traversal",
+          "durationText": "10:26",
+          "durationSeconds": 626,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "06-05",
+          "displayId": "6-5",
+          "orderInChapter": 5,
+          "sourceLine": "6-5 BFS和图的最短路径 Perfect Squares(21:20)",
+          "titleRaw": "BFS和图的最短路径 Perfect Squares",
+          "titleNormalized": "BFS 和图的最短路径 Perfect Squares",
+          "durationText": "21:20",
+          "durationSeconds": 1280,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "06-06",
+          "displayId": "6-6",
+          "orderInChapter": 6,
+          "sourceLine": "6-6 优先队列(11:09)",
+          "titleRaw": "优先队列",
+          "titleNormalized": "优先队列",
+          "durationText": "11:09",
+          "durationSeconds": 669,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "06-07",
+          "displayId": "6-7",
+          "orderInChapter": 7,
+          "sourceLine": "6-7 优先队列相关的算法问题 Top K Frequent Elements(15:37)",
+          "titleRaw": "优先队列相关的算法问题 Top K Frequent Elements",
+          "titleNormalized": "优先队列相关的算法问题 Top K Frequent Elements",
+          "durationText": "15:37",
+          "durationSeconds": 937,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "06-08",
+          "displayId": "6-8",
+          "orderInChapter": 8,
+          "sourceLine": "6-8 两种关于 topK 问题求解思路的套路",
+          "titleRaw": "两种关于 topK 问题求解思路的套路",
+          "titleNormalized": "两种关于 Top K 问题求解思路的套路",
+          "durationText": null,
+          "durationSeconds": null,
+          "contentKind": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "07",
+      "number": 7,
+      "title": "二叉树和递归",
+      "knownDurationSeconds": 4961,
+      "lessons": [
+        {
+          "id": "07-01",
+          "displayId": "7-1",
+          "orderInChapter": 1,
+          "sourceLine": "7-1 二叉树天然的递归结构(15:58)",
+          "titleRaw": "二叉树天然的递归结构",
+          "titleNormalized": "二叉树天然的递归结构",
+          "durationText": "15:58",
+          "durationSeconds": 958,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "07-02",
+          "displayId": "7-2",
+          "orderInChapter": 2,
+          "sourceLine": "7-2 一个简单的二叉树问题引发的血案 Invert Binary Tree(09:08)",
+          "titleRaw": "一个简单的二叉树问题引发的血案 Invert Binary Tree",
+          "titleNormalized": "一个简单的二叉树问题引发的血案 Invert Binary Tree",
+          "durationText": "09:08",
+          "durationSeconds": 548,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "07-03",
+          "displayId": "7-3",
+          "orderInChapter": 3,
+          "sourceLine": "7-3 不会翻转二叉树的大神",
+          "titleRaw": "不会翻转二叉树的大神",
+          "titleNormalized": "不会翻转二叉树的大神",
+          "durationText": null,
+          "durationSeconds": null,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "07-04",
+          "displayId": "7-4",
+          "orderInChapter": 4,
+          "sourceLine": "7-4 注意递归的终止条件 Path Sum(12:04)",
+          "titleRaw": "注意递归的终止条件 Path Sum",
+          "titleNormalized": "注意递归的终止条件 Path Sum",
+          "durationText": "12:04",
+          "durationSeconds": 724,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "07-05",
+          "displayId": "7-5",
+          "orderInChapter": 5,
+          "sourceLine": "7-5 定义递归问题 Binary Tree Path(13:34)",
+          "titleRaw": "定义递归问题 Binary Tree Path",
+          "titleNormalized": "定义递归问题 Binary Tree Path",
+          "durationText": "13:34",
+          "durationSeconds": 814,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "07-06",
+          "displayId": "7-6",
+          "orderInChapter": 6,
+          "sourceLine": "7-6 稍复杂的递归逻辑 Path Sum III(14:11)",
+          "titleRaw": "稍复杂的递归逻辑 Path Sum III",
+          "titleNormalized": "稍复杂的递归逻辑 Path Sum III",
+          "durationText": "14:11",
+          "durationSeconds": 851,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "07-07",
+          "displayId": "7-7",
+          "orderInChapter": 7,
+          "sourceLine": "7-7 二分搜索树中的问题 Lowest Common Ancestor of a Binary Search Tree(17:46)",
+          "titleRaw": "二分搜索树中的问题 Lowest Common Ancestor of a Binary Search Tree",
+          "titleNormalized": "二分搜索树中的问题 Lowest Common Ancestor of a Binary Search Tree",
+          "durationText": "17:46",
+          "durationSeconds": 1066,
+          "contentKind": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "08",
+      "number": 8,
+      "title": "递归和回溯法",
+      "knownDurationSeconds": 9352,
+      "lessons": [
+        {
+          "id": "08-01",
+          "displayId": "8-1",
+          "orderInChapter": 1,
+          "sourceLine": "8-1 树形问题 Letter Combinations of a Phone Number(18:09)",
+          "titleRaw": "树形问题 Letter Combinations of a Phone Number",
+          "titleNormalized": "树形问题 Letter Combinations of a Phone Number",
+          "durationText": "18:09",
+          "durationSeconds": 1089,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "08-02",
+          "displayId": "8-2",
+          "orderInChapter": 2,
+          "sourceLine": "8-2 什么是回溯(18:16)",
+          "titleRaw": "什么是回溯",
+          "titleNormalized": "什么是回溯",
+          "durationText": "18:16",
+          "durationSeconds": 1096,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "08-03",
+          "displayId": "8-3",
+          "orderInChapter": 3,
+          "sourceLine": "8-3 排列问题 Permutations(19:02)",
+          "titleRaw": "排列问题 Permutations",
+          "titleNormalized": "排列问题 Permutations",
+          "durationText": "19:02",
+          "durationSeconds": 1142,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "08-04",
+          "displayId": "8-4",
+          "orderInChapter": 4,
+          "sourceLine": "8-4 组合问题 Combinations(14:27)",
+          "titleRaw": "组合问题 Combinations",
+          "titleNormalized": "组合问题 Combinations",
+          "durationText": "14:27",
+          "durationSeconds": 867,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "08-05",
+          "displayId": "8-5",
+          "orderInChapter": 5,
+          "sourceLine": "8-5 回溯法解决组合问题的优化(17:29)",
+          "titleRaw": "回溯法解决组合问题的优化",
+          "titleNormalized": "回溯法解决组合问题的优化",
+          "durationText": "17:29",
+          "durationSeconds": 1049,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "08-06",
+          "displayId": "8-6",
+          "orderInChapter": 6,
+          "sourceLine": "8-6 二维平面上的回溯法 Word Search(21:45)",
+          "titleRaw": "二维平面上的回溯法 Word Search",
+          "titleNormalized": "二维平面上的回溯法 Word Search",
+          "durationText": "21:45",
+          "durationSeconds": 1305,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "08-07",
+          "displayId": "8-7",
+          "orderInChapter": 7,
+          "sourceLine": "8-7 floodfill算法，一类经典问题 Number of Islands-(21:27)",
+          "titleRaw": "floodfill算法，一类经典问题 Number of Islands-",
+          "titleNormalized": "flood fill 算法，一类经典问题 Number of Islands",
+          "durationText": "21:27",
+          "durationSeconds": 1287,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "08-08",
+          "displayId": "8-8",
+          "orderInChapter": 8,
+          "sourceLine": "8-8 回溯法是经典人工智能的基础 N Queens(25:17)",
+          "titleRaw": "回溯法是经典人工智能的基础 N Queens",
+          "titleNormalized": "回溯法是经典人工智能的基础 N Queens",
+          "durationText": "25:17",
+          "durationSeconds": 1517,
+          "contentKind": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "09",
+      "number": 9,
+      "title": "动态规划基础",
+      "knownDurationSeconds": 12819,
+      "lessons": [
+        {
+          "id": "09-01",
+          "displayId": "9-1",
+          "orderInChapter": 1,
+          "sourceLine": "9-1 什么是动态规划(20:27)",
+          "titleRaw": "什么是动态规划",
+          "titleNormalized": "什么是动态规划",
+          "durationText": "20:27",
+          "durationSeconds": 1227,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "09-02",
+          "displayId": "9-2",
+          "orderInChapter": 2,
+          "sourceLine": "9-2 第一个动态规划问题 Climbing Stairs(14:02)",
+          "titleRaw": "第一个动态规划问题 Climbing Stairs",
+          "titleNormalized": "第一个动态规划问题 Climbing Stairs",
+          "durationText": "14:02",
+          "durationSeconds": 842,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "09-03",
+          "displayId": "9-3",
+          "orderInChapter": 3,
+          "sourceLine": "9-3 发现重叠子问题 Integer Break(25:10)",
+          "titleRaw": "发现重叠子问题 Integer Break",
+          "titleNormalized": "发现重叠子问题 Integer Break",
+          "durationText": "25:10",
+          "durationSeconds": 1510,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "09-04",
+          "displayId": "9-4",
+          "orderInChapter": 4,
+          "sourceLine": "9-4 状态的定义和状态转移 House Robber(27:19)",
+          "titleRaw": "状态的定义和状态转移 House Robber",
+          "titleNormalized": "状态的定义和状态转移 House Robber",
+          "durationText": "27:19",
+          "durationSeconds": 1639,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "09-05",
+          "displayId": "9-5",
+          "orderInChapter": 5,
+          "sourceLine": "9-5 0-1背包问题(32:37)",
+          "titleRaw": "0-1背包问题",
+          "titleNormalized": "0-1 背包问题",
+          "durationText": "32:37",
+          "durationSeconds": 1957,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "09-06",
+          "displayId": "9-6",
+          "orderInChapter": 6,
+          "sourceLine": "9-6 0-1背包问题的优化和变种(20:18)",
+          "titleRaw": "0-1背包问题的优化和变种",
+          "titleNormalized": "0-1 背包问题的优化和变种",
+          "durationText": "20:18",
+          "durationSeconds": 1218,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "09-07",
+          "displayId": "9-7",
+          "orderInChapter": 7,
+          "sourceLine": "9-7 面试中的0-1背包问题 Partition Equal Subset Sum(27:34)",
+          "titleRaw": "面试中的0-1背包问题 Partition Equal Subset Sum",
+          "titleNormalized": "面试中的 0-1 背包问题 Partition Equal Subset Sum",
+          "durationText": "27:34",
+          "durationSeconds": 1654,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "09-08",
+          "displayId": "9-8",
+          "orderInChapter": 8,
+          "sourceLine": "9-8 LIS问题 Longest Increasing Subsequence(25:12)",
+          "titleRaw": "LIS问题 Longest Increasing Subsequence",
+          "titleNormalized": "LIS 问题 Longest Increasing Subsequence",
+          "durationText": "25:12",
+          "durationSeconds": 1512,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "09-09",
+          "displayId": "9-9",
+          "orderInChapter": 9,
+          "sourceLine": "9-9 LCS，最短路，求动态规划的具体解以及更多(21:00)",
+          "titleRaw": "LCS，最短路，求动态规划的具体解以及更多",
+          "titleNormalized": "LCS、最短路、求动态规划的具体解以及更多",
+          "durationText": "21:00",
+          "durationSeconds": 1260,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "09-10",
+          "displayId": "9-10",
+          "orderInChapter": 10,
+          "sourceLine": "9-10 动态规划的经典问题",
+          "titleRaw": "动态规划的经典问题",
+          "titleNormalized": "动态规划的经典问题",
+          "durationText": null,
+          "durationSeconds": null,
+          "contentKind": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "number": 10,
+      "title": "贪心算法",
+      "knownDurationSeconds": 2729,
+      "lessons": [
+        {
+          "id": "10-01",
+          "displayId": "10-1",
+          "orderInChapter": 1,
+          "sourceLine": "10-1 贪心基础 Assign Cookies(12:12)",
+          "titleRaw": "贪心基础 Assign Cookies",
+          "titleNormalized": "贪心基础 Assign Cookies",
+          "durationText": "12:12",
+          "durationSeconds": 732,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "10-02",
+          "displayId": "10-2",
+          "orderInChapter": 2,
+          "sourceLine": "10-2 贪心算法与动态规划的关系 Non-overlapping Intervals(17:58)",
+          "titleRaw": "贪心算法与动态规划的关系 Non-overlapping Intervals",
+          "titleNormalized": "贪心算法与动态规划的关系 Non-overlapping Intervals",
+          "durationText": "17:58",
+          "durationSeconds": 1078,
+          "contentKind": "unknown"
+        },
+        {
+          "id": "10-03",
+          "displayId": "10-3",
+          "orderInChapter": 3,
+          "sourceLine": "10-3 贪心选择性质的证明(15:19)",
+          "titleRaw": "贪心选择性质的证明",
+          "titleNormalized": "贪心选择性质的证明",
+          "durationText": "15:19",
+          "durationSeconds": 919,
+          "contentKind": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "number": 11,
+      "title": "课程结语",
+      "knownDurationSeconds": 165,
+      "lessons": [
+        {
+          "id": "11-01",
+          "displayId": "11-1",
+          "orderInChapter": 1,
+          "sourceLine": "11-1 结语(02:45)",
+          "titleRaw": "结语",
+          "titleNormalized": "结语",
+          "durationText": "02:45",
+          "durationSeconds": 165,
+          "contentKind": "unknown"
+        }
+      ]
+    }
+  ]
+}

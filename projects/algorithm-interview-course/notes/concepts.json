@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "concepts": [
+    {
+      "id": "interview-skill:observable-reasoning",
+      "type": "interview_skill",
+      "nameZh": "可观察的推理过程",
+      "nameEn": "Observable reasoning",
+      "aliases": ["思考路径", "思考方向", "解题思路"],
+      "definition": "在面试中把约束澄清、候选方案、权衡、优化方向和卡点清楚表达出来，使面试官能够跟随问题解决过程。",
+      "status": "verified",
+      "lessonRefs": ["01-01", "01-04"],
+      "evidenceRefs": [
+        "01-01:ev-002",
+        "01-01:ev-004",
+        "01-01:ev-005",
+        "01-04:ev-003",
+        "01-04:ev-005"
+      ]
+    },
+    {
+      "id": "interview-skill:clarify-constraints",
+      "type": "interview_skill",
+      "nameZh": "澄清约束",
+      "nameEn": "Constraint clarification",
+      "aliases": ["从条件读取暗示", "约束驱动选型"],
+      "definition": "在选择算法前确认数据分布、规模、顺序性、空间、稳定性、存储结构和运行环境等会改变方案的条件。",
+      "status": "verified",
+      "lessonRefs": ["01-01", "01-04"],
+      "evidenceRefs": ["01-01:ev-004", "01-04:ev-002"]
+    },
+    {
+      "id": "concept:interview-scope",
+      "type": "concept",
+      "nameZh": "面试评价范围",
+      "nameEn": "Interview evaluation scope",
+      "aliases": ["算法面试只是面试的一部分"],
+      "definition": "算法面试只是技术面试的一部分，技术表现又只是完整招聘评价的一部分；项目、行为和沟通同样会被考察。",
+      "status": "verified",
+      "lessonRefs": ["01-01", "01-02", "01-03"],
+      "evidenceRefs": [
+        "01-01:ev-003",
+        "01-02:ev-001",
+        "01-02:ev-002",
+        "01-03:ev-001"
+      ]
+    },
+    {
+      "id": "interview-skill:project-storytelling",
+      "type": "interview_skill",
+      "nameZh": "项目经历表达",
+      "nameEn": "Project storytelling",
+      "aliases": ["项目经历", "Bug 复盘"],
+      "definition": "以具体项目、挑战、错误、修复和结果为事实基础，展示技术深度与过去的行为方式。",
+      "status": "verified",
+      "lessonRefs": ["01-02"],
+      "evidenceRefs": ["01-02:ev-001", "01-02:ev-002", "01-02:ev-003"]
+    },
+    {
+      "id": "interview-skill:behavioral-questions",
+      "type": "interview_skill",
+      "nameZh": "行为类问题",
+      "nameEn": "Behavioral questions",
+      "aliases": ["行为题", "Behavioral Questions"],
+      "definition": "通过候选人过去的具体经历了解其处理挑战、错误、失败和冲突等情境时的思考与行为。",
+      "status": "verified",
+      "lessonRefs": ["01-02"],
+      "evidenceRefs": ["01-02:ev-003"]
+    },
+    {
+      "id": "interview-skill:reverse-questions",
+      "type": "interview_skill",
+      "nameZh": "反向提问",
+      "nameEn": "Questions for the interviewer",
+      "aliases": ["向面试官提问"],
+      "definition": "在面试末尾围绕团队运作、项目规划、技术难点、选型标准和成长机会提出有信息量的问题。",
+      "status": "verified",
+      "lessonRefs": ["01-02"],
+      "evidenceRefs": ["01-02:ev-004"]
+    },
+    {
+      "id": "concept:algorithm-interview-preparation-scope",
+      "type": "concept",
+      "nameZh": "算法面试准备范围",
+      "nameEn": "Algorithm interview preparation scope",
+      "aliases": ["基础优先"],
+      "definition": "以基础排序、数据结构及二分、DFS/BFS、递归、分治、回溯、贪心和动态规划等通用思想为主线，而非把高级主题或竞赛水平设为开始门槛。",
+      "status": "verified",
+      "lessonRefs": ["01-03"],
+      "evidenceRefs": [
+        "01-03:ev-002",
+        "01-03:ev-003",
+        "01-03:ev-004",
+        "01-03:ev-005",
+        "01-03:ev-006"
+      ]
+    },
+    {
+      "id": "concept:online-judge",
+      "type": "concept",
+      "nameZh": "在线判题系统",
+      "nameEn": "Online Judge",
+      "aliases": ["OJ"],
+      "definition": "自动运行和判断提交代码的平台；课程强调练习平台的题目类型应与算法面试目标匹配。",
+      "status": "verified",
+      "lessonRefs": ["01-03"],
+      "evidenceRefs": ["01-03:ev-007", "01-03:ev-008", "01-03:ev-009"]
+    },
+    {
+      "id": "pattern:learning-practice-loop",
+      "type": "pattern",
+      "nameZh": "学习—实践反馈循环",
+      "nameEn": "Learning-practice feedback loop",
+      "aliases": ["学习和做题的平衡"],
+      "definition": "先理解算法思想，再用适量题目验证迁移并复盘错误，避免只按通过数量机械刷题。",
+      "status": "verified",
+      "lessonRefs": ["01-03"],
+      "evidenceRefs": ["01-03:ev-010"]
+    },
+    {
+      "id": "pattern:brute-force-baseline",
+      "type": "pattern",
+      "nameZh": "暴力基线",
+      "nameEn": "Brute-force baseline",
+      "aliases": ["暴力解法", "暴力法"],
+      "definition": "先用能覆盖全部候选的直接方法建立正确、可分析的起点，再结合规模判断可行性并定位优化目标。",
+      "status": "verified",
+      "lessonRefs": ["01-04"],
+      "evidenceRefs": ["01-04:ev-003", "01-04:ev-004"]
+    },
+    {
+      "id": "pattern:space-time-tradeoff",
+      "type": "pattern",
+      "nameZh": "空间换时间",
+      "nameEn": "Space-time tradeoff",
+      "aliases": ["空间和时间的交换"],
+      "definition": "使用额外存储记录中间信息，以减少重复计算；是否适用取决于题目的空间约束。",
+      "status": "verified",
+      "lessonRefs": ["01-04"],
+      "evidenceRefs": ["01-04:ev-002", "01-04:ev-005"]
+    },
+    {
+      "id": "pattern:bottleneck-optimization",
+      "type": "pattern",
+      "nameZh": "瓶颈优化",
+      "nameEn": "Bottleneck optimization",
+      "aliases": ["在瓶颈处寻找答案"],
+      "definition": "先识别主导整体复杂度的步骤，再集中减少该步骤的重复工作或替换其算法与数据结构。",
+      "status": "verified",
+      "lessonRefs": ["01-04"],
+      "evidenceRefs": ["01-04:ev-005"]
+    },
+    {
+      "id": "interview-skill:boundary-aware-coding",
+      "type": "interview_skill",
+      "nameZh": "边界意识与代码质量",
+      "nameEn": "Boundary-aware coding",
+      "aliases": ["极端条件判断", "代码规范"],
+      "definition": "在实现中主动处理空输入、特殊数量、空指针等边界，并保持变量语义、模块化和复用性。",
+      "status": "verified",
+      "lessonRefs": ["01-01", "01-04"],
+      "evidenceRefs": ["01-01:ev-005", "01-04:ev-006"]
+    },
+    {
+      "id": "interview-skill:whiteboard-coding",
+      "type": "interview_skill",
+      "nameZh": "白板编程",
+      "nameEn": "Whiteboard coding",
+      "aliases": [],
+      "definition": "在没有 IDE 自动补全、编译和调试辅助时，仍能手写基础算法与数据结构实现。",
+      "status": "verified",
+      "lessonRefs": ["01-04"],
+      "evidenceRefs": ["01-04:ev-007"]
+    },
+    {
+      "id": "problem:leetcode-3",
+      "type": "problem",
+      "nameZh": "无重复字符的最长子串",
+      "nameEn": "Longest Substring Without Repeating Characters",
+      "aliases": ["LeetCode 3"],
+      "definition": "第一章用于说明暴力基线与规模判断的示例题；完整优化解法将在后续课次建立。",
+      "status": "verified",
+      "lessonRefs": ["01-04"],
+      "evidenceRefs": ["01-04:ev-004"]
+    },
+    {
+      "id": "concept:big-o-notation",
+      "type": "concept",
+      "nameZh": "大 O 记号",
+      "nameEn": "Big O notation",
+      "aliases": ["渐进复杂度", "增长阶"],
+      "definition": "用输入规模函数描述算法基本操作数的渐进增长量级；课程在面试语境中按惯例使用最紧的有意义上界，并省略常数因子和同一规模变量下的低阶项。",
+      "status": "verified",
+      "lessonRefs": ["02-01", "02-02", "02-03"],
+      "evidenceRefs": [
+        "02-01:ev-002",
+        "02-01:ev-004",
+        "02-01:ev-006",
+        "02-01:ev-007",
+        "02-02:ev-001",
+        "02-03:ev-001"
+      ]
+    },
+    {
+      "id": "concept:complexity-cases",
+      "type": "concept",
+      "nameZh": "最好、最坏与平均情况复杂度",
+      "nameEn": "Best, worst, and average-case complexity",
+      "aliases": ["用例相关复杂度"],
+      "definition": "同一算法的成本可能随输入排列或分布而变化，需要明确所讨论的是最好、最坏还是平均情况，而不是只写一个脱离用例的复杂度。",
+      "status": "verified",
+      "lessonRefs": ["02-01"],
+      "evidenceRefs": ["02-01:ev-009"]
+    },
+    {
+      "id": "concept:multi-variable-complexity",
+      "type": "concept",
+      "nameZh": "多变量复杂度",
+      "nameEn": "Multi-variable complexity",
+      "aliases": ["多维度数据规模"],
+      "definition": "当成本由彼此独立的规模维度共同决定时，应分别保留这些变量；例如图遍历的 V 与 E、字符串数量 n 与字符串长度 s 不能任意合并或删项。",
+      "status": "verified",
+      "lessonRefs": ["02-01"],
+      "evidenceRefs": ["02-01:ev-007", "02-01:ev-008"]
+    },
+    {
+      "id": "concept:data-scale-budget",
+      "type": "concept",
+      "nameZh": "数据规模预算",
+      "nameEn": "Input-scale budget",
+      "aliases": ["数据规模概念", "复杂度反推"],
+      "definition": "在给定运行时间下，用复杂度增长阶估计方案可处理的数据数量级，或从题目规模反推所需复杂度；课程中的 1 秒经验值是数量级参照，不是跨机器的固定保证。",
+      "status": "verified",
+      "lessonRefs": ["01-04", "02-02", "02-04"],
+      "evidenceRefs": [
+        "01-04:ev-002",
+        "01-04:ev-004",
+        "02-02:ev-002",
+        "02-02:ev-003",
+        "02-04:ev-002"
+      ]
+    },
+    {
+      "id": "concept:space-complexity",
+      "type": "concept",
+      "nameZh": "辅助空间与递归栈空间",
+      "nameEn": "Auxiliary and recursion-stack space",
+      "aliases": ["空间复杂度", "调用栈空间"],
+      "definition": "除输入本身外，算法申请的数组、常数变量以及递归调用栈都会形成随数据规模变化的额外空间成本。",
+      "status": "verified",
+      "lessonRefs": ["02-02"],
+      "evidenceRefs": ["02-02:ev-004", "02-02:ev-005"]
+    },
+    {
+      "id": "pattern:complexity-from-code-structure",
+      "type": "pattern",
+      "nameZh": "从代码结构识别增长阶",
+      "nameEn": "Complexity from code structure",
+      "aliases": ["简单复杂度分析"],
+      "definition": "先确定基本操作及其执行次数怎样随输入规模变化，再处理顺序相加、嵌套相乘、固定次数循环、按比例缩小和平方根边界等常见结构。",
+      "status": "verified",
+      "lessonRefs": ["02-03"],
+      "evidenceRefs": [
+        "02-03:ev-001",
+        "02-03:ev-002",
+        "02-03:ev-003",
+        "02-03:ev-004",
+        "02-03:ev-005",
+        "02-03:ev-006",
+        "02-03:ev-007",
+        "02-03:ev-008",
+        "02-03:ev-009"
+      ]
+    },
+    {
+      "id": "pattern:doubling-ratio-experiment",
+      "type": "pattern",
+      "nameZh": "倍增比率实验",
+      "nameEn": "Doubling-ratio experiment",
+      "aliases": ["复杂度试验", "Doubling test"],
+      "definition": "逐次把输入规模翻倍并比较计时结果的比率，用观测趋势检查实现是否与 O(n)、O(n²)、O(log n) 或 O(n log n) 的理论预期相符。",
+      "status": "verified",
+      "lessonRefs": ["02-04", "02-06", "02-07"],
+      "evidenceRefs": [
+        "02-04:ev-002",
+        "02-04:ev-004",
+        "02-04:ev-005",
+        "02-04:ev-007",
+        "02-04:ev-008",
+        "02-06:ev-007",
+        "02-07:ev-006"
+      ]
+    },
+    {
+      "id": "concept:recursive-complexity",
+      "type": "concept",
+      "nameZh": "递归算法复杂度",
+      "nameEn": "Recursive algorithm complexity",
+      "aliases": ["递归深度分析", "每层工作量"],
+      "definition": "递归复杂度不能由“出现递归”直接猜测；单分支递归可结合每次调用成本与递归深度，多分支递归则需统计调用树节点或各层总工作量。",
+      "status": "verified",
+      "lessonRefs": ["02-05"],
+      "evidenceRefs": [
+        "02-05:ev-001",
+        "02-05:ev-002",
+        "02-05:ev-003",
+        "02-05:ev-004",
+        "02-05:ev-005",
+        "02-05:ev-006"
+      ]
+    },
+    {
+      "id": "concept:recursion-tree",
+      "type": "concept",
+      "nameZh": "递归树",
+      "nameEn": "Recursion tree",
+      "aliases": ["调用树"],
+      "definition": "把每次递归调用表示为树节点，并通过节点总数或每层成本之和推导多分支递归的总时间。",
+      "status": "verified",
+      "lessonRefs": ["02-05"],
+      "evidenceRefs": ["02-05:ev-005", "02-05:ev-006"]
+    },
+    {
+      "id": "concept:amortized-complexity",
+      "type": "concept",
+      "nameZh": "均摊时间复杂度",
+      "nameEn": "Amortized time complexity",
+      "aliases": ["Amortized Time Analysis", "均摊分析"],
+      "definition": "把一个操作序列中的偶发高成本分配到多次低成本操作上，评价整个序列中单次操作的平均保证，而不是只看某一次最坏操作。",
+      "status": "verified",
+      "lessonRefs": ["02-06", "02-07"],
+      "evidenceRefs": [
+        "02-06:ev-001",
+        "02-06:ev-006",
+        "02-06:ev-007",
+        "02-07:ev-002",
+        "02-07:ev-004"
+      ]
+    },
+    {
+      "id": "data-structure:dynamic-array",
+      "type": "data_structure",
+      "nameZh": "动态数组",
+      "nameEn": "Dynamic array",
+      "aliases": ["Vector", "MyVector"],
+      "definition": "在连续数组已满或利用率过低时重新分配容量并复制元素，从而在容量、单次扩缩容成本和插入删除性能之间取得平衡的线性结构。",
+      "status": "verified",
+      "lessonRefs": ["02-06", "02-07"],
+      "evidenceRefs": [
+        "02-06:ev-002",
+        "02-06:ev-003",
+        "02-06:ev-004",
+        "02-06:ev-005",
+        "02-07:ev-004",
+        "02-07:ev-008"
+      ]
+    },
+    {
+      "id": "pitfall:complexity-thrashing",
+      "type": "pitfall",
+      "nameZh": "复杂度震荡",
+      "nameEn": "Complexity thrashing",
+      "aliases": ["扩缩容震荡"],
+      "definition": "扩容与缩容阈值紧贴同一临界点时，交替添加和删除会反复触发 O(n) 的复制，使原本可均摊的操作退化为每次 O(n)。",
+      "status": "verified",
+      "lessonRefs": ["02-07"],
+      "evidenceRefs": ["02-07:ev-003"]
+    },
+    {
+      "id": "pattern:lazy-shrink",
+      "type": "pattern",
+      "nameZh": "延迟缩容",
+      "nameEn": "Lazy shrink",
+      "aliases": ["Lazy 策略", "四分之一阈值"],
+      "definition": "动态数组只有在元素数降到容量的四分之一时才把容量缩到一半，在扩容与缩容触发点之间保留缓冲区，避免临界点震荡并维持均摊 O(1)。",
+      "status": "verified",
+      "lessonRefs": ["02-07"],
+      "evidenceRefs": ["02-07:ev-004", "02-07:ev-005"]
+    }
+  ],
+  "conceptShape": {
+    "id": "concept:<canonical-slug>",
+    "type": "concept | pattern | data_structure | algorithm | problem | pitfall | interview_skill",
+    "nameZh": "",
+    "nameEn": "",
+    "aliases": [],
+    "definition": "",
+    "status": "provisional | verified",
+    "lessonRefs": [],
+    "evidenceRefs": []
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "slug": "algorithm-interview-course",
+  "title": "算法面试视频课程归纳笔记",
+  "platform": "knowledge-base",
+  "aspectRatio": "source",
+  "durationSeconds": null,
+  "status": "in-progress",
+  "language": "zh-CN",
+  "expectedLessons": 70,
+  "knownDurationSeconds": 66575.417,
+  "tags": ["算法面试", "课程笔记", "视频理解", "知识图谱"]
+}
