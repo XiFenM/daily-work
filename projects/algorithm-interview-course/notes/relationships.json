@@ -591,11 +591,40 @@
       "to": "lesson:04-04",
       "type": "contrasts_with",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "同属 Two Sum 题族，有序数组的双指针与查找表方案形成关键对照。",
-      "confidence": 0.96,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "03-06 解决有序数组 Two Sum II，利用单调性以对撞指针线性排除端点；04-04 明确对比上一章的有序版本，面对无序数组改用动态 unordered_map 保存“值到此前索引”，同一题族由输入顺序条件导向两种不同方案。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "03-06",
+          "assetId": "asset:video-03-06",
+          "startMs": 0,
+          "endMs": 179000,
+          "locator": "ev-001 · 00:00-02:59"
+        },
+        {
+          "lessonId": "03-06",
+          "assetId": "asset:video-03-06",
+          "startMs": 419000,
+          "endMs": 720000,
+          "locator": "ev-004–ev-006 · 06:59-12:00"
+        },
+        {
+          "lessonId": "04-04",
+          "assetId": "asset:video-04-04",
+          "startMs": 80000,
+          "endMs": 131000,
+          "locator": "ev-002 · 01:20-02:11"
+        },
+        {
+          "lessonId": "04-04",
+          "assetId": "asset:video-04-04",
+          "startMs": 242000,
+          "endMs": 757000,
+          "locator": "ev-005–ev-009 · 04:02-12:37"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-04-review-v1"
     },
     {
       "id": "edge:outline:03-07:03-08",
@@ -820,11 +849,33 @@
       "to": "lesson:04-07",
       "type": "applies",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "将窗口状态记录与 set/map 查找结构结合。",
-      "confidence": 0.92,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "03-08 在滑动窗口内用 freq[256] 同步记录字符成员状态；04-07 把同一“窗口 + 查找状态”框架应用到固定最大长度 k+1 的索引窗口，以 unordered_set 维护成员并显式回顾 03-08 的可变长度窗口作为对照。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "03-08",
+          "assetId": "asset:video-03-08",
+          "startMs": 154000,
+          "endMs": 586000,
+          "locator": "ev-002–ev-003 · 02:34-09:46"
+        },
+        {
+          "lessonId": "04-07",
+          "assetId": "asset:video-04-07",
+          "startMs": 53000,
+          "endMs": 577000,
+          "locator": "ev-003–ev-005 · 00:53-09:37"
+        },
+        {
+          "lessonId": "04-07",
+          "assetId": "asset:video-04-07",
+          "startMs": 577000,
+          "endMs": 626000,
+          "locator": "ev-006 · 09:37-10:26"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-04-review-v1"
     },
     {
       "id": "edge:outline:04-07:04-08",
@@ -832,11 +883,33 @@
       "to": "lesson:04-08",
       "type": "extends",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "从无序查找表窗口扩展到利用有序查找结构。",
-      "confidence": 0.9,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "04-07 在长度至多 k+1 的窗口中用 unordered_set 判断精确重复，并在结尾预告下一课需要有序查找表；04-08 保留索引窗口约束，新增数值差不超过 t 的范围条件，改用 set 的 lower_bound 在 [v-t,v+t] 中查询候选。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "04-07",
+          "assetId": "asset:video-04-07",
+          "startMs": 53000,
+          "endMs": 577000,
+          "locator": "ev-003–ev-005 · 00:53-09:37"
+        },
+        {
+          "lessonId": "04-07",
+          "assetId": "asset:video-04-07",
+          "startMs": 626000,
+          "endMs": 680484,
+          "locator": "ev-007 · 10:26-11:20"
+        },
+        {
+          "lessonId": "04-08",
+          "assetId": "asset:video-04-08",
+          "startMs": 0,
+          "endMs": 408000,
+          "locator": "ev-001–ev-003 · 00:00-06:48"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-04-review-v1"
     },
     {
       "id": "edge:outline:04-01:04-02",
@@ -844,11 +917,33 @@
       "to": "lesson:04-02",
       "type": "extends",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "从 set 的存在性记录扩展到 map 的计数或映射。",
-      "confidence": 0.95,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "04-01 用 set 记录成员存在性并让交集结果去重；04-02 面对需要保留重复次数的 Intersection of Two Arrays II，扩展为 map<int,int> 频次表，命中一次便递减一次。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "04-01",
+          "assetId": "asset:video-04-01",
+          "startMs": 0,
+          "endMs": 111000,
+          "locator": "ev-001 · 00:00-01:51"
+        },
+        {
+          "lessonId": "04-01",
+          "assetId": "asset:video-04-01",
+          "startMs": 228000,
+          "endMs": 675283,
+          "locator": "ev-003–ev-005 · 03:48-11:12"
+        },
+        {
+          "lessonId": "04-02",
+          "assetId": "asset:video-04-02",
+          "startMs": 0,
+          "endMs": 227000,
+          "locator": "ev-001–ev-002 · 00:00-03:47"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-04-review-v1"
     },
     {
       "id": "edge:outline:04-02:04-03",
@@ -856,11 +951,40 @@
       "to": "lesson:04-03",
       "type": "extends",
       "strength": "medium",
-      "status": "provisional",
-      "rationale": "从容器使用进入底层实现与顺序性差异。",
-      "confidence": 0.9,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "04-02 先用 map 频次解决交集 II，并在结尾明确预告下一课分析复杂度和底层实现；04-03 随即回看 set/map 两题的 O(n log n) 成本，比较平衡二叉搜索树与哈希表、顺序性，并重构为 unordered 容器。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "04-02",
+          "assetId": "asset:video-04-02",
+          "startMs": 80000,
+          "endMs": 227000,
+          "locator": "ev-002 · 01:20-03:47"
+        },
+        {
+          "lessonId": "04-02",
+          "assetId": "asset:video-04-02",
+          "startMs": 716000,
+          "endMs": 785960,
+          "locator": "ev-006 · 11:56-13:05"
+        },
+        {
+          "lessonId": "04-03",
+          "assetId": "asset:video-04-03",
+          "startMs": 0,
+          "endMs": 335000,
+          "locator": "ev-001–ev-003 · 00:00-05:35"
+        },
+        {
+          "lessonId": "04-03",
+          "assetId": "asset:video-04-03",
+          "startMs": 336000,
+          "endMs": 726000,
+          "locator": "ev-004–ev-008 · 05:36-12:06"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-04-review-v1"
     },
     {
       "id": "edge:outline:04-04:04-05",
@@ -868,11 +992,33 @@
       "to": "lesson:04-05",
       "type": "extends",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "从经典查找表问题扩展到灵活设计键值。",
-      "confidence": 0.91,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "04-04 为每个数组值查询 target-v，并用动态 map 保存此前值到索引；04-05 把补数查找扩展到四数组计数，将 C+D 的组合和作为键、索引对频次作为值，再为每个 A+B 查询相反数并累加频次。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "04-04",
+          "assetId": "asset:video-04-04",
+          "startMs": 242000,
+          "endMs": 757000,
+          "locator": "ev-005–ev-009 · 04:02-12:37"
+        },
+        {
+          "lessonId": "04-05",
+          "assetId": "asset:video-04-05",
+          "startMs": 0,
+          "endMs": 77000,
+          "locator": "ev-001 · 00:00-01:17"
+        },
+        {
+          "lessonId": "04-05",
+          "assetId": "asset:video-04-05",
+          "startMs": 180000,
+          "endMs": 545000,
+          "locator": "ev-004–ev-005 · 03:00-09:05"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-04-review-v1"
     },
     {
       "id": "edge:outline:04-05:04-06",
@@ -880,11 +1026,148 @@
       "to": "lesson:04-06",
       "type": "same_pattern_as",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "两课都强调通过转换表示来设计查找表键。",
-      "confidence": 0.92,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "04-05 把 C+D 的组合和映射到出现频次，并按补数聚合计数；04-06 对每个枢纽点把距离平方映射到其他点的频次，再按 k*(k-1) 聚合。两课都把派生量而非原始元素设计为键，但组合对象和计数公式不同。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "04-05",
+          "assetId": "asset:video-04-05",
+          "startMs": 180000,
+          "endMs": 663000,
+          "locator": "ev-004–ev-006 · 03:00-11:03"
+        },
+        {
+          "lessonId": "04-06",
+          "assetId": "asset:video-04-06",
+          "startMs": 93000,
+          "endMs": 731000,
+          "locator": "ev-002–ev-004 · 01:33-12:11"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-04-review-v1"
+    },
+    {
+      "id": "edge:video:04-03:04-08",
+      "from": "lesson:04-03",
+      "to": "lesson:04-08",
+      "type": "applies",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "04-03 说明哈希表失去最大最小、前驱后继、floor/ceil 等顺序能力，并把 set/map 归入平衡二叉搜索树实现；04-08 直接应用这一顺序性，将 unordered_set 改为 set，通过 lower_bound(v-t) 查询窗口内是否存在不大于 v+t 的候选。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "04-03",
+          "assetId": "asset:video-04-03",
+          "startMs": 0,
+          "endMs": 168000,
+          "locator": "ev-001 · 00:00-02:48"
+        },
+        {
+          "lessonId": "04-03",
+          "assetId": "asset:video-04-03",
+          "startMs": 376000,
+          "endMs": 525000,
+          "locator": "ev-005–ev-006 · 06:16-08:45"
+        },
+        {
+          "lessonId": "04-08",
+          "assetId": "asset:video-04-08",
+          "startMs": 64000,
+          "endMs": 408000,
+          "locator": "ev-002–ev-003 · 01:04-06:48"
+        }
+      ],
+      "createdBy": "chapter-04-review-v1"
+    },
+    {
+      "id": "edge:video:04-01:04-07",
+      "from": "lesson:04-01",
+      "to": "lesson:04-07",
+      "type": "applies",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "04-01 建立 set 的唯一键、成员查询与 insert/find/erase 用法，并用它完成数组交集；04-07 把这些操作应用到固定长度滑动窗口，以 unordered_set 实时查询重复、插入新值并删除离窗值。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "04-01",
+          "assetId": "asset:video-04-01",
+          "startMs": 0,
+          "endMs": 111000,
+          "locator": "ev-001 · 00:00-01:51"
+        },
+        {
+          "lessonId": "04-01",
+          "assetId": "asset:video-04-01",
+          "startMs": 322000,
+          "endMs": 558000,
+          "locator": "ev-004 · 05:22-09:18"
+        },
+        {
+          "lessonId": "04-07",
+          "assetId": "asset:video-04-07",
+          "startMs": 53000,
+          "endMs": 577000,
+          "locator": "ev-003–ev-005 · 00:53-09:37"
+        }
+      ],
+      "createdBy": "chapter-04-review-v1"
+    },
+    {
+      "id": "edge:video:04-02:04-05",
+      "from": "lesson:04-02",
+      "to": "lesson:04-05",
+      "type": "applies",
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "04-02 用 map 记录单个数组值的剩余频次，命中后递减以保留重复次数；04-05 将同一“键到频次”状态应用到派生键 C+D，必须保存每个组合和的出现次数并在补数命中时累加全部频次。",
+      "confidence": 0.97,
+      "evidence": [
+        {
+          "lessonId": "04-02",
+          "assetId": "asset:video-04-02",
+          "startMs": 0,
+          "endMs": 227000,
+          "locator": "ev-001–ev-002 · 00:00-03:47"
+        },
+        {
+          "lessonId": "04-05",
+          "assetId": "asset:video-04-05",
+          "startMs": 180000,
+          "endMs": 545000,
+          "locator": "ev-004–ev-005 · 03:00-09:05"
+        }
+      ],
+      "createdBy": "chapter-04-review-v1"
+    },
+    {
+      "id": "edge:video:04-02:04-06",
+      "from": "lesson:04-02",
+      "to": "lesson:04-06",
+      "type": "applies",
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "04-02 用 map 维护元素频次并按频次控制答案重数；04-06 将频次映射迁移到每个枢纽点的距离平方键，对同距点数量 k 计算 k*(k-1)，体现频次表从值计数到派生几何量计数的应用。",
+      "confidence": 0.96,
+      "evidence": [
+        {
+          "lessonId": "04-02",
+          "assetId": "asset:video-04-02",
+          "startMs": 80000,
+          "endMs": 227000,
+          "locator": "ev-002 · 01:20-03:47"
+        },
+        {
+          "lessonId": "04-06",
+          "assetId": "asset:video-04-06",
+          "startMs": 93000,
+          "endMs": 731000,
+          "locator": "ev-002–ev-004 · 01:33-12:11"
+        }
+      ],
+      "createdBy": "chapter-04-review-v1"
     },
     {
       "id": "edge:outline:05-01:05-03",

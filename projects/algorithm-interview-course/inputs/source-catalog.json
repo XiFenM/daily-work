@@ -14,7 +14,7 @@
       "duplicateLessonIds": [],
       "missingLessonIds": []
     },
-    "catalogScope": "chapters-01-03"
+    "catalogScope": "chapters-01-04"
   },
   "items": [
     {
@@ -605,6 +605,254 @@
       },
       "status": "mapped",
       "notes": "目录标称 15:20；实际 15:24.680，相差约 4.680 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-04-01",
+      "kind": "video",
+      "originalFilename": "4-1 set的使用 Intersection of Two Arrays_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/4-1 set的使用 Intersection of Two Arrays_慕课网.mp4",
+      "sha256": "98be0972f993acf1c60d024875e32d9243055918e6630dc6cb480c0efdf9072c",
+      "bytes": 84064312,
+      "lessonIds": ["04-01"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 675.283,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 11:12；实际 11:15.283，相差约 3.283 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-04-02",
+      "kind": "video",
+      "originalFilename": "4-2 map的使用 Intersection of Two Arrays II_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/4-2 map的使用 Intersection of Two Arrays II_慕课网.mp4",
+      "sha256": "6931eccf2b0e27082f973383b8b52de9ed7e11d748532ef4aa7f53a7efba92ab",
+      "bytes": 71689206,
+      "lessonIds": ["04-02"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 785.96,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 13:05；实际 13:05.960，相差约 0.960 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-04-03",
+      "kind": "video",
+      "originalFilename": "4-3 set和map不同底层实现的区别_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/4-3 set和map不同底层实现的区别_慕课网.mp4",
+      "sha256": "f07168f43630c7843ff78b346b0ece01a457a499eb5c03454fed03773e843e84",
+      "bytes": 110888888,
+      "lessonIds": ["04-03"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1140.12,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 19:00；实际 19:00.120，相差约 0.120 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-04-04",
+      "kind": "video",
+      "originalFilename": "4-4 使用查找表的经典问题 Two Sum_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/4-4 使用查找表的经典问题 Two Sum_慕课网.mp4",
+      "sha256": "ddd1af30def610a614956f63c19e63ee5f1c3a1a93e8af20e546f4bd5fd4db9a",
+      "bytes": 102777622,
+      "lessonIds": ["04-04"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1017,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 16:56；实际 16:57.000，相差约 1.000 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-04-05",
+      "kind": "video",
+      "originalFilename": "4-5 灵活选择键值 4Sum II_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/4-5 灵活选择键值 4Sum II_慕课网.mp4",
+      "sha256": "9c4d7fda009b2d0652e2c0b554c0ce60926dec108896ac0292e68a0dd965c0bf",
+      "bytes": 78928946,
+      "lessonIds": ["04-05"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 805.2,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 13:25；实际 13:25.200，相差约 0.200 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-04-06",
+      "kind": "video",
+      "originalFilename": "4-6 灵活选择键值 Number of Boomerangs_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/4-6 灵活选择键值 Number of Boomerangs_慕课网.mp4",
+      "sha256": "957382db6f08c3333a2fe92c50e58143514616a2cb68577af822c8cf6cc4d49d",
+      "bytes": 82825690,
+      "lessonIds": ["04-06"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 885.6,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 14:45；实际 14:45.600，相差约 0.600 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-04-07",
+      "kind": "video",
+      "originalFilename": "4-7 查找表和滑动窗口 Contain Duplicate II_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/4-7 查找表和滑动窗口 Contain Duplicate II_慕课网.mp4",
+      "sha256": "0ba6125ca5591e88dfbe26c987ff98705870669632a44769f6123edf7a4f5430",
+      "bytes": 74223843,
+      "lessonIds": ["04-07"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 680.484,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 11:20；实际 11:20.484，相差约 0.484 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-04-08",
+      "kind": "video",
+      "originalFilename": "4-8 二分搜索树底层实现的顺序性 Contain Duplicate III_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/4-8 二分搜索树底层实现的顺序性 Contain Duplicate III_慕课网.mp4",
+      "sha256": "1d25afc6acc5c61d6a32b868a9ee19fda62a49a73c229dc8122e236f5de20554",
+      "bytes": 70500442,
+      "lessonIds": ["04-08"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 654.28,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 10:50；实际 10:54.280，相差约 4.280 秒。12 帧联系表检查通过，课次映射无歧义。"
     }
   ],
   "itemShape": {
