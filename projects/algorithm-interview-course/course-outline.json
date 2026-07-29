@@ -300,7 +300,7 @@
       "id": "04",
       "number": 4,
       "title": "查找表相关问题",
-      "knownDurationSeconds": 6633,
+      "knownDurationSeconds": 6643.927,
       "lessons": [
         {
           "id": "04-01",
@@ -311,7 +311,9 @@
           "titleNormalized": "set 的使用 Intersection of Two Arrays",
           "durationText": "11:12",
           "durationSeconds": 672,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 675.283,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-04-01"]
         },
         {
           "id": "04-02",
@@ -322,7 +324,9 @@
           "titleNormalized": "map 的使用 Intersection of Two Arrays II",
           "durationText": "13:05",
           "durationSeconds": 785,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 785.96,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-04-02"]
         },
         {
           "id": "04-03",
@@ -333,7 +337,9 @@
           "titleNormalized": "set 和 map 不同底层实现的区别",
           "durationText": "19:00",
           "durationSeconds": 1140,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1140.12,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-04-03"]
         },
         {
           "id": "04-04",
@@ -344,7 +350,9 @@
           "titleNormalized": "使用查找表的经典问题 Two Sum",
           "durationText": "16:56",
           "durationSeconds": 1016,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1017,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-04-04"]
         },
         {
           "id": "04-05",
@@ -355,7 +363,9 @@
           "titleNormalized": "灵活选择键值 4Sum II",
           "durationText": "13:25",
           "durationSeconds": 805,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 805.2,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-04-05"]
         },
         {
           "id": "04-06",
@@ -366,7 +376,9 @@
           "titleNormalized": "灵活选择键值 Number of Boomerangs",
           "durationText": "14:45",
           "durationSeconds": 885,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 885.6,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-04-06"]
         },
         {
           "id": "04-07",
@@ -377,7 +389,9 @@
           "titleNormalized": "查找表和滑动窗口 Contain Duplicate II",
           "durationText": "11:20",
           "durationSeconds": 680,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 680.484,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-04-07"]
         },
         {
           "id": "04-08",
@@ -388,7 +402,9 @@
           "titleNormalized": "二分搜索树底层实现的顺序性 Contain Duplicate III",
           "durationText": "10:50",
           "durationSeconds": 650,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 654.28,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-04-08"]
         }
       ]
     },

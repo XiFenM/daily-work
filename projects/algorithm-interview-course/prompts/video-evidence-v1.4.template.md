@@ -50,20 +50,22 @@
 4. 滑动窗口必须记录窗口开闭语义、扩张和收缩条件、窗口内维护的统计量或查找结构，以及窗口保持的性质。
 5. `stateModels` 只记录视频可观察到的变量、区域、转移和不变量。若老师没有正式表述不变量，`invariant` 可以为 `null`，不能用教材知识补写。
 6. `correctness.method: "loop_invariant"` 只能在至少一个状态模型包含有证据的不变量，并且视频给出初始化、保持、终止和后置条件论证时使用；否则使用 `state_transition`、`unknown` 或其他真实匹配的方法，并记录不确定项。
-7. `correctness.method` 只能是 `not_applicable`、`loop_invariant`、`recursive_contract`、`induction`、`state_transition`、`exchange_argument`、`experimental_validation`、`other`、`unknown`。
+7. `correctness.method: "state_transition"` 只能在 `correctness.stateModelIds` 至少引用一个状态模型，并且被引用模型的 `transitions` 非空时使用；如果视频没有提供可记录的状态转移，就使用 `unknown`，不要把空转移模型标成 `state_transition`。
+8. `correctness.method` 只能是 `not_applicable`、`loop_invariant`、`recursive_contract`、`induction`、`state_transition`、`exchange_argument`、`experimental_validation`、`other`、`unknown`。
 
 ## 复杂度防补造规则
 
-1. 保留老师实际使用的 `O`、`Θ`、`Ω`，不能擅自把口语 Big O 改成严格紧界。
-2. 每个变量都记录视频给出的含义；未定义时填 `null` 并记录不确定项，不能默认都是 `n`。
-3. 区分理论操作次数、墙钟时间、辅助空间和递归栈空间。
-4. 区分 `worst`、`average`、`best`、`expected`、`amortized`、`empirical`；未说明用 `unspecified`。
-5. 公式只转录可辨部分，不能用教材记忆补齐。
-6. 递归分析不得凭算法名自动套主定理；记录实际出现的递推式、终止条件、分支、规模缩减、树深、每层工作量和总和。
-7. 少量实验数据不能证明渐进复杂度，只能描述观察趋势。
-8. 实验未交代的硬件、系统、编译器、优化、计时器、预热、重复次数和输入分布填 `null`，不得用当前机器补齐。
-9. 均摊复杂度不等于随机输入的平均复杂度；记录操作序列、昂贵操作触发条件、序列总成本和方法。
-10. 每个解法的复杂度必须与该解法的证据绑定，不能把优化解法的复杂度写到基线解法上。
+1. 顶层 `complexity` 永远必须是对象，不能返回 `null`。若视频没有给出摘要复杂度，使用 `{"time":null,"space":null,"assumptions":[],"evidenceIds":[]}`；详细结论仍写入 `complexityAnalyses`。
+2. 保留老师实际使用的 `O`、`Θ`、`Ω`，不能擅自把口语 Big O 改成严格紧界。
+3. 每个变量都记录视频给出的含义；未定义时填 `null` 并记录不确定项，不能默认都是 `n`。
+4. 区分理论操作次数、墙钟时间、辅助空间和递归栈空间。
+5. 区分 `worst`、`average`、`best`、`expected`、`amortized`、`empirical`；未说明用 `unspecified`。
+6. 公式只转录可辨部分，不能用教材记忆补齐。
+7. 递归分析不得凭算法名自动套主定理；记录实际出现的递推式、终止条件、分支、规模缩减、树深、每层工作量和总和。
+8. 少量实验数据不能证明渐进复杂度，只能描述观察趋势。
+9. 实验未交代的硬件、系统、编译器、优化、计时器、预热、重复次数和输入分布填 `null`，不得用当前机器补齐。
+10. 均摊复杂度不等于随机输入的平均复杂度；记录操作序列、昂贵操作触发条件、序列总成本和方法。
+11. 每个解法的复杂度必须与该解法的证据绑定，不能把优化解法的复杂度写到基线解法上。
 
 ## 输出总结构
 
@@ -265,7 +267,7 @@
 ]
 }
 
-`phase` 只能是 `initialization`、`preservation`、`termination`、`postcondition`、`boundary_safety`。同一阶段可以有多个义务（例如不同分支各自的保持性）。使用 `loop_invariant` 时，四个阶段 `initialization`、`preservation`、`termination`、`postcondition` 都必须有直接视频证据；状态模型的 `invariant` 本身也必须是 `course_direct` 且引用视频证据。
+`phase` 只能是 `initialization`、`preservation`、`termination`、`postcondition`、`boundary_safety`。同一阶段可以有多个义务（例如不同分支各自的保持性）。使用 `loop_invariant` 时，四个阶段 `initialization`、`preservation`、`termination`、`postcondition` 都必须有直接视频证据；状态模型的 `invariant` 本身也必须是 `course_direct` 且引用视频证据。使用 `state_transition` 时，`stateModelIds` 必须引用至少一个 `transitions` 非空的状态模型；若无法从视频中提取任何转移，则必须使用 `unknown`。
 
 ## 复杂度、公式和实验的精确结构
 
@@ -366,7 +368,7 @@
 "evidenceIds": []
 }
 
-`purpose` 必须是 sourced statement。`theoreticalExpectation`、`observation` 为 sourced statement 或 `null`。`limitations` 是 sourced statement 数组。
+每个 `experiments[]` 对象自身必须包含 `evidenceIds` 数组，即使其 `purpose`、`measurements`、`observation` 已分别带证据，也不能省略这个顶层字段。`purpose` 必须是 sourced statement。`theoreticalExpectation`、`observation` 为 sourced statement 或 `null`。`limitations` 是 sourced statement 数组。
 
 ## 关系与不确定项
 

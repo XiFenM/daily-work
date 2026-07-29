@@ -667,6 +667,328 @@
       "eligibleForSynthesis": true,
       "billingStatus": "reported_by_usage",
       "retryOfAttemptId": null
+    },
+    {
+      "attemptId": "04-03-understanding-001",
+      "lessonId": "04-03",
+      "attemptNumber": 1,
+      "attemptedAt": "2026-07-29T11:21:52.000Z",
+      "outcome": "accepted",
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "baseUrl": "https://zenmux.dev/api/v1",
+      "promptVersion": "video-evidence-v1.4",
+      "promptSha256": "4328951dcd9800e62f5793fc2c891688fabc8a1718a11e4a67916e0bcb0e2177",
+      "responseFormat": "json_object",
+      "requestId": "1d18a75c87e5464a90d2795e7115ef06",
+      "transport": {
+        "status": "completed",
+        "httpStatus": 200,
+        "failurePhase": null,
+        "requestMayHaveReachedServer": true
+      },
+      "validation": {
+        "status": "passed",
+        "validator": "normalize-lesson-evidence.mjs",
+        "errors": [],
+        "qaStatus": "completed"
+      },
+      "eligibleForSynthesis": true,
+      "billingStatus": "reported_by_usage",
+      "retryOfAttemptId": null
+    },
+    {
+      "attemptId": "04-08-understanding-001",
+      "lessonId": "04-08",
+      "attemptNumber": 1,
+      "attemptedAt": "2026-07-29T11:25:48.000Z",
+      "outcome": "rejected",
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "baseUrl": "https://zenmux.dev/api/v1",
+      "promptVersion": "video-evidence-v1.4",
+      "promptSha256": "4ffe50150ef712c25a7714b4712197245dc77d0ded31b41a30602aed696ee663",
+      "responseFormat": "json_object",
+      "requestId": "454eeba4b842467796ca7cccfaf674c2",
+      "transport": {
+        "status": "completed",
+        "httpStatus": 200,
+        "failurePhase": null,
+        "requestMayHaveReachedServer": true
+      },
+      "validation": {
+        "status": "failed",
+        "validator": "normalize-lesson-evidence.mjs",
+        "errors": [
+          "state_transition requires a linked state model with transitions."
+        ]
+      },
+      "eligibleForSynthesis": false,
+      "billingStatus": "reported_by_usage",
+      "retryOfAttemptId": null
+    },
+    {
+      "attemptId": "04-08-understanding-002",
+      "lessonId": "04-08",
+      "attemptNumber": 2,
+      "attemptedAt": "2026-07-29T11:29:27.000Z",
+      "outcome": "accepted",
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "baseUrl": "https://zenmux.dev/api/v1",
+      "promptVersion": "video-evidence-v1.4",
+      "promptSha256": "5f920dcd3fb1db5fef25c5fc6845d3ad3f719aaebfff6ae72de8ba2badfea781",
+      "responseFormat": "json_object",
+      "requestId": "6491c9ebc7c6463089ea4720dce1660a",
+      "transport": {
+        "status": "completed",
+        "httpStatus": 200,
+        "failurePhase": null,
+        "requestMayHaveReachedServer": true
+      },
+      "validation": {
+        "status": "passed",
+        "validator": "normalize-lesson-evidence.mjs",
+        "errors": [],
+        "qaStatus": "completed"
+      },
+      "eligibleForSynthesis": true,
+      "billingStatus": "reported_by_usage",
+      "retryOfAttemptId": "04-08-understanding-001"
+    },
+    {
+      "attemptId": "04-02-understanding-001",
+      "lessonId": "04-02",
+      "attemptNumber": 1,
+      "attemptedAt": "2026-07-29T11:31:42.000Z",
+      "outcome": "rejected",
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "baseUrl": "https://zenmux.dev/api/v1",
+      "promptVersion": "video-evidence-v1.4",
+      "promptSha256": "4e7801b819cab681a3e0610a03adbf05c3d3860baa45541b7e1864fb9b69f5a3",
+      "responseFormat": "json_object",
+      "requestId": "25d0988cb0e84f589342679967d245cb",
+      "transport": {
+        "status": "completed",
+        "httpStatus": 200,
+        "failurePhase": null,
+        "requestMayHaveReachedServer": true
+      },
+      "validation": {
+        "status": "failed",
+        "validator": "normalize-lesson-evidence.mjs",
+        "errors": [
+          "Raw evidence failed canonical schema: /complexity must be object"
+        ]
+      },
+      "eligibleForSynthesis": false,
+      "billingStatus": "reported_by_usage",
+      "retryOfAttemptId": null
+    },
+    {
+      "attemptId": "04-02-understanding-002",
+      "lessonId": "04-02",
+      "attemptNumber": 2,
+      "attemptedAt": "2026-07-29T11:36:10.000Z",
+      "outcome": "rejected",
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "baseUrl": "https://zenmux.dev/api/v1",
+      "promptVersion": "video-evidence-v1.4",
+      "promptSha256": "76fae1c96378a42f77d792b97c6dc07bf72ae43da5060dc721470b0eec0cbe3a",
+      "responseFormat": "json_object",
+      "requestId": "8235d03f14cb4aba98a0708292ebdd2a",
+      "transport": {
+        "status": "completed",
+        "httpStatus": 200,
+        "failurePhase": null,
+        "requestMayHaveReachedServer": true
+      },
+      "validation": {
+        "status": "failed",
+        "validator": "normalize-lesson-evidence.mjs",
+        "errors": [
+          "Raw evidence failed canonical schema: /experiments/0 must have required property 'evidenceIds'"
+        ]
+      },
+      "eligibleForSynthesis": false,
+      "billingStatus": "reported_by_usage",
+      "retryOfAttemptId": "04-02-understanding-001"
+    },
+    {
+      "attemptId": "04-01-understanding-001",
+      "lessonId": "04-01",
+      "attemptNumber": 1,
+      "attemptedAt": "2026-07-29T11:31:39.000Z",
+      "outcome": "accepted",
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "baseUrl": "https://zenmux.dev/api/v1",
+      "promptVersion": "video-evidence-v1.4",
+      "promptSha256": "3faa29f596766dd5165634b004230b862d076a7f2a8eed17bae454f21d9d0727",
+      "responseFormat": "json_object",
+      "requestId": "fa4b99365f584191a4c01084f025a3da",
+      "transport": {
+        "status": "completed",
+        "httpStatus": 200,
+        "failurePhase": null,
+        "requestMayHaveReachedServer": true
+      },
+      "validation": {
+        "status": "passed",
+        "validator": "normalize-lesson-evidence.mjs",
+        "errors": [],
+        "qaStatus": "completed"
+      },
+      "eligibleForSynthesis": true,
+      "billingStatus": "reported_by_usage",
+      "retryOfAttemptId": null
+    },
+    {
+      "attemptId": "04-04-understanding-001",
+      "lessonId": "04-04",
+      "attemptNumber": 1,
+      "attemptedAt": "2026-07-29T11:37:11.000Z",
+      "outcome": "accepted",
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "baseUrl": "https://zenmux.dev/api/v1",
+      "promptVersion": "video-evidence-v1.4",
+      "promptSha256": "639cc4550f2adfc595dc21eec6197ab5459b590d03bdbdb2dd9efc47129989db",
+      "responseFormat": "json_object",
+      "requestId": "de4747004de44a2ea2783a68980e9b13",
+      "transport": {
+        "status": "completed",
+        "httpStatus": 200,
+        "failurePhase": null,
+        "requestMayHaveReachedServer": true
+      },
+      "validation": {
+        "status": "passed",
+        "validator": "normalize-lesson-evidence.mjs",
+        "errors": [],
+        "qaStatus": "completed"
+      },
+      "eligibleForSynthesis": true,
+      "billingStatus": "reported_by_usage",
+      "retryOfAttemptId": null
+    },
+    {
+      "attemptId": "04-02-understanding-003",
+      "lessonId": "04-02",
+      "attemptNumber": 3,
+      "attemptedAt": "2026-07-29T11:39:05.000Z",
+      "outcome": "accepted",
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "baseUrl": "https://zenmux.dev/api/v1",
+      "promptVersion": "video-evidence-v1.4",
+      "promptSha256": "a33240a3246706f67bf3b999827743d8cc760c799523b0b6d12fd9a6816d47df",
+      "responseFormat": "json_object",
+      "requestId": "af67c0a97a8f4112a336657b3bbe5fbb",
+      "transport": {
+        "status": "completed",
+        "httpStatus": 200,
+        "failurePhase": null,
+        "requestMayHaveReachedServer": true
+      },
+      "validation": {
+        "status": "passed",
+        "validator": "normalize-lesson-evidence.mjs",
+        "errors": [],
+        "qaStatus": "completed"
+      },
+      "eligibleForSynthesis": true,
+      "billingStatus": "reported_by_usage",
+      "retryOfAttemptId": "04-02-understanding-002"
+    },
+    {
+      "attemptId": "04-05-understanding-001",
+      "lessonId": "04-05",
+      "attemptNumber": 1,
+      "attemptedAt": "2026-07-29T11:40:42.000Z",
+      "outcome": "accepted",
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "baseUrl": "https://zenmux.dev/api/v1",
+      "promptVersion": "video-evidence-v1.4",
+      "promptSha256": "f5e23c99fcf8149d41d595e39399ac8c81e93833679eb9b34723011b995c7d56",
+      "responseFormat": "json_object",
+      "requestId": "77ceadf1295e434ebb265d603e3bfb3f",
+      "transport": {
+        "status": "completed",
+        "httpStatus": 200,
+        "failurePhase": null,
+        "requestMayHaveReachedServer": true
+      },
+      "validation": {
+        "status": "passed",
+        "validator": "normalize-lesson-evidence.mjs",
+        "errors": [],
+        "qaStatus": "completed"
+      },
+      "eligibleForSynthesis": true,
+      "billingStatus": "reported_by_usage",
+      "retryOfAttemptId": null
+    },
+    {
+      "attemptId": "04-06-understanding-001",
+      "lessonId": "04-06",
+      "attemptNumber": 1,
+      "attemptedAt": "2026-07-29T11:41:37.000Z",
+      "outcome": "accepted",
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "baseUrl": "https://zenmux.dev/api/v1",
+      "promptVersion": "video-evidence-v1.4",
+      "promptSha256": "7048a5be55f46595b4b63f0a46f62a27ff92e14817c42eeb476a496d156d4437",
+      "responseFormat": "json_object",
+      "requestId": "99d230793e1b4c4eb9966886b7773bd9",
+      "transport": {
+        "status": "completed",
+        "httpStatus": 200,
+        "failurePhase": null,
+        "requestMayHaveReachedServer": true
+      },
+      "validation": {
+        "status": "passed",
+        "validator": "normalize-lesson-evidence.mjs",
+        "errors": [],
+        "qaStatus": "completed"
+      },
+      "eligibleForSynthesis": true,
+      "billingStatus": "reported_by_usage",
+      "retryOfAttemptId": null
+    },
+    {
+      "attemptId": "04-07-understanding-001",
+      "lessonId": "04-07",
+      "attemptNumber": 1,
+      "attemptedAt": "2026-07-29T11:44:39.000Z",
+      "outcome": "accepted",
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "baseUrl": "https://zenmux.dev/api/v1",
+      "promptVersion": "video-evidence-v1.4",
+      "promptSha256": "b44db6ff89b25a237d02e80de1c53d26350434a0972aaa8cac82923cae85e268",
+      "responseFormat": "json_object",
+      "requestId": "098d5a5ffd224ee6bab9360fc8f1f9e8",
+      "transport": {
+        "status": "completed",
+        "httpStatus": 200,
+        "failurePhase": null,
+        "requestMayHaveReachedServer": true
+      },
+      "validation": {
+        "status": "passed",
+        "validator": "normalize-lesson-evidence.mjs",
+        "errors": [],
+        "qaStatus": "completed"
+      },
+      "eligibleForSynthesis": true,
+      "billingStatus": "reported_by_usage",
+      "retryOfAttemptId": null
     }
   ],
   "generations": [
@@ -1462,6 +1784,454 @@
         }
       },
       "notes": "单次调用成功；严格本地门禁核对 924680 ms 时长、证据引用、对象结构与代码 verification 后通过；人工代码/OCR QA 已完成。"
+    },
+    {
+      "kind": "understanding",
+      "attemptId": "04-03-understanding-001",
+      "lessonId": "04-03",
+      "outcome": "accepted",
+      "eligibleForSynthesis": true,
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "createdAt": "2026-07-29T11:21:52.000Z",
+      "requestId": "1d18a75c87e5464a90d2795e7115ef06",
+      "inputs": [
+        "work/algorithm-interview-course/incoming/4-3 set和map不同底层实现的区别_慕课网.mp4",
+        "work/algorithm-interview-course/prompts/04-03-video-evidence-v1.4.md",
+        "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json"
+      ],
+      "outputs": [
+        "work/algorithm-interview-course/compressed/04-03-balanced.mp4",
+        "outputs/algorithm-interview-course/understanding/raw/04-03.json",
+        "outputs/algorithm-interview-course/understanding/raw/04-03.json.response.json",
+        "outputs/algorithm-interview-course/understanding/normalized/04-03.json"
+      ],
+      "parameters": {
+        "baseUrl": "https://zenmux.dev/api/v1",
+        "promptVersion": "video-evidence-v1.4",
+        "promptSha256": "4328951dcd9800e62f5793fc2c891688fabc8a1718a11e4a67916e0bcb0e2177",
+        "responseFormat": "json_object",
+        "compression": "balanced",
+        "compressedBytes": 16654289,
+        "compressedSha256": "1862a2a1b23f6f8a367641ccb242e77a466b36c10ae49cde6cf020c5c402fb38",
+        "sourceSha256": "f07168f43630c7843ff78b346b0ece01a457a499eb5c03454fed03773e843e84",
+        "maxLocalMb": 50,
+        "attemptNumber": 1,
+        "usage": {
+          "promptTokens": 108015,
+          "completionTokens": 8671,
+          "reasoningTokens": 2128,
+          "totalTokens": 116686
+        }
+      },
+      "notes": "单次调用成功；严格本地门禁核对 1140120 ms 时长、证据引用、对象结构与代码 verification 后通过；人工代码/OCR QA 已完成。"
+    },
+    {
+      "kind": "understanding",
+      "attemptId": "04-08-understanding-001",
+      "lessonId": "04-08",
+      "outcome": "rejected",
+      "eligibleForSynthesis": false,
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "createdAt": "2026-07-29T11:25:48.000Z",
+      "requestId": "454eeba4b842467796ca7cccfaf674c2",
+      "inputs": [
+        "work/algorithm-interview-course/incoming/4-8 二分搜索树底层实现的顺序性 Contain Duplicate III_慕课网.mp4",
+        "work/algorithm-interview-course/prompts/04-08-video-evidence-v1.4.md",
+        "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json"
+      ],
+      "outputs": [
+        "work/algorithm-interview-course/compressed/04-08-balanced.mp4",
+        "outputs/algorithm-interview-course/understanding/retries/04-08-attempt-1-invalid.json",
+        "outputs/algorithm-interview-course/understanding/retries/04-08-attempt-1-invalid.response.json"
+      ],
+      "parameters": {
+        "baseUrl": "https://zenmux.dev/api/v1",
+        "promptVersion": "video-evidence-v1.4",
+        "promptSha256": "4ffe50150ef712c25a7714b4712197245dc77d0ded31b41a30602aed696ee663",
+        "responseFormat": "json_object",
+        "compression": "balanced",
+        "compressedBytes": 10415297,
+        "compressedSha256": "a32b70d9c11c42eea35991f13b053f9306f1ad0ebe83f9deef6b854dc714459a",
+        "sourceSha256": "1d25afc6acc5c61d6a32b868a9ee19fda62a49a73c229dc8122e236f5de20554",
+        "maxLocalMb": 50,
+        "attemptNumber": 1,
+        "usage": {
+          "promptTokens": 63761,
+          "completionTokens": 11238,
+          "reasoningTokens": 5465,
+          "totalTokens": 74999
+        }
+      },
+      "notes": "HTTP 调用完成，但本地门禁拒绝：correctness.method 标记为 state_transition，而关联状态模型没有任何 transitions；没有生成 normalized 文件。"
+    },
+    {
+      "kind": "understanding",
+      "attemptId": "04-08-understanding-002",
+      "lessonId": "04-08",
+      "outcome": "accepted",
+      "eligibleForSynthesis": true,
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "createdAt": "2026-07-29T11:29:27.000Z",
+      "requestId": "6491c9ebc7c6463089ea4720dce1660a",
+      "inputs": [
+        "work/algorithm-interview-course/incoming/4-8 二分搜索树底层实现的顺序性 Contain Duplicate III_慕课网.mp4",
+        "work/algorithm-interview-course/prompts/retries/04-08-video-evidence-v1.4-attempt-2.md",
+        "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json"
+      ],
+      "outputs": [
+        "work/algorithm-interview-course/compressed/04-08-balanced.mp4",
+        "outputs/algorithm-interview-course/understanding/raw/04-08.json",
+        "outputs/algorithm-interview-course/understanding/raw/04-08.json.response.json",
+        "outputs/algorithm-interview-course/understanding/normalized/04-08.json"
+      ],
+      "parameters": {
+        "baseUrl": "https://zenmux.dev/api/v1",
+        "promptVersion": "video-evidence-v1.4",
+        "promptSha256": "5f920dcd3fb1db5fef25c5fc6845d3ad3f719aaebfff6ae72de8ba2badfea781",
+        "responseFormat": "json_object",
+        "compression": "balanced",
+        "compressedBytes": 10415297,
+        "compressedSha256": "a32b70d9c11c42eea35991f13b053f9306f1ad0ebe83f9deef6b854dc714459a",
+        "sourceSha256": "1d25afc6acc5c61d6a32b868a9ee19fda62a49a73c229dc8122e236f5de20554",
+        "maxLocalMb": 50,
+        "attemptNumber": 2,
+        "usage": {
+          "promptTokens": 63875,
+          "completionTokens": 9392,
+          "reasoningTokens": 3434,
+          "totalTokens": 73267
+        }
+      },
+      "notes": "单次调用成功；严格本地门禁核对 654280 ms 时长、证据引用、对象结构与代码 verification 后通过；人工代码/OCR QA 已完成。"
+    },
+    {
+      "kind": "understanding",
+      "attemptId": "04-02-understanding-001",
+      "lessonId": "04-02",
+      "outcome": "rejected",
+      "eligibleForSynthesis": false,
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "createdAt": "2026-07-29T11:31:42.000Z",
+      "requestId": "25d0988cb0e84f589342679967d245cb",
+      "inputs": [
+        "work/algorithm-interview-course/incoming/4-2 map的使用 Intersection of Two Arrays II_慕课网.mp4",
+        "work/algorithm-interview-course/prompts/04-02-video-evidence-v1.4.md",
+        "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json"
+      ],
+      "outputs": [
+        "work/algorithm-interview-course/compressed/04-02-balanced.mp4",
+        "outputs/algorithm-interview-course/understanding/retries/04-02-attempt-1-invalid.json",
+        "outputs/algorithm-interview-course/understanding/retries/04-02-attempt-1-invalid.response.json"
+      ],
+      "parameters": {
+        "baseUrl": "https://zenmux.dev/api/v1",
+        "promptVersion": "video-evidence-v1.4",
+        "promptSha256": "4e7801b819cab681a3e0610a03adbf05c3d3860baa45541b7e1864fb9b69f5a3",
+        "responseFormat": "json_object",
+        "compression": "balanced",
+        "compressedBytes": 14677456,
+        "compressedSha256": "43b858be7a53fca27a349dc5a797c799a5120a98817158c4b087129bac750959",
+        "sourceSha256": "6931eccf2b0e27082f973383b8b52de9ed7e11d748532ef4aa7f53a7efba92ab",
+        "maxLocalMb": 50,
+        "attemptNumber": 1,
+        "usage": {
+          "promptTokens": 76006,
+          "completionTokens": 7961,
+          "reasoningTokens": 2968,
+          "totalTokens": 83967
+        }
+      },
+      "notes": "HTTP 调用完成，但本地 canonical schema 门禁拒绝：顶层 complexity 必填对象被返回为 null；没有生成 normalized 文件。"
+    },
+    {
+      "kind": "understanding",
+      "attemptId": "04-02-understanding-002",
+      "lessonId": "04-02",
+      "outcome": "rejected",
+      "eligibleForSynthesis": false,
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "createdAt": "2026-07-29T11:36:10.000Z",
+      "requestId": "8235d03f14cb4aba98a0708292ebdd2a",
+      "inputs": [
+        "work/algorithm-interview-course/incoming/4-2 map的使用 Intersection of Two Arrays II_慕课网.mp4",
+        "work/algorithm-interview-course/prompts/retries/04-02-video-evidence-v1.4-attempt-2.md",
+        "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json"
+      ],
+      "outputs": [
+        "work/algorithm-interview-course/compressed/04-02-balanced.mp4",
+        "outputs/algorithm-interview-course/understanding/retries/04-02-attempt-2-invalid.json",
+        "outputs/algorithm-interview-course/understanding/retries/04-02-attempt-2-invalid.json.response.json"
+      ],
+      "parameters": {
+        "baseUrl": "https://zenmux.dev/api/v1",
+        "promptVersion": "video-evidence-v1.4",
+        "promptSha256": "76fae1c96378a42f77d792b97c6dc07bf72ae43da5060dc721470b0eec0cbe3a",
+        "responseFormat": "json_object",
+        "compression": "balanced",
+        "compressedBytes": 14677456,
+        "compressedSha256": "43b858be7a53fca27a349dc5a797c799a5120a98817158c4b087129bac750959",
+        "sourceSha256": "6931eccf2b0e27082f973383b8b52de9ed7e11d748532ef4aa7f53a7efba92ab",
+        "maxLocalMb": 50,
+        "attemptNumber": 2,
+        "usage": {
+          "promptTokens": 76065,
+          "completionTokens": 8392,
+          "reasoningTokens": 3086,
+          "totalTokens": 84457
+        }
+      },
+      "notes": "HTTP 调用完成，但本地 canonical schema 门禁拒绝：experiment 对象缺少自身必填 evidenceIds；没有生成 normalized 文件。"
+    },
+    {
+      "kind": "understanding",
+      "attemptId": "04-01-understanding-001",
+      "lessonId": "04-01",
+      "outcome": "accepted",
+      "eligibleForSynthesis": true,
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "createdAt": "2026-07-29T11:31:39.000Z",
+      "requestId": "fa4b99365f584191a4c01084f025a3da",
+      "inputs": [
+        "work/algorithm-interview-course/incoming/4-1 set的使用 Intersection of Two Arrays_慕课网.mp4",
+        "work/algorithm-interview-course/prompts/04-01-video-evidence-v1.4.md",
+        "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json"
+      ],
+      "outputs": [
+        "work/algorithm-interview-course/compressed/04-01-balanced.mp4",
+        "outputs/algorithm-interview-course/understanding/raw/04-01.json",
+        "outputs/algorithm-interview-course/understanding/raw/04-01.json.response.json",
+        "outputs/algorithm-interview-course/understanding/normalized/04-01.json"
+      ],
+      "parameters": {
+        "baseUrl": "https://zenmux.dev/api/v1",
+        "promptVersion": "video-evidence-v1.4",
+        "promptSha256": "3faa29f596766dd5165634b004230b862d076a7f2a8eed17bae454f21d9d0727",
+        "responseFormat": "json_object",
+        "compression": "balanced",
+        "compressedBytes": 10405767,
+        "compressedSha256": "9aec82aa9764cba1c9ea566bee530cc92ca7244e87e1d4b46f430c34c0338837",
+        "sourceSha256": "98be0972f993acf1c60d024875e32d9243055918e6630dc6cb480c0efdf9072c",
+        "maxLocalMb": 50,
+        "attemptNumber": 1,
+        "usage": {
+          "promptTokens": 65776,
+          "completionTokens": 6562,
+          "reasoningTokens": 3050,
+          "totalTokens": 72338
+        }
+      },
+      "notes": "单次调用成功；严格本地门禁核对 675283 ms 时长、证据引用、对象结构与代码 verification 后通过；人工代码/OCR QA 已完成。"
+    },
+    {
+      "kind": "understanding",
+      "attemptId": "04-04-understanding-001",
+      "lessonId": "04-04",
+      "outcome": "accepted",
+      "eligibleForSynthesis": true,
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "createdAt": "2026-07-29T11:37:11.000Z",
+      "requestId": "de4747004de44a2ea2783a68980e9b13",
+      "inputs": [
+        "work/algorithm-interview-course/incoming/4-4 使用查找表的经典问题 Two Sum_慕课网.mp4",
+        "work/algorithm-interview-course/prompts/04-04-video-evidence-v1.4.md",
+        "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json"
+      ],
+      "outputs": [
+        "work/algorithm-interview-course/compressed/04-04-balanced.mp4",
+        "outputs/algorithm-interview-course/understanding/raw/04-04.json",
+        "outputs/algorithm-interview-course/understanding/raw/04-04.json.response.json",
+        "outputs/algorithm-interview-course/understanding/normalized/04-04.json"
+      ],
+      "parameters": {
+        "baseUrl": "https://zenmux.dev/api/v1",
+        "promptVersion": "video-evidence-v1.4",
+        "promptSha256": "639cc4550f2adfc595dc21eec6197ab5459b590d03bdbdb2dd9efc47129989db",
+        "responseFormat": "json_object",
+        "compression": "balanced",
+        "compressedBytes": 13825387,
+        "compressedSha256": "acb0ac9ded43280f9f13fb4170c38def722a7cc9cbcdd326e905e34f5494303f",
+        "sourceSha256": "ddd1af30def610a614956f63c19e63ee5f1c3a1a93e8af20e546f4bd5fd4db9a",
+        "maxLocalMb": 50,
+        "attemptNumber": 1,
+        "usage": {
+          "promptTokens": 97091,
+          "completionTokens": 11010,
+          "reasoningTokens": 2848,
+          "totalTokens": 108101
+        }
+      },
+      "notes": "单次调用成功；严格本地门禁核对 1017000 ms 时长、证据引用、对象结构与代码 verification 后通过；人工代码/OCR QA 已完成。"
+    },
+    {
+      "kind": "understanding",
+      "attemptId": "04-02-understanding-003",
+      "lessonId": "04-02",
+      "outcome": "accepted",
+      "eligibleForSynthesis": true,
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "createdAt": "2026-07-29T11:39:05.000Z",
+      "requestId": "af67c0a97a8f4112a336657b3bbe5fbb",
+      "inputs": [
+        "work/algorithm-interview-course/incoming/4-2 map的使用 Intersection of Two Arrays II_慕课网.mp4",
+        "work/algorithm-interview-course/prompts/retries/04-02-video-evidence-v1.4-attempt-3.md",
+        "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json"
+      ],
+      "outputs": [
+        "work/algorithm-interview-course/compressed/04-02-balanced.mp4",
+        "outputs/algorithm-interview-course/understanding/raw/04-02.json",
+        "outputs/algorithm-interview-course/understanding/raw/04-02.json.response.json",
+        "outputs/algorithm-interview-course/understanding/normalized/04-02.json"
+      ],
+      "parameters": {
+        "baseUrl": "https://zenmux.dev/api/v1",
+        "promptVersion": "video-evidence-v1.4",
+        "promptSha256": "a33240a3246706f67bf3b999827743d8cc760c799523b0b6d12fd9a6816d47df",
+        "responseFormat": "json_object",
+        "compression": "balanced",
+        "compressedBytes": 14677456,
+        "compressedSha256": "43b858be7a53fca27a349dc5a797c799a5120a98817158c4b087129bac750959",
+        "sourceSha256": "6931eccf2b0e27082f973383b8b52de9ed7e11d748532ef4aa7f53a7efba92ab",
+        "maxLocalMb": 50,
+        "attemptNumber": 3,
+        "usage": {
+          "promptTokens": 76107,
+          "completionTokens": 11325,
+          "reasoningTokens": 5928,
+          "totalTokens": 87432
+        }
+      },
+      "notes": "单次调用成功；严格本地门禁核对 785960 ms 时长、证据引用、对象结构与代码 verification 后通过；人工代码/OCR QA 已完成。"
+    },
+    {
+      "kind": "understanding",
+      "attemptId": "04-05-understanding-001",
+      "lessonId": "04-05",
+      "outcome": "accepted",
+      "eligibleForSynthesis": true,
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "createdAt": "2026-07-29T11:40:42.000Z",
+      "requestId": "77ceadf1295e434ebb265d603e3bfb3f",
+      "inputs": [
+        "work/algorithm-interview-course/incoming/4-5 灵活选择键值 4Sum II_慕课网.mp4",
+        "work/algorithm-interview-course/prompts/04-05-video-evidence-v1.4.md",
+        "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json"
+      ],
+      "outputs": [
+        "work/algorithm-interview-course/compressed/04-05-balanced.mp4",
+        "outputs/algorithm-interview-course/understanding/raw/04-05.json",
+        "outputs/algorithm-interview-course/understanding/raw/04-05.json.response.json",
+        "outputs/algorithm-interview-course/understanding/normalized/04-05.json"
+      ],
+      "parameters": {
+        "baseUrl": "https://zenmux.dev/api/v1",
+        "promptVersion": "video-evidence-v1.4",
+        "promptSha256": "f5e23c99fcf8149d41d595e39399ac8c81e93833679eb9b34723011b995c7d56",
+        "responseFormat": "json_object",
+        "compression": "balanced",
+        "compressedBytes": 11861546,
+        "compressedSha256": "968de562458a1a23d36ff9d56fafe24bfbf2743dcfb3745a4eb378a5c2f88149",
+        "sourceSha256": "9c4d7fda009b2d0652e2c0b554c0ce60926dec108896ac0292e68a0dd965c0bf",
+        "maxLocalMb": 50,
+        "attemptNumber": 1,
+        "usage": {
+          "promptTokens": 77843,
+          "completionTokens": 9880,
+          "reasoningTokens": 3879,
+          "totalTokens": 87723
+        }
+      },
+      "notes": "单次调用成功；严格本地门禁核对 805200 ms 时长、证据引用、对象结构与代码 verification 后通过。人工 QA 按幻灯片公式将模型摘要中的数量级换算笔误 `500^4 = 6250 亿` 校正为 `62,500,000,000 = 625 亿`；屏幕代码仍为 not_run。"
+    },
+    {
+      "kind": "understanding",
+      "attemptId": "04-06-understanding-001",
+      "lessonId": "04-06",
+      "outcome": "accepted",
+      "eligibleForSynthesis": true,
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "createdAt": "2026-07-29T11:41:37.000Z",
+      "requestId": "99d230793e1b4c4eb9966886b7773bd9",
+      "inputs": [
+        "work/algorithm-interview-course/incoming/4-6 灵活选择键值 Number of Boomerangs_慕课网.mp4",
+        "work/algorithm-interview-course/prompts/04-06-video-evidence-v1.4.md",
+        "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json"
+      ],
+      "outputs": [
+        "work/algorithm-interview-course/compressed/04-06-balanced.mp4",
+        "outputs/algorithm-interview-course/understanding/raw/04-06.json",
+        "outputs/algorithm-interview-course/understanding/raw/04-06.json.response.json",
+        "outputs/algorithm-interview-course/understanding/normalized/04-06.json"
+      ],
+      "parameters": {
+        "baseUrl": "https://zenmux.dev/api/v1",
+        "promptVersion": "video-evidence-v1.4",
+        "promptSha256": "7048a5be55f46595b4b63f0a46f62a27ff92e14817c42eeb476a496d156d4437",
+        "responseFormat": "json_object",
+        "compression": "balanced",
+        "compressedBytes": 14659233,
+        "compressedSha256": "6fbd939ebaab0abc31944c74a59de31cc79215004d067e46488a274aa7500eee",
+        "sourceSha256": "957382db6f08c3333a2fe92c50e58143514616a2cb68577af822c8cf6cc4d49d",
+        "maxLocalMb": 50,
+        "attemptNumber": 1,
+        "usage": {
+          "promptTokens": 85107,
+          "completionTokens": 9433,
+          "reasoningTokens": 4315,
+          "totalTokens": 94540
+        }
+      },
+      "notes": "单次调用成功；严格本地门禁核对 885600 ms 时长、证据引用、对象结构与代码 verification 后通过。人工逐帧 QA 发现模型代码转录漏掉视频中的 `if (iter->second >= 2)`，已在 normalized artifact 中把代码完整性降为 partial 并记录 OCR 不确定项；屏幕代码仍为 not_run。"
+    },
+    {
+      "kind": "understanding",
+      "attemptId": "04-07-understanding-001",
+      "lessonId": "04-07",
+      "outcome": "accepted",
+      "eligibleForSynthesis": true,
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "createdAt": "2026-07-29T11:44:39.000Z",
+      "requestId": "098d5a5ffd224ee6bab9360fc8f1f9e8",
+      "inputs": [
+        "work/algorithm-interview-course/incoming/4-7 查找表和滑动窗口 Contain Duplicate II_慕课网.mp4",
+        "work/algorithm-interview-course/prompts/04-07-video-evidence-v1.4.md",
+        "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json"
+      ],
+      "outputs": [
+        "work/algorithm-interview-course/compressed/04-07-balanced.mp4",
+        "outputs/algorithm-interview-course/understanding/raw/04-07.json",
+        "outputs/algorithm-interview-course/understanding/raw/04-07.json.response.json",
+        "outputs/algorithm-interview-course/understanding/normalized/04-07.json"
+      ],
+      "parameters": {
+        "baseUrl": "https://zenmux.dev/api/v1",
+        "promptVersion": "video-evidence-v1.4",
+        "promptSha256": "b44db6ff89b25a237d02e80de1c53d26350434a0972aaa8cac82923cae85e268",
+        "responseFormat": "json_object",
+        "compression": "balanced",
+        "compressedBytes": 9876170,
+        "compressedSha256": "30ab897d237cc1ae684d0df00b88cd5638b6de08bb5588584832e51fe584ef8a",
+        "sourceSha256": "0ba6125ca5591e88dfbe26c987ff98705870669632a44769f6123edf7a4f5430",
+        "maxLocalMb": 50,
+        "attemptNumber": 1,
+        "usage": {
+          "promptTokens": 66483,
+          "completionTokens": 6723,
+          "reasoningTokens": 1364,
+          "totalTokens": 73206
+        }
+      },
+      "notes": "单次调用成功；严格本地门禁核对 680484 ms 时长、证据引用、对象结构与代码 verification 后通过；人工代码/OCR QA 已完成。"
     }
   ]
 }
