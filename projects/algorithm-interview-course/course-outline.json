@@ -188,7 +188,7 @@
       "id": "03",
       "number": 3,
       "title": "数组中的问题其实最常见",
-      "knownDurationSeconds": 7689,
+      "knownDurationSeconds": 7700.52,
       "lessons": [
         {
           "id": "03-01",
@@ -199,7 +199,9 @@
           "titleNormalized": "从二分查找法看如何写出正确的程序",
           "durationText": "15:27",
           "durationSeconds": 927,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 930.52,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-03-01"]
         },
         {
           "id": "03-02",
@@ -210,7 +212,9 @@
           "titleNormalized": "改变变量定义，依然可以写出正确的算法",
           "durationText": "12:06",
           "durationSeconds": 726,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 726.48,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-03-02"]
         },
         {
           "id": "03-03",
@@ -221,7 +225,9 @@
           "titleNormalized": "在 LeetCode 上解决第一个问题 Move Zeros",
           "durationText": "13:27",
           "durationSeconds": 807,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 807.52,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-03-03"]
         },
         {
           "id": "03-04",
@@ -232,7 +238,9 @@
           "titleNormalized": "即使简单的问题，也有很多优化的思路",
           "durationText": "15:30",
           "durationSeconds": 930,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 930.48,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-03-04"]
         },
         {
           "id": "03-05",
@@ -243,7 +251,9 @@
           "titleNormalized": "三路快排 partition 思路的应用 Sort Color",
           "durationText": "22:26",
           "durationSeconds": 1346,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1346.64,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-03-05"]
         },
         {
           "id": "03-06",
@@ -254,7 +264,9 @@
           "titleNormalized": "对撞指针 Two Sum II - Input Array is Sorted",
           "durationText": "19:44",
           "durationSeconds": 1184,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1184.28,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-03-06"]
         },
         {
           "id": "03-07",
@@ -265,7 +277,9 @@
           "titleNormalized": "滑动窗口 Minimum Size Subarray Sum",
           "durationText": "14:09",
           "durationSeconds": 849,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 849.92,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-03-07"]
         },
         {
           "id": "03-08",
@@ -276,7 +290,9 @@
           "titleNormalized": "在滑动窗口中做记录 Longest Substring Without Repeating Characters",
           "durationText": "15:20",
           "durationSeconds": 920,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 924.68,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-03-08"]
         }
       ]
     },

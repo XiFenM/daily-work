@@ -2,17 +2,17 @@
 
 ## 当前状态
 
-课程全部素材已盘点并与 70 个课次完成编号映射；第一、二章已经完成视频理解、正式笔记、章节综述和关系校准。
+课程全部素材已盘点并与 70 个课次完成编号映射；第一至三章已经完成视频理解、正式笔记、章节综述和关系校准。
 
 - 课程规模：11 章、70 个课次
 - 素材：67 个视频、3 个 Markdown 文本，另有 1 个已忽略的 `.DS_Store`
 - 课次映射：70/70
-- 已完成详细单课笔记：11/70
-- 已完成章节综述：2/11
-- 已完成视频理解：11/67
+- 已完成详细单课笔记：19/70
+- 已完成章节综述：3/11
+- 已完成视频理解：19/67
 - 第一章实测时长：1:05:54.88
 - 第二章实测时长：1:47:08.537
-- 关系审核：14 条 `verified`；尚未处理到目标课次的候选继续保持 `provisional`
+- 第三章实测时长：2:08:20.520
 
 ## 第一章
 
@@ -41,6 +41,22 @@
 
 `定义规模 → 选基本操作 → 计数 → 化简 → 声明情形 → 补空间 → 核对规模 → 必要时实测`
 
+## 第三章
+
+- [章节综述：数组中的问题其实最常见](chapters/03.md)
+- [03-01 从二分查找法看如何写出正确的程序](lessons/03-01.md)
+- [03-02 改变变量定义，依然可以写出正确的算法](lessons/03-02.md)
+- [03-03 在 LeetCode 上解决第一个问题 Move Zeros](lessons/03-03.md)
+- [03-04 即使简单的问题，也有很多优化的思路](lessons/03-04.md)
+- [03-05 三路快排 partition 思路的应用 Sort Color](lessons/03-05.md)
+- [03-06 对撞指针 Two Sum II - Input Array is Sorted](lessons/03-06.md)
+- [03-07 滑动窗口 Minimum Size Subarray Sum](lessons/03-07.md)
+- [03-08 在滑动窗口中做记录 Longest Substring Without Repeating Characters](lessons/03-08.md)
+
+第三章的统一解题主线是：
+
+`定义变量/区间语义 → 写出状态不变量 → 从暴力基线识别重复工作 → 用 partition、双指针或滑动窗口缩小未知区域 → 维护答案与边界`
+
 ## 导航
 
 - [课程目录](../course-outline.md)
@@ -49,6 +65,6 @@
 - [概念词表](concepts.json)
 - [单课笔记模板](lessons/_template.md)
 - [章节综述模板](chapters/_template.md)
-- [当前视频证据 Prompt](../prompts/video-evidence-v1.3.template.md)
+- [当前视频证据 Prompt](../prompts/video-evidence-v1.4.template.md)
 - [生成与调用清单](../manifest.json)
 - [处理进度](../progress.json)

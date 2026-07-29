@@ -36,7 +36,7 @@ outputs/algorithm-interview-course/
 课程按章节顺序推进；每一章扩大调用前，先从本章选择能暴露新结构风险的代表课完成校准。跨课程预先识别的三个校准点是：
 
 - `01-03`：方法论型讲解，已在第一章完成；
-- `03-01`：代码、边界和不变量，到达第三章时校准；
+- `03-01`：代码、边界和不变量，已在第三章完成；
 - `09-05`：长时长、公式与状态转移，到达第九章时校准。
 
 不需要为了按章处理而提前调用未来章节；例如第二章先用实验、公式和多对象最密集的 `02-04` 校准 v1.3 证据结构，再处理本章其余课次。如果上传文件不完整，则从已到位素材中选最接近的代表课。校准项包括：
@@ -52,7 +52,7 @@ outputs/algorithm-interview-course/
 
 ## 阶段 3：视频证据抽取
 
-1. 从 `prompts/video-evidence-v1.3.template.md` 渲染当前课次专用 Prompt。v1.2 在 v1.1 基础上增加多复杂度结论、公式和实验结构；v1.3 进一步收紧时间上限、对象结构、正确性方法和关系候选字段。历史调用继续保留原 Prompt 与哈希。
+1. 从 `prompts/video-evidence-v1.4.template.md` 渲染当前课次专用 Prompt。v1.2 在 v1.1 基础上增加多复杂度结论、公式和实验结构；v1.3 进一步收紧时间上限、对象结构、正确性方法和关系候选字段；v1.4 为代码密集课程增加解法—代码—状态模型引用、区间/指针/窗口语义和分阶段正确性义务。历史调用继续保留原 Prompt 与哈希，渲染脚本仍支持显式选择 v1.3。
 2. 本地视频默认先尝试 `balanced` 压缩，副本写到明确的课次路径；仍超过 50 MB 时再评估 `strong`、分段或受控 URL。
 3. 原片永不覆盖；已有压缩副本先校验哈希和参数，不静默重建。
 4. 调用示例：
@@ -60,7 +60,7 @@ outputs/algorithm-interview-course/
 ```bash
 ZENMUX_BASE_URL="https://zenmux.dev/api/v1" pnpm zenmux understand \
   --input "work/algorithm-interview-course/incoming/3-1 从二分查找法看如何写出正确的程序_慕课网.mp4" \
-  --prompt-file "work/algorithm-interview-course/prompts/03-01-video-evidence-v1.3.md" \
+  --prompt-file "work/algorithm-interview-course/prompts/03-01-video-evidence-v1.4.md" \
   --model "<live-video-capable-model>" \
   --extra-file "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json" \
   --compress balanced \
@@ -73,8 +73,8 @@ ZENMUX_BASE_URL="https://zenmux.dev/api/v1" pnpm zenmux understand \
 `configs/zenmux-json-object-extra.json` 要求模型返回 JSON object，但它只保证 JSON 语法，不代替本地 schema 门禁。第二章校准时，`google/gemini-3.6-flash` 对完整课程 schema 的 `json_schema` 请求因嵌套深度和受支持关键字限制返回 HTTP 400，因此当前组合使用：
 
 1. `response_format: {"type": "json_object"}` 约束输出为 JSON；
-2. v1.3 Prompt 明确所有必填对象、枚举和视频时长上限；
-3. `normalize-lesson-evidence.mjs` 严格检查课次 ID、时长、证据引用、时间边界、对象形状和正确性方法；
+2. v1.4 Prompt 明确所有必填对象、枚举、视频时长上限，以及解法、代码和状态模型的引用关系；
+3. `normalize-lesson-evidence.mjs` 严格检查课次 ID、时长、证据引用、时间边界、对象形状、跨对象引用和正确性方法；v1.4 的循环不变量还必须具有初始化、保持、终止和后置条件证据；
 4. `validate-project.mjs` 对 manifest、规范化证据、笔记和关系图做跨文件对账。
 
 `build-response-format.mjs` 只用于评估某个供应商是否能无损表达 canonical schema；遇到供应商不支持的多类型 union 时会明确失败，不会静默选择其中一种类型生成有损 schema。
@@ -90,10 +90,12 @@ node projects/algorithm-interview-course/scripts/normalize-lesson-evidence.mjs \
   --chapter "03" \
   --asset-id "asset:video-03-01" \
   --duration "<ffprobe-seconds>" \
-  --prompt-version "video-evidence-v1.3"
+  --prompt-version "video-evidence-v1.4"
 ```
 
 每一次尝试都必须写入 `manifest.json` 的 `attempts`，包括 HTTP、网络和本地门禁失败；得到模型响应的尝试同时写入 `generations` 并标记 `accepted` 或 `rejected`。成功课次可使用 `register-understanding.mjs` 登记请求 ID、模型、输入输出、Prompt/压缩哈希和 token 用量。CLI 本身不会自动修改 manifest。
+
+`register-understanding.mjs` 只接受已完成人工 QA 的结果：人工核对代码关键 token、区间/指针/窗口语义和关键时间戳后，必须显式传入 `--qa-reviewed true`；省略该参数或传入其他值都会拒绝注册，不会写入 manifest/progress。项目验收还会要求所有已接受的 v1.4 尝试都具有 `validation.qaStatus: "completed"`，并要求每份状态为 `lessonNote: "completed"` 的笔记同时具有 `qa: "completed"`。
 
 ## 阶段 4：文本证据与单课笔记
 
@@ -130,12 +132,12 @@ node projects/algorithm-interview-course/scripts/normalize-lesson-evidence.mjs \
 
 ## 当前停止点
 
-课程素材已经到位并完成全量编号映射。第一、二章共 11 节课已走完阶段 1–6 的章节范围流程：
+课程素材已经到位并完成全量编号映射。第一至三章共 19 节课已走完阶段 1–6 的章节范围流程：
 
-- 11 个视频完成 SHA-256、FFprobe、画面抽样和压缩副本校验；
-- 11 节完成 ZenMux 视频理解、规范化证据和本地门禁；
-- 11 份单课笔记与 2 份章节综述已完成；
-- 概念词表和关系图已完成第二章校准；
+- 19 个视频完成 SHA-256、FFprobe、画面抽样和压缩副本校验；
+- 19 节完成 ZenMux 视频理解、规范化证据和本地门禁；
+- 19 份单课笔记与 3 份章节综述已完成；
+- 概念词表和关系图已完成第三章校准；
 - 原始响应、失败尝试、规范化证据、请求 ID、Prompt 和压缩副本均已审计到 `manifest.json`。
 
-第二章共发起 15 次理解尝试：7 个课次最终各有 1 个可用结果；`02-04` 首次生成因时间戳越界和对象结构错误被拒绝，校准期间另有 5 次 HTTP 400 与 2 次网络失败。失败尝试没有被静默覆盖。下一步从第三章 `03-01` 开始。
+第三章共发起 8 次到达服务端的理解请求，8 个课次均一次取得可用结果。v1.4 门禁要求完整 JSON Schema、解法—代码—状态模型引用、证据时间边界和人工代码/OCR QA 同时通过，未通过人工 QA 的结果不能登记为可综合。下一步从第四章 `04-01` 开始。

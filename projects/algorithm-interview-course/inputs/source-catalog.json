@@ -14,7 +14,7 @@
       "duplicateLessonIds": [],
       "missingLessonIds": []
     },
-    "catalogScope": "chapters-01-02"
+    "catalogScope": "chapters-01-03"
   },
   "items": [
     {
@@ -357,6 +357,254 @@
       },
       "status": "mapped",
       "notes": "目录标称 11:25；实际 11:29.888，相差约 4.888 秒，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-03-01",
+      "kind": "video",
+      "originalFilename": "3-1 从二分查找法看如何写出正确的程序_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/3-1 从二分查找法看如何写出正确的程序_慕课网.mp4",
+      "sha256": "845c50b11e9223eb4c2ebc6047d3d21785762feaa60cded84cc2169e80be1d62",
+      "bytes": 111396599,
+      "lessonIds": ["03-01"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 930.52,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 15:27；实际 15:30.520，相差约 3.520 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-03-02",
+      "kind": "video",
+      "originalFilename": "3-2 改变变量定义，依然可以写出正确的算法_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/3-2 改变变量定义，依然可以写出正确的算法_慕课网.mp4",
+      "sha256": "4a684c1b5ca492926de43b566410e6142dac2184b29499ad2ef3fba900037176",
+      "bytes": 59465250,
+      "lessonIds": ["03-02"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 726.48,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 12:06，与实际 12:06.480 相符。12 帧联系表检查通过。"
+    },
+    {
+      "assetId": "asset:video-03-03",
+      "kind": "video",
+      "originalFilename": "3-3 在LeetCode上解决第一个问题 Move Zeros_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/3-3 在LeetCode上解决第一个问题 Move Zeros_慕课网.mp4",
+      "sha256": "baec73a0af92e57451c96511ecec6d4434193b1cc4dbb933dbecf9769bad719f",
+      "bytes": 76744479,
+      "lessonIds": ["03-03"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 807.52,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 13:27，与实际 13:27.520 相符。12 帧联系表检查通过。"
+    },
+    {
+      "assetId": "asset:video-03-04",
+      "kind": "video",
+      "originalFilename": "3-4 即使简单的问题，也有很多优化的思路_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/3-4 即使简单的问题，也有很多优化的思路_慕课网.mp4",
+      "sha256": "ab4bc7a8f78550d3303c497862a4888c4c61ffa3908366727352bf5babd133aa",
+      "bytes": 87393677,
+      "lessonIds": ["03-04"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 930.48,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 15:30，与实际 15:30.480 相符。12 帧联系表检查通过。"
+    },
+    {
+      "assetId": "asset:video-03-05",
+      "kind": "video",
+      "originalFilename": "3-5 三路快排partition思路的应用 Sort Color_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/3-5 三路快排partition思路的应用 Sort Color_慕课网.mp4",
+      "sha256": "1f6f689fbe6ddff238e4f47fff256d84e2b2d3eacb272008e412131677ebd960",
+      "bytes": 124208700,
+      "lessonIds": ["03-05"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1346.64,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 22:26，与实际 22:26.640 相符。12 帧联系表检查通过。"
+    },
+    {
+      "assetId": "asset:video-03-06",
+      "kind": "video",
+      "originalFilename": "3-6 对撞指针 Two Sum II - Input Array is Sorted_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/3-6 对撞指针 Two Sum II - Input Array is Sorted_慕课网.mp4",
+      "sha256": "372345326ce2d74253b08737fe902e9661c208d6739229ec22758b976203f1a1",
+      "bytes": 111331953,
+      "lessonIds": ["03-06"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1184.28,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 19:44，与实际 19:44.280 相符。12 帧联系表检查通过。"
+    },
+    {
+      "assetId": "asset:video-03-07",
+      "kind": "video",
+      "originalFilename": "3-7 滑动窗口 Minimum Size Subarray Sum_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/3-7 滑动窗口 Minimum Size Subarray Sum_慕课网.mp4",
+      "sha256": "f6bf476287f7a5aaf8652a02e33463b492e090f17d487b606b4a4fd636f20b5d",
+      "bytes": 84282965,
+      "lessonIds": ["03-07"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 849.92,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 14:09，与实际 14:09.920 相符。12 帧联系表检查通过。"
+    },
+    {
+      "assetId": "asset:video-03-08",
+      "kind": "video",
+      "originalFilename": "3-8 在滑动窗口中做记录 Longest Substring Without Repeating Characters_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/3-8 在滑动窗口中做记录 Longest Substring Without Repeating Characters_慕课网.mp4",
+      "sha256": "992f6c586de315a1b3ec6a1fc9d012410bb8645c3b1791eba8d2ec80383cbce5",
+      "bytes": 87172256,
+      "lessonIds": ["03-08"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 924.68,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 15:20；实际 15:24.680，相差约 4.680 秒。12 帧联系表检查通过，课次映射无歧义。"
     }
   ],
   "itemShape": {

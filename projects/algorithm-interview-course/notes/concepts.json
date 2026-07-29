@@ -9,13 +9,24 @@
       "aliases": ["思考路径", "思考方向", "解题思路"],
       "definition": "在面试中把约束澄清、候选方案、权衡、优化方向和卡点清楚表达出来，使面试官能够跟随问题解决过程。",
       "status": "verified",
-      "lessonRefs": ["01-01", "01-04"],
+      "lessonRefs": ["01-01", "01-04", "03-04", "03-05", "03-06", "03-07"],
       "evidenceRefs": [
         "01-01:ev-002",
         "01-01:ev-004",
         "01-01:ev-005",
         "01-04:ev-003",
-        "01-04:ev-005"
+        "01-04:ev-005",
+        "03-04:ev-006",
+        "03-04:ev-008",
+        "03-05:ev-001",
+        "03-05:ev-004",
+        "03-06:ev-001",
+        "03-06:ev-002",
+        "03-06:ev-003",
+        "03-06:ev-004",
+        "03-07:ev-003",
+        "03-07:ev-004",
+        "03-07:ev-005"
       ]
     },
     {
@@ -26,8 +37,24 @@
       "aliases": ["从条件读取暗示", "约束驱动选型"],
       "definition": "在选择算法前确认数据分布、规模、顺序性、空间、稳定性、存储结构和运行环境等会改变方案的条件。",
       "status": "verified",
-      "lessonRefs": ["01-01", "01-04"],
-      "evidenceRefs": ["01-01:ev-004", "01-04:ev-002"]
+      "lessonRefs": [
+        "01-01",
+        "01-04",
+        "03-03",
+        "03-04",
+        "03-06",
+        "03-07",
+        "03-08"
+      ],
+      "evidenceRefs": [
+        "01-01:ev-004",
+        "01-04:ev-002",
+        "03-03:ev-002",
+        "03-04:ev-008",
+        "03-06:ev-001",
+        "03-07:ev-003",
+        "03-08:ev-001"
+      ]
     },
     {
       "id": "concept:interview-scope",
@@ -101,10 +128,18 @@
       "nameZh": "在线判题系统",
       "nameEn": "Online Judge",
       "aliases": ["OJ"],
-      "definition": "自动运行和判断提交代码的平台；课程强调练习平台的题目类型应与算法面试目标匹配。",
+      "definition": "自动运行和判断提交代码的平台；课程先按面试题相关性推荐 LeetCode，随后演示题目查找、语言模板、运行、提交与 Accepted 结果。平台测试是经验验证，不替代复杂度和约束分析。",
       "status": "verified",
-      "lessonRefs": ["01-03"],
-      "evidenceRefs": ["01-03:ev-007", "01-03:ev-008", "01-03:ev-009"]
+      "lessonRefs": ["01-03", "03-03"],
+      "evidenceRefs": [
+        "01-03:ev-007",
+        "01-03:ev-008",
+        "01-03:ev-009",
+        "03-03:ev-001",
+        "03-03:ev-003",
+        "03-03:ev-007",
+        "03-03:ev-008"
+      ]
     },
     {
       "id": "pattern:learning-practice-loop",
@@ -125,8 +160,13 @@
       "aliases": ["暴力解法", "暴力法"],
       "definition": "先用能覆盖全部候选的直接方法建立正确、可分析的起点，再结合规模判断可行性并定位优化目标。",
       "status": "verified",
-      "lessonRefs": ["01-04"],
-      "evidenceRefs": ["01-04:ev-003", "01-04:ev-004"]
+      "lessonRefs": ["01-04", "03-06", "03-07"],
+      "evidenceRefs": [
+        "01-04:ev-003",
+        "01-04:ev-004",
+        "03-06:ev-002",
+        "03-07:ev-004"
+      ]
     },
     {
       "id": "pattern:space-time-tradeoff",
@@ -136,8 +176,15 @@
       "aliases": ["空间和时间的交换"],
       "definition": "使用额外存储记录中间信息，以减少重复计算；是否适用取决于题目的空间约束。",
       "status": "verified",
-      "lessonRefs": ["01-04"],
-      "evidenceRefs": ["01-04:ev-002", "01-04:ev-005"]
+      "lessonRefs": ["01-04", "03-03", "03-04"],
+      "evidenceRefs": [
+        "01-04:ev-002",
+        "01-04:ev-005",
+        "03-03:ev-005",
+        "03-03:ev-010",
+        "03-04:ev-001",
+        "03-04:ev-002"
+      ]
     },
     {
       "id": "pattern:bottleneck-optimization",
@@ -147,19 +194,60 @@
       "aliases": ["在瓶颈处寻找答案"],
       "definition": "先识别主导整体复杂度的步骤，再集中减少该步骤的重复工作或替换其算法与数据结构。",
       "status": "verified",
-      "lessonRefs": ["01-04"],
-      "evidenceRefs": ["01-04:ev-005"]
+      "lessonRefs": ["01-04", "03-04", "03-05", "03-06", "03-07", "03-08"],
+      "evidenceRefs": [
+        "01-04:ev-005",
+        "03-04:ev-003",
+        "03-04:ev-004",
+        "03-04:ev-005",
+        "03-05:ev-004",
+        "03-05:ev-005",
+        "03-06:ev-002",
+        "03-06:ev-003",
+        "03-06:ev-004",
+        "03-07:ev-004",
+        "03-07:ev-005",
+        "03-08:ev-002",
+        "03-08:ev-003"
+      ]
     },
     {
       "id": "interview-skill:boundary-aware-coding",
       "type": "interview_skill",
       "nameZh": "边界意识与代码质量",
       "nameEn": "Boundary-aware coding",
-      "aliases": ["极端条件判断", "代码规范"],
-      "definition": "在实现中主动处理空输入、特殊数量、空指针等边界，并保持变量语义、模块化和复用性。",
+      "aliases": ["极端条件判断", "代码规范", "边界条件", "索引边界"],
+      "definition": "在实现中主动处理空输入、特殊数量、空指针、索引基数和区间端点等边界，并保持变量语义、模块化和复用性。",
       "status": "verified",
-      "lessonRefs": ["01-01", "01-04"],
-      "evidenceRefs": ["01-01:ev-005", "01-04:ev-006"]
+      "lessonRefs": [
+        "01-01",
+        "01-04",
+        "03-01",
+        "03-02",
+        "03-04",
+        "03-05",
+        "03-06",
+        "03-07",
+        "03-08"
+      ],
+      "evidenceRefs": [
+        "01-01:ev-005",
+        "01-04:ev-006",
+        "03-01:ev-005",
+        "03-02:ev-002",
+        "03-02:ev-005",
+        "03-04:ev-005",
+        "03-04:ev-008",
+        "03-05:ev-003",
+        "03-05:ev-007",
+        "03-06:ev-001",
+        "03-06:ev-005",
+        "03-06:ev-007",
+        "03-07:ev-003",
+        "03-07:ev-006",
+        "03-08:ev-001",
+        "03-08:ev-003"
+      ]
     },
     {
       "id": "interview-skill:whiteboard-coding",
@@ -178,10 +266,15 @@
       "nameZh": "无重复字符的最长子串",
       "nameEn": "Longest Substring Without Repeating Characters",
       "aliases": ["LeetCode 3"],
-      "definition": "第一章用于说明暴力基线与规模判断的示例题；完整优化解法将在后续课次建立。",
+      "definition": "寻找字符串中不含重复字符的最长连续子串；01-04 用 O(n³) 暴力法说明规模与优化起点，03-08 使用滑动窗口和 freq[256] 完成状态记录与线性扫描。",
       "status": "verified",
-      "lessonRefs": ["01-04"],
-      "evidenceRefs": ["01-04:ev-004"]
+      "lessonRefs": ["01-04", "03-08"],
+      "evidenceRefs": [
+        "01-04:ev-004",
+        "03-08:ev-001",
+        "03-08:ev-002",
+        "03-08:ev-003"
+      ]
     },
     {
       "id": "concept:big-o-notation",
@@ -248,8 +341,16 @@
       "aliases": ["空间复杂度", "调用栈空间"],
       "definition": "除输入本身外，算法申请的数组、常数变量以及递归调用栈都会形成随数据规模变化的额外空间成本。",
       "status": "verified",
-      "lessonRefs": ["02-02"],
-      "evidenceRefs": ["02-02:ev-004", "02-02:ev-005"]
+      "lessonRefs": ["02-02", "03-03", "03-04", "03-05", "03-06", "03-07"],
+      "evidenceRefs": [
+        "02-02:ev-004",
+        "02-02:ev-005",
+        "03-03:ev-010",
+        "03-04:ev-002",
+        "03-05:ev-004",
+        "03-06:ev-006",
+        "03-07:ev-007"
+      ]
     },
     {
       "id": "pattern:complexity-from-code-structure",
@@ -259,7 +360,7 @@
       "aliases": ["简单复杂度分析"],
       "definition": "先确定基本操作及其执行次数怎样随输入规模变化，再处理顺序相加、嵌套相乘、固定次数循环、按比例缩小和平方根边界等常见结构。",
       "status": "verified",
-      "lessonRefs": ["02-03"],
+      "lessonRefs": ["02-03", "03-03", "03-04", "03-05", "03-06", "03-07"],
       "evidenceRefs": [
         "02-03:ev-001",
         "02-03:ev-002",
@@ -269,7 +370,16 @@
         "02-03:ev-006",
         "02-03:ev-007",
         "02-03:ev-008",
-        "02-03:ev-009"
+        "02-03:ev-009",
+        "03-03:ev-009",
+        "03-03:ev-010",
+        "03-04:ev-002",
+        "03-05:ev-004",
+        "03-06:ev-002",
+        "03-06:ev-003",
+        "03-06:ev-006",
+        "03-07:ev-004",
+        "03-07:ev-007"
       ]
     },
     {
@@ -376,6 +486,227 @@
       "status": "verified",
       "lessonRefs": ["02-07"],
       "evidenceRefs": ["02-07:ev-004", "02-07:ev-005"]
+    },
+    {
+      "id": "algorithm:binary-search",
+      "type": "algorithm",
+      "nameZh": "二分查找",
+      "nameEn": "Binary search",
+      "aliases": ["二分搜索", "Binary Search"],
+      "definition": "在有序数组的候选区间中比较中点，并依据大小关系每轮排除约一半位置；闭区间 [l,r] 与半开区间 [l,r) 都可正确实现，但初始化、循环条件和更新必须服从同一套区间语义。",
+      "status": "verified",
+      "lessonRefs": ["02-03", "03-01", "03-02", "03-06"],
+      "evidenceRefs": [
+        "02-03:ev-005",
+        "03-01:ev-004",
+        "03-01:ev-005",
+        "03-02:ev-001",
+        "03-02:ev-002",
+        "03-06:ev-003"
+      ]
+    },
+    {
+      "id": "concept:loop-invariant-interval-semantics",
+      "type": "concept",
+      "nameZh": "循环不变量与区间语义",
+      "nameEn": "Loop invariant and interval semantics",
+      "aliases": ["循环不变量", "变量定义", "候选区间", "已处理区间"],
+      "definition": "先明确索引、端点和各数组区域表示什么，再保证初始化、循环条件、状态转移与终止时该逻辑声明始终成立；它既用于二分查找，也用于原地压缩、partition、对撞指针和滑动窗口。",
+      "status": "verified",
+      "lessonRefs": [
+        "03-01",
+        "03-02",
+        "03-04",
+        "03-05",
+        "03-06",
+        "03-07",
+        "03-08"
+      ],
+      "evidenceRefs": [
+        "03-01:ev-005",
+        "03-02:ev-001",
+        "03-02:ev-002",
+        "03-02:ev-006",
+        "03-04:ev-001",
+        "03-04:ev-002",
+        "03-04:ev-005",
+        "03-05:ev-006",
+        "03-05:ev-007",
+        "03-06:ev-004",
+        "03-06:ev-005",
+        "03-07:ev-005",
+        "03-07:ev-006",
+        "03-08:ev-002",
+        "03-08:ev-003"
+      ]
+    },
+    {
+      "id": "pattern:in-place-array-compaction",
+      "type": "pattern",
+      "nameZh": "原地数组压缩",
+      "nameEn": "In-place array compaction",
+      "aliases": ["原地移动", "已处理前缀", "Move Zeros 双指针"],
+      "definition": "用索引 k 维护原数组中的已处理有效前缀，把符合条件的元素按顺序覆写或交换到前部，并在不使用线性辅助容器的前提下完成稳定压缩或尾部整理。",
+      "status": "verified",
+      "lessonRefs": ["03-03", "03-04"],
+      "evidenceRefs": [
+        "03-03:ev-010",
+        "03-04:ev-001",
+        "03-04:ev-002",
+        "03-04:ev-003",
+        "03-04:ev-004",
+        "03-04:ev-005"
+      ]
+    },
+    {
+      "id": "pattern:array-partition",
+      "type": "pattern",
+      "nameZh": "数组区间划分",
+      "nameEn": "Array partition",
+      "aliases": ["Partition", "区域划分", "多区域指针"],
+      "definition": "使用一个或多个边界把数组划分为语义不同的已处理区、待处理区和目标区，并通过交换与边界移动持续维持各区域的不变量。",
+      "status": "verified",
+      "lessonRefs": ["03-04", "03-05", "03-06"],
+      "evidenceRefs": [
+        "03-04:ev-001",
+        "03-04:ev-003",
+        "03-04:ev-004",
+        "03-05:ev-005",
+        "03-05:ev-006",
+        "03-05:ev-007",
+        "03-06:ev-008"
+      ]
+    },
+    {
+      "id": "algorithm:three-way-partition",
+      "type": "algorithm",
+      "nameZh": "三路 partition",
+      "nameEn": "Three-way partition",
+      "aliases": ["三路快排 partition", "Quick Sort 3 Ways"],
+      "definition": "维护小于标定值、等于标定值、大于标定值和未处理区等区域；在 Sort Colors 中把 0、1、2 分别放入三个区域，用一次扫描完成归位。",
+      "status": "verified",
+      "lessonRefs": ["01-01", "03-05", "03-06"],
+      "evidenceRefs": [
+        "01-01:ev-004",
+        "03-05:ev-005",
+        "03-05:ev-006",
+        "03-05:ev-007",
+        "03-06:ev-008"
+      ]
+    },
+    {
+      "id": "pattern:colliding-pointers",
+      "type": "pattern",
+      "nameZh": "对撞指针",
+      "nameEn": "Colliding pointers",
+      "aliases": ["首尾双指针", "Two Pointers"],
+      "definition": "把两个指针放在有序序列或字符串两端，根据当前状态安全淘汰一个端点并向中间收缩；在 Two Sum II 中，和过小移动左端，和过大移动右端。",
+      "status": "verified",
+      "lessonRefs": ["03-06"],
+      "evidenceRefs": ["03-06:ev-004", "03-06:ev-005", "03-06:ev-008"]
+    },
+    {
+      "id": "pattern:sliding-window",
+      "type": "pattern",
+      "nameZh": "滑动窗口",
+      "nameEn": "Sliding window",
+      "aliases": ["双索引窗口", "Two Pointer window"],
+      "definition": "用左右边界维护连续区间及其增量状态；条件不足时扩张右边界，条件满足或约束被破坏时收缩左边界，使每个边界最多线性前进。",
+      "status": "verified",
+      "lessonRefs": ["03-07", "03-08"],
+      "evidenceRefs": [
+        "03-07:ev-001",
+        "03-07:ev-005",
+        "03-07:ev-006",
+        "03-08:ev-002",
+        "03-08:ev-003"
+      ]
+    },
+    {
+      "id": "data-structure:window-frequency-table",
+      "type": "data_structure",
+      "nameZh": "窗口频次表",
+      "nameEn": "Window frequency table",
+      "aliases": ["freq[256]", "字符频次数组", "窗口状态记录"],
+      "definition": "以字符编码为键记录当前窗口内每个字符出现次数；课程在 ASCII 假设下使用固定长度 freq[256]，从而常数时间判断新字符是否会造成重复。",
+      "status": "verified",
+      "lessonRefs": ["03-08"],
+      "evidenceRefs": ["03-08:ev-001", "03-08:ev-002", "03-08:ev-003"]
+    },
+    {
+      "id": "problem:leetcode-283",
+      "type": "problem",
+      "nameZh": "移动零",
+      "nameEn": "Move Zeroes",
+      "aliases": ["LeetCode 283", "Move Zeros", "Move Zeroes"],
+      "definition": "把数组中的零移到末尾并保持非零元素相对顺序；课程先用 O(n) 辅助向量建立基线，再以已处理前缀、覆写和交换把额外空间降为 O(1)。",
+      "status": "verified",
+      "lessonRefs": ["03-03", "03-04"],
+      "evidenceRefs": [
+        "03-03:ev-001",
+        "03-03:ev-002",
+        "03-03:ev-005",
+        "03-03:ev-010",
+        "03-04:ev-001",
+        "03-04:ev-002",
+        "03-04:ev-003",
+        "03-04:ev-004",
+        "03-04:ev-005"
+      ]
+    },
+    {
+      "id": "problem:leetcode-75",
+      "type": "problem",
+      "nameZh": "颜色分类",
+      "nameEn": "Sort Colors",
+      "aliases": ["LeetCode 75"],
+      "definition": "对只含 0、1、2 的数组原地排序；课程先给标准排序和计数排序，再把三路快排 partition 应用于一次扫描的三区域归位。",
+      "status": "verified",
+      "lessonRefs": ["03-05"],
+      "evidenceRefs": [
+        "03-05:ev-001",
+        "03-05:ev-002",
+        "03-05:ev-004",
+        "03-05:ev-005",
+        "03-05:ev-006",
+        "03-05:ev-007"
+      ]
+    },
+    {
+      "id": "problem:leetcode-167",
+      "type": "problem",
+      "nameZh": "两数之和 II：有序数组",
+      "nameEn": "Two Sum II - Input Array Is Sorted",
+      "aliases": ["LeetCode 167", "Two Sum II"],
+      "definition": "在有序数组中寻找和为 target 的两个不同位置并返回 1-based 索引；课程从 O(n²) 暴力，经 O(n log n) 二分，优化到 O(n) 对撞指针。",
+      "status": "verified",
+      "lessonRefs": ["03-06"],
+      "evidenceRefs": [
+        "03-06:ev-001",
+        "03-06:ev-002",
+        "03-06:ev-003",
+        "03-06:ev-004",
+        "03-06:ev-005",
+        "03-06:ev-006"
+      ]
+    },
+    {
+      "id": "problem:leetcode-209",
+      "type": "problem",
+      "nameZh": "长度最小的子数组",
+      "nameEn": "Minimum Size Subarray Sum",
+      "aliases": ["LeetCode 209"],
+      "definition": "给定整数数组和阈值 s，返回和至少为 s 的最短连续子数组长度，无解返回 0；课程从 O(n³) 连续子数组枚举优化到 O(n) 滑动窗口。",
+      "status": "verified",
+      "lessonRefs": ["03-07"],
+      "evidenceRefs": [
+        "03-07:ev-002",
+        "03-07:ev-003",
+        "03-07:ev-004",
+        "03-07:ev-005",
+        "03-07:ev-006",
+        "03-07:ev-007"
+      ]
     }
   ],
   "conceptShape": {
