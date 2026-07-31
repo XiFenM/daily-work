@@ -4,7 +4,7 @@
   "chapterCount": 11,
   "lessonCount": 70,
   "knownDurationLessonCount": 67,
-  "knownDurationSeconds": 66629.430349,
+  "knownDurationSeconds": 66639.752435,
   "unknownDurationLessonIds": ["06-08", "07-03", "09-10"],
   "normalizationNotes": [
     {
@@ -707,7 +707,7 @@
       "id": "08",
       "number": 8,
       "title": "递归和回溯法",
-      "knownDurationSeconds": 9352,
+      "knownDurationSeconds": 9362.322086,
       "lessons": [
         {
           "id": "08-01",
@@ -718,7 +718,9 @@
           "titleNormalized": "树形问题 Letter Combinations of a Phone Number",
           "durationText": "18:09",
           "durationSeconds": 1089,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1092.522086,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-08-01"]
         },
         {
           "id": "08-02",
@@ -729,7 +731,9 @@
           "titleNormalized": "什么是回溯",
           "durationText": "18:16",
           "durationSeconds": 1096,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1096.16,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-08-02"]
         },
         {
           "id": "08-03",
@@ -740,7 +744,9 @@
           "titleNormalized": "排列问题 Permutations",
           "durationText": "19:02",
           "durationSeconds": 1142,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1142.12,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-08-03"]
         },
         {
           "id": "08-04",
@@ -751,7 +757,9 @@
           "titleNormalized": "组合问题 Combinations",
           "durationText": "14:27",
           "durationSeconds": 867,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 867.84,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-08-04"]
         },
         {
           "id": "08-05",
@@ -762,7 +770,9 @@
           "titleNormalized": "回溯法解决组合问题的优化",
           "durationText": "17:29",
           "durationSeconds": 1049,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1049.08,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-08-05"]
         },
         {
           "id": "08-06",
@@ -773,7 +783,9 @@
           "titleNormalized": "二维平面上的回溯法 Word Search",
           "durationText": "21:45",
           "durationSeconds": 1305,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1305.16,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-08-06"]
         },
         {
           "id": "08-07",
@@ -784,7 +796,9 @@
           "titleNormalized": "flood fill 算法，一类经典问题 Number of Islands",
           "durationText": "21:27",
           "durationSeconds": 1287,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1287.48,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-08-07"]
         },
         {
           "id": "08-08",
@@ -795,7 +809,9 @@
           "titleNormalized": "回溯法是经典人工智能的基础 N Queens",
           "durationText": "25:17",
           "durationSeconds": 1517,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1521.96,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-08-08"]
         }
       ]
     },

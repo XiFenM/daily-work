@@ -233,6 +233,18 @@ describe("normalize-lesson-evidence video-evidence-v1.4", () => {
     expect(result.normalized.stateModels).toHaveLength(1);
   });
 
+  it("applies the same strict gate to video-evidence-v1.5", async () => {
+    const fixture = makeV14Fixture();
+    fixture.provenance.promptVersion = "video-evidence-v1.5";
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.5");
+
+    expect(result.status).toBe(0);
+    expect(result.normalized.provenance.promptVersion).toBe(
+      "video-evidence-v1.5",
+    );
+  });
+
   it("accepts reuse of an unchanged state model by a later solution", async () => {
     const fixture = makeV14Fixture();
     fixture.solutionProgression.push({

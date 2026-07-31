@@ -30,12 +30,16 @@ const lessonId = argumentsMap.lesson;
 if (!lessonId) {
   throw new Error("Specify --lesson <lesson-id>, for example --lesson 01-03.");
 }
-const promptVersion = argumentsMap["prompt-version"] ?? "video-evidence-v1.4";
+const promptVersion = argumentsMap["prompt-version"] ?? "video-evidence-v1.5";
 if (
-  !new Set(["video-evidence-v1.3", "video-evidence-v1.4"]).has(promptVersion)
+  !new Set([
+    "video-evidence-v1.3",
+    "video-evidence-v1.4",
+    "video-evidence-v1.5",
+  ]).has(promptVersion)
 ) {
   throw new Error(
-    "Unsupported --prompt-version. Use video-evidence-v1.3 or video-evidence-v1.4.",
+    "Unsupported --prompt-version. Use video-evidence-v1.3, video-evidence-v1.4, or video-evidence-v1.5.",
   );
 }
 

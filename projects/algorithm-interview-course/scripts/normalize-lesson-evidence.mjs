@@ -61,7 +61,9 @@ const promptVersion =
   "unknown";
 const strictV13 = promptVersion === "video-evidence-v1.3";
 const strictV14 = promptVersion === "video-evidence-v1.4";
-const strictExtraction = strictV13 || strictV14;
+const strictV15 = promptVersion === "video-evidence-v1.5";
+const strictV14OrLater = strictV14 || strictV15;
+const strictExtraction = strictV13 || strictV14OrLater;
 if (
   strictExtraction &&
   rawEvidence.provenance?.promptVersion !== promptVersion
@@ -70,7 +72,7 @@ if (
     `Raw promptVersion ${rawEvidence.provenance?.promptVersion ?? "missing"} does not match ${promptVersion}.`,
   );
 }
-if (strictV14) {
+if (strictV14OrLater) {
   assertCanonicalSchema(rawEvidence, "Raw");
 }
 
@@ -161,7 +163,7 @@ if (strictExtraction) {
     "uncertainties",
     "provenance",
   ];
-  if (strictV14) {
+  if (strictV14OrLater) {
     requiredTopLevelFields.splice(
       requiredTopLevelFields.indexOf("correctness"),
       0,
@@ -229,10 +231,10 @@ if (strictExtraction) {
     }
   }
 
-  if (strictV14) {
+  if (strictV14OrLater) {
     assertExactKeys(rawEvidence, requiredTopLevelFields, "root");
     if (rawEvidence.schemaVersion !== "1.0") {
-      throw new Error("video-evidence-v1.4 requires schemaVersion 1.0.");
+      throw new Error(`${promptVersion} requires schemaVersion 1.0.`);
     }
 
     if (rawEvidence.problem !== null) {
@@ -692,7 +694,7 @@ if (!allowedCorrectnessMethods.has(normalized.correctness.method)) {
   );
 }
 if (
-  !strictV14 &&
+  !strictV14OrLater &&
   normalized.problem === null &&
   normalized.correctness.claims.length === 0 &&
   normalized.correctness.method === "unknown"
@@ -700,7 +702,7 @@ if (
   normalized.correctness.method = "not_applicable";
 }
 
-if (strictV14) {
+if (strictV14OrLater) {
   const uniqueIds = (items, path) => {
     const ids = items.map((item) => item.id);
     if (new Set(ids).size !== ids.length) {
