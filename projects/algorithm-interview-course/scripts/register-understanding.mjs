@@ -223,7 +223,8 @@ lessonState.transportFailures = updatedLessonAttempts.filter((attempt) =>
 ).length;
 lessonState.acceptedAttemptId = attemptId;
 progress.summary.understoodLessons = Object.values(progress.lessons).filter(
-  (state) => state.videoEvidence === "completed",
+  (state) =>
+    state.videoEvidence === "completed" || state.textEvidence === "completed",
 ).length;
 progress.updatedAt = createdAt;
 

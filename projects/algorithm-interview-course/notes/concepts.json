@@ -54,7 +54,10 @@
         "07-04",
         "07-05",
         "07-06",
-        "07-07"
+        "07-07",
+        "08-01",
+        "08-03",
+        "08-05"
       ],
       "evidenceRefs": [
         "01-01:ev-004",
@@ -79,7 +82,11 @@
         "07-05:ev-002",
         "07-06:ev-001",
         "07-06:ev-004",
-        "07-07:ev-005"
+        "07-07:ev-005",
+        "08-01:ev-004",
+        "08-03:ev-001",
+        "08-03:ev-006",
+        "08-05:ev-005"
       ]
     },
     {
@@ -196,7 +203,8 @@
         "04-04",
         "04-05",
         "04-06",
-        "04-07"
+        "04-07",
+        "08-02"
       ],
       "evidenceRefs": [
         "01-04:ev-003",
@@ -207,7 +215,8 @@
         "04-05:ev-002",
         "04-05:ev-003",
         "04-06:ev-002",
-        "04-07:ev-002"
+        "04-07:ev-002",
+        "08-02:ev-006"
       ]
     },
     {
@@ -1593,10 +1602,15 @@
       "nameZh": "搜索状态去重",
       "nameEn": "Visited-state deduplication",
       "aliases": ["visited 数组", "入队即标记", "图遍历去重"],
-      "definition": "在图搜索生成新状态时检查并更新 visited，使同一状态至多进入队列一次；课程用它修复 Perfect Squares 基线 BFS 中重复节点不断入队并导致 MLE 的问题。",
+      "definition": "在图或网格搜索生成新状态时检查并更新 visited，避免同一状态被重复加入待处理集合。Perfect Squares 在入队时标记以修复 BFS 的重复入队与 MLE；Number of Islands 在 DFS 入口永久标记已归入连通分量的陆地。它不等同于 Word Search 中返回时要恢复的路径局部占用。",
       "status": "verified",
-      "lessonRefs": ["06-05"],
-      "evidenceRefs": ["06-05:ev-005", "06-05:ev-006"]
+      "lessonRefs": ["06-05", "08-07"],
+      "evidenceRefs": [
+        "06-05:ev-005",
+        "06-05:ev-006",
+        "08-07:ev-007",
+        "08-07:ev-008"
+      ]
     },
     {
       "id": "data-structure:priority-queue",
@@ -1813,7 +1827,20 @@
       "aliases": ["函数语义", "递归问题定义", "Recursive contract"],
       "definition": "先精确定义递归函数对当前输入代表的任务、返回值或副作用，再依据这一语义写基本情况、子问题调用与结果组合；理解和证明代码时把子调用视为满足同一契约。",
       "status": "verified",
-      "lessonRefs": ["07-01", "07-02", "07-04", "07-05", "07-06", "07-07"],
+      "lessonRefs": [
+        "07-01",
+        "07-02",
+        "07-04",
+        "07-05",
+        "07-06",
+        "07-07",
+        "08-01",
+        "08-03",
+        "08-04",
+        "08-06",
+        "08-07",
+        "08-08"
+      ],
       "evidenceRefs": [
         "07-01:ev-003",
         "07-01:ev-012",
@@ -1826,7 +1853,15 @@
         "07-06:ev-004",
         "07-06:ev-005",
         "07-07:ev-004",
-        "07-07:ev-005"
+        "07-07:ev-005",
+        "08-01:ev-006",
+        "08-01:ev-007",
+        "08-03:ev-004",
+        "08-04:ev-003",
+        "08-06:ev-005",
+        "08-07:ev-007",
+        "08-07:ev-008",
+        "08-08:ev-005"
       ]
     },
     {
@@ -1835,9 +1870,23 @@
       "nameZh": "递归基例",
       "nameEn": "Recursion base case",
       "aliases": ["递归终止条件", "基本情况", "Base case"],
-      "definition": "无需继续调用子问题即可直接返回的情况。树递归中的基例必须服从函数契约：空指针、叶节点或当前值命中并不天然等价，选择错误会导致误判、遗漏或调用栈溢出。",
+      "definition": "无需继续调用子问题即可直接返回的情况，必须服从递归函数契约。它既可以写在函数入口，也可以像 flood fill 一样融合到“是否调用下一层”的前置检查中；空指针、叶节点、部分解已满或候选耗尽等条件不能脱离具体状态语义互换。",
       "status": "verified",
-      "lessonRefs": ["07-01", "07-02", "07-04", "07-05", "07-06", "07-07"],
+      "lessonRefs": [
+        "07-01",
+        "07-02",
+        "07-04",
+        "07-05",
+        "07-06",
+        "07-07",
+        "08-01",
+        "08-02",
+        "08-03",
+        "08-04",
+        "08-06",
+        "08-07",
+        "08-08"
+      ],
       "evidenceRefs": [
         "07-01:ev-004",
         "07-01:ev-005",
@@ -1849,7 +1898,16 @@
         "07-05:ev-004",
         "07-06:ev-004",
         "07-06:ev-005",
-        "07-07:ev-005"
+        "07-07:ev-005",
+        "08-01:ev-007",
+        "08-02:ev-001",
+        "08-02:ev-002",
+        "08-03:ev-004",
+        "08-04:ev-003",
+        "08-06:ev-005",
+        "08-07:ev-007",
+        "08-07:ev-008",
+        "08-08:ev-005"
       ]
     },
     {
@@ -2016,6 +2074,312 @@
       "status": "verified",
       "lessonRefs": ["07-07"],
       "evidenceRefs": ["07-07:ev-003", "07-07:ev-004", "07-07:ev-005"]
+    },
+    {
+      "id": "algorithm:backtracking",
+      "type": "algorithm",
+      "nameZh": "回溯法",
+      "nameEn": "Backtracking",
+      "aliases": ["回溯", "回溯算法", "递归回溯"],
+      "definition": "沿搜索空间树逐层选择候选并递归深入，在分支完成或无法继续时返回上层，再尝试其他候选。若分支修改共享可变状态，返回后必须按状态语义恢复；若下一状态由新值构造，则可随调用返回自然恢复。回溯是枚举框架，不等同于所有 DFS 或 flood fill。",
+      "status": "verified",
+      "lessonRefs": [
+        "08-01",
+        "08-02",
+        "08-03",
+        "08-04",
+        "08-05",
+        "08-06",
+        "08-08"
+      ],
+      "evidenceRefs": [
+        "08-01:ev-001",
+        "08-01:ev-005",
+        "08-01:ev-007",
+        "08-02:ev-004",
+        "08-02:ev-006",
+        "08-03:ev-002",
+        "08-03:ev-004",
+        "08-03:ev-005",
+        "08-04:ev-002",
+        "08-04:ev-003",
+        "08-05:ev-002",
+        "08-05:ev-003",
+        "08-06:ev-001",
+        "08-06:ev-004",
+        "08-06:ev-008",
+        "08-08:ev-003",
+        "08-08:ev-005"
+      ]
+    },
+    {
+      "id": "concept:search-space-tree",
+      "type": "concept",
+      "nameZh": "搜索空间树",
+      "nameEn": "Search-space tree",
+      "aliases": ["解空间树", "决策树", "树形问题"],
+      "definition": "把部分解或搜索状态表示为节点，把一次候选选择表示为边，由此展开全部可能路径；输入本身不必是树。它主要描述候选空间与搜索控制，不与用于累计递归调用成本的“递归树”节点合并。",
+      "status": "verified",
+      "lessonRefs": [
+        "08-01",
+        "08-02",
+        "08-03",
+        "08-04",
+        "08-05",
+        "08-06",
+        "08-08"
+      ],
+      "evidenceRefs": [
+        "08-01:ev-002",
+        "08-01:ev-005",
+        "08-02:ev-003",
+        "08-02:ev-004",
+        "08-03:ev-002",
+        "08-04:ev-002",
+        "08-05:ev-002",
+        "08-06:ev-004",
+        "08-08:ev-003"
+      ]
+    },
+    {
+      "id": "pattern:choose-explore-undo",
+      "type": "pattern",
+      "nameZh": "选择—探索—撤销",
+      "nameEn": "Choose-explore-undo",
+      "aliases": ["选择—递归—撤销", "状态恢复", "回到原位"],
+      "definition": "在共享可变状态上先记录当前选择，再递归探索该分支，返回后把路径、占用标记或网格标记完整恢复到父状态，使兄弟候选从同一父节点出发；撤销对象必须与选择时修改的状态一一对应。",
+      "status": "verified",
+      "lessonRefs": ["08-03", "08-04", "08-06", "08-08"],
+      "evidenceRefs": [
+        "08-03:ev-004",
+        "08-03:ev-005",
+        "08-04:ev-003",
+        "08-06:ev-008",
+        "08-08:ev-005"
+      ]
+    },
+    {
+      "id": "concept:permutation",
+      "type": "concept",
+      "nameZh": "排列",
+      "nameEn": "Permutation",
+      "aliases": ["全排列", "Permutations"],
+      "definition": "从给定元素中按顺序构造选择序列；顺序不同通常表示不同结果。LeetCode 46 的课程实现以 used 标记当前路径已经使用的输入下标，逐位置生成无重复元素数组的全部排列；输入值重复时还需另行处理结果去重。",
+      "status": "verified",
+      "lessonRefs": ["08-03"],
+      "evidenceRefs": [
+        "08-03:ev-001",
+        "08-03:ev-002",
+        "08-03:ev-003",
+        "08-03:ev-004",
+        "08-03:ev-006"
+      ]
+    },
+    {
+      "id": "concept:combination",
+      "type": "concept",
+      "nameZh": "组合",
+      "nameEn": "Combination",
+      "aliases": ["组合问题", "Combinations"],
+      "definition": "从候选集合中选择元素而不区分同一组元素的排列顺序。LeetCode 77 通过 start 和下一层的 i+1 只生成严格递增路径；不同变体还需单独确认输入是否重复、元素能否复用以及数量或目标和约束。",
+      "status": "verified",
+      "lessonRefs": ["08-04", "08-05"],
+      "evidenceRefs": [
+        "08-04:ev-001",
+        "08-04:ev-002",
+        "08-04:ev-003",
+        "08-05:ev-005"
+      ]
+    },
+    {
+      "id": "pattern:search-pruning",
+      "type": "pattern",
+      "nameZh": "搜索剪枝",
+      "nameEn": "Search pruning",
+      "aliases": ["剪枝", "Pruning", "回溯剪枝"],
+      "definition": "在展开搜索分支前，用必要条件、剩余容量或冲突约束证明该分支不可能形成合法解，并提前停止探索。剪枝必须说明被删除状态为何不可完成，不能仅凭一次运行时间变快认定正确。",
+      "status": "verified",
+      "lessonRefs": ["08-02", "08-05", "08-08"],
+      "evidenceRefs": [
+        "08-02:ev-006",
+        "08-05:ev-002",
+        "08-05:ev-003",
+        "08-08:ev-003",
+        "08-08:ev-004"
+      ]
+    },
+    {
+      "id": "pattern:grid-path-state-restoration",
+      "type": "pattern",
+      "nameZh": "网格路径内访问状态恢复",
+      "nameEn": "Path-local grid visitation restoration",
+      "aliases": ["路径局部 visited", "网格路径回溯", "失败后恢复访问标记"],
+      "definition": "在网格路径搜索中，visited 只表示当前候选路径占用的位置；进入分支时标记，分支失败并返回时恢复，使其他起点或兄弟路径仍可使用该格。它不同于连通分量遍历中需要永久保留的访问标记。",
+      "status": "verified",
+      "lessonRefs": ["08-06"],
+      "evidenceRefs": [
+        "08-06:ev-002",
+        "08-06:ev-003",
+        "08-06:ev-008",
+        "08-06:ev-009"
+      ]
+    },
+    {
+      "id": "algorithm:flood-fill",
+      "type": "algorithm",
+      "nameZh": "Flood fill 算法",
+      "nameEn": "Flood fill",
+      "aliases": ["floodfill", "区域填充", "连通区域扩散"],
+      "definition": "从一个满足条件的起点出发，沿规定邻接关系扩散并标记整个可达区域。Number of Islands 用 DFS 永久标记已归入岛屿的陆地；返回时不恢复 visited，因此不能因为实现使用递归就自动把 flood fill 归为回溯。",
+      "status": "verified",
+      "lessonRefs": ["08-07"],
+      "evidenceRefs": [
+        "08-07:ev-001",
+        "08-07:ev-003",
+        "08-07:ev-004",
+        "08-07:ev-007",
+        "08-07:ev-008"
+      ]
+    },
+    {
+      "id": "concept:connected-component",
+      "type": "concept",
+      "nameZh": "连通分量",
+      "nameEn": "Connected component",
+      "aliases": ["连通块", "四连通区域", "岛屿"],
+      "definition": "在给定邻接关系下彼此可达且不能再扩大的节点集合。Number of Islands 采用上下左右四邻接；外层每发现一个未访问陆地就计数一次，随后 flood fill 永久标记该连通分量。",
+      "status": "verified",
+      "lessonRefs": ["08-07"],
+      "evidenceRefs": [
+        "08-07:ev-002",
+        "08-07:ev-003",
+        "08-07:ev-004",
+        "08-07:ev-006",
+        "08-07:ev-007",
+        "08-07:ev-008"
+      ]
+    },
+    {
+      "id": "pattern:n-queens-constraint-pruning",
+      "type": "pattern",
+      "nameZh": "N 皇后约束剪枝",
+      "nameEn": "N-Queens constraint pruning",
+      "aliases": ["列与对角线冲突剪枝", "col/dia1/dia2 标记"],
+      "definition": "按行构造 N Queens 部分棋盘，用 col、dia1 和 dia2 常数时间拒绝列或两类对角线冲突的候选，递归返回后撤销占用。它是行约束搜索的专用建模，不应在没有课程证据时等同为排列问题。",
+      "status": "verified",
+      "lessonRefs": ["08-08"],
+      "evidenceRefs": [
+        "08-08:ev-002",
+        "08-08:ev-003",
+        "08-08:ev-004",
+        "08-08:ev-005"
+      ]
+    },
+    {
+      "id": "problem:leetcode-17",
+      "type": "problem",
+      "nameZh": "电话号码的字母组合",
+      "nameEn": "Letter Combinations of a Phone Number",
+      "aliases": ["LeetCode 17"],
+      "definition": "根据数字字符串中每一位的电话按键字母映射，返回全部可能字符串。课程把每个数字位置建模为搜索空间树的一层，以 index 和当前前缀 s 递归生成结果。",
+      "status": "verified",
+      "lessonRefs": ["08-01", "08-02"],
+      "evidenceRefs": [
+        "08-01:ev-003",
+        "08-01:ev-005",
+        "08-01:ev-006",
+        "08-01:ev-007",
+        "08-02:ev-001",
+        "08-02:ev-002"
+      ]
+    },
+    {
+      "id": "problem:leetcode-46",
+      "type": "problem",
+      "nameZh": "全排列",
+      "nameEn": "Permutations",
+      "aliases": ["LeetCode 46"],
+      "definition": "返回互不相同整数的所有排列；课程用当前排列 p、递归深度 index 与下标占用数组 used 枚举全部顺序，并在递归返回后恢复两份共享状态。",
+      "status": "verified",
+      "lessonRefs": ["08-03"],
+      "evidenceRefs": [
+        "08-03:ev-001",
+        "08-03:ev-002",
+        "08-03:ev-004",
+        "08-03:ev-005"
+      ]
+    },
+    {
+      "id": "problem:leetcode-77",
+      "type": "problem",
+      "nameZh": "组合",
+      "nameEn": "Combinations",
+      "aliases": ["LeetCode 77"],
+      "definition": "从 1...n 中选出 k 个数字并返回全部组合。课程先用 start 与 i+1 生成严格递增组合，再依据剩余空位推导 i <= n-(k-c.size())+1，剪掉候选不足的分支。",
+      "status": "verified",
+      "lessonRefs": ["08-04", "08-05"],
+      "evidenceRefs": [
+        "08-04:ev-001",
+        "08-04:ev-002",
+        "08-04:ev-003",
+        "08-05:ev-001",
+        "08-05:ev-002",
+        "08-05:ev-003",
+        "08-05:ev-004"
+      ]
+    },
+    {
+      "id": "problem:leetcode-79",
+      "type": "problem",
+      "nameZh": "单词搜索",
+      "nameEn": "Word Search",
+      "aliases": ["LeetCode 79"],
+      "definition": "判断二维字符网格中是否存在一条上下左右相邻、路径内不重复使用位置且依次拼出目标单词的路径；课程枚举起点并用路径局部 visited 做递归回溯。",
+      "status": "verified",
+      "lessonRefs": ["08-06"],
+      "evidenceRefs": [
+        "08-06:ev-002",
+        "08-06:ev-003",
+        "08-06:ev-004",
+        "08-06:ev-005",
+        "08-06:ev-008"
+      ]
+    },
+    {
+      "id": "problem:leetcode-200",
+      "type": "problem",
+      "nameZh": "岛屿数量",
+      "nameEn": "Number of Islands",
+      "aliases": ["LeetCode 200"],
+      "definition": "统计字符网格中由 '1' 构成的四连通陆地分量数量；课程外层扫描新陆地入口并计数，再用 DFS flood fill 永久标记整座岛屿。",
+      "status": "verified",
+      "lessonRefs": ["08-07"],
+      "evidenceRefs": [
+        "08-07:ev-001",
+        "08-07:ev-002",
+        "08-07:ev-003",
+        "08-07:ev-004",
+        "08-07:ev-006",
+        "08-07:ev-007",
+        "08-07:ev-008"
+      ]
+    },
+    {
+      "id": "problem:leetcode-51",
+      "type": "problem",
+      "nameZh": "N 皇后",
+      "nameEn": "N-Queens",
+      "aliases": ["LeetCode 51", "N Queens"],
+      "definition": "在 n×n 棋盘放置 n 个皇后，使任意两个皇后不同行、不同列且不共享两类对角线，并返回全部棋盘。课程按行搜索，以列和对角线占用数组进行约束剪枝与状态恢复。",
+      "status": "verified",
+      "lessonRefs": ["08-08"],
+      "evidenceRefs": [
+        "08-08:ev-002",
+        "08-08:ev-003",
+        "08-08:ev-004",
+        "08-08:ev-005",
+        "08-08:ev-006"
+      ]
     }
   ],
   "conceptShape": {

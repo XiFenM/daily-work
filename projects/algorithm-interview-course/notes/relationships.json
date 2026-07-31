@@ -1988,9 +1988,9 @@
       "to": "lesson:08-01",
       "type": "recommended_before",
       "strength": "medium",
-      "status": "provisional",
-      "rationale": "07-07 章末明确预告下一章将处理输入本身未必是树、但递归展开会形成树形结构的问题；由于 08-01 尚未完成理解与双侧复核，这条课程预告只保留为 provisional，不能进入主知识地图。",
-      "confidence": 0.84,
+      "status": "verified",
+      "rationale": "07-07 章末从“输入本身是二叉树”的递归问题预告下一章将讨论不依赖树结构的递归；08-01 开头明确承接上一章，并把“输入不是树、求解过程展开成树”的树形问题作为章节入口。两侧共同构成从数据结构递归到搜索空间树的课程桥梁。",
+      "confidence": 0.98,
       "evidence": [
         {
           "lessonId": "07-07",
@@ -1998,9 +1998,23 @@
           "startMs": 1032000,
           "endMs": 1070440,
           "locator": "ev-007 · 17:12-17:50.440"
+        },
+        {
+          "lessonId": "08-01",
+          "assetId": "asset:video-08-01",
+          "startMs": 3000,
+          "endMs": 36000,
+          "locator": "ev-001 · 00:03-00:36"
+        },
+        {
+          "lessonId": "08-01",
+          "assetId": "asset:video-08-01",
+          "startMs": 36000,
+          "endMs": 60000,
+          "locator": "ev-002 · 00:36-01:00"
         }
       ],
-      "createdBy": "chapter-07-review-v1"
+      "createdBy": "chapter-07-review-v1; verified-by chapter-08-review-v1"
     },
     {
       "id": "edge:outline:08-01:08-02",
@@ -2008,11 +2022,40 @@
       "to": "lesson:08-02",
       "type": "extends",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "从具体树形问题抽象出回溯方法。",
-      "confidence": 0.94,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "08-01 用电话号码字母组合建立逐位分支的搜索空间树与 findCombination 代码；08-02 直接在同一函数上增加日志并运行，随后把“递归探底、返回父层、继续兄弟分支”抽象为回溯。因此后课是在同一问题和代码上的机制解释，而不是新的平行题解。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "08-01",
+          "assetId": "asset:video-08-01",
+          "startMs": 241000,
+          "endMs": 360000,
+          "locator": "ev-005 · 04:01-06:00"
+        },
+        {
+          "lessonId": "08-01",
+          "assetId": "asset:video-08-01",
+          "startMs": 490000,
+          "endMs": 1089000,
+          "locator": "ev-007 · 08:10-18:09"
+        },
+        {
+          "lessonId": "08-02",
+          "assetId": "asset:video-08-02",
+          "startMs": 0,
+          "endMs": 218000,
+          "locator": "ev-001 · 00:00-03:38"
+        },
+        {
+          "lessonId": "08-02",
+          "assetId": "asset:video-08-02",
+          "startMs": 596000,
+          "endMs": 682000,
+          "locator": "ev-004 · 09:56-11:22"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-08-review-v1"
     },
     {
       "id": "edge:outline:08-04:08-05",
@@ -2020,35 +2063,327 @@
       "to": "lesson:08-05",
       "type": "extends",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "在组合问题基础上加入剪枝优化。",
-      "confidence": 0.98,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "08-04 为 LeetCode 77 建立 start、i+1 与 push/recurse/pop 的未剪枝组合搜索；08-05 开头直接回顾并提交该基线，再从剩余空位推导 i <= n-(k-c.size())+1，替换循环上界并提交优化版。两课是同一实现的明确基线—剪枝延伸。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "08-04",
+          "assetId": "asset:video-08-04",
+          "startMs": 93000,
+          "endMs": 332000,
+          "locator": "ev-002 · 01:33-05:32"
+        },
+        {
+          "lessonId": "08-04",
+          "assetId": "asset:video-08-04",
+          "startMs": 332000,
+          "endMs": 867840,
+          "locator": "ev-003 · 05:32-14:27.840"
+        },
+        {
+          "lessonId": "08-05",
+          "assetId": "asset:video-08-05",
+          "startMs": 0,
+          "endMs": 116000,
+          "locator": "ev-001 · 00:00-01:56"
+        },
+        {
+          "lessonId": "08-05",
+          "assetId": "asset:video-08-05",
+          "startMs": 116000,
+          "endMs": 226000,
+          "locator": "ev-002 · 01:56-03:46"
+        },
+        {
+          "lessonId": "08-05",
+          "assetId": "asset:video-08-05",
+          "startMs": 226000,
+          "endMs": 458000,
+          "locator": "ev-003 · 03:47-07:38"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-08-review-v1"
     },
     {
       "id": "edge:outline:08-06:08-07",
       "from": "lesson:08-06",
       "to": "lesson:08-07",
-      "type": "same_pattern_as",
+      "type": "contrasts_with",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "二维网格上的回溯与 flood fill 共享状态搜索结构。",
-      "confidence": 0.9,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "两课都使用二维网格、四方向偏移、边界检查、DFS 与 visited，但状态生命周期相反：08-06 的 visited 只表示当前候选单词路径，失败后必须恢复；08-07 的 visited 表示陆地已归入某个连通分量，返回后必须永久保留。该差异比笼统的“同一模式”更能决定代码正确性。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "08-06",
+          "assetId": "asset:video-08-06",
+          "startMs": 705000,
+          "endMs": 933000,
+          "locator": "ev-006 · 11:45-15:33"
+        },
+        {
+          "lessonId": "08-06",
+          "assetId": "asset:video-08-06",
+          "startMs": 1070000,
+          "endMs": 1200000,
+          "locator": "ev-008 · 17:50-20:00"
+        },
+        {
+          "lessonId": "08-07",
+          "assetId": "asset:video-08-07",
+          "startMs": 473000,
+          "endMs": 768000,
+          "locator": "ev-005 · 07:53-12:48"
+        },
+        {
+          "lessonId": "08-07",
+          "assetId": "asset:video-08-07",
+          "startMs": 990000,
+          "endMs": 1072000,
+          "locator": "ev-008 · 16:30-17:52"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-08-review-v1"
     },
     {
-      "id": "edge:outline:06-05:08-07",
-      "from": "lesson:06-05",
-      "to": "lesson:08-07",
-      "type": "alternative_to",
+      "id": "edge:video:08-07:06-05",
+      "from": "lesson:08-07",
+      "to": "lesson:06-05",
+      "type": "revisits",
       "strength": "medium",
-      "status": "provisional",
-      "rationale": "BFS 与 DFS/flood fill 可形成图搜索策略对照。",
-      "confidence": 0.8,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "08-07 用 DFS/flood fill 回访 06-05 已建立的“搜索生成邻居 + visited 去重”框架：前课用 visited 修复状态图 BFS 的重复入队，后课用 visited 永久标记四连通陆地分量。两课解决的目标契约不同，因此不是同一问题的可替代方案。",
+      "confidence": 0.96,
+      "evidence": [
+        {
+          "lessonId": "06-05",
+          "assetId": "asset:video-06-05",
+          "startMs": 320000,
+          "endMs": 488000,
+          "locator": "ev-004 · 05:20-08:08"
+        },
+        {
+          "lessonId": "06-05",
+          "assetId": "asset:video-06-05",
+          "startMs": 488000,
+          "endMs": 1054000,
+          "locator": "ev-005–ev-006 · 08:08-17:34"
+        },
+        {
+          "lessonId": "08-07",
+          "assetId": "asset:video-08-07",
+          "startMs": 135000,
+          "endMs": 378000,
+          "locator": "ev-003 · 02:15-06:18"
+        },
+        {
+          "lessonId": "08-07",
+          "assetId": "asset:video-08-07",
+          "startMs": 1020000,
+          "endMs": 1072000,
+          "locator": "ev-007 · 17:00-17:52"
+        },
+        {
+          "lessonId": "08-07",
+          "assetId": "asset:video-08-07",
+          "startMs": 990000,
+          "endMs": 1072000,
+          "locator": "ev-008 · 16:30-17:52"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; redirected-and-verified-by chapter-08-review-v1"
+    },
+    {
+      "id": "edge:video:08-02:08-03",
+      "from": "lesson:08-02",
+      "to": "lesson:08-03",
+      "type": "applies",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "08-02 用电话号码组合的返回轨迹定义回溯，并说明值语义使字符串状态自然恢复；08-03 把这一控制流应用到共享可变的排列状态，明确要求递归后同时执行 p.pop_back() 和 used[i]=false。后课把“返回上层”落实为显式状态恢复。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "08-02",
+          "assetId": "asset:video-08-02",
+          "startMs": 596000,
+          "endMs": 682000,
+          "locator": "ev-004 · 09:56-11:22"
+        },
+        {
+          "lessonId": "08-03",
+          "assetId": "asset:video-08-03",
+          "startMs": 359000,
+          "endMs": 905000,
+          "locator": "ev-004 · 05:59-15:05"
+        },
+        {
+          "lessonId": "08-03",
+          "assetId": "asset:video-08-03",
+          "startMs": 905000,
+          "endMs": 1016000,
+          "locator": "ev-005 · 15:05-16:56"
+        }
+      ],
+      "createdBy": "chapter-08-review-v1"
+    },
+    {
+      "id": "edge:video:08-03:08-04",
+      "from": "lesson:08-03",
+      "to": "lesson:08-04",
+      "type": "contrasts_with",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "08-03 的排列把不同选择顺序视为不同答案，因此每层从全部未使用下标中选候选；08-04 明确指出组合不关心顺序，并用 start 与 i+1 只生成严格递增路径。两课共享回溯骨架，但答案等价关系直接改变候选域。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "08-03",
+          "assetId": "asset:video-08-03",
+          "startMs": 19000,
+          "endMs": 85000,
+          "locator": "ev-001 · 00:19-01:25"
+        },
+        {
+          "lessonId": "08-03",
+          "assetId": "asset:video-08-03",
+          "startMs": 255000,
+          "endMs": 359000,
+          "locator": "ev-003 · 04:15-05:59"
+        },
+        {
+          "lessonId": "08-04",
+          "assetId": "asset:video-08-04",
+          "startMs": 0,
+          "endMs": 93000,
+          "locator": "ev-001 · 00:00-01:33"
+        },
+        {
+          "lessonId": "08-04",
+          "assetId": "asset:video-08-04",
+          "startMs": 93000,
+          "endMs": 332000,
+          "locator": "ev-002 · 01:33-05:32"
+        }
+      ],
+      "createdBy": "chapter-08-review-v1"
+    },
+    {
+      "id": "edge:video:08-02:08-06",
+      "from": "lesson:08-02",
+      "to": "lesson:08-06",
+      "type": "applies",
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "08-02 把回溯概括为沿选择路径递归、返回后继续其他分支；08-06 明确把这一方法从一维候选扩展到二维网格，以四方向搜索和失败后恢复路径 visited 实现 Word Search。",
+      "confidence": 0.96,
+      "evidence": [
+        {
+          "lessonId": "08-02",
+          "assetId": "asset:video-08-02",
+          "startMs": 596000,
+          "endMs": 682000,
+          "locator": "ev-004 · 09:56-11:22"
+        },
+        {
+          "lessonId": "08-02",
+          "assetId": "asset:video-08-02",
+          "startMs": 834000,
+          "endMs": 949000,
+          "locator": "ev-006 · 13:54-15:49"
+        },
+        {
+          "lessonId": "08-06",
+          "assetId": "asset:video-08-06",
+          "startMs": 0,
+          "endMs": 30000,
+          "locator": "ev-001 · 00:00-00:30"
+        },
+        {
+          "lessonId": "08-06",
+          "assetId": "asset:video-08-06",
+          "startMs": 1070000,
+          "endMs": 1200000,
+          "locator": "ev-008 · 17:50-20:00"
+        }
+      ],
+      "createdBy": "chapter-08-review-v1"
+    },
+    {
+      "id": "edge:video:08-07:08-08",
+      "from": "lesson:08-07",
+      "to": "lesson:08-08",
+      "type": "contrasts_with",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "08-07 的 visited 表示陆地已经永久归入一个连通分量，递归返回后不恢复；08-08 的 col、dia1、dia2 与 row 只描述当前部分棋盘，探索完一个列候选后必须全部撤销。两课直接说明状态是否回退取决于语义，而不是是否使用 DFS。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "08-07",
+          "assetId": "asset:video-08-07",
+          "startMs": 990000,
+          "endMs": 1072000,
+          "locator": "ev-008 · 16:30-17:52"
+        },
+        {
+          "lessonId": "08-08",
+          "assetId": "asset:video-08-08",
+          "startMs": 683000,
+          "endMs": 1245000,
+          "locator": "ev-005 · 11:23-20:45"
+        }
+      ],
+      "createdBy": "chapter-08-review-v1"
+    },
+    {
+      "id": "edge:video:08-02:08-08",
+      "from": "lesson:08-02",
+      "to": "lesson:08-08",
+      "type": "applies",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "08-02 把回溯抽象为沿搜索树试探、返回并继续其他分支，同时指出可用剪枝避免无效搜索；08-08 把这套框架完整应用到 N Queens，按行尝试列、用列和两类对角线冲突剪枝，并在递归返回后撤销全部占用状态。这是方法应用关系，不把 N Queens 等同于排列。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "08-02",
+          "assetId": "asset:video-08-02",
+          "startMs": 596000,
+          "endMs": 682000,
+          "locator": "ev-004 · 09:56-11:22"
+        },
+        {
+          "lessonId": "08-02",
+          "assetId": "asset:video-08-02",
+          "startMs": 834000,
+          "endMs": 949000,
+          "locator": "ev-006 · 13:54-15:49"
+        },
+        {
+          "lessonId": "08-08",
+          "assetId": "asset:video-08-08",
+          "startMs": 170000,
+          "endMs": 393000,
+          "locator": "ev-003 · 02:50-06:33"
+        },
+        {
+          "lessonId": "08-08",
+          "assetId": "asset:video-08-08",
+          "startMs": 393000,
+          "endMs": 683000,
+          "locator": "ev-004 · 06:33-11:23"
+        },
+        {
+          "lessonId": "08-08",
+          "assetId": "asset:video-08-08",
+          "startMs": 683000,
+          "endMs": 1245000,
+          "locator": "ev-005 · 11:23-20:45"
+        }
+      ],
+      "createdBy": "chapter-08-review-v1"
     },
     {
       "id": "edge:outline:02-05:09-01",

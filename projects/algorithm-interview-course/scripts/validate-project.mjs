@@ -178,10 +178,14 @@ for (const attempt of manifest.attempts ?? []) {
       attempt.validation?.status === "passed",
       `${attempt.attemptId} is accepted without passed validation.`,
     );
-    if (attempt.promptVersion === "video-evidence-v1.4") {
+    if (
+      new Set(["video-evidence-v1.4", "video-evidence-v1.5"]).has(
+        attempt.promptVersion,
+      )
+    ) {
       check(
         attempt.validation?.qaStatus === "completed",
-        `${attempt.attemptId} is an accepted v1.4 attempt without completed QA.`,
+        `${attempt.attemptId} is an accepted ${attempt.promptVersion} attempt without completed QA.`,
       );
     }
     check(

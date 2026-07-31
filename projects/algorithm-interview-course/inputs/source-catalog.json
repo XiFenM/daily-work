@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "sourceRoot": "work/algorithm-interview-course/incoming",
   "inventory": {
-    "scannedAt": "2026-07-31T07:38:40.000Z",
+    "scannedAt": "2026-07-31T08:47:07Z",
     "layout": "flat",
     "courseAssetCount": 70,
     "videoCount": 67,
@@ -14,7 +14,7 @@
       "duplicateLessonIds": [],
       "missingLessonIds": []
     },
-    "catalogScope": "chapters-01-07"
+    "catalogScope": "chapters-01-08"
   },
   "items": [
     {
@@ -1474,6 +1474,254 @@
       },
       "status": "processed",
       "notes": "目录标称 17:46；实际 17:50.440，相差约 4.440 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-08-01",
+      "kind": "video",
+      "originalFilename": "8-1 树形问题 Letter Combinations of a Phone Number_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/8-1 树形问题 Letter Combinations of a Phone Number_慕课网.mp4",
+      "sha256": "5329a47e5e3a34259f3ffb60149523966a751d362d0bfefe9e249c2512dbdc76",
+      "bytes": 111207567,
+      "lessonIds": ["08-01"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1092.522086,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 18:09；实际 18:12.522，相差约 3.522 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成。"
+    },
+    {
+      "assetId": "asset:video-08-02",
+      "kind": "video",
+      "originalFilename": "8-2 什么是回溯_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/8-2 什么是回溯_慕课网.mp4",
+      "sha256": "06014c413c1dcb6f9dc1ffaa263110e539c6bde674a239c71de1f28ed44a1e76",
+      "bytes": 94123635,
+      "lessonIds": ["08-02"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1096.16,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 18:16；实际 18:16.160，相差约 0.160 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成。"
+    },
+    {
+      "assetId": "asset:video-08-03",
+      "kind": "video",
+      "originalFilename": "8-3 排列问题 Permutations_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/8-3 排列问题 Permutations_慕课网.mp4",
+      "sha256": "572cf2a0ac39ac2567d5a3e07e7b7e98dc52c0a26701a73a6a9162a006b81e2f",
+      "bytes": 125177443,
+      "lessonIds": ["08-03"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1142.12,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 19:02；实际 19:02.120，相差约 0.120 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成。"
+    },
+    {
+      "assetId": "asset:video-08-04",
+      "kind": "video",
+      "originalFilename": "8-4 组合问题 Combinations_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/8-4 组合问题 Combinations_慕课网.mp4",
+      "sha256": "fd128eafef27bae6957f9dde7ec184636fa8a28faf523875fb2c933d091ea5bc",
+      "bytes": 96584742,
+      "lessonIds": ["08-04"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 867.84,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 14:27；实际 14:27.840，相差约 0.840 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成。"
+    },
+    {
+      "assetId": "asset:video-08-05",
+      "kind": "video",
+      "originalFilename": "8-5 回溯法解决组合问题的优化_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/8-5 回溯法解决组合问题的优化_慕课网.mp4",
+      "sha256": "a3e720700be7974540c5fe1907c347b285792fe52c34606bfbb9bf3958942729",
+      "bytes": 99138557,
+      "lessonIds": ["08-05"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1049.08,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 17:29；实际 17:29.080，相差约 0.080 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成。"
+    },
+    {
+      "assetId": "asset:video-08-06",
+      "kind": "video",
+      "originalFilename": "8-6 二维平面上的回溯法 Word Search_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/8-6 二维平面上的回溯法 Word Search_慕课网.mp4",
+      "sha256": "2274102897a80443f4a06edaf00621ca750a339639731fde84876030e887953d",
+      "bytes": 142391066,
+      "lessonIds": ["08-06"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1305.16,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 21:45；实际 21:45.160，相差约 0.160 秒。12 帧联系表与定向代码画面检查通过，课次映射无歧义；balanced 压缩副本已生成。"
+    },
+    {
+      "assetId": "asset:video-08-07",
+      "kind": "video",
+      "originalFilename": "8-7 floodfill算法，一类经典问题 Number of Islands-_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/8-7 floodfill算法，一类经典问题 Number of Islands-_慕课网.mp4",
+      "sha256": "27ef82198f853df4e7553d72e37ba2a210fead8238743b7ea185b59154faf328",
+      "bytes": 127276874,
+      "lessonIds": ["08-07"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1287.48,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 21:27；实际 21:27.480，相差约 0.480 秒。原文件名保留尾随连字符，规范标题已移除；12 帧联系表检查通过，balanced 压缩副本已生成。"
+    },
+    {
+      "assetId": "asset:video-08-08",
+      "kind": "video",
+      "originalFilename": "8-8 回溯法是经典人工智能的基础 N Queens_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/8-8 回溯法是经典人工智能的基础 N Queens_慕课网.mp4",
+      "sha256": "b1c79bd844c6297056d502aee8d2804a48a7247aed1cb0448ff2a7b10f333b33",
+      "bytes": 142188143,
+      "lessonIds": ["08-08"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1521.96,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 25:17；实际 25:21.960，相差约 4.960 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成。"
     }
   ],
   "itemShape": {

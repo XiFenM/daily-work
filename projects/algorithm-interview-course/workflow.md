@@ -52,20 +52,20 @@ outputs/algorithm-interview-course/
 
 ## 阶段 3：视频证据抽取
 
-1. 从 `prompts/video-evidence-v1.4.template.md` 渲染当前课次专用 Prompt。v1.2 在 v1.1 基础上增加多复杂度结论、公式和实验结构；v1.3 进一步收紧时间上限、对象结构、正确性方法和关系候选字段；v1.4 为代码密集课程增加解法—代码—状态模型引用、区间/指针/窗口语义和分阶段正确性义务。历史调用继续保留原 Prompt 与哈希，渲染脚本仍支持显式选择 v1.3。
+1. 从 `prompts/video-evidence-v1.5.template.md` 渲染当前课次专用 Prompt。v1.2 在 v1.1 基础上增加多复杂度结论、公式和实验结构；v1.3 进一步收紧时间上限、对象结构、正确性方法和关系候选字段；v1.4 为代码密集课程增加解法—代码—状态模型引用、区间/指针/窗口语义和分阶段正确性义务；v1.5 进一步要求顶层只能是 JSON 对象，并补充递归契约、候选域、选择—递归—撤销和访问标记生命周期规则。历史调用继续保留原 Prompt 与哈希，渲染脚本仍支持显式选择 v1.3 或 v1.4。
 2. 本地视频默认先尝试 `balanced` 压缩，副本写到明确的课次路径；仍超过 50 MB 时再评估 `strong`、分段或受控 URL。
 3. 原片永不覆盖；已有压缩副本先校验哈希和参数，不静默重建。
 4. 调用示例：
 
 ```bash
 ZENMUX_BASE_URL="https://zenmux.dev/api/v1" pnpm zenmux understand \
-  --input "work/algorithm-interview-course/incoming/3-1 从二分查找法看如何写出正确的程序_慕课网.mp4" \
-  --prompt-file "work/algorithm-interview-course/prompts/03-01-video-evidence-v1.4.md" \
+  --input "work/algorithm-interview-course/incoming/8-1 树形问题 Letter Combinations of a Phone Number_慕课网.mp4" \
+  --prompt-file "work/algorithm-interview-course/prompts/08-01-video-evidence-v1.5.md" \
   --model "<live-video-capable-model>" \
   --extra-file "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json" \
   --compress balanced \
-  --compressed-out "work/algorithm-interview-course/compressed/03-01-balanced.mp4" \
-  --out "outputs/algorithm-interview-course/understanding/raw/03-01.json"
+  --compressed-out "work/algorithm-interview-course/compressed/08-01-balanced.mp4" \
+  --out "outputs/algorithm-interview-course/understanding/raw/08-01.json"
 ```
 
 模型必须从实时目录中确认支持 `video` 或适用的 `file` 输入。仓库 CLI 会把本地文件整体读入内存并编码为 Base64，默认上限 50 MB；不要仅靠大幅提高 `--max-local-mb` 处理超大文件。
@@ -73,8 +73,8 @@ ZENMUX_BASE_URL="https://zenmux.dev/api/v1" pnpm zenmux understand \
 `configs/zenmux-json-object-extra.json` 要求模型返回 JSON object，但它只保证 JSON 语法，不代替本地 schema 门禁。第二章校准时，`google/gemini-3.6-flash` 对完整课程 schema 的 `json_schema` 请求因嵌套深度和受支持关键字限制返回 HTTP 400，因此当前组合使用：
 
 1. `response_format: {"type": "json_object"}` 约束输出为 JSON；
-2. v1.4 Prompt 明确所有必填对象、枚举、视频时长上限，以及解法、代码和状态模型的引用关系；
-3. `normalize-lesson-evidence.mjs` 严格检查课次 ID、时长、证据引用、时间边界、对象形状、跨对象引用和正确性方法；v1.4 的循环不变量还必须具有初始化、保持、终止和后置条件证据；
+2. v1.5 Prompt 明确所有必填对象、枚举、视频时长上限、顶层对象边界，以及解法、代码和状态模型的引用关系；
+3. `normalize-lesson-evidence.mjs` 严格检查课次 ID、时长、证据引用、时间边界、对象形状、跨对象引用和正确性方法；v1.4 与 v1.5 的循环不变量还必须具有初始化、保持、终止和后置条件证据；
 4. `validate-project.mjs` 对 manifest、规范化证据、笔记和关系图做跨文件对账。
 
 `build-response-format.mjs` 只用于评估某个供应商是否能无损表达 canonical schema；遇到供应商不支持的多类型 union 时会明确失败，不会静默选择其中一种类型生成有损 schema。
@@ -90,12 +90,14 @@ node projects/algorithm-interview-course/scripts/normalize-lesson-evidence.mjs \
   --chapter "03" \
   --asset-id "asset:video-03-01" \
   --duration "<ffprobe-seconds>" \
-  --prompt-version "video-evidence-v1.4"
+  --prompt-version "video-evidence-v1.5"
 ```
 
 每一次尝试都必须写入 `manifest.json` 的 `attempts`，包括 HTTP、网络和本地门禁失败；得到模型响应的尝试同时写入 `generations` 并标记 `accepted` 或 `rejected`。成功课次可使用 `register-understanding.mjs` 登记请求 ID、模型、输入输出、Prompt/压缩哈希和 token 用量。CLI 本身不会自动修改 manifest。
 
-`register-understanding.mjs` 只接受已完成人工 QA 的结果：人工核对代码关键 token、区间/指针/窗口语义和关键时间戳后，必须显式传入 `--qa-reviewed true`；省略该参数或传入其他值都会拒绝注册，不会写入 manifest/progress。项目验收还会要求所有已接受的 v1.4 尝试都具有 `validation.qaStatus: "completed"`，并要求每份状态为 `lessonNote: "completed"` 的笔记同时具有 `qa: "completed"`。
+`register-understanding.mjs` 只接受已完成人工 QA 的结果：人工核对代码关键 token、区间/指针/窗口/回溯状态语义和关键时间戳后，必须显式传入 `--qa-reviewed true`；省略该参数或传入其他值都会拒绝注册，不会写入 manifest/progress。项目验收还会要求所有已接受的 v1.4/v1.5 尝试都具有 `validation.qaStatus: "completed"`，并要求每份状态为 `lessonNote: "completed"` 的笔记同时具有 `qa: "completed"`。
+
+代码验证状态分成两层：Prompt 与 normalizer 要求模型抽取结果中的 `codeArtifacts[].verification` 固定为 `not_run`，防止模型把课程现场运行或平台 Accepted 冒充本项目验证；人工 QA 若随后确实在本机完成语法编译或代表性测试，可以把 **normalized 证据**中的状态提升为 `compiled` 或 `tested`，并在正式笔记中记录脚手架、覆盖范围与未验证项。不得只依据视频画面提升本地验证状态。
 
 ## 阶段 4：文本证据与单课笔记
 
