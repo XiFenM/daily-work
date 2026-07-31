@@ -3,9 +3,9 @@
   "courseTitle": "算法面试课程",
   "chapterCount": 11,
   "lessonCount": 70,
-  "knownDurationLessonCount": 66,
-  "knownDurationSeconds": 65379,
-  "unknownDurationLessonIds": ["01-01", "06-08", "07-03", "09-10"],
+  "knownDurationLessonCount": 67,
+  "knownDurationSeconds": 66629.430349,
+  "unknownDurationLessonIds": ["06-08", "07-03", "09-10"],
   "normalizationNotes": [
     {
       "lessonId": "01-01",
@@ -17,7 +17,7 @@
     },
     {
       "lessonId": "07-05",
-      "note": "目录中的英文题名为“Binary Tree Path”，保留原文，待课程素材确认是否应为复数形式。"
+      "note": "目录中的英文题名为“Binary Tree Path”；课程题面确认 LeetCode 257 的正式题名为“Binary Tree Paths”，因此保留原始标题并设置复数形式的规范标题。"
     },
     {
       "lessonId": "08-07",
@@ -609,7 +609,7 @@
       "id": "07",
       "number": 7,
       "title": "二叉树和递归",
-      "knownDurationSeconds": 4961,
+      "knownDurationSeconds": 4970.921088,
       "lessons": [
         {
           "id": "07-01",
@@ -620,7 +620,9 @@
           "titleNormalized": "二叉树天然的递归结构",
           "durationText": "15:58",
           "durationSeconds": 958,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 961.24,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-07-01"]
         },
         {
           "id": "07-02",
@@ -631,7 +633,9 @@
           "titleNormalized": "一个简单的二叉树问题引发的血案 Invert Binary Tree",
           "durationText": "09:08",
           "durationSeconds": 548,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 549,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-07-02"]
         },
         {
           "id": "07-03",
@@ -642,7 +646,8 @@
           "titleNormalized": "不会翻转二叉树的大神",
           "durationText": null,
           "durationSeconds": null,
-          "contentKind": "unknown"
+          "contentKind": "text",
+          "assetRefs": ["asset:text-07-03"]
         },
         {
           "id": "07-04",
@@ -653,7 +658,9 @@
           "titleNormalized": "注意递归的终止条件 Path Sum",
           "durationText": "12:04",
           "durationSeconds": 724,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 724.2,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-07-04"]
         },
         {
           "id": "07-05",
@@ -661,10 +668,12 @@
           "orderInChapter": 5,
           "sourceLine": "7-5 定义递归问题 Binary Tree Path(13:34)",
           "titleRaw": "定义递归问题 Binary Tree Path",
-          "titleNormalized": "定义递归问题 Binary Tree Path",
+          "titleNormalized": "定义递归问题 Binary Tree Paths",
           "durationText": "13:34",
           "durationSeconds": 814,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 814.881088,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-07-05"]
         },
         {
           "id": "07-06",
@@ -675,7 +684,9 @@
           "titleNormalized": "稍复杂的递归逻辑 Path Sum III",
           "durationText": "14:11",
           "durationSeconds": 851,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 851.16,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-07-06"]
         },
         {
           "id": "07-07",
@@ -686,7 +697,9 @@
           "titleNormalized": "二分搜索树中的问题 Lowest Common Ancestor of a Binary Search Tree",
           "durationText": "17:46",
           "durationSeconds": 1066,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1070.44,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-07-07"]
         }
       ]
     },

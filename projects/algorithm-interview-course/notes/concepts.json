@@ -35,7 +35,7 @@
       "nameZh": "澄清约束",
       "nameEn": "Constraint clarification",
       "aliases": ["从条件读取暗示", "约束驱动选型"],
-      "definition": "在选择算法前确认数据分布、规模、顺序性、空间、稳定性、存储结构和运行环境等会改变方案的条件。",
+      "definition": "在选择算法前确认数据分布、规模、顺序性、空间、稳定性、存储结构、路径起止与方向、值域、指针和目标存在性、运行环境等会改变方案的条件。",
       "status": "verified",
       "lessonRefs": [
         "01-01",
@@ -50,7 +50,11 @@
         "04-06",
         "04-08",
         "06-01",
-        "06-07"
+        "06-07",
+        "07-04",
+        "07-05",
+        "07-06",
+        "07-07"
       ],
       "evidenceRefs": [
         "01-01:ev-004",
@@ -69,7 +73,13 @@
         "04-08:ev-006",
         "06-01:ev-005",
         "06-01:ev-006",
-        "06-07:ev-001"
+        "06-07:ev-001",
+        "07-04:ev-002",
+        "07-04:ev-007",
+        "07-05:ev-002",
+        "07-06:ev-001",
+        "07-06:ev-004",
+        "07-07:ev-005"
       ]
     },
     {
@@ -77,15 +87,18 @@
       "type": "concept",
       "nameZh": "面试评价范围",
       "nameEn": "Interview evaluation scope",
-      "aliases": ["算法面试只是面试的一部分"],
-      "definition": "算法面试只是技术面试的一部分，技术表现又只是完整招聘评价的一部分；项目、行为和沟通同样会被考察。",
+      "aliases": ["算法面试只是面试的一部分", "算法答案不是全部"],
+      "definition": "算法题的正确答案只是面试评价的一部分；项目、软件工程、行为、沟通与共同解决问题的体验同样可能被考察，具体权重随岗位和组织而异。",
       "status": "verified",
-      "lessonRefs": ["01-01", "01-02", "01-03"],
+      "lessonRefs": ["01-01", "01-02", "01-03", "07-03"],
       "evidenceRefs": [
         "01-01:ev-003",
         "01-02:ev-001",
         "01-02:ev-002",
-        "01-03:ev-001"
+        "01-03:ev-001",
+        "07-03:ev-002",
+        "07-03:ev-008",
+        "07-03:ev-009"
       ]
     },
     {
@@ -313,9 +326,10 @@
         "代码规范",
         "边界条件",
         "索引边界",
-        "链表边界"
+        "链表边界",
+        "递归边界"
       ],
-      "definition": "在实现中主动处理空输入、特殊数量、空指针、索引基数和区间端点等边界，并保持变量语义、模块化和复用性。",
+      "definition": "在实现中主动处理空输入、特殊数量、空指针、索引基数、区间端点、递归基例和路径端点等边界，并保持变量与函数语义、模块化和复用性。",
       "status": "verified",
       "lessonRefs": [
         "01-01",
@@ -339,7 +353,11 @@
         "05-05",
         "05-06",
         "06-01",
-        "06-07"
+        "06-07",
+        "07-04",
+        "07-05",
+        "07-06",
+        "07-07"
       ],
       "evidenceRefs": [
         "01-01:ev-005",
@@ -384,7 +402,13 @@
         "05-06:ev-005",
         "06-01:ev-004",
         "06-07:ev-001",
-        "06-07:ev-004"
+        "06-07:ev-004",
+        "07-04:ev-006",
+        "07-04:ev-008",
+        "07-05:ev-004",
+        "07-06:ev-004",
+        "07-06:ev-005",
+        "07-07:ev-005"
       ]
     },
     {
@@ -1050,14 +1074,15 @@
       "aliases": ["平衡二叉树容器", "有序 set", "有序 map"],
       "definition": "以课程所述平衡二叉树为底层的 set/map 类容器，通常以 O(log n) 完成插入、删除和查找，并保留键的顺序，从而支持最值、前驱后继及 lower_bound 等范围定位；这是课程层面的抽象，不限定标准库的具体树种。",
       "status": "verified",
-      "lessonRefs": ["04-03", "04-08"],
+      "lessonRefs": ["04-03", "04-08", "07-07"],
       "evidenceRefs": [
         "04-03:ev-001",
         "04-03:ev-005",
         "04-03:ev-006",
         "04-08:ev-002",
         "04-08:ev-003",
-        "04-08:ev-005"
+        "04-08:ev-005",
+        "07-07:ev-002"
       ]
     },
     {
@@ -1481,14 +1506,15 @@
       "aliases": ["系统栈", "递归现场", "Call stack"],
       "definition": "递归函数在调用子问题前暂停当前现场，并由系统栈保存尚待执行的操作与返回位置；子调用结束后弹出现场继续执行，因此递归控制流可以进一步改写为显式栈。",
       "status": "verified",
-      "lessonRefs": ["06-02", "06-03"],
+      "lessonRefs": ["06-02", "06-03", "07-01"],
       "evidenceRefs": [
         "06-02:ev-003",
         "06-02:ev-004",
         "06-02:ev-005",
         "06-02:ev-006",
         "06-03:ev-001",
-        "06-03:ev-002"
+        "06-03:ev-002",
+        "07-01:ev-006"
       ]
     },
     {
@@ -1746,6 +1772,250 @@
         "06-07:ev-004",
         "06-07:ev-005"
       ]
+    },
+    {
+      "id": "concept:binary-tree-recursive-structure",
+      "type": "concept",
+      "nameZh": "二叉树的递归结构",
+      "nameEn": "Recursive structure of a binary tree",
+      "aliases": ["二叉树天然递归结构", "树的递归定义"],
+      "definition": "空树是二叉树；非空二叉树由根节点和两棵仍为二叉树的左右子树组成。由此，许多树问题可以把当前树的任务缩小为左右子树上的同类任务。",
+      "status": "verified",
+      "lessonRefs": [
+        "06-02",
+        "07-01",
+        "07-02",
+        "07-04",
+        "07-05",
+        "07-06",
+        "07-07"
+      ],
+      "evidenceRefs": [
+        "06-02:ev-003",
+        "07-01:ev-002",
+        "07-01:ev-005",
+        "07-02:ev-004",
+        "07-04:ev-003",
+        "07-04:ev-008",
+        "07-05:ev-003",
+        "07-05:ev-004",
+        "07-06:ev-003",
+        "07-06:ev-005",
+        "07-07:ev-001",
+        "07-07:ev-004"
+      ]
+    },
+    {
+      "id": "concept:recursive-function-contract",
+      "type": "concept",
+      "nameZh": "递归函数契约",
+      "nameEn": "Recursive function contract",
+      "aliases": ["函数语义", "递归问题定义", "Recursive contract"],
+      "definition": "先精确定义递归函数对当前输入代表的任务、返回值或副作用，再依据这一语义写基本情况、子问题调用与结果组合；理解和证明代码时把子调用视为满足同一契约。",
+      "status": "verified",
+      "lessonRefs": ["07-01", "07-02", "07-04", "07-05", "07-06", "07-07"],
+      "evidenceRefs": [
+        "07-01:ev-003",
+        "07-01:ev-012",
+        "07-02:ev-004",
+        "07-04:ev-003",
+        "07-04:ev-008",
+        "07-05:ev-001",
+        "07-05:ev-004",
+        "07-06:ev-003",
+        "07-06:ev-004",
+        "07-06:ev-005",
+        "07-07:ev-004",
+        "07-07:ev-005"
+      ]
+    },
+    {
+      "id": "concept:recursion-base-case",
+      "type": "concept",
+      "nameZh": "递归基例",
+      "nameEn": "Recursion base case",
+      "aliases": ["递归终止条件", "基本情况", "Base case"],
+      "definition": "无需继续调用子问题即可直接返回的情况。树递归中的基例必须服从函数契约：空指针、叶节点或当前值命中并不天然等价，选择错误会导致误判、遗漏或调用栈溢出。",
+      "status": "verified",
+      "lessonRefs": ["07-01", "07-02", "07-04", "07-05", "07-06", "07-07"],
+      "evidenceRefs": [
+        "07-01:ev-004",
+        "07-01:ev-005",
+        "07-01:ev-006",
+        "07-02:ev-004",
+        "07-04:ev-001",
+        "07-04:ev-007",
+        "07-04:ev-008",
+        "07-05:ev-004",
+        "07-06:ev-004",
+        "07-06:ev-005",
+        "07-07:ev-005"
+      ]
+    },
+    {
+      "id": "concept:root-to-leaf-path",
+      "type": "concept",
+      "nameZh": "根到叶路径",
+      "nameEn": "Root-to-leaf path",
+      "aliases": ["从根到叶子的路径", "Root-to-leaf path"],
+      "definition": "从当前树的根节点开始，沿父子边向下，并在左右孩子都为空的叶节点结束的完整路径；空孩子本身不是路径终点。",
+      "status": "verified",
+      "lessonRefs": ["07-01", "07-04", "07-05"],
+      "evidenceRefs": [
+        "07-01:ev-009",
+        "07-04:ev-002",
+        "07-04:ev-007",
+        "07-05:ev-002",
+        "07-05:ev-004"
+      ]
+    },
+    {
+      "id": "pattern:path-sum-start-node-decomposition",
+      "type": "pattern",
+      "nameZh": "路径起点分解",
+      "nameEn": "Path start-node decomposition",
+      "aliases": ["Path Sum III 起点分解", "双重递归", "枚举路径起点"],
+      "definition": "把任意起点的向下路径问题拆成两层契约：外层递归枚举每个可能起点，内层递归只统计从固定起点出发的合法路径；Path Sum III 再按起点位于当前根、左子树或右子树划分答案。",
+      "status": "verified",
+      "lessonRefs": ["07-06"],
+      "evidenceRefs": ["07-06:ev-001", "07-06:ev-003", "07-06:ev-005"]
+    },
+    {
+      "id": "data-structure:binary-search-tree",
+      "type": "data_structure",
+      "nameZh": "二分搜索树",
+      "nameEn": "Binary search tree",
+      "aliases": ["二叉搜索树", "BST", "Binary Search Tree"],
+      "definition": "对每个节点，左子树所有键都小于该节点，右子树所有键都大于该节点，且左右子树仍分别是二分搜索树。该全子树有序性支持定向搜索；操作成本取决于树高，不能把平衡树的 O(log n) 无条件套给任意 BST。",
+      "status": "verified",
+      "lessonRefs": ["04-03", "07-07"],
+      "evidenceRefs": [
+        "04-03:ev-001",
+        "04-03:ev-005",
+        "04-03:ev-006",
+        "07-07:ev-001",
+        "07-07:ev-002"
+      ]
+    },
+    {
+      "id": "concept:lowest-common-ancestor",
+      "type": "concept",
+      "nameZh": "最近公共祖先",
+      "nameEn": "Lowest common ancestor",
+      "aliases": ["LCA", "Lowest Common Ancestor"],
+      "definition": "给定树中的两个节点，同时是二者祖先且距离二者最近的节点；一个目标节点本身可以是另一个目标节点的祖先。",
+      "status": "verified",
+      "lessonRefs": ["07-07"],
+      "evidenceRefs": ["07-07:ev-003", "07-07:ev-004"]
+    },
+    {
+      "id": "pattern:bst-order-pruning",
+      "type": "pattern",
+      "nameZh": "BST 顺序剪枝",
+      "nameEn": "BST order-guided pruning",
+      "aliases": ["BST 有序性剪枝", "顺序性定向搜索"],
+      "definition": "利用二分搜索树的全子树有序性判断目标必在当前节点哪一侧，从而只进入一棵子树；求 LCA 时，两目标同小则向左、同大则向右，否则当前节点就是分叉点。",
+      "status": "verified",
+      "lessonRefs": ["07-07"],
+      "evidenceRefs": ["07-07:ev-001", "07-07:ev-004", "07-07:ev-005"]
+    },
+    {
+      "id": "concept:user-centered-engineering",
+      "type": "concept",
+      "nameZh": "以用户为中心的工程",
+      "nameEn": "User-centered engineering",
+      "aliases": ["以用户为中心的软件", "尊重用户", "用户体验取向"],
+      "definition": "用真实用户的失败与恢复路径检验工程设计：尽量解释错误、连接相似问题、降低用户自行修复或参与改进的门槛，并通过技术取舍减少安装、依赖和使用痛苦；这并不等于技术质量可以被忽略。",
+      "status": "verified",
+      "lessonRefs": ["07-03"],
+      "evidenceRefs": [
+        "07-03:ev-005",
+        "07-03:ev-006",
+        "07-03:ev-007",
+        "07-03:ev-010"
+      ]
+    },
+    {
+      "id": "problem:leetcode-104",
+      "type": "problem",
+      "nameZh": "二叉树的最大深度",
+      "nameEn": "Maximum Depth of Binary Tree",
+      "aliases": ["LeetCode 104"],
+      "definition": "求二叉树从根到叶的最长路径长度；课程令空树深度为 0，并返回左右子树最大深度的较大值加 1。",
+      "status": "verified",
+      "lessonRefs": ["07-01"],
+      "evidenceRefs": ["07-01:ev-009", "07-01:ev-010", "07-01:ev-011"]
+    },
+    {
+      "id": "problem:leetcode-226",
+      "type": "problem",
+      "nameZh": "翻转二叉树",
+      "nameEn": "Invert Binary Tree",
+      "aliases": ["LeetCode 226"],
+      "definition": "把二叉树镜像翻转；课程递归翻转左右子树、交换当前节点的左右孩子指针，并返回原根指针。",
+      "status": "verified",
+      "lessonRefs": ["07-02"],
+      "evidenceRefs": ["07-02:ev-002", "07-02:ev-004"]
+    },
+    {
+      "id": "problem:leetcode-112",
+      "type": "problem",
+      "nameZh": "路径总和",
+      "nameEn": "Path Sum",
+      "aliases": ["LeetCode 112"],
+      "definition": "判断二叉树中是否存在节点和等于目标值的根到叶路径；课程用单侧树反例说明成功终止必须发生在真正的叶节点，而不能把空孩子误当成路径结尾。",
+      "status": "verified",
+      "lessonRefs": ["07-04"],
+      "evidenceRefs": [
+        "07-04:ev-002",
+        "07-04:ev-006",
+        "07-04:ev-007",
+        "07-04:ev-008",
+        "07-04:ev-009"
+      ]
+    },
+    {
+      "id": "problem:leetcode-257",
+      "type": "problem",
+      "nameZh": "二叉树的所有路径",
+      "nameEn": "Binary Tree Paths",
+      "aliases": ["LeetCode 257"],
+      "definition": "返回二叉树中所有根到叶路径的字符串；课程让递归函数返回子树路径集合，再给每条左右子树路径加上当前节点前缀。",
+      "status": "verified",
+      "lessonRefs": ["07-05"],
+      "evidenceRefs": [
+        "07-05:ev-001",
+        "07-05:ev-002",
+        "07-05:ev-003",
+        "07-05:ev-004"
+      ]
+    },
+    {
+      "id": "problem:leetcode-437",
+      "type": "problem",
+      "nameZh": "路径总和 III",
+      "nameEn": "Path Sum III",
+      "aliases": ["LeetCode 437"],
+      "definition": "统计二叉树中节点和等于目标值的向下路径数量，路径可从任意节点开始并在任意节点结束；课程以外层递归枚举起点、内层递归统计固定起点路径，并因负数或零的可能性在命中后继续搜索。",
+      "status": "verified",
+      "lessonRefs": ["07-06"],
+      "evidenceRefs": [
+        "07-06:ev-001",
+        "07-06:ev-003",
+        "07-06:ev-004",
+        "07-06:ev-005"
+      ]
+    },
+    {
+      "id": "problem:leetcode-235",
+      "type": "problem",
+      "nameZh": "二分搜索树的最近公共祖先",
+      "nameEn": "Lowest Common Ancestor of a Binary Search Tree",
+      "aliases": ["LeetCode 235"],
+      "definition": "在二分搜索树中寻找两个给定节点的最近公共祖先；课程根据两目标相对当前根的值同时向左、同时向右或在当前处分叉来选择递归分支。",
+      "status": "verified",
+      "lessonRefs": ["07-07"],
+      "evidenceRefs": ["07-07:ev-003", "07-07:ev-004", "07-07:ev-005"]
     }
   ],
   "conceptShape": {

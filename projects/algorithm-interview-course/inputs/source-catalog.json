@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "sourceRoot": "work/algorithm-interview-course/incoming",
   "inventory": {
-    "scannedAt": "2026-07-31T06:13:38.000Z",
+    "scannedAt": "2026-07-31T07:38:40.000Z",
     "layout": "flat",
     "courseAssetCount": 70,
     "videoCount": 67,
@@ -14,7 +14,7 @@
       "duplicateLessonIds": [],
       "missingLessonIds": []
     },
-    "catalogScope": "chapters-01-06"
+    "catalogScope": "chapters-01-07"
   },
   "items": [
     {
@@ -169,7 +169,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 19:52；实际 19:55.60，相差约 3.60 秒，课次映射无歧义。"
     },
     {
@@ -200,7 +200,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 11:26，与实际 11:26.289 相符。"
     },
     {
@@ -231,7 +231,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 19:20，与实际 19:20.56 相符。"
     },
     {
@@ -262,7 +262,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 14:53，与实际 14:53.48 相符。"
     },
     {
@@ -293,7 +293,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 14:46，与实际 14:46.44 相符。"
     },
     {
@@ -324,7 +324,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 15:16，与实际 15:16.28 相符。"
     },
     {
@@ -355,7 +355,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 11:25；实际 11:29.888，相差约 4.888 秒，课次映射无歧义。"
     },
     {
@@ -386,7 +386,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 15:27；实际 15:30.520，相差约 3.520 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -417,7 +417,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 12:06，与实际 12:06.480 相符。12 帧联系表检查通过。"
     },
     {
@@ -448,7 +448,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 13:27，与实际 13:27.520 相符。12 帧联系表检查通过。"
     },
     {
@@ -479,7 +479,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 15:30，与实际 15:30.480 相符。12 帧联系表检查通过。"
     },
     {
@@ -510,7 +510,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 22:26，与实际 22:26.640 相符。12 帧联系表检查通过。"
     },
     {
@@ -541,7 +541,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 19:44，与实际 19:44.280 相符。12 帧联系表检查通过。"
     },
     {
@@ -572,7 +572,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 14:09，与实际 14:09.920 相符。12 帧联系表检查通过。"
     },
     {
@@ -603,7 +603,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 15:20；实际 15:24.680，相差约 4.680 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -634,7 +634,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 11:12；实际 11:15.283，相差约 3.283 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -665,7 +665,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 13:05；实际 13:05.960，相差约 0.960 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -696,7 +696,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 19:00；实际 19:00.120，相差约 0.120 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -727,7 +727,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 16:56；实际 16:57.000，相差约 1.000 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -758,7 +758,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 13:25；实际 13:25.200，相差约 0.200 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -789,7 +789,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 14:45；实际 14:45.600，相差约 0.600 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -820,7 +820,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 11:20；实际 11:20.484，相差约 0.484 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -851,7 +851,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 10:50；实际 10:54.280，相差约 4.280 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -882,7 +882,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 15:44；实际 15:47.520，相差约 3.520 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -913,7 +913,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 16:26；实际 16:26.960，相差约 0.960 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -944,7 +944,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 17:08；实际 17:08.800，相差约 0.800 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -975,7 +975,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 13:30；实际 13:30.720，相差约 0.720 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -1006,7 +1006,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 07:29；实际 07:29.960，相差约 0.960 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -1037,7 +1037,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 16:49；实际 16:53.520，相差约 4.520 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -1068,7 +1068,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 16:10；实际 16:13.440，相差约 3.440 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -1099,7 +1099,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 16:03；实际 16:03.680，相差约 0.680 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -1130,7 +1130,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 19:33；实际 19:33.120，相差约 0.120 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -1161,7 +1161,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 10:26；实际 10:26.320，相差约 0.320 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -1192,7 +1192,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 21:20；实际 21:20.880，相差约 0.880 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -1223,7 +1223,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 11:09；实际 11:09.040，相差约 0.040 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -1254,7 +1254,7 @@
         "audioChannelLayout": "stereo",
         "subtitleStreams": 0
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "目录标称 15:37；实际 15:41.685，相差约 4.685 秒。12 帧联系表检查通过，课次映射无歧义。"
     },
     {
@@ -1270,8 +1270,210 @@
         "confidence": 1,
         "reviewRequired": false
       },
-      "status": "mapped",
+      "status": "processed",
       "notes": "Markdown 文本教程，无视频时长；文件名、标题和正文共同确认其为第六章 Top K 两种求解思路的补充，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-07-01",
+      "kind": "video",
+      "originalFilename": "7-1 二叉树天然的递归结构_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/7-1 二叉树天然的递归结构_慕课网.mp4",
+      "sha256": "8dd43daa0232828b09553b0c1240bedb661e40d2f2d684521ca2f3bd0b73919f",
+      "bytes": 100812490,
+      "lessonIds": ["07-01"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 961.24,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 15:58；实际 16:01.240，相差约 3.240 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-07-02",
+      "kind": "video",
+      "originalFilename": "7-2 一个简单的二叉树问题引发的血案 Invert Binary Tree_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/7-2 一个简单的二叉树问题引发的血案 Invert Binary Tree_慕课网.mp4",
+      "sha256": "c1867007a7fceee4668a35ed64b9c0a2c80b4db4403514b68fee734d2ac4892d",
+      "bytes": 56246992,
+      "lessonIds": ["07-02"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 549,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 09:08；实际 09:09.000，相差约 1.000 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:text-07-03",
+      "kind": "text",
+      "originalFilename": "7-3 不会翻转二叉树的大神.md",
+      "path": "work/algorithm-interview-course/incoming/7-3 不会翻转二叉树的大神.md",
+      "sha256": "6946950fd39704380c1c1106a38dcdecbc47cfe642a32e25fc0863e6e4fe2448",
+      "bytes": 12798,
+      "lessonIds": ["07-03"],
+      "match": {
+        "method": "filename+title+content+manual",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "status": "processed",
+      "notes": "Markdown 文本教程，无视频时长；文件名、标题和正文共同确认其为第七章二叉树面试争议与工程价值观的补充，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-07-04",
+      "kind": "video",
+      "originalFilename": "7-4 注意递归的终止条件 Path Sum_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/7-4 注意递归的终止条件 Path Sum_慕课网.mp4",
+      "sha256": "f538a3a235f7e3614aa067f738c6da168fc38f0abcd68301c008ce7c99aa88d4",
+      "bytes": 70637336,
+      "lessonIds": ["07-04"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 724.2,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 12:04；实际 12:04.200，相差约 0.200 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-07-05",
+      "kind": "video",
+      "originalFilename": "7-5 定义递归问题 Binary Tree Path_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/7-5 定义递归问题 Binary Tree Path_慕课网.mp4",
+      "sha256": "4f083bc794db66e6bacf3fd0ebb2041ea279e92e920ca0fa3f8e57a799939110",
+      "bytes": 86306524,
+      "lessonIds": ["07-05"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 814.881088,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 13:34；实际 13:34.881，相差约 0.881 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-07-06",
+      "kind": "video",
+      "originalFilename": "7-6 稍复杂的递归逻辑 Path Sum III_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/7-6 稍复杂的递归逻辑 Path Sum III_慕课网.mp4",
+      "sha256": "58ac21d9844be96a0f2251284a0cd7b37de6bd910d9ebc63029a219a25ce79c4",
+      "bytes": 89004194,
+      "lessonIds": ["07-06"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 851.16,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 14:11；实际 14:11.160，相差约 0.160 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-07-07",
+      "kind": "video",
+      "originalFilename": "7-7 二分搜索树中的问题 Lowest Common Ancestor of a Binary Search Tree_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/7-7 二分搜索树中的问题 Lowest Common Ancestor of a Binary Search Tree_慕课网.mp4",
+      "sha256": "dc5959381798f8a4daf5c34c8aa34a11c58ffab3f086551c6ffd99fbb85bb7dc",
+      "bytes": 100100306,
+      "lessonIds": ["07-07"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1070.44,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 17:46；实际 17:50.440，相差约 4.440 秒。12 帧联系表检查通过，课次映射无歧义。"
     }
   ],
   "itemShape": {
