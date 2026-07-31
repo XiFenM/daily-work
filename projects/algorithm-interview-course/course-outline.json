@@ -498,7 +498,7 @@
       "id": "06",
       "number": 6,
       "title": "栈，队列，优先队列",
-      "knownDurationSeconds": 6618,
+      "knownDurationSeconds": 6628.165261,
       "lessons": [
         {
           "id": "06-01",
@@ -509,7 +509,9 @@
           "titleNormalized": "栈的基础应用 Valid Parentheses",
           "durationText": "16:10",
           "durationSeconds": 970,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 973.44,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-06-01"]
         },
         {
           "id": "06-02",
@@ -520,7 +522,9 @@
           "titleNormalized": "栈和递归的紧密关系 Binary Tree Preorder, Inorder and Postorder Traversal",
           "durationText": "16:03",
           "durationSeconds": 963,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 963.68,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-06-02"]
         },
         {
           "id": "06-03",
@@ -531,7 +535,9 @@
           "titleNormalized": "运用栈模拟递归",
           "durationText": "19:33",
           "durationSeconds": 1173,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1173.12,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-06-03"]
         },
         {
           "id": "06-04",
@@ -542,7 +548,9 @@
           "titleNormalized": "队列的典型应用 Binary Tree Level Order Traversal",
           "durationText": "10:26",
           "durationSeconds": 626,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 626.32,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-06-04"]
         },
         {
           "id": "06-05",
@@ -553,7 +561,9 @@
           "titleNormalized": "BFS 和图的最短路径 Perfect Squares",
           "durationText": "21:20",
           "durationSeconds": 1280,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1280.88,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-06-05"]
         },
         {
           "id": "06-06",
@@ -564,7 +574,9 @@
           "titleNormalized": "优先队列",
           "durationText": "11:09",
           "durationSeconds": 669,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 669.04,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-06-06"]
         },
         {
           "id": "06-07",
@@ -575,7 +587,9 @@
           "titleNormalized": "优先队列相关的算法问题 Top K Frequent Elements",
           "durationText": "15:37",
           "durationSeconds": 937,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 941.685261,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-06-07"]
         },
         {
           "id": "06-08",
@@ -586,7 +600,8 @@
           "titleNormalized": "两种关于 Top K 问题求解思路的套路",
           "durationText": null,
           "durationSeconds": null,
-          "contentKind": "unknown"
+          "contentKind": "text",
+          "assetRefs": ["asset:text-06-08"]
         }
       ]
     },
