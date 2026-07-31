@@ -412,7 +412,7 @@
       "id": "05",
       "number": 5,
       "title": "在链表中穿针引线",
-      "knownDurationSeconds": 5226,
+      "knownDurationSeconds": 5237.48,
       "lessons": [
         {
           "id": "05-01",
@@ -423,7 +423,9 @@
           "titleNormalized": "链表，在节点间穿针引线 Reverse Linked List",
           "durationText": "15:44",
           "durationSeconds": 944,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 947.52,
+          "contentKind": "problem_walkthrough",
+          "assetRefs": ["asset:video-05-01"]
         },
         {
           "id": "05-02",
@@ -434,7 +436,9 @@
           "titleNormalized": "测试你的链表程序",
           "durationText": "16:26",
           "durationSeconds": 986,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 986.96,
+          "contentKind": "mixed",
+          "assetRefs": ["asset:video-05-02"]
         },
         {
           "id": "05-03",
@@ -445,7 +449,9 @@
           "titleNormalized": "设立链表的虚拟头结点 Remove Linked List Elements",
           "durationText": "17:08",
           "durationSeconds": 1028,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1028.8,
+          "contentKind": "problem_walkthrough",
+          "assetRefs": ["asset:video-05-03"]
         },
         {
           "id": "05-04",
@@ -456,7 +462,9 @@
           "titleNormalized": "复杂的穿针引线 Swap Nodes in Pairs",
           "durationText": "13:30",
           "durationSeconds": 810,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 810.72,
+          "contentKind": "problem_walkthrough",
+          "assetRefs": ["asset:video-05-04"]
         },
         {
           "id": "05-05",
@@ -467,7 +475,9 @@
           "titleNormalized": "不仅仅是穿针引线 Delete Node in a Linked List",
           "durationText": "07:29",
           "durationSeconds": 449,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 449.96,
+          "contentKind": "problem_walkthrough",
+          "assetRefs": ["asset:video-05-05"]
         },
         {
           "id": "05-06",
@@ -478,7 +488,9 @@
           "titleNormalized": "链表与双指针 Remove Nth Node Form End of List",
           "durationText": "16:49",
           "durationSeconds": 1009,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1013.52,
+          "contentKind": "problem_walkthrough",
+          "assetRefs": ["asset:video-05-06"]
         }
       ]
     },

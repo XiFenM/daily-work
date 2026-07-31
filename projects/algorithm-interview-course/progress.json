@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-07-29T11:55:25Z",
+  "updatedAt": "2026-07-29T14:24:38.000Z",
   "summary": {
     "expectedLessons": 70,
     "knownDurationLessons": 67,
@@ -8,15 +8,15 @@
     "discoveredAssets": 70,
     "discoveredVideos": 67,
     "discoveredTexts": 3,
-    "catalogedAssets": 27,
+    "catalogedAssets": 33,
     "mappedLessons": 70,
-    "hashVerifiedLessons": 27,
-    "probedLessons": 27,
-    "understoodLessons": 27,
-    "synthesizedLessons": 27,
-    "verifiedLessons": 27,
-    "synthesizedChapters": 4,
-    "verifiedRelationshipEdges": 38
+    "hashVerifiedLessons": 33,
+    "probedLessons": 33,
+    "understoodLessons": 33,
+    "synthesizedLessons": 33,
+    "verifiedLessons": 33,
+    "synthesizedChapters": 5,
+    "verifiedRelationshipEdges": 44
   },
   "defaultLessonState": {
     "sourceMapping": "awaiting-source",
@@ -373,6 +373,90 @@
       "rejectedAttempts": 1,
       "transportFailures": 0,
       "acceptedAttemptId": "04-08-understanding-002"
+    },
+    "05-01": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "notes": "目录标称 15:44；FFprobe 实际 15:47.520，相差约 3.520 秒。12 帧联系表视觉 QA 已通过；人工逐帧确认反转链表的五步关键代码与屏幕一致，并将模型误标为 explicit_in_lesson 的 05-01→05-03 关系降为 editorial_hypothesis。",
+      "understandingAttempts": 1,
+      "rejectedAttempts": 0,
+      "transportFailures": 0,
+      "acceptedAttemptId": "05-01-understanding-001"
+    },
+    "05-02": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "notes": "目录标称 16:26；FFprobe 实际 16:26.960，相差约 0.960 秒。12 帧联系表视觉 QA 已通过；首次输出因 relationCandidates 使用未定义类型 `precedes` 被本地 schema 门禁拒绝，失败响应已留档。第二次通过；人工逐帧核对 create/print/delete 辅助函数，并把课程中的单样例运行标为 experimental_validation 而非完整证明。",
+      "understandingAttempts": 2,
+      "rejectedAttempts": 1,
+      "transportFailures": 0,
+      "acceptedAttemptId": "05-02-understanding-002"
+    },
+    "05-03": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "notes": "目录标称 17:08；FFprobe 实际 17:08.800，相差约 0.800 秒。12 帧联系表视觉 QA 已通过；人工逐帧确认无 dummyHead 与 dummyHead 两版屏幕代码。复杂度降为编辑推导，05-01→05-03 降为 editorial_hypothesis，并记录课程 GC 置空说法的运行时边界；代码仍为 not_run。",
+      "understandingAttempts": 1,
+      "rejectedAttempts": 0,
+      "transportFailures": 0,
+      "acceptedAttemptId": "05-03-understanding-001"
+    },
+    "05-04": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "notes": "目录标称 13:30；FFprobe 实际 13:30.720，相差约 0.720 秒。12 帧联系表视觉 QA 已通过；人工逐帧确认 dummyHead、循环条件和三处重连顺序。将“必须使用 next”改为本课显式保存版本，并把 05-03→05-04 降为 editorial_hypothesis 待双侧裁决。",
+      "understandingAttempts": 1,
+      "rejectedAttempts": 0,
+      "transportFailures": 0,
+      "acceptedAttemptId": "05-04-understanding-001"
+    },
+    "05-05": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "notes": "目录标称 07:29；FFprobe 实际 07:29.960，相差约 0.960 秒。12 帧联系表视觉 QA 已通过；人工审查确认屏幕原码完整，但其中尾节点分支 `delete node; node = NULL;` 无法修复前驱 next，会留下悬空指针；已作为课程代码边界明确记录，代码仍为 not_run。",
+      "understandingAttempts": 1,
+      "rejectedAttempts": 0,
+      "transportFailures": 0,
+      "acceptedAttemptId": "05-05-understanding-001"
+    },
+    "05-06": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "notes": "目录标称 16:49；FFprobe 实际 16:53.520，相差约 4.520 秒。12 帧联系表视觉 QA 已通过；人工 QA 将不可见的函数尾部从模型转录中移除并把代码降为 partial，另记录 `assert(n >= 0)` 与 1 起算契约不一致；03-06→05-06 保持编辑候选。",
+      "understandingAttempts": 1,
+      "rejectedAttempts": 0,
+      "transportFailures": 0,
+      "acceptedAttemptId": "05-06-understanding-001"
     }
   }
 }
