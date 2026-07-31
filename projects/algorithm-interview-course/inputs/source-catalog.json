@@ -14,7 +14,7 @@
       "duplicateLessonIds": [],
       "missingLessonIds": []
     },
-    "catalogScope": "chapters-01-04"
+    "catalogScope": "chapters-01-05"
   },
   "items": [
     {
@@ -853,6 +853,192 @@
       },
       "status": "mapped",
       "notes": "目录标称 10:50；实际 10:54.280，相差约 4.280 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-05-01",
+      "kind": "video",
+      "originalFilename": "5-1 链表，在节点间穿针引线 Reverse Linked List_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/5-1 链表，在节点间穿针引线 Reverse Linked List_慕课网.mp4",
+      "sha256": "626da06b10954f93c885bf44feb12b1fe324d60fa262650f154e7095df494adf",
+      "bytes": 93008374,
+      "lessonIds": ["05-01"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 947.52,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 15:44；实际 15:47.520，相差约 3.520 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-05-02",
+      "kind": "video",
+      "originalFilename": "5-2 测试你的链表程序_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/5-2 测试你的链表程序_慕课网.mp4",
+      "sha256": "09c50f70557804ec6ab61cef02df91ba06f1f9888deddc8825028ec15a29e77b",
+      "bytes": 88546875,
+      "lessonIds": ["05-02"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 986.96,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 16:26；实际 16:26.960，相差约 0.960 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-05-03",
+      "kind": "video",
+      "originalFilename": "5-3 设立链表的虚拟头结点 Remove Linked List Elements_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/5-3 设立链表的虚拟头结点 Remove Linked List Elements_慕课网.mp4",
+      "sha256": "2078b9ffd10fd0d17e91cf035757000089870fffd52b13fadaca1ca94b47464a",
+      "bytes": 97772560,
+      "lessonIds": ["05-03"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1028.8,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 17:08；实际 17:08.800，相差约 0.800 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-05-04",
+      "kind": "video",
+      "originalFilename": "5-4 复杂的穿针引线 Swap Nodes in Pairs_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/5-4 复杂的穿针引线 Swap Nodes in Pairs_慕课网.mp4",
+      "sha256": "87b76c01218f60d8dc461cc712472a1300e69e42c9aa81bbff3e23d51dd0b3c4",
+      "bytes": 72670030,
+      "lessonIds": ["05-04"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 810.72,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 13:30；实际 13:30.720，相差约 0.720 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-05-05",
+      "kind": "video",
+      "originalFilename": "5-5 不仅仅是穿针引线 Delete Node in a Linked List_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/5-5 不仅仅是穿针引线 Delete Node in a Linked List_慕课网.mp4",
+      "sha256": "f9e47104e5c0a2b9c7ed24ecff1c6d0a467e229bc1c4afdd244ebc28376d413e",
+      "bytes": 49912216,
+      "lessonIds": ["05-05"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 449.96,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 07:29；实际 07:29.960，相差约 0.960 秒。12 帧联系表检查通过，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-05-06",
+      "kind": "video",
+      "originalFilename": "5-6 链表与双指针 Remove Nth Node Form End of List_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/5-6 链表与双指针 Remove Nth Node Form End of List_慕课网.mp4",
+      "sha256": "946ea9ed3ec7070ef45495d147f095872496bea224e79e59b4f76e79728927e9",
+      "bytes": 102267349,
+      "lessonIds": ["05-06"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1013.52,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "mapped",
+      "notes": "目录标称 16:49；实际 16:53.520，相差约 4.520 秒。12 帧联系表检查通过，课次映射无歧义。"
     }
   ],
   "itemShape": {

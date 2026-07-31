@@ -1170,16 +1170,72 @@
       "createdBy": "chapter-04-review-v1"
     },
     {
+      "id": "edge:video:05-01:05-02",
+      "from": "lesson:05-01",
+      "to": "lesson:05-02",
+      "type": "extends",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "05-01 在 LeetCode 提交并通过 reverseList；05-02 开场明确要为“上节课编写的 reverseList”补充本地构建、打印和释放工具，并实际调用该函数打印反转前后结果，因此后者直接把算法实现扩展为可观察的本地测试流程。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "05-01",
+          "assetId": "asset:video-05-01",
+          "startMs": 525000,
+          "endMs": 830000,
+          "locator": "ev-005 · 08:45-13:50"
+        },
+        {
+          "lessonId": "05-02",
+          "assetId": "asset:video-05-02",
+          "startMs": 0,
+          "endMs": 40000,
+          "locator": "ev-001 · 00:00-00:40"
+        },
+        {
+          "lessonId": "05-02",
+          "assetId": "asset:video-05-02",
+          "startMs": 316000,
+          "endMs": 464000,
+          "locator": "ev-004 · 05:16-07:44"
+        }
+      ],
+      "createdBy": "chapter-05-review-v1"
+    },
+    {
       "id": "edge:outline:05-01:05-03",
       "from": "lesson:05-01",
       "to": "lesson:05-03",
       "type": "recommended_before",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "基本指针改链是理解虚拟头结点删除逻辑的基础。",
-      "confidence": 0.88,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "05-01 通过保存后继再改写 next 建立防断链的基本指针重连语义；05-03 先用同类前驱—待删节点重连完成普通删除，再引入 dummyHead 统一头结点删除。两课内容构成从基础改链到边界统一的明确学习递进。",
+      "confidence": 0.96,
+      "evidence": [
+        {
+          "lessonId": "05-01",
+          "assetId": "asset:video-05-01",
+          "startMs": 178000,
+          "endMs": 524000,
+          "locator": "ev-003–ev-004 · 02:58-08:44"
+        },
+        {
+          "lessonId": "05-03",
+          "assetId": "asset:video-05-03",
+          "startMs": 75000,
+          "endMs": 223000,
+          "locator": "ev-003 · 01:15-03:43"
+        },
+        {
+          "lessonId": "05-03",
+          "assetId": "asset:video-05-03",
+          "startMs": 723000,
+          "endMs": 792000,
+          "locator": "ev-006 · 12:03-13:12"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-05-review-v1"
     },
     {
       "id": "edge:outline:05-03:05-04",
@@ -1187,11 +1243,80 @@
       "to": "lesson:05-04",
       "type": "extends",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "从虚拟头结点和简单改链进入更复杂的成对交换。",
-      "confidence": 0.91,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "05-03 建立 dummyHead 并让遍历指针从它开始，以统一原头结点和普通节点的改链；05-04 直接复用 dummyHead，在其后维护 p、node1、node2、next 完成相邻节点成对交换，把同一技巧扩展到更复杂的局部重排。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "05-03",
+          "assetId": "asset:video-05-03",
+          "startMs": 723000,
+          "endMs": 919000,
+          "locator": "ev-006–ev-007 · 12:03-15:19"
+        },
+        {
+          "lessonId": "05-04",
+          "assetId": "asset:video-05-04",
+          "startMs": 58000,
+          "endMs": 530000,
+          "locator": "ev-002–ev-003 · 00:58-08:50"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-05-review-v1"
+    },
+    {
+      "id": "edge:video:05-03:05-05",
+      "from": "lesson:05-03",
+      "to": "lesson:05-05",
+      "type": "contrasts_with",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "05-03 的常规删除依赖前驱指针把 cur->next 越过待删节点；05-05 的接口只给待删节点、无法取得前驱，于是改为复制后继值并物理删除后继。两课直接对照了“有前驱时重连”与“无前驱时改变值语义”的不同删除策略。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "05-03",
+          "assetId": "asset:video-05-03",
+          "startMs": 75000,
+          "endMs": 223000,
+          "locator": "ev-003 · 01:15-03:43"
+        },
+        {
+          "lessonId": "05-05",
+          "assetId": "asset:video-05-05",
+          "startMs": 0,
+          "endMs": 338000,
+          "locator": "ev-001–ev-004 · 00:00-05:38"
+        }
+      ],
+      "createdBy": "chapter-05-review-v1"
+    },
+    {
+      "id": "edge:video:05-03:05-06",
+      "from": "lesson:05-03",
+      "to": "lesson:05-06",
+      "type": "applies",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "05-03 解释 dummyHead 通过为原 head 补出前驱来统一删除；05-06 在删除倒数第 n 个节点时应用同一结构，让固定间距双指针最终定位到待删节点的前驱，并覆盖待删节点恰为头结点的情况。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "05-03",
+          "assetId": "asset:video-05-03",
+          "startMs": 723000,
+          "endMs": 919000,
+          "locator": "ev-006–ev-007 · 12:03-15:19"
+        },
+        {
+          "lessonId": "05-06",
+          "assetId": "asset:video-05-06",
+          "startMs": 225000,
+          "endMs": 716000,
+          "locator": "ev-004–ev-005 · 03:45-11:56"
+        }
+      ],
+      "createdBy": "chapter-05-review-v1"
     },
     {
       "id": "edge:outline:03-06:05-06",
@@ -1199,11 +1324,33 @@
       "to": "lesson:05-06",
       "type": "same_pattern_as",
       "strength": "medium",
-      "status": "provisional",
-      "rationale": "双指针模式从数组迁移到链表，但指针语义不同。",
-      "confidence": 0.84,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "03-06 在有序数组两端维护指针并向中间对撞；05-06 明确把双指针技术迁移到链表，让两个指针保持 n+1 的固定间距并同步前进。两课同属双指针模式，但状态机分别是端点淘汰与相对位置定位。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "03-06",
+          "assetId": "asset:video-03-06",
+          "startMs": 419000,
+          "endMs": 714000,
+          "locator": "ev-004–ev-005 · 06:59-11:54"
+        },
+        {
+          "lessonId": "05-06",
+          "assetId": "asset:video-05-06",
+          "startMs": 0,
+          "endMs": 48000,
+          "locator": "ev-001 · 00:00-00:48"
+        },
+        {
+          "lessonId": "05-06",
+          "assetId": "asset:video-05-06",
+          "startMs": 225000,
+          "endMs": 386000,
+          "locator": "ev-004 · 03:45-06:26"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-05-review-v1"
     },
     {
       "id": "edge:outline:06-02:06-03",

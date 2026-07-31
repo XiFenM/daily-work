@@ -299,7 +299,13 @@
       "type": "interview_skill",
       "nameZh": "边界意识与代码质量",
       "nameEn": "Boundary-aware coding",
-      "aliases": ["极端条件判断", "代码规范", "边界条件", "索引边界"],
+      "aliases": [
+        "极端条件判断",
+        "代码规范",
+        "边界条件",
+        "索引边界",
+        "链表边界"
+      ],
       "definition": "在实现中主动处理空输入、特殊数量、空指针、索引基数和区间端点等边界，并保持变量语义、模块化和复用性。",
       "status": "verified",
       "lessonRefs": [
@@ -316,7 +322,13 @@
         "04-04",
         "04-05",
         "04-06",
-        "04-08"
+        "04-08",
+        "05-01",
+        "05-02",
+        "05-03",
+        "05-04",
+        "05-05",
+        "05-06"
       ],
       "evidenceRefs": [
         "01-01:ev-005",
@@ -347,7 +359,18 @@
         "04-06:ev-005",
         "04-08:ev-004",
         "04-08:ev-005",
-        "04-08:ev-006"
+        "04-08:ev-006",
+        "05-01:ev-005",
+        "05-01:ev-006",
+        "05-02:ev-002",
+        "05-02:ev-005",
+        "05-03:ev-005",
+        "05-03:ev-006",
+        "05-04:ev-003",
+        "05-05:ev-005",
+        "05-06:ev-002",
+        "05-06:ev-004",
+        "05-06:ev-005"
       ]
     },
     {
@@ -465,7 +488,10 @@
         "04-05",
         "04-06",
         "04-07",
-        "04-08"
+        "04-08",
+        "05-01",
+        "05-04",
+        "05-06"
       ],
       "evidenceRefs": [
         "02-02:ev-004",
@@ -483,7 +509,11 @@
         "04-05:ev-005",
         "04-06:ev-004",
         "04-07:ev-005",
-        "04-08:ev-003"
+        "04-08:ev-003",
+        "05-01:ev-005",
+        "05-04:ev-004",
+        "05-06:ev-003",
+        "05-06:ev-005"
       ]
     },
     {
@@ -506,7 +536,10 @@
         "04-05",
         "04-06",
         "04-07",
-        "04-08"
+        "04-08",
+        "05-01",
+        "05-04",
+        "05-06"
       ],
       "evidenceRefs": [
         "02-03:ev-001",
@@ -540,7 +573,11 @@
         "04-06:ev-004",
         "04-07:ev-002",
         "04-07:ev-005",
-        "04-08:ev-003"
+        "04-08:ev-003",
+        "05-01:ev-005",
+        "05-04:ev-004",
+        "05-06:ev-003",
+        "05-06:ev-005"
       ]
     },
     {
@@ -1195,6 +1232,190 @@
         "04-08:ev-003",
         "04-08:ev-004",
         "04-08:ev-005"
+      ]
+    },
+    {
+      "id": "data-structure:singly-linked-list",
+      "type": "data_structure",
+      "nameZh": "单链表",
+      "nameEn": "Singly linked list",
+      "aliases": ["链表", "Linked List", "ListNode"],
+      "definition": "节点通过 next 指针单向连接的线性结构；它不支持数组式 O(1) 随机访问，通常要从头结点沿 next 顺序遍历，结构修改的关键是正确保存并重连相邻链段。",
+      "status": "verified",
+      "lessonRefs": ["05-01", "05-02", "05-03", "05-04", "05-05", "05-06"],
+      "evidenceRefs": [
+        "05-01:ev-001",
+        "05-02:ev-002",
+        "05-02:ev-003",
+        "05-03:ev-003",
+        "05-04:ev-001",
+        "05-04:ev-002",
+        "05-05:ev-002",
+        "05-06:ev-001"
+      ]
+    },
+    {
+      "id": "pattern:linked-list-pointer-rewiring",
+      "type": "pattern",
+      "nameZh": "链表指针重连",
+      "nameEn": "Linked-list pointer rewiring",
+      "aliases": ["穿针引线", "next 指针重连", "Pointer Rewiring"],
+      "definition": "在修改 next 之前先保存仍需访问的后继链段，再按稳定顺序改变前驱、当前节点和后继节点的连接；课程用这一模式完成反转、删除、成对交换和倒数删除，并反复防止断链与空指针。",
+      "status": "verified",
+      "lessonRefs": ["05-01", "05-03", "05-04", "05-05", "05-06"],
+      "evidenceRefs": [
+        "05-01:ev-003",
+        "05-01:ev-004",
+        "05-03:ev-003",
+        "05-03:ev-006",
+        "05-04:ev-002",
+        "05-04:ev-003",
+        "05-05:ev-004",
+        "05-06:ev-004",
+        "05-06:ev-005"
+      ]
+    },
+    {
+      "id": "pattern:dummy-head-node",
+      "type": "pattern",
+      "nameZh": "虚拟头结点",
+      "nameEn": "Dummy head node",
+      "aliases": ["dummyHead", "假的头结点", "哨兵头结点"],
+      "definition": "在真实头结点之前增加一个辅助节点并令其 next 指向原 head，使原头结点也拥有可操作的前驱，从而统一头部与中间节点的删除或交换逻辑；返回时取 dummyHead->next 作为新的真实头结点。",
+      "status": "verified",
+      "lessonRefs": ["05-03", "05-04", "05-06"],
+      "evidenceRefs": [
+        "05-03:ev-006",
+        "05-03:ev-007",
+        "05-04:ev-002",
+        "05-04:ev-003",
+        "05-06:ev-004",
+        "05-06:ev-005"
+      ]
+    },
+    {
+      "id": "pattern:fixed-gap-two-pointers",
+      "type": "pattern",
+      "nameZh": "固定间距双指针",
+      "nameEn": "Fixed-gap two pointers",
+      "aliases": ["链表双指针", "相距 n+1 的双指针"],
+      "definition": "先让一个指针领先固定步数，再让两个指针同步前进，以相对位置替代显式长度换算；删除倒数第 n 个节点时，从 dummyHead 出发让 q 先走 n+1 步，q 到 NULL 时 p 正好位于待删节点的前驱。",
+      "status": "verified",
+      "lessonRefs": ["05-06"],
+      "evidenceRefs": ["05-06:ev-001", "05-06:ev-004", "05-06:ev-005"]
+    },
+    {
+      "id": "pattern:successor-copy-delete",
+      "type": "pattern",
+      "nameZh": "复制后继删除",
+      "nameEn": "Successor-copy deletion",
+      "aliases": ["节点值覆盖", "复制后继节点", "Copy successor and delete"],
+      "definition": "当只拿到待删节点且其后继存在时，把后继节点的值复制到当前节点，再越过并释放后继；逻辑上删除了指定值所在位置，但物理上移除的是后继节点，因此该技巧不能在缺少前驱时通用删除真实尾节点。",
+      "status": "verified",
+      "lessonRefs": ["05-05"],
+      "evidenceRefs": [
+        "05-05:ev-002",
+        "05-05:ev-003",
+        "05-05:ev-004",
+        "05-05:ev-006"
+      ]
+    },
+    {
+      "id": "interview-skill:linked-list-test-harness",
+      "type": "interview_skill",
+      "nameZh": "链表辅助测试",
+      "nameEn": "Linked-list test harness",
+      "aliases": ["链表本地测试", "构建—打印—释放", "链表辅助函数"],
+      "definition": "为链表算法准备数组转链表、结构化打印和安全释放等辅助函数，并在本地组合调用待测算法观察输入输出；单个样例的成功运行只能提供实验性验证，不能代替对全部输入的正确性证明。",
+      "status": "verified",
+      "lessonRefs": ["05-02"],
+      "evidenceRefs": [
+        "05-02:ev-001",
+        "05-02:ev-002",
+        "05-02:ev-003",
+        "05-02:ev-004",
+        "05-02:ev-005"
+      ]
+    },
+    {
+      "id": "problem:leetcode-206",
+      "type": "problem",
+      "nameZh": "反转链表",
+      "nameEn": "Reverse Linked List",
+      "aliases": ["LeetCode 206"],
+      "definition": "在不改节点值的条件下反转单链表；课程用 pre、cur、next 先保存后继再逐边反向连接，按 O(n) 时间和 O(1) 辅助空间完成迭代实现。",
+      "status": "verified",
+      "lessonRefs": ["05-01"],
+      "evidenceRefs": [
+        "05-01:ev-002",
+        "05-01:ev-003",
+        "05-01:ev-004",
+        "05-01:ev-005"
+      ]
+    },
+    {
+      "id": "problem:leetcode-203",
+      "type": "problem",
+      "nameZh": "移除链表元素",
+      "nameEn": "Remove Linked List Elements",
+      "aliases": ["LeetCode 203"],
+      "definition": "删除链表中所有值等于 val 的节点；课程先展示无虚拟头结点时连续删除头部与删空等特判，再用 dummyHead 为原头结点补出前驱，统一所有位置的删除逻辑。",
+      "status": "verified",
+      "lessonRefs": ["05-03"],
+      "evidenceRefs": [
+        "05-03:ev-002",
+        "05-03:ev-003",
+        "05-03:ev-005",
+        "05-03:ev-006",
+        "05-03:ev-007"
+      ]
+    },
+    {
+      "id": "problem:leetcode-24",
+      "type": "problem",
+      "nameZh": "两两交换链表中的节点",
+      "nameEn": "Swap Nodes in Pairs",
+      "aliases": ["LeetCode 24"],
+      "definition": "在不修改节点值的条件下交换每一对相邻节点；课程借助 dummyHead 及 p、node1、node2、next 依次重连链段，以 O(n) 时间和 O(1) 辅助空间完成。",
+      "status": "verified",
+      "lessonRefs": ["05-04"],
+      "evidenceRefs": [
+        "05-04:ev-001",
+        "05-04:ev-002",
+        "05-04:ev-003",
+        "05-04:ev-004"
+      ]
+    },
+    {
+      "id": "problem:leetcode-237",
+      "type": "problem",
+      "nameZh": "删除链表中的节点",
+      "nameEn": "Delete Node in a Linked List",
+      "aliases": ["LeetCode 237"],
+      "definition": "接口只提供待删节点而没有 head 或前驱；课程核心解法在后继存在时复制后继值，再越过并释放后继节点，以等价实现指定位置的逻辑删除。",
+      "status": "verified",
+      "lessonRefs": ["05-05"],
+      "evidenceRefs": [
+        "05-05:ev-002",
+        "05-05:ev-003",
+        "05-05:ev-004",
+        "05-05:ev-006"
+      ]
+    },
+    {
+      "id": "problem:leetcode-19",
+      "type": "problem",
+      "nameZh": "删除链表的倒数第 N 个结点",
+      "nameEn": "Remove Nth Node From End of List",
+      "aliases": ["LeetCode 19"],
+      "definition": "删除单链表倒数第 n 个节点；课程先给出两遍扫描的长度换算，再用 dummyHead 和固定间距双指针一次扫描定位待删节点的前驱，按 O(n) 时间和 O(1) 辅助空间实现。",
+      "status": "verified",
+      "lessonRefs": ["05-06"],
+      "evidenceRefs": [
+        "05-06:ev-002",
+        "05-06:ev-003",
+        "05-06:ev-004",
+        "05-06:ev-005"
       ]
     }
   ],
