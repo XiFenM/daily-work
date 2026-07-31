@@ -125,9 +125,16 @@
           "startMs": 749000,
           "endMs": 824440,
           "locator": "ev-008 · 12:29-13:40（片尾至实测 13:44.44）"
+        },
+        {
+          "lessonId": "02-01",
+          "assetId": "asset:video-02-01",
+          "startMs": 0,
+          "endMs": 109000,
+          "locator": "ev-001–ev-002 · 00:00-01:49"
         }
       ],
-      "createdBy": "chapter-01-review-v1"
+      "createdBy": "chapter-01-review-v1; evidence-audited-by chapter-07-review-v1"
     },
     {
       "id": "edge:video-outline:01-04:02-02",
@@ -243,11 +250,26 @@
       "to": "lesson:01-01",
       "type": "revisits",
       "strength": "medium",
-      "status": "provisional",
-      "rationale": "07-03 的配套文本重新讨论算法题表现与工程、用户价值之间的关系。",
-      "confidence": 0.85,
-      "evidence": [],
-      "createdBy": "text-inventory-v1"
+      "status": "verified",
+      "rationale": "01-01 把“正确回答”扩展到思路表达、优化、代码质量和容错；07-03 再次强调面试不是只判答案对错，还会观察共同讨论与解决问题的体验。两课共同否定只看最终答案的单一评价，但 07-03 的工程与用户价值讨论不等同于 01-01 的算法作答框架。",
+      "confidence": 0.96,
+      "evidence": [
+        {
+          "lessonId": "07-03",
+          "assetId": "asset:text-07-03",
+          "startMs": null,
+          "endMs": null,
+          "locator": "ev-002 · 第 8–11 段"
+        },
+        {
+          "lessonId": "01-01",
+          "assetId": "asset:video-01-01",
+          "startMs": 1010000,
+          "endMs": 1180280,
+          "locator": "ev-005 · 16:50-19:40"
+        }
+      ],
+      "createdBy": "text-inventory-v1; verified-by chapter-07-review-v1"
     },
     {
       "id": "edge:outline:07-03:01-02",
@@ -255,11 +277,33 @@
       "to": "lesson:01-02",
       "type": "revisits",
       "strength": "medium",
-      "status": "provisional",
-      "rationale": "07-03 的配套文本再次强调算法能力只是工程师面试评价的一部分。",
-      "confidence": 0.88,
-      "evidence": [],
-      "createdBy": "text-inventory-v1"
+      "status": "verified",
+      "rationale": "01-02 明确说明算法面试只是技术面试的一部分，并列出项目和多类工程能力；07-03 从争议故事重新并置算法知识、软件工程才能、创造力与合作体验，重访多维评价主题而不声称这些维度能互相替代。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "07-03",
+          "assetId": "asset:text-07-03",
+          "startMs": null,
+          "endMs": null,
+          "locator": "ev-002 · 第 8–11 段"
+        },
+        {
+          "lessonId": "07-03",
+          "assetId": "asset:text-07-03",
+          "startMs": null,
+          "endMs": null,
+          "locator": "ev-008–ev-009 · 第 54–69 段"
+        },
+        {
+          "lessonId": "01-02",
+          "assetId": "asset:video-01-02",
+          "startMs": 0,
+          "endMs": 223000,
+          "locator": "ev-001 · 00:00-03:43"
+        }
+      ],
+      "createdBy": "text-inventory-v1; verified-by chapter-07-review-v1"
     },
     {
       "id": "edge:outline:02-01:02-02",
@@ -1657,48 +1701,306 @@
       "from": "lesson:06-02",
       "to": "lesson:07-01",
       "type": "recommended_before",
-      "strength": "strong",
-      "status": "provisional",
-      "rationale": "树遍历与递归关系为二叉树递归结构铺垫。",
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "06-02 用递归二叉树遍历和系统栈解释递归如何运行；07-01 转向二叉树的递归定义与函数语义。前者为后者提供运行机制背景，但两课没有稳定课次 ID 的直接互指，因此仅作为经双侧内容复核的编辑性学习桥梁，不是硬性先修。",
       "confidence": 0.92,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "evidence": [
+        {
+          "lessonId": "06-02",
+          "assetId": "asset:video-06-02",
+          "startMs": 0,
+          "endMs": 188000,
+          "locator": "ev-001–ev-003 · 00:00-03:08"
+        },
+        {
+          "lessonId": "07-01",
+          "assetId": "asset:video-07-01",
+          "startMs": 3000,
+          "endMs": 272000,
+          "locator": "ev-001–ev-003 · 00:03-04:32"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-07-review-v1"
     },
     {
       "id": "edge:outline:07-04:07-05",
       "from": "lesson:07-04",
       "to": "lesson:07-05",
       "type": "extends",
-      "strength": "strong",
-      "status": "provisional",
-      "rationale": "从递归终止条件进入递归问题和返回值的定义。",
-      "confidence": 0.93,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "07-04 为根到叶路径建立“空指针不等于叶节点”的正确终止条件；07-05 保留同一根到叶契约，并进一步让递归函数返回全部子树路径后向上组合。两课构成从布尔判定与基例校准到返回集合与结果构造的编辑性递进。",
+      "confidence": 0.97,
+      "evidence": [
+        {
+          "lessonId": "07-04",
+          "assetId": "asset:video-07-04",
+          "startMs": 21000,
+          "endMs": 51000,
+          "locator": "ev-002 · 00:21-00:51"
+        },
+        {
+          "lessonId": "07-04",
+          "assetId": "asset:video-07-04",
+          "startMs": 373000,
+          "endMs": 585000,
+          "locator": "ev-007–ev-008 · 06:13-09:45"
+        },
+        {
+          "lessonId": "07-05",
+          "assetId": "asset:video-07-05",
+          "startMs": 0,
+          "endMs": 155000,
+          "locator": "ev-001–ev-002 · 00:00-02:35"
+        },
+        {
+          "lessonId": "07-05",
+          "assetId": "asset:video-07-05",
+          "startMs": 385000,
+          "endMs": 694000,
+          "locator": "ev-004 · 06:25-11:34"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-07-review-v1"
     },
     {
       "id": "edge:outline:07-05:07-06",
       "from": "lesson:07-05",
       "to": "lesson:07-06",
       "type": "extends",
-      "strength": "strong",
-      "status": "provisional",
-      "rationale": "从基本递归定义进入更复杂的递归组合逻辑。",
-      "confidence": 0.94,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "07-05 定义从给定根出发、在叶节点结束的全部路径返回契约；07-06 放宽为任意起点和任意终点的向下路径，并增加外层递归枚举起点、内层递归统计固定起点路径。后者实质扩展了路径范围和递归职责，但课程没有直接点名上一课。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "07-05",
+          "assetId": "asset:video-07-05",
+          "startMs": 61000,
+          "endMs": 155000,
+          "locator": "ev-002 · 01:01-02:35"
+        },
+        {
+          "lessonId": "07-05",
+          "assetId": "asset:video-07-05",
+          "startMs": 385000,
+          "endMs": 694000,
+          "locator": "ev-004 · 06:25-11:34"
+        },
+        {
+          "lessonId": "07-06",
+          "assetId": "asset:video-07-06",
+          "startMs": 0,
+          "endMs": 65000,
+          "locator": "ev-001 · 00:00-01:05"
+        },
+        {
+          "lessonId": "07-06",
+          "assetId": "asset:video-07-06",
+          "startMs": 127000,
+          "endMs": 851160,
+          "locator": "ev-003–ev-005 · 02:07-14:11"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-07-review-v1"
     },
     {
-      "id": "edge:outline:07-01:08-01",
+      "id": "edge:video:07-01:07-02",
       "from": "lesson:07-01",
+      "to": "lesson:07-02",
+      "type": "applies",
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "07-01 建立二叉树递归结构、函数语义、终止条件与递归过程；07-02 把这套方法直接用于 Invert Binary Tree：空树返回，递归翻转两棵子树，再交换当前节点的左右孩子。关系由双侧内容验证，但不是课程显式互指。",
+      "confidence": 0.97,
+      "evidence": [
+        {
+          "lessonId": "07-01",
+          "assetId": "asset:video-07-01",
+          "startMs": 77000,
+          "endMs": 339000,
+          "locator": "ev-002–ev-004 · 01:17-05:39"
+        },
+        {
+          "lessonId": "07-02",
+          "assetId": "asset:video-07-02",
+          "startMs": 188000,
+          "endMs": 312000,
+          "locator": "ev-004 · 03:08-05:12"
+        }
+      ],
+      "createdBy": "chapter-07-review-v1"
+    },
+    {
+      "id": "edge:text-video:07-03:07-02",
+      "from": "lesson:07-03",
+      "to": "lesson:07-02",
+      "type": "revisits",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "07-02 先讲 Invert Binary Tree 并转述 Max Howell 的面试轶事；07-03 明确重开同一人物与“翻转二叉树”争议，但把重点转向事实边界、面试协作、工程能力和用户价值。标题关联与主题转向均有双侧证据。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "07-03",
+          "assetId": "asset:text-07-03",
+          "startMs": null,
+          "endMs": null,
+          "locator": "ev-001–ev-002 · 标题后第 1–11 段"
+        },
+        {
+          "lessonId": "07-03",
+          "assetId": "asset:text-07-03",
+          "startMs": null,
+          "endMs": null,
+          "locator": "ev-008 · 第 54–61 段"
+        },
+        {
+          "lessonId": "07-02",
+          "assetId": "asset:video-07-02",
+          "startMs": 36000,
+          "endMs": 188000,
+          "locator": "ev-002–ev-003 · 00:36-03:07"
+        }
+      ],
+      "createdBy": "chapter-07-review-v1"
+    },
+    {
+      "id": "edge:video:07-04:07-06",
+      "from": "lesson:07-04",
+      "to": "lesson:07-06",
+      "type": "contrasts_with",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "07-04 的 Path Sum 只接受从整棵树根开始、在叶节点结束的路径，并把叶节点条件作为核心正确性边界；07-06 的 Path Sum III 明确允许任意起点与任意终点，但仍要求向下，因此必须额外枚举起点。两课直接形成路径契约对照。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "07-04",
+          "assetId": "asset:video-07-04",
+          "startMs": 21000,
+          "endMs": 51000,
+          "locator": "ev-002 · 00:21-00:51"
+        },
+        {
+          "lessonId": "07-04",
+          "assetId": "asset:video-07-04",
+          "startMs": 373000,
+          "endMs": 461000,
+          "locator": "ev-007 · 06:13-07:41"
+        },
+        {
+          "lessonId": "07-06",
+          "assetId": "asset:video-07-06",
+          "startMs": 0,
+          "endMs": 65000,
+          "locator": "ev-001 · 00:00-01:05"
+        }
+      ],
+      "createdBy": "chapter-07-review-v1"
+    },
+    {
+      "id": "edge:video:03-02:07-05",
+      "from": "lesson:03-02",
+      "to": "lesson:07-05",
+      "type": "same_pattern_as",
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "03-02 先定义候选区间和变量含义，再让初始化、循环条件与更新服从该语义；07-05 先定义递归函数应返回当前子树的全部根到叶路径，再组织基例、子调用与组合。两课共享“先定语义契约，再写控制逻辑”的正确性模式，但分别用于循环与递归。",
+      "confidence": 0.94,
+      "evidence": [
+        {
+          "lessonId": "03-02",
+          "assetId": "asset:video-03-02",
+          "startMs": 0,
+          "endMs": 233000,
+          "locator": "ev-001–ev-002 · 00:00-03:53"
+        },
+        {
+          "lessonId": "03-02",
+          "assetId": "asset:video-03-02",
+          "startMs": 499000,
+          "endMs": 726480,
+          "locator": "ev-006 · 08:19-12:06"
+        },
+        {
+          "lessonId": "07-05",
+          "assetId": "asset:video-07-05",
+          "startMs": 0,
+          "endMs": 61000,
+          "locator": "ev-001 · 00:00-01:01"
+        },
+        {
+          "lessonId": "07-05",
+          "assetId": "asset:video-07-05",
+          "startMs": 385000,
+          "endMs": 694000,
+          "locator": "ev-004 · 06:25-11:34"
+        }
+      ],
+      "createdBy": "chapter-07-review-v1"
+    },
+    {
+      "id": "edge:video:07-07:04-03",
+      "from": "lesson:07-07",
+      "to": "lesson:04-03",
+      "type": "revisits",
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "04-03 从 set/map 的底层实现说明平衡二叉搜索树如何保留顺序并支持最值、前驱后继等操作；07-07 回到 BST 的全子树顺序性，并把它用于 LCA 的单侧定向搜索。后者重访有序树思想，但不把普通 BST 与标准库平衡容器视为同一实现。",
+      "confidence": 0.97,
+      "evidence": [
+        {
+          "lessonId": "07-07",
+          "assetId": "asset:video-07-07",
+          "startMs": 0,
+          "endMs": 278000,
+          "locator": "ev-001–ev-002 · 00:00-04:38"
+        },
+        {
+          "lessonId": "07-07",
+          "assetId": "asset:video-07-07",
+          "startMs": 374000,
+          "endMs": 530000,
+          "locator": "ev-004 · 06:14-08:50"
+        },
+        {
+          "lessonId": "04-03",
+          "assetId": "asset:video-04-03",
+          "startMs": 0,
+          "endMs": 168000,
+          "locator": "ev-001 · 00:00-02:48"
+        },
+        {
+          "lessonId": "04-03",
+          "assetId": "asset:video-04-03",
+          "startMs": 376000,
+          "endMs": 525000,
+          "locator": "ev-005–ev-006 · 06:16-08:45"
+        }
+      ],
+      "createdBy": "chapter-07-review-v1"
+    },
+    {
+      "id": "edge:video-outline:07-07:08-01",
+      "from": "lesson:07-07",
       "to": "lesson:08-01",
       "type": "recommended_before",
-      "strength": "strong",
+      "strength": "medium",
       "status": "provisional",
-      "rationale": "递归树结构为树形搜索问题铺垫。",
-      "confidence": 0.91,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "rationale": "07-07 章末明确预告下一章将处理输入本身未必是树、但递归展开会形成树形结构的问题；由于 08-01 尚未完成理解与双侧复核，这条课程预告只保留为 provisional，不能进入主知识地图。",
+      "confidence": 0.84,
+      "evidence": [
+        {
+          "lessonId": "07-07",
+          "assetId": "asset:video-07-07",
+          "startMs": 1032000,
+          "endMs": 1070440,
+          "locator": "ev-007 · 17:12-17:50.440"
+        }
+      ],
+      "createdBy": "chapter-07-review-v1"
     },
     {
       "id": "edge:outline:08-01:08-02",
@@ -1754,9 +2056,9 @@
       "to": "lesson:09-01",
       "type": "recommended_before",
       "strength": "medium",
-      "status": "verified",
-      "rationale": "02-05 用重复的双分支递归推导 O(2^n)，并明确指出可用剪枝或动态规划把指数级成本降为多项式级，为第 9 章的动态规划动机提供直接背景。",
-      "confidence": 0.96,
+      "status": "provisional",
+      "rationale": "02-05 用重复的双分支递归推导 O(2^n)，并明确指出可用剪枝或动态规划把指数级成本降为多项式级，为第 9 章的动态规划动机提供单侧背景；09-01 尚未完成理解，缺少目标侧证据，因此暂不能保持 verified。",
+      "confidence": 0.82,
       "evidence": [
         {
           "lessonId": "02-05",
@@ -1766,7 +2068,7 @@
           "locator": "ev-005 · 06:49-10:57"
         }
       ],
-      "createdBy": "outline-analysis-v1; verified-by chapter-02-review-v1"
+      "createdBy": "outline-analysis-v1; downgraded-by chapter-07-review-v1"
     },
     {
       "id": "edge:outline:09-01:09-02",
