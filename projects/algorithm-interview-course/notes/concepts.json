@@ -48,7 +48,9 @@
         "04-04",
         "04-05",
         "04-06",
-        "04-08"
+        "04-08",
+        "06-01",
+        "06-07"
       ],
       "evidenceRefs": [
         "01-01:ev-004",
@@ -64,7 +66,10 @@
         "04-06:ev-005",
         "04-08:ev-001",
         "04-08:ev-004",
-        "04-08:ev-006"
+        "04-08:ev-006",
+        "06-01:ev-005",
+        "06-01:ev-006",
+        "06-07:ev-001"
       ]
     },
     {
@@ -252,7 +257,8 @@
         "04-05",
         "04-06",
         "04-07",
-        "04-08"
+        "04-08",
+        "06-07"
       ],
       "evidenceRefs": [
         "01-04:ev-005",
@@ -291,7 +297,10 @@
         "04-07:ev-004",
         "04-07:ev-005",
         "04-08:ev-002",
-        "04-08:ev-003"
+        "04-08:ev-003",
+        "06-07:ev-002",
+        "06-07:ev-003",
+        "06-07:ev-005"
       ]
     },
     {
@@ -328,7 +337,9 @@
         "05-03",
         "05-04",
         "05-05",
-        "05-06"
+        "05-06",
+        "06-01",
+        "06-07"
       ],
       "evidenceRefs": [
         "01-01:ev-005",
@@ -370,7 +381,10 @@
         "05-05:ev-005",
         "05-06:ev-002",
         "05-06:ev-004",
-        "05-06:ev-005"
+        "05-06:ev-005",
+        "06-01:ev-004",
+        "06-07:ev-001",
+        "06-07:ev-004"
       ]
     },
     {
@@ -381,8 +395,8 @@
       "aliases": [],
       "definition": "在没有 IDE 自动补全、编译和调试辅助时，仍能手写基础算法与数据结构实现。",
       "status": "verified",
-      "lessonRefs": ["01-04"],
-      "evidenceRefs": ["01-04:ev-007"]
+      "lessonRefs": ["01-04", "06-06"],
+      "evidenceRefs": ["01-04:ev-007", "06-06:ev-002"]
     },
     {
       "id": "problem:leetcode-3",
@@ -491,7 +505,8 @@
         "04-08",
         "05-01",
         "05-04",
-        "05-06"
+        "05-06",
+        "06-08"
       ],
       "evidenceRefs": [
         "02-02:ev-004",
@@ -513,7 +528,9 @@
         "05-01:ev-005",
         "05-04:ev-004",
         "05-06:ev-003",
-        "05-06:ev-005"
+        "05-06:ev-005",
+        "06-08:ev-003",
+        "06-08:ev-004"
       ]
     },
     {
@@ -539,7 +556,8 @@
         "04-08",
         "05-01",
         "05-04",
-        "05-06"
+        "05-06",
+        "06-07"
       ],
       "evidenceRefs": [
         "02-03:ev-001",
@@ -577,7 +595,10 @@
         "05-01:ev-005",
         "05-04:ev-004",
         "05-06:ev-003",
-        "05-06:ev-005"
+        "05-06:ev-005",
+        "06-07:ev-002",
+        "06-07:ev-003",
+        "06-07:ev-005"
       ]
     },
     {
@@ -982,7 +1003,7 @@
       "aliases": ["计数表", "频次表", "Frequency counter"],
       "definition": "把元素、组合和或距离等特征作为键，把出现次数作为值；它保留重复性信息，可在相交、组合计数和分组计数中避免集合去重造成的信息丢失。",
       "status": "verified",
-      "lessonRefs": ["04-02", "04-05", "04-06"],
+      "lessonRefs": ["04-02", "04-05", "04-06", "06-07"],
       "evidenceRefs": [
         "04-02:ev-001",
         "04-02:ev-002",
@@ -990,7 +1011,9 @@
         "04-05:ev-005",
         "04-06:ev-002",
         "04-06:ev-003",
-        "04-06:ev-004"
+        "04-06:ev-004",
+        "06-07:ev-002",
+        "06-07:ev-004"
       ]
     },
     {
@@ -1001,7 +1024,7 @@
       "aliases": ["散列表", "unordered_set", "unordered_map"],
       "definition": "通过哈希定位键的关联结构；课程把查找、插入和删除按平均 O(1) 分析，因此常用于成员和映射查询，但它不维护键的顺序，且该平均成本不应误写成无条件的最坏情况保证。",
       "status": "verified",
-      "lessonRefs": ["04-03", "04-04", "04-05", "04-06", "04-07"],
+      "lessonRefs": ["04-03", "04-04", "04-05", "04-06", "04-07", "06-07"],
       "evidenceRefs": [
         "04-03:ev-004",
         "04-03:ev-005",
@@ -1015,7 +1038,8 @@
         "04-06:ev-003",
         "04-06:ev-004",
         "04-07:ev-004",
-        "04-07:ev-005"
+        "04-07:ev-005",
+        "06-07:ev-004"
       ]
     },
     {
@@ -1416,6 +1440,311 @@
         "05-06:ev-003",
         "05-06:ev-004",
         "05-06:ev-005"
+      ]
+    },
+    {
+      "id": "data-structure:stack",
+      "type": "data_structure",
+      "nameZh": "栈",
+      "nameEn": "Stack",
+      "aliases": ["LIFO", "后进先出"],
+      "definition": "后进先出的线性结构；课程先用它保存尚未匹配的左括号，再把递归调用现场解释为系统栈中的帧，最后用显式 Command 栈统一模拟二叉树前、中、后序遍历。",
+      "status": "verified",
+      "lessonRefs": ["06-01", "06-02", "06-03"],
+      "evidenceRefs": [
+        "06-01:ev-003",
+        "06-01:ev-004",
+        "06-02:ev-005",
+        "06-02:ev-006",
+        "06-03:ev-001",
+        "06-03:ev-002",
+        "06-03:ev-003",
+        "06-03:ev-004"
+      ]
+    },
+    {
+      "id": "pattern:delimiter-matching",
+      "type": "pattern",
+      "nameZh": "分隔符嵌套匹配",
+      "nameEn": "Delimiter matching with a stack",
+      "aliases": ["括号匹配", "Valid Parentheses", "最近未闭合括号"],
+      "definition": "从左到右扫描分隔符，左括号入栈，右括号必须与当前栈顶配对并弹栈；遇到右括号时栈空、类型不匹配，或扫描结束后栈非空，均说明嵌套不合法。",
+      "status": "verified",
+      "lessonRefs": ["06-01"],
+      "evidenceRefs": ["06-01:ev-002", "06-01:ev-003", "06-01:ev-004"]
+    },
+    {
+      "id": "concept:recursion-call-stack",
+      "type": "concept",
+      "nameZh": "递归调用栈",
+      "nameEn": "Recursion call stack",
+      "aliases": ["系统栈", "递归现场", "Call stack"],
+      "definition": "递归函数在调用子问题前暂停当前现场，并由系统栈保存尚待执行的操作与返回位置；子调用结束后弹出现场继续执行，因此递归控制流可以进一步改写为显式栈。",
+      "status": "verified",
+      "lessonRefs": ["06-02", "06-03"],
+      "evidenceRefs": [
+        "06-02:ev-003",
+        "06-02:ev-004",
+        "06-02:ev-005",
+        "06-02:ev-006",
+        "06-03:ev-001",
+        "06-03:ev-002"
+      ]
+    },
+    {
+      "id": "pattern:explicit-stack-recursion-simulation",
+      "type": "pattern",
+      "nameZh": "显式栈模拟递归",
+      "nameEn": "Explicit-stack recursion simulation",
+      "aliases": ["Command 栈", "go/print 指令", "非递归树遍历"],
+      "definition": "把递归中的“继续展开节点”和“输出节点”编码为显式指令帧，并按实际执行顺序的逆序压栈；调整 print、左子树 go、右子树 go 三项的压栈顺序，即可统一表达二叉树前、中、后序遍历。",
+      "status": "verified",
+      "lessonRefs": ["06-02", "06-03"],
+      "evidenceRefs": [
+        "06-02:ev-006",
+        "06-03:ev-001",
+        "06-03:ev-002",
+        "06-03:ev-003",
+        "06-03:ev-004",
+        "06-03:ev-005"
+      ]
+    },
+    {
+      "id": "data-structure:queue",
+      "type": "data_structure",
+      "nameZh": "队列",
+      "nameEn": "Queue",
+      "aliases": ["FIFO", "先进先出", "普通队列"],
+      "definition": "先进先出的线性结构；课程用队列按发现顺序保存二叉树节点与层级，并进一步按层扩展隐式图状态，是层序遍历和无权图 BFS 的核心容器。",
+      "status": "verified",
+      "lessonRefs": ["06-04", "06-05"],
+      "evidenceRefs": [
+        "06-04:ev-001",
+        "06-04:ev-003",
+        "06-05:ev-001",
+        "06-05:ev-005",
+        "06-05:ev-006"
+      ]
+    },
+    {
+      "id": "algorithm:breadth-first-search",
+      "type": "algorithm",
+      "nameZh": "广度优先搜索",
+      "nameEn": "Breadth-first search",
+      "aliases": ["BFS", "广度优先遍历", "层序遍历"],
+      "definition": "借助队列按层扩展节点或状态；课程先在二叉树中保存节点及层级，再把整数状态及单位代价转移建成隐式无权图，用 BFS 求从 n 到 0 的最少边数。",
+      "status": "verified",
+      "lessonRefs": ["06-04", "06-05"],
+      "evidenceRefs": [
+        "06-04:ev-001",
+        "06-04:ev-002",
+        "06-04:ev-003",
+        "06-05:ev-001",
+        "06-05:ev-004",
+        "06-05:ev-005",
+        "06-05:ev-006"
+      ]
+    },
+    {
+      "id": "concept:implicit-state-graph",
+      "type": "concept",
+      "nameZh": "隐式状态图",
+      "nameEn": "Implicit state graph",
+      "aliases": ["状态建图", "图建模", "Implicit graph"],
+      "definition": "不预先存储全部邻接边，而是把问题状态定义为节点，并在搜索时按合法操作即时生成后继；Perfect Squares 中节点为 0..n，减去一个完全平方数构成一条单位代价边。",
+      "status": "verified",
+      "lessonRefs": ["06-05"],
+      "evidenceRefs": [
+        "06-05:ev-001",
+        "06-05:ev-004",
+        "06-05:ev-005",
+        "06-05:ev-006"
+      ]
+    },
+    {
+      "id": "pattern:visited-state-deduplication",
+      "type": "pattern",
+      "nameZh": "搜索状态去重",
+      "nameEn": "Visited-state deduplication",
+      "aliases": ["visited 数组", "入队即标记", "图遍历去重"],
+      "definition": "在图搜索生成新状态时检查并更新 visited，使同一状态至多进入队列一次；课程用它修复 Perfect Squares 基线 BFS 中重复节点不断入队并导致 MLE 的问题。",
+      "status": "verified",
+      "lessonRefs": ["06-05"],
+      "evidenceRefs": ["06-05:ev-005", "06-05:ev-006"]
+    },
+    {
+      "id": "data-structure:priority-queue",
+      "type": "data_structure",
+      "nameZh": "优先队列",
+      "nameEn": "Priority queue",
+      "aliases": ["priority_queue", "按优先级出队", "优先级队列"],
+      "definition": "出队顺序由元素优先级决定而非进入先后；课程通过 C++ priority_queue 演示默认最大堆、greater 最小堆和自定义比较器，并在 Top K 中维护当前候选边界。",
+      "status": "verified",
+      "lessonRefs": ["06-06", "06-07", "06-08"],
+      "evidenceRefs": [
+        "06-06:ev-001",
+        "06-06:ev-003",
+        "06-06:ev-004",
+        "06-06:ev-005",
+        "06-06:ev-006",
+        "06-07:ev-003",
+        "06-07:ev-004",
+        "06-08:ev-001",
+        "06-08:ev-003"
+      ]
+    },
+    {
+      "id": "data-structure:heap",
+      "type": "data_structure",
+      "nameZh": "堆",
+      "nameEn": "Heap",
+      "aliases": ["最大堆", "最小堆"],
+      "definition": "优先队列的常用底层结构；课程只说明堆通常以数组模拟树、面试中可能要求手写，并借助 C++ 容器演示堆顶为最大值或最小值的两种顺序，没有在本节展开具体堆型的结构实现。",
+      "status": "verified",
+      "lessonRefs": ["06-06", "06-07"],
+      "evidenceRefs": [
+        "06-06:ev-002",
+        "06-06:ev-004",
+        "06-06:ev-005",
+        "06-07:ev-003",
+        "06-07:ev-004"
+      ]
+    },
+    {
+      "id": "pattern:heap-comparator-order",
+      "type": "pattern",
+      "nameZh": "堆比较器与出队顺序",
+      "nameEn": "Heap comparator and priority order",
+      "aliases": ["greater<int>", "自定义 comparator", "myCmp"],
+      "definition": "通过模板比较器或自定义函数控制 priority_queue 的堆顶语义；课程演示默认最大堆、greater<int> 最小堆，以及按个位数并使用 a%10>b%10 的自定义优先级。",
+      "status": "verified",
+      "lessonRefs": ["06-06", "06-07"],
+      "evidenceRefs": [
+        "06-06:ev-004",
+        "06-06:ev-005",
+        "06-06:ev-006",
+        "06-07:ev-004"
+      ]
+    },
+    {
+      "id": "concept:top-k-selection",
+      "type": "concept",
+      "nameZh": "Top K 选择",
+      "nameEn": "Top-K selection",
+      "aliases": ["Top K", "前 k 个高频元素", "第 k 个元素"],
+      "definition": "课程把 LC347 的前 k 个高频元素，以及文本列出的 LC215 第 k 大元素和面试题 17.14 最小 k 个数都归入 Top K 题族；这些题可能要求前 k 个集合或第 k 个位置，具体输出契约需按题面区分。",
+      "status": "verified",
+      "lessonRefs": ["06-07", "06-08"],
+      "evidenceRefs": [
+        "06-07:ev-001",
+        "06-07:ev-002",
+        "06-07:ev-003",
+        "06-07:ev-005",
+        "06-08:ev-001",
+        "06-08:ev-002",
+        "06-08:ev-003",
+        "06-08:ev-004"
+      ]
+    },
+    {
+      "id": "pattern:bounded-heap-top-k",
+      "type": "pattern",
+      "nameZh": "有界堆维护 Top K",
+      "nameEn": "Bounded-heap Top-K",
+      "aliases": ["大小为 k 的最小堆", "Top K 优先队列", "候选集淘汰"],
+      "definition": "遍历候选时维护固定容量的堆，把堆顶作为当前候选边界；Top K Frequent Elements 中先统计频次，再用大小为 k 的最小堆淘汰较低频元素，课程按 O(n log k) 口径分析。",
+      "status": "verified",
+      "lessonRefs": ["06-07"],
+      "evidenceRefs": ["06-07:ev-003", "06-07:ev-004"]
+    },
+    {
+      "id": "concept:top-k-strategy-comparison",
+      "type": "concept",
+      "nameZh": "Top K 策略比较",
+      "nameEn": "Top-K strategy comparison",
+      "aliases": ["优先队列与快速排序思想", "Top K 两种套路"],
+      "definition": "文本课并列给出优先队列与快速排序思想两类 Top K 方向及各自复杂度口径，并提出为何仍使用优先队列的开放问题；正文没有展开 partition 实现或回答适用场景。",
+      "status": "verified",
+      "lessonRefs": ["06-08"],
+      "evidenceRefs": [
+        "06-08:ev-001",
+        "06-08:ev-003",
+        "06-08:ev-004",
+        "06-08:ev-005"
+      ]
+    },
+    {
+      "id": "problem:leetcode-20",
+      "type": "problem",
+      "nameZh": "有效的括号",
+      "nameEn": "Valid Parentheses",
+      "aliases": ["LeetCode 20"],
+      "definition": "判断包含圆括号、方括号和花括号的字符串是否按类型与嵌套顺序正确闭合；课程用栈保存左括号，并在每个右括号处检查当前栈顶。",
+      "status": "verified",
+      "lessonRefs": ["06-01"],
+      "evidenceRefs": ["06-01:ev-002", "06-01:ev-003", "06-01:ev-004"]
+    },
+    {
+      "id": "problem:leetcode-144",
+      "type": "problem",
+      "nameZh": "二叉树的前序遍历",
+      "nameEn": "Binary Tree Preorder Traversal",
+      "aliases": ["LeetCode 144"],
+      "definition": "按根、左、右顺序访问二叉树；课程先用递归追踪系统调用栈，再把 go/print 指令按相反执行顺序压入显式栈实现非递归遍历。",
+      "status": "verified",
+      "lessonRefs": ["06-02", "06-03"],
+      "evidenceRefs": [
+        "06-02:ev-002",
+        "06-02:ev-003",
+        "06-02:ev-004",
+        "06-02:ev-005",
+        "06-03:ev-001",
+        "06-03:ev-002"
+      ]
+    },
+    {
+      "id": "problem:leetcode-102",
+      "type": "problem",
+      "nameZh": "二叉树的层序遍历",
+      "nameEn": "Binary Tree Level Order Traversal",
+      "aliases": ["LeetCode 102"],
+      "definition": "按层返回二叉树节点；课程使用 queue<pair<TreeNode*,int>> 同时保存节点与从 0 开始的层级，并在首次遇到新层时创建对应结果数组。",
+      "status": "verified",
+      "lessonRefs": ["06-04"],
+      "evidenceRefs": ["06-04:ev-002", "06-04:ev-003"]
+    },
+    {
+      "id": "problem:leetcode-279",
+      "type": "problem",
+      "nameZh": "完全平方数",
+      "nameEn": "Perfect Squares",
+      "aliases": ["LeetCode 279"],
+      "definition": "求和为正整数 n 的最少完全平方数个数；课程把 0..n 建模为整数状态图，用 BFS 从 n 搜索到 0，并以 visited 去重修复基线版本的 MLE。",
+      "status": "verified",
+      "lessonRefs": ["06-05"],
+      "evidenceRefs": [
+        "06-05:ev-002",
+        "06-05:ev-003",
+        "06-05:ev-004",
+        "06-05:ev-005",
+        "06-05:ev-006"
+      ]
+    },
+    {
+      "id": "problem:leetcode-347",
+      "type": "problem",
+      "nameZh": "前 K 个高频元素",
+      "nameEn": "Top K Frequent Elements",
+      "aliases": ["LeetCode 347"],
+      "definition": "返回非空数组中出现频率最高的 k 个不同元素；课程先用哈希表统计频次，再以大小为 k 的最小堆维护候选，并按 O(n log k) 口径分析。",
+      "status": "verified",
+      "lessonRefs": ["06-07"],
+      "evidenceRefs": [
+        "06-07:ev-001",
+        "06-07:ev-002",
+        "06-07:ev-003",
+        "06-07:ev-004",
+        "06-07:ev-005"
       ]
     }
   ],
