@@ -4,7 +4,7 @@
   "chapterCount": 11,
   "lessonCount": 70,
   "knownDurationLessonCount": 67,
-  "knownDurationSeconds": 66652.29756,
+  "knownDurationSeconds": 66660.73756,
   "unknownDurationLessonIds": ["06-08", "07-03", "09-10"],
   "normalizationNotes": [
     {
@@ -957,7 +957,7 @@
       "id": "10",
       "number": 10,
       "title": "贪心算法",
-      "knownDurationSeconds": 2729,
+      "knownDurationSeconds": 2737.44,
       "lessons": [
         {
           "id": "10-01",
@@ -968,7 +968,9 @@
           "titleNormalized": "贪心基础 Assign Cookies",
           "durationText": "12:12",
           "durationSeconds": 732,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 735.44,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-10-01"]
         },
         {
           "id": "10-02",
@@ -979,7 +981,9 @@
           "titleNormalized": "贪心算法与动态规划的关系 Non-overlapping Intervals",
           "durationText": "17:58",
           "durationSeconds": 1078,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1078.68,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-10-02"]
         },
         {
           "id": "10-03",
@@ -990,7 +994,9 @@
           "titleNormalized": "贪心选择性质的证明",
           "durationText": "15:19",
           "durationSeconds": 919,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 923.32,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-10-03"]
         }
       ]
     },

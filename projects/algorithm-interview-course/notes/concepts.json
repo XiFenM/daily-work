@@ -1789,15 +1789,16 @@
       "nameZh": "完全平方数",
       "nameEn": "Perfect Squares",
       "aliases": ["LeetCode 279"],
-      "definition": "求和为正整数 n 的最少完全平方数个数；课程把 0..n 建模为整数状态图，用 BFS 从 n 搜索到 0，并以 visited 去重修复基线版本的 MLE。",
+      "definition": "求和为正整数 n 的最少完全平方数个数；06-05 把 0..n 建模为整数状态图，用 BFS 从 n 搜索到 0，并以 visited 去重修复基线版本的 MLE；10-03 再用 n=12 否定‘每次取最大平方数’的贪心规则。",
       "status": "verified",
-      "lessonRefs": ["06-05"],
+      "lessonRefs": ["06-05", "10-03"],
       "evidenceRefs": [
         "06-05:ev-002",
         "06-05:ev-003",
         "06-05:ev-004",
         "06-05:ev-005",
-        "06-05:ev-006"
+        "06-05:ev-006",
+        "10-03:ev-003"
       ]
     },
     {
@@ -2428,7 +2429,8 @@
         "09-06",
         "09-07",
         "09-08",
-        "09-09"
+        "09-09",
+        "10-02"
       ],
       "evidenceRefs": [
         "09-01:ev-013",
@@ -2448,7 +2450,10 @@
         "09-08:ev-003",
         "09-08:ev-006",
         "09-09:ev-001",
-        "09-09:ev-003"
+        "09-09:ev-003",
+        "10-02:ev-004",
+        "10-02:ev-005",
+        "10-02:ev-006"
       ]
     },
     {
@@ -2658,9 +2663,9 @@
       "nameZh": "0-1 背包",
       "nameEn": "0-1 Knapsack",
       "aliases": ["01 背包", "每件物品最多一次"],
-      "definition": "在容量约束下从不同物品中每件最多选择一次，最大化总价值；课程以物品前缀和容量为二维状态，比较不选与容量允许时选择当前物品。",
+      "definition": "在容量约束下从不同物品中每件最多选择一次，最大化总价值；第九章以物品前缀和容量为状态，比较不选与选择当前物品；10-03 回访容量 5 的反例，说明按单位价值优先不能保证一般 0-1 背包最优。",
       "status": "verified",
-      "lessonRefs": ["09-05", "09-06", "09-07", "09-09"],
+      "lessonRefs": ["09-05", "09-06", "09-07", "09-09", "10-03"],
       "evidenceRefs": [
         "09-05:ev-002",
         "09-05:ev-005",
@@ -2670,7 +2675,8 @@
         "09-06:ev-002",
         "09-07:ev-002",
         "09-07:ev-005",
-        "09-09:ev-008"
+        "09-09:ev-008",
+        "10-03:ev-002"
       ]
     },
     {
@@ -2822,6 +2828,155 @@
       "status": "verified",
       "lessonRefs": ["09-06"],
       "evidenceRefs": ["09-06:ev-010"]
+    },
+    {
+      "id": "algorithm:greedy",
+      "type": "algorithm",
+      "nameZh": "贪心算法",
+      "nameEn": "Greedy algorithm",
+      "aliases": ["贪心", "greedy"],
+      "definition": "按确定的局部优先级立即作出可行选择并丢弃其他候选；正确使用不仅要给出排序与扫描规则，还要证明该选择可进入某个全局最优解，且选择后仍得到同类剩余子问题。",
+      "status": "verified",
+      "lessonRefs": ["10-01", "10-02", "10-03"],
+      "evidenceRefs": [
+        "10-01:ev-001",
+        "10-01:ev-003",
+        "10-01:ev-004",
+        "10-02:ev-007",
+        "10-02:ev-008",
+        "10-02:ev-009",
+        "10-03:ev-001",
+        "10-03:ev-005",
+        "10-03:ev-006",
+        "10-03:ev-007",
+        "10-03:ev-008",
+        "10-03:ev-009"
+      ]
+    },
+    {
+      "id": "concept:greedy-choice-property",
+      "type": "concept",
+      "nameZh": "贪心选择性质",
+      "nameEn": "Greedy-choice property",
+      "aliases": ["局部选择安全性", "安全贪心选择"],
+      "definition": "存在一个全局最优解包含当前贪心选择；课程直观表述为作出该选择后不影响剩余子问题，并用区间最早结束选择的一步替换论证展示这一性质。",
+      "status": "verified",
+      "lessonRefs": ["10-03"],
+      "evidenceRefs": [
+        "10-03:ev-001",
+        "10-03:ev-005",
+        "10-03:ev-006",
+        "10-03:ev-007",
+        "10-03:ev-008",
+        "10-03:ev-009"
+      ]
+    },
+    {
+      "id": "pattern:sort-then-greedy-scan",
+      "type": "pattern",
+      "nameZh": "排序后贪心扫描",
+      "nameEn": "Sort-then-greedy scan",
+      "aliases": ["排序加单次扫描", "有序候选贪心"],
+      "definition": "先按与局部选择一致的主键排列候选，再用指针、可行性边界和计数器单向扫描；排序键、方向与相等主键语义都是算法状态的一部分。",
+      "status": "verified",
+      "lessonRefs": ["10-01", "10-02"],
+      "evidenceRefs": [
+        "10-01:ev-003",
+        "10-01:ev-004",
+        "10-02:ev-007",
+        "10-02:ev-008"
+      ]
+    },
+    {
+      "id": "pattern:earliest-finish-interval-selection",
+      "type": "pattern",
+      "nameZh": "最早结束区间选择",
+      "nameEn": "Earliest-finish interval selection",
+      "aliases": ["区间调度贪心", "按结束时间排序"],
+      "definition": "把区间按结束时间升序排列，每次接受与上一选择兼容且最早结束的候选，使后续可行起点门槛尽量早；课程下一课用替换论证说明一步选择安全。",
+      "status": "verified",
+      "lessonRefs": ["10-02", "10-03"],
+      "evidenceRefs": [
+        "10-02:ev-007",
+        "10-02:ev-008",
+        "10-02:ev-009",
+        "10-03:ev-005"
+      ]
+    },
+    {
+      "id": "pattern:greedy-exchange-argument",
+      "type": "pattern",
+      "nameZh": "贪心交换论证",
+      "nameEn": "Greedy exchange argument",
+      "aliases": ["替换论证", "exchange argument"],
+      "definition": "取任意最优解，用贪心选择替换其中对应选择，并证明可行性与目标值不变差，从而得到一个包含贪心选择的最优解；整体算法还需剩余子问题闭包与重复交换或归纳。",
+      "status": "verified",
+      "lessonRefs": ["10-03"],
+      "evidenceRefs": [
+        "10-03:ev-004",
+        "10-03:ev-006",
+        "10-03:ev-007",
+        "10-03:ev-008",
+        "10-03:ev-009"
+      ]
+    },
+    {
+      "id": "concept:interval-compatibility-boundary",
+      "type": "concept",
+      "nameZh": "区间兼容端点边界",
+      "nameEn": "Interval compatibility boundary",
+      "aliases": ["端点相接", "start >= previous.end"],
+      "definition": "区间能否首尾相接取决于题目契约；Non-overlapping Intervals 明确把 [1,2] 与 [2,3] 视为不重叠，所以 DP 与贪心均使用 current.start >= previous.end。",
+      "status": "verified",
+      "lessonRefs": ["10-02"],
+      "evidenceRefs": ["10-02:ev-002", "10-02:ev-005", "10-02:ev-008"]
+    },
+    {
+      "id": "problem:leetcode-455",
+      "type": "problem",
+      "nameZh": "分发饼干",
+      "nameEn": "Assign Cookies",
+      "aliases": ["LeetCode 455"],
+      "definition": "在每个孩子最多获得一块饼干、饼干尺寸至少达到孩子需求才满足的约束下，最大化满足人数；课程把两数组降序排序后用双指针匹配。",
+      "status": "verified",
+      "lessonRefs": ["10-01"],
+      "evidenceRefs": ["10-01:ev-002", "10-01:ev-003", "10-01:ev-004"]
+    },
+    {
+      "id": "problem:leetcode-435",
+      "type": "problem",
+      "nameZh": "无重叠区间",
+      "nameEn": "Non-overlapping Intervals",
+      "aliases": ["LeetCode 435", "最少删除重叠区间"],
+      "definition": "删除最少区间使剩余区间互不重叠；课程把目标改写为最多保留兼容区间，先给固定结尾的 O(n²) DP，再给按结束时间排序的 O(n log n) 贪心，并在下一课展开一步交换论证。",
+      "status": "verified",
+      "lessonRefs": ["10-02", "10-03"],
+      "evidenceRefs": [
+        "10-02:ev-002",
+        "10-02:ev-003",
+        "10-02:ev-005",
+        "10-02:ev-007",
+        "10-02:ev-008",
+        "10-03:ev-005"
+      ]
+    },
+    {
+      "id": "pitfall:unproved-greedy-choice",
+      "type": "pitfall",
+      "nameZh": "未经证明的贪心选择",
+      "nameEn": "Unproved greedy choice",
+      "aliases": ["局部最优冒充全局最优", "贪心直觉未证明"],
+      "definition": "只凭‘每次取当前最大或最小’就丢弃其他候选，没有反例检查、交换论证或剩余子问题闭环；代码短、样例通过和平台 Accepted 都不能替代普遍正确性证明。",
+      "status": "verified",
+      "lessonRefs": ["10-01", "10-02", "10-03"],
+      "evidenceRefs": [
+        "10-01:ev-001",
+        "10-02:ev-009",
+        "10-03:ev-002",
+        "10-03:ev-003",
+        "10-03:ev-004",
+        "10-03:ev-005"
+      ]
     }
   ],
   "conceptShape": {

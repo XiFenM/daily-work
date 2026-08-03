@@ -211,6 +211,39 @@
           }
         }
       }
+    },
+    {
+      "if": {
+        "properties": {
+          "provenance": {
+            "properties": {
+              "promptVersion": {
+                "const": "video-evidence-v1.7"
+              }
+            },
+            "required": ["promptVersion"]
+          }
+        },
+        "required": ["provenance"]
+      },
+      "then": {
+        "required": ["stateModels"],
+        "properties": {
+          "solutionProgression": {
+            "items": {
+              "required": ["id", "codeArtifactIds", "stateModelIds"]
+            }
+          },
+          "codeArtifacts": {
+            "items": {
+              "required": ["id", "solutionStageId", "completeness"]
+            }
+          },
+          "correctness": {
+            "required": ["completeness", "stateModelIds", "obligations"]
+          }
+        }
+      }
     }
   ],
   "$defs": {
@@ -623,7 +656,11 @@
             "preservation",
             "termination",
             "postcondition",
-            "boundary_safety"
+            "boundary_safety",
+            "greedy_choice",
+            "exchange_step",
+            "prefix_dominance",
+            "optimal_substructure"
           ]
         },
         "statement": {
@@ -655,6 +692,7 @@
             "induction",
             "state_transition",
             "exchange_argument",
+            "stays_ahead",
             "experimental_validation",
             "other",
             "unknown"
@@ -665,6 +703,9 @@
           "items": {
             "$ref": "#/$defs/sourcedStatement"
           }
+        },
+        "completeness": {
+          "enum": ["complete", "partial", "not_applicable", "unknown"]
         },
         "stateModelIds": {
           "type": "array",

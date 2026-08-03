@@ -183,6 +183,7 @@ for (const attempt of manifest.attempts ?? []) {
         "video-evidence-v1.4",
         "video-evidence-v1.5",
         "video-evidence-v1.6",
+        "video-evidence-v1.7",
       ]).has(attempt.promptVersion)
     ) {
       check(

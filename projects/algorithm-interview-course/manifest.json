@@ -2241,6 +2241,93 @@
       "eligibleForSynthesis": true,
       "billingStatus": "reported_by_usage",
       "retryOfAttemptId": null
+    },
+    {
+      "attemptId": "10-01-understanding-001",
+      "lessonId": "10-01",
+      "attemptNumber": 1,
+      "attemptedAt": "2026-08-03T02:45:53.000Z",
+      "outcome": "accepted",
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "baseUrl": "https://zenmux.dev/api/v1",
+      "promptVersion": "video-evidence-v1.7",
+      "promptSha256": "353204cc4195a0f02534e9d0d45465963aafd48065e7c3ccbfe5ccca0d5613f8",
+      "responseFormat": "json_object",
+      "requestId": "7fc63eaef2f04f309d9b8fbf4ae8a815",
+      "transport": {
+        "status": "completed",
+        "httpStatus": 200,
+        "failurePhase": null,
+        "requestMayHaveReachedServer": true
+      },
+      "validation": {
+        "status": "passed",
+        "validator": "normalize-lesson-evidence.mjs",
+        "errors": [],
+        "qaStatus": "completed"
+      },
+      "eligibleForSynthesis": true,
+      "billingStatus": "reported_by_usage",
+      "retryOfAttemptId": null
+    },
+    {
+      "attemptId": "10-02-understanding-001",
+      "lessonId": "10-02",
+      "attemptNumber": 1,
+      "attemptedAt": "2026-08-03T02:39:47.000Z",
+      "outcome": "accepted",
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "baseUrl": "https://zenmux.dev/api/v1",
+      "promptVersion": "video-evidence-v1.7",
+      "promptSha256": "738f10c12ac3031f522752462c513cb177b06a8c85cc73135f11442544343d9a",
+      "responseFormat": "json_object",
+      "requestId": "fa98a9315c5d4cd2835b45716a6cf342",
+      "transport": {
+        "status": "completed",
+        "httpStatus": 200,
+        "failurePhase": null,
+        "requestMayHaveReachedServer": true
+      },
+      "validation": {
+        "status": "passed",
+        "validator": "normalize-lesson-evidence.mjs",
+        "errors": [],
+        "qaStatus": "completed"
+      },
+      "eligibleForSynthesis": true,
+      "billingStatus": "reported_by_usage",
+      "retryOfAttemptId": null
+    },
+    {
+      "attemptId": "10-03-understanding-001",
+      "lessonId": "10-03",
+      "attemptNumber": 1,
+      "attemptedAt": "2026-08-03T02:48:02.000Z",
+      "outcome": "accepted",
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "baseUrl": "https://zenmux.dev/api/v1",
+      "promptVersion": "video-evidence-v1.7",
+      "promptSha256": "a4269a03ace8e237dd42e4eeb9bd16d441b24624159cd74cc592732f74c9d091",
+      "responseFormat": "json_object",
+      "requestId": "b34946d6e9474ecdabe3cbc83c82f3c0",
+      "transport": {
+        "status": "completed",
+        "httpStatus": 200,
+        "failurePhase": null,
+        "requestMayHaveReachedServer": true
+      },
+      "validation": {
+        "status": "passed",
+        "validator": "normalize-lesson-evidence.mjs",
+        "errors": [],
+        "qaStatus": "completed"
+      },
+      "eligibleForSynthesis": true,
+      "billingStatus": "reported_by_usage",
+      "retryOfAttemptId": null
     }
   ],
   "generations": [
@@ -5240,6 +5327,129 @@
         }
       },
       "notes": "单次调用成功；严格本地门禁核对 1218360 ms 时长、证据引用、对象结构与代码 verification 后通过；人工代码/OCR QA 已完成。"
+    },
+    {
+      "kind": "understanding",
+      "attemptId": "10-01-understanding-001",
+      "lessonId": "10-01",
+      "outcome": "accepted",
+      "eligibleForSynthesis": true,
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "createdAt": "2026-08-03T02:45:53.000Z",
+      "requestId": "7fc63eaef2f04f309d9b8fbf4ae8a815",
+      "inputs": [
+        "work/algorithm-interview-course/incoming/10-1 贪心基础 Assign Cookies_慕课网.mp4",
+        "work/algorithm-interview-course/prompts/10-01-video-evidence-v1.7.md",
+        "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json"
+      ],
+      "outputs": [
+        "work/algorithm-interview-course/compressed/10-01-balanced.mp4",
+        "outputs/algorithm-interview-course/understanding/raw/10-01.json",
+        "outputs/algorithm-interview-course/understanding/raw/10-01.json.response.json",
+        "outputs/algorithm-interview-course/understanding/normalized/10-01.json"
+      ],
+      "parameters": {
+        "baseUrl": "https://zenmux.dev/api/v1",
+        "promptVersion": "video-evidence-v1.7",
+        "promptSha256": "353204cc4195a0f02534e9d0d45465963aafd48065e7c3ccbfe5ccca0d5613f8",
+        "responseFormat": "json_object",
+        "compression": "balanced",
+        "compressedBytes": 10623327,
+        "compressedSha256": "d88a55eb916ae6ba06e7f460fc3685ee0944c0e1179f0d6b6a5fc4bc0c451dc4",
+        "sourceSha256": "da05d874197a77d960bfec11cb5caf029a700a33ccea51ca31053fd077d01ceb",
+        "maxLocalMb": 50,
+        "attemptNumber": 1,
+        "usage": {
+          "promptTokens": 74673,
+          "completionTokens": 8982,
+          "reasoningTokens": 4246,
+          "totalTokens": 83655
+        }
+      },
+      "notes": "单次调用成功，未重复请求；原始响应保持不变，本地校准输入补记相同需求/饼干可互换的 tie-break 语义后通过 v1.7 门禁；核对 735440 ms 时长、证据引用、对象结构与 code verification，并完成代表用例、随机 oracle、sanitizer 和工程告警 QA。"
+    },
+    {
+      "kind": "understanding",
+      "attemptId": "10-02-understanding-001",
+      "lessonId": "10-02",
+      "outcome": "accepted",
+      "eligibleForSynthesis": true,
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "createdAt": "2026-08-03T02:39:47.000Z",
+      "requestId": "fa98a9315c5d4cd2835b45716a6cf342",
+      "inputs": [
+        "work/algorithm-interview-course/incoming/10-2 贪心算法与动态规划的关系 Non-overlapping Intervals_慕课网.mp4",
+        "work/algorithm-interview-course/prompts/10-02-video-evidence-v1.7.md",
+        "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json"
+      ],
+      "outputs": [
+        "work/algorithm-interview-course/compressed/10-02-balanced.mp4",
+        "outputs/algorithm-interview-course/understanding/raw/10-02.json",
+        "outputs/algorithm-interview-course/understanding/raw/10-02.json.response.json",
+        "outputs/algorithm-interview-course/understanding/normalized/10-02.json"
+      ],
+      "parameters": {
+        "baseUrl": "https://zenmux.dev/api/v1",
+        "promptVersion": "video-evidence-v1.7",
+        "promptSha256": "738f10c12ac3031f522752462c513cb177b06a8c85cc73135f11442544343d9a",
+        "responseFormat": "json_object",
+        "compression": "balanced",
+        "compressedBytes": 18137840,
+        "compressedSha256": "fc2c8dbb38ce79eb563d8079db5022469e851fc14850be67a5220e5abd402c4a",
+        "sourceSha256": "a3aa18d639c2c74a65234547509f229ab6640d0b08909fe2391bc8f1deb673a8",
+        "maxLocalMb": 50,
+        "attemptNumber": 1,
+        "usage": {
+          "promptTokens": 106219,
+          "completionTokens": 13522,
+          "reasoningTokens": 6324,
+          "totalTokens": 119741
+        }
+      },
+      "notes": "单次调用成功，未重复请求；首次本地归一化暴露门禁未识别“start/end 相同”措辞的正则缺口，修复并新增回归测试后同一响应通过；核对 1078680 ms 时长、固定结尾 DP 状态、证据引用与两份 code verification，并完成 111111 组 oracle、sanitizer 和工程告警 QA。"
+    },
+    {
+      "kind": "understanding",
+      "attemptId": "10-03-understanding-001",
+      "lessonId": "10-03",
+      "outcome": "accepted",
+      "eligibleForSynthesis": true,
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "createdAt": "2026-08-03T02:48:02.000Z",
+      "requestId": "b34946d6e9474ecdabe3cbc83c82f3c0",
+      "inputs": [
+        "work/algorithm-interview-course/incoming/10-3 贪心选择性质的证明_慕课网.mp4",
+        "work/algorithm-interview-course/prompts/10-03-video-evidence-v1.7.md",
+        "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json"
+      ],
+      "outputs": [
+        "work/algorithm-interview-course/compressed/10-03-balanced.mp4",
+        "outputs/algorithm-interview-course/understanding/raw/10-03.json",
+        "outputs/algorithm-interview-course/understanding/raw/10-03.json.response.json",
+        "outputs/algorithm-interview-course/understanding/normalized/10-03.json"
+      ],
+      "parameters": {
+        "baseUrl": "https://zenmux.dev/api/v1",
+        "promptVersion": "video-evidence-v1.7",
+        "promptSha256": "a4269a03ace8e237dd42e4eeb9bd16d441b24624159cd74cc592732f74c9d091",
+        "responseFormat": "json_object",
+        "compression": "balanced",
+        "compressedBytes": 11073908,
+        "compressedSha256": "9b79c79b8bfb992e07bfdf7f460d02545cf066de6112f58219f8eddd80310134",
+        "sourceSha256": "98210ef085e150bf003ef1749e34c8e41a023e7d88b501666dc7ee89b81065fc",
+        "maxLocalMb": 50,
+        "attemptNumber": 1,
+        "usage": {
+          "promptTokens": 91784,
+          "completionTokens": 8357,
+          "reasoningTokens": 4532,
+          "totalTokens": 100141
+        }
+      },
+      "notes": "单次调用成功且首次归一化通过；核对 923320 ms 时长、10 条校准证据、反例与一步交换论证，正确性保持 exchange_argument/partial；本课无代码，代码测试不适用，人工画面与证明义务 QA 已完成。"
     }
   ]
 }

@@ -269,6 +269,137 @@ const makeV16DpFixture = () => {
   return fixture;
 };
 
+const makeV17GreedyFixture = () => {
+  const fixture = makeV14Fixture();
+  fixture.lessonId = "10-02";
+  fixture.chapterId = "10";
+  fixture.titleObserved = "贪心算法与动态规划的关系";
+  fixture.timeline[0] = {
+    startMs: 0,
+    endMs: 930520,
+    topic: "按区间终点排序并证明贪心选择",
+    summary: "按右端点升序处理区间，并用交换论证说明首个选择。",
+    evidenceIds: ["ev-001"],
+  };
+  fixture.learningObjectives = [sourced("区分贪心选择性质与最优子结构。")];
+  fixture.concepts = [
+    {
+      canonicalName: "greedy exchange argument",
+      namesObserved: ["交换论证"],
+      role: "introduces",
+      definition: "把某个最优解的首个选择替换为贪心选择。",
+      evidenceIds: ["ev-001"],
+    },
+  ];
+  fixture.problem = {
+    platform: null,
+    problemId: null,
+    titleObserved: "区间选择",
+    statement: "选择尽可能多的不重叠区间。",
+    constraints: ["端点相等时可以衔接"],
+    clarifyingQuestions: [],
+    evidenceIds: ["ev-001"],
+  };
+  fixture.solutionProgression[0] = {
+    id: "solution-001",
+    stage: "optimized",
+    idea: "按右端点升序扫描，接受与已选前缀不冲突的区间。",
+    timeComplexity: "O(n log n)",
+    spaceComplexity: "O(1)",
+    limitations: ["视频未给出相同右端点的二级排序键"],
+    codeArtifactIds: ["code-001"],
+    stateModelIds: ["state-001"],
+    evidenceIds: ["ev-001"],
+  };
+  fixture.codeArtifacts[0] = {
+    ...fixture.codeArtifacts[0],
+    code: "sort(intervals.begin(), intervals.end(), byEnd); if (start >= end) { end = finish; }",
+  };
+  fixture.stateModels[0] = {
+    id: "state-001",
+    solutionStageId: "solution-001",
+    kind: "other",
+    variables: [
+      {
+        symbol: "intervals",
+        role: "candidate_order",
+        meaning: "按右端点升序排列的候选；相同右端点的 tie-break 未说明",
+        updateRule: null,
+        evidenceIds: ["ev-001"],
+      },
+      {
+        symbol: "end",
+        role: "feasibility_frontier",
+        meaning: "已选前缀最后一个区间的右端点",
+        updateRule: "接受候选后更新为该候选的右端点",
+        evidenceIds: ["ev-001"],
+      },
+    ],
+    regions: [
+      {
+        notation: "intervals[0..i)",
+        meaning: "已经扫描并决定接受或跳过的候选前缀",
+        evidenceIds: ["ev-001"],
+      },
+    ],
+    invariant: null,
+    transitions: [
+      {
+        condition: "candidate.start >= end",
+        updates: "接受候选并令 end = candidate.end",
+        preserves: null,
+        evidenceIds: ["ev-001"],
+      },
+    ],
+    termination: sourced("扫描完全部候选后返回已选择区间数。"),
+    evidenceIds: ["ev-001"],
+  };
+  fixture.correctness = {
+    method: "exchange_argument",
+    completeness: "complete",
+    claims: [sourced("可把一个最优解的首区间换成最早结束区间。")],
+    stateModelIds: ["state-001"],
+    obligations: [
+      {
+        phase: "greedy_choice",
+        ...sourced("当前贪心选择是右端点最小的可行区间。"),
+      },
+      {
+        phase: "exchange_step",
+        ...sourced("替换最优解的首区间不会减少后续可选空间。"),
+      },
+      {
+        phase: "optimal_substructure",
+        ...sourced("首区间确定后，剩余区间构成同类最优子问题。"),
+      },
+      {
+        phase: "postcondition",
+        ...sourced("重复替换可得到与贪心选择序列一致的最优解。"),
+      },
+    ],
+  };
+  fixture.complexity = {
+    time: "O(n log n)",
+    space: "O(1)",
+    assumptions: ["排序成本主导线性扫描"],
+    evidenceIds: ["ev-001"],
+  };
+  fixture.uncertainties = [
+    {
+      field: "solution-001.candidateOrder.tieBreak",
+      reason: "视频未说明相同右端点的二级排序键或稳定性。",
+      recommendedCheck: "人工复核比较器完整画面。",
+    },
+  ];
+  fixture.evidence[0] = {
+    ...fixture.evidence[0],
+    assetId: "asset:video-10-02",
+    observation: "画面和讲解展示按右端点排序、线性扫描与交换论证。",
+  };
+  fixture.provenance.promptVersion = "video-evidence-v1.7";
+  return fixture;
+};
+
 const runNormalizer = async (raw, promptVersion = "video-evidence-v1.4") => {
   const temporaryDirectory = await mkdtemp(
     resolve(tmpdir(), "lesson-evidence-test-"),
@@ -631,5 +762,262 @@ describe("normalize-lesson-evidence video-evidence-v1.6 DP gates", () => {
 
     expect(result.status).toBe(0);
     expect(result.normalized.correctness.method).toBe("induction");
+  });
+});
+
+describe("normalize-lesson-evidence video-evidence-v1.7 greedy gates", () => {
+  it("accepts a complete, evidence-backed exchange argument", async () => {
+    const result = await runNormalizer(
+      makeV17GreedyFixture(),
+      "video-evidence-v1.7",
+    );
+
+    expect(result.status).toBe(0);
+    expect(result.normalized.correctness).toMatchObject({
+      method: "exchange_argument",
+      completeness: "complete",
+    });
+  });
+
+  it("accepts a partial exchange argument when the course omits proof obligations", async () => {
+    const fixture = makeV17GreedyFixture();
+    fixture.correctness.completeness = "partial";
+    fixture.correctness.obligations = [];
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).toBe(0);
+    expect(result.normalized.correctness.completeness).toBe("partial");
+  });
+
+  it("rejects a complete exchange argument without an exchange step", async () => {
+    const fixture = makeV17GreedyFixture();
+    fixture.correctness.obligations = fixture.correctness.obligations.filter(
+      (obligation) => obligation.phase !== "exchange_step",
+    );
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain(
+      "exchange_argument completeness=complete requires a course_direct exchange_step obligation",
+    );
+  });
+
+  it("rejects an editorial exchange step in an otherwise complete proof", async () => {
+    const fixture = makeV17GreedyFixture();
+    const exchangeStep = fixture.correctness.obligations.find(
+      (obligation) => obligation.phase === "exchange_step",
+    );
+    exchangeStep.sourceClass = "editorial_inference";
+    exchangeStep.evidenceIds = [];
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain(
+      "exchange_argument completeness=complete requires a course_direct exchange_step obligation",
+    );
+  });
+
+  it("accepts a complete stays-ahead proof with all direct obligations", async () => {
+    const fixture = makeV17GreedyFixture();
+    fixture.correctness.method = "stays_ahead";
+    fixture.correctness.obligations = [
+      {
+        phase: "initialization",
+        ...sourced("空前缀时贪心与任意可行解处于同一位置。"),
+      },
+      {
+        phase: "prefix_dominance",
+        ...sourced("每个长度相同的前缀中，贪心前缀的结束位置不更晚。"),
+      },
+      {
+        phase: "preservation",
+        ...sourced("加入下一个选择后，领先关系继续成立。"),
+      },
+      {
+        phase: "termination",
+        ...sourced("候选耗尽时前缀比较覆盖完整选择序列。"),
+      },
+      {
+        phase: "postcondition",
+        ...sourced("因此任意可行解都不能选择比贪心更多的区间。"),
+      },
+    ];
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).toBe(0);
+    expect(result.normalized.correctness.method).toBe("stays_ahead");
+  });
+
+  it("rejects a complete stays-ahead proof without prefix dominance", async () => {
+    const fixture = makeV17GreedyFixture();
+    fixture.correctness.method = "stays_ahead";
+    fixture.correctness.obligations = [
+      {
+        phase: "initialization",
+        ...sourced("空前缀时两者相同。"),
+      },
+      {
+        phase: "preservation",
+        ...sourced("加入选择后性质保持。"),
+      },
+      {
+        phase: "termination",
+        ...sourced("扫描结束时停止。"),
+      },
+      {
+        phase: "postcondition",
+        ...sourced("贪心解达到最优。"),
+      },
+    ];
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain(
+      "stays_ahead completeness=complete requires a course_direct prefix_dominance obligation",
+    );
+  });
+
+  it("rejects completeness=complete for state transition alone", async () => {
+    const fixture = makeV17GreedyFixture();
+    fixture.correctness.method = "state_transition";
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain(
+      "correctness.completeness=complete is unsupported for state_transition",
+    );
+  });
+
+  it("rejects unknown completeness when algorithmic material exists", async () => {
+    const fixture = makeV17GreedyFixture();
+    fixture.correctness.completeness = "unknown";
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain(
+      "must mark correctness.completeness as complete or partial",
+    );
+  });
+
+  it("rejects disagreement between not_applicable method and completeness", async () => {
+    const fixture = makeV17GreedyFixture();
+    fixture.correctness.completeness = "not_applicable";
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain(
+      "must mark correctness.completeness as complete or partial",
+    );
+  });
+
+  it("accepts matching not_applicable values for a non-algorithm lesson", async () => {
+    const fixture = makeV17GreedyFixture();
+    fixture.problem = null;
+    fixture.solutionProgression = [];
+    fixture.codeArtifacts = [];
+    fixture.stateModels = [];
+    fixture.correctness = {
+      method: "not_applicable",
+      completeness: "not_applicable",
+      claims: [],
+      stateModelIds: [],
+      obligations: [],
+    };
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).toBe(0);
+    expect(result.normalized.correctness.completeness).toBe("not_applicable");
+  });
+
+  it("rejects a coded greedy solution without a linked state model", async () => {
+    const fixture = makeV17GreedyFixture();
+    fixture.solutionProgression[0].stateModelIds = [];
+    fixture.stateModels = [];
+    fixture.correctness = {
+      method: "unknown",
+      completeness: "partial",
+      claims: [],
+      stateModelIds: [],
+      obligations: [],
+    };
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain("requires a linked state model");
+  });
+
+  it("rejects a linked chapter 10 state without a transition", async () => {
+    const fixture = makeV17GreedyFixture();
+    fixture.correctness.completeness = "partial";
+    fixture.correctness.obligations = [];
+    fixture.stateModels[0].transitions = [];
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain("evidence-backed transition");
+  });
+
+  it("rejects an ordered greedy solution without a candidate_order variable", async () => {
+    const fixture = makeV17GreedyFixture();
+    fixture.stateModels[0].variables[0].role = "candidate_list";
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain("lacks a candidate_order state variable");
+  });
+
+  it("rejects candidate ordering that omits both tie-break semantics and uncertainty", async () => {
+    const fixture = makeV17GreedyFixture();
+    fixture.stateModels[0].variables[0].meaning = "按右端点升序排列的候选";
+    fixture.uncertainties = [];
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain(
+      "neither records tie-break semantics nor a tie-break uncertainty",
+    );
+  });
+
+  it("accepts explicit start/end tie-break wording from observed C++ comparators", async () => {
+    const fixture = makeV17GreedyFixture();
+    fixture.stateModels[0].variables[0].meaning =
+      "按 end 升序（若 end 相同则按 start 升序）排序后的区间数组";
+    fixture.uncertainties = [];
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).toBe(0);
+  });
+
+  it("rejects a v1.7 document that omits correctness completeness", async () => {
+    const fixture = makeV17GreedyFixture();
+    delete fixture.correctness.completeness;
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain("completeness");
+  });
+
+  it("keeps v1.6 documents valid without correctness completeness", async () => {
+    const fixture = makeV16DpFixture();
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.6");
+
+    expect(result.status).toBe(0);
+    expect(result.normalized.correctness).not.toHaveProperty("completeness");
   });
 });

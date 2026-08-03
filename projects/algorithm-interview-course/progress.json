@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-03T02:09:20.000Z",
+  "updatedAt": "2026-08-03T03:07:00.000Z",
   "summary": {
     "expectedLessons": 70,
     "knownDurationLessons": 67,
@@ -8,15 +8,15 @@
     "discoveredAssets": 70,
     "discoveredVideos": 67,
     "discoveredTexts": 3,
-    "catalogedAssets": 66,
+    "catalogedAssets": 69,
     "mappedLessons": 70,
-    "hashVerifiedLessons": 66,
-    "probedLessons": 63,
-    "understoodLessons": 66,
-    "synthesizedLessons": 66,
-    "verifiedLessons": 66,
-    "synthesizedChapters": 9,
-    "verifiedRelationshipEdges": 88
+    "hashVerifiedLessons": 69,
+    "probedLessons": 66,
+    "understoodLessons": 69,
+    "synthesizedLessons": 69,
+    "verifiedLessons": 69,
+    "synthesizedChapters": 10,
+    "verifiedRelationshipEdges": 93
   },
   "defaultLessonState": {
     "sourceMapping": "mapped",
@@ -907,6 +907,48 @@
       "relationshipReview": "completed",
       "qa": "completed",
       "notes": "Markdown 文本教程，无视频时长；SHA-256、标题后的 23 个正文段落和 16 个题名已逐项校验，没有补写平台、题号、题面、状态、代码或复杂度。"
+    },
+    "10-01": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "notes": "目录标称 12:12；FFprobe 实际 12:15.440。正式理解单次调用成功；tie-break 本地校准后通过 v1.7。正式笔记与独立交叉 QA 完成；屏幕代码通过 9 组代表、10,000 组随机 oracle 与 ASan/UBSan，保留 2 条 sign-compare、缺显式 <functional> 和原地排序边界。",
+      "understandingAttempts": 1,
+      "rejectedAttempts": 0,
+      "transportFailures": 0,
+      "acceptedAttemptId": "10-01-understanding-001"
+    },
+    "10-02": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "notes": "目录标称 17:58；FFprobe 实际 17:58.680。正式理解单次调用成功；门禁正则回归修复后同一响应通过。正式笔记与独立交叉 QA 完成；DP 固定结尾状态已校正，两份屏幕代码通过 9 组代表、111,111 组穷举 oracle 与 ASan/UBSan，保留 15 条算法类型告警和缺显式 <algorithm>。",
+      "understandingAttempts": 1,
+      "rejectedAttempts": 0,
+      "transportFailures": 0,
+      "acceptedAttemptId": "10-02-understanding-001"
+    },
+    "10-03": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "notes": "目录标称 15:19；FFprobe 实际 15:23.320。正式理解与首次归一化单次通过；正式笔记与独立交叉 QA 完成。0-1 背包和 Perfect Squares 反例已复核；区间一步交换论证保持 exchange_argument/partial，量词、剩余子问题、重复交换、并列结束时间和端点语义缺口均显式记录；本课无代码。",
+      "understandingAttempts": 1,
+      "rejectedAttempts": 0,
+      "transportFailures": 0,
+      "acceptedAttemptId": "10-03-understanding-001"
     }
   }
 }

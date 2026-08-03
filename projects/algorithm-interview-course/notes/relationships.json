@@ -2636,14 +2636,14 @@
       "createdBy": "outline-analysis-v1; verified-by chapter-09-review-v1"
     },
     {
-      "id": "edge:video-outline:09-05:10-02",
+      "id": "edge:video:09-05:10-03",
       "from": "lesson:09-05",
-      "to": "lesson:10-02",
-      "type": "contrasts_with",
+      "to": "lesson:10-03",
+      "type": "revisits",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "09-05 用容量 5 的反例证明按单位价值最高优先的局部规则不能保证一般 0-1 背包最优，比原 09-01 目录候选更直接；10-02 尚未处理，缺少目标侧证据，因此保持 provisional。",
-      "confidence": 0.9,
+      "status": "verified",
+      "rationale": "09-05 首次用容量 5 的反例说明单位价值最高优先不能保证一般 0-1 背包最优；10-03 原样回访价值 16 对 22 的同一反例，把它用于主动否定错误贪心规则。",
+      "confidence": 0.99,
       "evidence": [
         {
           "lessonId": "09-05",
@@ -2651,9 +2651,16 @@
           "startMs": 211000,
           "endMs": 389000,
           "locator": "ev-004 · 03:31-06:29"
+        },
+        {
+          "lessonId": "10-03",
+          "assetId": "asset:video-10-03",
+          "startMs": 65000,
+          "endMs": 125000,
+          "locator": "ev-002 · 01:05-02:05"
         }
       ],
-      "createdBy": "outline-analysis-v1; redirected-by chapter-09-review-v1"
+      "createdBy": "outline-analysis-v1; redirected-by chapter-09-review-v1; verified-and-retargeted-by chapter-10-review-v1"
     },
     {
       "id": "edge:video:08-08:09-01",
@@ -2857,11 +2864,26 @@
       "to": "lesson:10-02",
       "type": "extends",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "从贪心基础进入与动态规划的关系。",
-      "confidence": 0.96,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "10-01 结尾明确预告下一节讲贪心与动态规划的关系；10-02 开头承接这一主题，并从基础分配题推进到同一问题的 DP 与贪心对照。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "10-01",
+          "assetId": "asset:video-10-01",
+          "startMs": 640000,
+          "endMs": 735440,
+          "locator": "ev-006 · 10:40-12:15.440"
+        },
+        {
+          "lessonId": "10-02",
+          "assetId": "asset:video-10-02",
+          "startMs": 0,
+          "endMs": 16000,
+          "locator": "ev-001 · 00:00-00:16"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-10-review-v1"
     },
     {
       "id": "edge:outline:10-02:10-03",
@@ -2869,11 +2891,80 @@
       "to": "lesson:10-03",
       "type": "extends",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "从算法选择进入贪心选择性质的证明。",
-      "confidence": 0.96,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "10-02 结尾明确预告下一节证明贪心选择性质；10-03 从该性质进入反例与区间替换论证，实际完成所预告的证明主题。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "10-02",
+          "assetId": "asset:video-10-02",
+          "startMs": 1030000,
+          "endMs": 1078680,
+          "locator": "ev-009 · 17:10-17:58.680"
+        },
+        {
+          "lessonId": "10-03",
+          "assetId": "asset:video-10-03",
+          "startMs": 380000,
+          "endMs": 769000,
+          "locator": "ev-005–ev-009 · 06:20-12:49"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-10-review-v1"
+    },
+    {
+      "id": "edge:video:09-08:10-02",
+      "from": "lesson:09-08",
+      "to": "lesson:10-02",
+      "type": "same_pattern_as",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "09-08 定义 LIS(i) 为以 nums[i] 结尾的最优长度；10-02 的区间 DP 实际也把 memo[i] 定义为以 intervals[i] 结尾的最长兼容序列，二者都枚举合法前驱并从全表取最大值。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "09-08",
+          "assetId": "asset:video-09-08",
+          "startMs": 293000,
+          "endMs": 524000,
+          "locator": "ev-003 · 04:53-08:44"
+        },
+        {
+          "lessonId": "10-02",
+          "assetId": "asset:video-10-02",
+          "startMs": 239000,
+          "endMs": 732000,
+          "locator": "ev-004–ev-005 · 03:59-12:12"
+        }
+      ],
+      "createdBy": "chapter-10-review-v1"
+    },
+    {
+      "id": "edge:video:06-05:10-03",
+      "from": "lesson:06-05",
+      "to": "lesson:10-03",
+      "type": "contrasts_with",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "06-05 用 BFS 分层求 Perfect Squares 的最少项数；10-03 用 n=12 说明每次取最大平方数会得到 4 项而最优只需 3 项，直接对照了系统搜索与未经证明的单路径贪心。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "06-05",
+          "assetId": "asset:video-06-05",
+          "startMs": 320000,
+          "endMs": 488000,
+          "locator": "ev-004 · 05:20-08:08"
+        },
+        {
+          "lessonId": "10-03",
+          "assetId": "asset:video-10-03",
+          "startMs": 125000,
+          "endMs": 190000,
+          "locator": "ev-003 · 02:05-03:10"
+        }
+      ],
+      "createdBy": "chapter-10-review-v1"
     }
   ]
 }
