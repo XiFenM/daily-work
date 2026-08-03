@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "sourceRoot": "work/algorithm-interview-course/incoming",
   "inventory": {
-    "scannedAt": "2026-08-03T01:06:00Z",
+    "scannedAt": "2026-08-03T02:25:17Z",
     "layout": "flat",
     "courseAssetCount": 70,
     "videoCount": 67,
@@ -14,7 +14,7 @@
       "duplicateLessonIds": [],
       "missingLessonIds": []
     },
-    "catalogScope": "chapters-01-09"
+    "catalogScope": "chapters-01-10"
   },
   "items": [
     {
@@ -2017,6 +2017,99 @@
       },
       "status": "processed",
       "notes": "Markdown 文本教程，无视频时长；文件名、标题与 23 个正文段落共同确认其为第九章动态规划经典题清单，课次映射无歧义。"
+    },
+    {
+      "assetId": "asset:video-10-01",
+      "kind": "video",
+      "originalFilename": "10-1 贪心基础 Assign Cookies_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/10-1 贪心基础 Assign Cookies_慕课网.mp4",
+      "sha256": "da05d874197a77d960bfec11cb5caf029a700a33ccea51ca31053fd077d01ceb",
+      "bytes": 70420069,
+      "lessonIds": ["10-01"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 735.44,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 12:12；实际 12:15.440，相差约 3.440 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成并核验。"
+    },
+    {
+      "assetId": "asset:video-10-02",
+      "kind": "video",
+      "originalFilename": "10-2 贪心算法与动态规划的关系 Non-overlapping Intervals_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/10-2 贪心算法与动态规划的关系 Non-overlapping Intervals_慕课网.mp4",
+      "sha256": "a3aa18d639c2c74a65234547509f229ab6640d0b08909fe2391bc8f1deb673a8",
+      "bytes": 115535100,
+      "lessonIds": ["10-02"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1078.68,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 17:58；实际 17:58.680，相差约 0.680 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成并核验。"
+    },
+    {
+      "assetId": "asset:video-10-03",
+      "kind": "video",
+      "originalFilename": "10-3 贪心选择性质的证明_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/10-3 贪心选择性质的证明_慕课网.mp4",
+      "sha256": "98210ef085e150bf003ef1749e34c8e41a023e7d88b501666dc7ee89b81065fc",
+      "bytes": 85296594,
+      "lessonIds": ["10-03"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 923.32,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 15:19；实际 15:23.320，相差约 4.320 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成并核验。"
     }
   ],
   "itemShape": {

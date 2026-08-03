@@ -63,7 +63,8 @@ const strictV13 = promptVersion === "video-evidence-v1.3";
 const strictV14 = promptVersion === "video-evidence-v1.4";
 const strictV15 = promptVersion === "video-evidence-v1.5";
 const strictV16 = promptVersion === "video-evidence-v1.6";
-const strictV14OrLater = strictV14 || strictV15 || strictV16;
+const strictV17 = promptVersion === "video-evidence-v1.7";
+const strictV14OrLater = strictV14 || strictV15 || strictV16 || strictV17;
 const strictExtraction = strictV13 || strictV14OrLater;
 if (
   strictExtraction &&
@@ -514,11 +515,22 @@ if (strictExtraction) {
       );
     }
 
-    assertExactKeys(
-      rawEvidence.correctness,
-      ["method", "claims", "stateModelIds", "obligations"],
-      "correctness",
-    );
+    const correctnessFields = [
+      "method",
+      "claims",
+      "stateModelIds",
+      "obligations",
+    ];
+    if (strictV17) correctnessFields.splice(2, 0, "completeness");
+    assertExactKeys(rawEvidence.correctness, correctnessFields, "correctness");
+    if (
+      strictV17 &&
+      !new Set(["complete", "partial", "not_applicable", "unknown"]).has(
+        rawEvidence.correctness.completeness,
+      )
+    ) {
+      throw new Error("correctness.completeness is invalid for v1.7.");
+    }
     if (!Array.isArray(rawEvidence.correctness.claims)) {
       throw new Error("correctness.claims must be an array.");
     }
@@ -550,6 +562,10 @@ if (strictExtraction) {
           "termination",
           "postcondition",
           "boundary_safety",
+          "greedy_choice",
+          "exchange_step",
+          "prefix_dominance",
+          "optimal_substructure",
         ]).has(obligation.phase)
       ) {
         throw new Error(`${path}.phase is invalid.`);
@@ -685,6 +701,7 @@ const allowedCorrectnessMethods = new Set([
   "induction",
   "state_transition",
   "exchange_argument",
+  "stays_ahead",
   "experimental_validation",
   "other",
   "unknown",
@@ -853,6 +870,167 @@ if (strictV14OrLater) {
     throw new Error(
       "not_applicable correctness cannot include states or obligations.",
     );
+  }
+
+  if (strictV17 && normalized.chapterId === "10") {
+    const completeness = normalized.correctness.completeness;
+    const hasCorrectnessMaterial =
+      normalized.solutionProgression.length > 0 ||
+      normalized.correctness.claims.length > 0 ||
+      normalized.stateModels.length > 0;
+
+    if (
+      hasCorrectnessMaterial &&
+      !new Set(["complete", "partial"]).has(completeness)
+    ) {
+      throw new Error(
+        "Chapter 10 algorithmic material must mark correctness.completeness as complete or partial under video-evidence-v1.7.",
+      );
+    }
+    if (
+      (normalized.correctness.method === "not_applicable") !==
+      (completeness === "not_applicable")
+    ) {
+      throw new Error(
+        "correctness.method and correctness.completeness must agree on not_applicable under video-evidence-v1.7.",
+      );
+    }
+
+    for (const solution of normalized.solutionProgression) {
+      const requiresStateModel =
+        new Set(["intermediate", "optimized"]).has(solution.stage) ||
+        solution.codeArtifactIds.length > 0;
+      if (requiresStateModel && solution.stateModelIds.length === 0) {
+        throw new Error(
+          `${solution.id} requires a linked state model because it is intermediate/optimized or has code artifacts under video-evidence-v1.7 chapter 10 rules.`,
+        );
+      }
+    }
+
+    const linkedStateIds = new Set(
+      normalized.solutionProgression.flatMap(
+        (solution) => solution.stateModelIds,
+      ),
+    );
+    for (const stateId of linkedStateIds) {
+      const stateModel = stateById.get(stateId);
+      if (
+        stateModel.variables.length === 0 &&
+        stateModel.regions.length === 0
+      ) {
+        throw new Error(
+          `${stateId} requires an evidence-backed state variable or region for chapter 10 under video-evidence-v1.7.`,
+        );
+      }
+      if (stateModel.transitions.length === 0) {
+        throw new Error(
+          `${stateId} requires an evidence-backed transition for chapter 10 under video-evidence-v1.7.`,
+        );
+      }
+    }
+
+    const orderingSignal = /\bsort(?:ed|ing)?\b|排序|升序|降序|有序/iu;
+    const tieBreakSignal =
+      /\btie[-_ ]?break\b|并列|相同(?:主键|排序键|端点|值|start|end|起点|终点|开始|结束)|相等(?:主键|排序键|端点|值|start|end|起点|终点|开始|结束)|(?:start|end|起点|终点|开始|结束)\s*(?:相同|相等)|二级(?:键|排序)|稳定排序|stable sort/iu;
+    for (const solution of normalized.solutionProgression) {
+      const requiresStateModel =
+        new Set(["intermediate", "optimized"]).has(solution.stage) ||
+        solution.codeArtifactIds.length > 0;
+      const orderingText = [
+        solution.idea,
+        ...solution.codeArtifactIds.map((codeId) => codeById.get(codeId).code),
+      ].join("\n");
+      if (!requiresStateModel || !orderingSignal.test(orderingText)) continue;
+
+      const linkedStates = solution.stateModelIds.map((stateId) =>
+        stateById.get(stateId),
+      );
+      if (
+        !linkedStates.some((stateModel) =>
+          stateModel.variables.some(
+            (variable) => variable.role === "candidate_order",
+          ),
+        )
+      ) {
+        throw new Error(
+          `${solution.id} uses candidate ordering but lacks a candidate_order state variable under video-evidence-v1.7.`,
+        );
+      }
+
+      const orderingMetadata = JSON.stringify([
+        ...linkedStates.flatMap((stateModel) => stateModel.variables),
+        ...normalized.uncertainties,
+      ]);
+      if (!tieBreakSignal.test(orderingMetadata)) {
+        throw new Error(
+          `${solution.id} uses candidate ordering but neither records tie-break semantics nor a tie-break uncertainty under video-evidence-v1.7.`,
+        );
+      }
+    }
+
+    if (completeness === "complete") {
+      const requiredPhasesByMethod = new Map([
+        [
+          "exchange_argument",
+          [
+            "greedy_choice",
+            "exchange_step",
+            "optimal_substructure",
+            "postcondition",
+          ],
+        ],
+        [
+          "stays_ahead",
+          [
+            "initialization",
+            "prefix_dominance",
+            "preservation",
+            "termination",
+            "postcondition",
+          ],
+        ],
+        [
+          "loop_invariant",
+          ["initialization", "preservation", "termination", "postcondition"],
+        ],
+        ["induction", ["initialization", "preservation", "postcondition"]],
+      ]);
+      const requiredPhases = requiredPhasesByMethod.get(
+        normalized.correctness.method,
+      );
+      if (!requiredPhases) {
+        throw new Error(
+          `correctness.completeness=complete is unsupported for ${normalized.correctness.method} under video-evidence-v1.7 chapter 10 rules; use partial unless the course supplies a complete accepted proof method.`,
+        );
+      }
+      if (normalized.correctness.stateModelIds.length === 0) {
+        throw new Error(
+          `${normalized.correctness.method} with completeness=complete requires a linked state model under video-evidence-v1.7.`,
+        );
+      }
+      if (
+        !normalized.correctness.stateModelIds.some(
+          (stateId) => stateById.get(stateId).transitions.length > 0,
+        )
+      ) {
+        throw new Error(
+          `${normalized.correctness.method} with completeness=complete requires an evidence-backed state transition under video-evidence-v1.7.`,
+        );
+      }
+      for (const phase of requiredPhases) {
+        const hasDirectObligation = normalized.correctness.obligations.some(
+          (candidate) =>
+            candidate.phase === phase &&
+            candidate.sourceClass === "course_direct" &&
+            candidate.evidenceIds.length > 0,
+        );
+        if (!hasDirectObligation) {
+          throw new Error(
+            `${normalized.correctness.method} completeness=complete requires a course_direct ${phase} obligation under video-evidence-v1.7.`,
+          );
+        }
+      }
+    }
   }
 
   if (strictV16 && normalized.chapterId === "09") {
