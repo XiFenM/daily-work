@@ -2965,6 +2965,108 @@
         }
       ],
       "createdBy": "chapter-10-review-v1"
+    },
+    {
+      "id": "edge:video:11-01:01-03",
+      "from": "lesson:11-01",
+      "to": "lesson:01-03",
+      "type": "revisits",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "01-03 建立基础优先、使用 LeetCode 并平衡学习与做题的准备框架；11-01 在结语中依次回访基础、LeetCode、超越 Accepted 和题目分类思考，形成课程首尾闭环。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "01-03",
+          "assetId": "asset:video-01-03",
+          "startMs": 347000,
+          "endMs": 435000,
+          "locator": "ev-005 · 05:47-07:15"
+        },
+        {
+          "lessonId": "01-03",
+          "assetId": "asset:video-01-03",
+          "startMs": 738000,
+          "endMs": 814000,
+          "locator": "ev-008 · 12:18-13:34"
+        },
+        {
+          "lessonId": "01-03",
+          "assetId": "asset:video-01-03",
+          "startMs": 966000,
+          "endMs": 1058400,
+          "locator": "ev-010 · 16:06-17:38"
+        },
+        {
+          "lessonId": "11-01",
+          "assetId": "asset:video-11-01",
+          "startMs": 0,
+          "endMs": 150000,
+          "locator": "ev-001–ev-004 · 00:00-02:30"
+        }
+      ],
+      "createdBy": "chapter-11-review-v1"
+    },
+    {
+      "id": "edge:video:11-01:01-04",
+      "from": "lesson:11-01",
+      "to": "lesson:01-04",
+      "type": "revisits",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "01-04 把算法作答展开为建立可解释起点、设计与优化方案、实际实现和工程边界；11-01 用“设计—实现—继续优化”压缩回访同一解题流程。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "01-04",
+          "assetId": "asset:video-01-04",
+          "startMs": 383000,
+          "endMs": 623000,
+          "locator": "ev-005 · 06:23-10:23"
+        },
+        {
+          "lessonId": "01-04",
+          "assetId": "asset:video-01-04",
+          "startMs": 623000,
+          "endMs": 702000,
+          "locator": "ev-006 · 10:23-11:42"
+        },
+        {
+          "lessonId": "11-01",
+          "assetId": "asset:video-11-01",
+          "startMs": 86000,
+          "endMs": 113000,
+          "locator": "ev-003 · 01:26-01:53"
+        }
+      ],
+      "createdBy": "chapter-11-review-v1"
+    },
+    {
+      "id": "edge:video:03-03:11-01",
+      "from": "lesson:03-03",
+      "to": "lesson:11-01",
+      "type": "extends",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "03-03 完整演示 LeetCode 的 Run、Submit 和 Accepted；11-01 明确补充 Accepted 不是学习终点，还应继续审视算法设计、具体实现与优化空间。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "03-03",
+          "assetId": "asset:video-03-03",
+          "startMs": 579000,
+          "endMs": 678000,
+          "locator": "ev-007–ev-008 · 09:39-11:18"
+        },
+        {
+          "lessonId": "11-01",
+          "assetId": "asset:video-11-01",
+          "startMs": 41000,
+          "endMs": 113000,
+          "locator": "ev-002–ev-003 · 00:41-01:53"
+        }
+      ],
+      "createdBy": "chapter-11-review-v1"
     }
   ]
 }

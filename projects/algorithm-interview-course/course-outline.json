@@ -4,7 +4,7 @@
   "chapterCount": 11,
   "lessonCount": 70,
   "knownDurationLessonCount": 67,
-  "knownDurationSeconds": 66660.73756,
+  "knownDurationSeconds": 66665.61756,
   "unknownDurationLessonIds": ["06-08", "07-03", "09-10"],
   "normalizationNotes": [
     {
@@ -22,6 +22,10 @@
     {
       "lessonId": "08-07",
       "note": "目录原文在 Number of Islands 后带有连字符，规范标题暂时去除该排版符号。"
+    },
+    {
+      "lessonId": "11-01",
+      "note": "目录课名为“结语”，视频全程主体标题页显示“玩儿转算法面试”；目录标题保持不变，画面题名仅记录在证据与正式笔记中。"
     }
   ],
   "chapters": [
@@ -1004,7 +1008,7 @@
       "id": "11",
       "number": 11,
       "title": "课程结语",
-      "knownDurationSeconds": 165,
+      "knownDurationSeconds": 169.88,
       "lessons": [
         {
           "id": "11-01",
@@ -1015,7 +1019,9 @@
           "titleNormalized": "结语",
           "durationText": "02:45",
           "durationSeconds": 165,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 169.88,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-11-01"]
         }
       ]
     }

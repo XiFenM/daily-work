@@ -25,8 +25,11 @@ const check = (condition, message) => {
   if (!condition) errors.push(message);
 };
 
+const chapters = new Map();
 const lessons = new Map();
 for (const chapter of outline.chapters ?? []) {
+  check(!chapters.has(chapter.id), `Duplicate chapter ID: ${chapter.id}`);
+  chapters.set(chapter.id, chapter);
   for (const lesson of chapter.lessons ?? []) {
     check(!lessons.has(lesson.id), `Duplicate lesson ID: ${lesson.id}`);
     lessons.set(lesson.id, lesson);
@@ -223,6 +226,7 @@ for (const attempt of manifest.attempts ?? []) {
 }
 
 const requestIds = new Set();
+const generationsByRequestId = new Map();
 const generationsByAttemptId = new Map();
 const manifestOutputPaths = new Set();
 for (const generation of manifest.generations ?? []) {
@@ -231,6 +235,7 @@ for (const generation of manifest.generations ?? []) {
     `Duplicate manifest request ID: ${generation.requestId}`,
   );
   requestIds.add(generation.requestId);
+  generationsByRequestId.set(generation.requestId, generation);
   if (generation.attemptId) {
     check(
       !generationsByAttemptId.has(generation.attemptId),
@@ -410,6 +415,9 @@ for (const [lessonId, state] of Object.entries(progress.lessons ?? {})) {
 const chapterNotes = (
   await readdir(resolve(projectRoot, "notes/chapters"))
 ).filter((name) => /^\d{2}\.md$/.test(name));
+const chapterNoteIds = new Set(
+  chapterNotes.map((filename) => basename(filename, ".md")),
+);
 check(
   chapterNotes.length === progress.summary.synthesizedChapters,
   `Progress reports ${progress.summary.synthesizedChapters} chapter summaries; found ${chapterNotes.length}.`,
@@ -465,6 +473,277 @@ for (const concept of concepts.concepts ?? []) {
     check(
       evidenceIndex.has(evidenceRef),
       `${concept.id} references missing evidence ${evidenceRef}.`,
+    );
+  }
+}
+
+if (project.status === "completed") {
+  const outlineLessonIds = new Set(lessons.keys());
+  const outlineUnknownDurationLessonIds = new Set(
+    outline.unknownDurationLessonIds ?? [],
+  );
+  const progressLessonIds = new Set(Object.keys(progress.lessons ?? {}));
+  check(
+    assets.size === outlineLessonIds.size,
+    `Completed project has ${assets.size} catalog assets; expected ${outlineLessonIds.size}.`,
+  );
+  for (const asset of assets.values()) {
+    check(
+      new Set(["video", "text"]).has(asset.kind),
+      `Completed project asset ${asset.assetId} has unsupported kind ${asset.kind}.`,
+    );
+    check(
+      (asset.lessonIds ?? []).length === 1,
+      `Completed project asset ${asset.assetId} must map to exactly one lesson.`,
+    );
+    const mappedLessonId = asset.lessonIds?.[0];
+    check(
+      lessons.get(mappedLessonId)?.assetRefs?.length === 1 &&
+        lessons.get(mappedLessonId)?.assetRefs?.[0] === asset.assetId,
+      `Completed project asset ${asset.assetId} is not reciprocally referenced by its outline lesson.`,
+    );
+    if (asset.kind === "video") {
+      check(
+        asset.assetId.startsWith("asset:video-") &&
+          /\.mp4$/i.test(asset.originalFilename ?? "") &&
+          /\.mp4$/i.test(asset.path ?? "") &&
+          asset.media?.format === "mp4" &&
+          Number.isFinite(asset.media?.durationSeconds) &&
+          asset.media.durationSeconds > 0 &&
+          !outlineUnknownDurationLessonIds.has(mappedLessonId),
+        `Completed project video asset ${asset.assetId} has inconsistent media metadata.`,
+      );
+    }
+    if (asset.kind === "text") {
+      check(
+        asset.assetId.startsWith("asset:text-") &&
+          /\.md$/i.test(asset.originalFilename ?? "") &&
+          /\.md$/i.test(asset.path ?? "") &&
+          asset.media === undefined &&
+          outlineUnknownDurationLessonIds.has(mappedLessonId),
+        `Completed project text asset ${asset.assetId} has inconsistent media metadata.`,
+      );
+    }
+  }
+  check(
+    progressLessonIds.size === outlineLessonIds.size &&
+      [...outlineLessonIds].every((lessonId) =>
+        progressLessonIds.has(lessonId),
+      ),
+    "Completed project progress lessons do not exactly match the outline.",
+  );
+  check(
+    normalizedByLesson.size === outlineLessonIds.size,
+    `Completed project has ${normalizedByLesson.size} normalized lessons; expected ${outlineLessonIds.size}.`,
+  );
+  check(
+    completedLessons.length === outlineLessonIds.size,
+    `Completed project has ${completedLessons.length} lesson notes; expected ${outlineLessonIds.size}.`,
+  );
+  check(
+    chapterNotes.length === (outline.chapters ?? []).length,
+    `Completed project has ${chapterNotes.length} chapter notes; expected ${(outline.chapters ?? []).length}.`,
+  );
+  check(
+    chapterNoteIds.size === chapters.size &&
+      [...chapters.keys()].every((chapterId) => chapterNoteIds.has(chapterId)),
+    "Completed project chapter notes do not exactly match the outline chapter IDs.",
+  );
+
+  const lessonAssetCounts = new Map(
+    [...outlineLessonIds].map((lessonId) => [lessonId, 0]),
+  );
+  const assetKindByLesson = new Map();
+  for (const asset of assets.values()) {
+    for (const lessonId of asset.lessonIds ?? []) {
+      lessonAssetCounts.set(
+        lessonId,
+        (lessonAssetCounts.get(lessonId) ?? 0) + 1,
+      );
+      assetKindByLesson.set(lessonId, asset.kind);
+    }
+  }
+  for (const lessonId of outlineLessonIds) {
+    const lesson = lessons.get(lessonId);
+    const outlineAssetRefs = lesson?.assetRefs ?? [];
+    const catalogAssetRefs = [...assets.values()]
+      .filter((asset) => (asset.lessonIds ?? []).includes(lessonId))
+      .map((asset) => asset.assetId)
+      .sort();
+    check(
+      lessonAssetCounts.get(lessonId) === 1,
+      `Completed project lesson ${lessonId} must map to exactly one catalog asset.`,
+    );
+    check(
+      outlineAssetRefs.length === 1 &&
+        outlineAssetRefs[0] === catalogAssetRefs[0] &&
+        assets.get(outlineAssetRefs[0])?.lessonIds?.includes(lessonId),
+      `Completed project lesson ${lessonId} assetRefs do not match the catalog mapping.`,
+    );
+    try {
+      const lessonNote = await readFile(
+        resolve(projectRoot, `notes/lessons/${lessonId}.md`),
+        "utf8",
+      );
+      check(
+        lessonNote.trim().length >= 1000,
+        `Completed lesson ${lessonId} note is unexpectedly empty.`,
+      );
+      check(
+        /^note_status:\s*["']?reviewed["']?\s*$/m.test(lessonNote),
+        `Completed lesson ${lessonId} note is not marked reviewed.`,
+      );
+    } catch {
+      errors.push(`Completed lesson ${lessonId} note is not readable.`);
+    }
+    const state = progress.lessons?.[lessonId];
+    check(
+      state?.sourceMapping === "mapped" &&
+        state?.lessonNote === "completed" &&
+        state?.relationshipReview === "completed" &&
+        state?.qa === "completed",
+      `Completed project lesson ${lessonId} has an unfinished workflow state.`,
+    );
+    if (assetKindByLesson.get(lessonId) === "video") {
+      check(
+        state?.mediaProbe === "completed" &&
+          state?.videoEvidence === "completed" &&
+          state?.textEvidence === "not-applicable",
+        `Completed video lesson ${lessonId} has inconsistent evidence state.`,
+      );
+      const provenanceRequestId =
+        normalizedByLesson.get(lessonId)?.provenance?.requestId;
+      const generation = generationsByRequestId.get(provenanceRequestId);
+      const sourceAsset = assets.get(outlineAssetRefs[0]);
+      const expectedNormalizedPath = `outputs/algorithm-interview-course/understanding/normalized/${lessonId}.json`;
+      check(
+        typeof provenanceRequestId === "string" &&
+          Boolean(generation) &&
+          (generation.lessonId === undefined ||
+            generation.lessonId === lessonId) &&
+          (generation.inputs ?? []).includes(sourceAsset?.path) &&
+          (generation.outputs ?? []).includes(expectedNormalizedPath) &&
+          (generation.outcome === undefined ||
+            generation.outcome === "accepted") &&
+          (generation.eligibleForSynthesis === undefined ||
+            generation.eligibleForSynthesis === true),
+        `Completed video lesson ${lessonId} has no manifest-backed request ID.`,
+      );
+      const lessonAttempts = attemptsByLesson.get(lessonId) ?? [];
+      if (lessonAttempts.length > 0) {
+        check(
+          typeof state?.acceptedAttemptId === "string",
+          `Completed video lesson ${lessonId} has attempts but no acceptedAttemptId.`,
+        );
+        const acceptedAttempt = attemptsById.get(state.acceptedAttemptId);
+        check(
+          generation?.attemptId === state.acceptedAttemptId &&
+            acceptedAttempt?.lessonId === lessonId &&
+            acceptedAttempt?.requestId === provenanceRequestId &&
+            acceptedAttempt?.outcome === "accepted" &&
+            acceptedAttempt?.eligibleForSynthesis === true,
+          `Completed video lesson ${lessonId} accepted attempt is not bound to its manifest generation.`,
+        );
+      }
+    }
+    if (assetKindByLesson.get(lessonId) === "text") {
+      check(
+        state?.mediaProbe === "not-applicable" &&
+          state?.videoEvidence === "not-applicable" &&
+          state?.textEvidence === "completed",
+        `Completed text lesson ${lessonId} has inconsistent evidence state.`,
+      );
+    }
+    check(
+      !Object.values(state ?? {}).includes("not-started"),
+      `Completed project lesson ${lessonId} still contains not-started state.`,
+    );
+  }
+
+  for (const chapterId of chapters.keys()) {
+    try {
+      const chapterNote = await readFile(
+        resolve(projectRoot, `notes/chapters/${chapterId}.md`),
+        "utf8",
+      );
+      check(
+        chapterNote.trim().length >= 1000,
+        `Completed chapter ${chapterId} note is unexpectedly empty.`,
+      );
+      check(
+        /^note_status:\s*["']?reviewed["']?\s*$/m.test(chapterNote),
+        `Completed chapter ${chapterId} note is not marked reviewed.`,
+      );
+    } catch {
+      errors.push(`Completed chapter ${chapterId} note is not readable.`);
+    }
+  }
+
+  const videoAssetCount = [...assets.values()].filter(
+    (asset) => asset.kind === "video",
+  ).length;
+  const textAssetCount = [...assets.values()].filter(
+    (asset) => asset.kind === "text",
+  ).length;
+  const expectedSummary = {
+    expectedLessons: outlineLessonIds.size,
+    knownDurationLessons: outline.knownDurationLessonCount,
+    discoveredAssets: assets.size,
+    discoveredVideos: videoAssetCount,
+    discoveredTexts: textAssetCount,
+    catalogedAssets: assets.size,
+    mappedLessons: outlineLessonIds.size,
+    hashVerifiedLessons: outlineLessonIds.size,
+    probedLessons: videoAssetCount,
+    understoodLessons: normalizedByLesson.size,
+    synthesizedLessons: completedLessons.length,
+    verifiedLessons: [...progressLessonIds].filter(
+      (lessonId) => progress.lessons[lessonId]?.qa === "completed",
+    ).length,
+    synthesizedChapters: chapterNotes.length,
+    verifiedRelationshipEdges,
+  };
+  for (const [field, expectedValue] of Object.entries(expectedSummary)) {
+    check(
+      progress.summary?.[field] === expectedValue,
+      `Completed project progress.${field} is ${progress.summary?.[field]}; expected ${expectedValue}.`,
+    );
+  }
+  const expectedUnknownDurationLessons = outlineUnknownDurationLessonIds;
+  const reportedUnknownDurationLessons = new Set(
+    progress.summary?.unknownDurationLessons ?? [],
+  );
+  check(
+    expectedUnknownDurationLessons.size ===
+      reportedUnknownDurationLessons.size &&
+      [...expectedUnknownDurationLessons].every((lessonId) =>
+        reportedUnknownDurationLessons.has(lessonId),
+      ),
+    "Completed project unknown-duration lessons do not match the outline.",
+  );
+
+  try {
+    const courseSynthesis = await readFile(
+      resolve(projectRoot, "notes/course-synthesis.md"),
+      "utf8",
+    );
+    check(
+      courseSynthesis.trim().length >= 1000,
+      "Completed project course synthesis is unexpectedly empty.",
+    );
+    check(
+      /^note_status:\s*["']?reviewed["']?\s*$/m.test(courseSynthesis),
+      "Completed project course synthesis is not marked reviewed.",
+    );
+    for (let section = 1; section <= 10; section += 1) {
+      check(
+        new RegExp(`^## ${section}\\. `, "m").test(courseSynthesis),
+        `Completed project course synthesis is missing section ${section}.`,
+      );
+    }
+  } catch {
+    errors.push(
+      "Completed project has no readable notes/course-synthesis.md file.",
     );
   }
 }

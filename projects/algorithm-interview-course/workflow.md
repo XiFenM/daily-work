@@ -53,8 +53,8 @@ outputs/algorithm-interview-course/
 ## 阶段 3：视频证据抽取
 
 1. 从 `prompts/video-evidence-v1.7.template.md` 渲染当前课次专用 Prompt。v1.2 在 v1.1 基础上增加多复杂度结论、公式和实验结构；v1.3 进一步收紧时间上限、对象结构、正确性方法和关系候选字段；v1.4 为代码密集课程增加解法—代码—状态模型引用、区间/指针/窗口语义和分阶段正确性义务；v1.5 进一步要求顶层只能是 JSON 对象，并补充递归契约、候选域、选择—递归—撤销和访问标记生命周期规则；v1.6 为动态规划课程增加递归/记忆化/自底向上/空间压缩版本分离、状态定义与转移、初始化与遍历顺序、0-1 背包二维/一维语义、LIS/LCS/最短路与具体解恢复的证据规则；v1.7 为贪心课程增加候选排序与 tie-break、区间端点语义、循环不变量、交换论证/领先性证明义务、贪心选择性质与最优子结构区分、规则级反例边界及与动态规划的对照。历史调用继续保留原 Prompt 与哈希，渲染脚本仍支持显式选择 v1.3、v1.4、v1.5、v1.6 或 v1.7。
-2. 本地视频默认先尝试 `balanced` 压缩，副本写到明确的课次路径；仍超过 50 MB 时再评估 `strong`、分段或受控 URL。
-3. 原片永不覆盖；已有压缩副本先校验哈希和参数，不静默重建。
+2. 本地视频先结合大小与画面可读性评估是否压缩：超过 50 MB 时默认尝试 `balanced`，副本写到明确的课次路径；远低于上限且无需降质时可以 `--compress none` 直接使用原片。无论哪种方式都必须先 `--dry-run`，且不得覆盖原片。
+3. 原片永不覆盖；已有压缩副本先校验哈希和参数，不静默重建。manifest 使用 `requestMedia`、`requestMediaBytes` 和 `requestMediaSha256` 区分正式调用实际使用的是 `source` 还是 `derivative`，只有衍生副本才列入 generation outputs。
 4. 调用示例：
 
 ```bash
@@ -74,7 +74,7 @@ ZENMUX_BASE_URL="https://zenmux.dev/api/v1" pnpm zenmux understand \
 
 1. `response_format: {"type": "json_object"}` 约束输出为 JSON；
 2. v1.7 Prompt 明确所有必填对象、枚举、视频时长上限、顶层对象边界、解法—代码—状态模型引用关系，以及动态规划和贪心的状态、转移、遍历/排序顺序、正确性与复杂度证据边界；
-3. `normalize-lesson-evidence.mjs` 严格检查课次 ID、时长、证据引用、时间边界、对象形状、跨对象引用和正确性方法；v1.4 及以后版本的循环不变量还必须具有初始化、保持、终止和后置条件证据；v1.6 在第 9 章额外要求 `intermediate`/`optimized` 或含代码的解法绑定含变量/区域与转移的状态模型，但允许只被描述或否定且无代码的 `baseline`/`alternative`/`observation` 不补造状态；v1.7 在第 10 章延续状态门禁，并要求 `correctness.completeness` 显式区分完整、部分和不适用：交换论证、领先性、循环不变量或归纳证明只有全部直接证据义务齐全时才能标记 `complete`，否则必须标记 `partial`；
+3. `normalize-lesson-evidence.mjs` 严格检查课次 ID、时长、证据引用、时间边界、对象形状、跨对象引用和正确性方法；v1.4 及以后版本的循环不变量还必须具有初始化、保持、终止和后置条件证据；v1.6 在第 9 章额外要求 `intermediate`/`optimized` 或含代码的解法绑定含变量/区域与转移的状态模型，但允许只被描述或否定且无代码的 `baseline`/`alternative`/`observation` 不补造状态；v1.7 在第 10 章延续状态门禁，并要求 `correctness.completeness` 显式区分完整、部分和不适用：交换论证、领先性、循环不变量或归纳证明只有全部直接证据义务齐全时才能标记 `complete`，否则必须标记 `partial`。v1.7 的 `not_applicable` 方法与完整度必须在所有章节一致；纯结语且没有算法结构时必须使用 `not_applicable/not_applicable`；
 4. `validate-project.mjs` 对 manifest、规范化证据、笔记和关系图做跨文件对账。
 
 `build-response-format.mjs` 只用于评估某个供应商是否能无损表达 canonical schema；遇到供应商不支持的多类型 union 时会明确失败，不会静默选择其中一种类型生成有损 schema。
@@ -132,16 +132,19 @@ node projects/algorithm-interview-course/scripts/normalize-lesson-evidence.mjs \
 - 生成章节综述、题型簇索引、算法模板索引、易混淆概念对照和全课程复习路线。
 - 每章结束运行 `node projects/algorithm-interview-course/scripts/validate-project.mjs`，对账课次、素材、规范化证据、manifest、正式笔记、关系边与概念证据引用。
 
-## 当前停止点
+## 最终完成状态
 
-课程素材已经到位并完成全量编号映射。第一至十章共 69 节课已走完阶段 1–6 的章节范围流程：
+全课程 70 节课已经走完阶段 1–6：
 
-- 66 个视频完成 SHA-256、FFprobe、画面抽样和压缩副本校验，`06-08`、`07-03`、`09-10` 三篇文本完成哈希与段落证据校验；
-- 66 个视频完成 ZenMux 视频理解、规范化证据和本地门禁，3 篇文本完成本地规范化证据；
-- 69 份单课笔记与 10 份章节综述已完成；
-- 概念词表和关系图已完成第十章校准；
-- 原始响应、失败尝试、规范化证据、请求 ID、Prompt 和压缩副本均已审计到 `manifest.json`。
+- 67 个视频完成 SHA-256、FFprobe 和画面抽样，`06-08`、`07-03`、`09-10` 三篇文本完成哈希与段落证据校验；
+- 67 个视频完成 ZenMux 视频理解、规范化证据、本地结构门禁和人工证据 QA，3 篇文本完成本地规范化证据；
+- 70 份单课笔记、11 份章节综述和 1 份全课程综合已经完成；
+- 概念词表含 150 个已验证节点；关系图含 97 条边，其中 96 条已验证、1 条待确认；
+- 原始响应、失败尝试、规范化证据、请求 ID、Prompt、输入选择和已知 token 用量均审计到 `manifest.json`；
+- 全部 67 个视频实测总时长为 66,665.61756 秒，约 18:31:06；3 篇文本教程没有视频时长，因此项目总时长字段保持未知。
 
-第九章 9 个视频共发起 12 次到达服务端的理解请求：9 个结果通过门禁，`09-07` 两次和 `09-09` 一次结果因时间线越界被拒绝；全部调用合计 1,793,339 tokens，其中 accepted 结果为 1,329,482 tokens。人工 QA 分离递归、记忆化、自底向上、空间压缩及背包一维/二维状态，核对本章 17 份屏幕代码：16 份完成本地测试；另 1 份迭代 Fibonacci 代码在扩展到 `n = 0` 时由 AddressSanitizer 复现越界，作为课程实现的输入契约风险保留。
+最终 manifest 对账为 81 次尝试、78 次到达服务端并产出 generation、63 个 accepted attempt、11 个 rejected attempt 和 7 次 transport failure。第一章 4 个成功 generation 产生于 attempt 审计结构启用之前；加上它们后，67 个视频各有 1 个正式 accepted 结果。被拒绝或传输失败的尝试均保留审计记录，不参与正式笔记综合。
 
-第十章 3 个视频各发起 1 次到达服务端的理解请求，3 个结果均通过门禁并完成人工 QA，合计 303,537 tokens；本地归一化校准没有触发重复 API 调用。Prompt v1.7 新增候选排序、tie-break、区间端点、贪心选择、交换论证与证明完整度门禁。人工 QA 校正 10-02 的固定结尾 DP 状态，保留 10-03 一步交换论证的 `partial` 边界，并用代表用例、暴力 oracle、ASan/UBSan 和严格告警核对本章 3 份屏幕代码。下一步处理第十一章课程结语。
+第十一章 11-01 在用户明确授权上传后，以 13,098,626 B 原片进行 1 次正式理解调用：模型 `google/gemini-3.6-flash`，请求 ID `82e83d77452344108d9a09a1b643a1b6`，合计 27,062 tokens；因为原片低于 50 MB 门槛，未使用压缩衍生文件，也没有重试。结语没有算法、代码或复杂度内容，规范化结构保持 `not_applicable/not_applicable`；人工 QA 纠正画面标题为“玩儿转算法面试”，将公司题型概括和课程维护计划限定为录制时观点，并确认本课没有重新定义 online judge 机制。
+
+课程级交付物位于 `notes/course-synthesis.md`。它只在主知识地图中使用已验证关系，将唯一 provisional 关系单独列出，并明确区分课程直接内容与编辑综合。
