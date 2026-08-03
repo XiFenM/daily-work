@@ -1,0 +1,690 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "09-06",
+  "chapterId": "09",
+  "titleObserved": "0-1背包问题的优化和变种",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 1218.36,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 45000,
+      "topic": "回顾 0-1 背包问题基础解法的复杂度",
+      "summary": "回顾上一节实现的 0-1 背包问题动态规划解法，总结其时间复杂度 O(n*C) 和空间复杂度 O(n*C)，指出空间复杂度存在极大优化空间。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 45000,
+      "endMs": 264000,
+      "topic": "两行空间优化（滚动数组）原理分析",
+      "summary": "分析状态转移方程 F(i, c) = max(F(i-1, c), v(i) + F(i-1, c-w(i)))，指出第 i 行只依赖第 i-1 行，理论上只需保留两行空间，空间复杂度降为 O(2*C) = O(C)。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 264000,
+      "endMs": 477000,
+      "topic": "两行空间优化代码实现与解析",
+      "summary": "在 C++ 代码中将二维 memo 数组开辟为 2 行，利用奇偶取模 (i%2 和 (i-1)%2) 轮流复用两行空间。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 477000,
+      "endMs": 735000,
+      "topic": "一行空间优化（一维数组倒序遍历）原理推导",
+      "summary": "推导是否可以仅用一行（一维数组）完成动态规划。分析发现，如果从右向左（容量从大到小）更新，更新当前位置时所依赖的左侧元素仍保持上一轮（i-1 行）的值，从而实现一维数组空间优化。",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 735000,
+      "endMs": 912000,
+      "topic": "一行空间优化代码实现与总结",
+      "summary": "修改 C++ 代码为一维数组 memo[C+1]，将容量循环改为从 C 递减到 w[i]，极大地简化了代码并降低了空间开销。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 912000,
+      "endMs": 1031000,
+      "topic": "0-1 背包问题变种：完全背包问题",
+      "summary": "介绍完全背包问题（每个物品可以无限次使用），并提出通过二进制拆分（1, 2, 4, 8...）转化为 0-1 背包问题的优化思路。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 1031000,
+      "endMs": 1053000,
+      "topic": "0-1 背包问题变种：多重背包问题",
+      "summary": "介绍多重背包问题（每个物品有限定数量 num(i) 个）。",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "startMs": 1053000,
+      "endMs": 1103000,
+      "topic": "0-1 背包问题变种：多维费用背包问题",
+      "summary": "介绍多维费用背包问题（需同时考虑体积和重量两个维度限制），指出其状态数组维度相应增加至三维。",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    },
+    {
+      "startMs": 1103000,
+      "endMs": 1218360,
+      "topic": "0-1 背包问题变种：带物品约束的背包问题",
+      "summary": "介绍物品之间存在互斥或互相依赖关系的背包问题变种，总结算法变化的思想并引出下一节面试题。",
+      "evidenceIds": [
+        "ev-011"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解 0-1 背包问题中状态只依赖上一行数据的特点，并掌握利用滚动数组（2 行空间）降低空间复杂度的方法。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "掌握一维数组（1 行空间）解决 0-1 背包问题的原理，理解为什么必须倒序遍历背包容量。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "了解完全背包、多重背包、多维费用背包以及带互斥/依赖约束背包等常见的背包问题变种及基本解决思路。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008",
+        "ev-009",
+        "ev-010",
+        "ev-011"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "0-1 背包问题空间优化",
+      "namesObserved": [
+        "0-1背包问题的优化",
+        "空间复杂度优化"
+      ],
+      "role": "introduces",
+      "definition": "利用 0-1 背包状态转移方程只依赖上一行状态的性质，将原本 O(n*C) 的空间压缩至 O(2*C) 滚动数组乃至 O(C) 一维数组的方法。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-006"
+      ]
+    },
+    {
+      "canonicalName": "完全背包问题",
+      "namesObserved": [
+        "完全背包问题"
+      ],
+      "role": "introduces",
+      "definition": "0-1 背包问题的变种之一，其中给定的每个物品可以无限次重复使用。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "canonicalName": "多重背包问题",
+      "namesObserved": [
+        "多重背包问题"
+      ],
+      "role": "introduces",
+      "definition": "0-1 背包问题的变种之一，其中每个物品不止 1 个，而是限定有 num(i) 个。",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "canonicalName": "多维费用背包问题",
+      "namesObserved": [
+        "多维费用背包问题"
+      ],
+      "role": "introduces",
+      "definition": "背包问题变种，限制条件包含多个维度（例如物品同时受到体积和重量两个维度的上限约束）。",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "intermediate",
+      "idea": "利用 0-1 背包状态转移方程中第 i 行只依赖第 i-1 行的性质，使用大小为 2*(C+1) 的二维数组 memo[2][C+1]，利用 i%2 与 (i-1)%2 进行奇偶行交替轮流复用。",
+      "timeComplexity": "O(n*C)",
+      "spaceComplexity": "O(C)",
+      "limitations": [
+        "仍需要 2 行存储空间，空间常数为 2"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "optimized",
+      "idea": "只使用大小为 C+1 的一维数组 memo[C+1]。在考虑第 i 个物品时，容量 j 从 C 倒序递减循环至 w[i]，从而保证更新 memo[j] 时用到的 memo[j - w[i]] 仍然是上一轮（第 i-1 行）未被覆盖的值。",
+      "timeComplexity": "O(n*C)",
+      "spaceComplexity": "O(C)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-002"
+      ],
+      "stateModelIds": [
+        "state-002"
+      ],
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Knapsack01{\npublic:\n    int knapsack01(const vector<int>& w, const vector<int>& v, int C){\n        assert(w.size() == v.size() && C >= 0);\n        int n = w.size();\n        if( n == 0 || C == 0 )\n            return 0;\n\n        vector<vector<int>> memo(2, vector<int>(C+1, -1));\n\n        for(int j = 0 ; j <= C ; j++ )\n            memo[0][j] = ( j >= w[0] ? v[0] : 0 );\n\n        for(int i = 1 ; i < n ; i ++ )\n            for(int j = 0 ; j <= C ; j ++ ){\n                memo[i%2][j] = memo[(i-1)%2][j];\n                if( j >= w[i] )\n                    memo[i%2][j] = max( memo[i%2][j] , v[i] + memo[(i-1)%2][j-w[i]] );\n            }\n\n        return memo[(n-1)%2][C];\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Knapsack01{\npublic:\n    int knapsack01(const vector<int>& w, const vector<int>& v, int C){\n        assert(w.size() == v.size() && C >= 0);\n        int n = w.size();\n        if( n == 0 || C == 0 )\n            return 0;\n\n        vector<int> memo(C+1, -1);\n\n        for(int j = 0 ; j <= C ; j++ )\n            memo[j] = ( j >= w[0] ? v[0] : 0 );\n\n        for(int i = 1 ; i < n ; i ++ )\n            for(int j = C ; j >= w[i] ; j -- ){\n                memo[j] = max( memo[j] , v[i] + memo[j-w[i]] );\n            }\n\n        return memo[C];\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "memo[i % 2][j]",
+          "role": "dp_table_cell",
+          "meaning": "考虑前 i 个物品、在背包容量为 j 时所能获得的最大价值，物理存储使用 2 行的动态规划表格",
+          "updateRule": "memo[i % 2][j] = max(memo[(i - 1) % 2][j], v[i] + memo[(i - 1) % 2][j - w[i]])",
+          "evidenceIds": [
+            "ev-003",
+            "ev-004"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "memo[2][C+1]",
+          "meaning": "大小为 2 乘以 (C+1) 的二维向量，第 0 行和第 1 行交替记录奇偶物品索引对应的解",
+          "evidenceIds": [
+            "ev-003",
+            "ev-004"
+          ]
+        }
+      ],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "当容量 j >= w[i] 时，可选择不放或放入第 i 个物品",
+          "updates": "memo[i % 2][j] 取 memo[(i - 1) % 2][j] 与 v[i] + memo[(i - 1) % 2][j - w[i]] 中的较大者",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-002",
+            "ev-004"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "完成 0 到 n-1 所有物品循环后，答案在 memo[(n-1)%2][C] 中。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "id": "state-002",
+      "solutionStageId": "solution-002",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "memo[j]",
+          "role": "dp_array_cell",
+          "meaning": "背包容量为 j 时的最大价值。在一维数组中，更新前保存第 i-1 轮的值，倒序更新后保存第 i 轮的值",
+          "updateRule": "memo[j] = max(memo[j], v[i] + memo[j - w[i]])",
+          "evidenceIds": [
+            "ev-006",
+            "ev-007"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "memo[C+1]",
+          "meaning": "大小为 C+1 的一维数组，存储不同容量下的最优解",
+          "evidenceIds": [
+            "ev-006",
+            "ev-007"
+          ]
+        }
+      ],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "从 j = C 倒序循环至 j >= w[i]",
+          "updates": "memo[j] 取原有 memo[j]（即上一轮值）与 v[i] + memo[j - w[i]]（因为倒序，memo[j - w[i]] 尚未更新，仍为上一轮值）的最大值",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-006",
+            "ev-007"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "最终最优解直接从 memo[C] 读取。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "通过从右向左（容量递减）更新一维数组，计算 memo[j] 时所参考的 memo[j - w[i]] 必定属于上一行（未放入当前物品 i 时）的状态，从而维持了 0-1 背包转移的正确性。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001",
+      "state-002"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": "O(n*C)",
+    "space": "O(C)",
+    "assumptions": [
+      "n 为物品数量，C 为背包容量"
+    ],
+    "evidenceIds": [
+      "ev-001",
+      "ev-002",
+      "ev-007"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "两行滚动数组解法时间复杂度",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n * C)",
+      "expressionNormalized": "O(n * C)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "物品个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-001"
+          ]
+        },
+        {
+          "symbol": "C",
+          "meaning": "背包容量",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-001"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "时间复杂度为 O(n * C)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-001"
+        ]
+      },
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "两行滚动数组解法空间复杂度",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(2 * C) = O(C)",
+      "expressionNormalized": "O(C)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "C",
+          "meaning": "背包容量",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "空间复杂度为 O(2 * C) = O(C)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "cx-003",
+      "subject": "一维数组解法空间复杂度",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(C)",
+      "expressionNormalized": "O(C)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "C",
+          "meaning": "背包容量",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "空间复杂度降低为 O(C)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "recurrence",
+      "sourceKind": "shown_in_video",
+      "rawText": "F(i, c) = max( F(i-1, c) , v(i) + F(i-1, c - w(i)) )",
+      "normalizedText": "F(i, c) = max(F(i-1, c), v(i) + F(i-1, c - w(i)))",
+      "variables": [
+        {
+          "symbol": "F(i, c)",
+          "meaning": "考虑将前 i 个物品放入容量为 c 的背包所获得的最大价值",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "symbol": "v(i)",
+          "meaning": "第 i 个物品的价值",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "symbol": "w(i)",
+          "meaning": "第 i 个物品的重量",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "experiments": [],
+  "examples": [],
+  "edgeCases": [],
+  "implementationPitfalls": [
+    {
+      "statement": "在使用一维数组优化 0-1 背包时，容量循环必须从大到小（倒序，j 从 C 递减到 w[i]）遍历。如果正序遍历，会导致同一件物品在同一轮循环中被重复放入，从而错写成完全背包逻辑。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "在面试中阐述 0-1 背包问题时，可先明晰 O(n*C) 的二维 DP 状态方程，再逐步推导如何压缩空间至两行（滚动数组）以及一行（倒序一维数组），展现对数据依赖与控制流的深入理解。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-006"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:09-05",
+      "to": "lesson:09-06",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "课程从 0-1 背包问题的基础解法延伸到 0-1 背包问题的空间优化与各种变种扩展。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "from": "lesson:09-06",
+      "to": "lesson:09-07",
+      "type": "applies",
+      "status": "provisional",
+      "rationale": "视频结尾预告下一节将应用 0-1 背包问题解决 LeetCode/面试中的具体题目 Partition Equal Subset Sum。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-011"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 45000,
+      "assetId": "asset:video-09-06",
+      "locator": "00:00-00:45",
+      "observation": "屏幕显示幻灯片“0-1背包问题”，总结时间复杂度 O(n*C) 与空间复杂度 O(n*C)，指出空间复杂度存在极大优化空间。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 45000,
+      "endMs": 125000,
+      "assetId": "asset:video-09-06",
+      "locator": "00:45-02:05",
+      "observation": "屏幕展示状态转移方程 F(i, c) = max(F(i-1, c), v(i) + F(i-1, c - w(i)))，指出第 i 行元素只依赖于第 i-1 行元素，空间复杂度可优化至 O(2*C) = O(C)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 125000,
+      "endMs": 264000,
+      "assetId": "asset:video-09-06",
+      "locator": "02:05-04:24",
+      "observation": "通过图示讲解两行空间轮流复用的逻辑：偶数行 (i%2==0) 和奇数行 (i%2==1) 互相交替参考。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 264000,
+      "endMs": 477000,
+      "assetId": "asset:video-09-06",
+      "locator": "04:24-07:57",
+      "observation": "老师在 IDE 中将 memo 声明修改为 vector<vector<int>> memo(2, vector<int>(C+1, -1)); 并将数组索引修改为 i%2 与 (i-1)%2。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 477000,
+      "endMs": 507000,
+      "assetId": "asset:video-09-06",
+      "locator": "07:57-08:27",
+      "observation": "幻灯片提出思考题：只使用一行大小为 C 的数组完成动态规划？",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 507000,
+      "endMs": 735000,
+      "assetId": "asset:video-09-06",
+      "locator": "08:27-12:15",
+      "observation": "老师画例解表（容量为5的背包），一步步演示如果从右向左刷新一行数组，求 memo[5] 时依赖左边的 memo[3]，左边 memo[3] 此时尚未被覆写，保留的正是上一行的数据。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 735000,
+      "endMs": 912000,
+      "assetId": "asset:video-09-06",
+      "locator": "12:15-15:12",
+      "observation": "在 IDE 中把 memo 改为 vector<int> memo(C+1, -1)，将容量循环写为 for(int j = C ; j >= w[i] ; j --)，最终直接返回 memo[C]。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 912000,
+      "endMs": 1031000,
+      "assetId": "asset:video-09-06",
+      "locator": "15:12-17:11",
+      "observation": "介绍完全背包问题（每个物品可无限使用），并讲解二进制拆分（1, 2, 4, 8, 16...）将其转化为 0-1 背包问题的优化思想。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 1031000,
+      "endMs": 1053000,
+      "assetId": "asset:video-09-06",
+      "locator": "17:11-17:33",
+      "observation": "屏幕显示多重背包问题：每个物品不止1个，有 num(i) 个。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-010",
+      "sourceType": "video_combined",
+      "startMs": 1053000,
+      "endMs": 1103000,
+      "assetId": "asset:video-09-06",
+      "locator": "17:33-18:23",
+      "observation": "屏幕显示多维费用背包问题：要考虑物品的体积和重量两个维度，DP 数组增加一个参数变为三维。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-011",
+      "sourceType": "video_combined",
+      "startMs": 1103000,
+      "endMs": 1218360,
+      "assetId": "asset:video-09-06",
+      "locator": "18:23-20:18",
+      "observation": "介绍物品间加入约束（互相排斥、互相依赖）的背包问题变种，总结并预告下一节在 LeetCode 面试题中应用 0-1 背包。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.6",
+    "generatedAt": null
+  }
+}

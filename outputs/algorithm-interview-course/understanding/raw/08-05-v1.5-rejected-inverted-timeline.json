@@ -1,0 +1,636 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "08-05",
+  "chapterId": "08",
+  "titleObserved": "回溯法解决组合问题的优化",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 1049.08,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 115000,
+      "topic": "LeetCode 77 基础解法提交与运行时间分析",
+      "summary": "将上一节编写的回溯法求解组合问题的 C++ 代码提交至 LeetCode 77 题，通过 27 组测试用例，运行时间为 76 ms。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 115001,
+      "endMs": 226000,
+      "topic": "递归树搜索空间分析与无用分支识别",
+      "summary": "以 n=4, k=2 为例分析递归树，指出在第一层选择 4 后，后续无法再取到足够的元素，该分支是不需要探索的。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 226001,
+      "endMs": 222000,
+      "topic": "回溯法剪枝概念提出",
+      "summary": "介绍在递归搜索树中剪针对不必要分支进行去除、不再深入搜索的技术，即回溯法的剪枝。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 222001,
+      "endMs": 458000,
+      "topic": "剪枝边界上界公式推导",
+      "summary": "推导 for 循环的剪枝边界：当前已选择 c.size() 个元素，还需 k - c.size() 个元素；在 [i...n] 范围内必须至少有 k - c.size() 个元素，推导出 i 的上界为 n - (k - c.size()) + 1。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 458001,
+      "endMs": 521000,
+      "topic": "剪枝优化代码实现与提交",
+      "summary": "将循环条件 i <= n 改写为 i <= n - (k - c.size()) + 1，重新提交至 LeetCode，运行时间缩短至 69 ms。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 521001,
+      "endMs": 738000,
+      "topic": "相关组合练习题：Combination Sum I & II",
+      "summary": "展示并讲解 LeetCode 39 (Combination Sum) 和 LeetCode 40 (Combination Sum II)，强调元素可否重复使用及集合中是否有重复元素对解法的影响。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 738001,
+      "endMs": 786000,
+      "topic": "相关练习题：Combination Sum III",
+      "summary": "展示 LeetCode 216 (Combination Sum III)，限定在 1-9 中选 k 个数字且每个只能用一次，使其和为 n。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 786001,
+      "endMs": 915000,
+      "topic": "相关练习题：Subsets I & II",
+      "summary": "展示 LeetCode 78 (Subsets) 与 LeetCode 90 (Subsets II)，讲解求无重复元素集合和有重复元素集合的所有子法。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 915001,
+      "endMs": 1049080,
+      "topic": "相关练习题：Binary Watch",
+      "summary": "展示 LeetCode 401 (Binary Watch)，结合二进制表硬件结构解释如何将其转化为组合问题。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解回溯法求解组合问题时递归搜索树中无用分支产生的原因",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "掌握组合问题回溯搜索中循环上界剪枝条件 i <= n - (k - c.size()) + 1 的数学推导过程",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "能够区分不同组合与子集类问题中“元素是否可重复使用”及“输入集合是否有重复元素”对边界和状态转移的影响",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-007"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "剪枝",
+      "namesObserved": [
+        "剪枝",
+        "回溯法的剪枝"
+      ],
+      "role": "introduces",
+      "definition": "在递归搜索树中，对于已知不可能产生有效解的分支放弃继续深入搜索，从而减少搜索空间的优化方法。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "回溯法",
+      "namesObserved": [
+        "回溯法"
+      ],
+      "role": "applies",
+      "definition": "一种通过探索所有可能的候选解来求解问题的算法。如果候选解被确认不是有效解，算法会通过撤销上一步的选择（回溯）并尝试其他候选解。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "组合问题",
+      "namesObserved": [
+        "组合问题",
+        "Combinations"
+      ],
+      "role": "applies",
+      "definition": "从给定集合中选出固定数量或满足特定条件的不计顺序的元素集合的问题。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "77",
+    "titleObserved": "Combinations",
+    "statement": "Given two integers n and k, return all possible combinations of k numbers out of 1 ... n.",
+    "constraints": [
+      "1 <= n",
+      "1 <= k <= n"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "使用标准回溯法，在递归遍历中尝试从 start 到 n 的每一个数字，依次放入当前组合 c 中，递归求解后再弹出。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [
+        "遍历循环始终走到 n，尝试了部分不可能凑够 k 个元素的无用分支"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "optimized",
+      "idea": "通过剪枝优化循环上界。由于还需 k - c.size() 个元素，在区间 [i...n] 内必须至少包含这些元素，推导出 i 的搜索上界为 n - (k - c.size()) + 1。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-002"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\nprivate:\n    vector<vector<int>> res;\n    // 求解C(n,k), 当前已经找到的组合存储在c中，需要从start开始搜索新的元素\n    void generateCombinations(int n, int k, int start, vector<int> &c){\n        if( c.size() == k ){\n            res.push_back(c);\n            return;\n        }\n        for( int i = start ; i <= n ; i ++ ){\n            c.push_back(i);\n            generateCombinations(n, k, i + 1, c);\n            c.pop_back();\n        }\n        return;\n    }\npublic:\n    vector<vector<int>> combine(int n, int k) {\n        res.clear();\n        if( n <= 0 || k <= 0 || k > n )\n            return res;\n        vector<int> c;\n        generateCombinations(n, k, 1, c);\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\nprivate:\n    vector<vector<int>> res;\n    // 求解C(n,k), 当前已经找到的组合存储在c中，需要从start开始搜索新的元素\n    void generateCombinations(int n, int k, int start, vector<int> &c){\n        if( c.size() == k ){\n            res.push_back(c);\n            return;\n        }\n        // 还有 k - c.size() 个空位，所以，[i...n] 中至少要有 k - c.size() 个元素\n        // i 最多为 n - (k - c.size()) + 1\n        for( int i = start ; i <= n - (k - c.size()) + 1 ; i ++ ){\n            c.push_back(i);\n            generateCombinations(n, k, i + 1, c);\n            c.pop_back();\n        }\n        return;\n    }\npublic:\n    vector<vector<int>> combine(int n, int k) {\n        res.clear();\n        if( n <= 0 || k <= 0 || k > n )\n            return res;\n        vector<int> c;\n        generateCombinations(n, k, 1, c);\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "c",
+          "role": "partial_solution",
+          "meaning": "当前递归路径中已经收集的组合元素向量",
+          "updateRule": "进入分支时 c.push_back(i)，回溯时 c.pop_back()",
+          "evidenceIds": [
+            "ev-001",
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "start",
+          "role": "candidate_boundary",
+          "meaning": "当前搜索尝试的起始数字元素",
+          "updateRule": "下一层递归传入 i + 1",
+          "evidenceIds": [
+            "ev-001",
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "i",
+          "role": "loop_pointer",
+          "meaning": "当前正在尝试加入组合的数字",
+          "updateRule": "从 start 到剪枝上限步进 +1",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "c.size() == k",
+          "updates": "res.push_back(c); return;",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-001"
+          ]
+        },
+        {
+          "condition": "i 从 start 遍历至剪枝上限",
+          "updates": "c.push_back(i) -> 递归调用 generateCombinations(n, k, i + 1, c) -> c.pop_back()",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-001",
+            "ev-003"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 c.size() == k 时保存解并返回，或 for 循环遍历完所有合法的 i 后自然返回",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-001",
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-001",
+        "ev-003"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "剪枝后循环上界为 n - (k - c.size()) + 1，能保证后面有足够数量的元素凑满 k 个，且不会漏掉任何有效解",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "LeetCode 77 测试用例基线提交运行时间",
+      "measure": "time",
+      "notation": "none",
+      "case": "empirical",
+      "expressionObserved": "76 ms",
+      "expressionNormalized": "76 ms",
+      "normalizationSourceClass": "course_direct",
+      "variables": [],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "未剪枝的基线解法在 LeetCode 27 组测试用例下耗时 76 ms，击败 82.29% 的 C++ 提交",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-001"
+        ]
+      },
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "LeetCode 77 测试用例剪枝优化后提交运行时间",
+      "measure": "time",
+      "notation": "none",
+      "case": "empirical",
+      "expressionObserved": "69 ms",
+      "expressionNormalized": "69 ms",
+      "normalizationSourceClass": "course_direct",
+      "variables": [],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "剪枝优化后的解法在 LeetCode 27 组测试用例下耗时 69 ms，提速约 10%，击败 98.12% 的 C++ 提交",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "inequality",
+      "sourceKind": "shown_in_video",
+      "rawText": "i <= n - (k - c.size()) + 1",
+      "normalizedText": "i <= n - (k - c.size()) + 1",
+      "variables": [
+        {
+          "symbol": "i",
+          "meaning": "当前尝试放入组合的数字",
+          "domainOrRelationship": "i >= start",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "n",
+          "meaning": "候选数字最大值 (1...n)",
+          "domainOrRelationship": "n >= k",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "k",
+          "meaning": "目标组合元素个数",
+          "domainOrRelationship": "k > 0",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "c.size()",
+          "meaning": "当前已挑选的元素个数",
+          "domainOrRelationship": "0 <= c.size() <= k",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "id": "experiment-001",
+      "subject": "LeetCode 77 提交对比实验",
+      "purpose": {
+        "statement": "验证对 for 循环上界进行剪枝优化后在在线测评系统上的性能提升",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-001",
+          "ev-004"
+        ]
+      },
+      "setup": {
+        "language": "C++",
+        "compilerOrRuntime": null,
+        "optimization": null,
+        "operatingSystem": null,
+        "hardware": null,
+        "timer": null,
+        "warmup": null,
+        "repetitions": null,
+        "inputGeneration": "LeetCode 27 组官方测试用例"
+      },
+      "measurements": [
+        {
+          "inputDescription": "27 test cases passed (baseline)",
+          "inputSize": null,
+          "observedValue": "76",
+          "unit": "ms",
+          "evidenceIds": [
+            "ev-001"
+          ]
+        },
+        {
+          "inputDescription": "27 test cases passed (pruned)",
+          "inputSize": null,
+          "observedValue": "69",
+          "unit": "ms",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "theoreticalExpectation": null,
+      "observation": {
+        "statement": "剪枝后在 27 组测试用例上运行时间从 76ms 降低到 69ms，超越提交占比从 82.29% 提升至 98.12%",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-001",
+          "ev-004"
+        ]
+      },
+      "limitations": [
+        {
+          "statement": "LeetCode 平台上测试用例数据量较小，若测试用例数据量更大，剪枝带来的提速效果会更明显",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "evidenceIds": [
+        "ev-001",
+        "ev-004"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "statement": "当 n = 4, k = 2 时，在第一层递归中取 4 后，剩余可选集合为空，无法凑齐 2 个元素，因此不需要尝试取 4 这个分支",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "edgeCases": [],
+  "implementationPitfalls": [
+    {
+      "statement": "推导剪枝公式时容易混淆闭区间与开区间的元素个数，应注意 [i...n] 闭区间的元素个数为 n - i + 1",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "在面试中遇到组合类问题时，若细节不明确，一定要向面试官确认：1) 集合中元素是否可能相同；2) 元素是可以无限制重复使用还是只能使用一次",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "在 LeetCode 或面试中，性能分布击败率高于平均水平（如 50% 以上）即可，不必盲目追求 90% 以上，但应掌握剪枝这种非常重要的计算机解题思想",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:08-04",
+      "to": "lesson:08-05",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "08-05 课次在 08-04 课次组合问题（LeetCode 77）回溯解法的基础上，进一步提出了剪枝优化的推导与实现。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001",
+        "ev-003"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 115000,
+      "assetId": "asset:video-08-05",
+      "locator": "00:00 - 01:55",
+      "observation": "展示 LeetCode 77 代码提交界面，基线代码获得 Accepted，27/27 test cases passed，Runtime 76 ms，beats 82.29% of cpp submissions。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 115001,
+      "endMs": 226000,
+      "assetId": "asset:video-08-05",
+      "locator": "01:55 - 03:46",
+      "observation": "通过 PPT 展示 n=4, k=2 的递归搜索树，指出在 [1,2,3,4] 中尝试取 4 后后续为空集合无法凑满 2 个数的分支，提出“回溯法的剪枝”概念。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 226001,
+      "endMs": 458000,
+      "assetId": "asset:video-08-05",
+      "locator": "03:46 - 07:38",
+      "observation": "在 IDE 中编写注释推导剪枝公式：还需 k - c.size() 个空位，[i...n] 中至少要有 k - c.size() 个元素，得出 i 上界为 n - (k - c.size()) + 1，并举例试验验证。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 458001,
+      "endMs": 521000,
+      "assetId": "asset:video-08-05",
+      "locator": "07:38 - 08:41",
+      "observation": "将修改后的剪枝代码重新提交至 LeetCode 77，获得 Accepted，Runtime 69 ms，beats 98.12% of cpp submissions。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 521001,
+      "endMs": 738000,
+      "assetId": "asset:video-08-05",
+      "locator": "08:41 - 12:18",
+      "observation": "PPT 介绍练习题 LeetCode 39 (Combination Sum) 和 LeetCode 40 (Combination Sum II)，强调面试沟通中对重复元素和使用次数澄清的重要性。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 738001,
+      "endMs": 786000,
+      "assetId": "asset:video-08-05",
+      "locator": "12:18 - 13:06",
+      "observation": "PPT 介绍练习题 LeetCode 216 (Combination Sum III)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 786001,
+      "endMs": 915000,
+      "assetId": "asset:video-08-05",
+      "locator": "13:06 - 15:15",
+      "observation": "PPT 介绍练习题 LeetCode 78 (Subsets) 和 LeetCode 90 (Subsets II)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 915001,
+      "endMs": 1049080,
+      "assetId": "asset:video-08-05",
+      "locator": "15:15 - 17:29",
+      "observation": "PPT 介绍练习题 LeetCode 401 (Binary Watch)，配合二进制手表图片讲解高位与低位灯的数值含义及转换为组合问题的思路。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.5",
+    "generatedAt": null
+  }
+}

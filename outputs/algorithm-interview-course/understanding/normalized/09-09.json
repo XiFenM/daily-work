@@ -1,0 +1,718 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "09-09",
+  "chapterId": "09",
+  "titleObserved": "更多关于动态规划",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 1264.76771,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 37000,
+      "topic": "更多关于动态规划概述",
+      "summary": "回顾前面学过的动态规划内容，说明本节将快速探讨更多与动态规划相关的问题与拓展思想。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 37000,
+      "endMs": 196000,
+      "topic": "最长公共子序列 (LCS) 问题定义与应用",
+      "summary": "介绍最长公共子序列（LCS）问题，并给出基因序列相似度比较的应用背景与简单示例。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 196000,
+      "endMs": 360000,
+      "topic": "LCS 问题的状态定义与转移方程",
+      "summary": "定义 LCS(m, n) 状态，分析当字符相等与不相等时的两种分支状态转移方程。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 360000,
+      "endMs": 548000,
+      "topic": "LCS 示例树状推导过程",
+      "summary": "以 ABCD 和 AEBD 为例，通过递归树的形式演示求解 LCS 的推导过程。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 548000,
+      "endMs": 571000,
+      "topic": "练习：求解 LCS 问题",
+      "summary": "建议学员课后自主尝试编写递归、记忆化搜索与自底向上动态规划代码。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 571000,
+      "endMs": 707000,
+      "topic": "从动态规划视角看 Dijkstra 的最短路最优性方程",
+      "summary": "课程以动态规划视角重新审视 Dijkstra，给出 shortestPath(x) 的最优性方程；本段未展开非负边权前提、贪心定点顺序或具体实现。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 707000,
+      "endMs": 888000,
+      "topic": "动态规划给出具体解：LIS 问题反向重构",
+      "summary": "讲解如何利用最长上升子序列（LIS）计算得出的 DP 数组，反向重构出具体的最长上升子序列。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 888000,
+      "endMs": 1112000,
+      "topic": "动态规划给出具体解：0-1 背包问题反向重构与空间优化限制",
+      "summary": "演示如何利用 0-1 背包问题的二维 DP 表格反向推导出所选物品组合，并指出一维空间优化会丢失历史信息从而无法重构具体解。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 1112000,
+      "endMs": 1264767,
+      "topic": "LeetCode 上更多动态规划问题与面试建议",
+      "summary": "总结动态规划在算法面试中的难度特点，鼓励学员多刷题积累思维经验。",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解最长公共子序列（LCS）问题的定义、应用背景及其二维状态转移方程。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "理解课程如何用最短路最优性方程解释 Dijkstra 单源最短路径算法。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "掌握如何利用动态规划求解过程中保存的状态表格/数组反向追溯重构出具体解。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    },
+    {
+      "statement": "认识到背包问题的一维空间复杂度优化会丢失历史行信息，导致无法反向重构具体解。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "最长公共子序列",
+      "namesObserved": [
+        "最长公共子序列",
+        "Longest Common Sequence",
+        "LCS"
+      ],
+      "role": "introduces",
+      "definition": "给出两个字符串 S1 和 S2，求保持各自相对顺序但不要求连续的最长公共子序列长度；课程英文副标题写作 Longest Common Sequence，标准术语是 Longest Common Subsequence。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "Dijkstra 算法",
+      "namesObserved": [
+        "dijkstra 单源最短路径算法",
+        "dijkstra"
+      ],
+      "role": "applies",
+      "definition": "用于非负边权图的单源最短路径算法。课程从最优性方程 shortestPath(x) = min(shortestPath(a) + w(a->x)) 的角度把它与动态规划联系起来；标准算法实现还依赖贪心地确定当前最短的未确定顶点。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "canonicalName": "具体解重构",
+      "namesObserved": [
+        "动态规划给出具体解",
+        "反向重构",
+        "反向查找"
+      ],
+      "role": "introduces",
+      "definition": "在求出最优值后，利用保存的 DP 状态数组或二维表格，从最终状态出发反向追溯求出构成该最优解的具体元素序列或选择方案。",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    },
+    {
+      "canonicalName": "动态规划",
+      "namesObserved": [
+        "动态规划",
+        "DP"
+      ],
+      "role": "reinforces",
+      "definition": null,
+      "evidenceIds": [
+        "ev-001",
+        "ev-009"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": null,
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "LCS(m, n)",
+          "role": "dp_state",
+          "meaning": "S1[0...m] 与 S2[0...n] 的最长公共子序列长度",
+          "updateRule": "末字符相等时取 1 + LCS(m-1,n-1)，否则取 max(LCS(m-1,n), LCS(m,n-1))",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "S1[0...m] × S2[0...n]",
+          "meaning": "由两个前缀末端索引共同定位一个二维序列 DP 子问题。",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "invariant": {
+        "statement": "每个已求出的 LCS(m,n) 都只描述对应两个前缀的最优公共子序列长度，不承诺保存具体序列。",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": [
+          "ev-003",
+          "ev-004"
+        ]
+      },
+      "transitions": [
+        {
+          "condition": "S1[m] == S2[n]",
+          "updates": "LCS(m,n) = 1 + LCS(m-1,n-1)",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "condition": "S1[m] != S2[n]",
+          "updates": "LCS(m,n) = max(LCS(m-1,n), LCS(m,n-1))",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "补全递归边界时，任一前缀为空（m < 0 或 n < 0）应返回 0；课程画面未把这一基线写进公式。",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": [
+          "ev-003",
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "id": "state-002",
+      "solutionStageId": null,
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "cursor / memo[cursor]",
+          "role": "reconstruction_cursor",
+          "meaning": "当前已选 LIS 末端位置及其对应的剩余目标长度",
+          "updateRule": "向左寻找值更小且 memo 值恰少 1 的前驱并移动 cursor",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "[0...cursor-1]",
+          "meaning": "下一步前驱只能来自当前末端左侧，以保持原序列中的相对顺序。",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "invariant": {
+        "statement": "已逆向选出的元素能够作为某条最长上升子序列的后缀；cursor 左侧仍存在一条长度恰少 1 且数值更小的合法前驱链。",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "transitions": [
+        {
+          "condition": "j < cursor、nums[j] < nums[cursor] 且 memo[j] == memo[cursor] - 1",
+          "updates": "记录 nums[j]，令 cursor = j，继续向左查找",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "追溯到 memo[cursor] == 1 后停止，再反转逆序收集的元素；课程示例得到 2, 3, 7, 101。",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "id": "state-003",
+      "solutionStageId": null,
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "memo[i][c]",
+          "role": "dp_table_cell",
+          "meaning": "使用物品 0...i、容量不超过 c 时的最大价值",
+          "updateRule": "比较当前格与上一行同容量格，判断物品 i 是否贡献了当前最优值",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        },
+        {
+          "symbol": "(i, c)",
+          "role": "reconstruction_cursor",
+          "meaning": "在二维背包 DP 表中反向追溯的当前位置",
+          "updateRule": "若选择物品 i，则移动到 (i-1, c-w[i])；否则移动到 (i-1, c)",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "memo[0...i][0...c]",
+          "meaning": "保留所有物品前缀与容量的历史行，供反向比较决策来源。",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        }
+      ],
+      "invariant": {
+        "statement": "当前格 memo[i][c] 的最优值可分解为“不选 i”对应的上一行同列，或“选 i”对应的上一行剩余容量再加 v[i]。",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": [
+          "ev-008"
+        ]
+      },
+      "transitions": [
+        {
+          "condition": "i > 0 且 memo[i][c] == memo[i-1][c]",
+          "updates": "可选择不记录物品 i，移动到 (i-1, c)",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-008"
+          ]
+        },
+        {
+          "condition": "i > 0 且当前最优值来自 v[i] + memo[i-1][c-w[i]]",
+          "updates": "记录物品 i，移动到 (i-1, c-w[i])",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-008"
+          ]
+        },
+        {
+          "condition": "i == 0",
+          "updates": "若 c >= w[0] 且 memo[0][c] == v[0]，记录物品 0；随后结束追溯",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-008"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "剩余容量为 0，或完成第 0 行的单独选择判定后结束；课程示例追溯出编号 1、2 的两件物品。",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": [
+          "ev-008"
+        ]
+      },
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "LCS 的末字符相等时，可以把该字符接到两个更短前缀的公共子序列之后；末字符不等时，任一公共子序列至少不使用其中一个末字符，因此两种删尾子问题取较大值覆盖最优解。",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": [
+          "ev-003",
+          "ev-004"
+        ]
+      },
+      {
+        "statement": "LIS 与 0-1 背包的反向追溯每一步都移动到能解释当前最优值的前驱状态，并在选择分支记录对应元素，因此最终得到一条与最优值一致的具体解；出现平局时可能得到多个正确答案中的任意一个。",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": [
+          "ev-007",
+          "ev-008"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001",
+      "state-002",
+      "state-003"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "recurrence",
+      "sourceKind": "shown_in_video",
+      "rawText": "S1[m] == S2[n] : LCS(m,n) = 1 + LCS(m-1, n-1) ; S1[m] != S2[n] : LCS(m,n) = max( LCS(m-1, n) , LCS(m, n-1) )",
+      "normalizedText": "LCS(m, n) = S1[m] == S2[n] ? 1 + LCS(m-1, n-1) : max(LCS(m-1, n), LCS(m, n-1))",
+      "variables": [
+        {
+          "symbol": "m",
+          "meaning": "S1 中当前考虑的字符索引",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "n",
+          "meaning": "S2 中当前考虑的字符索引",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "completeness": "partial",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "formula-002",
+      "kind": "recurrence",
+      "sourceKind": "shown_in_video",
+      "rawText": "shortestPath(x) = min( shortestPath(a) + w(a->x) )",
+      "normalizedText": "shortestPath(x) = min_{a}(shortestPath(a) + w(a->x))",
+      "variables": [
+        {
+          "symbol": "x",
+          "meaning": "目标节点",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "symbol": "a",
+          "meaning": "公式中用于更新 x 的候选前驱；画面没有限定候选集合、确定顺序或已确定状态",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "symbol": "w(a->x)",
+          "meaning": "从节点 a 到节点 x 的边权值",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "completeness": "partial",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "S1 = ABCD、S2 = AEBD 时，课程递归树得到最长公共子序列长度 3；其中一条具体公共子序列为 ABD。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "对 [10, 9, 2, 5, 3, 7, 101, 18] 的 LIS 状态数组 [1, 1, 1, 2, 2, 3, 4, 4] 反向追溯，课程示例得到具体序列 [2, 3, 7, 101]。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "重量 [1, 2, 3]、价值 [6, 10, 12]、容量 5 的 0-1 背包二维表最优值为 22；反向追溯选择编号 1 和 2 的物品。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "LCS 任一输入前缀为空时长度为 0；这是让画面递推式可终止所需的基线，但课程公式页未显式写出。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "当多个前驱状态同样最优时，具体解不唯一；重构算法需要确定任意一致的平局策略，而最优值不受影响。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "按课程所示，若 0-1 背包只保留优化后的一维值数组，之前各物品行的历史信息会丢失，因而不能再沿这张表直接反向重构物品组合；要求输出具体解时应保留二维表或另存决策/前驱信息。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "statement": "课程幻灯片英文副标题写作 Longest Common Sequence；标准算法术语是 Longest Common Subsequence。两者在本课均指“不要求连续、但保持相对顺序”的最长公共子序列，不能误写成最长公共子串。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "shortestPath 的最优性方程本身不足以完整定义 Dijkstra：标准 Dijkstra 还要求非负边权，并用贪心顺序确定当前最短的未确定顶点；负权图不能直接套用。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "算法面试中对基础算法考查居多，动态规划考查的难度通常远未达到算法竞赛的水平。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "statement": "当面试要求输出具体解而非仅最优值时，需要在计算阶段保留足以解释最优转移的历史信息（课程用完整 DP 表格演示），再从终点反向追溯；也可用额外前驱/决策记录替代整张表。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:09-08",
+      "to": "lesson:09-09",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "本课直接复用上一课的 LIS 状态数组来讲具体解重构，并进一步引出 LCS 与最短路最优性方程。",
+      "confidence": 0.9,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "from": "lesson:09-07",
+      "to": "lesson:09-09",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "本课复用 0-1 背包二维表说明具体物品组合的反向重构，并讨论一维压缩对追溯信息的影响。",
+      "confidence": 0.9,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 37000,
+      "assetId": "asset:video-09-09",
+      "locator": "00:00 - 00:37",
+      "observation": "幻灯片显示标题“更多关于动态规划”，老师回顾前面讲过的动态规划，并说明本节将快速了解更多与动态规划相关的问题。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 37000,
+      "endMs": 196000,
+      "assetId": "asset:video-09-09",
+      "locator": "00:37 - 03:16",
+      "observation": "幻灯片展示“最长公共子序列 Longest Common Sequence (LCS)”，讲解其定义及基因工程中 DNA 序列（ACGT）相似度比较的应用。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 196000,
+      "endMs": 360000,
+      "assetId": "asset:video-09-09",
+      "locator": "03:16 - 06:00",
+      "observation": "画面展示状态定义 LCS(m, n) 以及字符相等与不相等时的转移方程。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 360000,
+      "endMs": 548000,
+      "assetId": "asset:video-09-09",
+      "locator": "06:00 - 09:08",
+      "observation": "画面展示 ABCD 与 AEBD 的 LCS 递归树推导过程，通过字符相等时加 1、字符不等时分叉取较大值，得到最长公共子序列长度 3。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 548000,
+      "endMs": 571000,
+      "assetId": "asset:video-09-09",
+      "locator": "09:08 - 09:31",
+      "observation": "幻灯片显示“练习：求解LCS问题”，老师建议学员自行编写递归、记忆化搜索与自底向上 DP 代码。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 571000,
+      "endMs": 707000,
+      "assetId": "asset:video-09-09",
+      "locator": "09:31 - 11:47",
+      "observation": "幻灯片显示“dijkstra 单源最短路径算法也是动态规划”，给出 shortestPath(i) 的状态定义和 shortestPath(x) = min( shortestPath(a) + w(a->x) ) 的方程。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 707000,
+      "endMs": 888000,
+      "assetId": "asset:video-09-09",
+      "locator": "11:47 - 14:48",
+      "observation": "幻灯片显示“动态规划给出具体解”以及“300. Longest Increasing Subsequence”的状态数组示例，演示从最大值 4 (对应 101) 开始反向重构序列 2, 3, 7, 101 的过程。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 888000,
+      "endMs": 1112000,
+      "assetId": "asset:video-09-09",
+      "locator": "14:48 - 18:32",
+      "observation": "幻灯片显示“0-1背包问题”二维表格，用红线箭头反向推导出装入背包的物品为 1 号和 2 号物品，并强调空间优化为一维数组后将无法反向重构具体解。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 1112000,
+      "endMs": 1264767,
+      "assetId": "asset:video-09-09",
+      "locator": "18:32 - 21:04",
+      "observation": "幻灯片显示“Leetcode 上更多动态规划问题”，老师总结面试中对 DP 的考查特点，给出备考建议。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "formulaArtifacts.formula-001",
+      "reason": "LCS 公式页定义了两个转移分支，但没有写出任一前缀为空时返回 0 的递归/表格基线；因此公式不是可直接执行的完整定义。",
+      "recommendedCheck": "保持 shown_in_video 原式并标记 partial；在笔记中另以 editorial_inference 补出 m < 0 或 n < 0 时为 0，并区分索引口径与长度口径。"
+    },
+    {
+      "field": "concepts[0].namesObserved",
+      "reason": "幻灯片英文副标题为 Longest Common Sequence (LCS)，而标准术语是 Longest Common Subsequence；中文“最长公共子序列”是正确的。",
+      "recommendedCheck": "保留 Sequence 作为 observed label，不在规范化标题或面试答案中沿用；明确它不是 Longest Common Substring。"
+    },
+    {
+      "field": "formulaArtifacts.formula-002",
+      "reason": "Dijkstra 页只给出 shortestPath 最优性方程，未写候选前驱集合、源点基线、非负边权前提、松弛过程或贪心定点顺序；该方程不足以单独定义完整 Dijkstra 算法。",
+      "recommendedCheck": "保留课程“从 DP 视角理解”的讲法并将公式标记 partial；笔记中明确标准 Dijkstra 的非负边权与贪心实现边界，不把算法分类表述为无争议事实。"
+    },
+    {
+      "field": "implementationPitfalls[0]",
+      "reason": "“一维空间优化后无法给出具体解”只对课程所示、仅保留最终值数组且不保存额外轨迹的实现成立；额外保存前驱/决策或重新计算仍可重构。",
+      "recommendedCheck": "把结论限定为不能沿单一值数组直接回溯，不写成所有 O(C) 空间方案在理论上都绝对无法输出解。"
+    },
+    {
+      "field": "codeArtifacts/complexityAnalyses",
+      "reason": "本课只把 LCS 的递归、记忆化和自底向上实现作为练习，没有展示完整代码、运行结果或直接复杂度结论；Dijkstra 也没有给实现。",
+      "recommendedCheck": "代码验证保持不适用，顶层复杂度维持 null；如笔记补充标准 LCS O(MN) 时间/空间，必须明确标为 editorial_inference 且说明具体实现假设。"
+    },
+    {
+      "field": "relationCandidates",
+      "reason": "本课内容明确复用 LIS 与 0-1 背包，但没有说出稳定课次 ID 09-08/09-07。",
+      "recommendedCheck": "两条关系保持 provisional/editorial_hypothesis，待双侧课次审核后再升级。"
+    }
+  ],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "72d2f66ff05b474ab85ebe8a23c283c7",
+    "promptVersion": "video-evidence-v1.6",
+    "generatedAt": "2026-08-03T01:25:18.000Z"
+  }
+}

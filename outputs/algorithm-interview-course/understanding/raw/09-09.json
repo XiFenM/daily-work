@@ -1,0 +1,408 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "09-09",
+  "chapterId": "09",
+  "titleObserved": "更多关于动态规划",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 1264.76771,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 37000,
+      "topic": "更多关于动态规划概述",
+      "summary": "回顾前面学过的动态规划内容，说明本节将快速探讨更多与动态规划相关的问题与拓展思想。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 37000,
+      "endMs": 196000,
+      "topic": "最长公共子序列 (LCS) 问题定义与应用",
+      "summary": "介绍最长公共子序列（LCS）问题，并给出基因序列相似度比较的应用背景与简单示例。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 196000,
+      "endMs": 360000,
+      "topic": "LCS 问题的状态定义与转移方程",
+      "summary": "定义 LCS(m, n) 状态，分析当字符相等与不相等时的两种分支状态转移方程。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 360000,
+      "endMs": 548000,
+      "topic": "LCS 示例树状推导过程",
+      "summary": "以 ABCD 和 AEBD 为例，通过递归树的形式演示求解 LCS 的推导过程。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 548000,
+      "endMs": 571000,
+      "topic": "练习：求解 LCS 问题",
+      "summary": "建议学员课后自主尝试编写递归、记忆化搜索与自底向上动态规划代码。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 571000,
+      "endMs": 707000,
+      "topic": "Dijkstra 单源最短路径算法也是动态规划",
+      "summary": "从动态规划的角度重新审视 Dijkstra 算法，给出 shortestPath(x) 的状态转移方程表示。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 707000,
+      "endMs": 888000,
+      "topic": "动态规划给出具体解：LIS 问题反向重构",
+      "summary": "讲解如何利用最长上升子序列（LIS）计算得出的 DP 数组，反向重构出具体的最长上升子序列。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 888000,
+      "endMs": 1112000,
+      "topic": "动态规划给出具体解：0-1 背包问题反向重构与空间优化限制",
+      "summary": "演示如何利用 0-1 背包问题的二维 DP 表格反向推导出所选物品组合，并指出一维空间优化会丢失历史信息从而无法重构具体解。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 1112000,
+      "endMs": 1264767,
+      "topic": "LeetCode 上更多动态规划问题与面试建议",
+      "summary": "总结动态规划在算法面试中的难度特点，鼓励学员多刷题积累思维经验。",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解最长公共子序列（LCS）问题的定义、应用背景及其二维状态转移方程。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "理解 Dijkstra 单源最短路径算法背后的动态规划转移方程模型。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "掌握如何利用动态规划求解过程中保存的状态表格/数组反向追溯重构出具体解。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    },
+    {
+      "statement": "认识到背包问题的一维空间复杂度优化会丢失历史行信息，导致无法反向重构具体解。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "最长公共子序列",
+      "namesObserved": [
+        "最长公共子序列",
+        "Longest Common Sequence",
+        "LCS"
+      ],
+      "role": "introduces",
+      "definition": "给出两个字符串 S1 和 S2，求这两个字符串的最长公共子序列的长度。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "Dijkstra 算法",
+      "namesObserved": [
+        "dijkstra 单源最短路径算法",
+        "dijkstra"
+      ],
+      "role": "applies",
+      "definition": "用于图论中求解单源最短路径的算法，可视为求解 shortestPath(x) = min(shortestPath(a) + w(a->x)) 的动态规划过程。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "canonicalName": "具体解重构",
+      "namesObserved": [
+        "动态规划给出具体解",
+        "反向重构",
+        "反向查找"
+      ],
+      "role": "introduces",
+      "definition": "在求出最优值后，利用保存的 DP 状态数组或二维表格，从最终状态出发反向追溯求出构成该最优解的具体元素序列或选择方案。",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    },
+    {
+      "canonicalName": "动态规划",
+      "namesObserved": [
+        "动态规划",
+        "DP"
+      ],
+      "role": "reinforces",
+      "definition": null,
+      "evidenceIds": [
+        "ev-001",
+        "ev-009"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [],
+  "stateModels": [],
+  "correctness": {
+    "method": "unknown",
+    "claims": [],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "recurrence",
+      "sourceKind": "shown_in_video",
+      "rawText": "S1[m] == S2[n] : LCS(m,n) = 1 + LCS(m-1, n-1) ; S1[m] != S2[n] : LCS(m,n) = max( LCS(m-1, n) , LCS(m, n-1) )",
+      "normalizedText": "LCS(m, n) = S1[m] == S2[n] ? 1 + LCS(m-1, n-1) : max(LCS(m-1, n), LCS(m, n-1))",
+      "variables": [
+        {
+          "symbol": "m",
+          "meaning": "S1 中当前考虑的字符索引",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "n",
+          "meaning": "S2 中当前考虑的字符索引",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "formula-002",
+      "kind": "recurrence",
+      "sourceKind": "shown_in_video",
+      "rawText": "shortestPath(x) = min( shortestPath(a) + w(a->x) )",
+      "normalizedText": "shortestPath(x) = min_{a}(shortestPath(a) + w(a->x))",
+      "variables": [
+        {
+          "symbol": "x",
+          "meaning": "目标节点",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "symbol": "a",
+          "meaning": "能够直接到达 x 的前驱节点",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "symbol": "w(a->x)",
+          "meaning": "从节点 a 到节点 x 的边权值",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "experiments": [],
+  "examples": [],
+  "edgeCases": [],
+  "implementationPitfalls": [
+    {
+      "statement": "在 0-1 背包问题中进行一维数组空间优化后，由于丢失了之前行（不同物品选择状态）的信息，导致无法反向追溯重构出具体的物品组合；若题目要求输出具体解则不能采用一维数组空间优化。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "算法面试中对基础算法考查居多，动态规划考查的难度通常远未达到算法竞赛的水平。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "statement": "当面试要求输出具体解而非仅最优值时，需要保留完整 DP 表格，并采用从终点反向追溯（Backtracking）的思路重构解。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:09-08",
+      "to": "lesson:09-09",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "本课次在09-08的最长上升子序列（LIS）与09-07的背包问题基础上，延伸探讨了LCS、Dijkstra算法以及如何反向推导重构具体解。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001",
+        "ev-007",
+        "ev-008"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 37000,
+      "assetId": "asset:video-09-09",
+      "locator": "00:00 - 00:37",
+      "observation": "幻灯片显示标题“更多关于动态规划”，老师回顾前面讲过的动态规划，并说明本节将快速了解更多与动态规划相关的问题。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 37000,
+      "endMs": 196000,
+      "assetId": "asset:video-09-09",
+      "locator": "00:37 - 03:16",
+      "observation": "幻灯片展示“最长公共子序列 Longest Common Sequence (LCS)”，讲解其定义及基因工程中 DNA 序列（ACGT）相似度比较的应用。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 196000,
+      "endMs": 360000,
+      "assetId": "asset:video-09-09",
+      "locator": "03:16 - 06:00",
+      "observation": "画面展示状态定义 LCS(m, n) 以及字符相等与不相等时的转移方程。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 360000,
+      "endMs": 548000,
+      "assetId": "asset:video-09-09",
+      "locator": "06:00 - 09:08",
+      "observation": "画面展示 ABCD 与 AEBD 的 LCS 求解树状推导过程，找出最向左分支推导出的最长公共子序列长度为 3。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 548000,
+      "endMs": 571000,
+      "assetId": "asset:video-09-09",
+      "locator": "09:08 - 09:31",
+      "observation": "幻灯片显示“练习：求解LCS问题”，老师建议学员自行编写递归、记忆化搜索与自底向上 DP 代码。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 571000,
+      "endMs": 707000,
+      "assetId": "asset:video-09-09",
+      "locator": "09:31 - 11:47",
+      "observation": "幻灯片显示“dijkstra 单源最短路径算法也是动态规划”，给出 shortestPath(i) 的状态定义和 shortestPath(x) = min( shortestPath(a) + w(a->x) ) 的方程。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 707000,
+      "endMs": 888000,
+      "assetId": "asset:video-09-09",
+      "locator": "11:47 - 14:48",
+      "observation": "幻灯片显示“动态规划给出具体解”以及“300. Longest Increasing Subsequence”的状态数组示例，演示从最大值 4 (对应 101) 开始反向重构序列 2, 3, 7, 101 的过程。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 888000,
+      "endMs": 1112000,
+      "assetId": "asset:video-09-09",
+      "locator": "14:48 - 18:32",
+      "observation": "幻灯片显示“0-1背包问题”二维表格，用红线箭头反向推导出装入背包的物品为 1 号和 2 号物品，并强调空间优化为一维数组后将无法反向重构具体解。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 1112000,
+      "endMs": 1264767,
+      "assetId": "asset:video-09-09",
+      "locator": "18:32 - 21:04",
+      "observation": "幻灯片显示“Leetcode 上更多动态规划问题”，老师总结面试中对 DP 的考查特点，给出备考建议。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.6",
+    "generatedAt": null
+  }
+}

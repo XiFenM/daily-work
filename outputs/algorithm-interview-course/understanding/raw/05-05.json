@@ -1,0 +1,362 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "05-05",
+  "chapterId": "05",
+  "titleObserved": "不仅仅是穿针引线 Delete Node in a Linked List",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 449.96,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 17000,
+      "topic": "引入：链表问题不一定只是穿针引线",
+      "summary": "介绍链表问题除了改变 next 指针（穿针引线）外，有时可以通过改变节点的值（val）来灵活解决问题。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 17000,
+      "endMs": 106000,
+      "topic": "题目介绍与特点分析",
+      "summary": "讲解 LeetCode 237 号问题 Delete Node in a Linked List。对比以往删除节点需要前驱节点的情况，指出本题只给出了待删除节点本身指针的特殊限制。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 106000,
+      "endMs": 244000,
+      "topic": "解法思路图解与动画演示",
+      "summary": "使用动画演示通过覆盖值来删除节点的思路：将下一个节点的值复制到当前节点，再将下一个节点跳过并释放。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 244000,
+      "endMs": 338000,
+      "topic": "核心代码实现",
+      "summary": "在 C++ 编译器中编写核心值覆盖与下一个节点删除的代码。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 338000,
+      "endMs": 429000,
+      "topic": "边界条件处理与安全检查",
+      "summary": "增加对 node 为空以及 node->next 为空（待删除节点为尾节点）的边界处理逻辑。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 429000,
+      "endMs": 449960,
+      "topic": "总结",
+      "summary": "总结通过改变节点值来完成链表操作的技巧与适用场景。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "掌握在无法获取前驱节点的情况下删除链表节点的替代思路：覆盖节点值并删除后继节点",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "学会分析链表操作中的指针空值边界条件（node 为空及 node->next 为空）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "链表节点删除",
+      "namesObserved": [
+        "删除节点",
+        "Delete Node in a Linked List"
+      ],
+      "role": "applies",
+      "definition": "通过改变节点的指针指向或覆盖节点的值，将指定节点从链表结构中移除。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "节点值覆盖",
+      "namesObserved": [
+        "改变节点的值",
+        "值的置换"
+      ],
+      "role": "introduces",
+      "definition": "不改变链表的物理节点连接关系，而是将后继节点的数据复制到当前节点，从而在逻辑上达成删除当前节点的效果。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-003"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "237",
+    "titleObserved": "Delete Node in a Linked List",
+    "statement": "给定链表中的一个节点，删除该节点。",
+    "constraints": [
+      "仅给定要删除的节点指针 node，无法访问头节点或待删除节点的前驱节点"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "optimized",
+      "idea": "由于无法获取待删除节点的前驱节点，无法直接进行跳过节点的指针操作。可以通过将下一个节点的值复制到当前节点（覆盖当前节点的值），然后删除下一个节点来实现逻辑上的节点删除。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [
+        "如果待删除节点是链表的最后一个节点（node->next == NULL），无法通过复制下一个节点的值来完成删除"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    void deleteNode(ListNode* node) {\n        if( node == NULL )\n            return;\n\n        if( node->next == NULL ){\n            delete node;\n            node = NULL;\n            return;\n        }\n\n        node->val = node->next->val;\n        ListNode* delNode = node->next;\n        node->next = delNode->next;\n\n        delete delNode;\n\n        return;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "node",
+          "role": "target_node_pointer",
+          "meaning": "给定的待删除节点指针",
+          "updateRule": "node->val 被更新为 node->next->val；node->next 被更新为 delNode->next",
+          "evidenceIds": [
+            "ev-003",
+            "ev-004"
+          ]
+        },
+        {
+          "symbol": "delNode",
+          "role": "auxiliary_deletion_pointer",
+          "meaning": "指向 node->next 的临时指针，用于记录即将被物理释放内存的节点",
+          "updateRule": "赋值为 node->next，最后使用 delete 释放",
+          "evidenceIds": [
+            "ev-003",
+            "ev-004"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "node != NULL 且 node->next != NULL",
+          "updates": "node->val = node->next->val; delNode = node->next; node->next = delNode->next; delete delNode;",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-003",
+            "ev-004"
+          ]
+        }
+      ],
+      "termination": null,
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "通过将下一个节点的值复制给当前节点，并将当前节点的 next 重新指向下下节点，可以在逻辑上等价于删除了给定节点。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003",
+          "ev-006"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "链表结构如 ... -> 2 -> 3 -> 4 -> ...，给定指针 node 指向节点 3。将其值更新为 4（变为 2 -> 4 -> 4），然后跳过并释放后一个 4 节点，结果为 ... -> 2 -> 4 -> ...",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "传入的 node 指针为 NULL，直接 return 不做任何处理。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "传入的 node->next 为 NULL（即待删除节点为最后一个节点），视频中对其进行了 delete node; node = NULL; return; 处理。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在使用 node->val 或 node->next 前没有检查 node 是否为 NULL，容易造成空指针异常。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "直接修改指针解引用前未确保 node->next 不为 NULL，导致访问 node->next->val 时越界/报错。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "当面试官提出删除链表节点但只提供该节点指针时，跳出传统‘找到前驱节点再改指针’的思维，考虑‘值覆盖+删除下一个节点’的方法。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-003",
+        "ev-006"
+      ]
+    }
+  ],
+  "relationCandidates": [],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 17000,
+      "assetId": "asset:video-05-05",
+      "locator": "00:00 - 00:17",
+      "observation": "讲师引入主题‘不仅仅是穿针引线’，提出对于链表问题思路可以更灵活，有的问题不一定只靠改变 next 指针，也可以改变节点的值。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 17000,
+      "endMs": 106000,
+      "assetId": "asset:video-05-05",
+      "locator": "00:17 - 01:46",
+      "observation": "幻灯片展示 LeetCode 237. Delete Node in a Linked List 题目，说明函数签名为 void deleteNode(ListNode* node)，只给出了待删除节点的指针。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 106000,
+      "endMs": 244000,
+      "assetId": "asset:video-05-05",
+      "locator": "01:46 - 04:04",
+      "observation": "幻灯片使用动画展示 ...->2->3->4->... 的链表，通过将 4 覆盖到节点 3 的位置，再释放原来的 4 节点，完成节点删除。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 244000,
+      "endMs": 338000,
+      "assetId": "asset:video-05-05",
+      "locator": "04:04 - 05:38",
+      "observation": "在 IDE 中编写核心逻辑：node->val = node->next->val; ListNode* delNode = node->next; node->next = delNode->next; delete delNode; return;",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 338000,
+      "endMs": 429000,
+      "assetId": "asset:video-05-05",
+      "locator": "05:38 - 07:09",
+      "observation": "补充边界条件检查：if(node == NULL) return; 以及 if(node->next == NULL){ delete node; node = NULL; return; }",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 429000,
+      "endMs": 449960,
+      "assetId": "asset:video-05-05",
+      "locator": "07:09 - 07:29",
+      "observation": "讲师总结：在特定情况下可以考虑改变节点的值来完成链表操作任务。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "edgeCases[1]",
+      "reason": "在 LeetCode 237 的原题描述中通常保证待删除节点不是尾节点（node->next != NULL），但视频中讲师主动添加了 node->next == NULL 的处理逻辑。",
+      "recommendedCheck": "若严格按 LeetCode 官方题意可忽略 node->next == NULL，但按视频录像证据，视频中确实编写并讲解了该边界条件。"
+    }
+  ],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

@@ -1,0 +1,397 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "06-01",
+  "chapterId": "06",
+  "titleObserved": "栈的基础应用 Valid Parentheses",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 973.44,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 28000,
+      "topic": "章节引入",
+      "summary": "介绍栈和队列的整体章节及本小节主题“栈的基础使用”。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 28000,
+      "endMs": 106000,
+      "topic": "题目引入：Valid Parentheses",
+      "summary": "讲解 LeetCode 第 20 题 Valid Parentheses 的题意要求与合法/非法字符串示例。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 106000,
+      "endMs": 353000,
+      "topic": "栈解决括号匹配图解",
+      "summary": "使用动画演示通过辅助栈进行字符入栈与匹配弹栈的具体流程，并总结栈顶元素在嵌套层次关系中的作用。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 353000,
+      "endMs": 687000,
+      "topic": "代码实现与陷阱分析",
+      "summary": "在 C++ 中使用 std::stack 实现 isValid 函数，并指出循环结束后必须检查栈是否为空的细节陷阱。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 687000,
+      "endMs": 845000,
+      "topic": "补充练习：150. Evaluate Reverse Polish Notation",
+      "summary": "介绍逆波兰表达式求值问题及面试中关于运算符和数字类型的边界澄清点。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 845000,
+      "endMs": 973440,
+      "topic": "补充练习：71. Simplify Path",
+      "summary": "介绍 Simplify Path 路径简化问题，分析回退及多余斜杠等边界情况的沟通要点。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解栈（Stack）在处理具有嵌套层次关系（如括号匹配）问题中的特点与作用",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "掌握使用标准库栈 `std::stack` 解决 LeetCode 20 题 Valid Parentheses 的 C++ 代码实现",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "掌握括号匹配算法中“遍历完成后需检查栈是否为空”的关键逻辑与易错点",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Stack",
+      "namesObserved": [
+        "栈",
+        "Stack"
+      ],
+      "role": "introduces",
+      "definition": "一种后进先出的数据结构，栈顶元素反映了在嵌套层次关系中，最近的需要匹配的元素。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "Valid Parentheses",
+      "namesObserved": [
+        "Valid Parentheses",
+        "括号匹配"
+      ],
+      "role": "applies",
+      "definition": null,
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "20",
+    "titleObserved": "Valid Parentheses",
+    "statement": "给定一个字符串，只包含 '(', ')', '{', '}', '[', ']'，判定字符串中的括号匹配是否合法。",
+    "constraints": [
+      "字符串只包含 '(', ')', '{', '}', '[', ']' 六种字符"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "optimized",
+      "idea": "顺序遍历字符串。遇到左括号（'(', '{', '['）时将其推入栈中；遇到右括号（')', ']', '}'）时，若栈为空则非法，否则弹出栈顶元素比对是否匹配；遍历结束后若栈为空则完全匹配合法。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <cassert>\n#include <string>\n#include <stack>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    bool isValid(string s) {\n        stack<char> stack;\n        for (int i = 0; i < s.size(); i++) {\n            if (s[i] == '(' || s[i] == '{' || s[i] == '[') {\n                stack.push(s[i]);\n            } else {\n                if (stack.size() == 0) {\n                    return false;\n                }\n                char c = stack.top();\n                stack.pop();\n                \n                char match;\n                if (s[i] == ')') {\n                    match = '(';\n                } else if (s[i] == ']') {\n                    match = '[';\n                } else {\n                    assert(s[i] == '}');\n                    match = '{';\n                }\n                \n                if (c != match) {\n                    return false;\n                }\n            }\n        }\n        \n        if (stack.size() != 0) {\n            return false;\n        }\n        \n        return true;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "stack",
+          "role": "auxiliary_stack",
+          "meaning": "存储尚未匹配的左括号字符的栈",
+          "updateRule": "遇到左括号入栈，遇到与右括号匹配成功时出栈",
+          "evidenceIds": [
+            "ev-003",
+            "ev-004"
+          ]
+        },
+        {
+          "symbol": "i",
+          "role": "loop_index",
+          "meaning": "遍历字符串 s 的索引下标",
+          "updateRule": "从 0 递增至 s.size() - 1",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": {
+        "statement": "栈顶元素始终反映在嵌套层次关系中最近的需要匹配的左括号元素",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "transitions": [
+        {
+          "condition": "s[i] 为左括号 ('(', '{', '[')",
+          "updates": "stack.push(s[i])",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-003",
+            "ev-004"
+          ]
+        },
+        {
+          "condition": "s[i] 为右括号，且 stack 非空且 top 与 s[i] 对应的左括号匹配",
+          "updates": "stack.pop()",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-003",
+            "ev-004"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "字符串遍历结束，且 stack.size() == 0（栈为空）",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003",
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "遇到左括号入栈，遇到右括号比对栈顶元素，匹配则出栈，遍历后栈为空则说明括号匹配合法",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003",
+          "ev-004"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "示例：\"()\" 和 \"()[]{}\" 是合法的；\"(]\" 和 \"([)]\" 是非法的。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "示例演示：\"{ [ ( ) ] }\" 遍历时，'{', '[', '(' 依次入栈，遇到 ')' 弹出 '('，遇到 ']' 弹出 '['，遇到 '}' 弹出 '{'，最后栈空合法。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "示例演示：\"{ [ } ]\" 遍历时，'{', '[' 依次入栈，遇到 '}' 时栈顶为 '[' 不匹配，报错返回 false。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "遇到右括号时，栈中没有任何左括号（stack.size() == 0），应直接返回 false。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "遍历完所有字符后，栈中依然残留未匹配的左括号（stack.size() != 0），应返回 false。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "退出遍历循环后不能直接 return true，必须检查 stack.size() 是否为 0，若不为 0 则表示有未匹配左括号，应 return false。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "当算法问题中包含嵌套层次关系时，利用栈后进先出（LIFO）的特性，栈顶元素即代表最近需要被匹配或处理的对象。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "练习 150. Evaluate Reverse Polish Notation：需要向面试官确认运算符种类（如 +,-,*,/）和数字种类（如是否仅包含整数）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "练习 71. Simplify Path：需要向面试官沟通边界情况，例如路径是否一定合法、根目录下能否继续回退（如 /../ 返回 /）以及多余斜杠（如 /home//hello/ 简化为 /home/hello）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "relationCandidates": [],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 28000,
+      "assetId": "asset:video-06-01",
+      "locator": "00:00-00:28",
+      "observation": "展示课程和本小节标题《栈的基础使用》，介绍栈和队列这一章的总体背景。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 28000,
+      "endMs": 106000,
+      "assetId": "asset:video-06-01",
+      "locator": "00:28-01:46",
+      "observation": "引入 LeetCode 20. Valid Parentheses 题面，列出包含小括号、中括号和大括号的合法与非法字符串样例。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 106000,
+      "endMs": 353000,
+      "assetId": "asset:video-06-01",
+      "locator": "01:46-05:53",
+      "observation": "通过幻灯片和图解逐步演示字符串 \"{ [ ( ) ] }\" 和 \"{ [ } ]\" 在辅助栈中的进栈出栈匹配过程，总结栈顶元素反映了嵌套层次关系中最近需要匹配的元素。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 353000,
+      "endMs": 687000,
+      "assetId": "asset:video-06-01",
+      "locator": "05:53-11:27",
+      "observation": "在 CLion IDE 中编写 isValid C++ 逻辑代码，包含栈判空、入栈、出栈匹配以及出循环后的栈空校验逻辑。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 687000,
+      "endMs": 845000,
+      "assetId": "asset:video-06-01",
+      "locator": "11:27-14:05",
+      "observation": "给出练习题 150. Evaluate Reverse Polish Notation，讲解逆波兰表达式定义、样例及面试交流中的运算符和数值范围限定。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 845000,
+      "endMs": 973440,
+      "assetId": "asset:video-06-01",
+      "locator": "14:05-16:13",
+      "observation": "给出练习题 71. Simplify Path，讲解 Unix 路径简化逻辑及不能回退、多余斜杠等边界细节沟通注意事项。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

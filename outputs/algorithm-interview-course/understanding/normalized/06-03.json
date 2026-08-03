@@ -1,0 +1,696 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "06-03",
+  "chapterId": "06",
+  "titleObserved": "运用栈模拟递归",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1173.12,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 214000,
+      "topic": "自定义指令栈模拟二叉树前序遍历递归原理",
+      "summary": "介绍如何通过在栈中压入带有标识（如 go / print）的指令结构，利用栈的后进先出（LIFO）特性模拟系统调用栈，从而实现二叉树前序遍历的非递归化。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 214000,
+      "endMs": 641000,
+      "topic": "二叉树前序遍历非递归代码实现与 LeetCode 144 提交",
+      "summary": "定义 Command 结构体与指令栈，编写 C++ 非递归前序遍历代码，并在 LeetCode 144 平台提交获得 Accepted。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 641000,
+      "endMs": 794000,
+      "topic": "调整压栈顺序实现中序遍历与 LeetCode 94 提交",
+      "summary": "展示统一框架的扩展性：仅需将压栈顺序修改为右子树->打印节点->左子树，即可轻松转换为中序遍历，并在 LeetCode 94 提交 AC。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 794000,
+      "endMs": 865000,
+      "topic": "调整压栈顺序实现后序遍历与 LeetCode 145 提交",
+      "summary": "将压栈顺序修改为打印节点->右子树->左子树，即可将同一套模板改造成后序遍历，并在 LeetCode 145 提交 AC。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 865000,
+      "endMs": 916000,
+      "topic": "栈模拟框架与教科书传统非递归遍历方法的对比",
+      "summary": "总结通用指令栈模拟递归方法的优越性，对比教科书上复杂且各不相同的非递归遍历实现，强调统一思维模式的重要性。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 916000,
+      "endMs": 1173120,
+      "topic": "思考题：LeetCode 341 Flatten Nested List Iterator",
+      "summary": "引入 Google/Facebook/Twitter 面试题 LeetCode 341，解析嵌套整数列表（NestedInteger）的数据结构与迭代器接口设计。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解系统栈在二叉树递归遍历中的保存机制与执行顺序",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "掌握使用自定义 Command 结构与显式栈模拟递归调用的通用框架",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "能够仅通过调整指令压栈顺序统一实现前序、中序和后序非递归遍历",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "栈模拟递归",
+      "namesObserved": [
+        "运用栈模拟递归",
+        "非递归实现"
+      ],
+      "role": "introduces",
+      "definition": "通过显式维护一个栈来保存函数调用的状态和待执行指令，从而替代系统递归调用栈的算法技巧。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "二叉树前序遍历",
+      "namesObserved": [
+        "Binary Tree Preorder Traversal",
+        "前序遍历"
+      ],
+      "role": "applies",
+      "definition": "按照根节点、左子树、右子树的顺序访问二叉树节点的遍历方式。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "二叉树中序遍历",
+      "namesObserved": [
+        "Binary Tree Inorder Traversal",
+        "中序遍历"
+      ],
+      "role": "applies",
+      "definition": "按照左子树、根节点、右子树的顺序访问二叉树节点的遍历方式。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "二叉树后序遍历",
+      "namesObserved": [
+        "Binary Tree Postorder Traversal",
+        "后序遍历"
+      ],
+      "role": "applies",
+      "definition": "按照左子树、右子树、根节点的顺序访问二叉树节点的遍历方式。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "144",
+    "titleObserved": "144. Binary Tree Preorder Traversal",
+    "statement": "Given a binary tree, return the preorder traversal of its nodes' values.",
+    "constraints": [
+      "Recursive solution is trivial, could you do it iteratively?"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001",
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "定义 Command 指令结构（包含指令类型 go/print 和对应节点 TreeNode*），在栈中按反向顺序推入指令（右子树 go -> 左子树 go -> 当前节点 print），从而利用栈的 LIFO 顺序按前序遍历访问节点。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "limitations": [
+        "使用字符串 s 表示指令类型不够安全，生产代码中建议用 bool 或 enum 替代。"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "alternative",
+      "idea": "保持同一套 Command 栈模拟框架，将 go 分支的压栈顺序调整为：右子树 go -> 当前节点 print -> 左子树 go，即可实现非递归中序遍历。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-002"
+      ],
+      "stateModelIds": [
+        "state-002"
+      ],
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "solution-003",
+      "stage": "alternative",
+      "idea": "保持同一套 Command 栈模拟框架，将 go 分支的压栈顺序调整为：当前节点 print -> 右子树 go -> 左子树 go，即可实现非递归后序遍历。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-003"
+      ],
+      "stateModelIds": [
+        "state-003"
+      ],
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "struct Command {\n    string s; // go, print\n    TreeNode* node;\n    Command(string s, TreeNode* node): s(s), node(node){}\n};\n\nclass Solution {\npublic:\n    vector<int> preorderTraversal(TreeNode* root) {\n        vector<int> res;\n        if(root == NULL)\n            return res;\n            \n        stack<Command> stack;\n        stack.push(Command(\"go\", root));\n        while(!stack.empty()){\n            Command command = stack.top();\n            stack.pop();\n            \n            if(command.s == \"print\")\n                res.push_back(command.node->val);\n            else{\n                assert(command.s == \"go\");\n                if(command.node->right)\n                    stack.push(Command(\"go\", command.node->right));\n                if(command.node->left)\n                    stack.push(Command(\"go\", command.node->left));\n                stack.push(Command(\"print\", command.node));\n            }\n        }\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "tested",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "struct Command {\n    string s; // go, print\n    TreeNode* node;\n    Command(string s, TreeNode* node): s(s), node(node){}\n};\n\nclass Solution {\npublic:\n    vector<int> inorderTraversal(TreeNode* root) {\n        vector<int> res;\n        if(root == NULL)\n            return res;\n            \n        stack<Command> stack;\n        stack.push(Command(\"go\", root));\n        while(!stack.empty()){\n            Command command = stack.top();\n            stack.pop();\n            \n            if(command.s == \"print\")\n                res.push_back(command.node->val);\n            else{\n                assert(command.s == \"go\");\n                if(command.node->right)\n                    stack.push(Command(\"go\", command.node->right));\n                stack.push(Command(\"print\", command.node));\n                if(command.node->left)\n                    stack.push(Command(\"go\", command.node->left));\n            }\n        }\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "tested",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "code-003",
+      "solutionStageId": "solution-003",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "struct Command {\n    string s; // go, print\n    TreeNode* node;\n    Command(string s, TreeNode* node): s(s), node(node){}\n};\n\nclass Solution {\npublic:\n    vector<int> postorderTraversal(TreeNode* root) {\n        vector<int> res;\n        if(root == NULL)\n            return res;\n            \n        stack<Command> stack;\n        stack.push(Command(\"go\", root));\n        while(!stack.empty()){\n            Command command = stack.top();\n            stack.pop();\n            \n            if(command.s == \"print\")\n                res.push_back(command.node->val);\n            else{\n                assert(command.s == \"go\");\n                stack.push(Command(\"print\", command.node));\n                if(command.node->right)\n                    stack.push(Command(\"go\", command.node->right));\n                if(command.node->left)\n                    stack.push(Command(\"go\", command.node->left));\n            }\n        }\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "tested",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "stack",
+          "role": "command_stack",
+          "meaning": "存储待执行 Command 指令的栈",
+          "updateRule": "弹出栈顶指令；如果是 go 指令则分解为新的子指令压栈",
+          "evidenceIds": [
+            "ev-001",
+            "ev-002"
+          ]
+        },
+        {
+          "symbol": "command.s",
+          "role": "tag",
+          "meaning": "指令动作类型，值为 go 或 print",
+          "updateRule": "创建 Command 时指定",
+          "evidenceIds": [
+            "ev-001",
+            "ev-002"
+          ]
+        },
+        {
+          "symbol": "command.node",
+          "role": "node_pointer",
+          "meaning": "当前指令作用的二叉树节点指针",
+          "updateRule": "创建 Command 时绑定节点",
+          "evidenceIds": [
+            "ev-001",
+            "ev-002"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "command.s == \"print\"",
+          "updates": "res.push_back(command.node->val)",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "condition": "command.s == \"go\"",
+          "updates": "按遍历顺序反向压入 right(go), left(go), node(print)",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-001",
+            "ev-002"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 stack 为空时，所有节点均处理完毕，循环终止并返回 res",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "id": "state-002",
+      "solutionStageId": "solution-002",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "stack",
+          "role": "command_stack",
+          "meaning": "存储中序遍历中尚待执行的 Command 指令",
+          "updateRule": "弹出栈顶指令；go 指令按中序执行顺序的逆序分解并压栈",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "command.s",
+          "role": "tag",
+          "meaning": "指令动作类型，值为 go 或 print",
+          "updateRule": "创建 Command 时指定",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "command.s == \"print\"",
+          "updates": "res.push_back(command.node->val)",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "condition": "command.s == \"go\"",
+          "updates": "依次压入 right(go), node(print), left(go)，使实际执行顺序为 left, print, right",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 stack 为空时，所有节点均已按中序处理并返回 res",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "state-003",
+      "solutionStageId": "solution-003",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "stack",
+          "role": "command_stack",
+          "meaning": "存储后序遍历中尚待执行的 Command 指令",
+          "updateRule": "弹出栈顶指令；go 指令按后序执行顺序的逆序分解并压栈",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "symbol": "command.s",
+          "role": "tag",
+          "meaning": "指令动作类型，值为 go 或 print",
+          "updateRule": "创建 Command 时指定",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "command.s == \"print\"",
+          "updates": "res.push_back(command.node->val)",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "condition": "command.s == \"go\"",
+          "updates": "依次压入 node(print), right(go), left(go)，使实际执行顺序为 left, right, print",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 stack 为空时，所有节点均已按后序处理并返回 res",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "由于栈是后进先出（LIFO）结构，压栈顺序与实际出栈执行顺序相反；前序遍历需要的执行顺序是 print -> left -> right，因此压栈顺序必须是 right -> left -> print。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-001",
+          "ev-002"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": "O(n)",
+    "space": "O(n)",
+    "assumptions": [
+      "n 为二叉树的节点总数",
+      "O(n) 时间与 O(n) 最坏辅助空间由已核对代码结构推导；目标帧中未见课程显式复杂度标注"
+    ],
+    "evidenceIds": [
+      "ev-002"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "运用 Command 栈模拟前/中/后序遍历",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "editorial_inference",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "二叉树节点个数",
+          "domainOrRelationship": "n >= 0",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "二叉树中每个节点恰好被压入栈两次（一次 go，一次 print），弹出并处理每个指令耗时 O(1)。",
+          "sourceClass": "editorial_inference",
+          "evidenceIds": [
+            "ev-001",
+            "ev-002"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "总体时间复杂度为 O(n)",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "运用 Command 栈模拟前/中/后序遍历",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "worst",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "editorial_inference",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "二叉树节点个数",
+          "domainOrRelationship": "n >= 0",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "栈中最多同时保存与树的高度/节点数成正比的 Command 指令，最坏情况下（退化为链表）栈深度达到 O(n)。",
+          "sourceClass": "editorial_inference",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "辅助空间复杂度为 O(n)",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "对于简单二叉树 1 (root), 2 (left), 3 (right)，前序遍历出栈顺序依次为 print 1 -> go 2 -> print 2 -> go 3 -> print 3。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "LeetCode 341 输入 [[1,1],2,[1,1]]，依次调用 next() 得到 1 1 2 1 1。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "LeetCode 341 输入 [1,[4,[6]]]，依次调用 next() 得到 1 4 6。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "根节点为 NULL 时，提前判断并直接返回空的 result vector。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "生产环境中用字符串 \"go\" / \"print\" 表示指令容易出现拼写错误且不够安全，推荐改用 enum 或 bool 值标识指令类型。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "向 LeetCode 提交代码时，不要遗漏自定义的 struct Command 声明，因为它属于解答逻辑的一部分。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "教科书中的非递归后序遍历非常复杂且难以记忆，而通过显式指令栈模拟递归的方式，前、中、后序遍历只需要改变三行压栈代码的顺序，极不易出错。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:06-02",
+      "to": "lesson:06-03",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "06-02 介绍了二叉树递归遍历与系统栈的关系，06-03 进一步通过显式定义 Command 栈来实现非递归遍历。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 214000,
+      "assetId": "asset:video-06-03",
+      "locator": "00:00 - 03:34",
+      "observation": "老师讲解使用 Command 栈模拟二叉树前序遍历的动画，演示压栈 go 1，弹出后转换为 push 1-R(go), push 1-L(go), push cout 1(print)，进而展示如何利用栈的 LIFO 特性得到正确的输出顺序。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 214000,
+      "endMs": 641000,
+      "assetId": "asset:video-06-03",
+      "locator": "03:34 - 10:41",
+      "observation": "编写 C++ 代码实现 Command 结构与 preorderTraversal 函数，并在 LeetCode 144 上提交获得 Accepted。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 641000,
+      "endMs": 794000,
+      "assetId": "asset:video-06-03",
+      "locator": "10:41 - 13:14",
+      "observation": "修改指令压栈顺序为 right->print->left，实现 inorderTraversal，并在 LeetCode 94 提交 Accepted。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 794000,
+      "endMs": 865000,
+      "assetId": "asset:video-06-03",
+      "locator": "13:14 - 14:24",
+      "observation": "修改指令压栈顺序为 print->right->left，实现 postorderTraversal，并在 LeetCode 145 提交 Accepted。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 865000,
+      "endMs": 916000,
+      "assetId": "asset:video-06-03",
+      "locator": "14:25 - 15:16",
+      "observation": "总结教科书经典非递归方法与显式指令栈模拟方法的异同，强调指令栈模拟能将前中后序统一起来。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 916000,
+      "endMs": 1173120,
+      "assetId": "asset:video-06-03",
+      "locator": "15:16 - 19:33",
+      "observation": "讲解 LeetCode 341 Flatten Nested List Iterator 题目背景、NestedInteger 接口以及 NestedIterator 所需实现的 hasNext/next 方法。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "complexity",
+      "reason": "代码结构足以推出 O(n) 时间和 O(n) 最坏辅助空间，但抽查的目标帧没有出现课程显式复杂度标注，因此未把推导冒充为课程原话。",
+      "recommendedCheck": "如后续取得逐字稿，可复听 03:34-10:41 的代码讲解，确认讲师是否口述了复杂度。"
+    }
+  ],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "9502070bbd0245dbacadfa71a4cc730c",
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": "2026-07-31T06:22:01.000Z"
+  }
+}

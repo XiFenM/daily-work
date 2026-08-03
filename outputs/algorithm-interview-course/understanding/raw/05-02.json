@@ -1,0 +1,342 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "05-02",
+  "chapterId": "05",
+  "titleObserved": "测试你的链表程序",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 986.96,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 40000,
+      "topic": "链表本地测试背景与需求",
+      "summary": "讲解为什么在本地 IDE 中编写链表程序需要自定义辅助函数来构建与打印链表，以便于测试与调试。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 40000,
+      "endMs": 200000,
+      "topic": "实现 createLinkedList 辅助函数",
+      "summary": "编写根据整型数组构建单链表的 C++ 函数 createLinkedList，处理 n == 0 的边界情况。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 200000,
+      "endMs": 316000,
+      "topic": "实现 printLinkedList 辅助函数",
+      "summary": "编写打印链表各节点数值及结构的辅助函数 printLinkedList，输出格式为 val -> ... -> NULL。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 316000,
+      "endMs": 464000,
+      "topic": "编写 main 函数并进行本地运行测试",
+      "summary": "在 main 函数中通过数组创建链表、打印原链表，调用 reverseList 翻转链表并打印翻转后的结果，验证程序正确性。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 464000,
+      "endMs": 598000,
+      "topic": "实现 deleteLinkedList 辅助函数与 C++ 内存释放",
+      "summary": "讨论 C++ 中的手动内存管理，编写 deleteLinkedList 函数逐个 delete 释放动态分配的链表节点内存。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 598000,
+      "endMs": 654000,
+      "topic": "思考题：LeetCode 83. Remove Duplicates from Sorted List",
+      "summary": "介绍课后思考题 LeetCode 83，要求在有序链表中删除所有重复元素，使每个元素只保留一次。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 654000,
+      "endMs": 723000,
+      "topic": "思考题：LeetCode 86. Partition List",
+      "summary": "介绍课后思考题 LeetCode 86，要求根据给定值 x 将链表分隔为小于 x 的节点在前、大于等于 x 的节点在后两部分。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 723000,
+      "endMs": 785000,
+      "topic": "思考题：LeetCode 328. Odd Even Linked List",
+      "summary": "介绍课后思考题 LeetCode 328，要求将链表中奇数索引的节点排在偶数索引节点的前面，并保持相对顺序。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 785000,
+      "endMs": 895000,
+      "topic": "思考题：LeetCode 2. Add Two Numbers",
+      "summary": "介绍课后思考题 LeetCode 2，给定两个用逆序链表表示的非负整数，求相加后代表的链表，并提醒确认边界条件。",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "startMs": 895000,
+      "endMs": 986960,
+      "topic": "思考题：LeetCode 445. Add Two Numbers II",
+      "summary": "介绍课后思考题 LeetCode 445，对于顺序存储数字的链表加法，讨论在不许修改输入链表的前提下使用栈等辅助数据结构的思路。",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "能够自行编写 createLinkedList、printLinkedList 和 deleteLinkedList 等辅助函数用于链表程序的本地构建、打印与内存释放",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002",
+        "ev-003",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "掌握 C++ 环境下动态分配链表节点的创建与手动 delete 释放方法，确保程序无内存泄漏",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-005"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "链表本地测试",
+      "namesObserved": [
+        "测试你的链表程序",
+        "本地测试"
+      ],
+      "role": "introduces",
+      "definition": "在本地 IDE 中通过编写数组转链表、链表打印及内存释放等辅助函数对链表算法进行测试和调试的方法",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "内存管理",
+      "namesObserved": [
+        "内存管理",
+        "手动释放内存"
+      ],
+      "role": "reinforces",
+      "definition": "在 C++ 等语言中由开发者显式管理和释放动态分配内存（如 new/delete）的过程",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": null,
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "ListNode* createLinkedList(int arr[], int n) {\n    if (n == 0)\n        return NULL;\n    ListNode* head = new ListNode(arr[0]);\n    ListNode* curNode = head;\n    for (int i = 1; i < n; i++) {\n        curNode->next = new ListNode(arr[i]);\n        curNode = curNode->next;\n    }\n    return head;\n}\n\nvoid printLinkedList(ListNode* head) {\n    ListNode* curNode = head;\n    while (curNode != NULL) {\n        cout << curNode->val << \" -> \";\n        curNode = curNode->next;\n    }\n    cout << \"NULL\" << endl;\n    return;\n}\n\nvoid deleteLinkedList(ListNode* head) {\n    ListNode* curNode = head;\n    while (curNode != NULL) {\n        ListNode* delNode = curNode;\n        curNode = curNode->next;\n        delete delNode;\n    }\n    return;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-005"
+      ]
+    }
+  ],
+  "stateModels": [],
+  "correctness": {
+    "method": "unknown",
+    "claims": [],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [],
+  "edgeCases": [
+    {
+      "statement": "当传入空数组（n == 0）时，createLinkedList 函数直接返回 NULL 空指针",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "当链表为空（head == NULL）时，printLinkedList 和 deleteLinkedList 应能安全处理，不会出现解引用空指针崩溃",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-005"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在 C++ 中释放链表节点内存时，不能在 delete 当前节点后继续访问其 next 指针；需先保存或更新 curNode 到 next 节点再执行 delete 操作",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "在调用 reverseList 翻转链表后，原 head 指针位置已不再是头结点，后续打印和释放内存时必须传入翻转后返回的新头指针 head2",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "对于不允许修改输入链表结构的链表加法运算，可以使用栈等辅助数据结构来实现从低位到高位的加法及进位处理",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    },
+    {
+      "statement": "在面试中遇到用链表表示数值的问题时，应主动与面试官确认数字是否包含前导 0 或负数等细节",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "relationCandidates": [],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 40000,
+      "assetId": "asset:video-05-02",
+      "locator": "00:00-00:40",
+      "observation": "老师讲解为何要在本地 IDE 中编写构建与打印链表的辅助函数，以便测试上节课编写的 reverseList 程序。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 40000,
+      "endMs": 200000,
+      "assetId": "asset:video-05-02",
+      "locator": "00:40-03:20",
+      "observation": "屏幕上编写 createLinkedList 函数，通过 for 循环遍历数组元素，逐个 new 创建 ListNode 节点并连接成链表，处理了 n == 0 返回 NULL 的边界。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 200000,
+      "endMs": 316000,
+      "assetId": "asset:video-05-02",
+      "locator": "03:20-05:16",
+      "observation": "屏幕上编写 printLinkedList 函数，使用 while 循环遍历链表节点，并输出 val -> ... -> NULL 结构的格式。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 316000,
+      "endMs": 464000,
+      "assetId": "asset:video-05-02",
+      "locator": "05:16-07:44",
+      "observation": "屏幕上编写 main 函数，定义数组 {1, 2, 3, 4, 5} 并创建链表，打印原链表后调用 reverseList 得到 head2，打印翻转后的链表，控制台输出 1->2->3->4->5->NULL 和 5->4->3->2->1->NULL。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 464000,
+      "endMs": 598000,
+      "assetId": "asset:video-05-02",
+      "locator": "07:44-09:58",
+      "observation": "老师讲解 C++ 手动内存管理，编写 deleteLinkedList 函数，用 delNode 暂存当前节点并在移动 curNode 后 delete 释放节点内存，并在 main 函数中对 head2 调用删除。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 598000,
+      "endMs": 654000,
+      "assetId": "asset:video-05-02",
+      "locator": "09:58-10:54",
+      "observation": "PPT 展示 LeetCode 83. Remove Duplicates from Sorted List 题面与示例：给出有序链表，删除其中重复元素，使每个元素只保留一次。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 654000,
+      "endMs": 723000,
+      "assetId": "asset:video-05-02",
+      "locator": "10:54-12:03",
+      "observation": "PPT 展示 LeetCode 86. Partition List 题面与示例：给出一个链表及数 x，使得小于 x 的元素在前，大于等于 x 的元素在后。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 723000,
+      "endMs": 785000,
+      "assetId": "asset:video-05-02",
+      "locator": "12:03-13:05",
+      "observation": "PPT 展示 LeetCode 328. Odd Even Linked List 题面与示例：重新整理链表使奇数索引节点排在偶数索引节点前面，索引从 1 开始计，且保持相对顺序。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 785000,
+      "endMs": 895000,
+      "assetId": "asset:video-05-02",
+      "locator": "13:05-14:55",
+      "observation": "PPT 展示 LeetCode 2. Add Two Numbers 题面与示例：两个非空链表逆序表示非负整数，求相加后代表的链表。老师提醒注意前导 0 与负数等约束询问。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-010",
+      "sourceType": "video_combined",
+      "startMs": 895000,
+      "endMs": 986960,
+      "assetId": "asset:video-05-02",
+      "locator": "14:55-16:26",
+      "observation": "PPT 展示 LeetCode 445. Add Two Numbers II 题面：顺序存储数字的链表相加。老师提问若不允许修改输入链表（如 reverse）该如何处理，并给出使用辅助数据结构（如栈）的提示。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

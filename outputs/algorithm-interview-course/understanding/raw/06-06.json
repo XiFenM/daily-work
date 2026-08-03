@@ -1,0 +1,315 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "06-06",
+  "chapterId": "06",
+  "titleObserved": "优先队列",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 669.04,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 58000,
+      "topic": "优先队列的概念",
+      "summary": "讲解优先队列的定义及其与普通队列的区别（基于元素优先级/最大最小值出队）。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 58000,
+      "endMs": 118000,
+      "topic": "优先队列的底层实现与面试要求",
+      "summary": "强调优先队列底层通常基于堆实现，面试中可能考察堆底层的白板编程。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 118000,
+      "endMs": 332000,
+      "topic": "C++ 中 priority_queue 的默认使用（最大堆）",
+      "summary": "介绍 <queue> 头文件中的 priority_queue 容器类及其默认的最大堆出队行为。",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 332000,
+      "endMs": 462000,
+      "topic": "C++ 中最小堆的声明与使用",
+      "summary": "介绍通过传入 greater<int> 模板参数构建底层为最小堆的优先队列。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 462000,
+      "endMs": 615000,
+      "topic": "自定义比较函数的优先队列",
+      "summary": "介绍结合 std::function 与自定义比较函数定义灵活比较逻辑的优先队列。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 615000,
+      "endMs": 669040,
+      "topic": "总结与后续铺垫",
+      "summary": "总结优先队列特点，对比直接使用 STL 堆函数，并说明下一节将使用优先队列解决具体算法问题。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解优先队列（Priority Queue）的概念及其按最大值或最小值出队的逻辑",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "掌握 C++ 标准库中 priority_queue 容器类的基本用法（包含 <queue> 头文件，默认最大堆）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "掌握在 C++ 中通过模板参数 greater<T> 构建最小堆的方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "掌握在 C++ 中结合 std::function 使用自定义比较函数定义优先队列的优先级逻辑",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "了解技术面试中对堆底层实现（用数组模拟树）进行白板编程的要求",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "优先队列",
+      "namesObserved": [
+        "优先队列",
+        "priority_queue"
+      ],
+      "role": "introduces",
+      "definition": "一种特殊的队列结构，入队将元素放入队列，出队时按照一定的逻辑（如寻找队列中的最大值或最小值）取出元素。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "堆",
+      "namesObserved": [
+        "堆"
+      ],
+      "role": "introduces",
+      "definition": "优先队列的常用底层数据结构实现，通常使用一个数组来模拟一棵树。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "最大堆",
+      "namesObserved": [
+        "最大堆"
+      ],
+      "role": "reinforces",
+      "definition": "堆顶元素始终为当前堆中最大值的堆结构，为 C++ priority_queue 的默认行为。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "最小堆",
+      "namesObserved": [
+        "最小堆"
+      ],
+      "role": "reinforces",
+      "definition": "堆顶元素始终为当前堆中最小值的堆结构，在 C++ 中可以通过传入 greater<T> 比较器建立。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": null,
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <queue>\n#include <ctime>\n\nusing namespace std;\n\nbool myCmp( int a, int b ){\n    return a%10 < b%10;\n}\n\nint main() {\n    srand( time(NULL) );\n    \n    // 默认情况下，最大堆\n    priority_queue<int> pq;\n    for( int i = 0 ; i < 10 ; i ++ ){\n        int num = rand()%100;\n        pq.push( num );\n        cout<<\"insert \"<<num<<\" in priority queue.\"<<endl;\n    }\n    \n    while( !pq.empty() ){\n        cout<<pq.top()<<\" \";\n        pq.pop();\n    }\n    cout<<endl<<endl;\n    \n    // 底层是最小堆\n    priority_queue<int, vector<int>, greater<int>> pq2;\n    for( int i = 0 ; i < 10 ; i ++ ){\n        int num = rand()%100;\n        pq2.push( num );\n        cout<<\"insert \"<<num<<\" in priority queue.\"<<endl;\n    }\n    \n    while( !pq2.empty() ){\n        cout<<pq2.top()<<\" \";\n        pq2.pop();\n    }\n    cout<<endl<<endl;\n    \n    // 使用自定义Comparator的priority queue\n    priority_queue<int, vector<int>, function<bool(int,int)>> pq3(myCmp);\n    for( int i = 0 ; i < 10 ; i ++ ){\n        int num = rand()%100;\n        pq3.push( num );\n        cout<<\"insert \"<<num<<\" in priority queue.\"<<endl;\n    }\n    \n    while( !pq3.empty() ){\n        cout<<pq3.top()<<\" \";\n        pq3.pop();\n    }\n    cout<<endl<<endl;\n\n    return 0;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005",
+        "ev-006"
+      ]
+    }
+  ],
+  "stateModels": [],
+  "correctness": {
+    "method": "not_applicable",
+    "claims": [],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [],
+  "edgeCases": [],
+  "implementationPitfalls": [
+    {
+      "statement": "在 C++ 中声明 priority_queue 时，若需要修改比较逻辑为最小堆或自定义比较函数，不能只传入第三个模板参数，必须同时指定第二个底层容器类型参数（如 vector<int>）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "使用自定义比较函数 bool myCmp(int a, int b) 时，当返回 a % 10 < b % 10 时，优先队列出队的顺序是余数从大到小（即 < 对应最大堆/优先取出较大者效果）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "技术面试中对于堆的底层实现（用数组模拟树）要求较高，部分大公司可能要求在白板编程中手写堆的底层实现，需予以重视。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "在 C++ 面试或算法笔试中使用 priority_queue 时，注意默认是最大堆；若需要最小堆，必须写作 priority_queue<T, vector<T>, greater<T>>。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:06-06",
+      "to": "lesson:06-07",
+      "type": "applies",
+      "status": "provisional",
+      "rationale": "视频在结尾 11:03 明确提到下一小节将使用优先队列解决具体的算法问题。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 58000,
+      "assetId": "asset:video-06-06",
+      "locator": "00:00 - 00:58",
+      "observation": "老师讲解优先队列的概念，指出优先队列也是队列，但出队逻辑是寻找队列中的最大值或最小值。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 58000,
+      "endMs": 118000,
+      "assetId": "asset:video-06-06",
+      "locator": "00:58 - 01:58",
+      "observation": "老师指出优先队列底层实现通常是堆，并强调大公司面试中可能要求对堆的底层实现（用数组模拟树）进行白板编程。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 118000,
+      "endMs": 182000,
+      "assetId": "asset:video-06-06",
+      "locator": "01:58 - 03:02",
+      "observation": "老师展示在 C++ 中使用 priority_queue 需要包含 <queue> 头文件。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 182000,
+      "endMs": 332000,
+      "assetId": "asset:video-06-06",
+      "locator": "03:02 - 05:32",
+      "observation": "老师演示 priority_queue<int> 默认是最大堆，入队 10 个随机数后出队打印出从大到小的顺序。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 332000,
+      "endMs": 462000,
+      "assetId": "asset:video-06-06",
+      "locator": "05:32 - 07:42",
+      "observation": "老师演示使用 priority_queue<int, vector<int>, greater<int>> 建立最小堆，出队打印出从小到大的顺序。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 462000,
+      "endMs": 615000,
+      "assetId": "asset:video-06-06",
+      "locator": "07:42 - 10:15",
+      "observation": "老师演示结合 std::function 与自定义比较函数 myCmp（按个位数 a%10 与 b%10 比较）来创建优先队列，并验证输出结果。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 615000,
+      "endMs": 669040,
+      "assetId": "asset:video-06-06",
+      "locator": "10:15 - 11:09",
+      "observation": "老师总结优先队列对堆底层的屏蔽作用，提到 C++ 也提供了直接创建堆的 STL 函数，并预告下一节课将用优先队列解决具体算法问题。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

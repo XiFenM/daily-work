@@ -1,0 +1,493 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "08-07",
+  "chapterId": "08",
+  "titleObserved": "floodfill算法，一类经典问题 Number of Islands",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1287.48,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 50000,
+      "topic": "课程引入与题目背景",
+      "summary": "介绍 flood fill 算法的概念，并引出 LeetCode 200 号问题 Number of Islands。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 50000,
+      "endMs": 135000,
+      "topic": "Number of Islands 题意解析",
+      "summary": "解析二维字符数组表示的地图，说明 '1' 代表陆地，'0' 代表水域，只在上下左右四个方向相连算同一岛屿，给出两个示例。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 135000,
+      "endMs": 378000,
+      "topic": "Flood Fill 过程图解（单岛屿）",
+      "summary": "通过单块岛屿图示，类比红墨水扩散，演示从初始陆地点出发进行深度优先遍历标记整块岛屿的过程。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 378000,
+      "endMs": 473000,
+      "topic": "Flood Fill 过程解图（多岛屿）",
+      "summary": "演示在多块岛屿地图中，主循环按顺序扫描，遇到未标记的陆地就触发一次 flood fill，并将岛屿计数器加 1。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 473000,
+      "endMs": 768000,
+      "topic": "代码实现：辅助变量与函数声明",
+      "summary": "在 C++ 代码中定义方向数组 d[4][2]、二维 visited 数组及界内检查函数 inArea。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 768000,
+      "endMs": 1020000,
+      "topic": "代码实现：主遍历逻辑 numIslands",
+      "summary": "编写 numIslands 主函数，处理边界情况，初始化 visited 数组，双重循环扫描网格并触发 dfs 搜索。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 1020000,
+      "endMs": 1120000,
+      "topic": "代码实现：深度优先搜索 dfs",
+      "summary": "实现递归 dfs 函数，将当前位置置为 visited，并向四个方向递归搜索符合条件的未访问陆地。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 1120000,
+      "endMs": 1287480,
+      "topic": "细节讨论与思考题",
+      "summary": "讨论递归终止条件（融合在递归前判断中）与 visited 标记不恢复的原因（全局永久去重）；留出 LeetCode 130 和 417 思考题。",
+      "evidenceIds": [
+        "ev-008",
+        "ev-009",
+        "ev-010"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解并掌握 flood fill 算法的本质是二维平面上的深度优先遍历",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "学会使用方向数组和 visited 数组在二维网格中高效进行状态标记与搜索",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "区分回溯法中状态恢复与 flood fill 中状态永久标记的不同应用场景",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "flood fill 算法",
+      "namesObserved": [
+        "floodfill算法",
+        "flood fill"
+      ],
+      "role": "introduces",
+      "definition": "从起点出发，向周围相连且满足特定条件的节点扩散标记，将同一个连通区域全部填充或标记的遍历算法。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "深度优先遍历",
+      "namesObserved": [
+        "深度优先遍历",
+        "DFS"
+      ],
+      "role": "reinforces",
+      "definition": "沿着图中树枝深度不断探索，直到无法继续再退回上一节点继续探索的搜索策略。",
+      "evidenceIds": [
+        "ev-003",
+        "ev-007"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "200",
+    "titleObserved": "Number of Islands",
+    "statement": "给定一个二维数组，只含有 '0' 和 '1' 两个字符。其中 '1' 代表陆地，'0' 代表水域。横向和纵向的陆地连接成岛屿，被水域分隔开。问给出的地图中有多少岛屿？",
+    "constraints": [
+      "只包含字符 '0' 和 '1'",
+      "陆地只能横向（左右）或纵向（上下）相连，斜向不连接"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001",
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "双重循环遍历二维网格，遇到未访问的陆地字符 '1'，岛屿数量加 1，并以该位置为起点进行深度优先遍历（flood fill），将相连的所有陆地节点在 visited 数组中标记为 true。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [
+        "需要额外的 O(M*N) 空间存储 visited 访问数组"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005",
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "C++",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\nprivate:\n    int d[4][2] = {{0,1},{1,0},{0,-1},{-1,0}};\n    int m, n;\n    vector<vector<bool>> visited;\n\n    bool inArea(int x, int y){\n        return x >= 0 && x < m && y >= 0 && y < n;\n    }\n\n    // 从grid[x][y]的位置开始，进行floodfill\n    // 保证(x,y)合法，且grid[x][y]是没有被访问过的陆地\n    void dfs(vector<vector<char>>& grid, int x, int y){\n        visited[x][y] = true;\n        for(int i = 0 ; i < 4 ; i ++){\n            int newx = x + d[i][0];\n            int newy = y + d[i][1];\n            if(inArea(newx, newy) && !visited[newx][newy] && grid[newx][newy] == '1')\n                dfs(grid, newx, newy);\n        }\n        return;\n    }\n\npublic:\n    int numIslands(vector<vector<char>>& grid) {\n        m = grid.size();\n        if(m == 0)\n            return 0;\n        n = grid[0].size();\n\n        visited = vector<vector<bool>>(m, vector<bool>(n, false));\n\n        int res = 0;\n        for(int i = 0 ; i < m ; i ++)\n            for(int j = 0 ; j < n ; j ++)\n                if(grid[i][j] == '1' && !visited[i][j]){\n                    res ++;\n                    dfs(grid, i, j);\n                }\n\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "visited[x][y]",
+          "role": "访问状态标记矩阵",
+          "meaning": "记录位置 (x, y) 的陆地是否在之前的 flood fill 中被访问过",
+          "updateRule": "在 dfs(grid, x, y) 入口处设为 true，之后不进行重置恢复",
+          "evidenceIds": [
+            "ev-005",
+            "ev-007",
+            "ev-008"
+          ]
+        },
+        {
+          "symbol": "res",
+          "role": "岛屿计数器",
+          "meaning": "记录地图中找到的独立岛屿总数",
+          "updateRule": "每当主循环遇到一个 grid[i][j] == '1' 且 !visited[i][j] 时加 1",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": {
+        "statement": "遍历过程中，所有属于已统计岛屿的陆地格子 visited[x][y] 均为 true，防止被重复计数",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006",
+          "ev-008"
+        ]
+      },
+      "transitions": [
+        {
+          "condition": "inArea(newx, newy) && !visited[newx][newy] && grid[newx][newy] == '1'",
+          "updates": "调用 dfs(grid, newx, newy)，将 visited[newx][newy] 置为 true",
+          "preserves": {
+            "statement": "同一岛屿内相连的所有陆地节点均被纳入本次搜索并标记",
+            "sourceClass": "course_direct",
+            "evidenceIds": [
+              "ev-007"
+            ]
+          },
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当当前节点四周相邻节点均超出边界、或是水域、或是已被访问时，循环结束，dfs 函数返回",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007",
+          "ev-008"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005",
+        "ev-006",
+        "ev-007",
+        "ev-008"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "recursive_contract",
+    "claims": [
+      {
+        "statement": "dfs 函数契约保证：从给定的合法未访问陆地 (x, y) 出发，标记属于该岛屿的所有连通陆地，且不漏标、不跨越水域标记",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007",
+          "ev-008"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": [
+      {
+        "phase": "initialization",
+        "statement": "dfs 递归调用的前提条件在递归前检查（inArea && !visited && grid=='1'），保证传入 dfs 的位置必为合法且未访问的陆地",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007",
+          "ev-008"
+        ]
+      },
+      {
+        "phase": "termination",
+        "statement": "递归终止条件融合在 for 循环的 if 检查中，当四个方向均不满足未访问陆地条件时，循环不触发新的 dfs，函数直接 return",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007",
+          "ev-008"
+        ]
+      }
+    ]
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "示例 1 输入包含 1 个岛屿，算法应返回 1",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "示例 2 输入包含 3 个岛屿，算法应返回 3",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "当输入网格行数 m == 0 时，直接返回 0",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在 dfs 内部访问 grid[0].size() 前，必须先对 grid.size() == 0 的边界情况做判断与返回，避免空指针/越界异常",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "方向数组 d 的四位偏移顺序（如顺时针/逆时针/自定义）在 flood fill 遍历中不影响结果正确性，但需注意在某些极特殊搜索顺序依赖问题中要按题意布置",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "在回答 flood fill 与传统回溯法的区别时，应指出 flood fill 的目的是全局标记连通分量，因此 visited 状态置为 true 后不需要在递归返回时恢复成 false",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:08-06",
+      "to": "lesson:08-07",
+      "type": "same_pattern_as",
+      "status": "provisional",
+      "rationale": "同样是在二维网格平面上使用 DFS/递归搜索进行解题，但在状态恢复（visited 标记）的处理策略上存在差异。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001",
+        "ev-008"
+      ]
+    },
+    {
+      "from": "lesson:06-05",
+      "to": "lesson:08-07",
+      "type": "alternative_to",
+      "status": "provisional",
+      "rationale": "二者均涉及图/网格的遍历，BFS 可以作为 flood fill 算法的另一种实现选择。",
+      "confidence": 0.8,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 50000,
+      "assetId": "asset:video-08-07",
+      "locator": "00:00 - 00:50",
+      "observation": "幻灯片展示标题：'floodfill算法，一类经典问题'，并引入 LeetCode 200. Number of Islands 题目背景。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 50000,
+      "endMs": 135000,
+      "assetId": "asset:video-08-07",
+      "locator": "00:50 - 02:15",
+      "observation": "展示 Number of Islands 的题面说明与两个示例输入输出（答案分别为 1 和 3）。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 135000,
+      "endMs": 378000,
+      "assetId": "asset:video-08-07",
+      "locator": "02:15 - 06:18",
+      "observation": "展示单岛屿网格动画，演示从 (0,0) 开始进行深度优先遍历并将相连的棕色陆地标记为红色的过程。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 378000,
+      "endMs": 473000,
+      "assetId": "asset:video-08-07",
+      "locator": "06:18 - 07:53",
+      "observation": "演示包含 3 个岛屿的网格动画，展现主循环扫描触发 3 次 flood fill 并将岛屿数累加至 3 的全过程。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 473000,
+      "endMs": 768000,
+      "assetId": "asset:video-08-07",
+      "locator": "07:53 - 12:48",
+      "observation": "展示 C++ 编辑器界面，编写 private 成员变量 d[4][2]、m、n、visited 以及辅助函数 inArea。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 768000,
+      "endMs": 1020000,
+      "assetId": "asset:video-08-07",
+      "locator": "12:48 - 17:00",
+      "observation": "展示 numIslands 函数实现，包含 m==0 的边界特判、visited 数组初始化和双重循环遍历触发 dfs。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 1020000,
+      "endMs": 1120000,
+      "assetId": "asset:video-08-07",
+      "locator": "17:00 - 18:40",
+      "observation": "展示 dfs 函数实现，设置 visited[x][y] = true，并在 if 条件判断通过后递归调用 dfs。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_audio",
+      "startMs": 1120000,
+      "endMs": 1200000,
+      "assetId": "asset:video-08-07",
+      "locator": "18:40 - 20:00",
+      "observation": "老师口述解释为什么 dfs 没有显式递归终止条件（融合在 if 条件中）以及为什么不需要将 visited[x][y] 重置为 false。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 1072000,
+      "endMs": 1134000,
+      "assetId": "asset:video-08-07",
+      "locator": "17:52 - 18:54",
+      "observation": "展示思考题 1：LeetCode 130. Surrounded Regions 题面与示例。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-010",
+      "sourceType": "video_combined",
+      "startMs": 1134000,
+      "endMs": 1287480,
+      "assetId": "asset:video-08-07",
+      "locator": "18:54 - 21:27",
+      "observation": "展示思考题 2：LeetCode 417. Pacific Atlantic Water Flow 题面与示例，并总结全课内容。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.5",
+    "generatedAt": null
+  }
+}

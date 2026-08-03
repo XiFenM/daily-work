@@ -1,0 +1,356 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "07-02",
+  "chapterId": "07",
+  "titleObserved": "一个简单的二叉树问题引发的血案 Invert Binary Tree",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 549,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 36000,
+      "topic": "课程引入",
+      "summary": "介绍本节课通过一个简单的二叉树问题，探讨算法面试中二叉树与递归思想的应用及常见面试故事。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 36000,
+      "endMs": 83000,
+      "topic": "226. Invert Binary Tree 题意说明",
+      "summary": "展示 LeetCode 226 题反转二叉树的定义及示例，说明翻转的效果相当于镜面反射。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 83000,
+      "endMs": 188000,
+      "topic": "Max Howell 面试 Google 轶事",
+      "summary": "转述 Max Howell 推文引发的知名争议：推文将未能在白板上翻转二叉树与 Google 拒聘联系起来；本课材料不构成对真实拒聘因果的外部核验。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 188000,
+      "endMs": 312000,
+      "topic": "C++ 递归解法代码实现",
+      "summary": "在 IDE 中编写 C++ 代码，通过递归调用 invertTree 翻转左右子树，再利用 swap 交换左右节点指针。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 312000,
+      "endMs": 348000,
+      "topic": "思考题 100. Same Tree",
+      "summary": "提出练习题 LeetCode 100：给出两棵二叉树，判断它们是否完全一样。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 348000,
+      "endMs": 385000,
+      "topic": "思考题 101. Symmetric Tree",
+      "summary": "提出练习题 LeetCode 101：给出一棵二叉树，判断其是否左右对称；本课未展开解法。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 385000,
+      "endMs": 497000,
+      "topic": "思考题 222. Count Complete Tree Nodes 与概念复习",
+      "summary": "提出练习题 LeetCode 222 求完全二叉树节点个数，并复习完全二叉树与满二叉树的概念。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 497000,
+      "endMs": 549000,
+      "topic": "思考题 110. Balanced Binary Tree 与课后总结",
+      "summary": "提出练习题 LeetCode 110 平衡二叉树并给出定义，鼓励巩固二叉树与递归基础概念。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解并掌握二叉树镜像翻转（Invert Binary Tree）的递归解法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "能够明确递归函数的语义，利用递归定义直接求解子树问题",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "识别本节列出的四道课后思考题，并理解画面给出的完全二叉树、满二叉树与平衡二叉树文字定义；本节不展开这些练习的解法。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Invert Binary Tree",
+      "namesObserved": [
+        "Invert Binary Tree",
+        "反转一棵二叉树"
+      ],
+      "role": "applies",
+      "definition": "将二叉树中每个节点的左右子树进行镜像翻转",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "Complete Binary Tree",
+      "namesObserved": [
+        "完全二叉树"
+      ],
+      "role": "introduces",
+      "definition": "除了最后一层，所有层的节点数达到最大；与此同时，最后一层的所有节点都在最左侧",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "canonicalName": "Full Binary Tree",
+      "namesObserved": [
+        "满二叉树"
+      ],
+      "role": "introduces",
+      "definition": "所有层的节点数达到最大",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "canonicalName": "Balanced Binary Tree",
+      "namesObserved": [
+        "平衡二叉树"
+      ],
+      "role": "introduces",
+      "definition": "每一个节点的左右子树的高度差不超过1",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "226",
+    "titleObserved": "226. Invert Binary Tree",
+    "statement": "反转一棵二叉树",
+    "constraints": [],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "递归翻转根节点的左子树，再递归翻转根节点的右子树，最后在原树节点上交换 root 的左右孩子指针；函数返回的仍是传入的 root 指针。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "/// Definition for a binary tree node.\nstruct TreeNode {\n    int val;\n    TreeNode *left;\n    TreeNode *right;\n    TreeNode(int x) : val(x), left(NULL), right(NULL) {}\n};\n\nclass Solution {\npublic:\n    TreeNode* invertTree(TreeNode* root) {\n        if( root == NULL )\n            return NULL;\n        \n        invertTree( root->left );\n        invertTree( root->right );\n        swap( root->left, root->right );\n        \n        return root;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "compiled",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "stateModels": [],
+  "correctness": {
+    "method": "recursive_contract",
+    "claims": [
+      {
+        "statement": "invertTree 的语义是原地翻转以传入节点为根的二叉树并返回同一个根指针；先递归翻转两棵子树，再交换当前节点的 left 与 right 指针，即可完成整棵树的镜像翻转。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      }
+    ],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "输入二叉树根为4，二层为2、7，三层为1、3、6、9；翻转后根仍为4，二层变为7、2，三层变为9、6、3、1",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "若根节点 root == NULL，无需任何翻转操作，直接返回 NULL",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "implementationPitfalls": [],
+  "interviewPlaybook": [
+    {
+      "statement": "在面试中面对二叉树问题，使用递归思维往往非常简洁高效，明确递归函数的具体语义是关键",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-004"
+      ]
+    }
+  ],
+  "relationCandidates": [],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 36000,
+      "assetId": "asset:video-07-02",
+      "locator": "00:00 - 00:36",
+      "observation": "幻灯片展示课程标题《一个简单的二叉树问题引发的血案》，讲师引入二叉树与递归在面试中的常见性",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 36000,
+      "endMs": 83000,
+      "assetId": "asset:video-07-02",
+      "locator": "00:36 - 01:22",
+      "observation": "展示 LeetCode 226. Invert Binary Tree 题面与二叉树镜面翻转前后对比图",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 83000,
+      "endMs": 188000,
+      "assetId": "asset:video-07-02",
+      "locator": "01:23 - 03:07",
+      "observation": "展示并转述 Max Howell 推文截图；课程把“不会在白板上翻转二叉树”与 Google 拒聘相联系，但画面本身不能核验招聘决定的真实因果。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 188000,
+      "endMs": 312000,
+      "assetId": "asset:video-07-02",
+      "locator": "03:08 - 05:12",
+      "observation": "屏幕展示 CLion 编辑器，手写 C++ 递归解法，包含 if(root == NULL) return NULL; 递归调用 invertTree 并用 swap 交换左右孩子",
+      "confidence": 1
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 312000,
+      "endMs": 348000,
+      "assetId": "asset:video-07-02",
+      "locator": "05:12 - 05:48",
+      "observation": "展示思考题 100. Same Tree，判断两棵二叉树是否完全一样",
+      "confidence": 1
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 348000,
+      "endMs": 385000,
+      "assetId": "asset:video-07-02",
+      "locator": "05:49 - 06:24",
+      "observation": "展示思考题 101. Symmetric Tree，判断一棵二叉树是否左右对称",
+      "confidence": 1
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 385000,
+      "endMs": 497000,
+      "assetId": "asset:video-07-02",
+      "locator": "06:25 - 08:16",
+      "observation": "展示思考题 222. Count Complete Tree Nodes，并给出完全二叉树和满二叉树的文字定义",
+      "confidence": 1
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 497000,
+      "endMs": 549000,
+      "assetId": "asset:video-07-02",
+      "locator": "08:17 - 09:08",
+      "observation": "展示思考题 110. Balanced Binary Tree，给出平衡二叉树的文字定义并总结结语",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "timeline[2]",
+      "reason": "Max Howell 轶事来自课程对推文及背景的转述；本次 QA 没有访问推文原帖、Google 招聘记录或其他外部材料。",
+      "recommendedCheck": "使用“课程转述”“推文将两者联系起来”等措辞，不把二叉树题写成已被外部核验的唯一拒聘原因。"
+    },
+    {
+      "field": "timeline[4..7]",
+      "reason": "Same Tree、Symmetric Tree、Count Complete Tree Nodes 与 Balanced Binary Tree 都只作为思考题或概念复习展示，没有给出算法、代码、证明或复杂度。",
+      "recommendedCheck": "正式笔记将四题标为未讲解练习，不补入常见题解。"
+    },
+    {
+      "field": "codeArtifacts[0].verification",
+      "reason": "屏幕完整展示的 invertTree 算法经逐 token 核对，并在最小头文件包装下通过 clang++ 语法编译；没有构造或运行测试用例。",
+      "recommendedCheck": "verification 保持 compiled，不得写成 tested。"
+    }
+  ],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "aa0f4abab392483faae2c3cb0a6ffced",
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": "2026-07-31T07:49:10.000Z"
+  }
+}

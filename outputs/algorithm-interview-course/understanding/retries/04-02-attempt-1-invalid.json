@@ -1,0 +1,419 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "04-02",
+  "chapterId": "04",
+  "titleObserved": "350. Intersection of Two Arrays",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 785.96,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 80000,
+      "topic": "LeetCode 350 题目介绍与解法思路",
+      "summary": "介绍求两个数组交集（考虑元素出现频次）的问题，引入 map 数据结构记录元素及其对应的出现频次。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 80000,
+      "endMs": 228000,
+      "topic": "基于 std::map 的 C++ 代码实现",
+      "summary": "编写使用 C++ std::map 进行频次统计与交集提取的基础解法代码。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 228000,
+      "endMs": 496000,
+      "topic": "C++ std::map 默认值特性的实验演示",
+      "summary": "通过实验代码展示 C++ 中使用下标运算符访问 map 元素时的默认值插入副作用，以及 map::erase 方法的区别。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 496000,
+      "endMs": 696000,
+      "topic": "避免依赖默认值特性的显式解法代码",
+      "summary": "重构代码，使用 find()、insert() 和 erase() 显式处理键的存在性与频次为 0 的情况。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 696000,
+      "endMs": 785960,
+      "topic": "思考题与小结",
+      "summary": "提出若数组初始有序时的解决思路（双指针/二分查找），并预告下一小节将分析 set 与 map 的复杂度。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解两个数组求交集 II（考虑频次）与交集 I（去重）的区别，掌握映射 (map) 在频次统计中的应用。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "掌握 C++ std::map 下标运算符访问不存在键时的默认值插入行为及其对逻辑判定的影响。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "了解当输入数组有序时，可不借助辅助哈希数据结构进行交集求解的优化思路。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "映射",
+      "namesObserved": [
+        "map",
+        "映射"
+      ],
+      "role": "introduces",
+      "definition": "记录键与值（如元素与出现频次）对应关系的数据结构。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "键值对默认初始化",
+      "namesObserved": [
+        "默认值",
+        "默认初始化"
+      ],
+      "role": "introduces",
+      "definition": "在 C++ std::map 中，使用下标运算符 [] 访问不存在的键时，会自动插入该键并将值初始化为默认值（如 int 类型的 0）。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "350",
+    "titleObserved": "350. Intersection of Two Arrays",
+    "statement": "给定两个数组 nums，求两个数组的交集。",
+    "constraints": [
+      "如 nums1 = [1, 2, 2, 1], nums2 = [2, 2]，结果为 [2, 2]",
+      "出现的顺序可以是任意的"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "使用 map 统计 nums1 中每个元素的出现频次。随后遍历 nums2，若当前元素在 map 中的频次大于 0，则加入结果集并将其频次减 1。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [
+        "依赖 C++ std::map 的 [] 运算符在键不存在时自动插入默认值 0 的特性，可读性或移植性较差。"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "alternative",
+      "idea": "显式使用 find() 检查键是否存在，用 insert() 插入新键值对，并在频次减至 0 时显式调用 erase() 删除该键，避免对语言默认值特性的隐式依赖。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-003"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {\n        map<int,int> record;\n        for( int i = 0 ; i < nums1.size() ; i ++ )\n            record[nums1[i]] ++;\n\n        vector<int> resultVector;\n        for( int i = 0 ; i < nums2.size() ; i ++ )\n            if( record[nums2[i]] > 0 ){\n                resultVector.push_back( nums2[i] );\n                record[nums2[i]] --;\n            }\n\n        return resultVector;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": null,
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <map>\n\nusing namespace std;\n\nint main() {\n    map<int,int> myMap;\n\n    if( myMap.find( 42 ) == myMap.end() )\n        cout<<\"Can not find element 42\"<<endl;\n    else\n        cout<<\"Element 42 is in the map\"<<endl;\n\n    cout<<myMap[42]<<endl;\n    if( myMap.find( 42 ) == myMap.end() )\n        cout<<\"Can not find element 42\"<<endl;\n    else\n        cout<<\"Element 42 is in the map\"<<endl;\n\n    myMap[42] ++;\n    cout<<myMap[42]<<endl;\n\n    myMap[42] --;\n    cout<<myMap[42]<<endl;\n    if( myMap.find( 42 ) == myMap.end() )\n        cout<<\"Can not find element 42\"<<endl;\n    else\n        cout<<\"Element 42 is in the map\"<<endl;\n\n    myMap.erase( 42 );\n    if( myMap.find( 42 ) == myMap.end() )\n        cout<<\"Can not find element 42\"<<endl;\n    else\n        cout<<\"Element 42 is in the map\"<<endl;\n\n    return 0;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "code-003",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {\n        map<int,int> record;\n        for( int i = 0 ; i < nums1.size() ; i ++ )\n            if( record.find(nums1[i]) == record.end() )\n                record.insert( make_pair(nums1[i], 1) );\n            else\n                record[nums1[i]] ++;\n\n        vector<int> resultVector;\n        for( int i = 0 ; i < nums2.size() ; i ++ )\n            if( record.find(nums2[i]) != record.end() && record[nums2[i]] > 0 ){\n                resultVector.push_back( nums2[i] );\n                record[nums2[i]] --;\n                if( record[nums2[i]] == 0 )\n                    record.erase( nums2[i] );\n            }\n\n        return resultVector;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "record",
+          "role": "frequency_table",
+          "meaning": "映射结构，键为 nums1 中的元素，值为对应出现的剩余可匹配频次",
+          "updateRule": "遇到 nums1 元素频次加 1；在 nums2 匹配到该元素时频次减 1",
+          "evidenceIds": [
+            "ev-002",
+            "ev-004"
+          ]
+        },
+        {
+          "symbol": "resultVector",
+          "role": "result_accumulator",
+          "meaning": "存储交集元素的向量",
+          "updateRule": "每当从 nums2 中成功匹配到 record 频次大于 0 的元素时 push_back 追加",
+          "evidenceIds": [
+            "ev-002",
+            "ev-004"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "nums1[i] 写入 record",
+          "updates": "record[nums1[i]] 增加 1",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "condition": "nums2[i] 在 record 中的频次大于 0",
+          "updates": "追加 nums2[i] 至 resultVector，同时 record[nums2[i]] 减少 1",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "termination": null,
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": null,
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [
+    {
+      "id": "experiment-001",
+      "subject": "C++ std::map 访问运算符 [] 的默认值插入副作用",
+      "purpose": {
+        "statement": "验证 C++ std::map 使用 [] 访问不存在的键时，是否会触发默认值插入并将键放入映射中。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "setup": {
+        "language": "cpp",
+        "compilerOrRuntime": null,
+        "optimization": null,
+        "operatingSystem": null,
+        "hardware": null,
+        "timer": null,
+        "warmup": null,
+        "repetitions": null,
+        "inputGeneration": null
+      },
+      "measurements": [],
+      "theoreticalExpectation": null,
+      "observation": {
+        "statement": "访问 myMap[42] 输出 0，随后调用 myMap.find(42) 不再等于 myMap.end()，说明 42 已经被自动插入 map 中；当调用 myMap.erase(42) 后，myMap.find(42) 重新等于 myMap.end()。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "limitations": [],
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "statement": "nums1 = [1, 2, 2, 1], nums2 = [2, 2]，交集结果为 [2, 2]。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "edgeCases": [],
+  "implementationPitfalls": [
+    {
+      "statement": "使用 map[key]-- 将频次减为 0 后，该 key 依然存在于 C++ std::map 中（其 value 为 0），并非不包含该 key；判断元素是否存在必须区分“值等于 0”与“键不存在”。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "若面试官追问“如果两个数组初始已经有序，如何优化？”，可提出不使用辅助哈希表，改用双指针或二分查找来进行元素交集提取。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:04-01",
+      "to": "lesson:04-02",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "04-02 将 04-01 中基于 set 的无重交集求解扩展为基于 map 统计频次的多重交集求解 (Intersection of Two Arrays II)。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "from": "lesson:04-02",
+      "to": "lesson:04-03",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "04-02 在结尾留出复杂度悬念，告知下一小节 (04-03) 将分析 set 和 map 底层实现及时间性能区别。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 80000,
+      "assetId": "asset:video-04-02",
+      "locator": null,
+      "observation": "幻灯片显示 350. Intersection of Two Arrays，例 nums1=[1,2,2,1], nums2=[2,2]，结果为 [2,2]。老师指出交集需要考虑频次，需要使用 map 记录元素与频次。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 80000,
+      "endMs": 228000,
+      "assetId": "asset:video-04-02",
+      "locator": null,
+      "observation": "屏幕代码编写 intersect 函数，定义 map<int,int> record，通过 record[nums1[i]]++ 统计频次，并在遍历 nums2 时进行匹配与递减。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 228000,
+      "endMs": 496000,
+      "assetId": "asset:video-04-02",
+      "locator": null,
+      "observation": "老师编写 main_map_test.cpp 实验程序，展示 myMap[42] 会自动插入 42 且初始化值为 0，并在控制台运行查看输出；随后演示 myMap.erase(42) 才真正将其从 map 中移除。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 496000,
+      "endMs": 696000,
+      "assetId": "asset:video-04-02",
+      "locator": null,
+      "observation": "老师重构 intersect 函数，显式使用 record.find()，record.insert(make_pair(...)) 和 record.erase() 来编写更加严谨的代码。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 696000,
+      "endMs": 785960,
+      "assetId": "asset:video-04-02",
+      "locator": null,
+      "observation": "幻灯片展示“对于两个问题，如果数组有序？”，老师引导思考双指针/二分查找解法，并说明下一节分析 set 与 map 底层实现及时间性能区别。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "titleObserved",
+      "reason": "视频中幻灯片标题写为 '350. Intersection of Two Arrays'（缺少 II），但课程目录标题及题目实际内容均对应 Intersection of Two Arrays II（LeetCode 350）。",
+      "recommendedCheck": "记录观察到的 PPT 原始文字，但保持解析与 LeetCode 350 II 的对应关系。"
+    }
+  ],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

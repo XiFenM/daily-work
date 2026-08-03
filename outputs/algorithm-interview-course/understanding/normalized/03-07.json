@@ -1,0 +1,618 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "03-07",
+  "chapterId": "03",
+  "titleObserved": "209 Minimum Size Subarray Sum",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 849.92,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 43000,
+      "topic": "滑动窗口技术引言",
+      "summary": "回顾对撞指针，引出基于双指针的滑动窗口技术概念。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 43000,
+      "endMs": 239000,
+      "topic": "题目 209 Minimum Size Subarray Sum 描述与边界辨析",
+      "summary": "介绍题目要求（寻找和大于等于 s 的最短连续子数组），分析子数组连续性定义、无解情况（返回 0）及多解确认等面试注意事项。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 239000,
+      "endMs": 339000,
+      "topic": "暴力解法及 O(n^2) 优化思考",
+      "summary": "分析遍历所有子数组求和的 O(n^3) 暴力解法，并抛出重用计算优化到 O(n^2) 的思考题。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 339000,
+      "endMs": 476000,
+      "topic": "滑动窗口解法原理",
+      "summary": "通过图示讲解滑动窗口扩张（r 移动）与收缩（l 移动）寻找满足条件的最短连续子数组的过程。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 476000,
+      "endMs": 794000,
+      "topic": "C++ 代码实现",
+      "summary": "在 IDE 中编写 minSubArrayLen 函数，明确闭区间 [l...r] 维护窗口，处理边界条件与返回值。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 794000,
+      "endMs": 849920,
+      "topic": "复杂度分析与总结",
+      "summary": "分析滑动窗口算法的时间复杂度 O(n) 与空间复杂度 O(1)，并预告下一节课进一步探讨滑动窗口的应用。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解滑动窗口技术的基本原理，掌握通过双指针定义并维护连续区间窗口的方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "能够应用滑动窗口解决 Minimum Size Subarray Sum 问题，实现 O(n) 时间复杂度的算法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006",
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "掌握数组/子数组类面试题目的边界与限制沟通，如子数组连续性、无解返回值等",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Two Pointer",
+      "namesObserved": [
+        "双索引技术",
+        "Two Pointer"
+      ],
+      "role": "applies",
+      "definition": "使用两个索引定义区间或行进方向的技术。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "Sliding Window",
+      "namesObserved": [
+        "滑动窗口"
+      ],
+      "role": "introduces",
+      "definition": "由两个索引表示的窗口在数组中动态滑动的技术。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "209",
+    "titleObserved": "Minimum Size Subarray Sum",
+    "statement": "给定一个整型数组和一个数字 s，找到数组中最短的一个连续子数组，使得连续子数组的数字和 sum >= s，返回这个最短的连续子数组的长度值。",
+    "constraints": [
+      "子数组必须是连续的 (contiguous subarray)",
+      "若无解返回 0"
+    ],
+    "clarifyingQuestions": [
+      "什么叫子数组（是否要求连续）？",
+      "如果没有解怎么办？（返回 0）",
+      "如果有多个解怎么办？（只需返回最短长度）"
+    ],
+    "evidenceIds": [
+      "ev-002",
+      "ev-003"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "暴力解法：遍历所有可能的连续子数组 nums[i...j]，计算其元素和 sum，验证 sum >= s，并维护最小值。",
+      "timeComplexity": "O(n^3)",
+      "spaceComplexity": "O(1)",
+      "limitations": [
+        "包含大量的重复计算，时间复杂度极高"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "intermediate",
+      "idea": "优化暴力解法：重用前面的子数组和计算结果，避免重复计算，将时间复杂度降至 O(n^2)。",
+      "timeComplexity": "O(n^2)",
+      "spaceComplexity": "O(1)",
+      "limitations": [
+        "对于规模较大的输入依然不够高效"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "solution-003",
+      "stage": "optimized",
+      "idea": "滑动窗口解法：双指针 l=0, r=-1 维护闭区间 nums[l...r]。当 sum < s 且右边界未越界时，扩展右边界 r++ 并更新 sum；当 sum >= s 时，记录更新最小长度 res，并收缩左边界 l++。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-005",
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-003",
+      "language": "C++",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n#include <cassert>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    int minSubArrayLen(int s, vector<int>& nums) {\n\n        int l = 0, r = -1; // nums[l...r]为我们的滑动窗口\n        int sum = 0;\n        int res = nums.size() + 1;\n\n        while( l < nums.size() ){\n\n            if( r + 1 < nums.size() && sum < s )\n                sum += nums[++r];\n            else\n                sum -= nums[l++];\n\n            if( sum >= s )\n                res = min( res, r - l + 1 );\n        }\n\n        if( res == nums.size() + 1 )\n            return 0;\n\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-003",
+      "kind": "sliding_window",
+      "variables": [
+        {
+          "symbol": "l",
+          "role": "left pointer",
+          "meaning": "滑动窗口的左边界索引",
+          "updateRule": "当 sum >= s 时，sum -= nums[l++]；或当右边界无法继续扩张时向前移动",
+          "evidenceIds": [
+            "ev-005",
+            "ev-006"
+          ]
+        },
+        {
+          "symbol": "r",
+          "role": "right pointer",
+          "meaning": "滑动窗口的右边界索引",
+          "updateRule": "当 sum < s 且 r + 1 < nums.size() 时，sum += nums[++r]",
+          "evidenceIds": [
+            "ev-005",
+            "ev-006"
+          ]
+        },
+        {
+          "symbol": "sum",
+          "role": "window accumulator",
+          "meaning": "窗口 nums[l...r] 内所有元素的和",
+          "updateRule": "跟随 r 的扩张增加 nums[r]，跟随 l 的收缩减少 nums[l]",
+          "evidenceIds": [
+            "ev-005",
+            "ev-006"
+          ]
+        },
+        {
+          "symbol": "res",
+          "role": "result record",
+          "meaning": "记录满足 sum >= s 的连续子数组的最短长度，初值为 nums.size() + 1",
+          "updateRule": "当 sum >= s 时更新为 min(res, r - l + 1)",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "nums[l...r]",
+          "meaning": "闭区间 [l, r] 所表示的滑动窗口；初值 l=0, r=-1 时表示空窗口",
+          "evidenceIds": [
+            "ev-005",
+            "ev-006"
+          ]
+        }
+      ],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "r + 1 < nums.size() && sum < s",
+          "updates": "r++; sum += nums[r]",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-005",
+            "ev-006"
+          ]
+        },
+        {
+          "condition": "sum >= s 或 (r + 1 >= nums.size() 且 sum < s)",
+          "updates": "sum -= nums[l]; l++",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-005",
+            "ev-006"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "循环直到 l >= nums.size() 时终止",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "滑动窗口在移动过程中能够无遗漏地覆盖所有可能成为解的连续子数组区间",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": [
+      "ev-007"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "暴力解法",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n^3)",
+      "expressionNormalized": "O(n^3)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "暴力解法遍历所有子数组并重新求和，时间复杂度为 O(n^3)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "优化暴力解法",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n^2)",
+      "expressionNormalized": "O(n^2)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "通过重用子数组求和结果，优化后的暴力解法时间复杂度为 O(n^2)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "cx-003",
+      "subject": "滑动窗口解法",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "指针 l 和 r 在整个过程中只向前移动，不会回退，每个元素最多入窗和出窗一次",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "滑动窗口解法的时间复杂度为 O(n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "id": "cx-004",
+      "subject": "滑动窗口解法",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(1)",
+      "expressionNormalized": "O(1)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "算法仅使用了若干整型变量（l, r, sum, res），未开辟额外数组空间",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "滑动窗口解法的空间复杂度为 O(1)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "给定数组 [2, 3, 1, 2, 4, 3]，s = 7。存在子数组 [4, 3] 使得 sum = 7 >= 7 且长度为 2 为最短，返回 2",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "整边数组中没有任何连续子数组的和 >= s（无解），此时函数应返回 0",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "滑动窗口初始为空，定义为闭区间 nums[l...r] 时设置 l=0, r=-1",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "使用方括号 nums[r] 取值前，必须确保 r + 1 < nums.size() 防止数组越界",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "初始化 res 时应设为 nums.size() + 1（不可能取到的最大值），避免设为 0 或固定大常数导致判断失真",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "在使用 ++r 或 l++ 前要明确元素加减顺序：扩展右界时先 ++r 再加元素，收缩左界时先减元素再 l++",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "遇到子数组问题时，先向面试官确认子数组是否要求连续，以及无解和多解时的具体返回规范",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "若无思路可先提出暴力解法 O(n^3) 及其重用计算优化 O(n^2)，再引出滑动窗口 O(n) 的优化思路",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:03-07",
+      "to": "lesson:03-08",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "视频末尾明确指出下一小节将在滑动窗口中结合查找表/记录做进一步的拓展（Longest Substring Without Repeating Characters）。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 43000,
+      "assetId": "asset:video-03-07",
+      "locator": "00:00 - 00:43",
+      "observation": "PPT展示“双索引技术 Two Pointer”及“滑动窗口”，讲解滑动窗口是指用两个索引表示一个窗口并在数组中不停滑动。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 43000,
+      "endMs": 126000,
+      "assetId": "asset:video-03-07",
+      "locator": "00:43 - 02:06",
+      "observation": "PPT展示题目 209 Minimum Size Subarray Sum（Facebook 面试题），给定整型数组与数字 s，找最短连续子数组使 sum >= s，示例数组 [2,3,1,2,4,3], s=7 答案 [4,3] 返回 2。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 126000,
+      "endMs": 239000,
+      "assetId": "asset:video-03-07",
+      "locator": "02:06 - 03:59",
+      "observation": "老师强调面试沟通事项：1. 子数组必须连续；2. 没有解时题目指定返回 0；3. 若只需返回长度，多解情况不影响返回值。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 239000,
+      "endMs": 339000,
+      "assetId": "asset:video-03-07",
+      "locator": "03:59 - 05:39",
+      "observation": "PPT展示暴力解法：遍历所有连续子数组 nums[i...j]，计算 sum 并验证 sum >= s，时间复杂度 O(n^3)。提出思考题：能否优化到 O(n^2)。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 339000,
+      "endMs": 476000,
+      "assetId": "asset:video-03-07",
+      "locator": "05:39 - 07:56",
+      "observation": "动画演示滑动窗口原理：用 i 和 j 指针维护 nums[i...j]。sum < s 时右移 j 纳新；sum >= s 时记录长度并右移 i 缩小窗口。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 476000,
+      "endMs": 794000,
+      "assetId": "asset:video-03-07",
+      "locator": "07:56 - 13:14",
+      "observation": "IDE演示 C++ 代码编写：定义 l=0, r=-1, sum=0, res=nums.size()+1；循环 while(l < nums.size())；控制 r+1 < nums.size() && sum < s 扩张；else 减元素并 l++；记录 res=min(res, r-l+1)；无解返回 0。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 794000,
+      "endMs": 849920,
+      "assetId": "asset:video-03-07",
+      "locator": "13:14 - 14:09",
+      "observation": "代码顶端写入注释 // 时间复杂度: O(n), // 空间复杂度: O(1)。老师解释 l 和 r 最多各遍历一遍数组，故为 O(n)。预告下一节课示例。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "0304da39b2a947e9a542e6fe41b64d5d",
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": "2026-07-29T10:44:20.000Z"
+  }
+}

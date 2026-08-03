@@ -1,0 +1,495 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "02-06",
+  "chapterId": "02",
+  "titleObserved": "均摊复杂度分析 Amortized Time",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 916.28,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 44000,
+      "topic": "均摊复杂度分析概念引入",
+      "summary": "介绍均摊时间复杂度分析（Amortized Time Analysis）的基本概念，说明其适用于单个操作复杂度较高但用于方便其他操作、需要多个操作一起计算平均复杂度的场景。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 44000,
+      "endMs": 118000,
+      "topic": "动态数组（Vector）背景",
+      "summary": "以 C++ 标准库中的 Vector 动态数组类为例，说明如何通过封装底层静态数组来实现元素的添加和删除。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 119000,
+      "endMs": 244000,
+      "topic": "MyVector 基础类的代码实现",
+      "summary": "在 MyVector.h 中实现包含 data 指针、capacity 初始容量和 size 当前元素个数的基础结构，以及静态容量限制下的 push_back 与 pop_back。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 244000,
+      "endMs": 470000,
+      "topic": "动态扩容与倍率选择讨论",
+      "summary": "当 size == capacity 时调用 resize 将容量扩展为 2 * capacity。分析为何按 2 倍扩容优于按固定常数（如+100）增加容量。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 470000,
+      "endMs": 599000,
+      "topic": "resize 函数的实现与复杂度",
+      "summary": "实现 resize(newCapacity) 私有方法，开辟新数组并复制原有元素，指出 resize 函数本身的时间复杂度为 O(n)。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 600000,
+      "endMs": 743000,
+      "topic": "均摊复杂度推导与图示证明",
+      "summary": "通过图解分析当数组容量为 n 时，进行 n+1 次添加操作总耗费为 2n（前 n 次各耗费 1，第 n+1 次触发 resize 耗费 n 再加 1 次插入），平摊到每次操作耗费为 2，即均摊时间复杂度为 O(1)。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 743000,
+      "endMs": 788000,
+      "topic": "push_back 均摊复杂度总结",
+      "summary": "总结 push_back 操作在均摊（Average）意义下的时间复杂度为 O(1)。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 788000,
+      "endMs": 880000,
+      "topic": "代码实验验证 push_back 性能趋势",
+      "summary": "在 main.cpp 中对数据规模从 2^10 到 2^26 的 push_back 过程进行计时实验，观察到数据规模翻倍时总耗费时间大致翻倍，验证了均摊 O(1) 的结论。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 880000,
+      "endMs": 916280,
+      "topic": "pop_back 缩容问题引出",
+      "summary": "提出在删除元素（pop_back）时是否也应进行缩容释放空间的问题，并预告下一节课关于复杂度震荡的探讨。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解均摊时间复杂度分析（Amortized Time Analysis）的适用场景与计算方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "掌握基于静态数组和 2 倍扩容机制实现动态数组（Dynamic Array / Vector）的方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "能够证明动态数组 push_back 操作的均摊时间复杂度为 O(1)",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "均摊时间复杂度分析",
+      "namesObserved": [
+        "均摊复杂度分析",
+        "Amortized Time"
+      ],
+      "role": "introduces",
+      "definition": "把相对高复杂度操作的耗费均摊到其他低复杂度操作中，计算序列操作的平均复杂度分析方法。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-006"
+      ]
+    },
+    {
+      "canonicalName": "动态数组",
+      "namesObserved": [
+        "动态数组",
+        "Vector"
+      ],
+      "role": "applies",
+      "definition": "底层通过连续内存数组实现，在空间存满时可自动重新分配更高容量空间的线性数据结构。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "template <typename T>\nclass MyVector {\nprivate:\n    T* data;\n    int capacity; // 存储数组中可以容纳的最大元素个数\n    int size;     // 存储数组中的元素个数\n\n    void resize(int newCapacity) {\n        assert(newCapacity >= size);\n        T* newData = new T[newCapacity];\n        for (int i = 0; i < size; i++) {\n            newData[i] = data[i];\n        }\n        delete[] data;\n        data = newData;\n        capacity = newCapacity;\n    }\n\npublic:\n    MyVector() {\n        data = new T[10];\n        capacity = 10;\n        size = 0;\n    }\n\n    ~MyVector() {\n        delete[] data;\n    }\n\n    // Average: O(1)\n    void push_back(T e) {\n        if (size == capacity) {\n            resize(2 * capacity);\n        }\n        data[size++] = e;\n    }\n\n    T pop_back() {\n        assert(size > 0);\n        size--;\n        return data[size];\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "other",
+    "claims": [
+      {
+        "statement": "对容量为 n 的动态数组进行 n+1 次 push_back 操作，前 n 次每次耗费 1，第 n+1 次触发 resize 耗费 n 次复制加 1 次插入，总耗费为 2n，平均每次操作耗费为 2，均摊复杂度为 O(1)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      }
+    ]
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "resize(int newCapacity)",
+      "measure": "time",
+      "notation": "O",
+      "case": "worst",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "当前动态数组中的元素个数 size",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "resize 函数包含一个循环遍历当前数组所有元素并逐个复制到新数组，循环执行 n 次",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "resize 函数的时间复杂度为 O(n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "push_back(T e)",
+      "measure": "time",
+      "notation": "O",
+      "case": "amortized",
+      "expressionObserved": "O(1)",
+      "expressionNormalized": "O(1)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组容量（已满时的元素个数）",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "前 n 次添加操作每次直接插入耗费为 1，总计耗费 n",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "statement": "第 n+1 次添加触发 resize，将 n 个元素复制到新数组耗费 n，加上插入新元素耗费 1",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "statement": "n+1 次操作的总时间成本为 n + n + 1 ≈ 2n，平均每次操作耗费为 2n / (n+1) ≈ 2",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "触发扩容时容量按 2 倍增长",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004",
+            "ev-006"
+          ]
+        }
+      ],
+      "conclusion": {
+        "statement": "push_back 操作的均摊时间复杂度为 O(1)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [
+    {
+      "id": "experiment-001",
+      "subject": "MyVector push_back 运行时间测试",
+      "purpose": {
+        "statement": "实验验证基于 2 倍扩容的 MyVector 在连续 push_back 元素时，总运行时间与插入数据规模 n 呈线性 O(n) 关系（即单次操作为均摊 O(1)）",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "setup": {
+        "language": "C++",
+        "compilerOrRuntime": null,
+        "optimization": null,
+        "operatingSystem": null,
+        "hardware": null,
+        "timer": "clock()",
+        "warmup": null,
+        "repetitions": null,
+        "inputGeneration": "从 i=10 到 26，对 n = 2^i 个元素依次调用 push_back(i)"
+      },
+      "measurements": [
+        {
+          "inputDescription": "2^10 = 1024 operations",
+          "inputSize": "1024",
+          "observedValue": "2e-05",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        },
+        {
+          "inputDescription": "2^18 = 262144 operations",
+          "inputSize": "262144",
+          "observedValue": "0.001641",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        },
+        {
+          "inputDescription": "2^19 = 524288 operations",
+          "inputSize": "524288",
+          "observedValue": "0.003702",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        },
+        {
+          "inputDescription": "2^26 = 67108864 operations",
+          "inputSize": "67108864",
+          "observedValue": "0.657363",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "theoreticalExpectation": {
+        "statement": "数据规模 n 翻倍时，插入 n 个元素的总耗时应翻倍，说明单次 push_back 的均摊复杂度为 O(1)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "observation": {
+        "statement": "测试结果显示随数据规模 n 翻倍，总执行时间基本呈 2 倍比例增长，符合线性 O(n) 的理论预期",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "limitations": [],
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "examples": [],
+  "edgeCases": [],
+  "implementationPitfalls": [
+    {
+      "statement": "扩容时若采用固定的常数加量（如每次容量+100），在数据量很大时会导致极频繁地触发 O(n) 的 resize，从而使总体复杂度退化",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "interviewPlaybook": [],
+  "relationCandidates": [
+    {
+      "from": "lesson:02-03",
+      "to": "lesson:02-06",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "课程从单次从头到尾运行的简单复杂度分析，扩展到将多次操作联合分析的均摊时间复杂度分析。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "from": "lesson:02-06",
+      "to": "lesson:02-07",
+      "type": "applies",
+      "status": "provisional",
+      "rationale": "本课结尾提出 pop_back 缩容机制的疑问，为下一课探讨避免复杂度震荡奠定基础。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 44000,
+      "assetId": "asset:video-02-06",
+      "locator": null,
+      "observation": "视频片头展示标题“均摊复杂度分析 Amortized Time”，老师讲解均摊复杂度分析的定义及其与普通单次算法复杂度分析的区别。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 44000,
+      "endMs": 118000,
+      "assetId": "asset:video-02-06",
+      "locator": null,
+      "observation": "PPT展示“动态数组 (Vector)”，老师介绍 C++ 中的 vector 动态数组实现背景。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 119000,
+      "endMs": 244000,
+      "assetId": "asset:video-02-06",
+      "locator": null,
+      "observation": "屏幕编写 C++ 类模板 MyVector，包含 data、capacity、size 属性，实现基础的构造函数、析构函数、push_back 与 pop_back，并使用 assert(size < capacity) 限制边界。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 244000,
+      "endMs": 470000,
+      "assetId": "asset:video-02-06",
+      "locator": null,
+      "observation": "屏幕修改 push_back 代码，在 size == capacity 时调用 resize(2 * capacity)。老师对比分析乘以 2 扩容与加上固定常数扩容的优劣。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 470000,
+      "endMs": 599000,
+      "assetId": "asset:video-02-06",
+      "locator": null,
+      "observation": "屏幕实现 void resize(int newCapacity) 函数，并写出注释 // O(n)，说明 resize 涉及循环复制所有元素，复杂度为 O(n)。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 600000,
+      "endMs": 788000,
+      "assetId": "asset:video-02-06",
+      "locator": null,
+      "observation": "PPT展示“均摊复杂度分析 - 假设当前数组容量为n”，图解前 n 次添加各耗费 1，第 n+1 次耗费 1+n，总结 n+1 次总耗费 2n，平均每次耗费 2，即平均/均摊时间复杂度为 O(1)。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 788000,
+      "endMs": 880000,
+      "assetId": "asset:video-02-06",
+      "locator": null,
+      "observation": "屏幕切换至 main.cpp，编写对不同规模 n（2^10 到 2^26）循环 push_back 的计时程序，运行并在控制台输出耗时结果，证实随着 n 增加耗时呈线性增长。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 880000,
+      "endMs": 916280,
+      "assetId": "asset:video-02-06",
+      "locator": null,
+      "observation": "屏幕切回 MyVector.h 中的 pop_back 函数，老师抛出问题：在删除元素时是否也应当进行 resize 缩容以防止空间浪费？",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "ea934598307a4952818ad6bf5fa9b40e",
+    "promptVersion": "video-evidence-v1.3",
+    "generatedAt": "2026-07-29T09:30:26.000Z"
+  }
+}

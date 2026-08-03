@@ -57,8 +57,8 @@
 ## 安全、费用与版权边界
 
 - 密钥只从根目录 `.env` 或当前进程环境变量读取，不写入项目文件。
-- 原始课程素材放在被 Git 忽略的 `work/algorithm-interview-course/`，不提交到仓库。
-- 模型原始响应放在被 Git 忽略的 `outputs/algorithm-interview-course/`。
-- 正式笔记、Prompt、结构化元数据和关系图放在本项目目录中。
+- 原始课程素材放在被 Git 忽略的 `work/algorithm-interview-course/incoming/`，不提交到仓库；该目录只跟踪占位说明。
+- 压缩视频、抽帧图片、音频和其他大型多媒体继续忽略；`work/algorithm-interview-course/` 与 `outputs/algorithm-interview-course/` 中的 Markdown/JSON Prompt、请求快照、原始响应、规范化证据和 QA 记录纳入版本控制。
+- 正式笔记、Prompt 模板、结构化元数据和关系图放在本项目目录中。
 - 正式批处理前先用代表性课次校准 Prompt；失败重试必须记录原因，避免无审计重复调用。
 - 不公开或再分发课程原始素材；只有在用户明确授权的课次范围内，才将对应素材上传到受控的视频理解服务，调用与输入选择写入 manifest。

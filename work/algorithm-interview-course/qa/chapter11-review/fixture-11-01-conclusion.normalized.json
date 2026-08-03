@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "11-01",
+  "chapterId": "11",
+  "titleObserved": "结语",
+  "contentKind": "conclusion",
+  "actualDurationSeconds": 169.88,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 169880,
+      "topic": "课程结语",
+      "summary": "用于本地兼容性测试的非算法结语片段。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "learningObjectives": [],
+  "concepts": [],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [],
+  "stateModels": [],
+  "correctness": {
+    "method": "not_applicable",
+    "completeness": "not_applicable",
+    "claims": [],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [],
+  "edgeCases": [],
+  "implementationPitfalls": [],
+  "interviewPlaybook": [],
+  "relationCandidates": [],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_audio",
+      "startMs": 0,
+      "endMs": 169880,
+      "assetId": "asset:video-11-01",
+      "locator": null,
+      "observation": "用于验证结语型证据文档结构的本地测试片段。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "test/model",
+    "requestId": "request-local-chapter11-compatibility-test",
+    "promptVersion": "video-evidence-v1.7",
+    "generatedAt": "1970-01-01T00:00:01.000Z"
+  }
+}

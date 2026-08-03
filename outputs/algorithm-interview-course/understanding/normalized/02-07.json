@@ -1,0 +1,564 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "02-07",
+  "chapterId": "02",
+  "titleObserved": "避免复杂度的震荡",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 689.888,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 133000,
+      "topic": "动态数组删除元素逻辑与逻辑Bug修复",
+      "summary": "讲解 pop_back 删除元素时缩小数组容量的直觉写法，指出如果直接 resize 会抹掉未返回元素的问题，并在 size 减减前提前记录返回元素。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 133000,
+      "endMs": 221000,
+      "topic": "当 size == capacity / 2 时缩容的均摊复杂度分析",
+      "summary": "分析当元素个数减少到容量的 1/2 时进行 resize(capacity / 2) 的均摊复杂度，每次删除操作均摊为 O(1)。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 221000,
+      "endMs": 310000,
+      "topic": "复杂度震荡现象分析",
+      "summary": "分析在临界点频繁交替进行添加和删除元素操作时，由于每次操作都触发 resize，导致 push_back 和 pop_back 的复杂度退化为 O(n)，产生复杂度震荡。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 310000,
+      "endMs": 377000,
+      "topic": "复杂度震荡的解决方案：Lazy 缩容策略",
+      "summary": "提出解决震荡的方案：当元素个数减少到容量的 1/4 时，才 resize 为原容量的 1/2，为后续可能的添加元素留出空间余地。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 377000,
+      "endMs": 416000,
+      "topic": "MyVector.h 代码修改",
+      "summary": "修改 MyVector.h 中 pop_back 的缩容条件为 size == capacity / 4 时调用 resize(capacity / 2)。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 416000,
+      "endMs": 510000,
+      "topic": "实验验证 2*n 次添加与删除操作的时间消耗",
+      "summary": "在 main2.cpp 中通过连续 push_back n 个元素和 pop_back n 个元素的实验，观察数据规模翻倍时时间消耗成倍增加的线性关系，验证均摊 O(1)。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 510000,
+      "endMs": 576000,
+      "topic": "动态数组类的进一步完善建议",
+      "summary": "建议为 MyVector 添加可指定初始容量的构造函数，以及获取 capacity 和 size 的接口方法。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 576000,
+      "endMs": 628000,
+      "topic": "拓展到动态栈与动态队列",
+      "summary": "说明动态数组的 resize 机制同样适用于实现动态栈和动态队列。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 628000,
+      "endMs": 689888,
+      "topic": "第二章复杂度分析总结",
+      "summary": "回顾第二章包含的大 O 符号、基础复杂度分析、递归复杂度分析和均摊复杂度分析等核心内容。",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解动态数组删除元素时若在 size == capacity / 2 时立即缩容会导致复杂度震荡的原因",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "掌握防止复杂度震荡的 Lazy 缩容策略：当 size == capacity / 4 时，将容量 resize 为 capacity / 2",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "掌握通过均摊复杂度分析法与实验验证说明动态数组添加和删除操作的均摊时间复杂度均为 O(1)",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-006"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "复杂度震荡",
+      "namesObserved": [
+        "复杂度震荡",
+        "复杂度的震荡"
+      ],
+      "role": "introduces",
+      "definition": "在动态数据结构边界临界点上交替执行添加和删除操作时，频繁触发容量 resize 导致单次操作复杂度退化为 O(n) 的现象。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "均摊复杂度分析",
+      "namesObserved": [
+        "均摊复杂度分析",
+        "均摊复杂度"
+      ],
+      "role": "applies",
+      "definition": "将高成本的 resize 操作消耗平摊到多次低成本的普通添加/删除操作中进行渐进复杂度评估的方法。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "动态数组",
+      "namesObserved": [
+        "动态数组",
+        "MyVector"
+      ],
+      "role": "reinforces",
+      "definition": null,
+      "evidenceIds": [
+        "ev-001",
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "// MyVector.h pop_back 实现片段\n// Average: O(1)\nT pop_back(){\n    assert( size > 0 );\n    T ret = data[size-1];\n    size --;\n    if( size == capacity/4 )\n        resize(capacity/2 );\n    return ret;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-001",
+        "ev-005"
+      ]
+    },
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "// main2.cpp 性能测试主函数片段\nfor( int i = 10 ; i <= 26 ; i++ ){\n    int n = pow(2,i);\n    clock_t startTime = clock();\n    MyVector<int> vec;\n    for( int i = 0 ; i < n ; i++ )\n        vec.push_back(i);\n    for( int i = 0 ; i < n ; i++ )\n        vec.pop_back();\n    clock_t endTime = clock();\n    cout<<2*n<<\" operations:\\t\";\n    cout<<double(endTime - startTime)/CLOCKS_PER_SEC<<\" s\"<<endl;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "not_applicable",
+    "claims": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "频繁在容量临界点交替 push_back 与 pop_back",
+      "measure": "time",
+      "notation": "O",
+      "case": "worst",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "当前数组中的元素个数",
+          "domainOrRelationship": "正整数",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": {
+        "statement": "每次添加或删除元素都会触发容量 resize 操作，耗时为 n",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "derivationSteps": [
+        {
+          "statement": "当数组满了（容量为 2*n，元素为 2*n）时添加 1 个元素，触发扩容耗时 n；紧接着删除 1 个元素，元素变为容量的 1/2 触发缩容耗时 n；重复此过程无法均摊。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "缩容触发条件设置为 size == capacity / 2",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "conclusion": {
+        "statement": "在极端的临界点交替添加/删除序列下，均摊分析失效，单次操作复杂度退化为 O(n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "采用 Lazy 缩容（1/4 阈值）后的 pop_back 操作",
+      "measure": "time",
+      "notation": "O",
+      "case": "amortized",
+      "expressionObserved": "O(1)",
+      "expressionNormalized": "O(1)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [],
+      "costModel": {
+        "statement": "大部分删除操作耗时 1，只有当 size 减小到 capacity / 4 时触发耗时为 O(n) 的 resize(capacity / 2)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "derivationSteps": [
+        {
+          "statement": "当元素个数减少到 1/4 capacity 时才缩容至 1/2 capacity，给再次添加元素留出了余地，不会立刻触发扩容",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "缩容条件设置为 size == capacity / 4 且 resize 目标容量为 capacity / 2",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        }
+      ],
+      "conclusion": {
+        "statement": "pop_back 操作的均摊时间复杂度为 O(1)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004",
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [
+    {
+      "id": "experiment-001",
+      "subject": "MyVector 连续 push_back 与 pop_back 耗时测试",
+      "purpose": {
+        "statement": "通过实验观察不同数据规模 n 下执行 n 次 push_back 和 n 次 pop_back 的总运行时间变化趋势，验证均摊 O(1) 复杂度",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "setup": {
+        "language": "C++",
+        "compilerOrRuntime": "CLion / CXX compiler",
+        "optimization": null,
+        "operatingSystem": "macOS (based on /Users/yuanzhang file path shown in IDE)",
+        "hardware": null,
+        "timer": "clock() / CLOCKS_PER_SEC",
+        "warmup": null,
+        "repetitions": null,
+        "inputGeneration": "i 从 10 到 26，n = 2^i"
+      },
+      "measurements": [
+        {
+          "inputDescription": "2048 operations",
+          "inputSize": 2048,
+          "observedValue": "9.2e-05",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "inputDescription": "4096 operations",
+          "inputSize": 4096,
+          "observedValue": "6.7e-05",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "inputDescription": "8192 operations",
+          "inputSize": 8192,
+          "observedValue": "0.000131",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "inputDescription": "16384 operations",
+          "inputSize": 16384,
+          "observedValue": "0.000212",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "inputDescription": "32768 operations",
+          "inputSize": 32768,
+          "observedValue": "0.000442",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "inputDescription": "65536 operations",
+          "inputSize": 65536,
+          "observedValue": "0.000828",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "theoreticalExpectation": {
+        "statement": "由于单次操作为均摊 O(1)，当操作数 2*n 翻倍时，总消耗时间应当相应翻倍（呈现线性增长关系）",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "observation": {
+        "statement": "运行结果显示下一行的耗时基本为上一行耗时的 2 倍（如 0.000131s -> 0.000212s -> 0.000442s -> 0.000828s），验证了线性增长关系与均摊 O(1) 的正确性",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "limitations": [
+        {
+          "statement": "少量小规模数据运行时间可能受到系统计时器精度和抖动影响",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "examples": [],
+  "edgeCases": [
+    {
+      "statement": "pop_back 缩容时如果先 resize 再返回值，会导致待返回的元素内存被释放/覆盖",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在 pop_back 中修改 size 之前，需要先将 data[size-1] 存储到临时变量中，否则缩容过程会抹掉该元素",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "若在 size == capacity / 2 时就缩容，容易产生复杂度震荡，应修改为 size == capacity / 4 时才缩容至 capacity / 2",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "面试中设计动态数组或回答扩缩容策略时，应指出 Lazy 缩容（1/4 阈值）是防止复杂度震荡的关键技巧",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "解释均摊复杂度时，应使用扩缩容平摊高成本 resize 消耗的具体推导证明 push_back / pop_back 的均摊复杂度为 O(1)",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:02-06",
+      "to": "lesson:02-07",
+      "type": "applies",
+      "status": "provisional",
+      "rationale": "本课次 02-07 运用了 02-06 讲解的均摊复杂度分析方法，解决动态数组缩容带来的复杂度震荡问题。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 133000,
+      "assetId": "asset:video-02-07",
+      "locator": "00:00 - 02:13",
+      "observation": "老师展示在 pop_back 中实现缩容逻辑的代码，并强调先暂存 ret = data[size-1] 避免 resize 抹掉元素。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 133000,
+      "endMs": 221000,
+      "assetId": "asset:video-02-07",
+      "locator": "02:13 - 03:41",
+      "observation": "PPT 演示均摊复杂度分析：假设当前容量 2*n，当剩下 n 个元素时 resize 到 n，总耗时 n+1，平摊到 n 次删除，每次均摊 O(1)。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 221000,
+      "endMs": 310000,
+      "assetId": "asset:video-02-07",
+      "locator": "03:41 - 05:10",
+      "observation": "PPT 展示防止复杂度震荡：在容量 2*n 且元素数处于 n 临界点时，反复添加和删除元素会导致每次都触发 resize(n)，单次复杂度退化为 O(n)。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 310000,
+      "endMs": 377000,
+      "assetId": "asset:video-02-07",
+      "locator": "05:10 - 06:17",
+      "observation": "PPT 展示解决方案：当元素个数为数组容量的 1/4 时才 resize，缩容为当前容量的 1/2，给再次添加元素留出余地。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 377000,
+      "endMs": 416000,
+      "assetId": "asset:video-02-07",
+      "locator": "06:17 - 06:56",
+      "observation": "代码编辑器中修改 MyVector.h，将 if( size == capacity/2 ) 改为 if( size == capacity/4 ) resize(capacity/2)。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 416000,
+      "endMs": 510000,
+      "assetId": "asset:video-02-07",
+      "locator": "06:56 - 08:30",
+      "observation": "在 main2.cpp 中测试 2*n 次操作的耗时，运行控制台输出各数据规模下的操作时间，验证耗时呈成倍增加的线性关系。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 510000,
+      "endMs": 576000,
+      "assetId": "asset:video-02-07",
+      "locator": "08:30 - 09:36",
+      "observation": "老师讲解可进一步完善 MyVector，如增加允许指定初始容量的构造函数及返回 capacity 和 size 的函数。",
+      "confidence": 0.9
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 576000,
+      "endMs": 628000,
+      "assetId": "asset:video-02-07",
+      "locator": "09:36 - 10:28",
+      "observation": "PPT 展示均摊复杂度：动态数组、动态栈、动态队列，说明此类 resize 机制同样适用于动态栈和动态队列的实现。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 628000,
+      "endMs": 689888,
+      "assetId": "asset:video-02-07",
+      "locator": "10:28 - 11:29",
+      "observation": "总结第二章“面试中的复杂度分析”，总结大 O、基础分析、递归分析与均摊复杂度分析，并预告下一章面试题分类讲解。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "faacc58e640f4e808fc6363e8bc6fa65",
+    "promptVersion": "video-evidence-v1.3",
+    "generatedAt": "2026-07-29T09:31:48.000Z"
+  }
+}

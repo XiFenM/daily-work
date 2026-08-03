@@ -1,0 +1,916 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "02-03",
+  "chapterId": "02",
+  "titleObserved": "常见的复杂度分析",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 1160.56,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 30000,
+      "topic": "O(1) 复杂度分析",
+      "summary": "讲解 swapTwoInts 函数，展示无数据规模变化的 O(1) 常数复杂度代码模式。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 30000,
+      "endMs": 132000,
+      "topic": "O(n) 复杂度分析",
+      "summary": "通过求和函数 sum 及字符串翻转函数 reverse 说明 O(n) 的特点，强调 1/2*n 次操作依然是 O(n)。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 132000,
+      "endMs": 313000,
+      "topic": "O(n^2) 复杂度分析",
+      "summary": "以选择排序 selectionSort 为例，推导等差数列求和公式 (n-1)+(n-2)+...+0 = 1/2*n^2 - 1/2*n，说明 O(n^2) 复杂度。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 313000,
+      "endMs": 391000,
+      "topic": "双重循环陷阱与 O(n)",
+      "summary": "通过 printInformation 函数展示双重循环中内层循环为常数 30 次的情况，说明不能盲目将双重循环认定为 O(n^2)。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 391000,
+      "endMs": 541000,
+      "topic": "O(log n) 二分查找法复杂度",
+      "summary": "分析二分查找 binarySearch，说明 n 经过 log2 n 次除以 2 操作后变为 1，复杂度为 O(log n)。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 541000,
+      "endMs": 705000,
+      "topic": "O(log n) 整数转字符串复杂度",
+      "summary": "通过 intToString 函数展示每次除以 10 得到 log10 n 次操作的过程，说明该算法时间复杂度亦为 O(log n)。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 705000,
+      "endMs": 886000,
+      "topic": "对数底数忽略与边界思考",
+      "summary": "用换底公式 log_a N = log_a b * log_b N 证明不同底数的对数相差常数，因此在 Big O 中省略底数；并提示 intToString 的边界陷阱（负数与 0）。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 886000,
+      "endMs": 1006000,
+      "topic": "双重循环 O(n log n) 分析",
+      "summary": "分析 hello 函数中外层循环 sz += sz（每次乘以 2）执行 log n 次、内层循环执行 n 次的结构，得出总复杂度为 O(n log n)。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 1006000,
+      "endMs": 1160560,
+      "topic": "O(sqrt(n)) 素数判断与总结",
+      "summary": "分析 isPrime 函数中 x*x <= n 条件使循环执行 sqrt(n) 次的情况，得出 O(sqrt(n)) 复杂度，并总结常见代码模式的分析方法。",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "掌握 O(1)、O(n)、O(n^2)、O(log n)、O(n log n) 及 O(sqrt(n)) 等常见代码模式的时间复杂度识别方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002",
+        "ev-003",
+        "ev-005",
+        "ev-008",
+        "ev-009"
+      ]
+    },
+    {
+      "statement": "理解大 O 复杂度忽略常数项及忽略对数底数的数学依据（换底公式）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "避免根据循环层数盲目判断复杂度的陷阱（例如内层常数循环或非线性增量循环）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-008"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "常数时间复杂度",
+      "namesObserved": [
+        "O(1)",
+        "常数级"
+      ],
+      "role": "introduces",
+      "definition": "算法运行时间与输入数据规模 n 无关，执行固定次数的基本操作。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "线性时间复杂度",
+      "namesObserved": [
+        "O(n)"
+      ],
+      "role": "introduces",
+      "definition": "算法运行时间与数据规模 n 成正比增加的复杂度。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "平方时间复杂度",
+      "namesObserved": [
+        "O(n^2)"
+      ],
+      "role": "introduces",
+      "definition": "算法运行时间与数据规模 n 的平方成正比增加的复杂度，常见于双重线性循环。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "对数时间复杂度",
+      "namesObserved": [
+        "O(logn)"
+      ],
+      "role": "introduces",
+      "definition": "算法数据规模每次按比例缩小（如除以 2 或除以 10）时产生的复杂度。",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006",
+        "ev-007"
+      ]
+    },
+    {
+      "canonicalName": "线性对数时间复杂度",
+      "namesObserved": [
+        "O(nlogn)"
+      ],
+      "role": "introduces",
+      "definition": "外层循环为对数级次数、内层循环为线性次数（或反之）组合而成的复杂度。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "canonicalName": "平方根时间复杂度",
+      "namesObserved": [
+        "O(sqrt(n))"
+      ],
+      "role": "introduces",
+      "definition": "循环条件受 x*x <= n 约束时，循环执行 sqrt(n) 次的复杂度。",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "void swapTwoInts( int &a , int &b ){\n    int temp = a;\n    a = b;\n    b = temp;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "int sum( int n ){\n    int ret = 0;\n    for( int i = 0 ; i <= n ; i ++ )\n        ret += i;\n    return ret;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "void reverse( string &s ){\n    int n = s.size();\n    for( int i = 0 ; i < n/2 ; i ++ )\n        swap( s[i] , s[n-1-i] );\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "void selectionSort(int arr[], int n){\n    for(int i = 0 ; i < n ; i ++){\n        int minIndex = i;\n        for( int j = i + 1 ; j < n ; j ++ )\n            if( arr[j] < arr[minIndex] )\n                minIndex = j;\n\n        swap( arr[i] , arr[minIndex] );\n    }\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "void printInformation(int n){\n    for( int i = 1 ; i <= n ; i ++ )\n        for( int j = 1 ; j <= 30 ; j ++ )\n            cout<<\"Class \"<<i<<\" - \"<<\"No. \"<<j<<endl;\n    return;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "int binarySearch(int arr[], int n, int target){\n    int l = 0, r = n-1;\n    while( l <= r ){\n        int mid = l + (r-l)/2;\n        if( arr[mid] == target ) return mid;\n        if( arr[mid] > target ) r = mid - 1;\n        else l = mid + 1;\n    }\n    return -1;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "string intToString( int num ){\n    string s = \"\";\n    while( num ){\n        s += '0' + num%10;\n        num /= 10;\n    }\n    reverse(s);\n    return s;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "void hello(int n){\n    for( int sz = 1 ; sz < n ; sz += sz )\n        for( int i = 1 ; i < n ; i ++ )\n            cout<<\"Hello, Algorithm!\"<<endl;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "bool isPrime( int n ){\n    for( int x = 2 ; x*x <= n ; x ++ )\n        if( n%x == 0 )\n            return false;\n    return true;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "unknown",
+    "claims": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "swapTwoInts",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(1)",
+      "expressionNormalized": "O(1)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "交换两个整型变量无数据规模变化，属于常数级操作",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-001"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "swapTwoInts 的时间复杂度为 O(1)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-001"
+        ]
+      },
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "reverse",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "字符串长度",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "翻转字符串仅需扫描前半部分进行 1/2 * n 次 swap 操作",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "statement": "1/2 为常数系数，在 Big O 表示法中忽略常数系数，结果依然为 O(n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "reverse 的时间复杂度为 O(n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "cx-003",
+      "subject": "selectionSort",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n^2)",
+      "expressionNormalized": "O(n^2)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "比较操作次数为 (n-1) + (n-2) + ... + 0，符合等差数列求和",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "statement": "求和结果为 1/2 * n * (n-1) = 1/2 * n^2 - 1/2 * n",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "statement": "忽略低阶项 -1/2 * n 和常数系数 1/2，得到 O(n^2)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "selectionSort 的时间复杂度为 O(n^2)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "cx-004",
+      "subject": "printInformation",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "班级个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "内层循环执行固定 30 次，与输入数据规模 n 无关",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "statement": "基本操作总次数为 30n，忽略常数系数 30，得 O(n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "printInformation 的时间复杂度为 O(n)，而非 O(n^2)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "cx-005",
+      "subject": "binarySearch",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(logn)",
+      "expressionNormalized": "O(log n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "每次未找到目标时丢弃一半元素，从 n -> n/2 -> n/4 -> ... -> 1",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "statement": "求 n 经过几次除以 2 操作后等于 1，答案为 log2 n",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "binarySearch 的时间复杂度为 O(log n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "cx-006",
+      "subject": "intToString",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(logn)",
+      "expressionNormalized": "O(log n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "输入的整数 num",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "while 循环每次将 num 除以 10，相当于求 n 经过几次除以 10 操作后等于 0，次数为 log10 n",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "statement": "reverse 操作的复杂度与字符串位数一致，亦为 O(log10 n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-006",
+            "ev-007"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "intToString 的时间复杂度为 O(log n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    },
+    {
+      "id": "cx-007",
+      "subject": "hello",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(nlogn)",
+      "expressionNormalized": "O(n log n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "输入规模参数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-008"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "外层循环 sz += sz 相当于每次乘以 2，循环执行 log2 n 次",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        },
+        {
+          "statement": "内层循环执行 n 次，总打印次数为 n * log2 n",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "hello 函数的时间复杂度为 O(n log n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-008"
+        ]
+      },
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "id": "cx-008",
+      "subject": "isPrime",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(sqrt(n))",
+      "expressionNormalized": "O(sqrt(n))",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "待判断是否为素数的整数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-009"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "循环终止条件为 x * x <= n，相当于 x <= sqrt(n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-009"
+          ]
+        },
+        {
+          "statement": "循环自增步长为 1，故执行次数最多为 sqrt(n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-009"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "isPrime 的时间复杂度为 O(sqrt(n))",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-009"
+        ]
+      },
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "summation",
+      "sourceKind": "shown_in_video",
+      "rawText": "(n-1) + (n-2) + (n-3) + ... + 0 = (0+n-1)*n/2 = (1/2)*n*(n-1) = 1/2*n^2 - 1/2*n = O(n^2)",
+      "normalizedText": "(n-1) + (n-2) + (n-3) + ... + 0 = (0+n-1)*n/2 = (1/2)*n*(n-1) = 1/2*n^2 - 1/2*n",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数据规模",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "formula-002",
+      "kind": "formula",
+      "sourceKind": "shown_in_video",
+      "rawText": "log_a N = log_a b * log_b N",
+      "normalizedText": "log_a N = log_a b * log_b N",
+      "variables": [
+        {
+          "symbol": "a",
+          "meaning": "对数底数 a",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        },
+        {
+          "symbol": "b",
+          "meaning": "对数底数 b",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        },
+        {
+          "symbol": "N",
+          "meaning": "真数 N",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "experiments": [],
+  "examples": [],
+  "edgeCases": [
+    {
+      "statement": "intToString 简易实现中未处理 num 为负数或 0 的边界情况",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "isPrime 简易实现中未处理 n <= 1（如 0、1、负数）的边界情况，会错误返回 true",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "看到双重循环就直接认定复杂度为 O(n^2)，忽视内层循环可能为常数或外层循环增量为非线性",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-008"
+      ]
+    },
+    {
+      "statement": "看到单重循环就直接认定复杂度为 O(n)，忽视循环终止条件可能是 x*x <= n 从而导致 O(sqrt(n))",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "分析复杂度时要看循环的起始点、终止条件以及每次循环变量的增量变化方式",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008",
+        "ev-009"
+      ]
+    },
+    {
+      "statement": "在对数复杂度中，因换底公式相差常数倍，大 O 忽略底数统称为 O(log n)",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:02-02",
+      "to": "lesson:02-03",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "02-02 建立数据规模概念，02-03 具体分析常见代码模式的时间复杂度。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "from": "lesson:02-03",
+      "to": "lesson:02-04",
+      "type": "applies",
+      "status": "provisional",
+      "rationale": "02-03 介绍理论复杂度分析，02-04 亲自试验算法时间复杂度（实验验证）。",
+      "confidence": 0.85,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 30000,
+      "assetId": "asset:video-02-03",
+      "locator": "00:00-00:30",
+      "observation": "幻灯片展示 O(1) 标题及 swapTwoInts 函数代码，老师说明交换两个整数没有数据规模变化，复杂度为 O(1)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 30000,
+      "endMs": 132000,
+      "assetId": "asset:video-02-03",
+      "locator": "00:30-02:12",
+      "observation": "展示 O(n) 标题及 sum 与 reverse 代码，强调 reverse 进行了 1/2*n 次 swap 操作，但复杂度依然是 O(n)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 132000,
+      "endMs": 313000,
+      "assetId": "asset:video-02-03",
+      "locator": "02:12-05:13",
+      "observation": "展示 selectionSort 代码及等差数列推导公式 (n-1)+(n-2)+...+0 = 1/2*n^2 - 1/2*n，得出 O(n^2) 结论。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 313000,
+      "endMs": 391000,
+      "assetId": "asset:video-02-03",
+      "locator": "05:13-06:31",
+      "observation": "展示 printInformation 代码，双重循环但内层循环固定为 30 次，基本操作数为 30n，复杂度为 O(n)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 391000,
+      "endMs": 541000,
+      "assetId": "asset:video-02-03",
+      "locator": "06:31-09:01",
+      "observation": "展示 binarySearch 代码，分析每次丢弃一半元素的过程，得出需要 log2 n 次操作，复杂度为 O(log n)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 541000,
+      "endMs": 705000,
+      "assetId": "asset:video-02-03",
+      "locator": "09:01-11:45",
+      "observation": "展示 intToString 代码，分析 while 循环每次 num /= 10 执行 log10 n 次，复杂度为 O(log n)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 705000,
+      "endMs": 886000,
+      "assetId": "asset:video-02-03",
+      "locator": "11:45-14:46",
+      "observation": "展示换底公式 log_a N = log_a b * log_b N，说明不同底数相差常数倍，大 O 记法中忽略底数，并提到 intToString 的负数/0 陷阱。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 886000,
+      "endMs": 1006000,
+      "assetId": "asset:video-02-03",
+      "locator": "14:46-16:46",
+      "observation": "展示 hello 函数代码，外层循环 sz += sz 循环 log n 次，内层循环 n 次，得出复杂度为 O(n log n)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 1006000,
+      "endMs": 1160560,
+      "assetId": "asset:video-02-03",
+      "locator": "16:46-19:20",
+      "observation": "展示 isPrime 代码，循环条件 x*x <= n 执行 sqrt(n) 次，复杂度为 O(sqrt(n))，并指出其未处理 <=1 的缺陷及优化空间。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.3",
+    "generatedAt": null
+  }
+}

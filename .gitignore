@@ -17,6 +17,27 @@ outputs/**
 !outputs/.gitkeep
 work/**
 !work/.gitkeep
+
+# Algorithm interview course: keep reproducible text evidence, not media
+!work/algorithm-interview-course/
+!work/algorithm-interview-course/**/
+!work/algorithm-interview-course/*.md
+!work/algorithm-interview-course/*.json
+!work/algorithm-interview-course/**/*.md
+!work/algorithm-interview-course/**/*.json
+work/algorithm-interview-course/incoming/**
+!work/algorithm-interview-course/incoming/
+!work/algorithm-interview-course/incoming/README.md
+!outputs/algorithm-interview-course/
+!outputs/algorithm-interview-course/**/
+!outputs/algorithm-interview-course/*.md
+!outputs/algorithm-interview-course/*.json
+!outputs/algorithm-interview-course/**/*.md
+!outputs/algorithm-interview-course/**/*.json
+work/algorithm-interview-course/**/.env
+work/algorithm-interview-course/**/.env.*
+outputs/algorithm-interview-course/**/.env
+outputs/algorithm-interview-course/**/.env.*
 apps/video/out/
 apps/video/.remotion/
 apps/video/public/generated/

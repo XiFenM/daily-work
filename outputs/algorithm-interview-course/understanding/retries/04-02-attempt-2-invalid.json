@@ -1,0 +1,431 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "04-02",
+  "chapterId": "04",
+  "titleObserved": "350. Intersection of Two Arrays",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 785.96,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 80000,
+      "topic": "LeetCode 350 题目介绍",
+      "summary": "讲解求两个数组交集 II 的题目要求，对比 349 题，指出元素出现的频次在交集中是有意义的，需要用 map 记录元素及频次。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 80000,
+      "endMs": 227000,
+      "topic": "利用 C++ std::map 默认值特性的代码实现",
+      "summary": "使用 C++ std::map<int, int> 统计 nums1 中每个元素的频次，再遍历 nums2，在频次大于 0 时将元素加入结果集并扣减频次。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 227000,
+      "endMs": 496000,
+      "topic": "C++ std::map 默认值与 operator[] 行为实验",
+      "summary": "编写测试代码演示 std::map 使用 [] 访问不存在的键时会插入该键并赋予默认值 0，以及键值减为 0 后仍然存在于 map 中，需要 erase 才能真正删除。",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 496000,
+      "endMs": 695000,
+      "topic": "不依赖 map 默认值的显式逻辑代码实现",
+      "summary": "修改代码，显式使用 find()、insert() 和 erase() 处理 map 映射，增强代码在不同语言中的可读性与通用性。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 695000,
+      "endMs": 785960,
+      "topic": "思考题与后续铺垫",
+      "summary": "提出思考题：若给定数组有序该如何解决；并说明 map 和 set 底层实现及复杂度分析将在下一小节详细讲解。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解对于需要记录元素出现频次的数组交集问题，应选择 map 数据结构来保存键值（元素->频次）映射。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "掌握 C++ std::map 中 operator[] 访问不存在键时的默认初始化行为及 erase 彻底删除键的作用。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "掌握编写不依赖特定语言 map 默认值特性的显式元素查找、插入与删除代码逻辑。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Map",
+      "namesObserved": [
+        "map",
+        "映射",
+        "键值对应"
+      ],
+      "role": "introduces",
+      "definition": "记录元素（键）及其出现频次（值）的键值对数据结构。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "Default Value in Map",
+      "namesObserved": [
+        "默认值"
+      ],
+      "role": "introduces",
+      "definition": "在 C++ std::map 中通过 operator[] 访问未初始化的键时，系统会自动插入该键并将值设置为该类型的默认值（如整型为 0）。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "350",
+    "titleObserved": "350. Intersection of Two Arrays",
+    "statement": "给定两个数组 nums1 和 nums2，求两个数组的交集。结果中每个元素出现的次数，应与它在两个数组中出现的次数的最小值一致；输出结果出现的顺序可以是任意的。",
+    "constraints": [
+      "出现的顺序可以是任意的"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "利用 C++ std::map<int, int> 的 operator[] 特性：遍历 nums1，使用 record[nums1[i]]++ 统计元素频次；遍历 nums2，若 record[nums2[i]] > 0，则将元素存入结果并对频次进行减一操作。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [
+        "依赖 C++ STL map operator[] 自动插入键与默认值 0 的特性，在其他无此特性的编程语言中可能导致越界或错误。"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "optimized",
+      "idea": "显式判断 map 逻辑：使用 find() 检查键是否存在，若不存在则 insert(make_pair(..., 1))；遍历 nums2 时，判断键存在且频次大于 0 才加入结果并减一；当频次减至 0 时显式调用 erase() 删除键。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [
+        "代码较为冗长，但逻辑清晰、语意明确，跨语言通用性更高。"
+      ],
+      "codeArtifactIds": [
+        "code-003"
+      ],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {\n        map<int, int> record;\n        for( int i = 0 ; i < nums1.size() ; i ++ )\n            record[nums1[i]] ++;\n\n        vector<int> resultVector;\n        for( int i = 0 ; i < nums2.size() ; i ++ )\n            if( record[nums2[i]] > 0 ){\n                resultVector.push_back( nums2[i] );\n                record[nums2[i]] --;\n            }\n\n        return resultVector;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": null,
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <map>\nusing namespace std;\n\nint main() {\n    map<int,int> myMap;\n    if( myMap.find( 42 ) == myMap.end() )\n        cout<<\"Can not find element 42\"<<endl;\n    else\n        cout<<\"Element 42 is in the map\"<<endl;\n\n    cout<<myMap[42]<<endl;\n    if( myMap.find( 42 ) == myMap.end() )\n        cout<<\"Can not find element 42\"<<endl;\n    else\n        cout<<\"Element 42 is in the map\"<<endl;\n\n    myMap[42] ++;\n    cout<<myMap[42]<<endl;\n\n    myMap[42] --;\n    cout<<myMap[42]<<endl;\n    if( myMap.find( 42 ) == myMap.end() )\n        cout<<\"Can not find element 42\"<<endl;\n    else\n        cout<<\"Element 42 is in the map\"<<endl;\n\n    myMap.erase( 42 );\n    if( myMap.find( 42 ) == myMap.end() )\n        cout<<\"Can not find element 42\"<<endl;\n    else\n        cout<<\"Element 42 is in the map\"<<endl;\n\n    return 0;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "id": "code-003",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {\n        map<int, int> record;\n        for( int i = 0 ; i < nums1.size() ; i ++ )\n            if( record.find(nums1[i]) == record.end() )\n                record.insert( make_pair(nums1[i], 1) );\n            else\n                record[nums1[i]] ++;\n\n        vector<int> resultVector;\n        for( int i = 0 ; i < nums2.size() ; i ++ )\n            if( record.find(nums2[i]) != record.end() && record[nums2[i]] > 0 ){\n                resultVector.push_back( nums2[i] );\n                record[nums2[i]] --;\n                if( record[nums2[i]] == 0 )\n                    record.erase( nums2[i] );\n            }\n\n        return resultVector;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "stateModels": [],
+  "correctness": {
+    "method": "unknown",
+    "claims": [],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": [
+      "ev-007"
+    ]
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [
+    {
+      "id": "experiment-001",
+      "subject": "C++ std::map 下 [] 运算符与 erase() 的行为测试",
+      "purpose": {
+        "statement": "验证 C++ 中 std::map 在使用 operator[] 访问不存在的键时是否会自动插入默认值，以及值减为 0 后键是否依然留在映射中。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004",
+          "ev-005"
+        ]
+      },
+      "setup": {
+        "language": "cpp",
+        "compilerOrRuntime": "CLion2016",
+        "optimization": null,
+        "operatingSystem": "macOS",
+        "hardware": null,
+        "timer": null,
+        "warmup": null,
+        "repetitions": null,
+        "inputGeneration": null
+      },
+      "measurements": [
+        {
+          "inputDescription": "查找不存在的 key 42",
+          "inputSize": null,
+          "observedValue": "Can not find element 42",
+          "unit": null,
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "inputDescription": "用 myMap[42] 访问并打印",
+          "inputSize": null,
+          "observedValue": "0，且再次 find 时变为 Element 42 is in the map",
+          "unit": null,
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "inputDescription": "对 myMap[42] 先后执行 ++ 和 --，再次 find",
+          "inputSize": null,
+          "observedValue": "值变为 0，但 Element 42 is in the map 依然成立",
+          "unit": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "inputDescription": "执行 myMap.erase(42)，再次 find",
+          "inputSize": null,
+          "observedValue": "Can not find element 42",
+          "unit": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "theoreticalExpectation": null,
+      "observation": {
+        "statement": "C++ std::map 在访问未初始化的键时会隐式插入该键并设值为 0；值被减为 0 不等于元素从 map 中被删除，必须调用 erase() 才能移除。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004",
+          "ev-005"
+        ]
+      },
+      "limitations": []
+    }
+  ],
+  "examples": [
+    {
+      "statement": "nums1 = [1, 2, 2, 1], nums2 = [2, 2]，交集结果为 [2, 2]",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "edgeCases": [],
+  "implementationPitfalls": [
+    {
+      "statement": "在 C++ std::map 中，键对应的值变为 0 并不代表该键被彻底移除了，find() 仍能找到该键，只有调用 erase() 才能从映射中彻底删除。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "在部分不提供 map 默认初始化或使用 [] 会报越界错的语言中，直接使用 myMap[key] 读取未插入元素会导致运行错误。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-006"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "思考题：如果给定的两个数组本身已经是有序的，可以不借助辅助数据结构 map/set，直接利用有序性（如双指针/二分查找）来快速求解交集。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:04-01",
+      "to": "lesson:04-02",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "04-01 讲解 set 的使用（Intersection of Two Arrays），04-02 扩展到频次相关的 map 使用（Intersection of Two Arrays II）。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "from": "lesson:04-02",
+      "to": "lesson:04-03",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "视频结尾预告下一小节将深入讲解 set 和 map 不同底层实现及时间性能区别。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 80000,
+      "assetId": "asset:video-04-02",
+      "locator": "00:00 - 01:20",
+      "observation": "PPT展示 LeetCode 350. Intersection of Two Arrays 题目。nums1 = [1, 2, 2, 1], nums2 = [2, 2]，结果为 [2, 2]。指出元素出现的频次有了意义，需要用 map 存频次。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 80000,
+      "endMs": 120000,
+      "assetId": "asset:video-04-02",
+      "locator": "01:20 - 02:00",
+      "observation": "老师讲解算法思路：用 map 记录 nums1 中各元素及其频次，再遍历 nums2 进行比较与频次扣减。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 120000,
+      "endMs": 227000,
+      "assetId": "asset:video-04-02",
+      "locator": "02:00 - 03:47",
+      "observation": "在 main.cpp 中使用 map<int, int> record 实现求解函数 intersect，利用 operator[] 完成频次统计和判断。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 227000,
+      "endMs": 310000,
+      "assetId": "asset:video-04-02",
+      "locator": "03:47 - 05:10",
+      "observation": "在 main_map_test.cpp 中实验测试：访问 myMap[42] 输出 0，并演示在此访问后 myMap.find(42) 不再等于 myMap.end()。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 310000,
+      "endMs": 496000,
+      "assetId": "asset:video-04-02",
+      "locator": "05:10 - 08:16",
+      "observation": "测试 ++ 和 -- 操作后，myMap[42] 值为 0 但 key 依然在 map 中，直至执行 myMap.erase(42) 后 find 才返回 end()。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 496000,
+      "endMs": 695000,
+      "assetId": "asset:video-04-02",
+      "locator": "08:16 - 11:35",
+      "observation": "修改 main.cpp 中的代码，不依赖默认值逻辑，显式编写 find()、insert() 和 erase() 判断，写出更通用清晰的代码。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 695000,
+      "endMs": 785960,
+      "assetId": "asset:video-04-02",
+      "locator": "11:35 - 13:05.96",
+      "observation": "PPT 提出思考题：对于两个问题，如果数组有序？老师说明利用有序性可以不借用辅助结构求解，并预告下一节分析 map/set 时间复杂度与底层实现。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

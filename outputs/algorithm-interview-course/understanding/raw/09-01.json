@@ -1,0 +1,895 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "09-01",
+  "chapterId": "09",
+  "titleObserved": "什么是动态规划",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 1230.96,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 52000,
+      "topic": "章节引入：什么是动态规划",
+      "summary": "介绍第九章的主题动态规划，说明其在算法设计中具有强设计感与艺术性，应用广泛且非常灵活。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 52000,
+      "endMs": 114000,
+      "topic": "引入示例：斐波那契数列定义",
+      "summary": "通过大家熟知的斐波那契数列 (Fibonacci Sequence) 引入，给出数学定义递推公式。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 114000,
+      "endMs": 174000,
+      "topic": "斐波那契数列的纯递归实现",
+      "summary": "展示根据递推定义直接编写的简单 C++ 递归函数代码。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 174000,
+      "endMs": 340000,
+      "topic": "纯递归解法的性能实验 (n=10, 20)",
+      "summary": "在 IDE 中测试 n=10 和 n=20 时纯递归算法的运行时间，观察数据规模扩大后的性能表现。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 340000,
+      "endMs": 540000,
+      "topic": "纯递归解法的性能实验 (n=40, 42) 与复杂度分析",
+      "summary": "测试 n=40 和 n=42 时的耗时，指出数据规模微增导致运行时间暴增万倍，推导其时间复杂度为指数级 O(2^n)。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 540000,
+      "endMs": 737000,
+      "topic": "递归树分析：重叠子问题",
+      "summary": "通过画出 fib(5) 的递归树，直观展示递归过程中存在的大量重复计算（重叠子问题）。",
+      "evidenceIds": [
+        "ev-006",
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 737000,
+      "endMs": 838000,
+      "topic": "引入计数统计与递归调用次数",
+      "summary": "在代码中加入全局计数器 num，统计 n=20 和 n=40 时递归调用的实际巨大次数。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 838000,
+      "endMs": 1047000,
+      "topic": "解法优化：记忆化搜索 (自顶向下)",
+      "summary": "增加全局 memo 数组保存已计算子问题的解，实现记忆化搜索，将计算复杂度降至 O(n) 并进行性能实验对比。",
+      "evidenceIds": [
+        "ev-009",
+        "ev-010",
+        "ev-011",
+        "ev-012"
+      ]
+    },
+    {
+      "startMs": 1047000,
+      "endMs": 1048000,
+      "topic": "解法优化：动态规划 (自底向上)",
+      "summary": "展示自底向上的动态规划实现，从基础状态 memo[0], memo[1] 逐步递推，分析其相比记忆化搜索的常数与栈空间优势。",
+      "evidenceIds": [
+        "ev-013",
+        "ev-014"
+      ]
+    },
+    {
+      "startMs": 1048000,
+      "endMs": 1230960,
+      "topic": "动态规划概念总结",
+      "summary": "给出动态规划的维基百科定义，总结递归问题、重叠子问题、记忆化搜索（自顶向下）与动态规划（自底向上）的关系。",
+      "evidenceIds": [
+        "ev-015",
+        "ev-016"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解重叠子问题概念及其对纯递归算法性能导致的指数级影响",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "掌握自顶向下的记忆化搜索方法，通过引入 memo 数组避免重复计算",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009",
+        "ev-012"
+      ]
+    },
+    {
+      "statement": "掌握自底向上的动态规划方法，理解其从小数据量子问题层层递推求解原问题的思路",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-013",
+        "ev-015"
+      ]
+    },
+    {
+      "statement": "理解记忆化搜索与动态规划的关系及二者在递归栈与开销上的差异",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-014",
+        "ev-016"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Dynamic Programming",
+      "namesObserved": [
+        "动态规划",
+        "dynamic programming",
+        "dynamic optimization"
+      ],
+      "role": "introduces",
+      "definition": "将原问题拆解成若干子问题，同时保存子问题的答案，使得每个子问题只求解一次，最终获得原问题的答案。",
+      "evidenceIds": [
+        "ev-015"
+      ]
+    },
+    {
+      "canonicalName": "Overlapping Subproblems",
+      "namesObserved": [
+        "重叠子问题",
+        "重复计算"
+      ],
+      "role": "introduces",
+      "definition": "在递归求解过程中多次出现的相同子问题，导致重复计算。",
+      "evidenceIds": [
+        "ev-006",
+        "ev-016"
+      ]
+    },
+    {
+      "canonicalName": "Memoization",
+      "namesObserved": [
+        "记忆化搜索",
+        "自顶向下的解决问题"
+      ],
+      "role": "introduces",
+      "definition": "在自顶向下的递归搜索过程中，使用数据结构（如 memo 数组）记录已求解的子问题答案，再次遇到时直接返回缓存结果。",
+      "evidenceIds": [
+        "ev-009",
+        "ev-012",
+        "ev-016"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": null,
+    "problemId": null,
+    "titleObserved": "斐波那契数列 Fibonacci Sequence",
+    "statement": "求斐波那契数列第 n 项的值 F(n)。根据定义，F(0)=0，F(1)=1（幻灯片公式写为 F(0)=1, F(1)=1），对 n > 1 有 F(n) = F(n-1) + F(n-2)。",
+    "constraints": [
+      "n 为非负整数"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-002",
+      "ev-003"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "直接根据斐波那契数列递推定义编写自顶向下的简单递归算法。",
+      "timeComplexity": "O(2^n)",
+      "spaceComplexity": "O(n)",
+      "limitations": [
+        "存在大量的重复子问题计算，递归树规模指数级膨胀，n 稍大时计算时间不可接受。"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-003",
+        "ev-005"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "intermediate",
+      "idea": "自顶向下的记忆化搜索：在递归调用的同时增加一个全局 memo 数组。若 memo[n] != -1 说明已计算过，直接返回；否则计算后存入 memo[n]。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "limitations": [
+        "依然依赖递归调用的函数开销与系统栈空间。"
+      ],
+      "codeArtifactIds": [
+        "code-002"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-009",
+        "ev-010"
+      ]
+    },
+    {
+      "id": "solution-003",
+      "stage": "optimized",
+      "idea": "自底向上的动态规划：从基本情况 memo[0]=0, memo[1]=1 开始，通过循环递推计算 memo[i] = memo[i-1] + memo[i-2]，直到计算出 memo[n]。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "limitations": [
+        "使用了 O(n) 的辅助向量 memo 存储所有状态（视频中未展示空间压缩）。"
+      ],
+      "codeArtifactIds": [
+        "code-003"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-013",
+        "ev-014"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "int fib( int n ){\n    if( n == 0 )\n        return 0;\n    if( n == 1 )\n        return 1;\n    return fib(n-1) + fib(n-2);\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "vector<int> memo;\n\nint fib( int n ){\n    if( n == 0 )\n        return 0;\n    if( n == 1 )\n        return 1;\n    if( memo[n] == -1 )\n        memo[n] = fib(n-1) + fib(n-2);\n    return memo[n];\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "id": "code-003",
+      "solutionStageId": "solution-003",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "int fib( int n ){\n    vector<int> memo(n+1, -1);\n    memo[0] = 0;\n    memo[1] = 1;\n    for( int i = 2 ; i <= n ; i++ )\n        memo[i] = memo[i-1] + memo[i-2];\n    return memo[n];\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-013"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "memo[i]",
+          "role": "state_value",
+          "meaning": "第 i 个斐波那契数的值",
+          "updateRule": "memo[i] = memo[i-1] + memo[i-2]",
+          "evidenceIds": [
+            "ev-002",
+            "ev-013"
+          ]
+        },
+        {
+          "symbol": "i",
+          "role": "index",
+          "meaning": "当前计算的斐波那契数列项的索引，范围从 0 到 n",
+          "updateRule": "i 从 2 循环增加到 n",
+          "evidenceIds": [
+            "ev-013"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "i >= 2",
+          "updates": "memo[i] = memo[i-1] + memo[i-2]",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-002",
+            "ev-013"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "递推或搜索计算到 i = n 时结束，返回 memo[n]",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-013"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002",
+        "ev-013"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "子问题计算完成后将其结果存入 memo[n]，确保每个子问题 memo[i] 只会被真正计算一次",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-009",
+          "ev-013",
+          "ev-015"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": "O(n)",
+    "space": "O(n)",
+    "assumptions": [],
+    "evidenceIds": [
+      "ev-010",
+      "ev-014"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "纯递归求解斐波那契数列",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(2^n)",
+      "expressionNormalized": "O(2^n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "斐波那契数列的项数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "递归树的节点数按二叉树形式呈指数级增长，整体计算规模为 2 的 n 次方级别",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005",
+            "ev-006"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "纯递归求解斐波那契数列的时间复杂度为 O(2^n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "记忆化搜索与动态规划求解斐波那契数列",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "斐波那契数列的项数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-010"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "每个斐波那契数值仅计算一次，子问题总数为 n 个，因此时间复杂度降为线性级 O(n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-010",
+            "ev-014"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "记忆化搜索与动态规划求解斐波那契数列的时间复杂度为 O(n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-010",
+          "ev-014"
+        ]
+      },
+      "evidenceIds": [
+        "ev-010",
+        "ev-014"
+      ]
+    }
+  ],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "recurrence",
+      "sourceKind": "shown_in_video",
+      "rawText": "F(0)=1, F(1)=1, F(n)=F(n-1)+F(n-2)",
+      "normalizedText": "F(0)=1, F(1)=1, F(n)=F(n-1)+F(n-2)",
+      "variables": [
+        {
+          "symbol": "F(n)",
+          "meaning": "第 n 个斐波那契数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "symbol": "n",
+          "meaning": "数列索引/项数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "id": "experiment-001",
+      "subject": "纯递归求解斐波那契数列的运行耗时与调用次数测试",
+      "purpose": {
+        "statement": "通过倍增数据规模 n，观察纯递归算法运行时间与函数调用次数的爆发式增长",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004",
+          "ev-005",
+          "ev-008"
+        ]
+      },
+      "setup": {
+        "language": "cpp",
+        "compilerOrRuntime": null,
+        "optimization": null,
+        "operatingSystem": null,
+        "hardware": null,
+        "timer": "clock()",
+        "warmup": null,
+        "repetitions": null,
+        "inputGeneration": null
+      },
+      "measurements": [
+        {
+          "inputDescription": "n = 10",
+          "inputSize": "10",
+          "observedValue": "4e-06",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "inputDescription": "n = 20",
+          "inputSize": "20",
+          "observedValue": "0.000104",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "inputDescription": "n = 40",
+          "inputSize": "40",
+          "observedValue": "1.28333",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "inputDescription": "n = 42",
+          "inputSize": "42",
+          "observedValue": "3.47917",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "theoreticalExpectation": null,
+      "observation": {
+        "statement": "当 n 从 20 增至 40 时，耗时暴增两万多倍；n=40 时 fib 函数被重复调用了 331160281 次",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005",
+          "ev-008"
+        ]
+      },
+      "limitations": [],
+      "evidenceIds": [
+        "ev-004",
+        "ev-005",
+        "ev-008"
+      ]
+    },
+    {
+      "id": "experiment-002",
+      "subject": "记忆化搜索与动态规划的运行耗时测试",
+      "purpose": {
+        "statement": "测试引入 memo 数组优化后的记忆化搜索与动态规划的运行效率与调用次数",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-010",
+          "ev-011",
+          "ev-014"
+        ]
+      },
+      "setup": {
+        "language": "cpp",
+        "compilerOrRuntime": null,
+        "optimization": null,
+        "operatingSystem": null,
+        "hardware": null,
+        "timer": "clock()",
+        "warmup": null,
+        "repetitions": null,
+        "inputGeneration": null
+      },
+      "measurements": [
+        {
+          "inputDescription": "记忆化搜索 n = 40",
+          "inputSize": "40",
+          "observedValue": "5e-06",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-010"
+          ]
+        },
+        {
+          "inputDescription": "记忆化搜索 n = 1000",
+          "inputSize": "1000",
+          "observedValue": "6e-05",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-011"
+          ]
+        },
+        {
+          "inputDescription": "动态规划 n = 1000",
+          "inputSize": "1000",
+          "observedValue": "1e-05",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-014"
+          ]
+        }
+      ],
+      "theoreticalExpectation": null,
+      "observation": {
+        "statement": "记忆化搜索与动态规划均在纳秒/微秒级别完成计算，性能提升达到百万倍；记忆化搜索的 fib 函数调用次数降至 2n-1 次",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-010",
+          "ev-011",
+          "ev-014"
+        ]
+      },
+      "limitations": [],
+      "evidenceIds": [
+        "ev-010",
+        "ev-011",
+        "ev-014"
+      ]
+    }
+  ],
+  "examples": [],
+  "edgeCases": [],
+  "implementationPitfalls": [
+    {
+      "statement": "记忆化搜索中 memo 数组初始哨兵值的选择必须小心。对于结果可能包含 -1 的问题，不能直接使用 -1 作为未计算的判断标记。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "statement": "计算较大的斐波那契数（如 n=1000）时，结果会迅速超出 32 位整型表示范围导致整型溢出，实际应用中需采用 long long 或高精度类型。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007",
+        "ev-011"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "遇到能够拆解为子问题的递归问题，首先分析是否存在重叠子问题。若存在重复计算，应通过记忆化搜索（自顶向下）或动态规划（自底向上）将指数级复杂度优化为多项式级/线性级。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-015",
+        "ev-016"
+      ]
+    },
+    {
+      "statement": "记忆化搜索与自底向上的动态规划本质相同，但动态规划避免了递归调用的开销与系统栈消耗，通常代码更加简洁、常数更小。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-014",
+        "ev-016"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:02-05",
+      "to": "lesson:09-01",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "课程中提及之前章节讲解过的递归复杂度分析及数据规模倍增测试方法。",
+      "confidence": 0.8,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "from": "lesson:09-01",
+      "to": "lesson:09-02",
+      "type": "applies",
+      "status": "provisional",
+      "rationale": "本课建立的重叠子问题、记忆化搜索与自底向上动态规划基本思想将在后续具体算法问题（如 Climbing Stairs）中直接应用。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001",
+        "ev-016"
+      ]
+    },
+    {
+      "from": "lesson:09-01",
+      "to": "lesson:10-02",
+      "type": "contrasts_with",
+      "status": "provisional",
+      "rationale": "候选关系列表中给出的对比候选关系。",
+      "confidence": 0.5,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 52000,
+      "assetId": "asset:video-09-01",
+      "locator": "00:00 - 00:52",
+      "observation": "老师介绍第9章动态规划章节，说明动态规划是著名的算法设计思想，设计感与艺术性强，解题范围广。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 52000,
+      "endMs": 114000,
+      "assetId": "asset:video-09-01",
+      "locator": "00:52 - 01:54",
+      "observation": "幻灯片展示斐波那契数列定义 F(0)=1, F(1)=1, F(n)=F(n-1)+F(n-2)，老师说明其为天然的递归表达式。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 114000,
+      "endMs": 174000,
+      "assetId": "asset:video-09-01",
+      "locator": "01:54 - 02:54",
+      "observation": "幻灯片及 IDE 屏幕展示 int fib(int n) 递归实现，边界条件为 n==0 时 return 0, n==1 时 return 1。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 174000,
+      "endMs": 340000,
+      "assetId": "asset:video-09-01",
+      "locator": "02:54 - 05:40",
+      "observation": "IDE 中运行测试：n=10 时耗时 4e-6 秒 (res=55)；n=20 时耗时 0.000104 秒 (res=6765)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 340000,
+      "endMs": 540000,
+      "assetId": "asset:video-09-01",
+      "locator": "05:40 - 09:00",
+      "observation": "IDE 中运行测试：n=40 时耗时 1.28333 秒；n=42 时耗时 3.47917 秒。得出纯递归算法复杂度为 O(2^n)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_visual",
+      "startMs": 540000,
+      "endMs": 737000,
+      "assetId": "asset:video-09-01",
+      "locator": "09:00 - 12:17",
+      "observation": "幻灯片展示 fib(5) 的递归树，标注高亮框指出 fib(3) 计算了 2 次，fib(2) 计算了 3 次，直观展示重复计算。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_audio",
+      "startMs": 300000,
+      "endMs": 326000,
+      "assetId": "asset:video-09-01",
+      "locator": "05:00 - 05:26",
+      "observation": "老师口述提示：更大数据的斐波那契数增长极快，返回值需设为 long long 避免整型溢出。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 457000,
+      "endMs": 517000,
+      "assetId": "asset:video-09-01",
+      "locator": "07:37 - 08:37",
+      "observation": "代码添加全局变量 num++ 记录函数调用次数：n=20 时调用 21891 次；n=40 时调用 331160281 次。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 518000,
+      "endMs": 660000,
+      "assetId": "asset:video-09-01",
+      "locator": "08:38 - 11:00",
+      "observation": "代码引入 vector<int> memo 数组，初始化为 -1；若 memo[n] == -1 赋予 fib(n-1)+fib(n-2) 并返回 memo[n]。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-010",
+      "sourceType": "video_combined",
+      "startMs": 728000,
+      "endMs": 828000,
+      "assetId": "asset:video-09-01",
+      "locator": "12:08 - 12:45",
+      "observation": "记忆化搜索测试：n=40 时耗时 5e-6 秒，fib 函数仅调用 79 次，比纯递归提升百万倍，时间复杂度降至 O(n)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-011",
+      "sourceType": "video_combined",
+      "startMs": 828000,
+      "endMs": 894000,
+      "assetId": "asset:video-09-01",
+      "locator": "12:54 - 13:24",
+      "observation": "记忆化搜索测试：n=1000 时耗时 6e-5 秒，调用 1999 次 (2n-1)，结果发生整型溢出 (155611435)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-012",
+      "sourceType": "video_visual",
+      "startMs": 827000,
+      "endMs": 894000,
+      "assetId": "asset:video-09-01",
+      "locator": "13:47 - 14:54",
+      "observation": "幻灯片标题为《记忆化搜索 - 自顶向下的解决问题》，展示完整记忆化搜索代码。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-013",
+      "sourceType": "video_combined",
+      "startMs": 894000,
+      "endMs": 960000,
+      "assetId": "asset:video-09-01",
+      "locator": "14:54 - 16:00",
+      "observation": "幻灯片标题为《动态规划 - 自底向上的解决问题》，展示使用 for 循环递推 memo[i] 的完整 C++ 代码。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-014",
+      "sourceType": "video_combined",
+      "startMs": 960000,
+      "endMs": 1047000,
+      "assetId": "asset:video-09-01",
+      "locator": "16:00 - 17:27",
+      "observation": "动态规划测试：n=1000 耗时 1e-5 秒。分析自底向上动态规划相比自顶向下记忆化搜索无递归栈消耗，更优秀。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-015",
+      "sourceType": "video_combined",
+      "startMs": 1047000,
+      "endMs": 1100000,
+      "assetId": "asset:video-09-01",
+      "locator": "17:28 - 18:20",
+      "observation": "幻灯片展示维基百科对动态规划的英文与中文定义，强调拆解子问题、保存答案、子问题仅求解一次。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-016",
+      "sourceType": "video_combined",
+      "startMs": 1100000,
+      "endMs": 1230960,
+      "assetId": "asset:video-09-01",
+      "locator": "18:20 - 20:27",
+      "observation": "幻灯片展示结构图：递归问题 -> 重叠子问题 -> 记忆化搜索(自顶向下) / 动态规划(自底向上) 总结。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "formulaArtifacts[0].rawText vs codeArtifacts[0].code",
+      "reason": "幻灯片 01:03 上斐波那契数列公式标注为 F(0)=1, F(1)=1；但屏幕展示和实际运行的 C++ 代码中边界条件为 if(n==0) return 0; if(n==1) return 1; 即 F(0)=0, F(1)=1。",
+      "recommendedCheck": "核对课程代码仓库或记录画面与口述代码的实现差异。"
+    }
+  ],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.6",
+    "generatedAt": null
+  }
+}

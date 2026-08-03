@@ -1,0 +1,547 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "10-03",
+  "chapterId": "10",
+  "titleObserved": "贪心选择性质的证明",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 923.32,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 65000,
+      "topic": "贪心选择性质的基本定义",
+      "summary": "介绍贪心选择性质的直观定义，并指出若某条贪心规则不能成立，举出一个反例即可否定它。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 65000,
+      "endMs": 125000,
+      "topic": "反例法否定贪心算法：0-1背包问题",
+      "summary": "通过按单位价值（v/w）贪心选择的0-1背包反例，证明贪心策略无法保证获取全局最优解。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 125000,
+      "endMs": 190000,
+      "topic": "反例法否定贪心算法：LeetCode 279 完全平方数",
+      "summary": "展示完全平方数（n=12）问题中优先选最大平方数的直觉贪心失效反例（9+1+1+1 相比最优解 4+4+4）。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 190000,
+      "endMs": 380000,
+      "topic": "贪心算法正确性证明方法探讨",
+      "summary": "讨论无法举出反例时，需要使用数学归纳法或反证法进行严谨数学证明。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 380000,
+      "endMs": 404000,
+      "topic": "区间不重叠问题与贪心选择",
+      "summary": "给出最大化互不重叠区间数量的目标，以及按结束时间排序、每次选择当前最早结束兼容区间的规则。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 404000,
+      "endMs": 470000,
+      "topic": "反设与证明量词",
+      "summary": "以“某次选择”引入区间 i，并反设该选择不能达到最优值 k；画面没有把“某次”正式量化为任意迭代步骤。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 470000,
+      "endMs": 634000,
+      "topic": "交换步骤",
+      "summary": "令一个最优解当前选择结束更晚的区间 j，以贪心区间 i 替换 j，并说明替换不影响后续区间选择。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 634000,
+      "endMs": 672000,
+      "topic": "一步交换引理的矛盾收束",
+      "summary": "替换后仍得到大小为 k 的解，与至多 k-1 的反设矛盾；课程据此宣布区间问题具有贪心选择性质。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 672000,
+      "endMs": 769000,
+      "topic": "贪心选择性质证明通用模式总结",
+      "summary": "总结贪心算法A完全替代最优算法O且不影响求解最优解的证明框架，并给出Assign Cookies课后练习。",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "startMs": 769000,
+      "endMs": 923320,
+      "topic": "贪心算法在综合问题中的应用与总结",
+      "summary": "课程以题名级方式列出最小生成树与最短路径，并给出贪心练习建议；没有展开具体算法、适用条件或正确性证明。",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解贪心选择性质的定义：求解最优化问题时作出局部贪心选择不会影响后续子问题的求解。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "掌握使用反例法否定不成立的贪心算法策略。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "理解使用反证法（替换论证）证明贪心选择性质的数学证明思路。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005",
+        "ev-006",
+        "ev-007",
+        "ev-008",
+        "ev-009"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "贪心选择性质",
+      "namesObserved": [
+        "贪心选择性质"
+      ],
+      "role": "introduces",
+      "definition": "在求解一个最优化问题中，使用贪心的方式选择了一组内容之后，不会影响剩下的子问题的求解。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "反证法",
+      "namesObserved": [
+        "反证法"
+      ],
+      "role": "applies",
+      "definition": "假设贪心选择得到的解不是最优的，通过将最优解中的步骤替换为贪心选择且证明不影响解的优劣或后续选择，从而推导出矛盾。",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005",
+        "ev-006",
+        "ev-007",
+        "ev-008",
+        "ev-009"
+      ]
+    },
+    {
+      "canonicalName": "最小生成树",
+      "namesObserved": [
+        "最小生成树"
+      ],
+      "role": "mentions",
+      "definition": null,
+      "evidenceIds": [
+        "ev-010"
+      ]
+    },
+    {
+      "canonicalName": "最短路径",
+      "namesObserved": [
+        "最短路径"
+      ],
+      "role": "mentions",
+      "definition": null,
+      "evidenceIds": [
+        "ev-010"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "observation",
+      "idea": "按区间结尾排序，每次选择结尾最早且与前一个已选区间不重叠的区间。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [
+        "课程只完成一步交换引理；没有形式化给出重复交换或归纳闭环",
+        "区间端点相等时能否衔接以及结束时间并列时的 tie-break 没有说明"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [],
+  "stateModels": [],
+  "correctness": {
+    "method": "exchange_argument",
+    "completeness": "partial",
+    "claims": [
+      {
+        "statement": "课程通过一步交换说明：存在一个大小仍为 k 的最优解，其当前选择可以换成结束最早的兼容区间。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005",
+          "ev-006",
+          "ev-007",
+          "ev-008"
+        ]
+      },
+      {
+        "statement": "画面没有直接给出重复交换或归纳、剩余子问题最优结构、并列结束时间与端点语义，因此只能把整体算法正确性记为部分证明。",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": [
+          "ev-005",
+          "ev-006",
+          "ev-007",
+          "ev-008",
+          "ev-009"
+        ]
+      }
+    ],
+    "stateModelIds": [],
+    "obligations": [
+      {
+        "phase": "greedy_choice",
+        "statement": "选择结尾最早且与前一区间不重叠的区间 [s(i), f(i)]，其中 f(i) 是当前所有可选区间中结尾最早的。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      {
+        "phase": "exchange_step",
+        "statement": "假设最优解在这一步选择 [s(j), f(j)] 且 f(j) > f(i)，用 [s(i), f(i)] 替换 [s(j), f(j)] 后，由于 f(i) 更早结束，不会影响后续区间的选择，同样可构成大小为 k 的解。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      {
+        "phase": "postcondition",
+        "statement": "课程的一步结论是：选择 [s(i), f(i)] 也能得到大小为 k 的解，与“该选择所得解最多为 k-1”的反设矛盾，并据此宣布该问题具有贪心选择性质。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-008"
+        ]
+      }
+    ]
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "inequality",
+      "sourceKind": "shown_in_video",
+      "rawText": "f(j) > f(i)",
+      "normalizedText": "f(j) > f(i)",
+      "variables": [
+        {
+          "symbol": "f(i)",
+          "meaning": "贪心选择区间的结尾时间",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        },
+        {
+          "symbol": "f(j)",
+          "meaning": "假设的最优解所选区间的结尾时间",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "0-1背包反例：容量为5，物品0(w=1,v=6), 物品1(w=2,v=10), 物品2(w=3,v=12)。按v/w贪心选0和1得价值16；而选1和2得价值22。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "完全平方数反例：n=12。贪心选最大平方数9得到 9+1+1+1 (4个)；而最优解为 4+4+4 (3个)。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "课程画面使用 f(j) > f(i)，没有覆盖 f(j) = f(i) 的并列最早结束情况。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "课程没有定义区间是闭、开或半开，也没有说明端点相等时算冲突还是可衔接。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "不能把一步交换引理直接改写成整个迭代算法已经获得完整形式化证明。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007",
+        "ev-008",
+        "ev-009"
+      ]
+    },
+    {
+      "statement": "课程末页只列出最小生成树和最短路径题名；不能据此补写 Prim、Kruskal、Dijkstra、边权条件或其证明。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "面试中很少会让现场证明贪心算法的严谨正确性，关键在于积累常见模型并能通过反例排除错误的贪心直觉。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    },
+    {
+      "statement": "看到局部规则时，先精确写出规则和前提，再尝试构造最小反例；没有反例也不能替代正确性证明。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:10-02",
+      "to": "lesson:10-03",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "给定相邻课候选指向 10-02；本课继续用区间调度讲贪心选择证明，但本课画面没有直接说出课次承接关系。",
+      "confidence": 0.88,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "from": "lesson:09-05",
+      "to": "lesson:10-03",
+      "type": "revisits",
+      "status": "provisional",
+      "rationale": "本课重新使用 0-1 背包的同一三物品、容量 5、按单位价值贪心得 16 而可行最优值为 22 的反例。",
+      "confidence": 0.99,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "from": "lesson:06-05",
+      "to": "lesson:10-03",
+      "type": "revisits",
+      "status": "provisional",
+      "rationale": "本课重新使用 279 Perfect Squares，并把 n=12 的“先取最大平方数”作为错误贪心反例；06-05 曾以同题讲 BFS 最短路。",
+      "confidence": 0.97,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 65000,
+      "assetId": "asset:video-10-03",
+      "locator": "00:00 - 01:05",
+      "observation": "幻灯片展示《贪心选择性质》，老师解释其直观语义；00:45 后画面直接写出“如果无法使用贪心算法，举出反例即可”。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 65000,
+      "endMs": 125000,
+      "assetId": "asset:video-10-03",
+      "locator": "01:05 - 02:05",
+      "observation": "幻灯片展示0-1背包问题表格与容量5图示，通过单位价值贪心解16与最优解22对比举出反例。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 125000,
+      "endMs": 190000,
+      "assetId": "asset:video-10-03",
+      "locator": "02:05 - 03:10",
+      "observation": "幻灯片展示 279. Perfect Squares，说明 n=12 时贪心 9+1+1+1 劣于 4+4+4 的反例。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 190000,
+      "endMs": 380000,
+      "assetId": "asset:video-10-03",
+      "locator": "03:10 - 06:20",
+      "observation": "课程提出“无法举出反例时如何证明贪心算法正确性”，并在画面上明确给出“反证法”。模型还从组合音视频中提取到数学归纳法讨论，但本地视觉抽帧未独立核对该口述细节。",
+      "confidence": 0.9
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 380000,
+      "endMs": 404000,
+      "assetId": "asset:video-10-03",
+      "locator": "06:20 - 06:44",
+      "observation": "展示最大化互不重叠区间数量的问题，并给出按结束时间排序、每次选择当前最早结束且与前一已选区间不重叠的规则。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 404000,
+      "endMs": 470000,
+      "assetId": "asset:video-10-03",
+      "locator": "06:44 - 07:50",
+      "observation": "画面以“某次选择”定义贪心区间 [s(i),f(i)]，其中 f(i) 在当前选择中最早；随后反设该选择不能达到最优值 k。未出现“任意一步”或形式化全称量词。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 470000,
+      "endMs": 634000,
+      "assetId": "asset:video-10-03",
+      "locator": "07:50 - 10:34",
+      "observation": "假设一个最优解当前选择 [s(j),f(j)] 且 f(j)>f(i)；画面声称可用 i 替换 j 而不影响后续区间选择。只写出严格大于，没有处理结束时间相等。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 634000,
+      "endMs": 672000,
+      "assetId": "asset:video-10-03",
+      "locator": "10:34 - 11:12",
+      "observation": "课程说明选择 i 后仍构成大小为 k 的解，与“所得解最多为 k-1”的反设矛盾，并宣布该问题具有贪心选择性质。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 672000,
+      "endMs": 769000,
+      "assetId": "asset:video-10-03",
+      "locator": "11:12 - 12:49",
+      "observation": "总结抽象替换模板：贪心算法 A 能替代最优算法 O，且不影响求出最优解。画面没有展开逐步重复替换、归纳基例或剩余子问题闭包。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-010",
+      "sourceType": "video_combined",
+      "startMs": 769000,
+      "endMs": 923320,
+      "assetId": "asset:video-10-03",
+      "locator": "12:49 - 15:23.320",
+      "observation": "课程总结页列出“最小生成树”“最短路径”，并给出贪心学习建议；未显示具体算法名、前提、转移或证明。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "correctness.quantification",
+      "reason": "画面使用“某次选择”，没有显式说明这是任意迭代步骤，也没有给出全称量词或归纳基例。",
+      "recommendedCheck": "正式笔记把它限定为一步交换引理，不改写为已经逐轮证明整个算法。"
+    },
+    {
+      "field": "correctness.optimal_substructure",
+      "reason": "课程说替换“不影响后续区间选择”，但没有定义交换后的剩余实例，也没有证明剩余问题保持同类最优结构。",
+      "recommendedCheck": "保持 correctness.completeness=partial，并把残余子问题闭包列为缺失义务。"
+    },
+    {
+      "field": "correctness.repeated_exchange",
+      "reason": "画面没有展示对每个后续分歧重复交换、归纳保持、终止和最终贪心解等价。",
+      "recommendedCheck": "不要把一步大小为 k 的交换结论当作整个迭代算法的完整 postcondition。"
+    },
+    {
+      "field": "formulaArtifacts[0].tie_case",
+      "reason": "课程写 f(j)>f(i)，没有处理 f(j)=f(i) 的并列最早结束情况，也没有说明 tie-break。",
+      "recommendedCheck": "在笔记中单列并列结束时间边界；如补充可交换性，必须标 editorial_inference。"
+    },
+    {
+      "field": "problem.interval_endpoint_semantics",
+      "reason": "课程没有定义区间开闭，也没有说明一个区间起点等于前一区间终点时是否冲突。",
+      "recommendedCheck": "不要补造 < 或 <= 兼容条件；只按课程文字写“互不重叠”。"
+    },
+    {
+      "field": "concepts.graph_applications",
+      "reason": "最小生成树和最短路径只在结尾页以题名出现，没有具体算法、边权前提或正确性证据。",
+      "recommendedCheck": "仅记录为 mentions，不推断 Prim、Kruskal、Dijkstra、BFS 或任何适用条件。"
+    },
+    {
+      "field": "evidence[3].audio_detail",
+      "reason": "模型从组合音视频提取到数学归纳法讨论，但本地视觉抽帧只直接确认问题句与“反证法”。",
+      "recommendedCheck": "不把数学归纳法作为本课核心概念；如正文提及，明确它来自模型音频提取且未做独立听审。"
+    }
+  ],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "b34946d6e9474ecdabe3cbc83c82f3c0",
+    "promptVersion": "video-evidence-v1.7",
+    "generatedAt": "2026-08-03T02:48:02.000Z"
+  }
+}

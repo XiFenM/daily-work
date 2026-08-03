@@ -1,0 +1,558 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "06-07",
+  "chapterId": "06",
+  "titleObserved": "优先队列相关的算法问题 Top K Frequent Elements",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 941.685261,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 68000,
+      "topic": "Top K Frequent Elements 题目介绍与边界约束",
+      "summary": "介绍 LeetCode 347 题 Top K Frequent Elements 的题目要求与输入样例，并讨论 k 的合法性约束。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 68000,
+      "endMs": 165000,
+      "topic": "思路一：哈希表统计 + 全局排序",
+      "summary": "分析基础解法，先用哈希表统计元素频率，再对频率全排序取前 k 个，复杂度为 O(n log n)。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 165000,
+      "endMs": 255000,
+      "topic": "思路二：维护大小为 k 的优先队列",
+      "summary": "讲解使用容量为 k 的优先队列（最小堆）维护当前最高频率元素，将复杂度降低至 O(n log k)。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 255000,
+      "endMs": 747000,
+      "topic": "思路二的 C++ 代码实现",
+      "summary": "在 CCLion 中使用 C++ 实现思路二，编写频率统计、最小堆维护及结果提取过程。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 747000,
+      "endMs": 836000,
+      "topic": "思路三：维护大小为 n-k 的优先队列",
+      "summary": "探讨当 k 接近 n 时的优化思路，维护大小为 n-k 的优先队列，时间复杂度为 O(n log (n-k))。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 836000,
+      "endMs": 941685,
+      "topic": "思考练习：LeetCode 23 Merge k Sorted Lists",
+      "summary": "引出练习题 Merge k Sorted Lists，并延伸讨论 k 分归并排序及其性能实验。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解并掌握使用优先队列（堆）解决 Top K 问题的基本套路",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "学会根据 k 与 n 的相对大小关系选择维护 k 个元素或 (n-k) 个元素的堆优化算法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-005"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "优先队列",
+      "namesObserved": [
+        "优先队列",
+        "priority_queue"
+      ],
+      "role": "applies",
+      "definition": "一种能在 O(1) 时间获取极值、在对数时间内插入或删除元素的数据结构，在本课中用于维护 Top K 频率元素",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "最小堆",
+      "namesObserved": [
+        "最小堆",
+        "最小频率元素的优先队列"
+      ],
+      "role": "applies",
+      "definition": "堆顶为当前集合中最小元素的堆结构，用于随时替换并淘汰低频元素",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "347",
+    "titleObserved": "Top K Frequent Elements",
+    "statement": "给定一个非空数组，返回前 k 个出现频率最高的元素。",
+    "constraints": [
+      "数组非空",
+      "k 是合法的（k > 0 且 k <= 频率表中不同元素的个数）"
+    ],
+    "clarifyingQuestions": [
+      "如果 k 不合法（如 k <= 0 或 k 大于不同元素总数）时该如何处理？"
+    ],
+    "evidenceIds": [
+      "ev-001"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "用哈希表扫描一遍统计每个元素的出现频率，然后对频率数据进行排序，取前 k 个出现频率最高的元素。",
+      "timeComplexity": "O(nlogn)",
+      "spaceComplexity": null,
+      "limitations": [
+        "算法瓶颈在于对所有元素按照频率进行全局排序，代价较高"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "optimized",
+      "idea": "先用哈希表统计频率，再维护一个大小为 k 的优先队列（最小堆）。遍历频率表时，若新元素频率高于堆顶最小频率，则剔除堆顶并将新元素入堆。最终堆中留下的即为前 k 个高频元素。",
+      "timeComplexity": "O(nlogk)",
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "id": "solution-003",
+      "stage": "alternative",
+      "idea": "维护一个大小为 n-k 的优先队列，用于剔除频率最低的 n-k 个元素，最终剩下的也是前 k 个高频元素。",
+      "timeComplexity": "O(nlog(n-k))",
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n#include <unordered_map>\n#include <queue>\n#include <cassert>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    vector<int> topKFrequent(vector<int>& nums, int k) {\n        assert(k > 0);\n\n        unordered_map<int, int> freq;\n        for (int i = 0; i < nums.size(); i++) {\n            freq[nums[i]]++;\n        }\n\n        assert(k <= freq.size());\n\n        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;\n        for (unordered_map<int, int>::iterator iter = freq.begin(); iter != freq.end(); iter++) {\n            if (pq.size() == k) {\n                if (iter->second > pq.top().first) {\n                    pq.pop();\n                    pq.push(make_pair(iter->second, iter->first));\n                }\n            } else {\n                pq.push(make_pair(iter->second, iter->first));\n            }\n        }\n\n        vector<int> res;\n        while (!pq.empty()) {\n            res.push_back(pq.top().second);\n            pq.pop();\n        }\n\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-002",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "freq",
+          "role": "frequency_map",
+          "meaning": "哈希表，映射每个数组元素值及其在 nums 中出现的总次数",
+          "updateRule": "遍历 nums 数组，执行 freq[nums[i]]++",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "symbol": "pq",
+          "role": "min_heap",
+          "meaning": "保存当前最高频率前 k 个元素的最小堆，存 (频率, 元素) 对",
+          "updateRule": "当 pq.size() == k 且新元素频率 > pq.top().first 时，pop 堆顶并 push 新元素",
+          "evidenceIds": [
+            "ev-003",
+            "ev-004"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "pq.size() == k 且 iter->second > pq.top().first",
+          "updates": "pq.pop(); pq.push(make_pair(iter->second, iter->first));",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "condition": "pq.size() < k",
+          "updates": "pq.push(make_pair(iter->second, iter->first));",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "termination": null,
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "维护大小为 k 的最小堆，遍历完所有元素后，堆内保存的即为出现频率最高的 k 个元素",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": "O(nlogk)",
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": [
+      "ev-003"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "思路一：哈希表 + 全局排序",
+      "measure": "time",
+      "notation": "O",
+      "case": "worst",
+      "expressionObserved": "O(nlogn)",
+      "expressionNormalized": "O(n*log(n))",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组元素个数 / 不同的元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "扫描一遍统计频率耗时 O(n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "statement": "对频率数组排序耗时 O(n log n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "思路一总体时间复杂度为 O(n log n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "思路二：维护大小为 k 的优先队列",
+      "measure": "time",
+      "notation": "O",
+      "case": "worst",
+      "expressionObserved": "O(nlogk)",
+      "expressionNormalized": "O(n*log(k))",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "k",
+          "meaning": "需要返回的前 k 个高频元素的数量",
+          "domainOrRelationship": "k < n",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "优先队列大小始终维持为 k，堆操作单费为 log k",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "statement": "对 n 个元素进行遍历和必要的堆更新，总时间复杂度为 O(n log k)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "思路二的时间复杂度为 O(n log k)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "cx-003",
+      "subject": "思路三：维护大小为 n-k 的优先队列",
+      "measure": "time",
+      "notation": "O",
+      "case": "worst",
+      "expressionObserved": "O(nlog(n-k))",
+      "expressionNormalized": "O(n*log(n-k))",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "不同元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "symbol": "k",
+          "meaning": "目标元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "优先队列大小维持为 n-k，堆操作时间复杂度为 log(n-k)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "思路三的时间复杂度为 O(n log (n - k))",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "给定输入 [1, 1, 1, 2, 2, 3]，k = 2，返回 [1, 2]",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "k <= 0 或者 k 比频率表中不同元素的个数还要大",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-004"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在 C++ std::priority_queue 中，需明确指定排序属性。由于要按频率比较，且优先队列存的是 pair<频率, 元素>，需将频率放在 pair 的 first 成员中",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "面试中遇到 Top K 问题时，首先确认 k 的合法性约束与边界情况，并先给出 O(n log n) 的排序基线解法，再引出优先队列 O(n log k) 优化解法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002",
+        "ev-003"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:06-06",
+      "to": "lesson:06-07",
+      "type": "applies",
+      "status": "provisional",
+      "rationale": "06-06 讲解了优先队列的基础概念与性质，06-07 将优先队列直接应用到 Top K 问题的求解中",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "from": "lesson:06-07",
+      "to": "lesson:06-08",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "06-07 完成了 Top K 频繁元素的堆解法，06-08 进一步总结并扩展 Top K 问题的求解套路（如快排 partition 与堆的对比）",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-003",
+        "ev-005"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 68000,
+      "assetId": "asset:video-06-07",
+      "locator": null,
+      "observation": "展示 LeetCode 347. Top K Frequent Elements 题面，给定非空数组与 k=2，示例 [1,1,1,2,2,3] 返回 [1,2]，并讨论 k 的合法性（k > 0 且 k <= 频率表元素个数）。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 68000,
+      "endMs": 165000,
+      "assetId": "asset:video-06-07",
+      "locator": null,
+      "observation": "分析思路一：扫描一遍用 Map 统计频率 O(n)，对频率排序 O(n log n)，找到前 k 个元素，整体复杂度 O(n log n)。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 165000,
+      "endMs": 255000,
+      "assetId": "asset:video-06-07",
+      "locator": null,
+      "observation": "分析思路二：维护大小为 k 的优先队列（最小堆），如果新元素频率大于堆顶元素频率则替换。遍历完后队列中剩下的即为 Top K 元素，复杂度 O(n log k)。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_visual",
+      "startMs": 255000,
+      "endMs": 747000,
+      "assetId": "asset:video-06-07",
+      "locator": null,
+      "observation": "展示 C++ 代码：使用 unordered_map 统计频率，使用 priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> 维护包含 (频率, 元素) 的最小堆，最后弹出结果至 vector<int>。",
+      "confidence": 0.98
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 747000,
+      "endMs": 836000,
+      "assetId": "asset:video-06-07",
+      "locator": null,
+      "observation": "提出思路三：维护大小为 n-k 的优先队列，时间复杂度为 O(n log (n - k))，当 k 接近 n 时比 O(n log k) 更快。",
+      "confidence": 0.9
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 836000,
+      "endMs": 941685,
+      "assetId": "asset:video-06-07",
+      "locator": null,
+      "observation": "介绍练习题 LeetCode 23. Merge k Sorted Lists（将 k 个有序数组归并为一个有序数组），并延伸至 k 分归并排序。",
+      "confidence": 0.9
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

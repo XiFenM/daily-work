@@ -1,0 +1,455 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "05-01",
+  "chapterId": "05",
+  "titleObserved": "链表，在节点间穿针引线 Reverse Linked List",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 947.52,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 73000,
+      "topic": "链表与数组特性对比",
+      "summary": "介绍链表与数组的不同特性，指出数组支持 O(1) 随机访问，而链表需要从头节点开始沿 next 指针顺序寻址，链表操作的核心在于操控指针（“穿针引线”）。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 74000,
+      "endMs": 246000,
+      "topic": "LeetCode 206 反转链表问题引入与面试约束",
+      "summary": "展示 LeetCode 206 Reverse Linked List 题面，指出很多大厂常考此题，强调链表面试通常不允许通过修改节点值来实现反转，必须修改节点的 next 指针。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 247000,
+      "endMs": 524000,
+      "topic": "反转链表的过程推导与多指针设计",
+      "summary": "通过图示逐步推演反转过程，说明为了防止断链丢失后续节点，需要使用 cur、pre 和 next 三个指针协同完成指针方向反转与向后推进。",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 525000,
+      "endMs": 830000,
+      "topic": "C++ 代码实现与 LeetCode 提交验证",
+      "summary": "编写 C++ Solution 解法代码，解释在 while 循环体内初始化 next 指针以避免 head 为空时的空指针风险，分析复杂度并成功提交验证。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 831000,
+      "endMs": 947520,
+      "topic": "课后思考题：LeetCode 92 Reverse Linked List II",
+      "summary": "引入 LeetCode 92 题（反转指定区间 m 到 n 的链表），提醒在面试中遇到此题时需要关注并与面试官沟通边界及非法输入处理（如超出范围、m>n）。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解链表无随机访问特性及其与数组在寻址方式上的差异",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "掌握通过操作 next 指针改变链表结构的迭代双/三指针技巧",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "掌握反转链表（LeetCode 206）的标准迭代解法及其 O(n) 时间与 O(1) 空间复杂度",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "链表",
+      "namesObserved": [
+        "链表",
+        "Linked List"
+      ],
+      "role": "introduces",
+      "definition": "一种非连续的顺序数据结构，不支持随机访问，需从头节点开始沿指针（next）遍历。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "反转链表",
+      "namesObserved": [
+        "Reverse Linked List",
+        "反转一个链表"
+      ],
+      "role": "applies",
+      "definition": "将单链表中的所有 next 指针方向翻转，使原头节点变为尾节点，原尾节点变为新头节点。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "206",
+    "titleObserved": "Reverse Linked List",
+    "statement": "反转一个单链表。",
+    "constraints": [
+      "不能改变链表节点的值，只能改变节点的 next 指针方向。"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "改变节点的值：先遍历链表将值压入栈中，再反向弹栈更新链表各节点的值（课程提及此方法通常在面试中被禁止或不推荐）。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [
+        "改变了链表节点的值，违背了链表面试题通常要求操作节点指针而非修改值的约束"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "optimized",
+      "idea": "迭代三指针法：在遍历链表时，维护 pre、cur 和 next 三个指针。先用 next 保存 cur->next 防止断链，再将 cur->next 反向指向 pre，随后将 pre 和 cur 依次向后移动，直到 cur 为 NULL，返回 pre 作为新头节点。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    ListNode* reverseList(ListNode* head) {\n        ListNode* pre = NULL;\n        ListNode* cur = head;\n        while( cur != NULL ){\n            ListNode* next = cur->next;\n            \n            cur->next = pre;\n            pre = cur;\n            cur = next;\n        }\n        \n        return pre;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-002",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "pre",
+          "role": "previous_node_pointer",
+          "meaning": "指向当前已反转链表部分的头节点（初始为 NULL）",
+          "updateRule": "pre = cur",
+          "evidenceIds": [
+            "ev-003",
+            "ev-004",
+            "ev-005"
+          ]
+        },
+        {
+          "symbol": "cur",
+          "role": "current_node_pointer",
+          "meaning": "指向当前正在处理/反转的节点（初始为 head）",
+          "updateRule": "cur = next",
+          "evidenceIds": [
+            "ev-003",
+            "ev-004",
+            "ev-005"
+          ]
+        },
+        {
+          "symbol": "next",
+          "role": "next_node_pointer",
+          "meaning": "暂存当前节点的原本下一个节点，防止改变 cur->next 后丢失后续链表",
+          "updateRule": "next = cur->next",
+          "evidenceIds": [
+            "ev-003",
+            "ev-004",
+            "ev-005"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "cur != NULL",
+          "updates": "next = cur->next; cur->next = pre; pre = cur; cur = next;",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        }
+      ],
+      "termination": null,
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": "O(n)",
+    "space": "O(1)",
+    "assumptions": [
+      "n 为链表中的节点总数"
+    ],
+    "evidenceIds": [
+      "ev-005"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "反转链表（迭代三指针法）时间复杂度",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "链表中的节点总数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "遍历整条链表一次，每个节点的操作次数为常数次",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "时间复杂度为 O(n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "反转链表（迭代三指针法）空间复杂度",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(1)",
+      "expressionNormalized": "O(1)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "仅使用了 pre、cur、next 三个指针变量，未申请动态内存",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "空间复杂度为 O(1)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "对于链表 1 -> 2 -> 3 -> 4 -> 5 -> NULL，反转后为 5 -> 4 -> 3 -> 2 -> 1 -> NULL。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "空链表（head 为 NULL）或单节点链表：在循环前若直接写 next = head->next 会引发空指针解引用错误，因此把 next 的定义与赋值移至 while(cur != NULL) 循环体内更加安全。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "反转指针时，必须在修改 cur->next 之前先用临时变量 next 存下原来的 cur->next，否则会断链导致无法访问后续节点。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "面试中解答链表问题时，一般禁止通过把节点值取出来反转再写回的方式来完成反转，必须修改 next 指针关系。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "面对链表区间反转问题（如 LeetCode 92），注意要同面试官澄清边界输入条件（例如 m/n 超出链表长度、m > n 或 m/n 为负数等情况的处理）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:05-01",
+      "to": "lesson:05-03",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "候选关系提供",
+      "confidence": 0.8,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 73000,
+      "assetId": "asset:video-05-01",
+      "locator": "00:00-01:13",
+      "observation": "老师介绍链表与数组的区别，说明数组支持 O(1) 随机访问，而链表不具备该特性，只能顺着 next 指针遍历，链表问题实质是操控 next 指针进行“穿针引线”。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 74000,
+      "endMs": 177000,
+      "assetId": "asset:video-05-01",
+      "locator": "01:14-02:57",
+      "observation": "PPT展示 LeetCode 206. Reverse Linked List 题目及多家知名公司 Logo，强调面试中通常要求操作节点指针，不能直接通过改变节点值或入栈弹栈修改值的方式解决。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 178000,
+      "endMs": 354000,
+      "assetId": "asset:video-05-01",
+      "locator": "02:58-05:54",
+      "observation": "通过幻灯片动画演示如果直接将 head->next 设为 NULL 会导致第二个节点断链失联，引入需要记录 next 节点与 pre 节点的推导。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 355000,
+      "endMs": 524000,
+      "assetId": "asset:video-05-01",
+      "locator": "05:55-08:44",
+      "observation": "详细演示在每一步中，如何利用 pre, cur, next 三个指针，先保存 next，再做 cur->next = pre，接着将 pre, cur, next 依次前移的完整迭代过程。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 525000,
+      "endMs": 830000,
+      "assetId": "asset:video-05-01",
+      "locator": "08:45-13:50",
+      "observation": "屏幕编写 C++ Solution 代码，指出在 while(cur != NULL) 内部定义 `ListNode* next = cur->next;` 可避免空指针问题，最后在 LeetCode 界面提交并获得 Accepted。分析时间复杂度为 O(n)，空间复杂度为 O(1)。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 831000,
+      "endMs": 947520,
+      "assetId": "asset:video-05-01",
+      "locator": "13:51-15:47",
+      "observation": "介绍课后思考题 LeetCode 92 Reverse Linked List II（反转第 m 到 n 个元素），并讨论 m, n 越界或 m > n 时的边界与容错细节。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

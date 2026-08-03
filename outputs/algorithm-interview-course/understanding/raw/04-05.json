@@ -1,0 +1,539 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "04-05",
+  "chapterId": "04",
+  "titleObserved": "454. 4Sum II",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 805.2,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 77000,
+      "topic": "题目介绍与数据规模分析",
+      "summary": "介绍 LeetCode 454 号问题 4Sum II，给出题目要求及数据规模范围 0 <= N <= 500。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 77000,
+      "endMs": 180000,
+      "topic": "暴力解法 O(N^4) 与初步优化 O(N^3)",
+      "summary": "分析四重循环暴力解法 O(N^4) 的巨大计算量，以及将 D 放入查找表降低至 O(N^3) 但依然过慢的局限性。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 180000,
+      "endMs": 298000,
+      "topic": "优化思路：将 C+D 的和放入 Map (O(N^2))",
+      "summary": "提出将 C+D 的所有可能和及频次存入 Map，遍历 A 和 B 查找 0 - A[i] - B[j]，将复杂度优化至 O(N^2)。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 298000,
+      "endMs": 545000,
+      "topic": "C++ 代码实现与逻辑细节",
+      "summary": "在 C++ 中使用 unordered_map 编写 4Sum II 题解代码，添加 assert 断言并完成测试。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 545000,
+      "endMs": 663000,
+      "topic": "复杂度分析与解法变体总结",
+      "summary": "分析时间与空间复杂度均为 O(N^2)，讨论将 A+B 与 C+D 各存入查找表的变体思路，总结灵活选择查找表键值的核心方法。",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 663000,
+      "endMs": 805200,
+      "topic": "课后练习：LeetCode 49 Group Anagrams",
+      "summary": "布置课后思考题 LeetCode 49 Group Anagrams，提示分析字符集、大小写敏感性及查找表键的选择。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解如何通过结合两组数据（如 C+D 的和）建立查找表，将 O(N^4) 问题优化为 O(N^2)",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "学会根据问题数据规模范围（如 N <= 500）反推推导所需算法的时间复杂度边界",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "掌握使用 map 存储和及其出现频次（而不是 set）来处理可能重复的和",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "哈希表",
+      "namesObserved": [
+        "查找表",
+        "unordered_map",
+        "map"
+      ],
+      "role": "applies",
+      "definition": "用于存储 C[k]+D[l] 的和及其对应出现频次的数据结构，支持均摊 O(1) 的插入与查找。",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "canonicalName": "数据规模推导",
+      "namesObserved": [
+        "根据数据规模推测复杂度"
+      ],
+      "role": "introduces",
+      "definition": "根据题目给出的输入规模 N 范围推算计算机能在 1 秒内执行的操作上限，从而倒推可以接受的时间复杂度。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002",
+        "ev-004"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "454",
+    "titleObserved": "4Sum II",
+    "statement": "给出四个整形数组A,B,C,D，寻找有多少个i,j,k,l的组合，使得A[i] + B[j] + C[k] + D[l] == 0。其中，A,B,C,D中含有相同的元素个数N，且0<=N<=500。",
+    "constraints": [
+      "0 <= N <= 500",
+      "A, B, C, D 含有相同的元素个数 N"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "四重循环嵌套遍历数组 A, B, C, D 的所有元素组合，检查 A[i] + B[j] + C[k] + D[l] 是否为 0",
+      "timeComplexity": "O(N^4)",
+      "spaceComplexity": "O(1)",
+      "limitations": [
+        "N=500 时，500^4 = 6250 亿次基本操作，计算机无法在 1 秒内完成"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "intermediate",
+      "idea": "将数组 D 中的元素放入查找表，三重循环遍历 A, B, C，在查找表中查找 0 - A[i] - B[j] - C[k]",
+      "timeComplexity": "O(N^3)",
+      "spaceComplexity": "O(N)",
+      "limitations": [
+        "N=500 时，500^3 = 1.25 亿次基本操作，对于 1 秒的时间限制而言依然过慢"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "solution-003",
+      "stage": "optimized",
+      "idea": "将 C 和 D 的所有可能和及其出现频次放入 unordered_map 查找表；双重循环遍历 A 和 B，在查找表中查找 0 - A[i] - B[j] 的频次并累加到结果中",
+      "timeComplexity": "O(N^2)",
+      "spaceComplexity": "O(N^2)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "id": "solution-004",
+      "stage": "alternative",
+      "idea": "将 A+B 的所有可能和放入一个查找表，将 C+D 的所有可能和放入另一个查找表，再遍历这两个查找表进行匹配",
+      "timeComplexity": "O(N^2)",
+      "spaceComplexity": "O(N^2)",
+      "limitations": [],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-003",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n#include <unordered_map>\n#include <cassert>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    int fourSumCount(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D) {\n        assert(A.size() == B.size() && B.size() == C.size() && C.size() == D.size());\n        unordered_map<int,int> record;\n        for( int i = 0 ; i < C.size() ; i ++ )\n            for( int j = 0 ; j < D.size() ; j ++ )\n                record[C[i] + D[j]] ++;\n        \n        int res = 0;\n        for( int i = 0 ; i < A.size() ; i ++ )\n            for( int j = 0 ; j < B.size() ; j ++ )\n                if( record.find(0 - A[i] - B[j]) != record.end() )\n                    res += record[0 - A[i] - B[j]];\n        \n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-003",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "record",
+          "role": "hash_map",
+          "meaning": "存储 C[i] + D[j] 的和（键）与其出现的频次（值）",
+          "updateRule": "record[C[i] + D[j]]++",
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        },
+        {
+          "symbol": "res",
+          "role": "counter",
+          "meaning": "累加满足 A[i] + B[j] + C[k] + D[l] == 0 的组合总数",
+          "updateRule": "res += record[0 - A[i] - B[j]]",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "遍历 C[i] 和 D[j]",
+          "updates": "record[C[i] + D[j]] 对应频次自增 1",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "condition": "遍历 A[i] 和 B[j] 且 0 - A[i] - B[j] 在 record 中存在",
+          "updates": "res 累加上 record[0 - A[i] - B[j]] 的频次",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "termination": null,
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "通过哈希表记录 C[k] + D[l] 所有和的频次，使查询 0 - A[i] - B[j] 的组合数能在均摊 O(1) 时间内完成，从而正确且高效地计算出满足总和为 0 的四元组数量",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004",
+          "ev-005"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": "O(N^2)",
+    "space": "O(N^2)",
+    "assumptions": [
+      "N 为数组长度，0 <= N <= 500"
+    ],
+    "evidenceIds": [
+      "ev-005"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "solution-003",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n^2)",
+      "expressionNormalized": "O(N^2)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "N",
+          "meaning": "四个数组各自的元素个数",
+          "domainOrRelationship": "0 <= N <= 500",
+          "evidenceIds": [
+            "ev-001"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "遍历 C 和 D 构造查找表需要双重循环，执行 N * N 次插入操作，时间复杂度为 O(N^2)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "statement": "遍历 A 和 B 查询查找表需要双重循环，执行 N * N 次查找操作，单次查找均摊 O(1)，时间复杂度为 O(N^2)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "整体时间复杂度为 O(N^2)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "solution-003",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n^2)",
+      "expressionNormalized": "O(N^2)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "N",
+          "meaning": "四个数组各自的元素个数",
+          "domainOrRelationship": "0 <= N <= 500",
+          "evidenceIds": [
+            "ev-001"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "查找表 record 中最多包含 C 和 D 元素组合和的 N * N 个键值对",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "辅助空间复杂度为 O(N^2)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "LeetCode 49 练习样例：输入 [\"eat\", \"tea\", \"tan\", \"ate\", \"nat\", \"bat\"]，返回 [[\"ate\", \"eat\", \"tea\"], [\"nat\", \"tan\"], [\"bat\"]]",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "四个数组长度 N 为 0 的边界情况（0 <= N <= 500）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "查找表不能使用 set，因为 C[k] + D[l] 的和可能有多种不同的组合产生相同的值，必须用 map 记录该和出现的频次",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "面试中看到数据规模范围（如 N <= 500），应据此计算可接受的运算量（如 500^2 = 250,000 可以秒过），指导算法时间复杂度的设计",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "对于查找表问题，不仅可以直接存元素本身，还要灵活选择将组合逻辑（如 C+D 的和）作为键放入查找表",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-006"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:04-04",
+      "to": "lesson:04-05",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "本课将 Two Sum 中使用查找表优化寻找补数的思路，推广扩展到四数组组合和的查找表设计",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001",
+        "ev-004"
+      ]
+    },
+    {
+      "from": "lesson:04-05",
+      "to": "lesson:04-06",
+      "type": "same_pattern_as",
+      "status": "provisional",
+      "rationale": "两课均展示了灵活选择查找表键值（Key）来优化组合匹配问题的解题模式",
+      "confidence": 0.85,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-004",
+        "ev-006"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 77000,
+      "assetId": "asset:video-04-05",
+      "locator": "00:00-01:17",
+      "observation": "展示 LeetCode 454. 4Sum II 题目，要求在四个整形数组 A, B, C, D 中寻找 i,j,k,l 使得 A[i]+B[j]+C[k]+D[l]==0，元素个数为 N 且 0<=N<=500。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 77000,
+      "endMs": 118000,
+      "assetId": "asset:video-04-05",
+      "locator": "01:17-01:58",
+      "observation": "分析暴力解法 O(N^4)，500^4 = 625,0000,0000（6250亿）次基本操作，计算机无法承受。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 118000,
+      "endMs": 180000,
+      "assetId": "asset:video-04-05",
+      "locator": "01:58-03:00",
+      "observation": "分析将 D 放入查找表降低至 O(N^3) 的解法，500^3 = 1,2500,0000（1.25亿）次，对于 1 秒时间限制依然过慢。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 180000,
+      "endMs": 298000,
+      "assetId": "asset:video-04-05",
+      "locator": "03:00-04:58",
+      "observation": "提出将 C+D 的每种可能和及频次存入查找表 map (O(N^2))，500^2 = 25,0000（25万），在计算机承受范围内；解释为什么用 map 而不是 set。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 298000,
+      "endMs": 545000,
+      "assetId": "asset:video-04-05",
+      "locator": "04:58-09:05",
+      "observation": "展示 C++ 代码实现，使用 unordered_map<int, int> record 记录 C[i]+D[j] 频次，遍历 A 和 B 查找并累加 res；补充 assert 并说明时间空间复杂度均位 O(N^2)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 545000,
+      "endMs": 663000,
+      "assetId": "asset:video-04-05",
+      "locator": "09:05-11:03",
+      "observation": "讨论变体：将 A+B 与 C+D 的可能和分别存入两个查找表，复杂度同样为 O(N^2)；总结灵活选择查找表 key 的重要性。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 663000,
+      "endMs": 805200,
+      "assetId": "asset:video-04-05",
+      "locator": "11:03-13:25",
+      "observation": "展示练习题 LeetCode 49 Group Anagrams 题面及样例，提示思考字符集、大小写敏感及查找表键的定义。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

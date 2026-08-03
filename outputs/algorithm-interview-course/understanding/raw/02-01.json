@@ -1,0 +1,598 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "02-01",
+  "chapterId": "02",
+  "titleObserved": "究竟什么是大O（Big O）",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 1195.6,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 38000,
+      "topic": "课程引入：算法面试中的时间复杂度分析",
+      "summary": "介绍在算法面试中回答时间复杂度分析的重要性以及本章的主题。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 38000,
+      "endMs": 109000,
+      "topic": "大O的直观定义",
+      "summary": "讲解大O符号的含义：n表示数据规模，O(f(n))表示运行算法所需执行的指令数与f(n)成正比。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 109000,
+      "endMs": 209000,
+      "topic": "常见算法的Big O与指令数表示",
+      "summary": "列举二分查找、查找最大/最小值、归并排序、选择排序的Big O表达及其对应的常数乘以函数指令数。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 209000,
+      "endMs": 462000,
+      "topic": "常数项与时间复杂度的量级对比",
+      "summary": "通过对比算法A (10000*n) 与算法B (10*n^2) 在不同数据规模n下的指令数表格，说明Big O衡量的是量级差距。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 462000,
+      "endMs": 484000,
+      "topic": "复杂度增长趋势图",
+      "summary": "通过图表展示O(1)、O(logn)、O(n)、O(n^2)、O(c^n)随数据规模增加的增长趋势区别。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 484000,
+      "endMs": 597000,
+      "topic": "学术界与业界对大O定义的区别",
+      "summary": "辨析学术界中大O表示严格上界（如归并排序也是O(n^2)），与工业界/面试中默认用大O表示紧确/最低上界的约定俗成。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 597000,
+      "endMs": 767000,
+      "topic": "多维度数据规模的复杂度分析",
+      "summary": "分析当算法包含多部分且数据规模相同时最高阶项主导，以及多维度不相关数据规模（如图遍历O(V+E)）时不能随意省略项。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 767000,
+      "endMs": 1045000,
+      "topic": "思考题：字符串数组排序的时间复杂度",
+      "summary": "给出字符串数组排序的练习题，剖析常见混淆字符串长度s与数组长度n的错误，并推导正确的复杂度O(n*s*(logs+logn))。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 1045000,
+      "endMs": 1195600,
+      "topic": "复杂度与用例相关性（最好、最差与平均情况）",
+      "summary": "讨论插入排序与快速排序在最好、最差与平均情况下的时间复杂度，强调面试中通常关注平均/一般情况。",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解大O符号表示算法指令数与数据规模函数f(n)成正比，衡量的是渐进量级差距而非精确时间。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "区分学术界对大O（上界）的严格定义与工业界/面试中用大O表示紧确上界（最低上界）的惯例。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "掌握多变量数据规模下（如图的顶点数V与边数E，或字符串数组的字符串数n与最长字符串长度s）的时间复杂度分析方法。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    },
+    {
+      "statement": "了解算法复杂度与具体输入用例的关系，区分最差情况、最好情况和平均情况复杂度。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Big O Notation",
+      "namesObserved": [
+        "大O",
+        "Big O"
+      ],
+      "role": "introduces",
+      "definition": "设n表示数据规模，O(f(n))表示运行算法所需要执行的指令数，和f(n)成正比。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "Upper Bound",
+      "namesObserved": [
+        "上界",
+        "最低上界"
+      ],
+      "role": "introduces",
+      "definition": "学术界严谨讲O(f(n))表示算法执行的上界；工业界默认用大O表示算法执行的最低上界（紧确界）。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "canonicalName": "Time Complexity Dimensions",
+      "namesObserved": [
+        "数据规模维度",
+        "多变量复杂度"
+      ],
+      "role": "applies",
+      "definition": "当算法涉及多个互不相关的输入规模维度（如顶点数V与边数E，字符串数n与字符串长度s）时，复杂度需同时保留各维度的变量。",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": null,
+    "problemId": null,
+    "titleObserved": "一个时间复杂度的问题",
+    "statement": "有一个字符串数组，将数组中的每一个字符串按照字母序排序；之后再将整个字符串数组按照字典序排序。整个操作的时间复杂度？",
+    "constraints": [],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-008"
+    ]
+  },
+  "solutionProgression": [],
+  "codeArtifacts": [],
+  "correctness": {
+    "method": "unknown",
+    "claims": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "字符串数组双重排序算法",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n*s*logs + s*n*logn) = O(n*s*(logs+logn))",
+      "expressionNormalized": "O(n * s * (log s + log n))",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "字符串数组中的字符串个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-008"
+          ]
+        },
+        {
+          "symbol": "s",
+          "meaning": "最长字符串的长度",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-008"
+          ]
+        }
+      ],
+      "costModel": {
+        "statement": "包含对n个字符串内部分别排序（每个O(s log s)）与对整个数组排序（n log n次比较，每次比较耗时O(s)）两部分。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-008"
+        ]
+      },
+      "derivationSteps": [
+        {
+          "statement": "每个字符串内部按字母序排序的复杂度为 O(s log s)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        },
+        {
+          "statement": "处理n个字符串内部排序的总复杂度为 O(n * s log s)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        },
+        {
+          "statement": "对字符串数组排序需要进行 O(n log n) 次比较，每次比较两个长度为s的字符串耗时 O(s)，故数组排序耗时 O(s * n log n)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        },
+        {
+          "statement": "两部分相加得 O(n * s * log s + s * n * log n) = O(n * s * (log s + log n))。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "假设字符串的最长长度为s，数组包含n个字符串。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        }
+      ],
+      "conclusion": {
+        "statement": "整个操作的时间复杂度为 O(n * s * (log s + log n))。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-008"
+        ]
+      },
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "插入排序算法",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n^2)",
+      "expressionNormalized": "O(n^2)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "待排序数据规模",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-009"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "插入排序最差情况为 O(n^2)，最好情况（数组已有序）为 O(n)，平均情况为 O(n^2)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-009"
+        ]
+      },
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "id": "cx-003",
+      "subject": "快速排序算法",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(nlogn)",
+      "expressionNormalized": "O(n log n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "待排序数据规模",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-009"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "快速排序最差情况退化为 O(n^2)，最好情况与平均情况均为 O(n log n)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-009"
+        ]
+      },
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "formula",
+      "sourceKind": "shown_in_video",
+      "rawText": "O(f(n)) 表示运行算法所需要执行的指令数，和f(n)成正比",
+      "normalizedText": "Instructions = C * f(n)",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数据规模",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "symbol": "f(n)",
+          "meaning": "关于n的规模函数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "formula-002",
+      "kind": "formula",
+      "sourceKind": "shown_in_video",
+      "rawText": "O(nlogn + n) = O(nlogn)",
+      "normalizedText": "O(n log n + n) = O(n log n)",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数据规模",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "id": "formula-003",
+      "kind": "formula",
+      "sourceKind": "shown_in_video",
+      "rawText": "时间复杂度：O(V + E)",
+      "normalizedText": "O(V + E)",
+      "variables": [
+        {
+          "symbol": "V",
+          "meaning": "图中的顶点个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        },
+        {
+          "symbol": "E",
+          "meaning": "图中的边个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "对比算法A (指令数 10000*n) 与算法B (指令数 10*n^2)：在n=10和100时算法B更快，当n=1000时两者相等，当n>1000（如10^6）时算法A比算法B快1000倍，体现了渐进复杂度的量级优势。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "在高级排序算法中，当递归或拆分的数据规模小到一定程度时，常转而使用插入排序算法进行局部优化。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "计算字符串数组排序的复杂度时，切勿混淆字符串长度s与数组元素个数n，也不能误认为字符串比较是O(1)级别的常数操作。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "算法面试中提到的大O通常指紧确上界（最低上界），面试官说设计一个O(n)算法时，是指寻找问题能达到的最低上界复杂度。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "面试中分析复杂度时，如遇到多个独立维度（如V与E，或者n与s），须明确拆分变量并完整表述复杂度（如O(V+E)或O(n*s*(logs+logn))）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:01-04",
+      "to": "lesson:02-01",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "前序课次建议，用于引导复杂度分析的前置背景。",
+      "confidence": 0.8,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    },
+    {
+      "from": "lesson:02-01",
+      "to": "lesson:02-02",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "完成大O定义后，顺承进行数据规模的感知与建立概念。",
+      "confidence": 0.9,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    },
+    {
+      "from": "lesson:02-01",
+      "to": "lesson:02-03",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "在大O概念基础上进一步学习简单的复杂度分析法。",
+      "confidence": 0.9,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 38000,
+      "assetId": "asset:video-02-01",
+      "locator": "00:00-00:38",
+      "observation": "幻灯片展示标题《面试中的时间复杂度分析》，讲师阐述算法面试中时间复杂度分析是不可避免的关键问题。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 38000,
+      "endMs": 109000,
+      "assetId": "asset:video-02-01",
+      "locator": "00:38-01:49",
+      "observation": "幻灯片展示“到底什么是大O”，文字注明“n表示数据规模，O(f(n))表示运行算法所需要执行的指令数，和f(n)成正比”。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 109000,
+      "endMs": 209000,
+      "assetId": "asset:video-02-01",
+      "locator": "01:49-03:29",
+      "observation": "幻灯片展示二分查找O(logn)->a*logn、寻找最大/最小值O(n)->b*n、归并排序O(nlogn)->c*nlogn、选择排序O(n^2)->d*n^2，并说明a,b,c,d为常数。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 209000,
+      "endMs": 462000,
+      "assetId": "asset:video-02-01",
+      "locator": "03:29-07:42",
+      "observation": "幻灯片展示算法A(O(n), 10000*n)与算法B(O(n^2), 10*n^2)随n变大的表格，指出大O衡量的是量级差距；提到在高级排序中规模小到一定程度时可切入插入排序优化。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_visual",
+      "startMs": 462000,
+      "endMs": 484000,
+      "assetId": "asset:video-02-01",
+      "locator": "07:42-08:04",
+      "observation": "幻灯片展示包含# of operations vs # of inputs坐标图，包含Constant O(1), Logarithmic O(log n), Linear O(n), Quadratic O(n^2), Exponential O(c^n)曲线。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 484000,
+      "endMs": 597000,
+      "assetId": "asset:video-02-01",
+      "locator": "08:04-09:57",
+      "observation": "幻灯片展示“在学术界，严格地讲，O(f(n))表示算法执行的上界；在业界，我们就用O来表示算法执行的最低上界”。强调面试和工业界默认使用紧确界。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 597000,
+      "endMs": 767000,
+      "assetId": "asset:video-02-01",
+      "locator": "09:57-12:47",
+      "observation": "幻灯片列出O(nlogn + n) = O(nlogn)、O(nlogn + n^2) = O(n^2)，对比展示多维度参数O(A log A + B)、O(A log A + B^2)以及邻接表图遍历O(V + E)。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 767000,
+      "endMs": 1045000,
+      "assetId": "asset:video-02-01",
+      "locator": "12:47-17:25",
+      "observation": "展示练习题“一个时间复杂度的问题”：每个字符串按字母序排序，再将整个字符串数组按字典序排序。讲解常见错误及正确的推导过程 O(n*s*logs + s*n*logn) = O(n*s*(logs+logn))。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 1045000,
+      "endMs": 1195600,
+      "assetId": "asset:video-02-01",
+      "locator": "17:25-19:55",
+      "observation": "幻灯片展示“算法复杂度在有些情况是用例相关的”，列出插入排序（最差O(n^2)，最好O(n)，平均O(n^2)）与快速排序（最差O(n^2)，最好O(nlogn)，平均O(nlogn)），指出业界通常关注平均情况。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.3",
+    "generatedAt": null
+  }
+}

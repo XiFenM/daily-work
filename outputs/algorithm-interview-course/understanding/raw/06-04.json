@@ -1,0 +1,358 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "06-04",
+  "chapterId": "06",
+  "titleObserved": "队列的典型应用 Binary Tree Level Order Traversal",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 626.32,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 62000,
+      "topic": "队列的基本应用",
+      "summary": "介绍队列在算法面试中的主要应用，即广度优先遍历（BFS），包括树的层序遍历和无权图的最短路径问题。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 62000,
+      "endMs": 121000,
+      "topic": "LeetCode 102 题目介绍",
+      "summary": "讲解 LeetCode 102 二叉树层序遍历问题，明确输入二叉树结构和二维数组的输出格式要求。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 121000,
+      "endMs": 489000,
+      "topic": "代码实现与层级处理",
+      "summary": "在 C++ 中使用 queue 存储 pair<TreeNode*, int> 记录节点及所在层级，编写并实现层序遍历算法。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 489000,
+      "endMs": 524000,
+      "topic": "练习题：LeetCode 107",
+      "summary": "介绍自底向上的二叉树层序遍历问题 LeetCode 107 Binary Tree Level Order Traversal II。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 524000,
+      "endMs": 570000,
+      "topic": "练习题：LeetCode 103",
+      "summary": "介绍之字形/锯齿形二叉树层序遍历问题 LeetCode 103 Binary Tree Zigzag Level Order Traversal。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 570000,
+      "endMs": 626320,
+      "topic": "练习题：LeetCode 199 与总结",
+      "summary": "介绍二叉树右视图问题 LeetCode 199 Binary Tree Right Side View，并预告下一节课图的广度优先遍历内容。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解如何使用队列结构实现二叉树的广度优先遍历（层序遍历）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "掌握在二叉树层序遍历中如何通过绑定节点与层级信息（pair<TreeNode*, int>）来按层整理输出结果。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Queue",
+      "namesObserved": [
+        "队列",
+        "Queue"
+      ],
+      "role": "applies",
+      "definition": "一种先进先出的数据结构，在此处用于实现广度优先遍历（层序遍历）。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "Breadth-First Search",
+      "namesObserved": [
+        "广度优先遍历"
+      ],
+      "role": "introduces",
+      "definition": "按层/按距离从近到远逐层探索数据结构（如树或图）的遍历方法。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "Level Order Traversal",
+      "namesObserved": [
+        "层序遍历"
+      ],
+      "role": "applies",
+      "definition": "对二叉树从上到下、从左到右按层依次访问所有节点的遍历方式。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "102",
+    "titleObserved": "Binary Tree Level Order Traversal",
+    "statement": "对一个二叉树进行层序遍历，返回每层节点组成的二维数组。",
+    "constraints": [],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "使用队列维护待遍历节点，并在队列中将每个 TreeNode 指针与对应的层级 level（从0开始）组成 pair 进行存储。每次出队时，如果 level 等于当前结果数组 res 的 size，说明遇到了新的层级，需压入一个新的空 vector<int>，而后将节点值放入 res[level]，最后将非空的左右子节点与 level+1 一起压入队列。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n#include <queue>\n\nusing namespace std;\n\n/// Definition for a binary tree node.\nstruct TreeNode {\n    int val;\n    TreeNode *left;\n    TreeNode *right;\n    TreeNode(int x) : val(x), left(NULL), right(NULL) {}\n};\n\nclass Solution {\npublic:\n    vector<vector<int>> levelOrder(TreeNode* root) {\n\n        vector<vector<int>> res;\n        if( root == NULL )\n            return res;\n\n        queue< pair<TreeNode*,int> > q;\n        q.push( make_pair( root , 0 ) );\n\n        while( !q.empty() ){\n\n            TreeNode* node = q.front().first;\n            int level = q.front().second;\n            q.pop();\n\n            if( level == res.size() )\n                res.push_back( vector<int>() );\n\n            res[level].push_back( node->val );\n\n            if( node->left )\n                q.push( make_pair( node->left , level + 1 ) );\n            if( node->right )\n                q.push( make_pair( node->right , level + 1 ) );\n        }\n\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "q",
+          "role": "work_queue",
+          "meaning": "保存待处理节点及对应层号 pair<TreeNode*, int> 的辅助队列",
+          "updateRule": "初始化为包含 (root, 0)；遍历中弹出队首元素，将非空左、右子节点与 level+1 组对入队",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "res",
+          "role": "accumulator",
+          "meaning": "存储各层节点值的二维动态数组 vector<vector<int>>",
+          "updateRule": "当 level == res.size() 时向 res 中追加新空数组，并将当前 node->val 加入 res[level]",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "!q.empty()",
+          "updates": "取出队首 (node, level) 并 pop；若 level == res.size() 追加 vector<int>()；res[level].push_back(node->val)；若 node->left 非空压入 (node->left, level+1)；若 node->right 非空压入 (node->right, level+1)",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "termination": null,
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "对于根为3，第1层为[9,20]，第2层为[15,7]的二叉树，层序遍历结果为 [[3], [9, 20], [15, 7]]",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "LeetCode 107 要求返回自底向上的层序遍历结果，对同棵二叉树输出 [[15, 7], [9, 20], [3]]",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "LeetCode 103 要求按照之字形顺序层序遍历，对同棵二叉树输出 [[3], [20, 9], [15, 7]]",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "LeetCode 199 要求返回从右侧看二叉树能看到的节点，对示例树输出 [1, 3, 4]",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "当传入的根节点 root 为 NULL 时，直接返回空的 res",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "访问结果二维数组 res[level] 之前，必须先检查 level 是否等于 res.size() 并追加新的 vector<int>，防止数组越界",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "interviewPlaybook": [],
+  "relationCandidates": [
+    {
+      "from": "lesson:06-04",
+      "to": "lesson:06-05",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "本课从队列应用在二叉树层序遍历出发，结尾明确引出下一节课将在图中应用广度优先遍历解决无权图最短路径问题",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001",
+        "ev-006"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 62000,
+      "assetId": "asset:video-06-04",
+      "locator": null,
+      "observation": "讲解队列的基本应用在于广度优先遍历，包括树的层序遍历和无权图的最短路径问题。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 62000,
+      "endMs": 121000,
+      "assetId": "asset:video-06-04",
+      "locator": null,
+      "observation": "展示 LeetCode 102 Binary Tree Level Order Traversal 题面和二叉树层序遍历示例图及二维数组输出示例。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 121000,
+      "endMs": 489000,
+      "assetId": "asset:video-06-04",
+      "locator": null,
+      "observation": "在 IDE 中完成 C++ 解法代码编写，使用 queue<pair<TreeNode*, int>> 维护节点与层级，并进行解释。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 489000,
+      "endMs": 524000,
+      "assetId": "asset:video-06-04",
+      "locator": null,
+      "observation": "展示练习题 LeetCode 107 Binary Tree Level Order Traversal II，要求从底向上层序遍历。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 524000,
+      "endMs": 570000,
+      "assetId": "asset:video-06-04",
+      "locator": null,
+      "observation": "展示练习题 LeetCode 103 Binary Tree Zigzag Level Order Traversal，要求按之字形（S形）顺序返回节点。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 570000,
+      "endMs": 626320,
+      "assetId": "asset:video-06-04",
+      "locator": null,
+      "observation": "展示练习题 LeetCode 199 Binary Tree Right Side View，并结课预告下一小节的图广度优先遍历。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

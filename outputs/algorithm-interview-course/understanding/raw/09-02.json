@@ -1,0 +1,653 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "09-02",
+  "chapterId": "09",
+  "titleObserved": "第一个动态规划问题 Climbing Stairs",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 842.68,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 61000,
+      "topic": "课程引入与 Climbing Stairs 题意讲解",
+      "summary": "介绍 LeetCode 第 70 题 Climbing Stairs，讲解题意、步长规则及 n=3 的具体示例",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 61000,
+      "endMs": 157000,
+      "topic": "自顶向下递归树分析",
+      "summary": "分析爬 n 阶台阶如何拆分为爬 n-1 阶与爬 n-2 阶的两个子问题，并绘制递归求解树",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 157000,
+      "endMs": 351000,
+      "topic": "纯递归解法代码实现",
+      "summary": "编写 calcWays 递归函数实现纯递归求解，并讨论 n=0 和 n=1 的递归终止条件",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 351000,
+      "endMs": 440000,
+      "topic": "重叠子问题分析",
+      "summary": "结合递归树指出 n-2、n-3 等子问题的重复计算现象，说明记忆化搜索的必要性",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 440000,
+      "endMs": 533000,
+      "topic": "记忆化搜索解法实现",
+      "summary": "在 Solution 类中使用 memo 数组记录已计算过的子问题，实现自顶向下的记忆化搜索",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 533000,
+      "endMs": 626000,
+      "topic": "自底向上动态规划实现与斐波那契数列联系",
+      "summary": "去掉递归函数，改用循环迭代实现自底向上的动态规划，并指出其与斐波那契数列的密切联系",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 626000,
+      "endMs": 739000,
+      "topic": "练习题 120. Triangle",
+      "summary": "介绍 LeetCode 120 题 Triangle，分析三角形数组自顶向下最小路径和的限制与解题思路",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 739000,
+      "endMs": 842680,
+      "topic": "练习题 64. Minimum Path Sum 与扩展思考",
+      "summary": "介绍 LeetCode 64 题 Minimum Path Sum，探讨非负整数矩阵最小路径和问题及限定条件去除后的影响",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "能够将 Climbing Stairs 题意转化为自顶向下的递归子问题模型",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "能够识别递归树中的重叠子问题，并使用记忆化搜索（自顶向下）进行优化",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "能够掌握自底向上动态规划（递推）求解 Climbing Stairs 问题的方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Climbing Stairs Problem",
+      "namesObserved": [
+        "Climbing Stairs",
+        "爬楼梯"
+      ],
+      "role": "introduces",
+      "definition": "求解爬上 n 阶台阶共有多少种不同走法的问题，每次可选择跨 1 阶或 2 阶台阶",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "Overlapping Subproblems",
+      "namesObserved": [
+        "重叠子问题",
+        "重复求解"
+      ],
+      "role": "reinforces",
+      "definition": "递归树求解过程中多次重复出现的相同子问题节点",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "Memoization",
+      "namesObserved": [
+        "记忆化搜索"
+      ],
+      "role": "applies",
+      "definition": "自顶向下递归过程中使用额外数据结构（如数组 memo）记录已计算的子问题答案，避免重复计算",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "canonicalName": "Dynamic Programming",
+      "namesObserved": [
+        "动态规划",
+        "自底向上"
+      ],
+      "role": "applies",
+      "definition": "放弃递归结构，通过自底向上的循环递推，从小规模子问题依次推导更大规模问题的方法",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "canonicalName": "Fibonacci Sequence",
+      "namesObserved": [
+        "斐波那契数列"
+      ],
+      "role": "mentions",
+      "definition": "每一项等于前两项之和的递推数列",
+      "evidenceIds": [
+        "ev-003",
+        "ev-006"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "70",
+    "titleObserved": "Climbing Stairs",
+    "statement": "有一个楼梯，总共有 n 阶台阶。每一次，可以上一个台阶，也可以上两个台阶。问，爬上这样的一个楼梯，一共有多少不同的方法？",
+    "constraints": [
+      "保证 n > 0"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001",
+      "ev-003"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "把爬 n 阶台阶拆分为先爬 1 阶再爬 n-1 阶、或先爬 2 阶再爬 n-2 阶的两个独立子问题，使用纯递归函数 calcWays(n) = calcWays(n-1) + calcWays(n-2) 求解",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [
+        "存在大量重复计算的重叠子问题，导致递归树非常庞大"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "intermediate",
+      "idea": "在自顶向下递归求解过程中引入 memo 数组记录计算结果。当 memo[n] != -1 时直接返回缓存的答案，避免重叠子问题的重复求解",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-002"
+      ],
+      "stateModelIds": [
+        "state-002"
+      ],
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "solution-003",
+      "stage": "optimized",
+      "idea": "采用自底向上的动态规划，去掉递归调用。初始化 memo[0]=1 和 memo[1]=1，使用 for 循环从 i=2 依次递推计算 memo[i] = memo[i-1] + memo[i-2]",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-003"
+      ],
+      "stateModelIds": [
+        "state-003"
+      ],
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\nusing namespace std;\n\nclass Solution {\nprivate:\n    int calcWays(int n) {\n        if (n == 0 || n == 1)\n            return 1;\n        return calcWays(n - 1) + calcWays(n - 2);\n    }\npublic:\n    int climbStairs(int n) {\n        return calcWays(n);\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n\nusing namespace std;\n\nclass Solution {\nprivate:\n    vector<int> memo;\n    int calcWays(int n) {\n        if (n == 0 || n == 1)\n            return 1;\n        if (memo[n] == -1)\n            memo[n] = calcWays(n - 1) + calcWays(n - 2);\n        return memo[n];\n    }\n\npublic:\n    int climbStairs(int n) {\n        memo = vector<int>(n + 1, -1);\n        return calcWays(n);\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "code-003",
+      "solutionStageId": "solution-003",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    int climbStairs(int n) {\n        vector<int> memo(n + 1, -1);\n        memo[0] = 1;\n        memo[1] = 1;\n        for (int i = 2; i <= n; i++)\n            memo[i] = memo[i - 1] + memo[i - 2];\n        return memo[n];\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "n",
+          "role": "input_parameter",
+          "meaning": "递归函数当前待计算的方法数的台阶阶数",
+          "updateRule": "递归传参 n-1 与 n-2",
+          "evidenceIds": [
+            "ev-002",
+            "ev-003"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "n",
+          "meaning": "待求解的台阶规模状态",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "n >= 2",
+          "updates": "calcWays(n) = calcWays(n-1) + calcWays(n-2)",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-002",
+            "ev-003"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 n == 0 或 n == 1 时直接返回 1",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "id": "state-002",
+      "solutionStageId": "solution-002",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "memo[n]",
+          "role": "memoization_cache",
+          "meaning": "存储爬 n 阶台阶的方法数，初值 -1 表示未计算",
+          "updateRule": "memo[n] = calcWays(n-1) + calcWays(n-2)",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "memo[0...n]",
+          "meaning": "大小为 n+1 的记忆化数组，索引 0 到 n 对应各台阶数的方法数缓存",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "memo[n] == -1 且 n >= 2",
+          "updates": "memo[n] = calcWays(n-1) + calcWays(n-2)",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "若 n == 0 或 n == 1 则返回 1；若 memo[n] != -1 则直接返回 memo[n]",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "state-003",
+      "solutionStageId": "solution-003",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "memo[i]",
+          "role": "dp_table_entry",
+          "meaning": "爬上 i 阶台阶的不同方法总数",
+          "updateRule": "memo[i] = memo[i-1] + memo[i-2]",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "memo[0...n]",
+          "meaning": "大小为 n+1 的动态规划表",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "2 <= i <= n",
+          "updates": "memo[i] = memo[i-1] + memo[i-2]",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "循环到达 i = n 后结束，最终答案从 memo[n] 读取",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "recursive_contract",
+    "claims": [],
+    "stateModelIds": [
+      "state-001",
+      "state-002",
+      "state-003"
+    ],
+    "obligations": [
+      {
+        "phase": "initialization",
+        "statement": "当 n == 0 或 n == 1 时，直接返回基本走法数 1，不再发起更小规模递归",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      {
+        "phase": "preservation",
+        "statement": "通过爬 1 阶（剩余 n-1 阶）与爬 2 阶（剩余 n-2 阶）两种不重不漏的选择拆分子问题，组合得到 n 阶的总走法",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002",
+          "ev-003"
+        ]
+      },
+      {
+        "phase": "termination",
+        "statement": "递归调用参数依次减少，保证最终触及 base case n=0 或 n=1 终止",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002",
+          "ev-003"
+        ]
+      }
+    ]
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "recurrence",
+      "sourceKind": "shown_in_video",
+      "rawText": "memo[i] = memo[i-1] + memo[i-2]",
+      "normalizedText": "memo[i] = memo[i-1] + memo[i-2]",
+      "variables": [
+        {
+          "symbol": "memo[i]",
+          "meaning": "爬上 i 阶台阶的方法数",
+          "domainOrRelationship": "2 <= i <= n",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "symbol": "memo[i-1]",
+          "meaning": "爬上 i-1 阶台阶的方法数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "symbol": "memo[i-2]",
+          "meaning": "爬上 i-2 阶台阶的方法数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "当 n=3 时，爬台阶的方法为 [1,1,1]、[1,2]、[2,1]，答案为 3",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "对于没有台阶（n=0）的情况，根据边界可看解为 1 种方法（不走即为 1 种选择）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "开辟缓存数组 memo 时大小应为 n+1，以便通过 memo[n] 直接访问到第 n 阶台阶的结果，否则会发生数组越界",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    }
+  ],
+  "interviewPlaybook": [],
+  "relationCandidates": [
+    {
+      "from": "lesson:09-01",
+      "to": "lesson:09-02",
+      "type": "applies",
+      "status": "provisional",
+      "rationale": "本课通过具体问题 Climbing Stairs 践行 09-01 所介绍的动态规划思想与重叠子问题优化手段",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001",
+        "ev-006"
+      ]
+    },
+    {
+      "from": "lesson:09-02",
+      "to": "lesson:09-03",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "本课结尾引出 120 题与 64 题，为 09-03 中在更多复杂问题（如 Integer Break）中发现并分析重叠子问题做铺垫",
+      "confidence": 0.85,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 61000,
+      "assetId": "asset:video-09-02",
+      "locator": "00:00 - 01:01",
+      "observation": "展示 PPT 标题“第一个动态规划问题”及 70. Climbing Stairs 题面：总共 n 阶台阶，每次走 1 阶或 2 阶，求走法总数。给出 n=3 的示例（[1,1,1],[1,2],[2,1]，答案 3）。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 61000,
+      "endMs": 157000,
+      "assetId": "asset:video-09-02",
+      "locator": "01:01 - 02:37",
+      "observation": "PPT 演示自顶向下拆分过程：爬 n 阶拆为“再爬 1 阶（源自爬 n-1 阶）”和“再爬 2 阶（源自爬 n-2 阶）”，画出树状递归分支图。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 157000,
+      "endMs": 351000,
+      "assetId": "asset:video-09-02",
+      "locator": "02:37 - 05:51",
+      "observation": "屏幕编写纯递归代码 Solution::calcWays(n)。探讨递归终止条件，最初写 n==1 和 n==2，后整理简化为 if(n==0 || n==1) return 1; return calcWays(n-1) + calcWays(n-2);",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 351000,
+      "endMs": 440000,
+      "assetId": "asset:video-09-02",
+      "locator": "05:51 - 07:20",
+      "observation": "切换回 PPT 递归树，高亮标出多处重复出现的“爬 n-2 阶台阶”和“爬 n-3 阶台阶”节点，解释重复计算现象与重叠子问题。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 440000,
+      "endMs": 533000,
+      "assetId": "asset:video-09-02",
+      "locator": "07:20 - 08:53",
+      "observation": "屏幕代码加上私有成员 vector<int> memo，并在 climbStairs 中初始化大小为 n+1，值为 -1；calcWays 增加 memo[n] 的判断与保存。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 533000,
+      "endMs": 626000,
+      "assetId": "asset:video-09-02",
+      "locator": "08:53 - 10:26",
+      "observation": "删除递归函数 calcWays，在 climbStairs 内建立 memo(n+1, -1)，设置 memo[0]=1, memo[1]=1，用 for 循环从 i=2 到 n 执行 memo[i] = memo[i-1] + memo[i-2]，并指出其与斐波那契数列的等价性。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 626000,
+      "endMs": 739000,
+      "assetId": "asset:video-09-02",
+      "locator": "10:26 - 12:19",
+      "observation": "展示练习题 120. Triangle 题面与示例，解释三角形数字阵列中每一步只能移动到相邻格子的规则及最小路径和求解思路。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 739000,
+      "endMs": 842680,
+      "assetId": "asset:video-09-02",
+      "locator": "12:19 - 14:02",
+      "observation": "展示练习题 64. Minimum Path Sum 题面（m*n 矩阵，非负整数，只能右移或下移），提问如果去掉非负整数或限定移动方向会带来什么影响，引导学生思考。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.6",
+    "generatedAt": null
+  }
+}

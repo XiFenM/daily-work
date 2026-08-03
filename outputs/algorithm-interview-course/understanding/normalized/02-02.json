@@ -1,0 +1,677 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "02-02",
+  "chapterId": "02",
+  "titleObserved": "对数据规模有一个概念",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 686.289,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 61000,
+      "topic": "引入数据规模的概念",
+      "summary": "通过解答‘10^5 数据选择排序导致卡死’的常见提问，说明算法运行性能与数据规模 n 紧密相关。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 61000,
+      "endMs": 266000,
+      "topic": "O(n) 算法运行时间与数据规模对比实验",
+      "summary": "编写 C++ 代码运行 O(n) 的循环加法，测试 n 从 10^1 到 10^9 时的实际墙钟耗时。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 266000,
+      "endMs": 523000,
+      "topic": "在 1 秒限制下不同复杂度对应的可处理数据规模",
+      "summary": "总结在 1s 内解决问题时，O(n^2)、O(n)、O(nlogn) 等算法可处理的典型数据数量级及面试推导应用。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 523000,
+      "endMs": 591000,
+      "topic": "空间复杂度基本概念",
+      "summary": "讲解开辟一维辅助数组、二维辅助数组或常数级变量时的空间复杂度表示。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 591000,
+      "endMs": 686289,
+      "topic": "递归调用的空间代价",
+      "summary": "通过循环累加与递归累加代码对比，说明递归系统调用栈深度对空间复杂度的影响。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解数据规模 n 与算法在计算机上实际运行时间的量级关系。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "掌握在 1 秒运行时间限制下，根据不同时间复杂度反推算法能处理的输入数据规模上限。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "理解空间复杂度的评估方式，并认识到递归调用所产生的系统栈空间代价。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "数据规模",
+      "namesObserved": [
+        "数据规模",
+        "n"
+      ],
+      "role": "introduces",
+      "definition": "输入数据的数量或大小，通常用 n 表示，直接决定算法执行的指令条数和运行时间。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "时间复杂度",
+      "namesObserved": [
+        "时间复杂度",
+        "O"
+      ],
+      "role": "reinforces",
+      "definition": "描述算法运行时间随数据规模增长的渐进趋势。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "空间复杂度",
+      "namesObserved": [
+        "空间复杂度"
+      ],
+      "role": "introduces",
+      "definition": "算法在运行过程中所需辅助存储空间随数据规模增长的趋势。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "递归栈空间代价",
+      "namesObserved": [
+        "递归调用的空间代价",
+        "系统栈"
+      ],
+      "role": "introduces",
+      "definition": "进行递归调用时，系统保存每层函数运行状态所占据的调用栈空间。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "#include <iostream>\n#include <cmath>\n#include <ctime>\n\nusing namespace std;\n\nint main() {\n    for( int x = 1 ; x <= 9 ; x ++ ){\n        int n = pow(10, x);\n        clock_t startTime = clock();\n        int sum = 0;\n        for( int i = 0 ; i < n ; i ++ )\n            sum += i;\n        clock_t endTime = clock();\n        cout<<\"10^\"<<x<<\" : \"<<double(endTime - startTime)/CLOCKS_PER_SEC<<\" s\"<<endl;\n    }\n    return 0;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "int sum1( int n ){\n    assert( n >= 0 );\n    int ret = 0;\n    for( int i = 0 ; i <= n ; i++ )\n        ret += i;\n    return ret;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "int sum2( int n ){\n    assert( n >= 0 );\n    if( n == 0 )\n        return 0;\n    return n + sum2(n-1);\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "not_applicable",
+    "claims": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "1s内处理数据的经验数量级：O(n^2)算法",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n^2)",
+      "expressionNormalized": "O(n^2)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数据规模",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "10^4 规模的数据平方后为 10^8 次基本指令操作，在家用计算机上约耗时 0.4 秒，在 1 秒以内。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "解决问题的墙钟时间限制在 1 秒以内。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "conclusion": {
+        "statement": "在 1 秒运行限制下，O(n^2) 算法大约可处理 10^4 级别的数据规模。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "1s内处理数据的经验数量级：O(n)算法",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数据规模",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "10^8 次简单加法和赋值指令约耗时 0.4 秒，可以在 1 秒内完成。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002",
+            "ev-003"
+          ]
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "解决问题的墙钟时间限制在 1 秒以内。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "conclusion": {
+        "statement": "在 1 秒运行限制下，O(n) 算法大约可处理 10^8 级别的数据规模。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "id": "cx-003",
+      "subject": "1s内处理数据的经验数量级：O(nlogn)算法",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(nlogn)",
+      "expressionNormalized": "O(n * log(n))",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数据规模",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "log2(10^7) 约等于 20 多，10^7 * 20 约为 2*10^8 次操作，约在 1 秒量级。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "解决问题的墙钟时间限制在 1 秒以内。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "conclusion": {
+        "statement": "在 1 秒运行限制下，O(nlogn) 算法大约可处理 10^7 级别的数据规模。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "cx-004",
+      "subject": "循环累加 sum1 的辅助空间复杂度",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(1)",
+      "expressionNormalized": "O(1)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数据规模",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "sum1 函数只开辟了 ret 和 i 两个整型局部变量，所需空间与 n 无关。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "循环累加算法的空间复杂度为 O(1)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "cx-005",
+      "subject": "递归累加 sum2 的递归栈空间复杂度",
+      "measure": "stack_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数据规模 / 递归深度",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "递归调用深度为 n，系统栈中需要压入 n 个函数运行状态框架。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "递归累加算法的空间复杂度为 O(n)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [
+    {
+      "id": "experiment-001",
+      "subject": "O(n) 算法处理不同规模数据 (10^1 到 10^9) 的运行时间测试",
+      "purpose": {
+        "statement": "通过实验直观建立数据规模 n 与 CPU 墙钟时间的数量级概念，验证 O(n) 复杂度算法的线性增长趋势。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      "setup": {
+        "language": "C++",
+        "compilerOrRuntime": null,
+        "optimization": null,
+        "operatingSystem": null,
+        "hardware": null,
+        "timer": "clock() / CLOCKS_PER_SEC",
+        "warmup": null,
+        "repetitions": null,
+        "inputGeneration": "n = pow(10, x), x from 1 to 9"
+      },
+      "measurements": [
+        {
+          "inputDescription": "10^1",
+          "inputSize": "10",
+          "observedValue": "2e-06",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "inputDescription": "10^2",
+          "inputSize": "100",
+          "observedValue": "2e-06",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "inputDescription": "10^3",
+          "inputSize": "1000",
+          "observedValue": "5e-06",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "inputDescription": "10^4",
+          "inputSize": "10000",
+          "observedValue": "4e-05",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "inputDescription": "10^5",
+          "inputSize": "100000",
+          "observedValue": "0.000403",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "inputDescription": "10^6",
+          "inputSize": "1000000",
+          "observedValue": "0.004016",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "inputDescription": "10^7",
+          "inputSize": "10000000",
+          "observedValue": "0.041024",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "inputDescription": "10^8",
+          "inputSize": "100000000",
+          "observedValue": "0.414551",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "inputDescription": "10^9",
+          "inputSize": "1000000000",
+          "observedValue": "4.12745",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "theoreticalExpectation": {
+        "statement": "数据规模每上升 10 倍，运行时间也应当基本提升 10 倍。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      "observation": {
+        "statement": "数据从 10^3 开始，数据规模每增加 10 倍，耗时也相应大致增加 10 倍，其中 10^8 规模约耗时 0.41 秒，10^9 规模约耗时 4.13 秒。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      "limitations": [
+        {
+          "statement": "在数据规模很小时（如 10^1 到 10^3），计时器精度和耗时极短导致测试结果不具代表性。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "statement": "不同的计算机硬件配置不同，测试出的具体数值可能存在差异，但数量级基本一致。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "examples": [],
+  "edgeCases": [],
+  "implementationPitfalls": [
+    {
+      "statement": "对 10^5 规模的数据使用 O(n^2) 的选择排序时，所需基本指令多达 10^10 次，单线程串行计算会导致 CPU 被占满，程序耗时数十秒甚至极长，表现为计算机假死。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "忽略递归调用的深度限制，写深层递归可能消耗大量的系统栈空间，从而导致空间复杂度上升或栈溢出。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "面试官给出数据规模 n 时，可根据 1s 限制反推算法的最低复杂度要求。例如 n=10^8 时需设计 O(n) 或 O(nlogn) 的算法，若 n=10^3 则允许设计 O(n^2) 算法，若 n<=100 则可以设计 O(n^3) 算法。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "在复杂业务场景中，若允许预处理耗时较长（如 5 分钟或 1 小时），可根据允许的时间宽限相应降低对数据规模和时间复杂度的要求。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:01-04",
+      "to": "lesson:02-02",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "非证据候选关系核查",
+      "confidence": 0.5,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    },
+    {
+      "from": "lesson:02-01",
+      "to": "lesson:02-02",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "视频开头明确回顾上小节的大 O 概念，并在本节进一步应用到实际数据规模上。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "from": "lesson:02-02",
+      "to": "lesson:02-03",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "非证据候选关系核查",
+      "confidence": 0.5,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 61000,
+      "assetId": "asset:video-02-02",
+      "locator": null,
+      "observation": "老师回顾大 O 符号，引入‘数据规模 Concept’，并提出学生常问问题：对 10^5 数据进行选择排序为何会导致计算机假死？",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 61000,
+      "endMs": 266000,
+      "assetId": "asset:video-02-02",
+      "locator": null,
+      "observation": "老师展示并运行 C++ 测试代码，用 clock() 测量从 10^1 到 10^9 规模下的循环累加运行时间，输出控制台显示 10^8 约为 0.41 秒，10^9 约为 4.12 秒。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 266000,
+      "endMs": 523000,
+      "assetId": "asset:video-02-02",
+      "locator": null,
+      "observation": "老师展示 PPT『数据规模的概念』：1s 内解决问题时，O(n^2) 处理 ~10^4，O(n) 处理 ~10^8，O(nlogn) 处理 ~10^7。讲解如何结合保守估计与面试反推复杂度要求。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 523000,
+      "endMs": 591000,
+      "assetId": "asset:video-02-02",
+      "locator": null,
+      "observation": "老师切换幻灯片展示『空间复杂度』：多开一维辅助数组为 O(n)，二维辅助数组为 O(n^2)，多开常数空间为 O(1)。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 591000,
+      "endMs": 686289,
+      "assetId": "asset:video-02-02",
+      "locator": null,
+      "observation": "老师讲解递归调用的空间代价，并对比展示了循环累加 sum1（空间 O(1)）与递归累加 sum2（空间 O(n)）的代码。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "9318d79a49b44117a62023391ecfccd4",
+    "promptVersion": "video-evidence-v1.3",
+    "generatedAt": "2026-07-29T09:26:41.000Z"
+  }
+}

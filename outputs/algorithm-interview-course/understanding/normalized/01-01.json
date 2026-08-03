@@ -1,0 +1,275 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "01-01",
+  "chapterId": "01",
+  "titleObserved": "算法面试不仅仅是正确的回答问题",
+  "contentKind": "interview_strategy",
+  "actualDurationSeconds": 1180.28,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 46000,
+      "topic": "课程开篇与背景引入",
+      "summary": "介绍课程《玩儿转算法面试》，探讨算法面试课程是否只是单纯给出算法问题与解答。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 46000,
+      "endMs": 175000,
+      "topic": "这个课程的目标是什么？",
+      "summary": "阐述课程目标：建立合理的思考路径、面对算法面试不畏惧、培养计算机算法思维素质。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 175000,
+      "endMs": 326000,
+      "topic": "算法面试是什么与不是什么",
+      "summary": "界定算法面试的本质，说明算法面试不等于必须正确回答每个问题，也不等同于技术面试全貌或Offer保证。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 326000,
+      "endMs": 1010000,
+      "topic": "什么是给出合理的思考路径（以排序为例）",
+      "summary": "通过数据排序问题，分析不同应用场景和数据特征（重复元素、近乎有序、取值范围有限、稳定性、链表存储、外排序）对算法选择的影响。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 1010000,
+      "endMs": 1180280,
+      "topic": "什么是“正确”的回答一个算法问题",
+      "summary": "讲解广义的“正确”包含独到见解、优化、代码规范和容错性，强调在面对极难问题时展示解题思路与方向的重要性。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解算法面试的核心目的在于向面试官展示合理的思考路径与解题思路，而非单纯给出固定标准答案。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "明确算法面试与整体技术面试及最终Offer之间的关系，克服对算法面试的畏惧心理。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "学会通过与面试官沟通数据的具体特征、应用环境及额外约束（如重复度、近乎有序、取值范围、稳定性、数据结构与内存限制），选择最合适的算法方案。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "掌握广义“正确”回答算法问题的维度，包括独到见解、算法/语言层面的优化、代码规范与容错性。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "算法面试",
+      "namesObserved": [
+        "算法面试"
+      ],
+      "role": "introduces",
+      "definition": "面试官评估应聘者是否具备使用计算机算法思维解决实际问题素质的一种考察方式。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "思考路径",
+      "namesObserved": [
+        "思考路径",
+        "思考方向",
+        "思考问题的路线"
+      ],
+      "role": "introduces",
+      "definition": "在面对算法问题时，通过分析背景约束、数据特征并与面试官沟通，逐步推导并优化解决方案的思维逻辑过程。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "三路快速排序",
+      "namesObserved": [
+        "三路快排"
+      ],
+      "role": "introduces",
+      "definition": "针对包含大量重复元素的数据集进行了优化的快速排序变体方案。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "外排序",
+      "namesObserved": [
+        "外排序算法"
+      ],
+      "role": "introduces",
+      "definition": "当数据量巨大或内存极小、无法将全部数据装载进内存时所采用的排序算法。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [],
+  "correctness": {
+    "method": "not_applicable",
+    "claims": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "examples": [],
+  "edgeCases": [],
+  "implementationPitfalls": [],
+  "interviewPlaybook": [
+    {
+      "statement": "把算法面试看作是与面试官（如同同事或朋友）共同探讨一个实际问题的解决方案，而不是一场单向打高分的考试。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "不要未加思考就机械套用默认算法（如直接回答快排），应主动与面试官沟通问题的细节与数据应用环境。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "关注数据的特殊特征：若含大量重复元素考虑三路快排；若近乎有序考虑插入排序；若取值范围极其有限（如成绩）考虑计数排序。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "考察数据结构与系统限制：若要求稳定排序或使用链表存储考虑归并排序；若超出内存大小限制则需考虑外排序。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "即使遇到极难、无法当场完美求解的问题，也要清楚表达思考方向与解题思路，说明可在何种领域或通过何种资料进一步求解。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:01-01",
+      "to": "lesson:01-02",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "从“算法面试不只是答对问题”扩展到算法面试在整体面试中的位置。",
+      "confidence": 0.9,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "from": "lesson:07-03",
+      "to": "lesson:01-01",
+      "type": "revisits",
+      "status": "provisional",
+      "rationale": "07-03 的配套文本重新讨论算法题表现与工程、用户价值之间的关系。",
+      "confidence": 0.8,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": [
+        "ev-003",
+        "ev-005"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 46000,
+      "assetId": "asset:video-01-01",
+      "locator": "00:00-00:46",
+      "observation": "视频展示课程标题《玩儿转算法面试》，讲师liuyubobobo引入课程主题，探讨算法面试课程的定位。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 46000,
+      "endMs": 175000,
+      "assetId": "asset:video-01-01",
+      "locator": "00:46-02:55",
+      "observation": "PPT展示‘这个课程的目标是什么？’，包含思考路径、不畏惧（不需啃完《算法导论》）、计算思维素质等要点。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 175000,
+      "endMs": 326000,
+      "assetId": "asset:video-01-01",
+      "locator": "02:55-05:26",
+      "observation": "PPT展示‘什么是算法面试？’及‘算法面试不是什么’的3条澄清要点。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 326000,
+      "endMs": 1010000,
+      "assetId": "asset:video-01-01",
+      "locator": "05:26-16:50",
+      "observation": "讲师以‘对一组数据进行排序’为例，展示如何通过沟通数据的特征（重复元素、近乎有序、取值范围、稳定性、链表存储、内存大小）选出最适合的排序算法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 1010000,
+      "endMs": 1180280,
+      "assetId": "asset:video-01-01",
+      "locator": "16:50-19:40",
+      "observation": "PPT展示‘什么是“正确”的回答一个算法问题’，说明正确包含独到见解、优化、代码规范、容错性，并强调面对难题时表达思路的关键作用。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "032651b2d1354c9283e15daa887d5e8b",
+    "promptVersion": "video-evidence-v1.1",
+    "generatedAt": "2026-07-29T06:11:00.000Z"
+  }
+}

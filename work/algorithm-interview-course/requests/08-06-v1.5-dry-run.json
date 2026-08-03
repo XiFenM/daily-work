@@ -1,0 +1,27 @@
+{
+  "endpoint": "https://zenmux.dev/api/v1/chat/completions",
+  "payload": {
+    "response_format": {
+      "type": "json_object"
+    },
+    "model": "google/gemini-3.6-flash",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "<redacted:10964 chars>"
+          },
+          {
+            "type": "file",
+            "file": {
+              "filename": "08-06-balanced.mp4",
+              "file_data": "data:video/mp4;base64,<redacted:32649584 chars>"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

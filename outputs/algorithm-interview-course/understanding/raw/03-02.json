@@ -1,0 +1,630 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "03-02",
+  "chapterId": "03",
+  "titleObserved": "改变变量定义，依然可以写出正确的算法",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 726.48,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 60000,
+      "topic": "引入：改变二分查找的变量定义",
+      "summary": "回顾上一小节闭区间 [l, r] 的定义，并引入将右边界初始值设置为 r = n 的开区间/半开区间 [l, r) 定义。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 60000,
+      "endMs": 120000,
+      "topic": "循环条件调整",
+      "summary": "分析在 [l, r) 语义下，当 l == r 时区间为空无效，因此 while 循环条件应修改为 l < r。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 120000,
+      "endMs": 233000,
+      "topic": "分支更新逻辑调整",
+      "summary": "推导当 target < arr[mid] 时，右边界应更新为 r = mid，以保证新的搜索区间仍为 [l, mid) 半开区间。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 233000,
+      "endMs": 323000,
+      "topic": "代码编写与记忆误区探讨",
+      "summary": "强调算法编写不应死记硬背，而是要基于明确的变量定义与循环不变量进行逻辑推导。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 323000,
+      "endMs": 362000,
+      "topic": "运行测试验证",
+      "summary": "使用 1,000,000 数据量的数组对修改后的二分查找代码进行 assert 正确性测试与性能测量。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 362000,
+      "endMs": 499000,
+      "topic": "整型溢出 Bug 修复",
+      "summary": "指出 (l + r) / 2 在 l 与 r 较大时可能产生整型溢出的问题，并将其修复为 l + (r - l) / 2。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 499000,
+      "endMs": 726480,
+      "topic": "总结：如何写出正确的程序",
+      "summary": "总结写出正确程序的四大要素：明确变量含义、维护循环不变量、小数据量调试、大数据量测试。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "掌握左闭右开区间 [l, r) 语义下的二分查找代码实现与边界更新规则",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "理解中点计算公式 (l + r) / 2 可能导致整型溢出的原因及 l + (r - l) / 2 的修复方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "掌握编写正确程序的核心方法：明确变量含义、维护循环不变量、小数据量调试与大数据量测试",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Binary Search",
+      "namesObserved": [
+        "二分搜索法",
+        "二分查找法"
+      ],
+      "role": "applies",
+      "definition": "在有序数组中，通过不断将查找区间折半来寻找目标元素的搜索算法。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "Loop Invariant",
+      "namesObserved": [
+        "循环不变量"
+      ],
+      "role": "reinforces",
+      "definition": "在循环迭代过程中始终保持成立的逻辑性质或变量语义关系。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-006"
+      ]
+    },
+    {
+      "canonicalName": "Integer Overflow",
+      "namesObserved": [
+        "整型溢出"
+      ],
+      "role": "introduces",
+      "definition": "当两个较大整型变量相加结果超过该整型类型所能表示的最大值时发生的溢出现象。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "基于左闭右开区间 [l, r) 语义实现的二分查找算法，初始 r = n，循环条件 l < r，分支更新 r = mid 与 l = mid + 1。",
+      "timeComplexity": "O(log n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [
+        "使用 (l + r) / 2 计算 mid 时，在 l 和 r 均很大时存在整型溢出风险。"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-001",
+        "ev-002",
+        "ev-005"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "optimized",
+      "idea": "将中点计算公式替换为 mid = l + (r - l) / 2，彻底规避整型溢出风险的无 Bug 二分查找实现。",
+      "timeComplexity": "O(log n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-002"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "template<typename T>\nint binarySearch(T arr[], int n, T target) {\n    int l = 0, r = n; // 在 [l...r) 的范围里寻找 target\n    while (l < r) {   // 当 l == r 时，区间 [l...r) 依然是无效的\n        int mid = (l + r) / 2;\n        if (arr[mid] == target)\n            return mid;\n        if (target > arr[mid])\n            l = mid + 1; // target 在 [mid+1...r) 中\n        else             // target < arr[mid]\n            r = mid;     // target 在 [l...mid) 中\n    }\n    return -1;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "template<typename T>\nint binarySearch(T arr[], int n, T target) {\n    int l = 0, r = n;\n    while (l < r) {\n        int mid = l + (r - l) / 2;\n        if (arr[mid] == target)\n            return mid;\n        if (target > arr[mid])\n            l = mid + 1;\n        else\n            r = mid;\n    }\n    return -1;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "search_interval",
+      "variables": [
+        {
+          "symbol": "l",
+          "role": "left_bound",
+          "meaning": "搜索区间 [l, r) 的左闭边界索引",
+          "updateRule": "初始为 0；当 target > arr[mid] 时更新为 mid + 1",
+          "evidenceIds": [
+            "ev-001",
+            "ev-002"
+          ]
+        },
+        {
+          "symbol": "r",
+          "role": "right_bound",
+          "meaning": "搜索区间 [l, r) 的右开边界索引",
+          "updateRule": "初始为 n；当 target < arr[mid] 时更新为 mid",
+          "evidenceIds": [
+            "ev-001",
+            "ev-002"
+          ]
+        },
+        {
+          "symbol": "mid",
+          "role": "pivot",
+          "meaning": "当前搜索区间的中间元素索引",
+          "updateRule": "l + (r - l) / 2",
+          "evidenceIds": [
+            "ev-002",
+            "ev-005"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "[l, r)",
+          "meaning": "包含索引 l 到 r-1 的半开半闭有效候选搜索区间",
+          "evidenceIds": [
+            "ev-001",
+            "ev-002"
+          ]
+        }
+      ],
+      "invariant": {
+        "statement": "如果 target 存在于数组中，则一定处于半开区间 [l, r) 的范围内",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-001",
+          "ev-002"
+        ]
+      },
+      "transitions": [
+        {
+          "condition": "target > arr[mid]",
+          "updates": "l = mid + 1",
+          "preserves": {
+            "statement": "arr[mid] 及左侧元素均小于 target，目标仍维持在 [mid+1, r) 中",
+            "sourceClass": "course_direct",
+            "evidenceIds": [
+              "ev-002"
+            ]
+          },
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "condition": "target < arr[mid]",
+          "updates": "r = mid",
+          "preserves": {
+            "statement": "arr[mid] 及右侧元素均大于 target，因右边界为开区间，r 更新为 mid 即不包含 mid，目标仍维持在 [l, mid) 中",
+            "sourceClass": "course_direct",
+            "evidenceIds": [
+              "ev-002"
+            ]
+          },
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 l == r 时，区间 [l, r) 为空区间（例如 [42, 42) 不含任何元素），循环终止",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "loop_invariant",
+    "claims": [
+      {
+        "statement": "改变变量定义为 [l, r) 半开区间后，通过相应调整循环条件与边界更新规则，依然能写出完全正确的二分查找算法",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-001",
+          "ev-002",
+          "ev-004"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": [
+      {
+        "phase": "initialization",
+        "statement": "初始化 l = 0, r = n，搜索区间 [0, n) 正好覆盖数组中全部 n 个元素的索引下标",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-001"
+        ]
+      },
+      {
+        "phase": "preservation",
+        "statement": "若 arr[mid] != target，根据大小比较分别将 l 更新为 mid + 1 或将 r 更新为 mid，新区间 [l, r) 始终维持 target 的包含不变性",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      {
+        "phase": "termination",
+        "statement": "当 l >= r （即 l == r）时循环结束，此时区间 [l, r) 为空，说明数组中不存在 target",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      {
+        "phase": "postcondition",
+        "statement": "若在循环中找到 arr[mid] == target 则返回 mid 索引；若循环终止仍未找到则返回 -1",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      }
+    ]
+  },
+  "complexity": {
+    "time": "O(log n)",
+    "space": "O(1)",
+    "assumptions": [
+      "输入数组已按升序排列"
+    ],
+    "evidenceIds": [
+      "ev-001",
+      "ev-004"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "binarySearch",
+      "measure": "time",
+      "notation": "O",
+      "case": "worst",
+      "expressionObserved": "O(log n)",
+      "expressionNormalized": "O(log n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组中的元素个数",
+          "domainOrRelationship": "正整数",
+          "evidenceIds": [
+            "ev-001",
+            "ev-004"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "二分查找的时间复杂度为 O(log n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "formula",
+      "sourceKind": "shown_in_video",
+      "rawText": "mid = l + (r - l) / 2",
+      "normalizedText": "mid = l + (r - l) / 2",
+      "variables": [
+        {
+          "symbol": "l",
+          "meaning": "左边界索引",
+          "domainOrRelationship": "非负整数",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "symbol": "r",
+          "role": null,
+          "meaning": "右边界索引",
+          "domainOrRelationship": "非负整数",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "symbol": "mid",
+          "role": null,
+          "meaning": "中间位置索引",
+          "domainOrRelationship": "非负整数",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "id": "experiment-001",
+      "subject": "BinarySearch correctness and performance test",
+      "purpose": {
+        "statement": "验证 100 万数据量下修改变量定义后的二分查找程序的正确性与运行时间",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "setup": {
+        "language": "cpp",
+        "compilerOrRuntime": null,
+        "optimization": null,
+        "operatingSystem": "macOS",
+        "hardware": null,
+        "timer": "clock()",
+        "warmup": null,
+        "repetitions": null,
+        "inputGeneration": "MyUtil::generateOrderedArray(n)"
+      },
+      "measurements": [
+        {
+          "inputDescription": "长度为 1000000 的有序整数数组，依次寻找 0 到 n-1 的每个元素",
+          "inputSize": "1000000",
+          "observedValue": "0.389827",
+          "unit": "seconds",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "theoreticalExpectation": null,
+      "observation": {
+        "statement": "100 万数据量下的测试全部通过 assert 验证，耗时约 0.38 秒",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "limitations": [],
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "examples": [],
+  "edgeCases": [
+    {
+      "statement": "当 l == r 时，在 [l, r) 半开区间语义下该区间不包含任何元素（例如 [42, 42) 为空区间），循环条件必须用 l < r 而不能用 l <= r",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "当 l 和 r 都是较大整型数时，(l + r) 可能超出整型最大表示范围造成溢出，应使用 l + (r - l) / 2 防止整型溢出",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "死记硬背代码细节（如混用 l <= r 和 r = mid），导致边界死循环或漏掉元素",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "在中点求值表达式中使用 (l + r) / 2，忽略大整型相加溢出的经典隐蔽 Bug",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "面试中编写算法前，先明确声明变量的物理/数学含义（如 [l, r] 还是 [l, r)），并严格依据该语义推导循环边界与更新条件",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "在涉及中点计算的场合，主动采用 l + (r - l) / 2 形式，展现防范整型溢出的工程严谨性",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "遇到 Bug 时保持耐心，通过构建包含边界条件（如空集、不存在元素等）的微型数据集（4-6 个数据）手动手走流程进行调试",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:03-01",
+      "to": "lesson:03-02",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "03-02 课次承接 03-01 课次闭区间 [l, r] 的二分查找实现，进一步探讨改变变量定义为半开区间 [l, r) 时算法的相应调整与正确性推导。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 60000,
+      "assetId": "asset:video-03-02",
+      "locator": "00:00-01:00",
+      "observation": "老师讲解二分查找右边界初始化为 r = n，表示在 [l...r) 范围寻找 target 的变量定义变化。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 60000,
+      "endMs": 233000,
+      "assetId": "asset:video-03-02",
+      "locator": "01:00-03:53",
+      "observation": "详细推导 while(l < r) 循环条件以及 target < arr[mid] 时 r = mid 的更新逻辑，并用 [42, 42) 空区间与 [42, 43) 包含单元素做对比说明。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 233000,
+      "endMs": 323000,
+      "assetId": "asset:video-03-02",
+      "locator": "03:53-05:23",
+      "observation": "老师强调算法不应背诵，而应基于变量定义和逻辑进行推导。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 323000,
+      "endMs": 362000,
+      "assetId": "asset:video-03-02",
+      "locator": "05:23-06:02",
+      "observation": "运行 C++ 程序对 1,000,000 数据量数组进行 assert 验证并输出 Time cost: 0.389827 s。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 362000,
+      "endMs": 499000,
+      "assetId": "asset:video-03-02",
+      "locator": "06:02-08:19",
+      "observation": "老师指出 int mid = (l + r) / 2 在 l 和 r 较大时会发生整型溢出，演示将其修改为 int mid = l + (r - l) / 2。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 499000,
+      "endMs": 726480,
+      "assetId": "asset:video-03-02",
+      "locator": "08:19-12:06",
+      "observation": "幻灯片总结「如何写出正确的程序？」：明确变量的含义、循环不变量、小数据量调试、大数据量测试。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

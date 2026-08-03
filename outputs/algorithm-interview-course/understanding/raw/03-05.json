@@ -1,0 +1,805 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "03-05",
+  "chapterId": "03",
+  "titleObserved": "三路快排 partition 思路的应用 Sort Color",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1346.64,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 178000,
+      "topic": "问题引入与系统排序解法",
+      "summary": "引入 LeetCode 75 号问题 Sort Colors，讲解对于限定元素取值的数组，直接使用系统内置/常快速排序算法（O(n log n)）可以解决问题。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 178000,
+      "endMs": 545000,
+      "topic": "计数排序解法与代码实现",
+      "summary": "利用元素仅有 0, 1, 2 的特性，提出计数排序（Counting Sort）思路：第一遍扫描统计频率，第二遍扫描重写数组。给出 C++ 代码并分析复杂度。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 545000,
+      "endMs": 816000,
+      "topic": "三路快排 Partition 思路与状态模型",
+      "summary": "进一步探讨是否能仅遍历数组一次完成排序。结合三路快排（Quick Sort 3 Ways）的 Partition 机制，定义 zero、two 与 i 指针及三个闭/半开区间的循环不变量。",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 816000,
+      "endMs": 1163000,
+      "topic": "三路 Partition 代码实现与细节演示",
+      "summary": "编写单次遍历三路 Partition 的 C++ 代码，演示针对 0, 1, 2 的分支处理、指针移动、元素 swap 以及断言等代码工程细节。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 1163000,
+      "endMs": 1346640,
+      "topic": "拓展思考与相关练习题",
+      "summary": "布置两道相关练习题：LeetCode 88 Merge Sorted Array（归并排序思路）和 LeetCode 215 Kth Largest Element in an Array（利用快排 Partition 将 pivot 放于正确位置的性质）。",
+      "evidenceIds": [
+        "ev-008",
+        "ev-009"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解并掌握限定值域数组的计数排序（Counting Sort）方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "掌握将三路快排（Quick Sort 3 Ways）Partition 思想应用于单次遍历数组分类排序的方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006",
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "学习通过明确循环不变量（Loop Invariant）来设计与维护双指针/多指针的区间定义及边界",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Counting Sort",
+      "namesObserved": [
+        "计数排序"
+      ],
+      "role": "introduces",
+      "definition": "通过统计数组中各个不同元素的出现频率，然后再按顺序将对应数量的元素放回原数组的排序算法。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "3-Way QuickSort Partition",
+      "namesObserved": [
+        "三路快速排序",
+        "三路快排",
+        "partition"
+      ],
+      "role": "applies",
+      "definition": "快速排序的一种变体，将数组划分为小于标定点、等于标定点和大于标定点三个区域。在 Sort Colors 问题中单次 partition 即可将 0, 1, 2 三种元素归位。",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "canonicalName": "Loop Invariant",
+      "namesObserved": [
+        "循环不变量"
+      ],
+      "role": "applies",
+      "definition": "在循环体执行前后始终保持为真的逻辑条件，用于指导指针初始化、循环条件和区间更新逻辑。",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "75",
+    "titleObserved": "75 Sort Colors",
+    "statement": "给定一个有 n 个元素的数组，数组中元素的取值只有 0, 1, 2 三种可能。为这个数组排序。",
+    "constraints": [
+      "数组元素取值只有 0, 1, 2 三种可能",
+      "数组大小为 n"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "直接调用标准库的排序算法或任意如快速排序等通用排序算法进行排序。",
+      "timeComplexity": "O(n log n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [
+        "没有利用题目中元素取值仅有 0, 1, 2 的特殊条件",
+        "渐型时间复杂度未达到最优 O(n)"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "intermediate",
+      "idea": "计数排序（Counting Sort）：第一遍扫描数组分别统计 0, 1, 2 的元素个数；第二遍扫描将对应数量的 0, 1, 2 依次放回原数组。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(k)",
+      "limitations": [
+        "对整个数组进行了两遍遍历"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "id": "solution-003",
+      "stage": "optimized",
+      "idea": "借鉴三路快排 Partition 思路：使用 zero 指针和 two 指针维护 0 区间与 2 区间边界，遍历指针 i 扫描元素。若 nums[i] == 1 则 i++；若 nums[i] == 2 则与 --two 位置交换；若 nums[i] == 0 则与 ++zero 位置交换且 i++。只需遍历一次数组即可完成排序。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-002"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-005",
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-002",
+      "language": "C++",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    void sortColors(vector<int>& nums) {\n        int count[3] = {0}; // 存放0, 1, 2三个元素的频率\n        for (int i = 0; i < nums.size(); i++) {\n            assert(nums[i] >= 0 && nums[i] <= 2);\n            count[nums[i]]++;\n        }\n\n        int index = 0;\n        for (int i = 0; i < count[0]; i++)\n            nums[index++] = 0;\n        for (int i = 0; i < count[1]; i++)\n            nums[index++] = 1;\n        for (int i = 0; i < count[2]; i++)\n            nums[index++] = 2;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-003",
+      "language": "C++",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    void sortColors(vector<int>& nums) {\n        int zero = -1; // nums[0...zero] == 0\n        int two = nums.size(); // nums[two...n-1] == 2\n        for (int i = 0; i < two; ) {\n            if (nums[i] == 1) {\n                i++;\n            } else if (nums[i] == 2) {\n                two--;\n                swap(nums[i], nums[two]);\n            } else {\n                assert(nums[i] == 0);\n                zero++;\n                swap(nums[zero], nums[i]);\n                i++;\n            }\n        }\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-003",
+      "kind": "partition",
+      "variables": [
+        {
+          "symbol": "zero",
+          "role": "boundary_pointer",
+          "meaning": "指向存储 0 的区间的右边界",
+          "updateRule": "当遇到元素 0 时，zero++，并与 nums[i] 交换",
+          "evidenceIds": [
+            "ev-006",
+            "ev-007"
+          ]
+        },
+        {
+          "symbol": "two",
+          "role": "boundary_pointer",
+          "meaning": "指向存储 2 的区间的左边界",
+          "updateRule": "当遇到元素 2 时，two--，并与 nums[i] 交换",
+          "evidenceIds": [
+            "ev-006",
+            "ev-007"
+          ]
+        },
+        {
+          "symbol": "i",
+          "role": "scan_pointer",
+          "meaning": "当前扫描处理到的元素索引",
+          "updateRule": "处理完 1 或与 zero 交换完 0 后 i++；与 two 交换 2 后 i 保持不变",
+          "evidenceIds": [
+            "ev-006",
+            "ev-007"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "nums[0...zero]",
+          "meaning": "存放元素全部为 0 的闭区间",
+          "evidenceIds": [
+            "ev-006",
+            "ev-007"
+          ]
+        },
+        {
+          "notation": "nums[zero+1...i-1]",
+          "meaning": "存放元素全部为 1 的闭区间",
+          "evidenceIds": [
+            "ev-006",
+            "ev-007"
+          ]
+        },
+        {
+          "notation": "nums[two...n-1]",
+          "meaning": "存放元素全部为 2 的闭区间",
+          "evidenceIds": [
+            "ev-006",
+            "ev-007"
+          ]
+        }
+      ],
+      "invariant": {
+        "statement": "在算法执行的全过程中，始终保持 nums[0...zero] == 0, nums[zero+1...i-1] == 1, nums[two...n-1] == 2。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006",
+          "ev-007"
+        ]
+      },
+      "transitions": [
+        {
+          "condition": "nums[i] == 1",
+          "updates": "i++",
+          "preserves": {
+            "statement": "将 nums[i] 纳为 1 区间，区间 [zero+1...i-1] 扩展，保持全为 1",
+            "sourceClass": "course_direct",
+            "evidenceIds": [
+              "ev-006",
+              "ev-007"
+            ]
+          },
+          "evidenceIds": [
+            "ev-006",
+            "ev-007"
+          ]
+        },
+        {
+          "condition": "nums[i] == 2",
+          "updates": "two--; swap(nums[i], nums[two])",
+          "preserves": {
+            "statement": "将 2 放入 [two...n-1] 区间，i 不变（继续处理新换来的元素）",
+            "sourceClass": "course_direct",
+            "evidenceIds": [
+              "ev-006",
+              "ev-007"
+            ]
+          },
+          "evidenceIds": [
+            "ev-006",
+            "ev-007"
+          ]
+        },
+        {
+          "condition": "nums[i] == 0",
+          "updates": "zero++; swap(nums[zero], nums[i]); i++",
+          "preserves": {
+            "statement": "将 0 融入 [0...zero] 区间，交换出来的 1 被纳入 [zero+1...i-1] 区间，i++ 保持性质",
+            "sourceClass": "course_direct",
+            "evidenceIds": [
+              "ev-006",
+              "ev-007"
+            ]
+          },
+          "evidenceIds": [
+            "ev-006",
+            "ev-007"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 i == two 时循环终止，未处理区间 [i...two-1] 为空，整个数组被划分为 0, 1, 2 三个有序区域。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006",
+          "ev-007"
+        ]
+      },
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "loop_invariant",
+    "claims": [
+      {
+        "statement": "三路 Partition 算法能保证在单次遍历完成后，数组中所有 0 在最左侧、1 在中间、2 在最右侧，实现正确排序。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006",
+          "ev-007"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": [
+      {
+        "phase": "initialization",
+        "statement": "初始时 zero = -1, two = n, i = 0，三个区间 nums[0...-1]、nums[0...-1]、nums[n...n-1] 均为空集，循环不变量自然成立。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006",
+          "ev-007"
+        ]
+      },
+      {
+        "phase": "preservation",
+        "statement": "针对 nums[i] 为 0, 1, 2 的三种情况，分别执行对应指针更新与元素 swap，均能保证三个区间的数值性质不被破坏。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006",
+          "ev-007"
+        ]
+      },
+      {
+        "phase": "termination",
+        "statement": "当扫描指针 i 达到 two 时，i < two 条件不满足，循环终止。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006",
+          "ev-007"
+        ]
+      },
+      {
+        "phase": "postcondition",
+        "statement": "终止时整个数组被不重不漏地分割为 nums[0...zero] == 0, nums[zero+1...two-1] == 1, nums[two...n-1] == 2，数组完全有序。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006",
+          "ev-007"
+        ]
+      }
+    ]
+  },
+  "complexity": {
+    "time": "O(n)",
+    "space": "O(1)",
+    "assumptions": [
+      "数组元素个数为 n",
+      "元素取值范围受限为 {0, 1, 2}"
+    ],
+    "evidenceIds": [
+      "ev-004",
+      "ev-007"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "计数排序解法 (Solution 2)",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 nums 中的元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "第一遍扫描数组 nums 统计频率，耗时 O(n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "statement": "第二遍按 count 数组频率重写原数组，写入总次数为 n，耗时 O(n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "statement": "总时间复杂度为 O(n) + O(n) = O(n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "计数排序的时间复杂度为 O(n)，需扫描数组两遍",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "计数排序解法 (Solution 2)",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(k), k为元素取值范围",
+      "expressionNormalized": "O(1)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "k",
+          "meaning": "数组元素的取值范围大小，在本题中 k = 3",
+          "domainOrRelationship": "k = 3",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "使用了开辟长度为 k 的计数数组 count[3] 来存放频率",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "statement": "由于 k = 3 为常数，空间复杂度可看作 O(1)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "计数排序的辅助空间复杂度为 O(k) 即 O(1)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "cx-003",
+      "subject": "三路 Partition 解法 (Solution 3)",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 nums 中的元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "遍历指针 i 从 0 逐步移动至 two，对数组仅进行单次遍历",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        },
+        {
+          "statement": "每次循环处理一个元素并更新指针/交换，单次操作 O(1)，总体耗时 O(n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "三路 Partition 算法的时间复杂度为 O(n)，且只需要遍历数组一遍",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "id": "cx-004",
+      "subject": "三路 Partition 解法 (Solution 3)",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(1)",
+      "expressionNormalized": "O(1)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "仅使用了 zero, two, i 等常数个指针变量进行原地交换",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "三路 Partition 算法的辅助空间复杂度为 O(1)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "针对 LeetCode 215 题示例：数组 [3, 2, 1, 5, 6, 4]，k = 2，寻找第 2 大元素，结果为 5。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "数组中包含非法取值（非 0, 1, 2 的数值），代码中使用了 assert 进行边界容错断言检测",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-007"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "当 nums[i] == 2 与 nums[two-1] 交换后，交换上来的 nums[i] 是未处理元素，此时 i 不能自增（i 不加加），必须在下一轮循环继续检验 nums[i]",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "区间的开闭定义要保持一致。若定义 zero 为 nums[0...zero] == 0，则 zero 初始值必须为 -1；若定义 two 为 nums[two...n-1] == 2，则 two 初始值必须为 n",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "访问数组下标如 count[nums[i]] 时要注意防止数组越界问题",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "面试时若一时没有最优思路，可先给出暴力解法或通用解法（如直接调用系统 Sorting），保证先解决问题再优化",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "面对限定少量枚举值的排序问题，应首先想到计数排序（O(n) 时间，扫描两遍）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "若进一步被追问能否只遍历一次数组（1-pass），可利用三路快排（3-way QuickSort）Partition 的指针交换维护逻辑实现",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:03-05",
+      "to": "lesson:01-01",
+      "type": "revisits",
+      "status": "provisional",
+      "rationale": "课程开头强调了面试中先给出可行解再进行优化的思维方式，复考了 01-01 的核心面试策略。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "from": "lesson:03-04",
+      "to": "lesson:03-05",
+      "type": "same_pattern_as",
+      "status": "provisional",
+      "rationale": "连续两节课均展示针对看似简单的问题通过明确不变量和指针操作深化优化算法的思路模式。",
+      "confidence": 0.85,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": [
+        "ev-001",
+        "ev-005"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 27000,
+      "endMs": 178000,
+      "assetId": "asset:video-03-05",
+      "locator": "00:27 - 02:58",
+      "observation": "老师展示 LeetCode 75 Sort Colors 题面（取值只有 0,1,2，排序），强调面试中先用标准排序算法（O(n log n)）解决问题的思想。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 178000,
+      "endMs": 225000,
+      "assetId": "asset:video-03-05",
+      "locator": "02:58 - 03:45",
+      "observation": "老师讲解计数排序思路：扫描一遍统计 0,1,2 元素频次，再按频次重新写入原数组。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 225000,
+      "endMs": 488000,
+      "assetId": "asset:video-03-05",
+      "locator": "03:45 - 08:08",
+      "observation": "老师在 IDE 中编写计数排序 C++ 代码，添加 count[3] 数组与 assert 容错判断。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 488000,
+      "endMs": 545000,
+      "assetId": "asset:video-03-05",
+      "locator": "08:08 - 09:05",
+      "observation": "分析计数排序复杂度：时间 O(n)，空间 O(k)=O(1)，指出其需要对数组进行两遍遍历，提问能否只遍历一遍。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 545000,
+      "endMs": 613000,
+      "assetId": "asset:video-03-05",
+      "locator": "09:05 - 10:13",
+      "observation": "引入 Quick Sort 3 Ways（三路快排）的 partition 思想，展示小为 v、等于 v、大于 v 的区域划分图。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 613000,
+      "endMs": 816000,
+      "assetId": "asset:video-03-05",
+      "locator": "10:13 - 13:36",
+      "observation": "通过 PPT 动画模拟三路 Partition 过程，定义指针 zero, two, i 及对应的三个闭/半开区间循环不变量。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 816000,
+      "endMs": 1163000,
+      "assetId": "asset:video-03-05",
+      "locator": "13:36 - 19:23",
+      "observation": "老师在 IDE 中手写单次遍历三路 Partition 算法 C++ 代码，解释指针初始化 (zero=-1, two=n)、循环终止条件 (i<two) 及 swap 后 i++ 与不加加的细节。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 1163000,
+      "endMs": 1221000,
+      "assetId": "asset:video-03-05",
+      "locator": "19:23 - 20:21",
+      "observation": "老师布置课后练习 1：LeetCode 88 Merge Sorted Array（合并两个有序数组），说明其为归并排序中的归并步骤。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 1221000,
+      "endMs": 1346640,
+      "assetId": "asset:video-03-05",
+      "locator": "20:21 - 22:26",
+      "observation": "老师布置课后练习 2：LeetCode 215 Kth Largest Element in an Array，讲解利用快排 partition 将 pivot 放置在正确位置上的性质实现在 O(n) 时间内求解。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

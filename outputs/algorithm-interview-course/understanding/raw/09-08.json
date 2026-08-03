@@ -1,0 +1,642 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "09-08",
+  "chapterId": "09",
+  "titleObserved": "LIS 问题 Longest Increasing Subsequence",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1512.083447,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 184000,
+      "topic": "最长上升子序列问题引入与定义",
+      "summary": "介绍 LeetCode 300 最长上升子序列（LIS）问题，澄清子序列（可不连续）与“严格上升”的定义及边界约束。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 184000,
+      "endMs": 293000,
+      "topic": "暴力解法与复杂度分析",
+      "summary": "分析对所有子序列进行判断的暴力解法，时间复杂度为 O(2^n * n)。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 293000,
+      "endMs": 524000,
+      "topic": "动态规划状态定义与转移方程",
+      "summary": "定义 LIS(i) 表示以第 i 个数字结尾的最长上升子序列长度，推导状态转移方程 LIS(i) = max_{j < i}(1 + LIS(j)) (nums[i] > nums[j])。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 524000,
+      "endMs": 855000,
+      "topic": "例题手动模拟推导",
+      "summary": "以数组 [10, 9, 2, 5, 3, 7, 101, 18] 为例，逐步演算状态数组 memo[i] 的填表过程。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 855000,
+      "endMs": 1065000,
+      "topic": "常见误区与反例辨析",
+      "summary": "通过反例 [10, 15, 20, 11, 9, 101] 说明 memo 数组并非单调递增，指出不能向左贪心提前停止扫描，以及最终答案必须扫描全表取最大值。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 1065000,
+      "endMs": 1383000,
+      "topic": "C++ 代码实现与 O(n^2) 复杂度",
+      "summary": "编写 C++ 自底向上动态规划解法代码，并说明时间复杂度为 O(n^2)，空间复杂度为 O(n)。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 1383000,
+      "endMs": 1414000,
+      "topic": "O(n log n) 优化解法拓展",
+      "summary": "提及 LIS 问题存在基于二分查找/贪心的 O(n log n) 进阶解法，非 DP 范畴，建议课后自学。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 1414000,
+      "endMs": 1512083,
+      "topic": "课后练习：LeetCode 376 Wiggle Subsequence",
+      "summary": "布置 LeetCode 376 摆动序列问题作为课后思考与练习题。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解最长上升子序列（LIS）问题中“子序列”（不要求连续）与“严格上升”的精确定义",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "掌握 LIS 问题的动态规划状态定义：以第 i 个元素结尾的最长上升子序列长度",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "掌握 LIS 的状态转移方程及嵌套循环求全表最大值的逻辑",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "识别 LIS 求解过程中的陷阱：memo 数组不单调、不能提前终止向左扫描、最终答案需遍历整表提取",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Longest Increasing Subsequence",
+      "namesObserved": [
+        "最长上升子序列",
+        "LIS"
+      ],
+      "role": "introduces",
+      "definition": "给定一个整数序列，求其中元素保持相对顺序且严格递增的最长子序列的长度。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "Dynamic Programming",
+      "namesObserved": [
+        "动态规划"
+      ],
+      "role": "applies",
+      "definition": "通过定义以 nums[i] 结尾的子问题状态 memo[i]，自底向上递推求解整体最优解的方法。",
+      "evidenceIds": [
+        "ev-003",
+        "ev-006"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "300",
+    "titleObserved": "300. Longest Increasing Subsequence",
+    "statement": "给定一个整数序列，求其中的最长上升子序列的长度。",
+    "constraints": [
+      "子序列不要求连续，只需保证元素之间相对位置不变",
+      "上升要求必须是严格上升（后一个数严格大于前一个数）",
+      "同一个序列可能存在多个最长上升子序列，但最大长度唯一"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "枚举原序列的所有子序列，对每个子序列检查其是否严格递增，并在所有上升子序列中找最大长度。",
+      "timeComplexity": "O(2^n * n)",
+      "spaceComplexity": null,
+      "limitations": [
+        "指数级时间复杂度，遇到稍大输入即超域/超时"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "optimized",
+      "idea": "使用自底向上的动态规划。定义 memo[i] 为以 nums[i] 为结尾的最长上升子序列长度。初始化全 1，遍历每个 i，再检查所有 j < i，若 nums[j] < nums[i]，则更新 memo[i] = max(memo[i], 1 + memo[j])。最终全局结果为 max(memo)。",
+      "timeComplexity": "O(n^2)",
+      "spaceComplexity": "O(n)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-006"
+      ]
+    },
+    {
+      "id": "solution-003",
+      "stage": "alternative",
+      "idea": "结合二分查找/贪心算法求解 LIS，可将时间复杂度降至 O(n log n)，但该方法不属于动态规划范畴。",
+      "timeComplexity": "O(n log n)",
+      "spaceComplexity": null,
+      "limitations": [
+        "视频未展开代码，仅作为非 DP 优化方向提及"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-002",
+      "language": "C++",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    int lengthOfLIS(vector<int>& nums) {\n        if( nums.size() == 0 )\n            return 0;\n\n        // memo[i] 表示以 nums[i] 为结尾的最长上升子序列的长度\n        vector<int> memo(nums.size(), 1);\n        for( int i = 1 ; i < nums.size() ; i ++ )\n            for( int j = 0 ; j < i ; j ++ )\n                if( nums[j] < nums[i] )\n                    memo[i] = max( memo[i] , 1 + memo[j] );\n\n        int res = 1;\n        for( int i = 0 ; i < nums.size() ; i ++ )\n            res = max( res , memo[i] );\n\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-002",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "memo[i] / LIS(i)",
+          "role": "dp_table",
+          "meaning": "以 nums[i] 为结尾的最长上升子序列的长度",
+          "updateRule": "memo[i] = max(memo[i], 1 + memo[j]) (for all j < i and nums[j] < nums[i])",
+          "evidenceIds": [
+            "ev-003",
+            "ev-006"
+          ]
+        },
+        {
+          "symbol": "res",
+          "role": "result_accumulator",
+          "meaning": "整个数组的 LIS 最大长度，即 max(memo[i])",
+          "updateRule": "res = max(res, memo[i])",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "[0...i]",
+          "meaning": "索引 0 到 i 的子序列范围，nums[i] 必须被选中",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "j < i 且 nums[j] < nums[i]",
+          "updates": "memo[i] = max(memo[i], 1 + memo[j])",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-003",
+            "ev-006"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "最终遍历 memo 数组，最大值 res 即为原数组的最长上升子序列长度",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004",
+          "ev-006"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003",
+        "ev-006"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "通过强制 nums[i] 作为子序列末尾元素，将无固定结尾的子问题定位，从而使子问题重叠并满足状态转移逻辑",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": "O(n^2)",
+    "space": "O(n)",
+    "assumptions": [
+      "n 为输入数组 nums 的长度"
+    ],
+    "evidenceIds": [
+      "ev-006"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "solution-001",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O((2^n) * n)",
+      "expressionNormalized": "O(2^n * n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "每个元素都有选与不选两种可能，组合出 2^n 个子序列",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "statement": "判断每个子序列是否为上升子序列需要 O(n) 的扫描耗时",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "暴力解法时间复杂度为 O(2^n * n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "solution-002",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n^2)",
+      "expressionNormalized": "O(n^2)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 nums 的长度",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "两层嵌套 loop：外层 loop 执行 n 次，内层 loop 从 0 遍历到 i-1，总比较和转移次数为 O(n^2)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "动态规划解法时间复杂度为 O(n^2)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "id": "cx-003",
+      "subject": "solution-002",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": null,
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 nums 的长度",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "开辟了一个长度为 n 的 memo 数组存储每个位置的状态",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "动态规划辅助空间复杂度为 O(n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "recurrence",
+      "sourceKind": "shown_in_video",
+      "rawText": "LIS(i) = max_{j < i} (1 + LIS(j) if nums[i] > nums[j])",
+      "normalizedText": "LIS(i) = max_{j < i} (1 + LIS(j) if nums[i] > nums[j])",
+      "variables": [
+        {
+          "symbol": "LIS(i)",
+          "meaning": "以第 i 个数字结尾的最长上升子序列的长度",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "nums[i]",
+          "meaning": "原数组第 i 个位置的值",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "输入数组 [10, 9, 2, 5, 3, 7, 101, 18]，推导出 memo 数组为 [1, 1, 1, 2, 2, 3, 4, 4]，全局最大最长上升子序列长度为 4（如 [2, 5, 7, 101] 或 [2, 5, 7, 18]）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "输入数组 [10, 15, 20, 11, 9, 101]，推导出 memo 数组为 [1, 2, 3, 2, 1, 4]，证明 memo 数组不单调，最终答案为 4。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "输入数组为空（nums.size() == 0）时，最长上升子序列长度直接返回 0。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "误以为 memo 数组一定是单调递增的，试图向左找第一个小于 nums[i] 的元素后直接停止遍历；这是错误的，必须完整遍历所有 j < i 的位置。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "误以为 memo[n-1]（即最后一个元素结尾的 LIS 长度）就是最终答案；最长上升子序列的末尾元素可能在原数组任意位置，必须扫描全表取 max(memo[i])。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "面试中遇到 LIS 问题，先阐明“以 nums[i] 结尾”这一关键状态定义，再给出 O(n^2) 的 DP 解法；若面试官要求进一步优化，可提及基于二分查找的 O(n log n) 贪心解法。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:09-04",
+      "to": "lesson:09-08",
+      "type": "applies",
+      "status": "provisional",
+      "rationale": "09-04 讲解的状态定义与转移抽象模型应用到了 09-08 LIS 问题的状态设计中。",
+      "confidence": 0.8,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "from": "lesson:09-08",
+      "to": "lesson:09-09",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "09-08 讨论的序列 DP 模型拓展到 09-09 的 LCS 及更多 DP 问题中。",
+      "confidence": 0.8,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 184000,
+      "assetId": "asset:video-09-08",
+      "locator": "00:00 - 03:04",
+      "observation": "幻灯片展示 LeetCode 300 Longest Increasing Subsequence 题目，讲解子序列（非连续）、严格上升及多解但最大长度唯一的定义。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 184000,
+      "endMs": 293000,
+      "assetId": "asset:video-09-08",
+      "locator": "03:04 - 04:53",
+      "observation": "讲解暴力解法：枚举 2^n 个子序列并验证每个是否上升（耗时 O(n)），总复杂度 O(2^n * n)。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 293000,
+      "endMs": 524000,
+      "assetId": "asset:video-09-08",
+      "locator": "04:53 - 08:44",
+      "observation": "幻灯片给出 LIS(i) 定义：以第 i 个数字为结尾的最长上升子序列长度，并列出状态转移方程 LIS(i) = max_{j<i}(1 + LIS(j) if nums[i] > nums[j])。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 524000,
+      "endMs": 855000,
+      "assetId": "asset:video-09-08",
+      "locator": "08:44 - 14:15",
+      "observation": "画面逐步演示 [10, 9, 2, 5, 3, 7, 101, 18] 的 memo 填表过程，初始全 1，最终填出 [1, 1, 1, 2, 2, 3, 4, 4]，最大值为 4。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 855000,
+      "endMs": 1065000,
+      "assetId": "asset:video-09-08",
+      "locator": "14:15 - 17:45",
+      "observation": "通过反例 [10, 15, 20, 11, 9, 101] 填出 [1, 2, 3, 2, 1, 4]，分析 memo 数组不单调、不能向左贪心停止以及不能直接返回最后一个元素的陷阱。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 1065000,
+      "endMs": 1383000,
+      "assetId": "asset:video-09-08",
+      "locator": "17:45 - 23:03",
+      "observation": "屏幕编写 C++ 完整代码 lengthOfLIS，包括边界检查、双重循环 DP 更新及全表取 max(res, memo[i])，指出时间复杂度 O(n^2)。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 1383000,
+      "endMs": 1414000,
+      "assetId": "asset:video-09-08",
+      "locator": "23:03 - 23:34",
+      "observation": "幻灯片显示“LIS问题的O(nlogn)解法”，老师说明该解法结合二分查找/贪心，非 DP，鼓励感兴趣学员课后自学。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 1414000,
+      "endMs": 1512083,
+      "assetId": "asset:video-09-08",
+      "locator": "23:34 - 25:12",
+      "observation": "幻灯片展示 LeetCode 376. Wiggle Subsequence 题面与示例，作为课后思考练习题。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.6",
+    "generatedAt": null
+  }
+}

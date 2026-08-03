@@ -1,0 +1,595 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "09-07",
+  "chapterId": "09",
+  "titleObserved": "面试中的 0-1 背包问题 Partition Equal Subset Sum",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1654.653968,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 97000,
+      "topic": "LeetCode 416 题目引入",
+      "summary": "介绍 LeetCode 416 号问题 Partition Equal Subset Sum 的题意和示例，说明其本质与 0-1 背包问题高度相似。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 97000,
+      "endMs": 374000,
+      "topic": "问题转化为 0-1 背包与状态方程推导",
+      "summary": "将分割等和子集问题转化成从 n 个物品中选出部分数字填满容量为 sum/2 的背包问题，推导转移方程及时间复杂度。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 374000,
+      "endMs": 707000,
+      "topic": "数据规模分析与记忆化搜索思路",
+      "summary": "分析题目数据规模，确认算法可在一秒内运行完成，并设计自顶向下的递归函数与记忆化数组。",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 707000,
+      "endMs": 944000,
+      "topic": "记忆化搜索代码实现",
+      "summary": "使用 C++ 编写递归加记忆化搜索的代码，用二维数组 memo 记录重叠子问题的计算状态。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 944000,
+      "endMs": 1198000,
+      "topic": "自底向上动态规划与一维空间压缩实现",
+      "summary": "使用自底向上动态规划求解，直接应用 0-1 背包的空间优化方法，使用一维布尔数组和倒序容量循环进行代码实现。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 1198000,
+      "endMs": 1654653,
+      "topic": "相关背包变种练习题推荐",
+      "summary": "讲解并推荐几道与 0-1 背包及组合问题相关的 LeetCode 练习题：322 Coin Change, 377 Combination Sum IV, 474 Ones and Zeroes, 139 Word Break, 494 Target Sum。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "掌握将等和子集划分问题转化为 0-1 背包求填满容量 sum/2 的模型转换方法。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "学会根据题目给出的数据规模约束反推算法时间复杂度并验证可行性。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "掌握 0-1 背包自底向上动态规划的一维空间压缩技巧，使用容量倒序循环防止状态复用。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "0-1 背包问题",
+      "namesObserved": [
+        "0-1背包问题",
+        "背包问题"
+      ],
+      "role": "applies",
+      "definition": "在 n 个物品中挑选部分物品，使其重量之和不超过或正好等于指定容量，且价值最大或能否填满的问题。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "记忆化搜索",
+      "namesObserved": [
+        "记忆化搜索",
+        "递归加上记忆化搜索"
+      ],
+      "role": "applies",
+      "definition": "在自顶向下递归求解过程中，使用辅助数据结构保存已求解子问题的结果，避免重复计算。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "动态规划空间压缩",
+      "namesObserved": [
+        "空间优化",
+        "一维数组"
+      ],
+      "role": "applies",
+      "definition": "在自底向上动态规划中，利用下一层状态仅依赖上一层状态的性质，将二维 DP 表压缩为一维数组。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "416",
+    "titleObserved": "Partition Equal Subset Sum",
+    "statement": "给定一个非空数组，其中所有的数字 fountain 都是正整数。问是否可以将这个数组的元素分成两部分，使得每部分的数字和相等？",
+    "constraints": [
+      "最多有 200 个数字",
+      "每个数字最大为 100",
+      "所有数字和最大为 20000，背包最大容量为 10000"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001",
+      "ev-003"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "intermediate",
+      "idea": "将分割等和子集问题转化为填满容量为 sum/2 的 0-1 背包问题，使用带记忆化搜索的自顶向下递归求解。",
+      "timeComplexity": "O(n * sum)",
+      "spaceComplexity": "O(n * sum)",
+      "limitations": [
+        "需要额外的二维 memo 数组和递归调用栈空间"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "optimized",
+      "idea": "采用自底向上的动态规划算法，并应用 0-1 背包的一维滚动数组空间优化，容量从大到小倒序遍历。",
+      "timeComplexity": "O(n * sum)",
+      "spaceComplexity": "O(sum)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-002"
+      ],
+      "stateModelIds": [
+        "state-002"
+      ],
+      "evidenceIds": [
+        "ev-002",
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\nprivate:\n    // memo[i][c] 表示使用索引为[0..i]的这些元素，是否可以完全填满一个容量为c的背包\n    // -1表示未计算；0表示不可以填满；1表示可以填满\n    vector<vector<int>> memo;\n\n    // 用nums[0...index]，是否可以完全填满一个容量为sum的背包\n    bool tryPartition(const vector<int>& nums, int index, int sum) {\n        if (sum == 0)\n            return true;\n        if (sum < 0 || index < 0)\n            return false;\n        if (memo[index][sum] != -1)\n            return memo[index][sum] == 1;\n\n        memo[index][sum] = (tryPartition(nums, index - 1, sum) ||\n                             tryPartition(nums, index - 1, sum - nums[index])) ? 1 : 0;\n        return memo[index][sum] == 1;\n    }\npublic:\n    bool canPartition(vector<int>& nums) {\n        int sum = 0;\n        for (int i = 0; i < nums.size(); i++) {\n            assert(nums[i] > 0);\n            sum += nums[i];\n        }\n        if (sum % 2 != 0)\n            return false;\n\n        memo = vector<vector<int>>(nums.size(), vector<int>(sum / 2 + 1, -1));\n        return tryPartition(nums, nums.size() - 1, sum / 2);\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    bool canPartition(vector<int>& nums) {\n        int sum = 0;\n        for (int i = 0; i < nums.size(); i++) {\n            assert(nums[i] > 0);\n            sum += nums[i];\n        }\n        if (sum % 2 != 0)\n            return false;\n\n        int n = nums.size();\n        int C = sum / 2;\n        vector<bool> memo(C + 1, false);\n\n        for (int i = 0; i <= C; i++)\n            memo[i] = (nums[0] == i);\n\n        for (int i = 1; i < n; i++) {\n            for (int j = C; j >= nums[i]; j--) {\n                memo[j] = memo[j] || memo[j - nums[i]];\n            }\n        }\n        return memo[C];\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "memo[index][sum]",
+          "role": "memoization_cache",
+          "meaning": "表示考虑索引范围 [0...index] 的元素时，能否完全填满容量为 sum 的背包 (-1 未计算, 0 不可填满, 1 可填满)",
+          "updateRule": "memo[index][sum] = tryPartition(...) ? 1 : 0",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "不选当前物品 nums[index] 或选择当前物品 nums[index]",
+          "updates": "memo[index][sum] = tryPartition(nums, index - 1, sum) || tryPartition(nums, index - 1, sum - nums[index])",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-002",
+            "ev-004"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "递归基本情况为 sum == 0 返回 true；sum < 0 或 index < 0 返回 false。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "state-002",
+      "solutionStageId": "solution-002",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "memo[j]",
+          "role": "dp_table_1d",
+          "meaning": "一维布尔数组，表示当前处理过的物品前缀能否凑出重量恰好为 j 的组合",
+          "updateRule": "memo[j] = memo[j] || memo[j - nums[i]]",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "外层循环遍历物品 i 从 1 到 n-1；内层容量 j 从 C 倒序递减到 nums[i]",
+          "updates": "memo[j] = memo[j] || memo[j - nums[i]]",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "双重循环结束后，最终答案从 memo[C] 中读取。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "对于容量为 C = sum / 2 的背包，每个数字看作一件物品（重量为数字本身），若能刚好填满背包，则剩余数字之和亦为 sum / 2，原数组可平分为两个等和子集。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001",
+      "state-002"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": "O(n * sum)",
+    "space": "O(sum)",
+    "assumptions": [
+      "n 为数组元素个数，sum 为所有数组元素之和，C = sum / 2"
+    ],
+    "evidenceIds": [
+      "ev-002",
+      "ev-003",
+      "ev-005"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "Partition Equal Subset Sum 动态规划时间复杂度",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n * sum / 2) = O(n * sum)",
+      "expressionNormalized": "O(n * sum)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组中的数字个数/物品数量",
+          "domainOrRelationship": "n <= 200",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "sum",
+          "meaning": "数组中所有数字的总和",
+          "domainOrRelationship": "sum <= 20000",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "算法需要遍历 n 个物品，每个物品对容量为 sum / 2 的背包进行更新，总计算量为 n * (sum / 2)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "statement": "由于 / 2 是常数项，Big O 记法中省略常数系数，表示为 O(n * sum)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "时间复杂度为 O(n * sum)，带入最大约束 (200 * 10000 = 1,000,000) 可在一秒内高效运行。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002",
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "一维压缩动态规划辅助空间复杂度",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(C)",
+      "expressionNormalized": "O(sum)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "C",
+          "meaning": "背包的目标容量 C = sum / 2",
+          "domainOrRelationship": "C <= 10000",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "一维 DP 解法仅需要长度为 C + 1 的布尔类型数组 memo。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "辅助空间复杂度为 O(C) 即 O(sum)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "recurrence",
+      "sourceKind": "shown_in_video",
+      "rawText": "F(i, c) = F(i-1, c) || F(i-1, c - w(i))",
+      "normalizedText": "F(i, c) = F(i-1, c) || F(i-1, c - w(i))",
+      "variables": [
+        {
+          "symbol": "F(i, c)",
+          "meaning": "使用前 i 个物品是否能完全填满容量为 c 的背包",
+          "domainOrRelationship": "Boolean",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "symbol": "w(i)",
+          "meaning": "第 i 个物品的重量（即数字的值）",
+          "domainOrRelationship": "Positive Integer",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "示例 1：nums = [1, 5, 11, 5]，可以分成 [1, 5, 5] 和 [11] 两部分，和均为 11，返回 true。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "示例 2：nums = [1, 2, 3, 5]，无法分成元素和相等的两部分，返回 false。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "若数组所有元素之和 sum 为奇数（sum % 2 != 0），则不可能分割为两个整数和相同的子集，直接返回 false。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在 0-1 背包的一维滚动数组实现中，内层容量循环必须从大到小倒序遍历（j = C; j >= nums[i]; j--），防止同一物品在同一轮循环中被多次使用。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "记忆化搜索数组的初始值若用布尔类型无法区分“未计算”和“计算结果为 false”，因此自顶向下解法中使用 int 型二维数组并以 -1 表示未计算。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "在面试中分析问题时，注意题目给出的数据规模约束（如 max n=200, max val=100），可以据此倒推算法时间复杂度并验证 DP 方法的可行性。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "回答组合与背包类题目时，要主动与面试官明确：元素是否可以重复使用，以及生成的组合是顺序相关还是顺序无关。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:09-06",
+      "to": "lesson:09-07",
+      "type": "applies",
+      "status": "provisional",
+      "rationale": "本课将上一课 0-1 背包问题的抽象模型与空间优化技巧直接应用于 LeetCode 416 面试题。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001",
+        "ev-005"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 97000,
+      "assetId": "asset:video-09-07",
+      "locator": "00:00-01:37",
+      "observation": "展示 LeetCode 416. Partition Equal Subset Sum 题目幻灯片，给出题目定义和两组测试示例 [1, 5, 11, 5] 与 [1, 2, 3, 5]。",
+      "confidence": 0.98
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 97000,
+      "endMs": 374000,
+      "assetId": "asset:video-09-07",
+      "locator": "01:37-06:14",
+      "observation": "分析题目本质为在 n 个物品中选出部分物品填满容量 sum/2 的 0-1 背包问题；给出递推公式 F(i, c) = F(i-1, c) || F(i-1, c - w(i)) 和复杂度 O(n * sum)。",
+      "confidence": 0.98
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 374000,
+      "endMs": 427000,
+      "assetId": "asset:video-09-07",
+      "locator": "06:14-07:07",
+      "observation": "根据 LeetCode 原题限定条件（最多200个数字、每个最大100、和最大20000、背包最大10000）计算得到算法大约需要 100 万次运算，完全可在 1 秒内完成。",
+      "confidence": 0.98
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 427000,
+      "endMs": 944000,
+      "assetId": "asset:video-09-07",
+      "locator": "07:07-15:44",
+      "observation": "屏幕编写并讲解 C++ 记忆化搜索代码 canPartition 与 tryPartition，使用 vector<vector<int>> memo 初始化为 -1。",
+      "confidence": 0.98
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 944000,
+      "endMs": 1198000,
+      "assetId": "asset:video-09-07",
+      "locator": "15:44-19:58",
+      "observation": "屏幕编写自底向上动态规划代码，使用 vector<bool> memo(C + 1, false) 一维数组，内层循环容量倒序遍历（j = C; j >= nums[i]; j--）。",
+      "confidence": 0.98
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 1198000,
+      "endMs": 1654653,
+      "assetId": "asset:video-09-07",
+      "locator": "19:58-27:34",
+      "observation": "幻灯片依次列出几道背包变种扩展题：322 Coin Change, 377 Combination Sum IV, 474 Ones and Zeroes, 139 Word Break, 494 Target Sum 并讲解对应面试沟通要点。",
+      "confidence": 0.98
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.6",
+    "generatedAt": null
+  }
+}

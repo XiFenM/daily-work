@@ -1,0 +1,532 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "09-10",
+  "chapterId": "09",
+  "titleObserved": "动态规划的经典问题",
+  "contentKind": "conclusion",
+  "actualDurationSeconds": null,
+  "timeline": [
+    {
+      "startMs": null,
+      "endMs": null,
+      "topic": "章末提醒与练习定位",
+      "summary": "文本把本课放在动态规划章节之后，提醒读者仅看完一章不足以掌握灵活的动态规划，需要大量练习；文中所说的“基础”主要指状态定义方式常见或问题经典，不等于题目简单。",
+      "evidenceIds": ["ev-001", "ev-002"]
+    },
+    {
+      "startMs": null,
+      "endMs": null,
+      "topic": "优先练习的简单或中等题目",
+      "summary": "文本在“大家可以优先看看”之后，以“简单或中等难度”为组名，依次列出 11 个题目名称。",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005",
+        "ev-006",
+        "ev-007",
+        "ev-008",
+        "ev-009",
+        "ev-010",
+        "ev-011",
+        "ev-012",
+        "ev-013",
+        "ev-014",
+        "ev-015"
+      ]
+    },
+    {
+      "startMs": null,
+      "endMs": null,
+      "topic": "困难题目清单",
+      "summary": "文本在“困难”组下列出 5 个题目名称。",
+      "evidenceIds": [
+        "ev-016",
+        "ev-017",
+        "ev-018",
+        "ev-019",
+        "ev-020",
+        "ev-021"
+      ]
+    },
+    {
+      "startMs": null,
+      "endMs": null,
+      "topic": "开放征集与结语",
+      "summary": "文本邀请读者分享其他经典或有意思的动态规划问题，并以鼓励语结束。",
+      "evidenceIds": ["ev-022", "ev-023"]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解文本为何强调只看完本章不足以掌握动态规划，并把大量练习视为后续学习方式。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-001", "ev-002"]
+    },
+    {
+      "statement": "准确解释本课中“基础”的限定含义：状态定义方式比较常见，或者问题比较经典，而不是题目一定简单。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-002"]
+    },
+    {
+      "statement": "识别文本列入“简单或中等难度”组的 11 个题目名称。",
+      "sourceClass": "course_text",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005",
+        "ev-006",
+        "ev-007",
+        "ev-008",
+        "ev-009",
+        "ev-010",
+        "ev-011",
+        "ev-012",
+        "ev-013",
+        "ev-014",
+        "ev-015"
+      ]
+    },
+    {
+      "statement": "识别文本列入“困难”组的 5 个题目名称。",
+      "sourceClass": "course_text",
+      "evidenceIds": [
+        "ev-016",
+        "ev-017",
+        "ev-018",
+        "ev-019",
+        "ev-020",
+        "ev-021"
+      ]
+    },
+    {
+      "statement": "明确这些名称在本课中只是练习入口，不把标题列表补写成题面、状态定义、状态转移、题解、代码、证明或复杂度。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-003", "ev-005", "ev-021"]
+    },
+    {
+      "statement": "把结尾问题理解为面向读者的开放征集，而不是正文已经补充了更多经典题目。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-022"]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "动态规划的持续练习",
+      "namesObserved": ["掌握动态规划", "大量的练习"],
+      "role": "reinforces",
+      "definition": "文本认为动态规划具有灵活性，只看完本章不足以掌握，需要通过大量练习继续学习。",
+      "evidenceIds": ["ev-001", "ev-002"]
+    },
+    {
+      "canonicalName": "基础动态规划问题",
+      "namesObserved": ["比较“基础”的动态规划问题"],
+      "role": "reinforces",
+      "definition": "本课中的“基础”不是“简单”的同义词，而是指解题模式中的状态定义方式较常见，或者问题本身较经典。",
+      "evidenceIds": ["ev-002"]
+    },
+    {
+      "canonicalName": "动态规划经典题练习清单",
+      "namesObserved": ["大家可以优先看看这些问题"],
+      "role": "introduces",
+      "definition": "文本按“简单或中等难度”和“困难”两组列出 16 个题目名称，并建议读者优先查看这些问题。",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005",
+        "ev-006",
+        "ev-007",
+        "ev-008",
+        "ev-009",
+        "ev-010",
+        "ev-011",
+        "ev-012",
+        "ev-013",
+        "ev-014",
+        "ev-015",
+        "ev-016",
+        "ev-017",
+        "ev-018",
+        "ev-019",
+        "ev-020",
+        "ev-021"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [],
+  "stateModels": [],
+  "correctness": {
+    "method": "not_applicable",
+    "claims": [],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": ["本课是章末练习清单，没有给出任何题目的算法或成本分析"],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "文本把最大子序和、最长公共子序列、不相交的线、最长递增子序列、分割等和子集、石子游戏、零钱兑换、零钱兑换 II、单词拆分、乘积最大子数组和掷骰子的N种方法列在“简单或中等难度”组。",
+      "sourceClass": "course_text",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005",
+        "ev-006",
+        "ev-007",
+        "ev-008",
+        "ev-009",
+        "ev-010",
+        "ev-011",
+        "ev-012",
+        "ev-013",
+        "ev-014",
+        "ev-015"
+      ]
+    },
+    {
+      "statement": "文本把两个子序列的最大点积、矩阵中的最长递增路径、最短公共超序列、切披萨的方案数和鸡蛋掉落列在“困难”组。",
+      "sourceClass": "course_text",
+      "evidenceIds": [
+        "ev-016",
+        "ev-017",
+        "ev-018",
+        "ev-019",
+        "ev-020",
+        "ev-021"
+      ]
+    }
+  ],
+  "edgeCases": [],
+  "implementationPitfalls": [
+    {
+      "statement": "不要根据常见中文题名自动补写 LeetCode 题号、平台、题面约束或输入输出；正文只提供标题。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-005", "ev-021"]
+    },
+    {
+      "statement": "不要把“基础”改写成“简单”；作者明确说明它更多指状态定义方式常见或问题经典。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-002"]
+    },
+    {
+      "statement": "不要根据题名补造状态、状态转移、初始化、遍历顺序、代码、证明或复杂度；本课没有展开这些内容。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-003", "ev-005", "ev-021"]
+    },
+    {
+      "statement": "不要把两个难度组写成外部平台当前难度的独立核验结果；它们只是本地课程文本使用的分组标签。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-004", "ev-016"]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "把这份清单用作练习索引时，可为每道题另行记录状态定义、转移、边界、遍历顺序、复杂度和复盘结果；这是编辑整理的练习框架，不是本课已经提供的题解。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-002", "ev-003"]
+    },
+    {
+      "statement": "遇到题名熟悉的题，也应先读取实际题面和约束，再讨论解法，避免仅凭标题套用某个动态规划模板。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-002", "ev-005", "ev-021"]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:09-10",
+      "to": "lesson:09-07",
+      "type": "revisits",
+      "status": "provisional",
+      "rationale": "09-10 的推荐清单出现“分割等和子集”，与 09-07 的课名主题相同；本课没有使用稳定课次 ID，也没有复述 09-07 的题解，需读取 09-07 双侧证据后裁决。",
+      "confidence": 0.97,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": ["ev-009"]
+    },
+    {
+      "from": "lesson:09-10",
+      "to": "lesson:09-08",
+      "type": "revisits",
+      "status": "provisional",
+      "rationale": "09-10 的推荐清单出现“最长递增子序列”，与 09-08 的课名主题相同；当前证据只支持题名级重访，需读取 09-08 双侧证据后裁决。",
+      "confidence": 0.97,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": ["ev-008"]
+    },
+    {
+      "from": "lesson:09-10",
+      "to": "lesson:09-09",
+      "type": "revisits",
+      "status": "provisional",
+      "rationale": "09-10 的推荐清单出现“最长公共子序列”，与 09-09 课名中的 LCS 主题相同；本课没有展开 LCS 内容，需读取 09-09 双侧证据后裁决。",
+      "confidence": 0.96,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": ["ev-006"]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 1 段",
+      "observation": "文本认为读者通过本章已经对动态规划有一定认识，但明确提醒掌握动态规划不能只靠看完这一章。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 2 段",
+      "observation": "文本称动态规划很灵活，需要大量练习；作者推荐自己认为较“基础”的问题，并明确“基础”不一定简单，而更多指状态定义方式常见或问题经典。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 3 段",
+      "observation": "文本说读者可以优先看随后列出的问题。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 4 段",
+      "observation": "文本使用“简单或中等难度”作为第一组推荐题目的分组标题。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 5 段",
+      "observation": "第一组列出题名“最大子序和”，没有附带题号、题面或解法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 6 段",
+      "observation": "第一组列出题名“最长公共子序列”，没有附带题号、题面或解法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 7 段",
+      "observation": "第一组列出题名“不相交的线”，没有附带题号、题面或解法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 8 段",
+      "observation": "第一组列出题名“最长递增子序列”，没有附带题号、题面或解法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 9 段",
+      "observation": "第一组列出题名“分割等和子集”，没有附带题号、题面或解法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-010",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 10 段",
+      "observation": "第一组列出题名“石子游戏”，没有附带题号、题面或解法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-011",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 11 段",
+      "observation": "第一组列出题名“零钱兑换”，没有附带题号、题面或解法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-012",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 12 段",
+      "observation": "第一组列出题名“零钱兑换 II”，没有附带题号、题面或解法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-013",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 13 段",
+      "observation": "第一组列出题名“单词拆分”，没有附带题号、题面或解法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-014",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 14 段",
+      "observation": "第一组列出题名“乘积最大子数组”，没有附带题号、题面或解法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-015",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 15 段",
+      "observation": "第一组列出原文题名“掷骰子的N种方法”，没有附带题号、题面或解法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-016",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 16 段",
+      "observation": "文本使用“困难”作为第二组推荐题目的分组标题。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-017",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 17 段",
+      "observation": "第二组列出题名“两个子序列的最大点积”，没有附带题号、题面或解法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-018",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 18 段",
+      "observation": "第二组列出题名“矩阵中的最长递增路径”，没有附带题号、题面或解法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-019",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 19 段",
+      "observation": "第二组列出题名“最短公共超序列”，没有附带题号、题面或解法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-020",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 20 段",
+      "observation": "第二组列出题名“切披萨的方案数”，没有附带题号、题面或解法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-021",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 21 段",
+      "observation": "第二组列出题名“鸡蛋掉落”，没有附带题号、题面或解法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-022",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 22 段",
+      "observation": "文本向读者发问，邀请分享其他经典或有意思、值得推荐的动态规划问题；正文没有在这一问句中列出新的题目。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-023",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-09-10",
+      "locator": "标题后第 23 段",
+      "observation": "文本以“大家加油”结束。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "examples",
+      "reason": "正文只给出 16 个中文题名，没有题号、平台、链接、题面、版本或约束；相似题名可能对应不同题目。",
+      "recommendedCheck": "正式笔记只按原文记录题名。若后续要练习，先独立确认目标题面，不把常见平台映射写成课程直接证据。"
+    },
+    {
+      "field": "timeline[1]",
+      "reason": "“简单或中等难度”和“困难”是课程文本中的分组，但正文没有说明评定平台、时间或标准。",
+      "recommendedCheck": "保留为课程原文分组，不声称它们已经与任一平台当前难度标签核验一致。"
+    },
+    {
+      "field": "problem",
+      "reason": "本课列出许多题目名称，却没有选择其中任何一道定义为本课问题，也没有提供解法。",
+      "recommendedCheck": "problem 保持 null，solutionProgression、codeArtifacts、stateModels、complexityAnalyses 均保持空，不按算法常识补写。"
+    },
+    {
+      "field": "relationCandidates",
+      "reason": "清单中的三个题名与 09-07、09-08、09-09 的课程标题高度对应，但 09-10 没有写稳定课次 ID，也没有复述相邻课程内容。",
+      "recommendedCheck": "关系仅保留 provisional/editorial_hypothesis，交由关系审核读取对应课次的双侧证据后决定是否升级。"
+    }
+  ],
+  "provenance": {
+    "model": null,
+    "requestId": null,
+    "promptVersion": "text-evidence-v1",
+    "generatedAt": "2026-08-03T00:53:28.000Z"
+  }
+}

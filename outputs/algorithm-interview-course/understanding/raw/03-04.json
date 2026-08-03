@@ -1,0 +1,731 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "03-04",
+  "chapterId": "03",
+  "titleObserved": "即使简单的问题，也有很多优化的思路",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 930.48,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 159000,
+      "topic": "Move Zeros 原地优化思路 1：非零元素前移与补零",
+      "summary": "分析上一节 O(n) 辅助空间解法的局限，提出无需辅助空间的原地操作思路：遍历数组将非零元素依次放入 [0...k) 区间，遍历结束后将剩余位置补 0。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 159000,
+      "endMs": 296000,
+      "topic": "思路 1 代码实现与复杂度分析",
+      "summary": "在 C++ 中实现非零元素覆写与后半部分赋值 0 的两趟循环解法，确定时间复杂度为 O(n)，空间复杂度优化至 O(1)。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 296000,
+      "endMs": 425000,
+      "topic": "Move Zeros 原地优化思路 2：非零元素与零元素交换",
+      "summary": "思考能否在单趟遍历中同时完成非零元素前移和零元素后移，提出将非零元素与索引 k 位置元素进行 swap 交换的思路并进行动画演示。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 425000,
+      "endMs": 486000,
+      "topic": "思路 2 代码实现",
+      "summary": "使用 C++ swap 简化代码，去除了第二重填充 0 的循环，在单次遍历中完成 Move Zeros。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 486000,
+      "endMs": 560000,
+      "topic": "思路 3：极端情况优化（避免自我交换）",
+      "summary": "针对数组全为非零元素的极端情况，分析自我交换 (i == k) 的冗余开销，通过增加 `if (i != k)` 避免无效交换。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 560000,
+      "endMs": 670000,
+      "topic": "算法面试思维：不满足于 AC 与关注特殊测试用例",
+      "summary": "总结在刷题和面试中不要仅满足于 Accepted，要持续思考能否优化，并关注输入数据的特殊分布与边界情况。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 670000,
+      "endMs": 801000,
+      "topic": "课后练习 1：LeetCode 27 Remove Element",
+      "summary": "介绍 LeetCode 27 题面，并引导思考面试中需澄清的细节（删除定义、相对顺序、空间复杂度要求 O(1)）。",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 801000,
+      "endMs": 860000,
+      "topic": "课后练习 2：LeetCode 26 Remove Duplicates from Sorted Array",
+      "summary": "介绍 LeetCode 26 有序数组去重题面及要求（每个元素只留一个，返回新长度，原地操作）。",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "startMs": 860000,
+      "endMs": 930480,
+      "topic": "课后练习 3：LeetCode 80 Remove Duplicates from Sorted Array II",
+      "summary": "介绍 LeetCode 80 题面（每个元素最多保留两个），作为 26 题的进阶练习。",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "学会去除辅助数组，使用原地（In-place）双指针/索引维护技术将空间复杂度降低至 O(1)",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "掌握通过元素交换（swap）在单次遍历中完成数组重构的方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "学会识别特殊输入用例（如无零元素数组）并针对性地对算法细节进行微优化",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "培养面试中主动沟通澄清题目细节（如删定义、相对顺序、空间限制）的习惯",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006",
+        "ev-008"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "原地算法",
+      "namesObserved": [
+        "原地",
+        "In-place"
+      ],
+      "role": "introduces",
+      "definition": "不使用额外的辅助空间，直接在输入数据结构上进行修改的算法，空间复杂度为 O(1)。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "双指针 / 循环不变量",
+      "namesObserved": [
+        "k 索引",
+        "[0...k)"
+      ],
+      "role": "applies",
+      "definition": "通过索引 k 维护特定区间（如 [0...k) 均为非零元素），在遍历过程中保持该性质不变。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002",
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "283",
+    "titleObserved": "Move Zeros",
+    "statement": "给定一个数组 nums，写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。",
+    "constraints": [
+      "必须在原数组上操作，不能拷贝额外数组（原地操作）"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001",
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "intermediate",
+      "idea": "设置索引 k，遍历数组将所有非零元素按顺序覆写到 [0...k) 中；遍历结束后，将 [k...nums.size()) 的所有剩余位置赋值为 0。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [
+        "需要两趟遍历/赋值操作，第二趟需要显式将剩余位置置 0"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "optimized",
+      "idea": "在遍历数组时，一旦遇到非零元素 nums[i]，直接将其与 nums[k] 进行 swap 交换，随后 k++。单次遍历即可将非零元素聚集在前部，零元素自动交换到后部。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [
+        "当数组中完全没有 0 时，每个非零元素都会与自身进行一次无意义的交换 (nums[i] 与 nums[k] 交换，此时 i == k)"
+      ],
+      "codeArtifactIds": [
+        "code-002"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "id": "solution-003",
+      "stage": "optimized",
+      "idea": "在思路 2 的基础之上增加条件判断 `if (i != k)`。只有当 i 与 k 不相等时才执行 swap；若 i == k 则仅执行 `k++`，避免全非零数组下的自我交换开销。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-003"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    // 时间复杂度 O(n)\n    // 空间复杂度 O(1)\n    void moveZeroes(vector<int>& nums) {\n        int k = 0; // nums中, [0...k)的元素均为非0元素\n        \n        // 遍历到第i个元素后, 保证[0...i]中所有非0元素\n        // 都按照顺序排列在[0...k)中\n        for(int i = 0 ; i < nums.size() ; i ++)\n            if(nums[i])\n                nums[k++] = nums[i];\n                \n        // 将nums剩余的位置设置为0\n        for(int i = k ; i < nums.size() ; i ++)\n            nums[i] = 0;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    // 时间复杂度 O(n)\n    // 空间复杂度 O(1)\n    void moveZeroes(vector<int>& nums) {\n        int k = 0; // nums中, [0...k)的元素均为非0元素\n        \n        // 遍历到第i个元素后, 保证[0...i]中所有非0元素\n        // 都按照顺序排列在[0...k)中\n        // 同时, [k...i] 为0\n        for(int i = 0 ; i < nums.size() ; i ++)\n            if(nums[i])\n                swap( nums[k++] , nums[i] );\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "code-003",
+      "solutionStageId": "solution-003",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    // 时间复杂度 O(n)\n    // 空间复杂度 O(1)\n    void moveZeroes(vector<int>& nums) {\n        int k = 0; // nums中, [0...k)的元素均为非0元素\n        \n        // 遍历到第i个元素后, 保证[0...i]中所有非0元素\n        // 都按照顺序排列在[0...k)中\n        // 同时, [k...i] 为0\n        for(int i = 0 ; i < nums.size() ; i ++)\n            if(nums[i]){\n                if( i != k )\n                    swap( nums[k++] , nums[i] );\n                else // i == k\n                    k ++;\n            }\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "two_pointer",
+      "variables": [
+        {
+          "symbol": "k",
+          "role": "boundary_pointer",
+          "meaning": "保存下一个非零元素要存放的索引位置；区间 [0...k) 保存当前已遍历过的所有非零元素。",
+          "updateRule": "找到非零元素并处理后 k 进行加 1（k++）",
+          "evidenceIds": [
+            "ev-001",
+            "ev-002",
+            "ev-005"
+          ]
+        },
+        {
+          "symbol": "i",
+          "role": "scan_pointer",
+          "meaning": "遍历原数组 nums 的当前指针",
+          "updateRule": "每轮循环 i 加 1（i++）",
+          "evidenceIds": [
+            "ev-002",
+            "ev-004",
+            "ev-005"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "[0...k)",
+          "meaning": "保存已遍历到的所有非零元素，且保持原有相对顺序",
+          "evidenceIds": [
+            "ev-001",
+            "ev-002",
+            "ev-005"
+          ]
+        },
+        {
+          "notation": "[k...i]",
+          "meaning": "在思路 2/3 交换解法中，该区间内的元素均为 0",
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        }
+      ],
+      "invariant": {
+        "statement": "在遍历到第 i 个元素后，保证 [0...i] 中的所有非零元素都按顺序排列在 [0...k) 中；同时在交换解法中 [k...i] 区间均为 0。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002",
+          "ev-005"
+        ]
+      },
+      "transitions": [
+        {
+          "condition": "nums[i] != 0 且 i != k",
+          "updates": "swap(nums[k], nums[i]); k++;",
+          "preserves": {
+            "statement": "保持 [0...k) 均为非 0 元素且 [k...i] 均为 0",
+            "sourceClass": "course_direct",
+            "evidenceIds": [
+              "ev-005"
+            ]
+          },
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "condition": "nums[i] != 0 且 i == k",
+          "updates": "k++;",
+          "preserves": {
+            "statement": "保持 [0...k) 均为非 0 元素，免去自我交换",
+            "sourceClass": "course_direct",
+            "evidenceIds": [
+              "ev-005"
+            ]
+          },
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "i 遍历完 nums.size()，数组中所有非零元素均按相对顺序集中在 [0...k)，其余位置全为 0。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-001",
+          "ev-003",
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-001",
+        "ev-002",
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "loop_invariant",
+    "claims": [
+      {
+        "statement": "利用循环不变量 [0...k) 保存非零元素，遍历结束后所有非零元素集中在数组头部且保持相对顺序，其余位置全部为零。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002",
+          "ev-005"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": [
+      {
+        "phase": "initialization",
+        "statement": "初始时 k = 0，区间 [0...k) 即 [0...0) 为空区间，满足“保存所有已遍历过的非 0 元素”的定义。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-001",
+          "ev-002",
+          "ev-005"
+        ]
+      },
+      {
+        "phase": "preservation",
+        "statement": "每当处理元素 nums[i]：若 nums[i] != 0，将其放入/交换至 nums[k] 并执行 k++，区间 [0...k) 长度加 1 且保持全非零；若 nums[i] == 0 则 k 不变。循环不变量保持。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-001",
+          "ev-003",
+          "ev-005"
+        ]
+      },
+      {
+        "phase": "termination",
+        "statement": "当 i == nums.size() 时，整个数组遍历完毕，[0...k) 包含原数组所有非零元素，[k...nums.size()) 全部为零。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-001",
+          "ev-002",
+          "ev-005"
+        ]
+      },
+      {
+        "phase": "postcondition",
+        "statement": "数组所有 0 被移动到末尾，非零元素保持原有相对顺序，且没有使用额外辅助空间。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002",
+          "ev-004",
+          "ev-005"
+        ]
+      }
+    ]
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "moveZeroes 优化算法（思路 1/2/3）",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 nums 中的元素个数",
+          "domainOrRelationship": "n >= 0",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "对数组 nums 进行单次或两次扫描遍历，每次遍历耗时与数组长度 n 成正比。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002",
+            "ev-004"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "时间复杂度为 O(n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002",
+          "ev-004",
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002",
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "moveZeroes 优化算法（思路 1/2/3）",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(1)",
+      "expressionNormalized": "O(1)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "仅使用了 k 和 i 两个整型变量索引，未开辟任何辅助数组空间。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002",
+            "ev-004"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "空间复杂度为 O(1)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002",
+          "ev-004",
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002",
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "输入数组 nums = [0, 1, 0, 3, 12]，算法执行后 nums 变为 [1, 3, 12, 0, 0]。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "LeetCode 27 示例：nums = [3, 2, 2, 3], val = 3，处理后返回长度 2，且 nums 前两个元素为 2。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "LeetCode 26 示例：nums = [1, 1, 2]，去重后返回长度 2，且 nums 前两个元素为 1 和 2。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "statement": "LeetCode 80 示例：nums = [1, 1, 1, 2, 2, 3]，去重后返回长度 5，且 nums 前五个元素为 1, 1, 2, 2, 3。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "数组中没有 0 元素（全是非零元素，例如 [1, 2, 3]）：如果直接使用 swap(nums[k++], nums[i]) 会导致每个元素与自己交换，增加 `if (i != k)` 避免无用交换。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在思路 1 中，覆写完非零元素后容易忘记将剩余索引 [k...n) 补赋值为 0。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "对于简单问题，不要满足于简单的辅助空间解法，要主动探索是否可以做到 O(1) 空间的原地操作。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "做对题目获得 Accepted 只是第一步，要持续思考“能否做得更好”（如减少遍历次数、减少元素交换开销）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "面对数组删除/去重类问题，要主动与面试官沟通确认细节：1. 如何定义删除（直接去除还是移到末尾）？ 2. 是否要保证剩余元素的相对顺序？ 3. 是否有空间复杂度 O(1) 的硬性要求？",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:03-03",
+      "to": "lesson:03-04",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "本课在 03-03 提出的 Move Zeros 辅助空间 O(n) 基线解法基础上，进一步探讨原地优化与单次遍历 swap 优化。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "from": "lesson:03-04",
+      "to": "lesson:03-05",
+      "type": "same_pattern_as",
+      "status": "provisional",
+      "rationale": "本课使用的多区域指针/循环不变量思想，与下一课 Sort Colors 中三路快排 partition 思想具有相同的数组区间划分模式。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 159000,
+      "assetId": "asset:video-03-04",
+      "locator": "00:00 - 02:39",
+      "observation": "老师回顾 03-03 的 O(n) 空间解法，提出不用辅助空间直接在原地移动非零元素的思路：设置 k 索引，维护 [0...k) 为已遍历的非零元素，最后将 [k...n) 补 0。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 159000,
+      "endMs": 296000,
+      "assetId": "asset:video-03-04",
+      "locator": "02:39 - 04:56",
+      "observation": "老师在 C++ 代码中实现思路 1：先用 for 循环将非零元素覆写至 nums[k++]，再用第二个 for 循环将 nums[k...n) 赋 0。分析时间复杂度为 O(n)，空间复杂度为 O(1)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 296000,
+      "endMs": 425000,
+      "assetId": "asset:video-03-04",
+      "locator": "04:56 - 07:05",
+      "observation": "老师思考能否省略第二次补 0 的循环，提出遇到非零元素直接与 nums[k] 交换（swap）的思路，并配合 PPT 动画演示交换过程。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 425000,
+      "endMs": 486000,
+      "assetId": "asset:video-03-04",
+      "locator": "07:05 - 08:06",
+      "observation": "老师在 C++ 中将赋值替换为 swap(nums[k++], nums[i])，删除了第二个赋值 0 的循环，完成了思路 2 的实现。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 486000,
+      "endMs": 560000,
+      "assetId": "asset:video-03-04",
+      "locator": "08:06 - 09:20",
+      "observation": "老师分析当数组完全没有 0 时，每个非零元素都会和自己交换 (i == k)。在代码中增加 `if (i != k) swap(...) else k++;` 避免不必要的自我交换。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 560000,
+      "endMs": 670000,
+      "assetId": "asset:video-03-04",
+      "locator": "09:20 - 11:10",
+      "observation": "老师总结面试思维：不要仅追求 AC，要主动思考能否优化，并提到快速排序中针对近乎有序数组（随机标定点）和重复元素数组（三路快排）的优化也是基于特殊情况思考的。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 670000,
+      "endMs": 720000,
+      "assetId": "asset:video-03-04",
+      "locator": "11:10 - 12:00",
+      "observation": "展示练习题 1：LeetCode 27 Remove Element，题目要求删除所有等于 val 的元素并返回剩余元素个数。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 720000,
+      "endMs": 801000,
+      "assetId": "asset:video-03-04",
+      "locator": "12:00 - 13:21",
+      "observation": "老师讲解面试沟通技巧：对删除定义、相对顺序要求和空间复杂度限制进行明确询问，表现出全面考虑问题的专业态度。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 801000,
+      "endMs": 860000,
+      "assetId": "asset:video-03-04",
+      "locator": "13:21 - 14:20",
+      "observation": "展示练习题 2：LeetCode 26 Remove Duplicates from Sorted Array，有序数组去重，每个元素只留一个。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-010",
+      "sourceType": "video_combined",
+      "startMs": 860000,
+      "endMs": 930480,
+      "assetId": "asset:video-03-04",
+      "locator": "14:20 - 15:30",
+      "observation": "展示练习题 3：LeetCode 80 Remove Duplicates from Sorted Array II，有序数组去重进阶，每个元素最多保留两个。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

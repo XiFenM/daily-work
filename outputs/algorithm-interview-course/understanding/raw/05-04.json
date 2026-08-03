@@ -1,0 +1,487 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "05-04",
+  "chapterId": "05",
+  "titleObserved": "复杂的穿针引线 Swap Nodes in Pairs",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 810.72,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 58000,
+      "topic": "题目引入与约束条件",
+      "summary": "介绍 LeetCode 第 24 题 Swap Nodes in Pairs，明确只能对节点指针进行操作，不能修改节点的值。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 58000,
+      "endMs": 258000,
+      "topic": "算法图解与指针逻辑分析",
+      "summary": "通过链表动画演示，讲解使用虚拟头结点 dummyHead 以及 p、node1、node2、next 四个指针进行节点交换与重新连接的过程。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 258000,
+      "endMs": 530000,
+      "topic": "C++ 代码实现",
+      "summary": "在 IDE 中手写完整的 swapPairs 函数，包括 dummyHead 的创建、while 循环交换节点指针、内存释放以及返回结果。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 530000,
+      "endMs": 610000,
+      "topic": "复杂度分析与思考优化",
+      "summary": "总结算法的时间复杂度为 O(n)，空间复杂度为 O(1)；解答是否可以不使用 next 指针的思考问题。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 610000,
+      "endMs": 683000,
+      "topic": "拓展练习 1：LeetCode 25",
+      "summary": "介绍 LeetCode 25 题 Reverse Nodes in k-Group 的题目要求与示例。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 683000,
+      "endMs": 810720,
+      "topic": "拓展练习 2 & 3：LeetCode 147 & 148",
+      "summary": "介绍 LeetCode 147 Insertion Sort List 和 LeetCode 148 Sort List，并提示使用归并排序对链表进行 O(n log n) 排序。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "掌握通过虚拟头结点 (dummyHead) 统一链表头节点与其他节点交换逻辑的方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "掌握使用多指针（p, node1, node2, next）保存交换前后关系以防止指针断裂的穿针引线技巧",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "虚拟头结点",
+      "namesObserved": [
+        "dummyHead",
+        "虚拟的头节点"
+      ],
+      "role": "applies",
+      "definition": "人为在链表真实头节点前设立的辅助节点，用以消除头节点交换时的特判逻辑。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "链表穿针引线",
+      "namesObserved": [
+        "穿针引线"
+      ],
+      "role": "applies",
+      "definition": "通过精准改变链表节点的 next 指针指向，重新组织链表结构的操作。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "24",
+    "titleObserved": "Swap Nodes in Pairs",
+    "statement": "给定一个链表，对于每两个相邻的节点，交换其位置。",
+    "constraints": [
+      "只能对节点进行操作，不能修改节点的值"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "设立 dummyHead，利用 p 指向待交换对的前驱节点，node1 和 node2 为待交换对，next 保存 node2 的后继节点；完成三步指针重连后更新 p = node1，遍历整个链表。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n\nusing namespace std;\n\n/// Definition for singly-linked list.\nstruct ListNode {\n    int val;\n    ListNode *next;\n    ListNode(int x) : val(x), next(NULL) {}\n};\n\nclass Solution {\npublic:\n    ListNode* swapPairs(ListNode* head) {\n        ListNode* dummyHead = new ListNode(0);\n        dummyHead->next = head;\n\n        ListNode* p = dummyHead;\n        while( p->next && p->next->next ){\n            ListNode* node1 = p->next;\n            ListNode* node2 = node1->next;\n            ListNode* next = node2->next;\n\n            node2->next = node1;\n            node1->next = next;\n            p->next = node2;\n\n            p = node1;\n        }\n\n        ListNode* retNode = dummyHead->next;\n        delete dummyHead;\n\n        return retNode;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "dummyHead",
+          "role": "virtual_head",
+          "meaning": "虚拟头节点，其 next 指向链表的当前头节点",
+          "updateRule": "初始化为 new ListNode(0)，dummyHead->next = head",
+          "evidenceIds": [
+            "ev-002",
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "p",
+          "role": "pair_predecessor",
+          "meaning": "指向当前要交换的一对节点之前的那个节点",
+          "updateRule": "初始指向 dummyHead；每轮交换后更新为 node1",
+          "evidenceIds": [
+            "ev-002",
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "node1",
+          "role": "first_in_pair",
+          "meaning": "要交换的一对节点中的第一个节点",
+          "updateRule": "每轮迭代赋值为 p->next",
+          "evidenceIds": [
+            "ev-002",
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "node2",
+          "role": "second_in_pair",
+          "meaning": "要交换的一对节点中的第二个节点",
+          "updateRule": "每轮迭代赋值为 node1->next",
+          "evidenceIds": [
+            "ev-002",
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "next",
+          "role": "pair_successor",
+          "meaning": "要交换的一对节点之后的后继节点",
+          "updateRule": "每轮迭代赋值为 node2->next",
+          "evidenceIds": [
+            "ev-002",
+            "ev-003"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "p->next != NULL && p->next->next != NULL",
+          "updates": "node2->next = node1; node1->next = next; p->next = node2; p = node1;",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-002",
+            "ev-003"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 p->next == NULL 或 p->next->next == NULL 时，表示剩余节点不足两个，无法继续交换，循环终止。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "采用多指针保存关联节点后重新连接，可以在不修改节点值的情况下完成对链表中相邻节点的两两交换，并保持整个链表连续不断裂。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002",
+          "ev-003"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": "O(n)",
+    "space": "O(1)",
+    "assumptions": [
+      "n 为链表中的节点总数"
+    ],
+    "evidenceIds": [
+      "ev-004"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "swapPairs 时间复杂度",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "链表中的节点数量",
+          "domainOrRelationship": "正整数",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "需要将整个链表遍历一遍，每次处理一对节点，总操作次数与节点数 n 成正比。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "算法的时间复杂度为 O(n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "swapPairs 辅助空间复杂度",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(1)",
+      "expressionNormalized": "O(1)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "仅使用了固定数量的指针变量（dummyHead, p, node1, node2, next, retNode），只占用了常数级别的额外空间。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "算法的辅助空间复杂度为 O(1)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "链表 1->2->3->4->NULL 交换后返回 2->1->4->3->NULL",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "链表 1->2->3->4->5->NULL 交换后返回 2->1->4->3->5->NULL（奇数个节点时最后一个节点不动）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "链表长度为奇数时，最后一个节点无相邻节点可交换，循环通过 p->next && p->next->next 的条件自动安全终止。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在进行指针改变操作前，必须提前保存 next = node2->next，否则先修改 node1->next 会导致后续节点丢失。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "在 C++ 中通过 new 创建的 dummyHead，在函数返回前必须通过 delete 手动释放其内存，避免内存泄漏。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "遇到复杂的链表修改问题，画图理清每一个变量指针所指向节点的具体含义，避免仅靠脑想而导致指针混淆。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "虽然可以通过精心安排重新赋值顺序省去 next 变量，但多设一个指针保存节点能让思维和代码更加清晰，且不影响 O(1) 的空间复杂度级别。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:05-03",
+      "to": "lesson:05-04",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "05-04 承接了 05-03 中建立虚拟头结点 (dummyHead) 的技术，并将其应用在更复杂的双节点交换逻辑中。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 58000,
+      "assetId": "asset:video-05-04",
+      "locator": null,
+      "observation": "介绍 LeetCode 24 题 Swap Nodes in Pairs，展示题目要求与示例（1->2->3->4->NULL 变为 2->1->4->3->NULL），强调只能操作节点不能修改节点的值。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 58000,
+      "endMs": 258000,
+      "assetId": "asset:video-05-04",
+      "locator": null,
+      "observation": "画图展示 1->2->3->4->5 链表。引入 dummyHead，并设立 p、node1、node2、next 四个指针，演示指针重连逻辑：node2->next = node1, node1->next = next, p->next = node2, p = node1。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 258000,
+      "endMs": 530000,
+      "assetId": "asset:video-05-04",
+      "locator": null,
+      "observation": "在 IDE 中编写 swapPairs 代码，循环条件为 while(p->next && p->next->next)，在返回前保存 retNode = dummyHead->next 并 delete dummyHead。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 530000,
+      "endMs": 610000,
+      "assetId": "asset:video-05-04",
+      "locator": null,
+      "observation": "讨论可否不用 next 指针的问题，分析得出算法时间复杂度为 O(n)，空间复杂度为 O(1)，多设指针能极大增加代码清晰度。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 610000,
+      "endMs": 683000,
+      "assetId": "asset:video-05-04",
+      "locator": null,
+      "observation": "展示拓展练习题 LeetCode 25 Reverse Nodes in k-Group 的题目说明与样例（k=2 和 k=3 的情况）。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 683000,
+      "endMs": 810720,
+      "assetId": "asset:video-05-04",
+      "locator": null,
+      "observation": "展示拓展练习题 LeetCode 147 Insertion Sort List 和 LeetCode 148 Sort List，并提示对链表进行 O(n log n) 排序可使用自底向上的归并排序算法。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

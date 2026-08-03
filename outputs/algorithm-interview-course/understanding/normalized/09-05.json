@@ -1,0 +1,757 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "09-05",
+  "chapterId": "09",
+  "titleObserved": "0-1背包问题",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1957.92,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 57000,
+      "topic": "课程引入：动态规划中的经典问题 0-1 背包",
+      "summary": "回顾动态规划解题的核心三要素（重叠子问题、最优子结构、状态定义与转移），引出本节课的主题：0-1 背包问题。",
+      "evidenceIds": ["ev-001"]
+    },
+    {
+      "startMs": 57000,
+      "endMs": 143000,
+      "topic": "0-1 背包问题的题面与约束",
+      "summary": "详细阐述 0-1 背包问题的定义：背包容量 C，n 种物品，每件物品有重量 w(i) 与价值 v(i)，求在不超过容量限制下的最大总价值。",
+      "evidenceIds": ["ev-002"]
+    },
+    {
+      "startMs": 143000,
+      "endMs": 211000,
+      "topic": "暴力解法分析",
+      "summary": "分析暴力枚举解法：每个物品有放或不放两种选择，共有 2^n 种组合，判断每个组合并计算价值需 O(n)，总时间复杂度 O(2^n * n)。",
+      "evidenceIds": ["ev-003"]
+    },
+    {
+      "startMs": 211000,
+      "endMs": 389000,
+      "topic": "贪心算法尝试与反例否定",
+      "summary": "讨论按单位价值 (v/w) 从高到低选择的贪心策略，并举出具体反例（背包容量 5，物品重/价分别为 (1,6)、(2,10)、(3,12)），证明贪心策略在此问题中失效。",
+      "evidenceIds": ["ev-004"]
+    },
+    {
+      "startMs": 389000,
+      "endMs": 626000,
+      "topic": "0-1 背包问题的状态定义与状态转移方程",
+      "summary": "推导动态规划状态定义 F(i, c) 表示用前 0...i 个物品填充容量为 c 的背包的最大价值，分析选与不选第 i 个物品的分支，得到转移方程 F(i, c) = max(F(i-1, c), v[i] + F(i-1, c - w[i]))。",
+      "evidenceIds": ["ev-005"]
+    },
+    {
+      "startMs": 626000,
+      "endMs": 1095000,
+      "topic": "自顶向下记忆化搜索代码实现",
+      "summary": "使用 C++ 编写递归加记忆化的自顶向下解法，设置二维 memo 数组记录计算过的状态，处理递归基与边界检查。",
+      "evidenceIds": ["ev-006"]
+    },
+    {
+      "startMs": 1095000,
+      "endMs": 1610000,
+      "topic": "自底向上 2D 动态规划表格模拟",
+      "summary": "以 3 件物品、背包容量 5 为例，逐步模拟二维表格 memo[3][6] 的填表过程，分析第一行初始化与后续各行各列根据递推式更新的细节。",
+      "evidenceIds": ["ev-007"]
+    },
+    {
+      "startMs": 1610000,
+      "endMs": 1957920,
+      "topic": "自底向上 2D 动态规划代码实现与总结",
+      "summary": "编写自底向上 2D DP 算法的完整 C++ 代码，展示初始化第 0 行及双层循环迭代填表的逻辑，总结 0-1 背包的双参数状态特征。",
+      "evidenceIds": ["ev-008"]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解 0-1 背包问题的含义与题目约束条件",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-002"]
+    },
+    {
+      "statement": "理解为什么按单位价值从高到低排序的贪心算法不能解决 0-1 背包问题",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-004"]
+    },
+    {
+      "statement": "掌握 0-1 背包问题的双参数状态定义 F(i, c) 与状态转移方程",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-005"]
+    },
+    {
+      "statement": "掌握 0-1 背包问题的自顶向下记忆化搜索与自底向上动态规划代码实现",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-006", "ev-008"]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "0-1背包问题",
+      "namesObserved": ["0-1背包问题", "0-1 Knapsack Problem"],
+      "role": "introduces",
+      "definition": "在不超过背包容量限制的前提下，从 n 个具有各自重量与价值的物品中选择部分物品装入背包，使得物品总价值最大的组合优化问题。",
+      "evidenceIds": ["ev-001", "ev-002"]
+    },
+    {
+      "canonicalName": "贪心算法",
+      "namesObserved": ["贪心算法", "Greedy Algorithm"],
+      "role": "contrasts",
+      "definition": "在每一步选择中都采取在当前状态下最好或最优的选择，试图产生全局最优解的算法。在 0-1 背包中优先选择单位价值最高的策略可能无法得到全局最优解。",
+      "evidenceIds": ["ev-004"]
+    },
+    {
+      "canonicalName": "记忆化搜索",
+      "namesObserved": ["记忆化搜索", "自顶向下的解法"],
+      "role": "applies",
+      "definition": "采用自顶向下的递归求解，并在过程中用存储结构保存已计算过的子问题结果，避免重复计算。",
+      "evidenceIds": ["ev-006"]
+    },
+    {
+      "canonicalName": "动态规划",
+      "namesObserved": ["动态规划", "自底向上的解法"],
+      "role": "applies",
+      "definition": "将问题分解为互相重叠的子问题，通过状态定义、状态转移方程和表格填充自底向上求解。",
+      "evidenceIds": ["ev-005", "ev-007", "ev-008"]
+    }
+  ],
+  "problem": {
+    "platform": null,
+    "problemId": null,
+    "titleObserved": "0-1背包问题",
+    "statement": "有一个背包，它的容量为 C (Capacity)。现在有 n 种不同的物品，编号为 0...n-1，其中每一件物品的重量为 w(i)，价值为 v(i)。问可以向这个背包中盛放哪些物品，使得在不超过背包容量的基础上，物品的总价值最大。",
+    "constraints": [
+      "物品数量为 n",
+      "背包容量为 C",
+      "物品编号为 0...n-1",
+      "第 i 件物品的重量为 w(i)，价值为 v(i)",
+      "每件物品最多选择一次（放或不放）"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": ["ev-002", "ev-003"]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "暴力解法：枚举每件物品放或不放入背包的所有可能组合，共 2^n 种组合，然后逐一校验组合总重量是否超过 C，并计算有效组合的总价值，从中取最大值。",
+      "timeComplexity": "O(2^n * n)",
+      "spaceComplexity": null,
+      "limitations": [
+        "时间复杂度随着物品数量 n 指数级增长，无法处理规模较大的数据"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": ["ev-003"]
+    },
+    {
+      "id": "solution-002",
+      "stage": "alternative",
+      "idea": "贪心算法尝试：优先放入单位价值 (v/w) 最高的物品。视频证明该策略在 0-1 背包问题中可能因背包空间浪费而无法取得全局最优解。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": ["贪心选择不能保证获得全局最优解，容易产生反例"],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": ["ev-004"]
+    },
+    {
+      "id": "solution-003",
+      "stage": "intermediate",
+      "idea": "带记忆化的自顶向下递归：定义递归函数 bestValue(w, v, index, c) 表示考虑 0...index 物品填充容量 c 的背包的最大价值。使用二维数组 memo[n][C+1] 缓存已求解的状态。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": ["code-001"],
+      "stateModelIds": ["state-001"],
+      "evidenceIds": ["ev-005", "ev-006"]
+    },
+    {
+      "id": "solution-004",
+      "stage": "alternative",
+      "idea": "自底向上动态规划：构建 n 行 C+1 列的二维 DP 表 memo。先初始化第 0 行（仅考虑第 0 个物品），随后按照状态转移方程双重循环逐行逐列迭代，计算所有状态，最终结果存在 memo[n-1][C]。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": ["code-002"],
+      "stateModelIds": ["state-002"],
+      "evidenceIds": ["ev-005", "ev-007", "ev-008"]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-003",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n#include <cassert>\n\nusing namespace std;\n\nclass Knapsack01{\nprivate:\n    vector<vector<int>> memo;\n\n    // 用 [0...index] 的物品，填充容量为 c 的背包的最大价值\n    int bestValue(const vector<int> &w, const vector<int> &v, int index, int c){\n        if( index < 0 || c <= 0 )\n            return 0;\n\n        if( memo[index][c] != -1 )\n            return memo[index][c];\n\n        int res = bestValue(w, v, index - 1, c);\n        if( c >= w[index] )\n            res = max( res, v[index] + bestValue(w, v, index - 1, c - w[index]) );\n\n        memo[index][c] = res;\n        return res;\n    }\npublic:\n    int knapsack01(const vector<int> &w, const vector<int> &v, int C){\n        int n = w.size();\n        memo = vector<vector<int>>(n, vector<int>(C + 1, -1));\n        return bestValue(w, v, n - 1, C);\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "tested",
+      "evidenceIds": ["ev-006"]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-004",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n#include <cassert>\n\nusing namespace std;\n\nclass Knapsack01{\npublic:\n    int knapsack01(const vector<int> &w, const vector<int> &v, int C){\n        assert( w.size() == v.size() );\n        int n = w.size();\n        if( n == 0 )\n            return 0;\n\n        vector<vector<int>> memo(n, vector<int>(C + 1, -1));\n\n        for( int j = 0 ; j <= C ; j ++ )\n            memo[0][j] = ( j >= w[0] ? v[0] : 0 );\n\n        for( int i = 1 ; i < n ; i ++ )\n            for( int j = 0 ; j <= C ; j ++ ){\n                memo[i][j] = memo[i-1][j];\n                if( j >= w[i] )\n                    memo[i][j] = max( memo[i][j], v[i] + memo[i-1][j - w[i]] );\n            }\n\n        return memo[n-1][C];\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "tested",
+      "evidenceIds": ["ev-008"]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-003",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "index",
+          "role": "item_prefix_bound",
+          "meaning": "自顶向下函数当前考虑的物品前缀索引范围 [0...index]",
+          "updateRule": "递归子问题把 index 减 1",
+          "evidenceIds": ["ev-005", "ev-006"]
+        },
+        {
+          "symbol": "c",
+          "role": "capacity_constraint",
+          "meaning": "自顶向下子问题当前可使用的背包容量",
+          "updateRule": "不选当前物品时保持 c；选取时变为 c - w[index]",
+          "evidenceIds": ["ev-005", "ev-006"]
+        },
+        {
+          "symbol": "memo[index][c]",
+          "role": "memoized_subproblem",
+          "meaning": "自顶向下求得的 [0...index] 物品、容量 c 子问题最大价值；-1 表示尚未缓存",
+          "updateRule": "比较选与不选分支后把 res 写回 memo[index][c]",
+          "evidenceIds": ["ev-006"]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "memo[0...n-1][0...C]",
+          "meaning": "自顶向下记忆化缓存；构造时全部填为 -1，递归按需写入已求解状态",
+          "evidenceIds": ["ev-006"]
+        }
+      ],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "memo[index][c] != -1",
+          "updates": "直接返回已缓存的 memo[index][c]",
+          "preserves": null,
+          "evidenceIds": ["ev-006"]
+        },
+        {
+          "condition": "不将 index 对应物品放入背包",
+          "updates": "res = bestValue(w, v, index - 1, c)",
+          "preserves": null,
+          "evidenceIds": ["ev-005", "ev-006"]
+        },
+        {
+          "condition": "c >= w[index] 时考虑放入 index 对应物品",
+          "updates": "res = max(res, v[index] + bestValue(w, v, index - 1, c - w[index]))",
+          "preserves": null,
+          "evidenceIds": ["ev-005", "ev-006"]
+        },
+        {
+          "condition": "两个分支比较完成",
+          "updates": "memo[index][c] = res，并返回 res",
+          "preserves": null,
+          "evidenceIds": ["ev-006"]
+        }
+      ],
+      "termination": {
+        "statement": "index < 0 或 c <= 0 时返回 0；公开方法从 bestValue(w, v, n-1, C) 开始并返回该结果。",
+        "sourceClass": "course_direct",
+        "evidenceIds": ["ev-006"]
+      },
+      "evidenceIds": ["ev-005", "ev-006"]
+    },
+    {
+      "id": "state-002",
+      "solutionStageId": "solution-004",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "i",
+          "role": "item_prefix_bound",
+          "meaning": "自底向上表格的物品索引行；第 i 行表示考虑 [0...i] 的物品",
+          "updateRule": "初始化第 0 行后，从 1 递增到 n-1",
+          "evidenceIds": ["ev-005", "ev-007", "ev-008"]
+        },
+        {
+          "symbol": "j",
+          "role": "capacity_constraint",
+          "meaning": "自底向上表格的容量列，覆盖 0...C",
+          "updateRule": "每一行从 0 递增到 C",
+          "evidenceIds": ["ev-007", "ev-008"]
+        },
+        {
+          "symbol": "memo[i][j]",
+          "role": "dp_table_cell",
+          "meaning": "考虑 [0...i] 的物品、容量为 j 时可获得的最大总价值",
+          "updateRule": "先继承 memo[i-1][j]；若 j >= w[i]，再与 v[i] + memo[i-1][j-w[i]] 比较",
+          "evidenceIds": ["ev-005", "ev-007", "ev-008"]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "memo[0...n-1][0...C]",
+          "meaning": "自底向上的 n 行、C+1 列二维状态表；第 0 行先初始化，其余行按行填充",
+          "evidenceIds": ["ev-007", "ev-008"]
+        }
+      ],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "初始化第 0 行，0 <= j <= C",
+          "updates": "memo[0][j] = (j >= w[0] ? v[0] : 0)",
+          "preserves": null,
+          "evidenceIds": ["ev-007", "ev-008"]
+        },
+        {
+          "condition": "1 <= i < n 且 0 <= j <= C",
+          "updates": "先令 memo[i][j] = memo[i-1][j]，表示不选择第 i 个物品",
+          "preserves": null,
+          "evidenceIds": ["ev-005", "ev-007", "ev-008"]
+        },
+        {
+          "condition": "j >= w[i] 时也考虑选择第 i 个物品",
+          "updates": "memo[i][j] = max(memo[i][j], v[i] + memo[i-1][j-w[i]])",
+          "preserves": null,
+          "evidenceIds": ["ev-005", "ev-007", "ev-008"]
+        }
+      ],
+      "termination": {
+        "statement": "双层循环完成后返回 memo[n-1][C]；n == 0 时直接返回 0。",
+        "sourceClass": "course_direct",
+        "evidenceIds": ["ev-008"]
+      },
+      "evidenceIds": ["ev-005", "ev-007", "ev-008"]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "课程给出的选与不选两个分支对应第 i 件物品的两种可能；把两支结果取最大值可编辑归纳为覆盖当前物品的全部选择。",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": ["ev-005"]
+      }
+    ],
+    "stateModelIds": ["state-001", "state-002"],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [
+      "视频画面和结构化 evidence 未记录教师明确给出动态规划时间或空间复杂度，因此顶层不登记课程直接复杂度"
+    ],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "0-1背包问题暴力解法",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O((2^n)*n)",
+      "expressionNormalized": "O(2^n * n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "物品数量",
+          "domainOrRelationship": "正整数",
+          "evidenceIds": ["ev-003"]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "共有 2^n 种物品组合，每个组合需要检查总重量和总价值（耗时 O(n)）。",
+          "sourceClass": "course_direct",
+          "evidenceIds": ["ev-003"]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "暴力解法时间复杂度为 O(2^n * n)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": ["ev-003"]
+      },
+      "evidenceIds": ["ev-003"]
+    },
+    {
+      "id": "cx-002",
+      "subject": "自顶向下记忆化搜索时间复杂度（编辑推导）",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": null,
+      "expressionNormalized": "O(n * C)",
+      "normalizationSourceClass": "editorial_inference",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "物品数量",
+          "domainOrRelationship": "正整数",
+          "evidenceIds": ["ev-006"]
+        },
+        {
+          "symbol": "C",
+          "meaning": "背包容量",
+          "domainOrRelationship": "正整数",
+          "evidenceIds": ["ev-006"]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "从屏幕代码可编辑推导至多存在 n x (C+1) 个 memo 单元；每个已缓存子问题只比较常数个分支。",
+          "sourceClass": "editorial_inference",
+          "evidenceIds": ["ev-006"]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "依据记忆化代码结构可编辑推导时间复杂度为 O(n * C)；这不是已定位的课程明示复杂度。",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": ["ev-006"]
+      },
+      "evidenceIds": ["ev-006"]
+    },
+    {
+      "id": "cx-003",
+      "subject": "自顶向下记忆化缓存空间（不含递归栈，编辑推导）",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": null,
+      "expressionNormalized": "O(n * C)",
+      "normalizationSourceClass": "editorial_inference",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "物品数量",
+          "domainOrRelationship": "正整数",
+          "evidenceIds": ["ev-006"]
+        },
+        {
+          "symbol": "C",
+          "meaning": "背包容量",
+          "domainOrRelationship": "正整数",
+          "evidenceIds": ["ev-006"]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "屏幕代码显式分配 n 行、C+1 列的 memo；据此可编辑推导缓存占用 O(n * C)。",
+          "sourceClass": "editorial_inference",
+          "evidenceIds": ["ev-006"]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "只计算 memo 缓存时，空间可编辑推导为 O(n * C)；视频证据未给出递归栈的渐进界。",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": ["ev-006"]
+      },
+      "evidenceIds": ["ev-006"]
+    },
+    {
+      "id": "cx-004",
+      "subject": "自底向上二维动态规划时间复杂度（编辑推导）",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": null,
+      "expressionNormalized": "O(n * C)",
+      "normalizationSourceClass": "editorial_inference",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "物品数量",
+          "domainOrRelationship": "正整数",
+          "evidenceIds": ["ev-008"]
+        },
+        {
+          "symbol": "C",
+          "meaning": "背包容量",
+          "domainOrRelationship": "正整数",
+          "evidenceIds": ["ev-008"]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "屏幕代码的外层循环覆盖 i=1...n-1，内层循环覆盖 j=0...C，每个单元执行常数次比较。",
+          "sourceClass": "editorial_inference",
+          "evidenceIds": ["ev-008"]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "依据两层循环可编辑推导时间复杂度为 O(n * C)；这不是已定位的课程明示复杂度。",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": ["ev-008"]
+      },
+      "evidenceIds": ["ev-008"]
+    },
+    {
+      "id": "cx-005",
+      "subject": "自底向上二维动态规划辅助空间（编辑推导）",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": null,
+      "expressionNormalized": "O(n * C)",
+      "normalizationSourceClass": "editorial_inference",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "物品数量",
+          "domainOrRelationship": "正整数",
+          "evidenceIds": ["ev-008"]
+        },
+        {
+          "symbol": "C",
+          "meaning": "背包容量",
+          "domainOrRelationship": "正整数",
+          "evidenceIds": ["ev-008"]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "屏幕代码显式分配 n 行、C+1 列的二维 memo 表。",
+          "sourceClass": "editorial_inference",
+          "evidenceIds": ["ev-008"]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "依据二维表尺寸可编辑推导辅助空间为 O(n * C)；这不是已定位的课程明示复杂度。",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": ["ev-008"]
+      },
+      "evidenceIds": ["ev-008"]
+    }
+  ],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "recurrence",
+      "sourceKind": "shown_in_video",
+      "rawText": "F(i, c) = max( F(i-1, c) , v(i) + F(i-1, c - w(i)) )",
+      "normalizedText": "F(i, c) = max(F(i-1, c), v[i] + F(i-1, c - w[i]))",
+      "variables": [
+        {
+          "symbol": "i",
+          "meaning": "物品索引号 (0...n-1)",
+          "domainOrRelationship": "0 <= i < n",
+          "evidenceIds": ["ev-005"]
+        },
+        {
+          "symbol": "c",
+          "meaning": "当前考虑的背包容量",
+          "domainOrRelationship": "0 <= c <= C",
+          "evidenceIds": ["ev-005"]
+        },
+        {
+          "symbol": "v(i)",
+          "meaning": "第 i 件物品的价值",
+          "domainOrRelationship": null,
+          "evidenceIds": ["ev-005"]
+        },
+        {
+          "symbol": "w(i)",
+          "meaning": "第 i 件物品的重量",
+          "domainOrRelationship": null,
+          "evidenceIds": ["ev-005"]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": ["ev-005"]
+    }
+  ],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "背包容量 C=5，共有 3 件物品：id=0 (重量 1, 价值 6)、id=1 (重量 2, 价值 10)、id=2 (重量 3, 价值 12)。若按贪心策略选 id=0 和 id=1 总价值 16（浪费 2 容量）；最优解为选 id=1 和 id=2，总重量 5，总价值 22。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-004", "ev-007"]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "物品数量 n=0 或背包容量 C=0 时，无法装入任何物品，可直接返回最大价值 0。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-006", "ev-008"]
+    },
+    {
+      "statement": "若考虑放入第 i 个物品，必须满足背包当前容量 c >= w[i]，否则不能选择该物品，只能不装入该物品。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-005", "ev-006", "ev-008"]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "由于背包容量范围为 0...C，二维数组的列数必须设定为 C+1（列索引 0 到 C），若开辟为 C 则会导致 memo[i][C] 越界。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-006", "ev-008"]
+    },
+    {
+      "statement": "在初始化第 0 行时，只要容量 j >= w[0]，memo[0][j] 的值均为 v[0]；只有容量小于 w[0] 时才为 0。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-007", "ev-008"]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "面试中遇到背包类问题，可先通过分析限制条件找出双参数状态：物品前缀约束（i）与容量约束（c）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-005"]
+    },
+    {
+      "statement": "若面试官提问能否使用贪心算法求解 0-1 背包，可以通过举出具体的反例（如 3 件物品，容量 5，单位价值高但无法占满容量）来说明贪心算法不能保证全局最优。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-004"]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:09-04",
+      "to": "lesson:09-05",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "课程目录中 09-04 先讲 House Robber 的状态定义与状态转移，09-05 再进入双参数的 0-1 背包；09-05 开头只做一般性回顾，没有明确说出稳定课次 ID，因此仅保留编辑候选。",
+      "confidence": 0.82,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    },
+    {
+      "from": "lesson:09-05",
+      "to": "lesson:09-06",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "课程目录显示 09-06 紧接本课讨论 0-1 背包的优化和变种；当前 09-05 evidence observation 没有记录明确预告口述，因此仅保留编辑候选。",
+      "confidence": 0.9,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 57000,
+      "assetId": "asset:video-09-05",
+      "locator": "00:00-00:57",
+      "observation": "老师回顾之前的动态规划问题（递归结构、重叠子问题、最优子结构），引出 0-1 背包问题。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 57000,
+      "endMs": 143000,
+      "assetId": "asset:video-09-05",
+      "locator": "00:57-02:23",
+      "observation": "幻灯片展示 0-1 背包问题描述：背包容量 C，n 种不同物品编号 0...n-1，重量 w(i)，价值 v(i)，求不超过容量下的最大价值。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 143000,
+      "endMs": 211000,
+      "assetId": "asset:video-09-05",
+      "locator": "02:23-03:31",
+      "observation": "老师讲解暴力解法：每一件物品都可以放进背包也可以不放进背包，共有 2^n 种组合，画面给出的时间复杂度为 O((2^n)*n)。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 211000,
+      "endMs": 389000,
+      "assetId": "asset:video-09-05",
+      "locator": "03:31-06:29",
+      "observation": "老师提出贪心算法（优先放单位价值 v/w 最高的物品），并用包含 3 个物品、背包容量 5 的具体例子证明贪心结果 16 小于最优解 22，否定了贪心策略。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 389000,
+      "endMs": 626000,
+      "assetId": "asset:video-09-05",
+      "locator": "06:29-10:26",
+      "observation": "老师推导状态定义 F(n, C) 及 F(i, c) 表示考虑 [0...i] 物品填充容量为 c 的背包的最大价值，给出状态转移方程 F(i, c) = max(F(i-1, c), v(i) + F(i-1, c - w(i)))。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 626000,
+      "endMs": 1095000,
+      "assetId": "asset:video-09-05",
+      "locator": "10:26-18:15",
+      "observation": "屏幕展示自顶向下递归 + 记忆化搜索代码，建立 memo 数组（容量 C+1），实现 bestValue 函数。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 1095000,
+      "endMs": 1610000,
+      "assetId": "asset:video-09-05",
+      "locator": "18:15-26:50",
+      "observation": "老师画出 3x6 的表格模拟自底向上动态规划的填表过程，从第 0 行初始化到最后填出 (2, 5) 位置为 22。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 1610000,
+      "endMs": 1957920,
+      "assetId": "asset:video-09-05",
+      "locator": "26:50-32:37",
+      "observation": "屏幕展示自底向上 2D 动态规划的完整 C++ 代码，并总结本节课的双参数状态定义。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "complexity",
+      "reason": "定向画面与现有 evidence observation 没有记录教师明确说出动态规划 O(n * C) 时间或空间复杂度；该结论只能从 memo 尺寸与循环结构编辑推导。",
+      "recommendedCheck": "顶层和 solutionProgression 的 DP 复杂度保持 null；详细 complexityAnalyses 标为 editorial_inference。若后续获得明确口述秒点，再恢复 course_direct 并填 expressionObserved。"
+    },
+    {
+      "field": "codeArtifacts",
+      "reason": "两段屏幕代码使用 std::max，但没有显式包含 <algorithm>；它们在当前 Apple clang 17 环境中能因传递包含通过，不代表严格可移植。",
+      "recommendedCheck": "保留 shown_in_video 代码原貌。若面向可移植工程添加 <algorithm>，应标为编辑修复，不得改称视频直接代码。"
+    },
+    {
+      "field": "relationCandidates",
+      "reason": "09-05 的现有 evidence 没有明确引用 09-04 或记录对 09-06 的稳定课次预告。",
+      "recommendedCheck": "两条关系保持 provisional/editorial_hypothesis，并由关系审核读取相邻课次的双侧证据后再升级。"
+    }
+  ],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "b919a308b4c740fbab3723d607a866ac",
+    "promptVersion": "video-evidence-v1.6",
+    "generatedAt": "2026-08-03T01:03:31.000Z"
+  }
+}
