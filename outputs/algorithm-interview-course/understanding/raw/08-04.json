@@ -1,0 +1,276 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "08-04",
+  "chapterId": "08",
+  "titleObserved": "组合问题",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 867.84,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 93000,
+      "topic": "组合问题与 LeetCode 77 题介绍",
+      "summary": "介绍组合问题的定义，引入 LeetCode 第 77 题 Combinations，并说明组合问题中元素顺序无关的特点。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 93000,
+      "endMs": 332000,
+      "topic": "递归树与回溯逻辑分析",
+      "summary": "以 n=4, k=2 为例绘制递归树，分析从集合中依次选择数字并回溯寻找所有组合的逻辑过程。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 332000,
+      "endMs": 867840,
+      "topic": "C++ 代码实现与逻辑讲解",
+      "summary": "编写 C++ 代码，通过递归 helper 函数 generateCombinations 和回溯 c.pop_back() 完成题目解答。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解组合问题的概念及与排列问题的区别（组合不关心元素的顺序）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "掌握使用回溯法（树形递归搜索 + 状态恢复）求解组合问题的方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "组合问题",
+      "namesObserved": [
+        "组合问题",
+        "Combinations"
+      ],
+      "role": "introduces",
+      "definition": "给出两个整数 n 和 k，求在 1...n 这 n 个数字中选出 k 个数字的所有组合（顺序无关）。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "回溯法",
+      "namesObserved": [
+        "回溯",
+        "回溯法"
+      ],
+      "role": "applies",
+      "definition": null,
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "77",
+    "titleObserved": "Combinations",
+    "statement": "给出两个整数 n 和 k，求在 1...n 这 n 个数字中选出 k 个数字的所有组合。",
+    "constraints": [
+      "顺序不重要，如 [1,2] 和 [2,1] 视为同一个组合"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "使用递归树回溯搜索所有可能性。维护当前已选元素的向量 c 和当前层搜索起始索引 start。遍历从 start 到 n 的数字，依次加入 c，递归搜索下一个位置 start = i + 1，递归返回后撤销选择（c.pop_back()）。当 c 的大小达到 k 时保存解。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <vector>\n\nusing namespace std;\n\nclass Solution {\nprivate:\n    vector<vector<int>> res;\n    \n    // 求解C(n,k), 当前已经找到的组合存储在c中，需要从start开始搜索新的元素\n    void generateCombinations(int n, int k, int start, vector<int> &c){\n        if( c.size() == k ){\n            res.push_back(c);\n            return;\n        }\n        \n        for( int i = start ; i <= n ; i ++ ){\n            c.push_back(i);\n            generateCombinations(n, k, i + 1, c);\n            c.pop_back();\n        }\n        \n        return;\n    }\npublic:\n    vector<vector<int>> combine(int n, int k) {\n        res.clear();\n        if( n <= 0 || k <= 0 || k > n )\n            return res;\n            \n        vector<int> c;\n        generateCombinations(n, k, 1, c);\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "c",
+          "role": "partial_solution",
+          "meaning": "当前递归搜索路径中已选出的元素集合（组合列表）",
+          "updateRule": "进入分支时 c.push_back(i)；回溯退出分支时 c.pop_back()",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "start",
+          "role": "search_bound",
+          "meaning": "当前递归层可选择数字的下限起始值",
+          "updateRule": "下一层递归传入 i + 1",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "遍历 i 从 start 到 n",
+          "updates": "c.push_back(i) -> generateCombinations(n, k, i + 1, c) -> c.pop_back()",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 c.size() == k 时，表示已选满 k 个数字，将当前组合 c 放入 res 并返回",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "n = 4, k = 2 时，从 1..4 中选择 2 个数字的所有组合结果为 [[1,2], [1,3], [1,4], [2,3], [2,4], [3,4]]",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "当 n <= 0 或 k <= 0 或 k > n 时为无效边界条件，直接返回空结果数组 res",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在递归调用 generateCombinations 返回后，必须执行 c.pop_back() 恢复状态，以便在 for 循环中尝试下一个可能的数字",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "interviewPlaybook": [],
+  "relationCandidates": [
+    {
+      "from": "lesson:08-04",
+      "to": "lesson:08-05",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "视频结尾明确说明下一小节将对该组合问题的回溯求解进行剪枝优化",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 93000,
+      "assetId": "asset:video-08-04",
+      "locator": null,
+      "observation": "讲解组合问题定义，给出 LeetCode 77 题 Combinations 题面：给出整数 n 和 k，求 1...n 中选出 k 个数字的所有组合。举例 n=4, k=2 的输出结果。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 93000,
+      "endMs": 332000,
+      "assetId": "asset:video-08-04",
+      "locator": null,
+      "observation": "以在 [1,2,3,4] 中取 2 个数为例绘制递归树，说明由于顺序无关，取了 2 之后只需要在 [3,4] 中取下一个数，不需要再考虑 1。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 332000,
+      "endMs": 867840,
+      "assetId": "asset:video-08-04",
+      "locator": null,
+      "observation": "在 IDE 中手写完整的 C++ 解法代码，定义成员变量 res，实现 generateCombinations 递归函数，展示 push_back/pop_back 的回溯过程，并在 combine 中进行边界判断 (n<=0 || k<=0 || k>n)。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.5",
+    "generatedAt": null
+  }
+}

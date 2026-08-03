@@ -1,0 +1,555 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "03-08",
+  "chapterId": "03",
+  "titleObserved": "在滑动窗口中做记录 Longest Substring Without Repeating Characters",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 924.68,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 154000,
+      "topic": "LeetCode 3 题意理解与细节明确",
+      "summary": "介绍最长无重复字符子串题目，分析示例，并对字符集范围及大小写敏感性等细节进行沟通明确。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 154000,
+      "endMs": 354000,
+      "topic": "滑动窗口与频次数组算法设计",
+      "summary": "分析如何使用 s[i...j] 滑动窗口及 freq[256] 频率数组记录窗口内字符频次，实现 O(1) 重复字符判定与窗口扩展缩小。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 354000,
+      "endMs": 586000,
+      "topic": "C++ 代码实现与逻辑细节",
+      "summary": "在 C++ 中编写 lengthOfLongestSubstring 函数，初始化 l=0, r=-1 的滑动窗口，处理边界判定与频次更新。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 586000,
+      "endMs": 734000,
+      "topic": "补充练习 1：LeetCode 438 Find All Anagrams in a String",
+      "summary": "布置并讲解 LeetCode 438 题意、Anagram 定义及滑动窗口应用注意事项。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 734000,
+      "endMs": 881000,
+      "topic": "补充练习 2：LeetCode 76 Minimum Window Substring",
+      "summary": "布置并讲解 LeetCode 76 题意、字符匹配包含规则及边界条件。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 881000,
+      "endMs": 924680,
+      "topic": "第 3 章数组问题小结",
+      "summary": "总结第 3 章涵盖的数组技术，包括双指针、碰撞指针与滑动窗口。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解如何利用滑动窗口在字符串中寻找符合不重复条件的最长子串",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "掌握使用固定大小的频次数组 freq[256] 在 O(1) 时间内判定和维护窗口内字符重复状态的方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "学会滑动窗口边界初始化（如 l=0, r=-1 表示空窗口 [l...r]）及其在代码中的条件与边界判定",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "滑动窗口",
+      "namesObserved": [
+        "滑动窗口"
+      ],
+      "role": "applies",
+      "definition": "通过两个指针 l 和 r 维护包含当前无重复字符子串的区间 s[l...r]，并随着右边界扩展或左边界收缩在字符串上向前滑动。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "查找表记录频率",
+      "namesObserved": [
+        "freq[256]",
+        "frequency"
+      ],
+      "role": "applies",
+      "definition": "使用大小为 256 的数组以 ASCII 码为索引记录当前窗口中各个字符出现的频次，从而快速判断新加入字符是否重复。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "3",
+    "titleObserved": "3 Longest Substring Without Repeating Characters",
+    "statement": "在一个字符串中寻找没有重复字母的最长子串，返回其长度。",
+    "constraints": [
+      "字符集为 ASCII 字符（使用大小为 256 的数组记录频次）",
+      "大小写敏感（例如大写 'A' 与小写 'a' 算作不同字符）"
+    ],
+    "clarifyingQuestions": [
+      "字符集范围是只有字母、数字加字母还是 ASCII？",
+      "大小写是否敏感？"
+    ],
+    "evidenceIds": [
+      "ev-001",
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "optimized",
+      "idea": "利用滑动窗口 s[l...r] 维护无重复字符的子串。使用 freq[256] 记录窗口内各字符出现频次。当右边界的下一个字符 s[r+1] 频次为 0 时扩展右边界；若频次为 1 则缩小左边界并扣减 s[l] 的频次，直至将重复字符排除出窗口。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <string>\n#include <cassert>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    int lengthOfLongestSubstring(string s) {\n        int freq[256] = {0};\n        int l = 0, r = -1; // 滑动窗口为s[l...r]\n        int res = 0;\n\n        while( l < s.size() ){\n            if( r + 1 < s.size() && freq[s[r+1]] == 0 )\n                freq[s[++r]] ++;\n            else // r + 1 >= s.size() || freq[s[r+1]] == 1\n                freq[s[l++]] --;\n\n            res = max( res, r - l + 1 );\n        }\n\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "sliding_window",
+      "variables": [
+        {
+          "symbol": "l",
+          "role": "window_left",
+          "meaning": "滑动窗口 s[l...r] 的左边界指针",
+          "updateRule": "当右侧欲加入字符与窗口内字符重复，或右边界到达末尾时，l++ 并扣减 freq[s[l]]",
+          "evidenceIds": [
+            "ev-002",
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "r",
+          "role": "window_right",
+          "meaning": "滑动窗口 s[l...r] 的右边界指针",
+          "updateRule": "当 r+1 未越界且 s[r+1] 未在窗口内出现过时，r++ 并在 freq[s[r]] 中加 1",
+          "evidenceIds": [
+            "ev-002",
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "freq",
+          "role": "lookup_table",
+          "meaning": "大小为 256 的频次数组，记录当前滑动窗口 s[l...r] 内每个 ASCII 字符出现的次数",
+          "updateRule": "窗口扩展时对应字符频次加 1，收缩时对应字符频次减 1",
+          "evidenceIds": [
+            "ev-002",
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "res",
+          "role": "accumulator",
+          "meaning": "遍历过程中记录的最大无重复字符子串的长度",
+          "updateRule": "每轮循环更新为 max(res, r - l + 1)",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "s[l...r]",
+          "meaning": "双闭区间表达的滑动窗口，保持窗口内不存在任何重复字符的性质",
+          "evidenceIds": [
+            "ev-002",
+            "ev-003"
+          ]
+        }
+      ],
+      "invariant": {
+        "statement": "滑动窗口 s[l...r] 内始终不包含任何重复字符，freq 数组精确记录 s[l...r] 中每个字符的频次",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002",
+          "ev-003"
+        ]
+      },
+      "transitions": [
+        {
+          "condition": "r + 1 < s.size() && freq[s[r+1]] == 0",
+          "updates": "r++; freq[s[r]]++;",
+          "preserves": {
+            "statement": "右边界右移一位，新加入字符在窗口内频次由 0 变 1，保持无重复字符不变量",
+            "sourceClass": "course_direct",
+            "evidenceIds": [
+              "ev-002",
+              "ev-003"
+            ]
+          },
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "condition": "r + 1 >= s.size() || freq[s[r+1]] != 0",
+          "updates": "freq[s[l]]--; l++;",
+          "preserves": {
+            "statement": "左边界右移一位，排除左端字符并降低其频次，从而逐步消除窗口内的重复字符或收缩窗口",
+            "sourceClass": "course_direct",
+            "evidenceIds": [
+              "ev-002",
+              "ev-003"
+            ]
+          },
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 l >= s.size() 时循环终止，代表所有可能的无重复字符子串均已考量完毕",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "通过 freq 数组在扩张右边界前校验 s[r+1] 是否出现过，保证扩展后的窗口无重复字符；当出现重复时不断缩减左边界直至解除重复，保证了窗口 s[l...r] 随时均为合法的无重复字符子串。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002",
+          "ev-003"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "lengthOfLongestSubstring 算法时间复杂度",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "输入字符串 s 的长度",
+          "domainOrRelationship": "s.size()",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "指针 l 与 r 均只向右移动，不会向左回退",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "statement": "每个字符最多被 r 访问一次进入窗口，被 l 访问一次离开窗口，因此总操作次数为 O(n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "该滑动窗口解法的时间复杂度为 O(n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "lengthOfLongestSubstring 算法空间复杂度",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(1)",
+      "expressionNormalized": "O(1)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "使用了固定大小为 256 的频次数组 freq[256]，与输入字符串长度 n 无关",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002",
+            "ev-003"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "辅助空间复杂度为 O(1)（或 O(C)，其中 C=256 为字符集大小）",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002",
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "输入 s = \"abcabcbb\"，最长无重复字符子串为 \"abc\"，返回长度为 3。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "输入 s = \"bbbbb\"，最长无重复字符子串为 \"b\"，返回长度为 1。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "输入 s = \"pwwkew\"，最长无重复字符子串为 \"wke\"，返回长度为 3。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "空字符串或极短字符串：当窗口初始化 l=0, r=-1 时，能够正确处理边界，若字符串为空则循环直接结束并返回 res=0。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "访问 freq[s[r+1]] 前，必须先判断 r + 1 < s.size()，防止数组或字符串越界。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "窗口区间初始化语义必须严格统一，如设 l=0, r=-1 时窗口定义为 s[l...r]，初始不包含任何元素，对应的 freq 数组全置 0。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "遇到字符串子串问题时，先向面试官确认字符集范围（ASCII 还是仅小写字母）以及大小写是否敏感。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "使用滑动窗口时，通过查找表或频次数组把判断“新元素加入是否合法”的操作优化至 O(1)，从而将整体算法复杂度降至 O(n)。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:01-04",
+      "to": "lesson:03-08",
+      "type": "same_problem_family_as",
+      "status": "provisional",
+      "rationale": "Given relation candidate",
+      "confidence": 0.8,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    },
+    {
+      "from": "lesson:03-07",
+      "to": "lesson:03-08",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "继承 03-07 的滑动窗口思路，引入 freq[256] 频次数组进行窗口状态记录",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "from": "lesson:03-08",
+      "to": "lesson:04-07",
+      "type": "applies",
+      "status": "provisional",
+      "rationale": "Given relation candidate",
+      "confidence": 0.8,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 154000,
+      "assetId": "asset:video-03-08",
+      "locator": "00:00 - 02:34",
+      "observation": "讲解 LeetCode 3 题意，给出三个测试样例，并对字符集范围（ASCII）和大小写敏感性进行明确沟通。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 154000,
+      "endMs": 354000,
+      "assetId": "asset:video-03-08",
+      "locator": "02:34 - 05:54",
+      "observation": "利用 PPT 动画展示滑动窗口 s[i...j] 的扩展与收缩过程，并引入 freq[256] 频次数组记录窗口字符状态。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 354000,
+      "endMs": 586000,
+      "assetId": "asset:video-03-08",
+      "locator": "05:54 - 09:46",
+      "observation": "展示完整的 C++ 代码实现，讲解 freq 初始化、l=0, r=-1 边界设置、while 循环条件、越界检查以及 res 更新。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 586000,
+      "endMs": 734000,
+      "assetId": "asset:video-03-08",
+      "locator": "09:46 - 12:14",
+      "observation": "布置练习题 LeetCode 438 Find All Anagrams in a String，说明 Anagrams 含义及解题细节。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 734000,
+      "endMs": 881000,
+      "assetId": "asset:video-03-08",
+      "locator": "12:14 - 14:41",
+      "observation": "布置练习题 LeetCode 76 Minimum Window Substring（Hard），讲解题目要求及字符包含定义。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 881000,
+      "endMs": 924680,
+      "assetId": "asset:video-03-08",
+      "locator": "14:41 - 15:24",
+      "observation": "回顾第 3 章所有内容（双指针、对撞指针、滑动窗口）并做本章总结。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

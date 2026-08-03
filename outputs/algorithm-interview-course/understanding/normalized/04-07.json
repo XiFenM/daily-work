@@ -1,0 +1,524 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "04-07",
+  "chapterId": "04",
+  "titleObserved": "查找表和滑动窗口 Contain Duplicate II",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 680.484,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 35000,
+      "topic": "题目引入：219 Contains Duplicate II",
+      "summary": "介绍 LeetCode 219 题面要求，寻找整型数组中索引差值不超过 k 的相同元素。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 35000,
+      "endMs": 53000,
+      "topic": "暴力解法分析",
+      "summary": "分析双重循环遍历所有数对的暴力解法及其 O(n^2) 时间复杂度。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 53000,
+      "endMs": 226000,
+      "topic": "滑动窗口 + 查找表解法推导",
+      "summary": "利用滑动窗口将问题转化为在包含 k+1 个元素的区间内寻找重复元素，并引入查找表（Set）。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 226000,
+      "endMs": 538000,
+      "topic": "C++ 代码实现与边界处理",
+      "summary": "编写使用 unordered_set 的 C++ 代码，详细分析 record.size() == k + 1 和删除 nums[i - k] 的边界条件。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 538000,
+      "endMs": 577000,
+      "topic": "复杂度分析",
+      "summary": "分析算法的时间复杂度 O(n) 与辅助空间复杂度 O(k)。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 577000,
+      "endMs": 626000,
+      "topic": "对比 LeetCode 3 题",
+      "summary": "对比本题固定最大窗口与 LeetCode 3 变长滑动窗口的异同。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 626000,
+      "endMs": 680484,
+      "topic": "课后练习：217 Contains Duplicate 及下节预告",
+      "summary": "给出简化的 217 题作为练习，并引出下一节含有顺序性要求的 Contains Duplicate III。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "掌握将固定长度限制条件转化为滑动窗口与查找表（Set）结合解题的技术",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "能够准确推导并实现维护滑动窗口大小不超过 k 的边界条件与元素剔除逻辑",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "滑动窗口",
+      "namesObserved": [
+        "滑动窗口"
+      ],
+      "role": "applies",
+      "definition": "在数组上保持一个固定或动态大小的连续子区间，并随遍历向右移动。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "查找表",
+      "namesObserved": [
+        "查找表",
+        "unordered_set",
+        "set"
+      ],
+      "role": "applies",
+      "definition": "用于在 O(1) 时间内判断当前元素是否存在于滑动窗口中的数据结构。",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "219",
+    "titleObserved": "Contains Duplicate II",
+    "statement": "给出一个整形数组 nums 和一个整数 k，是否存在索引 i 和 j，使得 nums[i] == nums[j] 且 i 和 j 之间的差不超过 k",
+    "constraints": [],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "双重循环遍历数组中所有的索引对 (i, j)，检查 nums[i] == nums[j] 时，|i - j| 是否小于等于 k。",
+      "timeComplexity": "O(n^2)",
+      "spaceComplexity": "O(1)",
+      "limitations": [
+        "复杂度较高，达到 O(n^2)"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "optimized",
+      "idea": "使用滑动窗口配合哈希集合（unordered_set）。遍历数组，在集合中查找当前元素是否存在；若存在则找到解；若不存在则加入集合。当集合元素数量达到 k + 1 时，移除最左侧元素 nums[i - k] 以保证窗口大小不超过 k。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(k)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n#include <unordered_set>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    bool containsNearbyDuplicate(vector<int>& nums, int k) {\n        unordered_set<int> record;\n        for (int i = 0; i < nums.size(); i++) {\n            if (record.find(nums[i]) != record.end())\n                return true;\n            \n            record.insert(nums[i]);\n            \n            // 保持 record 中最多有 k 个元素\n            if (record.size() == k + 1)\n                record.erase(nums[i - k]);\n        }\n        \n        return false;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-002",
+      "kind": "sliding_window",
+      "variables": [
+        {
+          "symbol": "i",
+          "role": "loop_counter",
+          "meaning": "当前遍历到的数组索引",
+          "updateRule": "i++",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "symbol": "record",
+          "role": "lookup_table",
+          "meaning": "存储当前滑动窗口内所有元素的哈希集合",
+          "updateRule": "insert(nums[i]); if (record.size() == k + 1) erase(nums[i - k]);",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "[i - k, i]",
+          "meaning": "滑动窗口维护最多 k+1 个连续元素的范围",
+          "evidenceIds": [
+            "ev-003",
+            "ev-004"
+          ]
+        }
+      ],
+      "invariant": {
+        "statement": "在每次循环结束时，record 中最多保存 k 个元素，使得窗口内任意两元素索引差均不超过 k",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "transitions": [
+        {
+          "condition": "record.find(nums[i]) != record.end()",
+          "updates": "return true",
+          "preserves": {
+            "statement": "找到满足 nums[i] == nums[j] 且 |i - j| <= k 的索引对",
+            "sourceClass": "course_direct",
+            "evidenceIds": [
+              "ev-004"
+            ]
+          },
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "condition": "record.find(nums[i]) == record.end()",
+          "updates": "record.insert(nums[i]); if (record.size() == k + 1) record.erase(nums[i - k]);",
+          "preserves": {
+            "statement": "保持 record 内元素无重复且最多保留 k 个元素",
+            "sourceClass": "course_direct",
+            "evidenceIds": [
+              "ev-004"
+            ]
+          },
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当遍历完整个数组都没有发现满足条件的重复元素时，循环结束并返回 false",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "通过在 record 中最多保留 k 个元素，可以保证在 record 中查找到任何等于 nums[i] 的元素时，其索引与 i 的差值均不超过 k",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003",
+          "ev-004"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": "O(n)",
+    "space": "O(k)",
+    "assumptions": [
+      "unordered_set 的插入、查找和删除平均时间复杂度为 O(1)"
+    ],
+    "evidenceIds": [
+      "ev-005"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "containsNearbyDuplicate 滑动窗口解法时间复杂度",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 nums 的长度",
+          "domainOrRelationship": "n >= 0",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "遍历数组进行一次 O(n) 的循环",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "statement": "循环内部对 unordered_set 进行查找、插入、删除均是 O(1) 级别操作",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "statement": "总体时间复杂度为 O(n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "时间复杂度为 O(n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "containsNearbyDuplicate 滑动窗口解法空间复杂度",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(k)",
+      "expressionNormalized": "O(k)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "k",
+          "meaning": "允许的最大索引差值，对应滑动窗口内允许的最大元素个数",
+          "domainOrRelationship": "k >= 0",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "查找表 record 中最多存放 k + 1 个元素（维护最多 k 个），因此空间复杂度为 O(k)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "空间复杂度为 O(k)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "当 i = k 时，i - k = 0，滑动窗口范围为 [0, k]，包含 k + 1 个元素。若未发现重复则擦除索引 0 的元素 nums[0]。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "edgeCases": [],
+  "implementationPitfalls": [
+    {
+      "statement": "擦除最左侧元素时，擦除的元素索引是 i - k 而非其他表达式，可以通过带入具体数值（如 i = k 时擦除 0）来核对边界逻辑。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "比较 LeetCode 3 与 LeetCode 219：两者均结合滑动窗口与查找表，但 LeetCode 3 窗口长度不固定，而 LeetCode 219 窗口最大长度固定为 k+1。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:03-08",
+      "to": "lesson:04-07",
+      "type": "applies",
+      "status": "provisional",
+      "rationale": "视频明确对比了上一章 LeetCode 3 (03-08) 的变长滑动窗口与本题 (04-07) 的定长滑动窗口与查找表结合技术。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "from": "lesson:04-07",
+      "to": "lesson:04-08",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "视频结尾预告下一个问题 (Contains Duplicate III) 将在 Contains Duplicate II 的基础上增加更多的限制条件，需要用到具有顺序性的底层查找表数据结构（BST）。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 35000,
+      "assetId": "asset:video-04-07",
+      "locator": "00:00 - 00:35",
+      "observation": "PPT展示题目 219 Contains Duplicate II，描述为：给出一个整形数组nums和一个整数k，是否存在索引i和j，使得nums[i] == nums[j] 且i和j之间的差不超过k。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 35000,
+      "endMs": 53000,
+      "assetId": "asset:video-04-07",
+      "locator": "00:35 - 00:53",
+      "observation": "讲师提到暴力解法穷举索引 i 和 j，检查 nums[i] == nums[j] 且 |i - j| <= k，复杂度为 O(n^2)。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 53000,
+      "endMs": 226000,
+      "assetId": "asset:video-04-07",
+      "locator": "00:53 - 03:46",
+      "observation": "讲师用图示讲解滑动窗口思想：维护包含 k+1 个元素的区间 [l, l+k]，在这个区间内查找是否存在重复元素。使用查找表 set 来实时查找。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 226000,
+      "endMs": 538000,
+      "assetId": "asset:video-04-07",
+      "locator": "03:46 - 08:58",
+      "observation": "讲师在 CodeBlocks 中编写 C++ 代码，使用 unordered_set<int> record，并在循环中使用 record.size() == k + 1 时执行 record.erase(nums[i - k])，详细分析带入具体值核对边界的过程。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 538000,
+      "endMs": 577000,
+      "assetId": "asset:video-04-07",
+      "locator": "08:58 - 09:37",
+      "observation": "代码注释中写明：时间复杂度 O(n)，空间复杂度 O(k)。讲师解释哈希表查找/插入/删除均是 O(1) 级别。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 577000,
+      "endMs": 626000,
+      "assetId": "asset:video-04-07",
+      "locator": "09:37 - 10:26",
+      "observation": "讲师回顾上一章第 3 题（最长无重复字符子串），对比说明第 3 题滑动窗口长度不固定，而本题滑动窗口最大长度固定为 k+1。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 626000,
+      "endMs": 680484,
+      "assetId": "asset:video-04-07",
+      "locator": "10:26 - 11:20",
+      "observation": "展示练习题 217 Contains Duplicate，并预告下一节 Contains Duplicate III 需要在查找表中使用具有顺序性的数据结构（BST）。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "098d5a5ffd224ee6bab9360fc8f1f9e8",
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": "2026-07-29T11:44:39.000Z"
+  }
+}

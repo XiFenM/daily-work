@@ -1,0 +1,465 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "07-07",
+  "chapterId": "07",
+  "titleObserved": "二分搜索树中的问题 Lowest Common Ancestor of a Binary Search Tree",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1070.44,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 90000,
+      "topic": "二分搜索树 (BST) 的定义与基本性质复习",
+      "summary": "回顾二分搜索树的递归定义：每个节点的键值大于左孩子、小于右孩子，且左右子树仍为二分搜索树。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 90000,
+      "endMs": 278000,
+      "topic": "二分搜索树基本操作与复杂度回顾",
+      "summary": "介绍二分搜索树的插入、查找、删除、最值、前驱后继、floor/ceil、rank、select 等基本操作，指出其时间复杂度通常为 O(log n)，并提及平衡二分搜索树与红黑树。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 278000,
+      "endMs": 374000,
+      "topic": "LeetCode 235 题面引入与最近公共祖先概念",
+      "summary": "引入 LeetCode 235 题，讲解二分搜索树中两节点最近公共祖先 (LCA) 的定义并结合具体树形图进行举例说明。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 374000,
+      "endMs": 530000,
+      "topic": "二分搜索树 LCA 的递归解法逻辑分析",
+      "summary": "分析节点 p 和 q 与当前节点 node 键值比较的三种情况：均小于 node 进左子树，均大于 node 进右子树，分布在两侧或其中之一即为 node 则当前 node 即为 LCA。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 530000,
+      "endMs": 790000,
+      "topic": "C++ 代码实现与边界/假设条件探讨",
+      "summary": "手写 C++ 递归解法代码，讨论 p 和 q 是否为空、root 是否为空，以及节点 p 和 q 是否一定存在于树中的前提假设。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 790000,
+      "endMs": 1032000,
+      "topic": "相关练习题推荐",
+      "summary": "推荐 LeetCode 98（验证二分搜索树）、450（删除节点）、108（有序数组转平衡 BST）、230（寻找第 k 小元素）以及 236（普通二叉树的 LCA）。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 1032000,
+      "endMs": 1070440,
+      "topic": "本章总结与下章预告",
+      "summary": "总结二叉树与递归章节，指出后续将探讨不依赖树结构本身、利用问题自身递归性质的递归算法。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解二分搜索树的定义及其天然的顺序性与递归结构。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "掌握利用二分搜索树性质求解两节点最近公共祖先 (Lowest Common Ancestor) 的递归算法。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "掌握树形问题中关于空指针、节点存在性等边界与前提假设的沟通技巧。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Binary Search Tree",
+      "namesObserved": [
+        "二分搜索树",
+        "BST"
+      ],
+      "role": "reinforces",
+      "definition": "一种二叉树，其中每个节点的键值大于其左孩子键值，小于其右孩子键值，且以左右孩子为根的子树仍为二分搜索树。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "Lowest Common Ancestor",
+      "namesObserved": [
+        "最近公共祖先",
+        "LCA"
+      ],
+      "role": "introduces",
+      "definition": "给定树中的两个节点，顺着这两个节点向上寻找父节点，距离这两个节点最近的共同祖先节点。",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "235",
+    "titleObserved": "Lowest Common Ancestor of a Binary Search Tree",
+    "statement": "给定一棵二分搜索树和两个节点，寻找这两个节点的最近公共祖先。",
+    "constraints": [
+      "树为有效的二分搜索树",
+      "给定的两节点 p 和 q 存在于树中（视频代码假设并指出需要与面试官确认）"
+    ],
+    "clarifyingQuestions": [
+      "节点 p 和 q 是否可能为空指针？",
+      "节点 p 和 q 是否保证一定存在于给定的二分搜索树中？"
+    ],
+    "evidenceIds": [
+      "ev-003",
+      "ev-005"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "利用 BST 的顺序性质：若 p 和 q 的值都小于当前节点值，则 LCA 必在左子树；若都大于当前节点值，则 LCA 必在右子树；否则当前节点即为 LCA（包含 p 和 q 分居两侧，或当前节点即为 p 或 q 的情况）。",
+      "timeComplexity": "O(h)",
+      "spaceComplexity": "O(h)",
+      "limitations": [
+        "依赖树为二分搜索树的顺序性质，若为普通二叉树则无法直接使用此数值比较逻辑"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {\n        assert(p != NULL && q != NULL);\n        if (root == NULL)\n            return NULL;\n        \n        if (p->val < root->val && q->val < root->val)\n            return lowestCommonAncestor(root->left, p, q);\n        if (p->val > root->val && q->val > root->val)\n            return lowestCommonAncestor(root->right, p, q);\n            \n        return root;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "root",
+          "role": "current_subtree_root",
+          "meaning": "当前递归层次的子树根节点",
+          "updateRule": "根据比较结果更新为 root->left 或 root->right",
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        },
+        {
+          "symbol": "p, q",
+          "role": "target_nodes",
+          "meaning": "需要寻找最近公共祖先的目标节点指针",
+          "updateRule": "递归过程中保持不变",
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "p->val < root->val && q->val < root->val",
+          "updates": "进入左子树寻找：lowestCommonAncestor(root->left, p, q)",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        },
+        {
+          "condition": "p->val > root->val && q->val > root->val",
+          "updates": "进入右子树寻找：lowestCommonAncestor(root->right, p, q)",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        },
+        {
+          "condition": "不满足上述两者（即 p 和 q 分居 root 两侧，或 root 等于 p，或 root 等于 q）",
+          "updates": "直接返回当前 root",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        }
+      ],
+      "termination": null,
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "recursive_contract",
+    "claims": [
+      {
+        "statement": "在二分搜索树中，若目标节点 p 和 q 的键值均小于当前根节点键值，其 LCA 必完全落在左子树中。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      {
+        "statement": "若目标节点 p 和 q 的键值均大于当前根节点键值，其 LCA 必完全落在右子树中。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      {
+        "statement": "若 p 和 q 不全落在同一侧子树中，当前根节点即为分割点，必然是 p 和 q 的最近公共祖先。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": "O(h)",
+    "space": "O(h)",
+    "assumptions": [
+      "h 为二分搜索树的高度"
+    ],
+    "evidenceIds": [
+      "ev-002",
+      "ev-004"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "BST LCA Recursive Solution",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(h)",
+      "expressionNormalized": "O(h)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "h",
+          "meaning": "二分搜索树的高度",
+          "domainOrRelationship": "平衡时为 log n，退化时为 n",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "每层递归向下下降一层树高，最多递归 h 层。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "时间复杂度为 O(h)，在平衡二分搜索树中为 O(log n)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002",
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "在以 6 为根的 BST 中，查找 2 和 8 的 LCA，结果为 6；查找 2 和 4 的 LCA，结果为 2。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "root 为 NULL 时，无公共祖先，返回 NULL。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "节点 p 或 q 本身就是另一个节点的祖先节点（例如 p 为 2，q 为 4），最近公共祖先即为 p 本身（即 2）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "忽视 p 和 q 是否一定存在于树中的前提。如果 p 或 q 不在树中，未做验证的情况下直接返回 root 会导致错误结果。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "在解答树相关题目时，注意与面试官确认输入指针是否为空，以及目标节点是否保证存在于树中。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "遇到 BST 题目，优先考虑 BST 键值大小的天然顺序性，通常可将全树搜索简化为类似于二分查找的方向性选择。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    }
+  ],
+  "relationCandidates": [],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 90000,
+      "assetId": "asset:video-07-07",
+      "locator": "00:00 - 01:30",
+      "observation": "视频幻灯片展示二分搜索树 (Binary Search Tree) 的定义及示例树结构（根 28，左 16，右 30 等）。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 90000,
+      "endMs": 278000,
+      "assetId": "asset:video-07-07",
+      "locator": "01:30 - 04:38",
+      "observation": "老师讲解 BST 的基本操作（insert, find, delete, min/max, successor/predecessor, floor/ceil, rank, select），指出其 O(log n) 的时间复杂度，并提到 map/set 底层红黑树。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 278000,
+      "endMs": 374000,
+      "assetId": "asset:video-07-07",
+      "locator": "04:38 - 06:14",
+      "observation": "展示 LeetCode 235 题面及公司标签（Facebook, Microsoft, Amazon, Twitter），并举例说明 LCA 定义。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 374000,
+      "endMs": 530000,
+      "assetId": "asset:video-07-07",
+      "locator": "06:14 - 08:50",
+      "observation": "老师画图推导 BST 中求解 LCA 的递归逻辑：同在左侧进左子树，同在右侧进右子树，分居两侧或包含自身则当前节点即为 LCA。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 530000,
+      "endMs": 790000,
+      "assetId": "asset:video-07-07",
+      "locator": "08:50 - 13:10",
+      "observation": "老师在 IDE 中编写 C++ Solution 类及 lowestCommonAncestor 函数，加入 assert(p != NULL && q != NULL) 与 root == NULL 判断，并说明解法的假设条件。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 790000,
+      "endMs": 1032000,
+      "assetId": "asset:video-07-07",
+      "locator": "13:10 - 17:12",
+      "observation": "展示练习题 LeetCode 98, 450, 108, 230, 236 题面及背景公司，并进行简要思路引导。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 1032000,
+      "endMs": 1070440,
+      "assetId": "asset:video-07-07",
+      "locator": "17:12 - 17:50",
+      "observation": "课程结语，总结本章二叉树与递归的内容，预告下一章将讨论不依赖树结构的递归问题。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

@@ -1,0 +1,656 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "09-04",
+  "chapterId": "09",
+  "titleObserved": "状态的定义和状态转移 House Robber",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1639.12,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 108000,
+      "topic": "House Robber 题目引入与示例讲解",
+      "summary": "介绍 LeetCode 198 House Robber 题面：在不偷窃相邻房子的前提下求可偷窃的最大宝物价值，并给出测试示例分析。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 108000,
+      "endMs": 242000,
+      "topic": "暴力解法分析",
+      "summary": "分析暴力组合搜索解法，计算包含 2^n 种组合及相邻检查的成本，得出 O(2^n * n) 时间复杂度。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 242000,
+      "endMs": 422000,
+      "topic": "递归树推导与重叠子问题分析",
+      "summary": "通过画出决策递归树，展示选择偷取某个房屋后的子问题变化，分析重叠子问题与最优子结构性质。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 422000,
+      "endMs": 738000,
+      "topic": "状态定义与状态转移方程",
+      "summary": "形式化定义状态为考虑偷窃 [x...n-1] 范围的房子（递归函数契约），并推导出状态转移方程。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 738000,
+      "endMs": 1045000,
+      "topic": "记忆化搜索实现 (Top-down)",
+      "summary": "在 C++ 编辑器中实现自顶向下的带记忆化递归解法，详细讲解 tryRob 递归函数与 memo 数组逻辑。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 1045000,
+      "endMs": 1328000,
+      "topic": "动态规划实现 (Bottom-up)",
+      "summary": "使用自底向上的动态规划方式重新实现代码，分析边界条件（n=0 及 memo[n-1] 初始化）与 O(n^2) 复杂度。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 1328000,
+      "endMs": 1412000,
+      "topic": "改变状态定义的思考与练习",
+      "summary": "提出另一种状态定义：考虑偷窃 [0...x] 范围内的房子，并布置思考练习。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 1412000,
+      "endMs": 1639120,
+      "topic": "相关扩展思考题引入",
+      "summary": "扩展讲解 House Robber II (213，环形街道)、House Robber III (337，二叉树结构) 以及 Best Time to Buy and Sell Stock with Cooldown (309) 等面试变体题。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解动态规划中状态定义（函数契约/做什么）与状态转移（递推逻辑/怎么做）的本质含义",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "掌握 House Robber 问题自顶向下记忆化搜索与自底向上动态规划的完整代码实现",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "体会相同问题采用不同状态定义（如 [x...n-1] 与 [0...x]）对控制流和转移方程的影响",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Dynamic Programming",
+      "namesObserved": [
+        "动态规划"
+      ],
+      "role": "applies",
+      "definition": "通过定义状态与状态转移方程，利用自底向上递推或自顶向下记忆化消除重复计算的求解方法。",
+      "evidenceIds": [
+        "ev-004",
+        "ev-006"
+      ]
+    },
+    {
+      "canonicalName": "State Definition",
+      "namesObserved": [
+        "状态的定义",
+        "函数的定义"
+      ],
+      "role": "introduces",
+      "definition": "明确子问题/递归函数具体表达的语义（即要解决什么问题、区间范围及返回值含义）。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "State Transition Equation",
+      "namesObserved": [
+        "状态转移方程",
+        "状态的转移"
+      ],
+      "role": "introduces",
+      "definition": "依据状态定义，表达当前状态如何由更小的子问题状态组合推导出来的方程或逻辑。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "Memoization",
+      "namesObserved": [
+        "记忆化搜索"
+      ],
+      "role": "applies",
+      "definition": "在自顶向下递归过程中，使用数组或哈希表缓存已求解子问题结果，遇到相同子问题直接返回。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "canonicalName": "Overlapping Subproblems",
+      "namesObserved": [
+        "重叠子问题"
+      ],
+      "role": "applies",
+      "definition": "递归穷举过程中多次重复出现的相同参数子问题区间。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "198",
+    "titleObserved": "198. House Robber",
+    "statement": "你是一个专业的小偷，打算偷窃一条街上的所有房子。每一个房子里都有不同价值的宝物，但是，如果你选择偷窃连续的两栋房子，就会触发报警系统。编程求出你最多可以偷窃价值多少的宝物？",
+    "constraints": [
+      "偷取的房子之间不能相邻"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "暴力解法：检查所有房子的组合（一共 2^n 种），对于每个组合检查是否有相邻房子，如果没有相邻房子，记录其总价值，最终寻找最大值。",
+      "timeComplexity": "O((2^n)*n)",
+      "spaceComplexity": null,
+      "limitations": [
+        "时间复杂度呈指数级增长，无法处理规模较大的数据"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "intermediate",
+      "idea": "带记忆化的自顶向下递归解法：定义 tryRob(nums, index) 表示考虑偷窃 nums[index...n-1] 范围内的房子所能获得的最大收益。使用 memo 数组存储已计算的 tryRob(index) 结果，初始值为 -1。",
+      "timeComplexity": null,
+      "spaceComplexity": "O(n)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "solution-003",
+      "stage": "optimized",
+      "idea": "自底向上的动态规划解法：使用数组 memo，其中 memo[i] 表示考虑偷窃 nums[i...n-1] 范围内的房子所能获得的最大收益。初始化 memo[n-1] = nums[n-1]，外层循环 i 从 n-2 递减到 0，内层循环 j 从 i 遍历到 n-1，逐递推计算 memo[i]。",
+      "timeComplexity": "O(n^2)",
+      "spaceComplexity": "O(n)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-002"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n\nusing namespace std;\n\nclass Solution {\nprivate:\n    // memo[i] 表示考虑偷窃 nums[i...n-1] 所能获得的最大收益\n    vector<int> memo;\n\n    // 考虑抢劫 nums[index...nums.size()) 这个范围的所有房子\n    int tryRob(const vector<int>& nums, int index) {\n        if (index >= nums.size()) {\n            return 0;\n        }\n        if (memo[index] != -1) {\n            return memo[index];\n        }\n        int res = 0;\n        for (int i = index; i < nums.size(); i++) {\n            res = max(res, nums[i] + tryRob(nums, i + 2));\n        }\n        memo[index] = res;\n        return res;\n    }\n\npublic:\n    int rob(vector<int>& nums) {\n        memo = vector<int>(nums.size(), -1);\n        return tryRob(nums, 0);\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-003",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    int rob(vector<int>& nums) {\n        int n = nums.size();\n        if (n == 0) {\n            return 0;\n        }\n        // memo[i] 表示考虑偷窃 nums[i...n-1] 所能获得的最大收益\n        vector<int> memo(n, -1);\n        memo[n - 1] = nums[n - 1];\n        for (int i = n - 2; i >= 0; i--) {\n            for (int j = i; j < n; j++) {\n                memo[i] = max(memo[i], nums[j] + (j + 2 < n ? memo[j + 2] : 0));\n            }\n        }\n        return memo[0];\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-002",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "memo[i] / f(i)",
+          "role": "dp_table",
+          "meaning": "考虑偷窃 nums[i...n-1] 范围内的房子所能获得的宝物最大收益",
+          "updateRule": "memo[i] = max_{j = i...n-1} (nums[j] + (j + 2 < n ? memo[j + 2] : 0))",
+          "evidenceIds": [
+            "ev-004",
+            "ev-005",
+            "ev-006"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "nums[i...n-1]",
+          "meaning": "从索引 i 到数组末尾 n-1 的待选择房屋区间",
+          "evidenceIds": [
+            "ev-004",
+            "ev-005",
+            "ev-006"
+          ]
+        }
+      ],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "在区间 nums[i...n-1] 中尝试偷窃第 j 个房屋 (i <= j < n)",
+          "updates": "获得当前宝物价值 nums[j]，并转移到跳过相邻房屋后的子问题 memo[j + 2]",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-004",
+            "ev-006"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "最终返回 memo[0]，即考虑偷窃 nums[0...n-1] 的全局最大收益",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004",
+        "ev-005",
+        "ev-006"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "通过穷举区间内偷取的第一个房子 j，并依赖后续不相邻子问题的最优解 memo[j+2]，可以获得当前区间的最大宝物收益",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004",
+          "ev-006"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": "O(n^2)",
+    "space": "O(n)",
+    "assumptions": [
+      "当前视频中给出的自底向上 DP 实现包含两层嵌套循环，因此时间复杂度为 O(n^2)"
+    ],
+    "evidenceIds": [
+      "ev-006"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "暴力解法 (Brute Force)",
+      "measure": "time",
+      "notation": "O",
+      "case": "worst",
+      "expressionObserved": "O((2^n)*n)",
+      "expressionNormalized": "O(n * 2^n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "房子的数量",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "n 个房子共有 2^n 种选择组合",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "statement": "对于每种组合，检查是否有相邻房子并计算总价值需要 O(n) 的时间",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "暴力解法时间复杂度为 O((2^n)*n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "视频中的自底向上动态规划实现",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n^2)",
+      "expressionNormalized": "O(n^2)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 nums 的长度/房子数量",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "外层循环 i 从 n-2 递减到 0，执行 O(n) 次",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "statement": "内层循环 j 从 i 遍历到 n-1，每次转移枚举所有可能的第一个偷窃起点，平均执行 O(n) 次",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "视频中展示的双重循环 DP 解法时间复杂度为 O(n^2)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "recurrence",
+      "sourceKind": "shown_in_video",
+      "rawText": "f(0) = max{ v(0) + f(2), v(1) + f(3), v(2) + f(4), ..., v(n-3) + f(n-1), v(n-2), v(n-1) }",
+      "normalizedText": "f(i) = max_{j = i...n-1} (v(j) + f(j+2))",
+      "variables": [
+        {
+          "symbol": "f(x)",
+          "meaning": "考虑偷窃 [x...n-1] 范围内的房子所能获得的最大收益（状态定义）",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "symbol": "v(i)",
+          "meaning": "第 i 个房子中宝物的价值",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "输入 [3, 4, 1, 2]，返回 6（选择偷取 4 和 2）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "输入 [4, 3, 1, 2]，返回 6（选择偷取 4 和 2）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "输入数组为空（n == 0）时，无法抢劫任何房屋，直接返回 0",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在访问 memo[j + 2] 时，需要注意数组越界问题（需判断 j + 2 < n，若越界则后续收益为 0）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "自底向上 DP 初始化 memo[n-1] = nums[n-1] 前，必须先特判 n == 0 的情况，否则 memo[n-1] 会发生数组越界访问错误",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "面试官询问动态规划问题时，优先表达清楚“状态的定义是什么（函数要做什么）”以及“状态如何转移（函数怎么做）”，往往比直接写代码更关键",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "同一个动态规划问题可以有不同的状态定义方式（如考虑 [x...n-1] 还是考虑 [0...x]），两者推导出的转移方程和循环方向不同，但均能得到正确答案",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:09-03",
+      "to": "lesson:09-04",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "课程承演前一课关于发现重叠子问题的思路，将记忆化搜索与动态规划方法应用到 House Robber 题目。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "from": "lesson:09-04",
+      "to": "lesson:09-05",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "在讲解 0-1 背包等复杂 DP 之前，先深入理解一维状态定义与状态转移。",
+      "confidence": 0.85,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "from": "lesson:09-04",
+      "to": "lesson:09-08",
+      "type": "applies",
+      "status": "provisional",
+      "rationale": "House Robber 建立的状态定义与状态转移分析框架，可进一步应用到 LIS 等经典 DP 问题。",
+      "confidence": 0.8,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 108000,
+      "assetId": "asset:video-09-04",
+      "locator": "00:00-01:48",
+      "observation": "展示 LeetCode 198 House Robber 题目 PPT，讲授题意与约束（不能偷取相邻房屋），并给出示例 [3,4,1,2] -> 6 以及 [4,3,1,2] -> 6。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 108000,
+      "endMs": 242000,
+      "assetId": "asset:video-09-04",
+      "locator": "01:48-04:02",
+      "observation": "分析暴力解法：检查所有房子的组合（2^n 种），每种检查是否有相邻房子 (O(n))，得出 O((2^n)*n) 的时间复杂度。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 242000,
+      "endMs": 422000,
+      "assetId": "asset:video-09-04",
+      "locator": "04:02-07:02",
+      "observation": "画出决策递归树 PPT，讲解选择偷 0、偷 1 ... 偷 n-1 后子问题范围的变化，指明树中存在 [4...n-1]、[5...n-1] 等重叠子问题和最优子结构。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 422000,
+      "endMs": 738000,
+      "assetId": "asset:video-09-04",
+      "locator": "07:02-12:18",
+      "observation": "PPT 给出状态定义“考虑偷窃 [x...n-1] 范围里的房子（函数的定义）”以及状态转移方程 f(0) = max{ v(0)+f(2), v(1)+f(3), ..., v(n-1) }，强调状态定义说明函数做什么，状态转移说明函数怎么做。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 738000,
+      "endMs": 1045000,
+      "assetId": "asset:video-09-04",
+      "locator": "12:18-17:25",
+      "observation": "在 IDE 中书写带记忆化搜索的 C++ 递归代码，定义 tryRob(nums, index) 与 memo 数组，初值置为 -1，命中的返回 memo[index]。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 1045000,
+      "endMs": 1328000,
+      "assetId": "asset:video-09-04",
+      "locator": "17:25-22:08",
+      "observation": "在 IDE 中书写自底向上的动态规划代码，包含 n==0 特判，初始化 memo[n-1] = nums[n-1]，双重循环 i 从 n-2 递减、j 从 i 遍历到 n-1，指出算法时间复杂度为 O(n^2)。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 1328000,
+      "endMs": 1412000,
+      "assetId": "asset:video-09-04",
+      "locator": "22:08-23:32",
+      "observation": "PPT 提出改变状态定义为“考虑偷窃 [0...x] 范围里的房子”，并留为思考练习题。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 1412000,
+      "endMs": 1639120,
+      "assetId": "asset:video-09-04",
+      "locator": "23:32-27:19",
+      "observation": "介绍三个扩展思考题：213. House Robber II (微软，环形街道)、337. House Robber III (Uber，二叉树结构并给出两个树图示例)、309. Best Time to Buy and Sell Stock with Cooldown (Google，含冷冻期股票交易)。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.6",
+    "generatedAt": null
+  }
+}

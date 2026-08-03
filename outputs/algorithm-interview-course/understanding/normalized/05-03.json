@@ -1,0 +1,637 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "05-03",
+  "chapterId": "05",
+  "titleObserved": "设立链表的虚拟头结点 Remove Linked List Elements",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1028.8,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 31000,
+      "topic": "课程主题与背景引入",
+      "summary": "介绍在处理链表问题时设立虚拟头结点的常用技巧及其作用。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 31000,
+      "endMs": 75000,
+      "topic": "LeetCode 203 题目介绍",
+      "summary": "讲解 Remove Linked List Elements 题意、输入输出示例与删除要求。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 75000,
+      "endMs": 223000,
+      "topic": "链表节点删除逻辑图解与头结点特殊性分析",
+      "summary": "通过图示讲解普通节点的删除过程，并分析为什么该逻辑无法直接应用于头结点的删除。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 223000,
+      "endMs": 723000,
+      "topic": "不使用虚拟头结点的代码实现与边界陷阱",
+      "summary": "演示对头结点特殊处理的代码实现，剖析连续头节点需要删除、全删为空链表等细节陷阱。",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 723000,
+      "endMs": 792000,
+      "topic": "虚拟头结点 (dummyHead) 机制原理",
+      "summary": "讲解如何引入 dummyHead 使原头结点拥有前驱节点，从而统一所有节点的删除逻辑。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 792000,
+      "endMs": 919000,
+      "topic": "基于虚拟头结点的代码实现与内存管理",
+      "summary": "用 C++ 实现基于 dummyHead 的简洁算法，并处理堆内存的开辟与释放。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 919000,
+      "endMs": 1028800,
+      "topic": "总结与课后思考练习题",
+      "summary": "总结虚拟头节点技巧，并留出 LeetCode 82 和 LeetCode 21 两道练习题。",
+      "evidenceIds": [
+        "ev-008",
+        "ev-009"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解单链表中头结点删除与普通节点删除存在差异的原因",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "掌握虚拟头结点（dummyHead）的概念与原理，利用虚拟头节点统一链表节点删除操作",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "掌握在 C++ 语言中进行链表节点删除时显式释放内存的手动管理方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-007"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Dummy Head Node",
+      "namesObserved": [
+        "虚拟头结点",
+        "dummyHead",
+        "假的头结点"
+      ],
+      "role": "introduces",
+      "definition": "在链表真正头结点前人为建立的一个虚拟节点，其 next 指向原链表头结点，用于消除头结点特殊性，统一链表插入与删除逻辑。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-006"
+      ]
+    },
+    {
+      "canonicalName": "Linked List Deletion",
+      "namesObserved": [
+        "删除链表中的节点",
+        "删除节点"
+      ],
+      "role": "applies",
+      "definition": "通过调整前驱节点的 next 指针跳过待删除节点，并释放待删除节点内存的操作。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "203",
+    "titleObserved": "Remove Linked List Elements",
+    "statement": "在链表中删除值为 val 的所有节点。",
+    "constraints": [],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "不使用虚拟头结点。首先使用 while 循环单独处理并删除位于头部且值等于 target val 的节点；处理完头结点后，再通过 cur 指针遍历后续链表删除值为 val 的节点。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [
+        "逻辑不统一，需要对头节点特殊处理",
+        "陷阱较多，需处理连续头节点待删以及全删后链表为空等情况"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "optimized",
+      "idea": "设立一个虚拟头结点 dummyHead，令 dummyHead->next 指向原链表 head。从 dummyHead 开始遍历，使用统一的逻辑检查并删除 cur->next 值为 val 的节点，最后释放 dummyHead 内存并返回 dummyHead->next。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-002"
+      ],
+      "stateModelIds": [
+        "state-002"
+      ],
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    ListNode* removeElements(ListNode* head, int val) {\n        while (head != NULL && head->val == val) {\n            ListNode* delNode = head;\n            head = head->next;\n            delete delNode;\n        }\n\n        if (head == NULL)\n            return NULL;\n\n        ListNode* cur = head;\n        while (cur->next != NULL) {\n            if (cur->next->val == val) {\n                ListNode* delNode = cur->next;\n                cur->next = delNode->next;\n                delete delNode;\n            }\n            else\n                cur = cur->next;\n        }\n\n        return head;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    ListNode* removeElements(ListNode* head, int val) {\n        ListNode* dummyHead = new ListNode(0);\n        dummyHead->next = head;\n\n        ListNode* cur = dummyHead;\n        while (cur->next != NULL) {\n            if (cur->next->val == val) {\n                ListNode* delNode = cur->next;\n                cur->next = delNode->next;\n                delete delNode;\n            }\n            else\n                cur = cur->next;\n        }\n\n        ListNode* retNode = dummyHead->next;\n        delete dummyHead;\n\n        return retNode;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "head",
+          "role": "pointer",
+          "meaning": "指向当前链表头结点的指针",
+          "updateRule": "删除头节点时更新为 head->next",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "symbol": "cur",
+          "role": "pointer",
+          "meaning": "遍历指针，指向当前被检查节点的前驱节点",
+          "updateRule": "当 cur->next->val != val 时，更新为 cur->next",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "symbol": "delNode",
+          "role": "pointer",
+          "meaning": "临时保存待删除节点的指针",
+          "updateRule": "指向 cur->next 或 head",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "cur->next != NULL && cur->next->val == val",
+          "updates": "delNode = cur->next; cur->next = delNode->next; delete delNode;",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "condition": "cur->next != NULL && cur->next->val != val",
+          "updates": "cur = cur->next;",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 cur->next == NULL 时循环终止",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "state-002",
+      "solutionStageId": "solution-002",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "dummyHead",
+          "role": "pointer",
+          "meaning": "人为创建的虚拟头节点指针，next 指向原 head",
+          "updateRule": null,
+          "evidenceIds": [
+            "ev-006",
+            "ev-007"
+          ]
+        },
+        {
+          "symbol": "cur",
+          "role": "pointer",
+          "meaning": "遍历指针，初始指向 dummyHead",
+          "updateRule": "若不删除 cur->next，则前进至 cur->next",
+          "evidenceIds": [
+            "ev-006",
+            "ev-007"
+          ]
+        },
+        {
+          "symbol": "delNode",
+          "role": "pointer",
+          "meaning": "暂存待释放节点指针",
+          "updateRule": "指向 cur->next",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        },
+        {
+          "symbol": "retNode",
+          "role": "pointer",
+          "meaning": "暂存最终返回的新链表头节点指针 (dummyHead->next)",
+          "updateRule": "dummyHead 释放前赋值为 dummyHead->next",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "cur->next != NULL && cur->next->val == val",
+          "updates": "delNode = cur->next; cur->next = delNode->next; delete delNode;",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        },
+        {
+          "condition": "cur->next != NULL && cur->next->val != val",
+          "updates": "cur = cur->next;",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 cur->next == NULL 时遍历结束",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [],
+    "stateModelIds": [
+      "state-001",
+      "state-002"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "solution-002 时间复杂度",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": null,
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "editorial_inference",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "链表中的节点个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "遍历一次链表即可完成删除，时间复杂度为 O(n)",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "solution-002 辅助空间复杂度",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": null,
+      "expressionNormalized": "O(1)",
+      "normalizationSourceClass": "editorial_inference",
+      "variables": [],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "只创建了固定数量的指针和虚拟头节点，空间复杂度为 O(1)",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "输入链表 1->2->6->3->4->5->6->NULL，要删除值为 6 的节点，返回 1->2->3->4->5->NULL。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "LeetCode 82 示例1：输入 1->2->3->3->4->4->5，返回 1->2->5。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "statement": "LeetCode 82 示例2：输入 1->1->1->2->3，返回 2->3。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "原链表的第一个（或连续多个）头节点就是要删除的节点。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "链表所有节点的值都等于待删除的值 val，删除后链表变为空链表。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "初始传入的 head 为空指针 NULL。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在不使用虚拟头结点时，处理完连续头部删除后必须再次检查 head 是否变为 NULL，否则后续使用 cur->next 会触发空指针异常崩溃。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "在 C++ 中删除链表节点时，若使用 new 动态开辟了空间（如 dummyHead），需调用 delete 显式释放内存，防止内存泄漏。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "在带有垃圾回收的语言中，删除节点时应将待删除节点的 next 指针置为 NULL，以便系统识别并回收。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "涉及到需要修改或删除链表头结点的算法题，优先考虑使用虚拟头结点 (dummyHead) 统一操作逻辑，极大简化代码复杂度与边界条件判断。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:05-01",
+      "to": "lesson:05-03",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "05-01 介绍了基本的链表节点穿针引线逻辑，05-03 进一步引入虚拟头结点技巧以统删除逻辑。",
+      "confidence": 0.95,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    },
+    {
+      "from": "lesson:05-03",
+      "to": "lesson:05-04",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "05-03 建立的虚拟头结点技巧将在后续更复杂的链表交换节点等问题中继续扩展应用。",
+      "confidence": 0.9,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 31000,
+      "assetId": "asset:video-05-03",
+      "locator": "00:00-00:31",
+      "observation": "视频片头展示标题“设立链表的虚拟头结点”，老师介绍在做链表相关算法时设立虚拟头结点是经常使用的一个技巧。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 31000,
+      "endMs": 75000,
+      "assetId": "asset:video-05-03",
+      "locator": "00:31-01:15",
+      "observation": "PPT展示 LeetCode 203. Remove Linked List Elements 题面：在链表中删除值为 val 的所有节点。示例 1->2->6->3->4->5->6->NULL，删除 6 后返回 1->2->3->4->5->NULL。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 75000,
+      "endMs": 223000,
+      "assetId": "asset:video-05-03",
+      "locator": "01:15-03:43",
+      "observation": "图解删除节点 3 的逻辑：`delNode = cur->next; cur->next = delNode->next; delete delNode;`。说明该逻辑适用于普通节点和最后一个元素，但对删除第一个元素（头节点）不适用，因为头节点没有前驱节点。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 223000,
+      "endMs": 411000,
+      "assetId": "asset:video-05-03",
+      "locator": "03:43-06:51",
+      "observation": "编写 C++ 代码模版 `removeElements(ListNode* head, int val)`。先写不使用虚拟头结点的普通节点删除逻辑，并强调 C++ 需要手动 delete 释放内存，其它语言需要将 `delNode->next = NULL`。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 411000,
+      "endMs": 723000,
+      "assetId": "asset:video-05-03",
+      "locator": "06:51-12:03",
+      "observation": "补充对头结点的删除逻辑，指出头节点可能连续等于 val 需写 while 循环：`while(head != NULL && head->val == val)`；且循环后若 head 变 NULL 须提前返回，分析了诸多特殊边界与陷阱。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 723000,
+      "endMs": 792000,
+      "assetId": "asset:video-05-03",
+      "locator": "12:03-13:12",
+      "observation": "图解引入虚拟头节点 dummyHead (假的头节点)，使其 next 指向原 head，遍历指针 cur 初始指向 dummyHead，从而原头结点也有了前驱节点，删除逻辑得以统一。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 792000,
+      "endMs": 919000,
+      "assetId": "asset:video-05-03",
+      "locator": "13:12-15:19",
+      "observation": "编写基于 dummyHead 的完整 C++ 代码：`ListNode* dummyHead = new ListNode(0); dummyHead->next = head;`，在返回前保存 `retNode = dummyHead->next;` 并 `delete dummyHead;` 释放内存。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 919000,
+      "endMs": 981000,
+      "assetId": "asset:video-05-03",
+      "locator": "15:19-16:21",
+      "observation": "出课后练习题 1：LeetCode 82 Remove Duplicates from Sorted List II，“给定一个有序链表，将其中有重复的元素全部删除。”给出两个示例。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 981000,
+      "endMs": 1028800,
+      "assetId": "asset:video-05-03",
+      "locator": "16:21-17:08",
+      "observation": "出课后练习题 2：LeetCode 21 Merge Two Sorted Lists，“merge两个有序的链表”，并引导体会使用虚拟头节点带来的便利。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "complexityAnalyses",
+      "reason": "视频证据未直接显示复杂度公式；O(n) 时间与 O(1) 辅助空间是根据屏幕循环及固定数量指针整理出的编辑推导。",
+      "recommendedCheck": "正式笔记保留该推导，但不得写成老师在视频中直接给出的复杂度结论。"
+    },
+    {
+      "field": "implementationPitfalls[2]",
+      "reason": "课程提到带垃圾回收的语言可将待删节点 next 置空；但一般追踪式 GC 回收的关键是对象是否仍可达，置空并非普遍必需条件。",
+      "recommendedCheck": "正式笔记并列保留课程说法与这一语言/运行时边界，不扩写成通用 GC 规则。"
+    }
+  ],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "92e6cdc9ce9e4f56962408762eee5ca3",
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": "2026-07-29T14:19:45.000Z"
+  }
+}

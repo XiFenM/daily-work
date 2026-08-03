@@ -1,0 +1,492 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "08-02",
+  "chapterId": "08",
+  "titleObserved": "什么是回溯",
+  "contentKind": "concept",
+  "actualDurationSeconds": 1096.16,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 218000,
+      "topic": "代码中添加调试日志",
+      "summary": "在 findCombination 递归函数入口、字母选择点、到达叶子节点及函数返回处添加 cout 输出语句，以便追踪递归调用轨迹。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 219000,
+      "endMs": 521000,
+      "topic": "运行测试用例与执行轨迹分析",
+      "summary": "运行输入为 \"234\" 的测试用例，逐行解读控制台输出日志，详细演示递归深入与逐层返回（回溯）的完整运化过程。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 522000,
+      "endMs": 595000,
+      "topic": "结合递归树图示讲解",
+      "summary": "以 digits = \"23\" 为例，通过树形结构解释递归函数如何在分支探到底部后返回上层节点并切换到下一个分支。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 596000,
+      "endMs": 682000,
+      "topic": "回溯（Backtracking）概念引出",
+      "summary": "指出递归调用的一个重要特征是“要返回”，将这种沿着路径寻找答案、到达底部或无法继续时返回上一层继续寻找的过程定义为“回溯”。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 683000,
+      "endMs": 833000,
+      "topic": "回溯算法复杂度分析",
+      "summary": "分析电话号码字母组合算法的时间复杂度，推导在假设每个数字对应 3 个字母时总组合数为 3^n，归导出指数级时间复杂度 O(2^n)。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 834000,
+      "endMs": 949000,
+      "topic": "回溯法与暴力解法总结",
+      "summary": "总结回溯法是解决未知变量层数（无法硬编码多重循环）时穷举所有可能解的主要实现手段，也是动态规划与剪枝优化等高级算法的基础。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 950000,
+      "endMs": 1009000,
+      "topic": "思考题：LeetCode 93 Restore IP Addresses",
+      "summary": "介绍练习题 LeetCode 93，要求为一个数字字符串插入 3 个点分割成所有合法的 IP 地址组合。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 1010000,
+      "endMs": 1096160,
+      "topic": "思考题：LeetCode 131 Palindrome Partitioning",
+      "summary": "介绍练习题 LeetCode 131，要求拆分字符串使得每一个拆分出的子串均为回文串，返回所有拆分方案。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解递归调用的关键特征是“要返回”，即回溯的本质",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "掌握通过在递归函数中添加控制台打印日志来分析递归与回溯执行轨迹的方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "理解回溯算法是解决变量层数（深度由输入 n 决定）暴力枚举问题的主要实现手段",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "掌握电话号码字母组合算法指数级时间复杂度 3^n = O(2^n) 的推导过程",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "回溯",
+      "namesObserved": [
+        "回溯",
+        "回溯法"
+      ],
+      "role": "introduces",
+      "definition": "递归调用的一个重要特征是执行完毕后要返回上一层继续执行。这种沿着一条路径寻找答案、到达底部或无法继续时返回上一层继续寻找其他可能性的过程称为回溯。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "递归树",
+      "namesObserved": [
+        "树",
+        "一棵树"
+      ],
+      "role": "reinforces",
+      "definition": "用树形结构形象表达递归调用展开与回溯过程的视图，节点表示递归状态，边表示分支选择。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "通过递归树穷举所有可能的字母组合，每次选择一个字母后递归处理下一个数字，当 index 处理完毕后将结果保存并返回上一层（回溯）以尝试其他字母分支。",
+      "timeComplexity": "O(2^n)",
+      "spaceComplexity": null,
+      "limitations": [
+        "时间复杂度为指数级 3^n = O(2^n)，在标准家用计算机上通常最大只能处理长度 n ≈ 20 的输入。"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-001",
+        "ev-002",
+        "ev-003",
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "void findCombination(const string &digits, int index, const string &s){\n    cout << index << \" : \" << s << endl;\n    if(index == digits.size()){\n        res.push_back(s);\n        cout << \"get \" << s << \" , return\" << endl;\n        return;\n    }\n\n    char c = digits[index];\n    assert(c >= '0' && c <= '9' && c != '1');\n    string letters = letterMap[c - '0'];\n    for(int i = 0; i < letters.size(); i ++){\n        cout << \"digits[\" << index << \"] = \" << c << \" , use \" << letters[i] << endl;\n        findCombination(digits, index + 1, s + letters[i]);\n    }\n    cout << \"digits[\" << index << \"] = \" << c << \" complete, return\" << endl;\n    return;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "index",
+          "role": "depth_pointer",
+          "meaning": "当前正在处理的数字字符在 digits 字符串中的索引",
+          "updateRule": "index + 1",
+          "evidenceIds": [
+            "ev-001",
+            "ev-002"
+          ]
+        },
+        {
+          "symbol": "s",
+          "role": "partial_solution",
+          "meaning": "从 digits[0...index-1] 翻译得到的当前部分解字符串",
+          "updateRule": "s + letters[i]",
+          "evidenceIds": [
+            "ev-001",
+            "ev-002"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "index < digits.size()",
+          "updates": "遍历 digits[index] 对应的所有字母 letters[i]，拼接生成 s + letters[i] 并递归调用 findCombination(digits, index + 1, s + letters[i])",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-001",
+            "ev-002"
+          ]
+        },
+        {
+          "condition": "index == digits.size()",
+          "updates": "获得一个完整的字母组合 s，压入 res 后触发 return 返回上一级递归（回溯）",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-001",
+            "ev-002"
+          ]
+        }
+      ],
+      "termination": null,
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "递归函数在遍历处理完当前节点的所有候选字母分支后，必定会执行 return 返回上一层递归函数",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002",
+          "ev-004"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": "O(2^n)",
+    "space": null,
+    "assumptions": [
+      "假设输入字符串 digits 长度为 n，每个数字平均代表 3 个字母。"
+    ],
+    "evidenceIds": [
+      "ev-005"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "电话号码字母组合回溯算法",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "3^n = O(2^n)",
+      "expressionNormalized": "O(2^n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数字字符串 digits 的长度",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "假设每个数字代表 3 个字母，长度为 n 的数字字符串共有 3^n 个叶子节点组合。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "statement": "由于常数底数的指数级复杂度之间仅相差常数倍，3^n 统一归类为大 O 表示法中的 O(2^n) 指数级复杂度。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "不考虑 7 和 9 代表 4 个字母以及 0 和 1 代表 1 个字母的特殊情况，按平均每个数字代表 3 个字母计算。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "conclusion": {
+        "statement": "算法的时间复杂度为 3^n = O(2^n) 级别的指数复杂度。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "formula",
+      "sourceKind": "shown_in_video",
+      "rawText": "时间复杂度: 3^n = O(2^n)",
+      "normalizedText": "3^n = O(2^n)",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数字字符串长度",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "输入 digits = \"234\"，调试日志输出了递归探底与逐层回溯的具体过程，最终打印所有 3 字母组合",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "思考题 LeetCode 93 Restore IP Addresses：输入 \"25525511135\"，返回 [\"255.255.11.135\", \"255.255.111.35\"]",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "思考题 LeetCode 131 Palindrome Partitioning：输入 s = \"aab\"，返回 [[\"aa\", \"b\"], [\"a\", \"a\", \"b\"]]",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "edgeCases": [],
+  "implementationPitfalls": [],
+  "interviewPlaybook": [
+    {
+      "statement": "算法面试中若没有更优思路，应优先尝试暴力解法；当所需循环嵌套层数取决于变量 n（无法写固定重数的 for 循环）时，可使用回溯法（递归）来实现多层枚举。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "回溯算法通常效率较低，但在实际应用中可以通过“剪枝”手段避免进入无效的叶子节点，从而提升搜索效率。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:08-01",
+      "to": "lesson:08-02",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "本课在 08-01 题解代码的基础上添加打印日志并绘制递归树，深入阐述了回溯算法的定义与复杂度",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001",
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 218000,
+      "assetId": "asset:video-08-02",
+      "locator": null,
+      "observation": "老师在 findCombination 函数中多处添加 cout 语句输出当前 index、s、选择的字母及 return 提示。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 219000,
+      "endMs": 521000,
+      "assetId": "asset:video-08-02",
+      "locator": null,
+      "observation": "运行程序输出类似 '0:' -> 'digits[0]=2, use a' -> '1:a' -> 'digits[1]=3, use d' -> ... 'get adg, return' -> 'digits[2]=4 complete, return' 的日志，证明递归与回溯的真实轨迹。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_visual",
+      "startMs": 522000,
+      "endMs": 595000,
+      "assetId": "asset:video-08-02",
+      "locator": null,
+      "observation": "幻灯片显示 17. Letter Combinations of a Phone Number 的递归树图示，根为 2，下一层为 3，叶节点输出 ad, ae, af 等组合。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 596000,
+      "endMs": 682000,
+      "assetId": "asset:video-08-02",
+      "locator": null,
+      "observation": "幻灯片显示“递归调用的一个重要特征 - 要返回”以及大字“回溯”，老师口述定义回溯过程。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 683000,
+      "endMs": 833000,
+      "assetId": "asset:video-08-02",
+      "locator": null,
+      "observation": "幻灯片显示“时间复杂度: 3^n = O(2^n)”，老师讲解底数常数与指数级复杂的含义及适用最大 n ≈ 20。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 834000,
+      "endMs": 949000,
+      "assetId": "asset:video-08-02",
+      "locator": null,
+      "observation": "幻灯片显示“回溯法是暴力解法的一个主要实现手段”，老师总结当循环重数 n 未知时需用回溯，后续可通过剪枝提升效率。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_visual",
+      "startMs": 950000,
+      "endMs": 1009000,
+      "assetId": "asset:video-08-02",
+      "locator": null,
+      "observation": "幻灯片展示“93. Restore IP Addresses”题目要求及示例输入 \"25525511135\" 和对应返回解。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_visual",
+      "startMs": 1010000,
+      "endMs": 1096160,
+      "assetId": "asset:video-08-02",
+      "locator": null,
+      "observation": "幻灯片展示“131. Palindrome Partitioning”题目要求（Bloomberg）及示例输入 s = \"aab\" 和对应返回解。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.5",
+    "generatedAt": null
+  }
+}

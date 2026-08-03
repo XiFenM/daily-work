@@ -1,0 +1,327 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "06-02",
+  "chapterId": "06",
+  "titleObserved": "栈和递归的紧密关系 Binary Tree Preorder, Inorder and Postorder Traversal",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 963.68,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 135000,
+      "topic": "栈和递归的紧密关系引入",
+      "summary": "讲解栈与递归算法之间的紧密联系，说明操作系统实现递归调用的手段正是使用栈。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 135000,
+      "endMs": 188000,
+      "topic": "二叉树前序遍历的递归代码",
+      "summary": "展示二叉树前序遍历（LeetCode 144）的递归 C++ 代码实现。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 188000,
+      "endMs": 558000,
+      "topic": "前序遍历递归过程动画演示",
+      "summary": "在含有 3 个节点的简易二叉树上逐步演示递归调用的单步执行过程与函数返回逻辑。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 558000,
+      "endMs": 922000,
+      "topic": "系统栈在递归中的运行机制",
+      "summary": "详细拆解递归执行过程中系统栈（Stack）压入现场状态（输出节点、访问左子树、访问右子树）与弹出恢复现场的运行机制。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 922000,
+      "endMs": 963680,
+      "topic": "用栈模拟系统栈编写非递归程序预告",
+      "summary": "总结系统栈的作用，预告在面试中如何通过自己创建栈来模拟系统栈，写出非递归（迭代）二叉树遍历程序。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解栈与递归之间的紧密关系以及操作系统利用系统栈支持递归调用的底层原理",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "掌握二叉树前序遍历的递归实现与单步执行追踪逻辑",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "认识到可用显式栈模拟系统栈来编写非递归（迭代）遍历程序，并明确具体实现留待下一节展开",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "系统栈",
+      "namesObserved": [
+        "系统栈",
+        "Stack"
+      ],
+      "role": "introduces",
+      "definition": "操作系统用于在递归和函数调用过程中保存上一层函数执行状态与恢复现场的数据结构。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-005"
+      ]
+    },
+    {
+      "canonicalName": "二叉树遍历",
+      "namesObserved": [
+        "前序遍历",
+        "中序遍历",
+        "后序遍历",
+        "Preorder Traversal",
+        "Inorder Traversal",
+        "Postorder Traversal"
+      ],
+      "role": "applies",
+      "definition": "按照特定顺序（如前序：根-左-右）访问二叉树中所有节点的过程。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "144",
+    "titleObserved": "144. Binary Tree Preorder Traversal",
+    "statement": "二叉树的前序遍历（递归与系统栈运行机制分析）。",
+    "constraints": [],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-002",
+      "ev-003"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "使用递归算法进行二叉树前序遍历，若节点不为空，首先打印/访问当前节点值，然后递归遍历左子树，最后递归遍历右子树。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "void preorder( TreeNode* node ){\n    if( node ){\n        cout << node->val;\n        preorder( node->left );\n        preorder( node->right );\n    }\n}",
+      "ocrUncertainties": [],
+      "verification": "compiled",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "node",
+          "role": "current node pointer",
+          "meaning": "当前递归函数正在处理的二叉树节点指针",
+          "updateRule": "分别更新为 node->left 和 node->right 以进入下层递归调用",
+          "evidenceIds": [
+            "ev-003",
+            "ev-004"
+          ]
+        },
+        {
+          "symbol": "Stack",
+          "role": "system call stack",
+          "meaning": "操作系统维护的系统栈，用于在递归调用时保存上层函数的执行现场（已完成指令与待执行指令）",
+          "updateRule": "进行递归调用时将当前执行指令状态压栈；当子递归函数执行完毕返回时，弹出栈顶状态并恢复现场继续执行",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "node != NULL",
+          "updates": "输出 node->val，将当前状态压入系统栈，递归调用 preorder(node->left)，子过程返回后再递归调用 preorder(node->right)",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-003",
+            "ev-005"
+          ]
+        },
+        {
+          "condition": "node == NULL",
+          "updates": "递归终止并直接返回，弹出系统栈栈顶保存的上一层函数状态并恢复执行",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        }
+      ],
+      "termination": null,
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "not_applicable",
+    "claims": [],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [],
+  "edgeCases": [],
+  "implementationPitfalls": [],
+  "interviewPlaybook": [
+    {
+      "statement": "在面试中若要求写出二叉树遍历的非递归（迭代）程序，可以通过显式建立一个栈结构来模拟操作系统的函数调用栈操作。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:06-02",
+      "to": "lesson:06-03",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "视频结尾明确说明下一小节将具体编码讲解如何使用自定义栈模拟系统栈写出非递归程序。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 135000,
+      "assetId": "asset:video-06-02",
+      "locator": "00:00-02:15",
+      "observation": "幻灯片展示“栈和递归的紧密关系”，讲师讲解操作系统实现递归调用的手段正是使用栈，理解两者关系对加深递归理解非常重要。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 111000,
+      "endMs": 135000,
+      "assetId": "asset:video-06-02",
+      "locator": "01:51-02:15",
+      "observation": "幻灯片列出 LeetCode 144. Binary Tree Preorder Traversal、94. Binary Tree Inorder Traversal、145. Binary Tree Postorder Traversal。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 135000,
+      "endMs": 188000,
+      "assetId": "asset:video-06-02",
+      "locator": "02:15-03:08",
+      "observation": "展示二叉树前序遍历 recursive 函数 C++ 代码：void preorder(TreeNode* node) { if(node) { cout << node->val; preorder(node->left); preorder(node->right); } }。",
+      "confidence": 0.98
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 188000,
+      "endMs": 558000,
+      "assetId": "asset:video-06-02",
+      "locator": "03:08-09:18",
+      "observation": "在包含节点 1、2、3 的二叉树上单步追踪 preorder 函数的递归调用过程与节点空值返回逻辑，并在演示结束后回到前序、中序、后序三道遍历题列表作过渡。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 558000,
+      "endMs": 922000,
+      "assetId": "asset:video-06-02",
+      "locator": "09:18-15:22",
+      "observation": "通过 Stack 示意图展示递归调用时系统栈压入现场记录（如 cout 1, go 1-L, go 1-R）与出栈恢复状态的过程。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 922000,
+      "endMs": 963680,
+      "assetId": "asset:video-06-02",
+      "locator": "15:22-16:03.680",
+      "observation": "幻灯片显示“使用栈模拟系统栈，写出非递归程序”，讲师预告下节课将编码实现自定义栈模拟系统栈。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "d3b405dab9a7443ebb274887e69fd043",
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": "2026-07-31T06:21:43.000Z"
+  }
+}

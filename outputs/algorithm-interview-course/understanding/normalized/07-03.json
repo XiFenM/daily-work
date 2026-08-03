@@ -1,0 +1,401 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "07-03",
+  "chapterId": "07",
+  "titleObserved": "不会翻转二叉树的大神",
+  "contentKind": "anecdote",
+  "actualDurationSeconds": null,
+  "timeline": [
+    {
+      "startMs": null,
+      "endMs": null,
+      "topic": "Max Howell 与二叉树面试故事",
+      "summary": "文本从 2015 年的推特及其争议讲起，并明确指出外界现在很难确认 Max Howell 当时的真实表现和 Google 不录用他的真实原因。",
+      "evidenceIds": ["ev-001", "ev-002"]
+    },
+    {
+      "startMs": null,
+      "endMs": null,
+      "topic": "算法面试与合作体验",
+      "summary": "作者借争议强调，面试不是只判定答案对错的考试，也会让面试官感受与候选人共同讨论和解决问题的体验。",
+      "evidenceIds": ["ev-002", "ev-003"]
+    },
+    {
+      "startMs": null,
+      "endMs": null,
+      "topic": "Max Howell 的自我评价",
+      "summary": "本地文本转载英文回答并配有中文翻译：Max Howell 承认 Homebrew 在依赖、边界行为和测试方面并不完善，也承认自己当时不熟悉二叉树。",
+      "evidenceIds": ["ev-004", "ev-005", "ev-008"]
+    },
+    {
+      "startMs": null,
+      "endMs": null,
+      "topic": "Homebrew 的用户体验取向",
+      "summary": "回答把 Homebrew 的成功更多归因于关注用户：出错时解释原因、寻找相似问题、降低自行修复门槛，并通过利用 Mac 现有依赖减少安装负担。",
+      "evidenceIds": ["ev-006", "ev-007"]
+    },
+    {
+      "startMs": null,
+      "endMs": null,
+      "topic": "对 Google、推特与个人能力的反思",
+      "summary": "回答为 Google 辩护，区分计算机科学知识与软件工程才能，承认原推特并不公平且助长情绪化传播，同时仍主张自己的创造能力值得被使用。",
+      "evidenceIds": ["ev-008", "ev-009"]
+    },
+    {
+      "startMs": null,
+      "endMs": null,
+      "topic": "从尊重用户到技术连接人",
+      "summary": "作者把触动概括为尊重用户，并用自己的 App 用户邮件、课程问答与技术交流经历说明：技术的价值还在于连接具体的人。",
+      "evidenceIds": ["ev-010", "ev-011", "ev-012", "ev-013"]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "区分流传的面试故事、外界推测、Max Howell 后来的自述和作者评论四个叙述层级。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-001", "ev-002", "ev-004", "ev-010"]
+    },
+    {
+      "statement": "理解文本为何说面试不是只看答案对错的考试，而包含共同讨论和解决问题的协作体验。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-002"]
+    },
+    {
+      "statement": "概括 Max Howell 在本地转载回答中对 Homebrew 技术缺陷和自身计算机科学基础的承认。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-005", "ev-008"]
+    },
+    {
+      "statement": "概括回答为 Homebrew 成功给出的用户体验解释，包括解释错误、连接相似问题、便于用户修复和减少依赖安装负担。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-006", "ev-007"]
+    },
+    {
+      "statement": "理解作者从 Homebrew 理念延伸出的“尊重用户”和“技术连接人”的价值判断。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-010", "ev-011", "ev-012", "ev-013"]
+    },
+    {
+      "statement": "明确本课不讲翻转二叉树的算法步骤、代码、正确性或复杂度，不能根据标题补造题解。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-001", "ev-008"]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "面试中的协作体验",
+      "namesObserved": ["共同探讨一个问题", "共同解决一个问题"],
+      "role": "reinforces",
+      "definition": "文本认为面试并非只检查答案是否正确，面试官还会感受与候选人共事、讨论和共同解决问题的体验。",
+      "evidenceIds": ["ev-002"]
+    },
+    {
+      "canonicalName": "算法能力与工程能力的多维评价",
+      "namesObserved": ["算法是不是一定这么重要", "软件工程面试", "计算机科学"],
+      "role": "contrasts",
+      "definition": "文本并置算法或计算机科学知识、软件工程才能、产品创造力和合作体验，但没有给出适用于所有岗位的统一权重。",
+      "evidenceIds": ["ev-002", "ev-003", "ev-008", "ev-009"]
+    },
+    {
+      "canonicalName": "以用户为中心的软件",
+      "namesObserved": ["user-experience focus", "Homebrew cares about the user", "尊重你的用户"],
+      "role": "introduces",
+      "definition": "回答把软件在失败时解释原因、帮助定位相似问题、允许用户便捷修复以及减少实际使用痛苦，视为关注用户的具体表现；作者将其概括为尊重用户。",
+      "evidenceIds": ["ev-006", "ev-007", "ev-010"]
+    },
+    {
+      "canonicalName": "可参与的开源软件",
+      "namesObserved": ["true Open Source", "你可以让 Homebrew 更好"],
+      "role": "introduces",
+      "definition": "回答强调当工具无法直接解决问题时，用户仍能便捷编辑和修复 Homebrew，并把这种可参与性视为其开源理念的一部分。",
+      "evidenceIds": ["ev-007"]
+    },
+    {
+      "canonicalName": "技术连接人",
+      "namesObserved": ["技术和人的距离", "被技术连接在了一起", "因为人"],
+      "role": "introduces",
+      "definition": "作者用 App 用户来信、课程问答和观点交流说明，代码和技术能够连接年龄、地域、职业与性格不同的人。",
+      "evidenceIds": ["ev-011", "ev-012", "ev-013"]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [],
+  "stateModels": [],
+  "correctness": {
+    "method": "not_applicable",
+    "claims": [],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [
+      "本课是叙事与职业反思文本，没有算法实现和复杂度分析"
+    ],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "回答称 Homebrew 出错时会尽力解释原因，并在 GitHub 中寻找相似问题指给用户。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-006"]
+    },
+    {
+      "statement": "回答称 Homebrew 提供了便于用户直接编辑和修复工具的方式，使用户能够参与改进。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-007"]
+    },
+    {
+      "statement": "作者用一位称已使用其 App 三年的年长用户来信，说明代码能够连接背景相距很远的人。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-011"]
+    },
+    {
+      "statement": "作者用慕课网问答区与后续交流社区说明，技术讨论也会带来技术之外的学习和观点碰撞。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-012"]
+    }
+  ],
+  "edgeCases": [],
+  "implementationPitfalls": [
+    {
+      "statement": "不要把标题或开场故事当作翻转二叉树的题解；正文没有算法、代码、输入输出、复杂度或正确性证明。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-001", "ev-008"]
+    },
+    {
+      "statement": "不要把“Google 因为他不会翻转二叉树而拒绝他”写成已核验因果；作者明确说真实表现和不录用原因难以确认。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-001", "ev-002"]
+    },
+    {
+      "statement": "不要把外界推测、Max Howell 自述和作者价值判断混成同一个说话者的确定结论。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-002", "ev-004", "ev-010"]
+    },
+    {
+      "statement": "本地文本提供英文回答与作者的中文翻译，但本次没有访问 Quora 或其他外部页面核验原帖、上下文、日期和译文。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-004"]
+    },
+    {
+      "statement": "不要把“算法不一定对所有现代计算机行业岗位同等重要”简化成“算法没有用”；正文同时保留了大公司考算法这一问题，只是没有在本课展开统一答案。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-003", "ev-008"]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "把算法题回答当作协作过程：在给出结论之外，让面试官看到澄清、讨论和共同解决问题的体验。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-002"]
+    },
+    {
+      "statement": "复盘面试时区分算法知识、软件工程能力、产品创造力、用户意识和合作体验；文本没有声称其中任何一项能无条件替代其他项。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-002", "ev-008", "ev-009", "ev-010"]
+    },
+    {
+      "statement": "讲项目价值时不仅列功能，也可说明失败时如何帮助用户、怎样降低修复成本，以及技术取舍解决了什么真实痛点。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-006", "ev-007"]
+    },
+    {
+      "statement": "叙述争议事件时主动标清已知事实、自述、推测和个人判断，避免把单一轶事扩展成普遍招聘规律。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-001", "ev-002", "ev-004"]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:07-03",
+      "to": "lesson:07-02",
+      "type": "revisits",
+      "status": "provisional",
+      "rationale": "07-03 以 Max Howell 争议重新讨论“翻转二叉树”，但从算法实现转向面试评价与职业反思；是否升级为正式关系需结合 07-02 视频双侧复核。",
+      "confidence": 0.98,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": ["ev-001", "ev-002", "ev-008"]
+    },
+    {
+      "from": "lesson:07-03",
+      "to": "lesson:01-02",
+      "type": "revisits",
+      "status": "provisional",
+      "rationale": "07-03 明确说面试不是只判定答案对错的考试，并并置算法知识、软件工程能力与合作体验，主题上重访“算法面试只是面试的一部分”；正式关系需沿用 01-02 已有证据做双侧裁决。",
+      "confidence": 0.97,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": ["ev-002", "ev-008", "ev-009"]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-07-03",
+      "locator": "标题后第 1–7 段",
+      "observation": "文本叙述 2015 年 Max Howell 推特、Homebrew 背景及“翻转一棵二叉树”的面试故事，并把该题评价为简单；这是课程文本对事件的叙述，不是本项目对外部事实的独立核验。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-07-03",
+      "locator": "第 8–11 段",
+      "observation": "作者说如今很难判断 Max Howell 的真实表现和 Google 不录用的真实原因；在转述一种业内推测后，作者强调面试不是只看答案正确与否的考试，还会观察共同讨论和解决问题的共事体验。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-07-03",
+      "locator": "第 12–20 段",
+      "observation": "文本列出多则针对大公司算法面试的调侃，并表达“算法对当代计算机行业不一定同等重要”的看法，同时提到另有文章讨论算法用途和大厂为何考算法；这些文章未在本地正文中展开。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-07-03",
+      "locator": "第 21–31 段",
+      "observation": "作者介绍自己看到 Quora 旧讨论及 Max Howell 在 2017 年的回答，随后开始逐句列出英文和中文翻译；本次只使用本地转载文本，没有访问 Quora。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-07-03",
+      "locator": "第 30–37 段",
+      "observation": "回答称 Homebrew 只是一个简单包管理器，并自评其依赖管理、边界行为处理和测试不够好，由此承认自己未能很好回答重计算机科学问题并非完全令人意外。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-07-03",
+      "locator": "第 36–45 段",
+      "observation": "回答追问软件为何成功，并把原因指向持续关注用户体验：Homebrew 在出错时尽量解释原因、搜索 GitHub 相似问题并帮助用户。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-07-03",
+      "locator": "第 44–53 段",
+      "observation": "回答称 Homebrew 便于用户直接编辑和修复，并把它称作真正开源的例子；还称其利用 Mac 现有依赖，减少安装时间与大型依赖图带来的实际痛苦。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-07-03",
+      "locator": "第 54–61 段",
+      "observation": "回答为 Google 辩护，承认当时甚至不太清楚二叉树，说明自己学的是化学，并提出计算机科学与现代 App 开发关系的问题；同时称七轮面试中软件工程部分表现很好。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-07-03",
+      "locator": "第 60–69 段",
+      "observation": "回答把软件工程称为自己的才能，后悔推特不公平并助长情绪化传播，但仍认为 Google 应该聘用自己，因为自己能创造虽不完美却受人喜欢的作品。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-010",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-07-03",
+      "locator": "第 70–71 段",
+      "observation": "作者说明自己的翻译曾不自觉地让 Max Howell 更谦虚，并把回答中最打动自己的 Homebrew 理念概括为以人为本，也就是尊重用户。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-011",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-07-03",
+      "locator": "第 72–79 段",
+      "observation": "作者回顾 iOS 开发经历和一位称已使用其 App 三年的年长用户来信，并由此感到代码能够连接年龄、国籍、地域、职业和性格相距很远的人。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-012",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-07-03",
+      "locator": "第 80–85 段",
+      "observation": "作者回顾慕课网课程问答、公众号和交流社区，认为技术让观点与人连接，自己也能从技术之外的交流和观点碰撞中学习。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-013",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-07-03",
+      "locator": "第 86–91 段",
+      "observation": "结尾表达对代码、逻辑和严谨性的喜爱，但把世界精彩的最终原因落在具体的人，并以此解释自己为何崇拜这位“不会翻转二叉树的大神”。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "evidence[0]",
+      "reason": "开场故事包含具体日期、公司、比例和招聘事件，但本次任务严格限定本地 Markdown，未访问推特、Quora、Google 或其他外部材料。",
+      "recommendedCheck": "正式笔记使用“文本叙述”“推特声称”“Max Howell 后来自述”等措辞，不把外部事实写成已被本项目独立核验。"
+    },
+    {
+      "field": "evidence[1]",
+      "reason": "作者明确表示无法确认 Google 不录用 Max Howell 的真实原因，并仅转述一种业内推测。",
+      "recommendedCheck": "不把算法题、性格或文化契合中的任何一项写成确定拒聘原因。"
+    },
+    {
+      "field": "evidence[3]",
+      "reason": "本地文本称逐句翻译 Max Howell 的 Quora 回答，但本次未核验外部原帖、完整上下文或翻译准确性。",
+      "recommendedCheck": "只把英语和中文都视为本地教程中的转载材料；涉及说话者时标为“回答称”或“作者翻译为”。"
+    },
+    {
+      "field": "problem",
+      "reason": "标题和故事提到翻转二叉树，但正文没有定义题目、给出输入输出、算法步骤、代码、证明或复杂度。",
+      "recommendedCheck": "保留 problem 为 null，不从 07-02 或常见 LeetCode 题解补造本课算法内容。"
+    },
+    {
+      "field": "relationCandidates",
+      "reason": "07-03 对 07-02 和 01-02 的联系在主题上很强，但文本没有使用稳定课次 ID，也不能单靠当前一侧证据证明双方完整关系。",
+      "recommendedCheck": "由关系审核读取 07-02 与 01-02 已完成证据后再决定是否升级；升级也应标明是编辑关系还是课程直接回指。"
+    }
+  ],
+  "provenance": {
+    "model": null,
+    "requestId": null,
+    "promptVersion": "text-evidence-v1",
+    "generatedAt": "2026-07-31T07:34:18.000Z"
+  }
+}

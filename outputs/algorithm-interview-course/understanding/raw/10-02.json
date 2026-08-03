@@ -1,0 +1,685 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "10-02",
+  "chapterId": "10",
+  "titleObserved": "贪心算法与动态规划的关系 Non-overlapping Intervals",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1078.68,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 16000,
+      "topic": "课程引入与主题说明",
+      "summary": "引出贪心算法与动态规划的关系，指出二者有着密切的联系。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 16000,
+      "endMs": 144000,
+      "topic": "题目引入：LeetCode 435. Non-overlapping Intervals",
+      "summary": "讲解题意、区间重叠界定（端点重合不算重叠）、边界约束与测试用例。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 144000,
+      "endMs": 239000,
+      "topic": "问题转化与暴力解法思考",
+      "summary": "将“最少删除区间”等价转化为“最多保留不重叠区间”，分析 O(2^n * n) 组合暴力解法。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 239000,
+      "endMs": 319000,
+      "topic": "动态规划思路：转化成最长上升子序列（LIS）模型",
+      "summary": "分析按起始点排序后，求解最多不重叠区间可建模为最长上升子序列问题。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 319000,
+      "endMs": 732000,
+      "topic": "动态规划代码实现（C++）",
+      "summary": "在 IDE 中编写基于 LIS 模型的动态规划实现，构建自定义比较器与 memo 状态数组。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 732000,
+      "endMs": 760000,
+      "topic": "动态规划解法复杂度分析",
+      "summary": "总结 DP 解法的时间复杂度为 O(n^2)。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 760000,
+      "endMs": 828000,
+      "topic": "贪心算法观察与思路设计",
+      "summary": "观察发现选择结尾最早的区间能给后续留出最大空间，提出按结尾排序的贪心策略。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 829000,
+      "endMs": 1030000,
+      "topic": "贪心算法代码实现（C++）",
+      "summary": "在 IDE 中编写按 end 排序并单次线性扫描的贪心解法代码。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 1030000,
+      "endMs": 1078680,
+      "topic": "贪心解法复杂度分析与总结预告",
+      "summary": "分析贪心解法单次扫描复杂度为 O(n)，整体为 O(n log n)，并预告下一节课将证明贪心选择性质。",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解将“最少删除区间数”转化为“最多保留互不重叠区间数”的问题等价转化思想",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "掌握将不重叠区间问题转化为最长上升子序列（LIS）模型的 O(n^2) 动态规划解法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "掌握按区间结尾排序的贪心算法，实现 O(n log n) 时间复杂度的优化求解",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008",
+        "ev-009"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Non-overlapping Intervals",
+      "namesObserved": [
+        "Non-overlapping Intervals",
+        "不重叠区间"
+      ],
+      "role": "introduces",
+      "definition": "给定一组区间，求最少删除多少个区间，可以使剩余区间之间互不重叠的问题。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "Dynamic Programming",
+      "namesObserved": [
+        "动态规划"
+      ],
+      "role": "applies",
+      "definition": null,
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "canonicalName": "Longest Increasing Subsequence",
+      "namesObserved": [
+        "最长上升子序列",
+        "LIS"
+      ],
+      "role": "applies",
+      "definition": null,
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "Greedy Algorithm",
+      "namesObserved": [
+        "贪心算法"
+      ],
+      "role": "applies",
+      "definition": "每次选择结尾最早且与前一个已被选择区间不重叠的区间，以保留最大剩余空间。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "435",
+    "titleObserved": "Non-overlapping Intervals",
+    "statement": "给定一组区间，问最少删除多少个区间，可以让这些区间之间互相不重叠。",
+    "constraints": [
+      "给定区间的起始点永远小于终止点。",
+      "诸如区间 [1,2] 和 [2,3]，不叫做重叠。"
+    ],
+    "clarifyingQuestions": [
+      "若给定的区间起始点大于终止点（如 [2,1]），需要先转换成 [1,2] 以保证算法正确性。",
+      "在面试中如果遇到类似问题，端点重合（如 [1,2] 与 [2,3]）是否算重叠必须与面试官沟通确定。"
+    ],
+    "evidenceIds": [
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "暴力解法：找出所有子区间的组合，之后判断它是否重叠。",
+      "timeComplexity": "O(2^n * n)",
+      "spaceComplexity": null,
+      "limitations": [
+        "时间复杂度为指数级 O(2^n * n)，无法处理较大规模数据"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "intermediate",
+      "idea": "动态规划解法（转化成 LIS 模型）：将区间按 start 升序排序，定义 memo[i] 为以索引 i 结尾的最长不重叠区间序列长度，双重循环递推。",
+      "timeComplexity": "O(n^2)",
+      "spaceComplexity": "O(n)",
+      "limitations": [
+        "时间复杂度为 O(n^2)，对于大规模数据性能不够理想"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-004",
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "id": "solution-003",
+      "stage": "optimized",
+      "idea": "贪心算法：将区间按照结尾（end）升序排序，每次优先选择结尾最早且与前一个选中区间不重叠的区间。",
+      "timeComplexity": "O(n log n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-002"
+      ],
+      "stateModelIds": [
+        "state-002"
+      ],
+      "evidenceIds": [
+        "ev-007",
+        "ev-008",
+        "ev-009"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "bool compare(const Interval &a, const Interval &b) {\n    if (a.start != b.start)\n        return a.start < b.start;\n    return a.end < b.end;\n}\n\nclass Solution {\npublic:\n    int eraseOverlapIntervals(vector<Interval>& intervals) {\n        if (intervals.size() == 0)\n            return 0;\n\n        sort(intervals.begin(), intervals.end(), compare);\n\n        // memo[i]表示使用intervals[0...i]的区间构成的最长不重叠区间序列\n        vector<int> memo(intervals.size(), 1);\n        for (int i = 1; i < intervals.size(); i++) {\n            for (int j = 0; j < i; j++) {\n                if (intervals[i].start >= intervals[j].end) {\n                    memo[i] = max(memo[i], 1 + memo[j]);\n                }\n            }\n        }\n\n        int res = 0;\n        for (int i = 0; i < memo.size(); i++) {\n            res = max(res, memo[i]);\n        }\n\n        return intervals.size() - res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-003",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "bool compare(const Interval &a, const Interval &b) {\n    if (a.end != b.end)\n        return a.end < b.end;\n    return a.start < b.start;\n}\n\nclass Solution {\npublic:\n    int eraseOverlapIntervals(vector<Interval>& intervals) {\n        if (intervals.size() == 0)\n            return 0;\n\n        sort(intervals.begin(), intervals.end(), compare);\n\n        int res = 1;\n        int pre = 0;\n        for (int i = 1; i < intervals.size(); i++) {\n            if (intervals[i].start >= intervals[pre].end) {\n                res++;\n                pre = i;\n            }\n        }\n\n        return intervals.size() - res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-002",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "memo[i]",
+          "role": "dp_state",
+          "meaning": "表示使用 intervals[0...i] 的区间构成的最长不重叠区间序列的长度",
+          "updateRule": "memo[i] = max(memo[i], 1 + memo[j])（当 intervals[i].start >= intervals[j].end 时）",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "symbol": "intervals",
+          "role": "candidate_order",
+          "meaning": "按 start 升序（若 start 相同则按 end 升序）排序后的区间数组",
+          "updateRule": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "intervals[0...i]",
+          "meaning": "区间数组中前 i+1 个区间的子集",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "intervals[i].start >= intervals[j].end",
+          "updates": "memo[i] = max(memo[i], 1 + memo[j])",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "termination": null,
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "state-002",
+      "solutionStageId": "solution-003",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "intervals",
+          "role": "candidate_order",
+          "meaning": "按 end 升序（若 end 相同则按 start 升序）排序后的区间数组",
+          "updateRule": null,
+          "evidenceIds": [
+            "ev-008"
+          ]
+        },
+        {
+          "symbol": "pre",
+          "role": "last_selected_index",
+          "meaning": "上一个被选中保留的不重叠区间的索引，初始为 0",
+          "updateRule": "当 intervals[i].start >= intervals[pre].end 时，更新 pre = i",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        },
+        {
+          "symbol": "res",
+          "role": "selected_count",
+          "meaning": "当前保留的最长不重叠区间的数量，初始为 1",
+          "updateRule": "当 intervals[i].start >= intervals[pre].end 时，res++",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "intervals[i].start >= intervals[pre].end",
+          "updates": "res++; pre = i;",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-008"
+          ]
+        }
+      ],
+      "termination": null,
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "completeness": "partial",
+    "claims": [
+      {
+        "statement": "优先选择结尾最早且与前一选择不重叠的区间，能为后面留出尽可能大的空间，从而得到最多不重叠区间",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001",
+      "state-002"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": "O(n log n)",
+    "space": "O(1)",
+    "assumptions": [
+      "n 为输入区间的数量"
+    ],
+    "evidenceIds": [
+      "ev-009"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "eraseOverlapIntervals (Dynamic Programming)",
+      "measure": "time",
+      "notation": "O",
+      "case": "worst",
+      "expressionObserved": "O(n^2)",
+      "expressionNormalized": "O(n^2)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "输入区间的数量",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "外层遍历每个区间 i，内层遍历 0 到 i-1 的区间 j 寻找状态转移，双重循环复杂度为 O(n^2)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005",
+            "ev-006"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "基于 LIS 模型的动态规划解法时间复杂度为 O(n^2)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "eraseOverlapIntervals (Greedy)",
+      "measure": "time",
+      "notation": "O",
+      "case": "worst",
+      "expressionObserved": "O(n log n)",
+      "expressionNormalized": "O(n log n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "输入区间的数量",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-009"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "对区间排序需要 O(n log n) 时间，后续进行单次线性扫描花费 O(n) 时间，整体时间复杂度由排序决定为 O(n log n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-008",
+            "ev-009"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "贪心解法的时间复杂度为 O(n log n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-009"
+        ]
+      },
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "输入 [[1,2], [2,3], [3,4], [1,3]]，算法返回 1（最少删除 1 个区间 [1,3]）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "输入 [[1,2], [1,2], [1,2]]，算法返回 2（最少删除 2 个区间 [1,2]）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "输入区间向量为空（intervals.size() == 0），无需删除任何区间，直接返回 0",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-008"
+      ]
+    },
+    {
+      "statement": "区间仅在端点相接（如 [1,2] 和 [2,3]），题目明确规定不属于重叠",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "DP 解法需要按照区间的 start 排序，而贪心解法需要按照区间的 end 排序，二者的排序比较规则不同，不可混淆",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-008"
+      ]
+    },
+    {
+      "statement": "判断不重叠的条件是当前区间的 start >= 上一个区间的 end（取大于等于，因为端点相重不算重叠）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-008"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "面对“最少删除多少个”的问题，可以逆向思考转化为“最多保留多少个”的互补问题",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "先给出 O(n^2) 的 DP（LIS 模型）解法证明基本思路，再分析区间结尾的贪心性质优化至 O(n log n)",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-007",
+        "ev-009"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:10-01",
+      "to": "lesson:10-02",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "本课承接上一课贪心算法基础，进一步讨论贪心算法与动态规划的关系。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "from": "lesson:10-02",
+      "to": "lesson:10-03",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "本课结尾预告下一节课将深入证明本课贪心选择性质的正确性。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 16000,
+      "assetId": "asset:video-10-02",
+      "locator": "00:00-00:16",
+      "observation": "PPT 幻灯片展示标题《贪心算法与动态规划的关系》，讲师口述说明二者关系密切。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 16000,
+      "endMs": 144000,
+      "assetId": "asset:video-10-02",
+      "locator": "00:16-02:24",
+      "observation": "PPT 幻灯片展示 LeetCode 435. Non-overlapping Intervals 题面、约束条件（start < end，[1,2]与[2,3]不算重叠）以及两组测试用例。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 144000,
+      "endMs": 239000,
+      "assetId": "asset:video-10-02",
+      "locator": "02:24-03:59",
+      "observation": "PPT 题面修改为“问最多保留多少个区间”，讲师讲解问题等价性，并提出 O(2^n * n) 的子区间组合暴力解法。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 239000,
+      "endMs": 319000,
+      "assetId": "asset:video-10-02",
+      "locator": "03:59-05:18",
+      "observation": "幻灯片列出“动态规划?”与“最长上升子序列”，讲师分析排序后可转化为 LIS 模型。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 319000,
+      "endMs": 732000,
+      "assetId": "asset:video-10-02",
+      "locator": "05:19-12:12",
+      "observation": "IDE 中展示 DP C++ 代码实现，包含按 start 排序的 compare 函数、memo 初始化与双重循环递推。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 732000,
+      "endMs": 760000,
+      "assetId": "asset:video-10-02",
+      "locator": "12:12-12:40",
+      "observation": "讲师口述说明该 DP 解法的时间复杂度是 O(n^2) 级别。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 760000,
+      "endMs": 828000,
+      "assetId": "asset:video-10-02",
+      "locator": "12:40-13:48",
+      "observation": "PPT 幻灯片展示“贪心算法：按照区间的结尾排序，每次选择结尾最早的，且和前一个区间不重叠的区间”。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 829000,
+      "endMs": 1030000,
+      "assetId": "asset:video-10-02",
+      "locator": "13:49-17:10",
+      "observation": "IDE 中展示贪心算法 C++ 代码实现，compare 改为比较 a.end 与 b.end，单次循环遍历区间。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 1030000,
+      "endMs": 1078680,
+      "assetId": "asset:video-10-02",
+      "locator": "17:10-17:58",
+      "observation": "讲师说明贪心解法通过 LeetCode Accepted，时间复杂度降为 O(n log n)，并引出下一节课对贪心选择性质正确性的证明。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "correctness.obligations",
+      "reason": "视频中未展开对贪心算法正确性的完整形式化证明（如交换论证），明确指出将在下一节课（10-03）中展开证明。",
+      "recommendedCheck": "参考课次 10-03 查看贪心选择性质与最优子结构的完整证明。"
+    }
+  ],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.7",
+    "generatedAt": null
+  }
+}

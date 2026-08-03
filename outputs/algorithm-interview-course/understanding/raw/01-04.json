@@ -1,0 +1,428 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "01-04",
+  "chapterId": "01",
+  "titleObserved": "解决算法面试问题的整体思路",
+  "contentKind": "interview_strategy",
+  "actualDurationSeconds": 824.44,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 25000,
+      "topic": "课程引入：解决算法面试问题的整体思路",
+      "summary": "介绍本节课将从宏观的角度总结解决算法面试问题时的整体思考流程与注意事项。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 25000,
+      "endMs": 136000,
+      "topic": "注意题目中的条件与隐藏暗示",
+      "summary": "讲解如何通过分析题目中的条件（如有序数组、复杂度要求、额外空间限制及数据规模等）推导可能适用的算法。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 136000,
+      "endMs": 205000,
+      "topic": "当没有思路时的应对策略",
+      "summary": "提出无思路时可以手绘简单测试用例进行推演，并强调暴力解法是思考的重要起点，绝不能放弃或回答没有想法。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 205000,
+      "endMs": 383000,
+      "topic": "不要忽视暴力解法：以 LeetCode 3 为例",
+      "summary": "以无重复字符的最长子串问题为例，演示枚举子串与查重的 O(n^3) 暴力求解过程，说明暴力法在特定数据规模下的可行性。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 383000,
+      "endMs": 623000,
+      "topic": "优化算法的常见思路与突破口",
+      "summary": "介绍遍历常见算法思路与数据结构、用哈希表实现以空间换时间、预处理排序以及在算法瓶颈处寻找优化突破口的方法。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 623000,
+      "endMs": 702000,
+      "topic": "实际编写代码时的细节与规范",
+      "summary": "强调面试编码中对极端边界条件（如空数组、空指针等）的判断，以及语义化变量名、模块化和复用性等代码规范。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 702000,
+      "endMs": 749000,
+      "topic": "基本问题的白板编程要求",
+      "summary": "指出对于快速排序、归并排序及堆实现等基础问题，必须做到能够白板手写无死角。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 749000,
+      "endMs": 824440,
+      "topic": "课程使用语言与推荐练习平台",
+      "summary": "说明课程主要以 C++ 进行代码示范，鼓励学员使用熟练的语言，推荐 LeetCode 和 HackerRank 平台，并预告下一章时间复杂度主题。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解解决算法面试问题的宏观思考流程与策略",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "掌握从题目条件、复杂度要求和数据规模中提取隐藏暗示的方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "掌握缺乏思路时的应对手段，理解暴力解法作为思考起点的意义",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "掌握优化算法的常用途径，包括常见思路/数据结构遍历、空间换时间、预处理及瓶颈处优化",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "掌握编码实现阶段的边界处理要求、代码规范及基础问题的白板编程能力",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "暴力解法",
+      "namesObserved": [
+        "暴力解法",
+        "暴力法"
+      ],
+      "role": "introduces",
+      "definition": "对问题所有可能的解或子集进行穷举和判断的基础求解方法，通常是思考优化算法的起点。",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "空间和时间的交换",
+      "namesObserved": [
+        "空间和时间的交换",
+        "以空间换时间"
+      ],
+      "role": "introduces",
+      "definition": "通过开辟额外的存储空间（如哈希表）记录中间数据，从而降低算法时间复杂度的优化策略。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-005"
+      ]
+    },
+    {
+      "canonicalName": "白板编程",
+      "namesObserved": [
+        "白板编程"
+      ],
+      "role": "introduces",
+      "definition": "在面试中不依赖 IDE 自动补全和编译环境，直接在纸上或白板上手写完整可运行代码的形式。",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [],
+  "correctness": {
+    "method": "unknown",
+    "claims": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "examples": [
+    {
+      "statement": "对于给定有序数组的查找问题，可思考是否可以使用二分查找法进行搜索",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "要求设计 O(nlogn) 算法时，通常暗示需要使用分治法（如搜索树）或先对数组进行排序",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "若数据规模大概是 10000，则设计一个 O(n^2) 级别的算法在现代计算机上是可行的",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "LeetCode 3 无重复字符的最长子串示例：输入 'abcabcbb' 结果为 'abc'；输入 'bbbbb' 结果为 'b'",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "LeetCode 3 暴力解法：使用 O(n^2) 算法遍历所有子串 s[i...j]，再用 O(n) 时间判断子串是否有重复字符，整体复杂度 O(n^3)，在 n=100 时可行",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "传入的数组为空",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "传入的字符串为空",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "参数数量为 0 或包含负数",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "指针为 NULL",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "变量命名随意，缺乏明确的语义",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "代码缺乏模块化与复用性设计",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "忽视对基础算法（如快排、归并）和数据结构（如最大堆、最小堆）的白板手写准备",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "仔细分析题目中的条件与数据规模，寻找隐藏暗示（如 O(nlogn) 暗示分治或排序，10000 规模暗示 O(n^2) 可行）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "一时没有思路时不要慌张，先用笔纸手写几个简单的测试用例进行试验和推演",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "千万不要向面试官表示自己没有任何想法；可先展示暴力解法作为思考起点，并说明其在特定小规模场景下的可行性",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "寻找优化算法思路时，可在脑海中遍历常见的算法思路与数据结构，尝试用哈希表进行空间换时间或对数据进行排序预处理",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "重点在算法瓶颈处寻找答案（例如将 O(nlogn)+O(n^2) 中的 O(n^2) 部分进行针对性优化）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "对于基本问题（如快速排序、归并排序、堆实现），务必做到能够白板编程，提升面试信心",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:01-03",
+      "to": "lesson:01-04",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "从面试前准备进入面试现场的回答方法。",
+      "confidence": 0.9,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    },
+    {
+      "from": "lesson:01-04",
+      "to": "lesson:02-01",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "老师在课次结尾明确预告下一章将整体介绍算法的时间复杂度。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 25000,
+      "assetId": "asset:video-01-04",
+      "locator": "00:00-00:25",
+      "observation": "画面展示标题页'解决算法面试问题的整体思路'，老师口头介绍本小节将从宏观角度讲解面对算法面试问题时的思考流程。",
+      "confidence": 0.98
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 25000,
+      "endMs": 136000,
+      "assetId": "asset:video-01-04",
+      "locator": "00:25-02:16",
+      "observation": "画面展示'注意题目中的条件'，列举有序数组（二分查找）、设计 O(nlogn) 算法（分治/排序）、无需额外空间及数据规模 10000（对应 O(n^2) 可行性）等暗示条件。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 136000,
+      "endMs": 205000,
+      "assetId": "asset:video-01-04",
+      "locator": "02:16-03:25",
+      "observation": "画面展示'当没有思路的时候'，包含'自己给自己几个简单的测试用例，试验一下'和'不要忽视暴力解法。暴力解法通常是思考的起点'两点提示。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 205000,
+      "endMs": 383000,
+      "assetId": "asset:video-01-04",
+      "locator": "03:25-06:23",
+      "observation": "画面展示'不要忽视暴力法'，列举 LeetCode 3 (Longest Substring Without Repeating Characters)，给出示例并推导遍历子串+查重的 O(n^3) 暴力解法及在 n=100 数据规模下的可行性。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 383000,
+      "endMs": 623000,
+      "assetId": "asset:video-01-04",
+      "locator": "06:23-10:23",
+      "observation": "画面展示'优化算法'，列出遍历算法思路、遍历数据结构、空间和时间的交换（哈希表）、预处理信息（排序）以及在瓶颈处寻找答案等策略。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 623000,
+      "endMs": 702000,
+      "assetId": "asset:video-01-04",
+      "locator": "10:23-11:42",
+      "observation": "画面展示'实际编写问题'，强调极端条件判断（数组/字符串为空、数量为0、指针为NULL）及代码规范（变量名、模块化、复用性）。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 702000,
+      "endMs": 749000,
+      "assetId": "asset:video-01-04",
+      "locator": "11:42-12:29",
+      "observation": "画面展示'对于基本问题，白板编程'，老师口头强调快排、归并及堆实现等基础算法与数据结构的白板手写要求。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 749000,
+      "endMs": 824440,
+      "assetId": "asset:video-01-04",
+      "locator": "12:29-13:40",
+      "observation": "画面展示 C++/Java/Python/JS/Swift 图标及 LeetCode 标志，老师说明课程主要语言与平台支持，并预告下一章将讲解算法的时间复杂度。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "titleObserved",
+      "reason": "目录规范标题为'如何回答算法面试问题'，而视频首页幻灯片与实际讲解主题为'解决算法面试问题的整体思路'。",
+      "recommendedCheck": "检查课程目录标题与视频片头 PPT 标题是否存在版本差异，确定是否需要统一规范。"
+    }
+  ],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.1",
+    "generatedAt": null
+  }
+}

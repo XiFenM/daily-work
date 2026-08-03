@@ -1,0 +1,466 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "05-02",
+  "chapterId": "05",
+  "titleObserved": "测试你的链表程序",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 986.96,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 40000,
+      "topic": "引入本地测试链表程序的目标",
+      "summary": "讲解为什么需要在本地构建和打印链表，以便测试先前完成的 reverseList 及后续链表算法。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 40000,
+      "endMs": 200000,
+      "topic": "实现 createLinkedList 函数",
+      "summary": "编写 createLinkedList 函数，通过传入整型数组及其长度动态构建单链表并返回头节点。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 200000,
+      "endMs": 316000,
+      "topic": "实现 printLinkedList 函数",
+      "summary": "编写 printLinkedList 函数，遍历链表并格式化打印每个节点的值和箭头分隔符。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 316000,
+      "endMs": 459000,
+      "topic": "在 main 函数中测试反转链表程序",
+      "summary": "构造测试数组 [1, 2, 3, 4, 5]，创建链表并打印，调用 reverseList 后打印反转结果，运行验证正确性。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 459000,
+      "endMs": 598000,
+      "topic": "C++ 内存管理与 deleteLinkedList 实现",
+      "summary": "针对 C++ 语言说明手动释放内存的必要性，实现 deleteLinkedList 函数并在 main 中调用释放节点内存。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 598000,
+      "endMs": 653000,
+      "topic": "思考题 1：LeetCode 83 Remove Duplicates from Sorted List",
+      "summary": "给出有序链表去重的题目要求与示例，要求保留重复元素的单次出现。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 653000,
+      "endMs": 723000,
+      "topic": "思考题 2：LeetCode 86 Partition List",
+      "summary": "讲解链表 partition 问题，要求将小于 x 的节点调整到大于等于 x 的节点之前，提醒注意节点相对顺序约束。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 723000,
+      "endMs": 785000,
+      "topic": "思考题 3：LeetCode 328 Odd Even Linked List",
+      "summary": "讲解奇偶链表重排问题，基于 1-indexed 索引将奇数索引节点排在偶数索引节点前，并保持各自相对顺序。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 785000,
+      "endMs": 895000,
+      "topic": "思考题 4：LeetCode 2 Add Two Numbers",
+      "summary": "讲解逆序存储数字的链表相加问题，分析前导零与非负整数等边界情况与澄清细节。",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "startMs": 895000,
+      "endMs": 986960,
+      "topic": "思考题 5：LeetCode 445 Add Two Numbers II",
+      "summary": "讲解顺序存储数字的链表相加问题，提出不允许修改/反转输入链表时的扩展约束与辅助数据结构思考建议。",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "学会如何在本地 C++ 环境中编写 createLinkedList 与 printLinkedList 辅助函数，实现链表的构建与可视化打印。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "掌握在 C++ 环境中对动态分配内存的链表节点进行手动释放（deleteLinkedList）的方法，避免内存泄漏。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "理解并思考多道链表扩展练习题（LeetCode 83, 86, 328, 2, 445）的题意、边界条件及不修改输入链表等约束条件。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007",
+        "ev-008",
+        "ev-009",
+        "ev-010"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "构建链表",
+      "namesObserved": [
+        "createLinkedList"
+      ],
+      "role": "introduces",
+      "definition": "根据传入的整型数组及元素个数，通过循环动态创建 ListNode 节点，并借助 next 指针依次连接生成单链表。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "打印链表",
+      "namesObserved": [
+        "printLinkedList"
+      ],
+      "role": "introduces",
+      "definition": "从头节点开始遍历链表，依次输出每个节点的值与箭头分隔符，遍历结束后输出 NULL 并换行。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "链表内存释放",
+      "namesObserved": [
+        "deleteLinkedList"
+      ],
+      "role": "introduces",
+      "definition": "遍历链表并借助临时指针记录待删除节点，在移动遍历指针后再执行 delete 操作，逐个释放节点占用的动态内存。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": null,
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "ListNod* createLinkedList(int arr[], int n){\n    if( n == 0 )\n        return NULL;\n    ListNode* head = new ListNode(arr[0]);\n    ListNode* curNode = head;\n    for( int i = 1 ; i < n ; i ++ ){\n        curNode->next = new ListNode(arr[i]);\n        curNode = curNode->next;\n    }\n    return head;\n}\n\nvoid printLinkedList(ListNode* head){\n    ListNode* curNode = head;\n    while( curNode != NULL ){\n        cout << curNode->val << \" -> \";\n        curNode = curNode->next;\n    }\n    cout << \"NULL\" << endl;\n    return;\n}\n\nvoid deleteLinkedList(ListNode* head){\n    ListNode* curNode = head;\n    while( curNode != NULL ){\n        ListNode* delNode = curNode;\n        curNode = curNode->next;\n        delete delNode;\n    }\n    return;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-005"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": null,
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "int main() {\n    int arr[] = {1, 2, 3, 4, 5};\n    int n = sizeof(arr)/sizeof(int);\n    ListNode* head = createLinkedList(arr, n);\n    printLinkedList(head);\n    ListNode* head2 = Solution().reverseList(head);\n    printLinkedList(head2);\n    deleteLinkedList(head2);\n    return 0;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "stateModels": [],
+  "correctness": {
+    "method": "experimental_validation",
+    "claims": [
+      {
+        "statement": "在本地 main 函数中通过 createLinkedList 创建链表 1->2->3->4->5->NULL，经过 reverseList 处理后打印输出 5->4->3->2->1->NULL，验证了反转链表算法在本地测试用例下的运行正确性。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      }
+    ],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "在 main 函数中，传入数组 [1, 2, 3, 4, 5]，构建链表 1->2->3->4->5->NULL；调用 reverseList 后打印输出 5->4->3->2->1->NULL。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "LeetCode 83 (Remove Duplicates from Sorted List)：输入 1->1->2 返回 1->2；输入 1->1->2->3->3 返回 1->2->3。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "LeetCode 86 (Partition List)：输入 1->4->3->2->5->2 且 x=3，重新整理后返回 1->2->2->4->3->5。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "LeetCode 328 (Odd Even Linked List)：输入 1->2->3->4->5->NULL，重新整理后返回 1->3->5->2->4->NULL。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "statement": "LeetCode 2 (Add Two Numbers)：342 + 465 = 807，链表逆序表示为 2->4->3 与 5->6->4，相加后返回 7->0->8。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "statement": "LeetCode 445 (Add Two Numbers II)：342 + 465 = 807，链表顺序表示为 3->4->2 与 4->6->5，相加后返回 8->0->7。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "createLinkedList 函数中，若传入数组元素个数 n == 0，直接返回空指针 NULL。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "printLinkedList 与 deleteLinkedList 函数中，若传入的 head 指针为 NULL，循环不触发，直接输出 NULL 或返回。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "在用链表表示数字相加（Add Two Numbers）时，需关注数字是否存在前导 0（除了数字 0 本身外没有前导 0）以及是否包含负数（本题限定为非负整数）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009",
+        "ev-010"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在 C++ 中手动释放链表节点内存时，必须在释放 delete delNode 前先将 curNode 推进到 curNode->next；若先 delete 则无法安全访问 next 指针。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "链表经 reverseList 反转后，原有 head 指针不再指向链表头部，后续打印或释放内存必须使用 reverseList 返回的新头指针 head2。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "在面试中遇到 Partition List 等节点重排问题时，若题意未明确，应主动向面试官确认分割后两部分节点是否需要保持原链表中的相对顺序。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "在面试中遇到链表表示大数相加时，应主动与面试官澄清是否存在前导零或负数等边界条件。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "statement": "对于顺序存储数字的链表相加（Add Two Numbers II），若题目限制不允许修改或反转输入的链表，可考虑使用栈（Stack）等辅助数据结构。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:05-01",
+      "to": "lesson:05-02",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "05-02 编写本地测试工具，测试 05-01 中实现的 reverseList 算法。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001",
+        "ev-004"
+      ]
+    },
+    {
+      "from": "lesson:05-02",
+      "to": "lesson:05-03",
+      "type": "precedes",
+      "status": "provisional",
+      "rationale": "05-02 建立的本地链表构建与测试辅助代码为后续链表题目的测试及虚拟头结点的引入奠定基础。",
+      "confidence": 0.85,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 40000,
+      "assetId": "asset:video-05-02",
+      "locator": null,
+      "observation": "老师总结上一小节实现了 reverseList 并通过 LeetCode 提交，但提到在本地缺少构建和打印链表的测试工具，因此本小节重点讲解如何构建和打印链表以方便本地测试。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 40000,
+      "endMs": 200000,
+      "assetId": "asset:video-05-02",
+      "locator": null,
+      "observation": "老师在 IDE 中编写 ListNod* createLinkedList(int arr[], int n) 函数，判断 n==0 时返回 NULL，先用 arr[0] 动态创建 head，然后循环 int i=1; i<n; i++ 将 curNode->next 设为 new ListNode(arr[i]) 并推进 curNode。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 200000,
+      "endMs": 316000,
+      "assetId": "asset:video-05-02",
+      "locator": null,
+      "observation": "老师在 IDE 中编写 void printLinkedList(ListNode* head) 函数，通过 while(curNode != NULL) 循环打印 curNode->val << \" -> \"，并在循环结束后打印 NULL 和 endl。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 316000,
+      "endMs": 459000,
+      "assetId": "asset:video-05-02",
+      "locator": null,
+      "observation": "老师在 main 函数中定义 arr[] = {1, 2, 3, 4, 5}，调用 createLinkedList 与 printLinkedList，接着调用 Solution().reverseList(head) 得到 head2 并打印，点击运行输出 1 -> 2 -> 3 -> 4 -> 5 -> NULL 和 5 -> 4 -> 3 -> 2 -> 1 -> NULL。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 459000,
+      "endMs": 598000,
+      "assetId": "asset:video-05-02",
+      "locator": null,
+      "observation": "老师讲解 C++ 开发者需手动释放 new 出来的动态内存，编写 void deleteLinkedList(ListNode* head)，在循环中记录 ListNode* delNode = curNode; curNode = curNode->next; delete delNode;，并在 main 中对 head2 调用 deleteLinkedList(head2)。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 598000,
+      "endMs": 653000,
+      "assetId": "asset:video-05-02",
+      "locator": null,
+      "observation": "展示 Slide：83. Remove Duplicates from Sorted List，要求给出一个有序链表，删除其中所有重复元素，使得每个元素只保留一次。给出示例 1->1->2 返回 1->2；1->1->2->3->3 返回 1->2->3。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 653000,
+      "endMs": 723000,
+      "assetId": "asset:video-05-02",
+      "locator": null,
+      "observation": "展示 Slide：86. Partition List，给出链表及数 x，整理链表使小于 x 的元素在前，大于等于 x 的元素在后。示例 1->4->3->2->5->2, x=3 返回 1->2->2->4->3->5。老师强调可与面试官沟通左右两侧节点是否需要保持原有相对顺序。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 723000,
+      "endMs": 785000,
+      "assetId": "asset:video-05-02",
+      "locator": null,
+      "observation": "展示 Slide：328. Odd Even Linked List，将所有索引为奇数的节点排在索引为偶数的节点前面。示例 1->2->3->4->5->NULL 返回 1->3->5->2->4->NULL。补充说明第一个节点索引为 1，奇数与偶数索引节点在重排后要保持相对顺序。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 785000,
+      "endMs": 895000,
+      "assetId": "asset:video-05-02",
+      "locator": null,
+      "observation": "展示 Slide：2. Add Two Numbers（Amazon, Microsoft, Bloomberg, Airbnb, Adobe）。给出两个非空链表表示非负整数，数字逆序存储。示例 342 + 465 = 807，链表 2->4->3 与 5->6->4 返回 7->0->8。分析前导零与负数等面试澄清事项。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-010",
+      "sourceType": "video_combined",
+      "startMs": 895000,
+      "endMs": 986960,
+      "assetId": "asset:video-05-02",
+      "locator": null,
+      "observation": "展示 Slide：445. Add Two Numbers II（Microsoft, Bloomberg）。数字顺序存储，342+465=807，3->4->2 与 4->6->5 返回 8->0->7。提出扩展思考：若不允许修改/反转输入的链表，提示可使用辅助数据结构（如栈）。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

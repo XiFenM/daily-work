@@ -1,0 +1,763 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "03-06",
+  "chapterId": "03",
+  "titleObserved": "167 Two Sum II - Input array is sorted",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1184.28,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 180000,
+      "topic": "Two Sum II 题目介绍与面试细节",
+      "summary": "介绍 LeetCode 167 题面，分析索引从 1 开始、保证有解且单解等约束与面试澄清问题",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 180000,
+      "endMs": 276000,
+      "topic": "暴力解法分析",
+      "summary": "讲解 O(n^2) 暴力双层遍历解法及其在 LeetCode 上超时 (TLE) 的原因",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 276000,
+      "endMs": 418000,
+      "topic": "二分搜索优化解法",
+      "summary": "利用数组有序性质，遍历 numbers[i] 并在其后有序数组中二分查找 target - numbers[i]，复杂度 O(n log n)",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 418000,
+      "endMs": 577000,
+      "topic": "对撞指针解法思路",
+      "summary": "详细推导从两端向中间移动的对撞指针解法，比较两数之和与 target 的关系来调整左右指针",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 577000,
+      "endMs": 828000,
+      "topic": "对撞指针代码实现与细节处理",
+      "summary": "在 C++ 中实现对撞指针算法，添加 1-based 索引转换、异常抛出和 assert 边界检查，分析 O(n) 时间与 O(1) 空间复杂度",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006",
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 828000,
+      "endMs": 1079000,
+      "topic": "对撞指针模式扩展：字符串与回文问题",
+      "summary": "总结对撞指针模式，与三路/两路快排关联；介绍 LeetCode 125 Valid Palindrome、LeetCode 344 Reverse String 和 LeetCode 345 Reverse Vowels",
+      "evidenceIds": [
+        "ev-008",
+        "ev-009",
+        "ev-010"
+      ]
+    },
+    {
+      "startMs": 1079000,
+      "endMs": 1184280,
+      "topic": "对撞指针模式扩展：盛最多水的容器",
+      "summary": "介绍 LeetCode 11 Container With Most Water 题面与木桶/墙体面积示意图",
+      "evidenceIds": [
+        "ev-011"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "掌握如何利用数组有序的性质将 Two Sum 问题的复杂度从暴力 O(n^2) 优化至对撞指针 O(n)",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "理解对撞指针（Two Pointers）的基本定义、指针移动不变量与正确性逻辑",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "掌握在算法面试中对索引基数（1-based vs 0-based）、解的存在性与唯一性等细节进行沟通澄清的技巧",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "了解对撞指针模式在字符串翻转、回文判定以及“盛最多水的容器”问题中的拓展应用",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008",
+        "ev-009",
+        "ev-010",
+        "ev-011"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "对撞指针",
+      "namesObserved": [
+        "对撞指针",
+        "双指针"
+      ],
+      "role": "introduces",
+      "definition": "设置分别指向数组/序列首尾的两个指针，根据特定条件不断向中间对撞缩减搜索空间的双指针技术。",
+      "evidenceIds": [
+        "ev-004",
+        "ev-008"
+      ]
+    },
+    {
+      "canonicalName": "二分搜索",
+      "namesObserved": [
+        "二分搜索",
+        "二分查找",
+        "二分查找法"
+      ],
+      "role": "reinforces",
+      "definition": null,
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "回文串",
+      "namesObserved": [
+        "回文串",
+        "Palindrome"
+      ],
+      "role": "mentions",
+      "definition": "正着看和反着看相同的字符串。",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "167",
+    "titleObserved": "Two Sum II - Input array is sorted",
+    "statement": "给定一个有序整型数组和一个整数 target，在其中寻找两个元素，使其和为 target。返回这两个数的索引。",
+    "constraints": [
+      "数组有序",
+      "索引从 1 开始计算",
+      "保证有解",
+      "保证只有唯一解",
+      "两个元素必须是不同位置的元素"
+    ],
+    "clarifyingQuestions": [
+      "如果没有解怎样？（题目保证有解）",
+      "如果有多个解怎样？（题目保证只有唯一解）",
+      "两个元素能否是同一个元素？（不能）",
+      "索引是从 0 开始还是从 1 开始？（从 1 开始）"
+    ],
+    "evidenceIds": [
+      "ev-001"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "双层遍历所有 (i, j) 数值对，检查 numbers[i] + numbers[j] == target",
+      "timeComplexity": "O(n^2)",
+      "spaceComplexity": "O(1)",
+      "limitations": [
+        "没有利用数组有序的性质",
+        "在 LeetCode 上提交会导致 Time Limit Exceeded (TLE)"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "intermediate",
+      "idea": "遍历每个 numbers[i]，在剩余的有序数组部分中使用二分查找寻找 target - numbers[i]",
+      "timeComplexity": "O(n log n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [
+        "复杂度 O(n log n) 仍有优化空间"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "solution-003",
+      "stage": "optimized",
+      "idea": "利用对撞指针，设置左指针 l 指向数组开头，右指针 r 指向数组结尾。计算 numbers[l] + numbers[r]，若等于 target 则找到解；若小于 target，则 l++；若大于 target，则 r--",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-004",
+        "ev-005",
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-003",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n#include <cassert>\n#include <stdexcept>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    vector<int> twoSum(vector<int>& numbers, int target) {\n        assert(numbers.size() >= 2);\n\n        int l = 0, r = numbers.size() - 1;\n        while (l < r) {\n            if (numbers[l] + numbers[r] == target) {\n                int res[2] = {l + 1, r + 1};\n                return vector<int>(res, res + 2);\n            }\n            else if (numbers[l] + numbers[r] < target)\n                l++;\n            else\n                r--;\n        }\n\n        throw invalid_argument(\"The input has no solution.\");\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-003",
+      "kind": "two_pointer",
+      "variables": [
+        {
+          "symbol": "l",
+          "role": "left_pointer",
+          "meaning": "指向当前对撞指针左边界的索引（初始为 0）",
+          "updateRule": "当 numbers[l] + numbers[r] < target 时，l++",
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        },
+        {
+          "symbol": "r",
+          "role": "right_pointer",
+          "meaning": "指向当前对撞指针右边界的索引（初始为 numbers.size() - 1）",
+          "updateRule": "当 numbers[l] + numbers[r] > target 时，r--",
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "[0, l)",
+          "meaning": "已被排查过、作为两数之一过小无法与当前右侧元素凑成 target 的左侧候选空间",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "notation": "(r, numbers.size() - 1]",
+          "meaning": "已被排查过、作为两数之一过大无法与当前左侧元素凑成 target 的右侧候选空间",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "notation": "[l, r]",
+          "meaning": "当前包含潜在正确解对 (l*, r*) 的对撞搜索区间",
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        }
+      ],
+      "invariant": {
+        "statement": "在对撞指针缩减过程中，若存在解 (l*, r*)，则必有 l <= l* < r* <= r",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "transitions": [
+        {
+          "condition": "numbers[l] + numbers[r] < target",
+          "updates": "l++",
+          "preserves": {
+            "statement": "因为 numbers[l] 是当前区间最小值，numbers[l] 与区间内任何 numbers[k] (k <= r) 之和都小于 target，故 l 不可能是解的一部分，将 l 排除保全解仍落在 [l+1, r]",
+            "sourceClass": "course_direct",
+            "evidenceIds": [
+              "ev-004"
+            ]
+          },
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        },
+        {
+          "condition": "numbers[l] + numbers[r] > target",
+          "updates": "r--",
+          "preserves": {
+            "statement": "因为 numbers[r] 是当前区间最大值，numbers[r] 与区间内任何 numbers[k] (k >= l) 之和都大于 target，故 r 不可能是解的一部分，将 r 排除保全解仍落在 [l, r-1]",
+            "sourceClass": "course_direct",
+            "evidenceIds": [
+              "ev-004"
+            ]
+          },
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 l >= r 时循环终止；或在 numbers[l] + numbers[r] == target 时找到解并直接 return",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "loop_invariant",
+    "claims": [
+      {
+        "statement": "由于数组有序，当 numbers[l] + numbers[r] != target 时，通过比较大小可以确信丢弃 l 或 r 不会遗漏解，最终能正确找到唯一解",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": [
+      {
+        "phase": "initialization",
+        "statement": "初始时 l = 0, r = n - 1，搜索区间 [0, n - 1] 包含整个数组，全集范围包含潜在解 (l*, r*)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004",
+          "ev-005"
+        ]
+      },
+      {
+        "phase": "preservation",
+        "statement": "若 numbers[l] + numbers[r] < target，则 l 与 [l, r] 内任意数的和都 < target，故 l* > l，l 可以安全加 1；若 numbers[l] + numbers[r] > target，则 r 与 [l, r] 内任意数的和都 > target，故 r* < r，r 可以安全减 1",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      {
+        "phase": "termination",
+        "statement": "若 numbers[l] + numbers[r] == target，直接返回 {l+1, r+1}；若 l >= r 仍未找到解，退出循环并抛出 invalid_argument",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      {
+        "phase": "postcondition",
+        "statement": "返回的索引被正确转换为 1-based 索引，满足题目要求",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-001",
+          "ev-005"
+        ]
+      }
+    ]
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "Two Sum II 暴力解法时间复杂度",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n^2)",
+      "expressionNormalized": "O(n^2)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 numbers 的长度",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "采用双层循环遍历所有 (i, j) 元素对",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "暴力解法时间复杂度为 O(n^2)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "Two Sum II 二分搜索解法时间复杂度",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n log n)",
+      "expressionNormalized": "O(n * log(n))",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 numbers 的长度",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "遍历每一个元素 numbers[i]（进行 n 次）",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "statement": "对于每个 numbers[i]，在剩余有序数组中二分查找 target - numbers[i]，耗时 O(log n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "二分搜索优化解法时间复杂度为 O(n log n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "cx-003",
+      "subject": "Two Sum II 对撞指针解法时间复杂度",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 numbers 的长度",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005",
+            "ev-006"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "左右指针 l 和 r 在每次循环中至少使 r - l 减少 1，最多执行 n 次检查",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "对撞指针解法的时间复杂度为 O(n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004",
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "id": "cx-004",
+      "subject": "Two Sum II 对撞指针解法空间复杂度",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(1)",
+      "expressionNormalized": "O(1)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "仅使用 l 和 r 两个整型指针变量以及固定大小的返回数组",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005",
+            "ev-006"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "对撞指针解法的辅助空间复杂度为 O(1)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [],
+  "edgeCases": [],
+  "implementationPitfalls": [],
+  "interviewPlaybook": [
+    {
+      "statement": "遇到数组问题时，关注题目提供的性质（如数组有序），利用有序性往往可以将 O(n^2) 暴力解优化为 O(n log n) 的二分搜索或 O(n) 的对撞指针。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "在面试中即使一时没有最优思路，不妨先给出暴力解法并分析其复杂度与瓶颈，表明这是一个可行解。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "编码前需澄清关键边界：如无解/多解处理、是否允许重复选择同一元素、索引是从 0 开始还是从 1 开始等。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "处理字符串回文等问题时，需明确空字符串是否为回文、字符的取值范围（仅数字字母还是所有 ASCII）、以及是否忽略大小写。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:03-06",
+      "to": "lesson:04-04",
+      "type": "contrasts_with",
+      "status": "provisional",
+      "rationale": "本课 Two Sum II 借助数组有序性使用对撞指针达成 O(n) 时间与 O(1) 空间；而无序 Two Sum 在 04-04 中使用查找表 (Hash Table) 达成 O(n) 时间与 O(n) 空间。",
+      "confidence": 0.8,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "from": "lesson:03-06",
+      "to": "lesson:05-06",
+      "type": "same_pattern_as",
+      "status": "provisional",
+      "rationale": "两课均使用双指针模式进行区间或位置的搜索与更新。",
+      "confidence": 0.7,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 179000,
+      "assetId": "asset:video-03-06",
+      "locator": null,
+      "observation": "展示 LeetCode 167 题面：给定有序整型数组和 target，寻找两数和为 target，返回 1-based 索引；讨论无解、多解、重用同一元素等面试澄清点",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 180000,
+      "endMs": 275000,
+      "assetId": "asset:video-03-06",
+      "locator": null,
+      "observation": "展示暴力解法：双层遍历 O(n^2)，说明在 LeetCode 上提交会遇到 Time Limit Exceeded",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 276000,
+      "endMs": 418000,
+      "assetId": "asset:video-03-06",
+      "locator": null,
+      "observation": "利用有序性质引入二分搜索：遍历 numbers[i]，在剩余有序数组中二分查找 target - numbers[i]，复杂度 O(n log n)",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 419000,
+      "endMs": 576000,
+      "assetId": "asset:video-03-06",
+      "locator": null,
+      "observation": "动画演示对撞指针：左指针 i 指向开头，右指针 j 指向结尾，根据 sum < target (i++) 或 sum > target (j--) 调整指针",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 577000,
+      "endMs": 714000,
+      "assetId": "asset:video-03-06",
+      "locator": null,
+      "observation": "展示并编写 C++ 代码 TwoSum：int l = 0, r = numbers.size() - 1; while(l < r)，找到时返回 {l+1, r+1}，无法找到抛出 invalid_argument",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_visual",
+      "startMs": 714000,
+      "endMs": 720000,
+      "assetId": "asset:video-03-06",
+      "locator": null,
+      "observation": "屏幕代码注释标注：时间复杂度 O(n)，空间复杂度 O(1)",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 720000,
+      "endMs": 827000,
+      "assetId": "asset:video-03-06",
+      "locator": null,
+      "observation": "代码补充：抛出 invalid_argument(\"The input has no solution.\")，以及 assert(numbers.size() >= 2)",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 828000,
+      "endMs": 871000,
+      "assetId": "asset:video-03-06",
+      "locator": null,
+      "observation": "总结对撞指针概念，提及与三路快排/两路快排 Partition 的联系",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 872000,
+      "endMs": 992000,
+      "assetId": "asset:video-03-06",
+      "locator": null,
+      "observation": "展示 LeetCode 125 Valid Palindrome，讨论字符串忽略大小写、非字母数字字符及空字符串定义",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-010",
+      "sourceType": "video_combined",
+      "startMs": 993000,
+      "endMs": 1078000,
+      "assetId": "asset:video-03-06",
+      "locator": null,
+      "observation": "展示 LeetCode 344 Reverse String 与 LeetCode 345 Reverse Vowels of a String（元音不包含 y）",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-011",
+      "sourceType": "video_combined",
+      "startMs": 1079000,
+      "endMs": 1184280,
+      "assetId": "asset:video-03-06",
+      "locator": null,
+      "observation": "展示 LeetCode 11 Container With Most Water，解释非负整数数组表示竖立墙的高度，与 x 轴构成容器容纳水的最大值",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "relationCandidates",
+      "reason": "与 lesson:04-04 和 lesson:05-06 的对比与模式相同关系在视频中未直接口述提及，属于编辑推断",
+      "recommendedCheck": "核算后续章节具体视频内容以确认跨课次关系"
+    }
+  ],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

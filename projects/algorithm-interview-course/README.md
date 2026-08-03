@@ -17,8 +17,8 @@
 ## 数据边界
 
 - `projects/algorithm-interview-course/`：提交 Prompt、正式笔记、结构化元数据和关系图。
-- `work/algorithm-interview-course/`：放原始视频、文本、压缩副本和临时 Prompt；Git 忽略。
-- `outputs/algorithm-interview-course/`：放原始模型输出和可再生成报告；Git 忽略。
+- `work/algorithm-interview-course/`：放原始材料、压缩副本、渲染 Prompt、请求快照和 QA 记录。`incoming/` 中的课程源材料以及所有视频、音频和图片继续由 Git 忽略；其余 Markdown/JSON 过程证据纳入版本控制。
+- `outputs/algorithm-interview-course/`：放原始模型输出、规范化证据和重试记录。Markdown/JSON 纳入版本控制，多媒体产物继续忽略。
 
 ## 当前状态
 

@@ -1,0 +1,1354 @@
+{
+  "response_format": {
+    "type": "json_schema",
+    "json_schema": {
+      "name": "algorithm_interview_lesson_evidence",
+      "strict": true,
+      "schema": {
+        "title": "Algorithm Interview Course Lesson Evidence",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schemaVersion",
+          "lessonId",
+          "chapterId",
+          "titleObserved",
+          "contentKind",
+          "actualDurationSeconds",
+          "timeline",
+          "learningObjectives",
+          "concepts",
+          "problem",
+          "solutionProgression",
+          "codeArtifacts",
+          "correctness",
+          "complexity",
+          "examples",
+          "edgeCases",
+          "implementationPitfalls",
+          "interviewPlaybook",
+          "relationCandidates",
+          "evidence",
+          "uncertainties",
+          "provenance",
+          "complexityAnalyses",
+          "formulaArtifacts",
+          "experiments"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "enum": [
+              "1.0"
+            ],
+            "type": "string"
+          },
+          "lessonId": {
+            "type": "string",
+            "pattern": "^[0-9]{2}-[0-9]{2}$"
+          },
+          "chapterId": {
+            "type": "string",
+            "pattern": "^[0-9]{2}$"
+          },
+          "titleObserved": {
+            "type": "string",
+            "nullable": true
+          },
+          "contentKind": {
+            "enum": [
+              "interview_strategy",
+              "concept",
+              "experiment",
+              "problem_walkthrough",
+              "anecdote",
+              "conclusion",
+              "mixed",
+              "unknown"
+            ],
+            "type": "string"
+          },
+          "actualDurationSeconds": {
+            "type": "number",
+            "nullable": true,
+            "minimum": 0
+          },
+          "timeline": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "startMs",
+                "endMs",
+                "topic",
+                "summary",
+                "evidenceIds"
+              ],
+              "properties": {
+                "startMs": {
+                  "type": "integer",
+                  "nullable": true,
+                  "minimum": 0
+                },
+                "endMs": {
+                  "type": "integer",
+                  "nullable": true,
+                  "minimum": 0
+                },
+                "topic": {
+                  "type": "string"
+                },
+                "summary": {
+                  "type": "string"
+                },
+                "evidenceIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^ev-[0-9]{3,}$"
+                  }
+                }
+              }
+            }
+          },
+          "learningObjectives": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "statement",
+                "sourceClass",
+                "evidenceIds"
+              ],
+              "properties": {
+                "statement": {
+                  "type": "string"
+                },
+                "sourceClass": {
+                  "enum": [
+                    "course_direct",
+                    "course_text",
+                    "editorial_inference",
+                    "supplemental"
+                  ],
+                  "type": "string"
+                },
+                "evidenceIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^ev-[0-9]{3,}$"
+                  }
+                }
+              }
+            }
+          },
+          "concepts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "canonicalName",
+                "namesObserved",
+                "role",
+                "definition",
+                "evidenceIds"
+              ],
+              "properties": {
+                "canonicalName": {
+                  "type": "string"
+                },
+                "namesObserved": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "role": {
+                  "enum": [
+                    "introduces",
+                    "reinforces",
+                    "applies",
+                    "contrasts",
+                    "mentions"
+                  ],
+                  "type": "string"
+                },
+                "definition": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "evidenceIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^ev-[0-9]{3,}$"
+                  }
+                }
+              }
+            }
+          },
+          "problem": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "platform",
+              "problemId",
+              "titleObserved",
+              "statement",
+              "constraints",
+              "clarifyingQuestions",
+              "evidenceIds"
+            ],
+            "properties": {
+              "platform": {
+                "type": "string",
+                "nullable": true
+              },
+              "problemId": {
+                "type": "string",
+                "nullable": true
+              },
+              "titleObserved": {
+                "type": "string",
+                "nullable": true
+              },
+              "statement": {
+                "type": "string",
+                "nullable": true
+              },
+              "constraints": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "clarifyingQuestions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "evidenceIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^ev-[0-9]{3,}$"
+                }
+              }
+            },
+            "nullable": true
+          },
+          "solutionProgression": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "stage",
+                "idea",
+                "timeComplexity",
+                "spaceComplexity",
+                "limitations",
+                "evidenceIds"
+              ],
+              "properties": {
+                "stage": {
+                  "enum": [
+                    "baseline",
+                    "observation",
+                    "intermediate",
+                    "optimized",
+                    "alternative"
+                  ],
+                  "type": "string"
+                },
+                "idea": {
+                  "type": "string"
+                },
+                "timeComplexity": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "spaceComplexity": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "limitations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "evidenceIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^ev-[0-9]{3,}$"
+                  }
+                }
+              }
+            }
+          },
+          "codeArtifacts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "language",
+                "sourceKind",
+                "code",
+                "ocrUncertainties",
+                "verification",
+                "evidenceIds"
+              ],
+              "properties": {
+                "language": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "sourceKind": {
+                  "enum": [
+                    "shown_in_video",
+                    "reconstructed",
+                    "supplemental"
+                  ],
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "ocrUncertainties": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "verification": {
+                  "enum": [
+                    "not_run",
+                    "compiled",
+                    "tested",
+                    "failed"
+                  ],
+                  "type": "string"
+                },
+                "evidenceIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^ev-[0-9]{3,}$"
+                  }
+                }
+              }
+            }
+          },
+          "correctness": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "method",
+              "claims"
+            ],
+            "properties": {
+              "method": {
+                "enum": [
+                  "not_applicable",
+                  "loop_invariant",
+                  "recursive_contract",
+                  "induction",
+                  "state_transition",
+                  "exchange_argument",
+                  "other",
+                  "unknown"
+                ],
+                "type": "string"
+              },
+              "claims": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "statement",
+                    "sourceClass",
+                    "evidenceIds"
+                  ],
+                  "properties": {
+                    "statement": {
+                      "type": "string"
+                    },
+                    "sourceClass": {
+                      "enum": [
+                        "course_direct",
+                        "course_text",
+                        "editorial_inference",
+                        "supplemental"
+                      ],
+                      "type": "string"
+                    },
+                    "evidenceIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^ev-[0-9]{3,}$"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "complexity": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "time",
+              "space",
+              "assumptions",
+              "evidenceIds"
+            ],
+            "properties": {
+              "time": {
+                "type": "string",
+                "nullable": true
+              },
+              "space": {
+                "type": "string",
+                "nullable": true
+              },
+              "assumptions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "evidenceIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^ev-[0-9]{3,}$"
+                }
+              }
+            }
+          },
+          "complexityAnalyses": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "subject",
+                "measure",
+                "notation",
+                "case",
+                "expressionObserved",
+                "expressionNormalized",
+                "normalizationSourceClass",
+                "variables",
+                "costModel",
+                "derivationSteps",
+                "assumptions",
+                "conclusion",
+                "evidenceIds"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^cx-[0-9]{3,}$"
+                },
+                "subject": {
+                  "type": "string"
+                },
+                "measure": {
+                  "enum": [
+                    "time",
+                    "auxiliary_space",
+                    "stack_space",
+                    "operation_count"
+                  ],
+                  "type": "string"
+                },
+                "notation": {
+                  "enum": [
+                    "O",
+                    "Theta",
+                    "Omega",
+                    "none",
+                    "unknown"
+                  ],
+                  "type": "string"
+                },
+                "case": {
+                  "enum": [
+                    "worst",
+                    "average",
+                    "best",
+                    "amortized",
+                    "expected",
+                    "empirical",
+                    "unspecified"
+                  ],
+                  "type": "string"
+                },
+                "expressionObserved": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "expressionNormalized": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "normalizationSourceClass": {
+                  "enum": [
+                    "course_direct",
+                    "course_text",
+                    "editorial_inference",
+                    "supplemental"
+                  ],
+                  "type": "string"
+                },
+                "variables": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "symbol",
+                      "meaning",
+                      "domainOrRelationship",
+                      "evidenceIds"
+                    ],
+                    "properties": {
+                      "symbol": {
+                        "type": "string"
+                      },
+                      "meaning": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "domainOrRelationship": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "evidenceIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "pattern": "^ev-[0-9]{3,}$"
+                        }
+                      }
+                    }
+                  }
+                },
+                "costModel": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "statement",
+                    "sourceClass",
+                    "evidenceIds"
+                  ],
+                  "properties": {
+                    "statement": {
+                      "type": "string"
+                    },
+                    "sourceClass": {
+                      "enum": [
+                        "course_direct",
+                        "course_text",
+                        "editorial_inference",
+                        "supplemental"
+                      ],
+                      "type": "string"
+                    },
+                    "evidenceIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^ev-[0-9]{3,}$"
+                      }
+                    }
+                  },
+                  "nullable": true
+                },
+                "derivationSteps": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "statement",
+                      "sourceClass",
+                      "evidenceIds"
+                    ],
+                    "properties": {
+                      "statement": {
+                        "type": "string"
+                      },
+                      "sourceClass": {
+                        "enum": [
+                          "course_direct",
+                          "course_text",
+                          "editorial_inference",
+                          "supplemental"
+                        ],
+                        "type": "string"
+                      },
+                      "evidenceIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "pattern": "^ev-[0-9]{3,}$"
+                        }
+                      }
+                    }
+                  }
+                },
+                "assumptions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "statement",
+                      "sourceClass",
+                      "evidenceIds"
+                    ],
+                    "properties": {
+                      "statement": {
+                        "type": "string"
+                      },
+                      "sourceClass": {
+                        "enum": [
+                          "course_direct",
+                          "course_text",
+                          "editorial_inference",
+                          "supplemental"
+                        ],
+                        "type": "string"
+                      },
+                      "evidenceIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "pattern": "^ev-[0-9]{3,}$"
+                        }
+                      }
+                    }
+                  }
+                },
+                "conclusion": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "statement",
+                    "sourceClass",
+                    "evidenceIds"
+                  ],
+                  "properties": {
+                    "statement": {
+                      "type": "string"
+                    },
+                    "sourceClass": {
+                      "enum": [
+                        "course_direct",
+                        "course_text",
+                        "editorial_inference",
+                        "supplemental"
+                      ],
+                      "type": "string"
+                    },
+                    "evidenceIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^ev-[0-9]{3,}$"
+                      }
+                    }
+                  }
+                },
+                "evidenceIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^ev-[0-9]{3,}$"
+                  }
+                }
+              }
+            }
+          },
+          "formulaArtifacts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "kind",
+                "sourceKind",
+                "rawText",
+                "normalizedText",
+                "variables",
+                "completeness",
+                "ocrUncertainties",
+                "evidenceIds"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^formula-[0-9]{3,}$"
+                },
+                "kind": {
+                  "enum": [
+                    "formula",
+                    "recurrence",
+                    "summation",
+                    "inequality",
+                    "table"
+                  ],
+                  "type": "string"
+                },
+                "sourceKind": {
+                  "enum": [
+                    "shown_in_video",
+                    "reconstructed"
+                  ],
+                  "type": "string"
+                },
+                "rawText": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "normalizedText": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "variables": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "symbol",
+                      "meaning",
+                      "domainOrRelationship",
+                      "evidenceIds"
+                    ],
+                    "properties": {
+                      "symbol": {
+                        "type": "string"
+                      },
+                      "meaning": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "domainOrRelationship": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "evidenceIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "pattern": "^ev-[0-9]{3,}$"
+                        }
+                      }
+                    }
+                  }
+                },
+                "completeness": {
+                  "enum": [
+                    "complete",
+                    "partial",
+                    "uncertain"
+                  ],
+                  "type": "string"
+                },
+                "ocrUncertainties": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "evidenceIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^ev-[0-9]{3,}$"
+                  }
+                }
+              }
+            }
+          },
+          "experiments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "subject",
+                "purpose",
+                "setup",
+                "measurements",
+                "theoreticalExpectation",
+                "observation",
+                "limitations",
+                "evidenceIds"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^experiment-[0-9]{3,}$"
+                },
+                "subject": {
+                  "type": "string"
+                },
+                "purpose": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "statement",
+                    "sourceClass",
+                    "evidenceIds"
+                  ],
+                  "properties": {
+                    "statement": {
+                      "type": "string"
+                    },
+                    "sourceClass": {
+                      "enum": [
+                        "course_direct",
+                        "course_text",
+                        "editorial_inference",
+                        "supplemental"
+                      ],
+                      "type": "string"
+                    },
+                    "evidenceIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^ev-[0-9]{3,}$"
+                      }
+                    }
+                  }
+                },
+                "setup": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "language",
+                    "compilerOrRuntime",
+                    "optimization",
+                    "operatingSystem",
+                    "hardware",
+                    "timer",
+                    "warmup",
+                    "repetitions",
+                    "inputGeneration"
+                  ],
+                  "properties": {
+                    "language": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "compilerOrRuntime": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "optimization": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "operatingSystem": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "hardware": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "timer": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "warmup": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "repetitions": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "inputGeneration": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                },
+                "measurements": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "inputDescription",
+                      "inputSize",
+                      "observedValue",
+                      "unit",
+                      "evidenceIds"
+                    ],
+                    "properties": {
+                      "inputDescription": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "inputSize": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "observedValue": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "unit": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "evidenceIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "pattern": "^ev-[0-9]{3,}$"
+                        }
+                      }
+                    }
+                  }
+                },
+                "theoreticalExpectation": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "statement",
+                    "sourceClass",
+                    "evidenceIds"
+                  ],
+                  "properties": {
+                    "statement": {
+                      "type": "string"
+                    },
+                    "sourceClass": {
+                      "enum": [
+                        "course_direct",
+                        "course_text",
+                        "editorial_inference",
+                        "supplemental"
+                      ],
+                      "type": "string"
+                    },
+                    "evidenceIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^ev-[0-9]{3,}$"
+                      }
+                    }
+                  },
+                  "nullable": true
+                },
+                "observation": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "statement",
+                    "sourceClass",
+                    "evidenceIds"
+                  ],
+                  "properties": {
+                    "statement": {
+                      "type": "string"
+                    },
+                    "sourceClass": {
+                      "enum": [
+                        "course_direct",
+                        "course_text",
+                        "editorial_inference",
+                        "supplemental"
+                      ],
+                      "type": "string"
+                    },
+                    "evidenceIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^ev-[0-9]{3,}$"
+                      }
+                    }
+                  },
+                  "nullable": true
+                },
+                "limitations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "statement",
+                      "sourceClass",
+                      "evidenceIds"
+                    ],
+                    "properties": {
+                      "statement": {
+                        "type": "string"
+                      },
+                      "sourceClass": {
+                        "enum": [
+                          "course_direct",
+                          "course_text",
+                          "editorial_inference",
+                          "supplemental"
+                        ],
+                        "type": "string"
+                      },
+                      "evidenceIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "pattern": "^ev-[0-9]{3,}$"
+                        }
+                      }
+                    }
+                  }
+                },
+                "evidenceIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^ev-[0-9]{3,}$"
+                  }
+                }
+              }
+            }
+          },
+          "examples": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "statement",
+                "sourceClass",
+                "evidenceIds"
+              ],
+              "properties": {
+                "statement": {
+                  "type": "string"
+                },
+                "sourceClass": {
+                  "enum": [
+                    "course_direct",
+                    "course_text",
+                    "editorial_inference",
+                    "supplemental"
+                  ],
+                  "type": "string"
+                },
+                "evidenceIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^ev-[0-9]{3,}$"
+                  }
+                }
+              }
+            }
+          },
+          "edgeCases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "statement",
+                "sourceClass",
+                "evidenceIds"
+              ],
+              "properties": {
+                "statement": {
+                  "type": "string"
+                },
+                "sourceClass": {
+                  "enum": [
+                    "course_direct",
+                    "course_text",
+                    "editorial_inference",
+                    "supplemental"
+                  ],
+                  "type": "string"
+                },
+                "evidenceIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^ev-[0-9]{3,}$"
+                  }
+                }
+              }
+            }
+          },
+          "implementationPitfalls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "statement",
+                "sourceClass",
+                "evidenceIds"
+              ],
+              "properties": {
+                "statement": {
+                  "type": "string"
+                },
+                "sourceClass": {
+                  "enum": [
+                    "course_direct",
+                    "course_text",
+                    "editorial_inference",
+                    "supplemental"
+                  ],
+                  "type": "string"
+                },
+                "evidenceIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^ev-[0-9]{3,}$"
+                  }
+                }
+              }
+            }
+          },
+          "interviewPlaybook": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "statement",
+                "sourceClass",
+                "evidenceIds"
+              ],
+              "properties": {
+                "statement": {
+                  "type": "string"
+                },
+                "sourceClass": {
+                  "enum": [
+                    "course_direct",
+                    "course_text",
+                    "editorial_inference",
+                    "supplemental"
+                  ],
+                  "type": "string"
+                },
+                "evidenceIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^ev-[0-9]{3,}$"
+                  }
+                }
+              }
+            }
+          },
+          "relationCandidates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "from",
+                "to",
+                "type",
+                "status",
+                "rationale",
+                "confidence",
+                "basis",
+                "evidenceIds"
+              ],
+              "properties": {
+                "from": {
+                  "type": "string",
+                  "pattern": "^lesson:[0-9]{2}-[0-9]{2}$"
+                },
+                "to": {
+                  "type": "string",
+                  "pattern": "^lesson:[0-9]{2}-[0-9]{2}$"
+                },
+                "type": {
+                  "enum": [
+                    "prerequisite_of",
+                    "recommended_before",
+                    "extends",
+                    "revisits",
+                    "applies",
+                    "contrasts_with",
+                    "alternative_to",
+                    "same_pattern_as",
+                    "same_problem_family_as"
+                  ],
+                  "type": "string"
+                },
+                "rationale": {
+                  "type": "string"
+                },
+                "status": {
+                  "enum": [
+                    "provisional"
+                  ],
+                  "type": "string"
+                },
+                "confidence": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "basis": {
+                  "enum": [
+                    "explicit_in_lesson",
+                    "editorial_hypothesis"
+                  ],
+                  "type": "string"
+                },
+                "evidenceIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^ev-[0-9]{3,}$"
+                  }
+                }
+              }
+            }
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "sourceType",
+                "startMs",
+                "endMs",
+                "assetId",
+                "locator",
+                "observation",
+                "confidence"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^ev-[0-9]{3,}$"
+                },
+                "sourceType": {
+                  "enum": [
+                    "video_audio",
+                    "video_visual",
+                    "video_combined",
+                    "text",
+                    "editorial_inference"
+                  ],
+                  "type": "string"
+                },
+                "startMs": {
+                  "type": "integer",
+                  "nullable": true,
+                  "minimum": 0
+                },
+                "endMs": {
+                  "type": "integer",
+                  "nullable": true,
+                  "minimum": 0
+                },
+                "assetId": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "locator": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "observation": {
+                  "type": "string"
+                },
+                "confidence": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              }
+            }
+          },
+          "uncertainties": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "field",
+                "reason",
+                "recommendedCheck"
+              ],
+              "properties": {
+                "field": {
+                  "type": "string"
+                },
+                "reason": {
+                  "type": "string"
+                },
+                "recommendedCheck": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "provenance": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "model",
+              "requestId",
+              "promptVersion",
+              "generatedAt"
+            ],
+            "properties": {
+              "model": {
+                "type": "string",
+                "nullable": true
+              },
+              "requestId": {
+                "type": "string",
+                "nullable": true
+              },
+              "promptVersion": {
+                "type": "string"
+              },
+              "generatedAt": {
+                "type": "string",
+                "nullable": true,
+                "format": "date-time"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

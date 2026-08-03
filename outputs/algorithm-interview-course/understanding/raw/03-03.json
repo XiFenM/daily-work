@@ -1,0 +1,517 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "03-03",
+  "chapterId": "03",
+  "titleObserved": "在 LeetCode 上解决第一个问题 Move Zeros",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 807.52,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 131000,
+      "topic": "课程与题目背景介绍",
+      "summary": "介绍本课将解决第一个 LeetCode 题目 283 Move Zeros，并演示如何在 LeetCode 网站上查找该题目。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 131000,
+      "endMs": 200000,
+      "topic": "Move Zeros 题面与要求说明",
+      "summary": "讲解 283 Move Zeros 的题目描述、示例以及 In-Place 等约束条件，并给出中文翻译。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 200000,
+      "endMs": 335000,
+      "topic": "LeetCode 解题界面与多语言支持",
+      "summary": "介绍 LeetCode 平台的代码输入框、Solution 类结构以及 C++、Java、Python、C、Swift 等多语言模板。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 335000,
+      "endMs": 365000,
+      "topic": "基线解法思路演示",
+      "summary": "使用幻灯片动画演示将数组中所有非零元素提取到辅助数组中，再写回原数组并补零的直观解法。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 365000,
+      "endMs": 579000,
+      "topic": "基线解法代码实现与本地测试",
+      "summary": "在 CLion IDE 中编写 C++ 代码实现基线解法，并在 main 函数中构建测试用例 [0, 1, 0, 3, 12] 运行验证。",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 579000,
+      "endMs": 710000,
+      "topic": "LeetCode 提交与结果查看",
+      "summary": "将代码粘贴至 LeetCode 进行 Run Code 和 Submit Solution，通过全部 21 个测试用例，运行耗时 19ms。",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 710000,
+      "endMs": 807520,
+      "topic": "基线解法复杂度分析与优化思考",
+      "summary": "分析基线解法的时间复杂度 O(n) 和空间复杂度 O(n)，指出其占用额外辅助空间（非原地算法）的局限，并预告下一课的优化方向。",
+      "evidenceIds": [
+        "ev-009",
+        "ev-010"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "了解 LeetCode 平台的使用方法，包括题目查找、模板类与解题函数规范、在线测试与提交验证",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-003",
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "掌握 Move Zeros 问题的基线解法：使用辅助向量提取非零元素后再放回原数组",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "理解基线解法的时间复杂度为 O(n) 但空间复杂度为 O(n)，明确辅助空间带来的非原地（non-in-place）局限",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009",
+        "ev-010"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Move Zeros",
+      "namesObserved": [
+        "Move Zeros",
+        "LeetCode 283 Move Zeros"
+      ],
+      "role": "introduces",
+      "definition": "给定一个数组 nums，将数组中所有的 0 挪到数组的末尾，同时维持其他所有非零元素的相对位置。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "In-place Algorithm",
+      "namesObserved": [
+        "in-place",
+        "原地算法"
+      ],
+      "role": "introduces",
+      "definition": "不创建原数组副本、不占用额外线性和辅助存储空间来解决数组问题的算法。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-010"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "283",
+    "titleObserved": "283. Move Zeros",
+    "statement": "给定一个数组 nums，写一个函数，将数组中所有的 0 挪到数组的末尾，而维持其他所有非 0 元素的相对位置。",
+    "constraints": [
+      "You must do this in-place without making a copy of the array.",
+      "Minimize the total number of operations."
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "遍历原数组 nums，将所有非零元素存入辅助向量 nonZeroElements 中；再将辅助向量中的非零元素依次覆盖 nums 前部，最后将 nums 剩余位置补零。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "limitations": [
+        "使用了额外的辅助存储空间 vector<int> nonZeroElements，不满足原地（in-place）修改的要求。"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-004",
+        "ev-005",
+        "ev-009",
+        "ev-010"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    void moveZeroes(vector<int>& nums) {\n        vector<int> nonZeroElements;\n        for (int i = 0; i < nums.size(); i++) {\n            if (nums[i]) {\n                nonZeroElements.push_back(nums[i]);\n            }\n        }\n        for (int i = 0; i < nonZeroElements.size(); i++) {\n            nums[i] = nonZeroElements[i];\n        }\n        for (int i = nonZeroElements.size(); i < nums.size(); i++) {\n            nums[i] = 0;\n        }\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005",
+        "ev-007"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "nonZeroElements",
+          "role": "auxiliary_container",
+          "meaning": "用于按顺序保存 nums 中所有非零元素的辅助动态数组/向量",
+          "updateRule": "在第一遍遍历 nums 时，若 nums[i] != 0 则 push_back 插入",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "symbol": "i",
+          "role": "loop_counter",
+          "meaning": "遍历 nums 或 nonZeroElements 的循环索引计数器",
+          "updateRule": "每次循环递增 i++",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [],
+      "termination": null,
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "unknown",
+    "claims": [],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "baseline solution time complexity",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 nums 的元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-009"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "第一遍遍历 nums，提取得出所有非零元素，进行 n 次元素检查与选择性插入",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-009"
+          ]
+        },
+        {
+          "statement": "第二遍遍历将非零元素放回 nums，并将剩余位置赋值为 0，合计遍历整个数组一遍",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-009"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "算法时间复杂度为 O(n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-009"
+        ]
+      },
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "baseline solution space complexity",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 nums 的元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-010"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "新建了辅助向量 nonZeroElements，最坏情况下（无 0 元素）需要存储 n 个元素",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-010"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "算法空间复杂度为 O(n)，使用了额外辅助存储空间",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-010"
+        ]
+      },
+      "evidenceIds": [
+        "ev-010"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [
+    {
+      "id": "experiment-001",
+      "subject": "LeetCode OJ 测评结果",
+      "purpose": {
+        "statement": "验证 Move Zeros 基线解法在 LeetCode 平台上的正确性与运行耗时",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007",
+          "ev-008"
+        ]
+      },
+      "setup": {
+        "language": "cpp",
+        "compilerOrRuntime": null,
+        "optimization": null,
+        "operatingSystem": null,
+        "hardware": null,
+        "timer": null,
+        "warmup": null,
+        "repetitions": null,
+        "inputGeneration": null
+      },
+      "measurements": [
+        {
+          "inputDescription": "LeetCode 平台上的 21 组测试用例",
+          "inputSize": "21 test cases",
+          "observedValue": "19",
+          "unit": "ms",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        }
+      ],
+      "theoreticalExpectation": null,
+      "observation": {
+        "statement": "21/21 test cases passed，测评状态 Accepted，运行时间 19 ms",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-008"
+        ]
+      },
+      "limitations": [],
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "statement": "输入 nums = [0, 1, 0, 3, 12]，函数运行后 nums 结果变为 [1, 3, 12, 0, 0]",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-006"
+      ]
+    }
+  ],
+  "edgeCases": [],
+  "implementationPitfalls": [],
+  "interviewPlaybook": [
+    {
+      "statement": "在面试中面对问题时，可以先给出一个最直观简单、保证正确性的解法（如使用辅助空间），再分析其复杂度并提出进一步优化的方向",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-010"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:03-03",
+      "to": "lesson:03-04",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "本课给出了 Move Zeros 的 O(n) 空间辅助数组基线解法，并在结尾提出下一课将探讨不需要辅助空间的优化思路。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 45000,
+      "assetId": "asset:video-03-03",
+      "locator": "00:00 - 00:45",
+      "observation": "视频展示标题“面试问题实战”及“LeetCode 283 Move Zeros”，标注公司 Facebook、Bloomberg，讲解如何在 LeetCode 查找题目。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 133000,
+      "endMs": 178000,
+      "assetId": "asset:video-03-03",
+      "locator": "02:13 - 02:58",
+      "observation": "展示 Move Zeros 的中文题面翻译：给定一个数组 nums，写一个函数，将数组中所有的 0 挪到数组的末尾，而维持其他所有非 0 元素的相对位置。举例 [0, 1, 0, 3, 12] -> [1, 3, 12, 0, 0]。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 200000,
+      "endMs": 335000,
+      "assetId": "asset:video-03-03",
+      "locator": "03:20 - 05:35",
+      "observation": "展示 LeetCode 解题框，切换演示 C++、Java、Python、C、Swift 等语言的模板代码结构。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_visual",
+      "startMs": 335000,
+      "endMs": 365000,
+      "assetId": "asset:video-03-03",
+      "locator": "05:35 - 06:05",
+      "observation": "幻灯片动画演示：将非零元素 [1, 3, 12] 取出放进新容器，再填充回原数组，剩余位置填 0。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 365000,
+      "endMs": 481000,
+      "assetId": "asset:video-03-03",
+      "locator": "06:05 - 08:01",
+      "observation": "老师在 CLion 中编写 moveZeroes C++ 函数，新建 vector<int> nonZeroElements 保存非零元素，再放回 nums 并补零。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 481000,
+      "endMs": 579000,
+      "assetId": "asset:video-03-03",
+      "locator": "08:01 - 09:39",
+      "observation": "在 main 函数中用 arr [0, 1, 0, 3, 12] 初始化 vector，调用 Solution().moveZeroes，打印输出 1 3 12 0 0。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 579000,
+      "endMs": 640000,
+      "assetId": "asset:video-03-03",
+      "locator": "09:39 - 10:40",
+      "observation": "将代码复制到 LeetCode OJ，点击 Run Code 和 Submit Solution。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_visual",
+      "startMs": 640000,
+      "endMs": 678000,
+      "assetId": "asset:video-03-03",
+      "locator": "10:40 - 11:18",
+      "observation": "提交结果详情界面显示“21 / 21 test cases passed. Status: Accepted. Runtime: 19 ms”。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 710000,
+      "endMs": 742000,
+      "assetId": "asset:video-03-03",
+      "locator": "11:50 - 12:22",
+      "observation": "老师在代码上方添加注释“// 时间复杂度: O(n)”，口述遍历了两次数组。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-010",
+      "sourceType": "video_combined",
+      "startMs": 742000,
+      "endMs": 807520,
+      "assetId": "asset:video-03-03",
+      "locator": "12:22 - 13:27",
+      "observation": "老师添加注释“// 空间复杂度: O(n)”，指出由于新建了 nonZeroElements 向量，使用了辅助空间，不是原地算法，并提出下一节课的优化方向。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

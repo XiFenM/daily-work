@@ -1,0 +1,590 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "04-03",
+  "chapterId": "04",
+  "titleObserved": "set和map",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 1140.12,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 168000,
+      "topic": "set 与 map 的底层实现对比（数组、顺序数组、平衡二叉搜索树）",
+      "summary": "介绍 set 和 map 的常见操作（insert, find, erase, change），对比普通数组、顺序数组和平衡二叉搜索树在插入、查找、删除操作上的时间复杂度。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 169000,
+      "endMs": 276000,
+      "topic": "Intersection of Two Arrays 基于 std::set 的复杂度分析",
+      "summary": "分析前一课次使用 std::set 解决数组交集问题的复杂度，指出建表、查找插入和导出 vector 的耗时，总结总体时间复杂度为 O(n log n)，空间复杂度为 O(n)。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 277000,
+      "endMs": 335000,
+      "topic": "Intersection of Two Arrays II 基于 std::map 的复杂度分析",
+      "summary": "分析使用 std::map 记录元素频次的解法复杂度，单次查找与修改为 O(log n)，总体时间复杂度为 O(n log n)，空间复杂度为 O(n)。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 336000,
+      "endMs": 375000,
+      "topic": "引入哈希表实现",
+      "summary": "在底层实现对比表中加入哈希表，说明哈希表在平均情况下插入、查找和删除的时间复杂度均达到 O(1)。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 376000,
+      "endMs": 456000,
+      "topic": "哈希表与二叉搜索树的区别：数据的顺序性",
+      "summary": "解释哈希表的主要缺点是失去了数据的顺序性，而平衡二叉搜索树可以维护最大最小值、前驱后继、floor/ceil、rank 和 select 等顺序性质。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 457000,
+      "endMs": 525000,
+      "topic": "C++ 语言中的 map/set 与 unordered_map/unordered_set",
+      "summary": "总结 C++ 中 map 和 set 底层为平衡二叉树，而 unordered_map 和 unordered_set 底层为哈希表。说明在不需要数据顺序性时优先使用无序容器。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 526000,
+      "endMs": 639000,
+      "topic": "使用 std::unordered_set 重构代码并优化复杂度",
+      "summary": "将 Intersection of Two Arrays 的代码重构为 std::unordered_set，使操作单次复杂度降为 O(1)，总体时间复杂度优化至 O(n)。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 640000,
+      "endMs": 705000,
+      "topic": "使用 std::unordered_map 重构代码并优化复杂度",
+      "summary": "将 Intersection of Two Arrays II 的代码重构为 std::unordered_map，时间复杂度由 O(n log n) 优化至 O(n)。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 706000,
+      "endMs": 726000,
+      "topic": "面试考察重点说明",
+      "summary": "强调算法面试重点在于理解并合理使用不同底层实现的容器，而非手写哈希表或平衡二叉树。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 727000,
+      "endMs": 1140120,
+      "topic": "查找表相关练习题目推荐",
+      "summary": "推荐并分析 5 道练习题：242. Valid Anagram、202. Happy Number、290. Word Pattern、205. Isomorphic Strings、451. Sort Characters By Frequency。",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "掌握 set 与 map 的不同底层实现（数组、顺序数组、平衡二叉搜索树、哈希表）在插入、查找、删除操作上的时间复杂度差异。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "理解哈希表相对于平衡二叉搜索树的优缺点，特别是哈希表失去数据顺序性对求最大最小值、前驱后继、rank/select 等操作的影响。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "能在 C++ 中熟练选用 std::set/std::map (平衡二叉树，O(log n)) 与 std::unordered_set/std::unordered_map (哈希表，O(1))，根据问题需求选择合适的查找表结构。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007",
+        "ev-008"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Set",
+      "namesObserved": [
+        "set"
+      ],
+      "role": "reinforces",
+      "definition": "一种只包含唯一键的数据结构，常见操作包括 insert, find, erase。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "Map",
+      "namesObserved": [
+        "map"
+      ],
+      "role": "reinforces",
+      "definition": "一种存储键值对的数据结构，常见操作包括 insert, find, erase 以及修改键对应的值。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "Balanced Binary Search Tree",
+      "namesObserved": [
+        "二分搜索树（平衡）",
+        "平衡二叉树",
+        "平衡的二叉树"
+      ],
+      "role": "introduces",
+      "definition": "一种保持平衡特性的二叉搜索树，插入、查找、删除操作时间复杂度均保持在 O(log n)。在 C++ 中作为 std::set 和 std::map 的底层实现。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-006"
+      ]
+    },
+    {
+      "canonicalName": "Hash Table",
+      "namesObserved": [
+        "哈希表"
+      ],
+      "role": "introduces",
+      "definition": "一种基于哈希映射的数据结构，平均插入、查找、删除时间复杂度为 O(1)，但会失去数据的顺序性。在 C++ 中作为 std::unordered_map 和 std::unordered_set 的底层实现。",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "canonicalName": "Data Ordering Properties",
+      "namesObserved": [
+        "数据的顺序性"
+      ],
+      "role": "introduces",
+      "definition": "数据集中维护元素大小顺序关系的性质，支持查找最大最小值、前驱后继、floor/ceil、rank 排位以及 select 索引等操作。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": null,
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n#include <unordered_set>\n\nusing namespace std;\n\n// 时间复杂度: O(n)\n// 空间复杂度: O(n)\nclass Solution {\npublic:\n    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {\n        \n        // O(n)\n        unordered_set<int> record(nums1.begin(), nums1.end());\n        \n        // O(n)\n        unordered_set<int> resultSet;\n        for( int i = 0 ; i < nums2.size() ; i ++ )\n            if( record.find(nums2[i]) != record.end() )\n                resultSet.insert( nums2[i] );\n                \n        // O(n)\n        return vector<int>(resultSet.begin(), resultSet.end());\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": null,
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n#include <unordered_map>\n\nusing namespace std;\n\n// 时间复杂度: O(n)\n// 空间复杂度: O(n)\nclass Solution {\npublic:\n    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {\n        \n        // O(n)\n        unordered_map<int,int> record;\n        for( int i = 0 ; i < nums1.size() ; i ++ )\n            record[nums1[i]] ++;\n            \n        // O(n)\n        vector<int> resultVector;\n        for( int i = 0 ; i < nums2.size() ; i ++ )\n            if( record[nums2[i]] > 0 ){\n                resultVector.push_back( nums2[i] );\n                record[nums2[i]] --;\n            }\n            \n        return resultVector;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "stateModels": [],
+  "correctness": {
+    "method": "unknown",
+    "claims": [],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "Intersection of Two Arrays (using std::set / BBST)",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(nlogn)",
+      "expressionNormalized": "O(n log n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "遍历 nums1 建 set：n 次插入，单次插入 O(log n)，小计 O(n log n)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "statement": "遍历 nums2 查找并插入 resultSet：查找与插入单次均为 O(log n)，小计 O(n log n)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "statement": "从 resultSet 导出为 vector：遍历树节点耗时 O(n)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "使用 std::set 时，时间复杂度为 O(n log n)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "Intersection of Two Arrays (using std::unordered_set / Hash Table)",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "哈希表建表耗时 O(n)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        },
+        {
+          "statement": "遍历 nums2 查找和插入哈希表单次均为 O(1)，循环总耗时 O(n)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        },
+        {
+          "statement": "导出 vector 耗时 O(n)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "改用 std::unordered_set 后，时间复杂度优化为 O(n)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "id": "cx-003",
+      "subject": "Intersection of Two Arrays II (using std::map / BBST)",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(nlogn)",
+      "expressionNormalized": "O(n log n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "构建 map：对 nums1 每个元素在 map 中计数，单次 O(log n)，总耗时 O(n log n)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "statement": "遍历 nums2：在 map 中查找并修改频次，单次 O(log n)，总耗时 O(n log n)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "使用 std::map 时，时间复杂度为 O(n log n)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "cx-004",
+      "subject": "Intersection of Two Arrays II (using std::unordered_map / Hash Table)",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-008"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "对 nums1 建立哈希表频次映射耗时 O(n)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        },
+        {
+          "statement": "遍历 nums2 在哈希表中查找与更新频次，单次 O(1)，小计 O(n)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "改用 std::unordered_map 后，时间复杂度优化为 O(n)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-008"
+        ]
+      },
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [],
+  "edgeCases": [
+    {
+      "statement": "对于字符串处理题目，需要沟通并考虑空串（Empty String）情况。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "statement": "需要考虑字符集范围（如 ASCII、英文字母、大写与小写敏感性）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "implementationPitfalls": [],
+  "interviewPlaybook": [
+    {
+      "statement": "面试中不需要从底层手写实现平衡二叉树或哈希表，重点在于理解不同容器的优缺点及复杂度，并根据问题需求选择合适的标准库容器。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "statement": "若查找问题不需要保留数据的顺序性（最大最小值、前驱后继、floor/ceil、rank/select），应优先使用基于哈希表实现的 unordered_map 或 unordered_set 以获得 O(1) 的平均操作复杂度。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:04-02",
+      "to": "lesson:04-03",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "Lesson 04-03 extends the discussion of std::map and std::set from previous lessons by analyzing their underlying data structures and introducing unordered variants.",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 168000,
+      "assetId": "asset:video-04-03",
+      "locator": "00:00-02:48",
+      "observation": "幻灯片列出 set 和 map 的常见操作（insert, find, erase, change），并展示普通数组、顺序数组和平衡二叉搜索树的插入、查找、删除复杂度对比表。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 169000,
+      "endMs": 276000,
+      "assetId": "asset:video-04-03",
+      "locator": "02:49-04:36",
+      "observation": "展示 Intersection of Two Arrays 的 C++ 代码，并在代码旁标注 O(n log n) 建表、O(n log n) 查找插入和 O(n) 导出 vector，推导总时间复杂度 O(n log n) 和空间复杂度 O(n)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 277000,
+      "endMs": 335000,
+      "assetId": "asset:video-04-03",
+      "locator": "04:37-05:35",
+      "observation": "展示 Intersection of Two Arrays II 的 C++ 代码，标注建 map 复杂度 O(n log n) 和遍历查找更新复杂度 O(n log n)，总结总时间复杂度 O(n log n)、空间复杂度 O(n)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 336000,
+      "endMs": 375000,
+      "assetId": "asset:video-04-03",
+      "locator": "05:36-06:15",
+      "observation": "底层实现表格中加入“哈希表”一列，标注插入 O(1)、查找 O(1)、删除 O(1)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 376000,
+      "endMs": 456000,
+      "assetId": "asset:video-04-03",
+      "locator": "06:16-07:36",
+      "observation": "幻灯片显示“哈希表的缺点是失去了数据的顺序性”，并列出数据的顺序性涵盖的操作：最大最小值、前驱和后继、floor和ceil、排位 rank、选择 select。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 457000,
+      "endMs": 525000,
+      "assetId": "asset:video-04-03",
+      "locator": "07:37-08:45",
+      "observation": "幻灯片显示 C++ 语言中 map 和 set 底层为平衡二叉树，unordered_map 和 unordered_set 底层为哈希表。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 526000,
+      "endMs": 639000,
+      "assetId": "asset:video-04-03",
+      "locator": "08:46-10:39",
+      "observation": "在 IDE 中修改 Intersection of Two Arrays 代码，包含 <unordered_set>，将 set<int> 改为 unordered_set<int>，修改注释中时间复杂度为 O(n)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 640000,
+      "endMs": 726000,
+      "assetId": "asset:video-04-03",
+      "locator": "10:40-12:06",
+      "observation": "在 IDE 中修改 Intersection of Two Arrays II 代码，包含 <unordered_map>，将 map<int,int> 改为 unordered_map<int,int>，修改注释中时间复杂度为 O(n)。老师口述面试不考手写哈希表或平衡二叉树，考察重点是容器的选择和使用。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 727000,
+      "endMs": 1139000,
+      "assetId": "asset:video-04-03",
+      "locator": "12:07-18:59",
+      "observation": "依次展示 LeetCode 242 (Valid Anagram)、202 (Happy Number)、290 (Word Pattern)、205 (Isomorphic Strings)、451 (Sort Characters By Frequency) 题面幻灯片，并提示细节与边界考量。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

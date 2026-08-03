@@ -1,0 +1,466 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "06-05",
+  "chapterId": "06",
+  "titleObserved": "BFS和图的最短路径 Perfect Squares",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1280.88,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 85000,
+      "topic": "BFS 与无权图最短路径引入",
+      "summary": "回顾树的层序遍历，引出图上的广度优先遍历（BFS）及其在求解无权图最短路径中的应用与建模抽象。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 85000,
+      "endMs": 224000,
+      "topic": "LeetCode 279 Perfect Squares 题面与边界分析",
+      "summary": "给出 279 号问题题面、完全平方数定义与示例（12 与 13），并分析题目必有解的性质（n 个 1）。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 224000,
+      "endMs": 320000,
+      "topic": "贪心算法局限性分析",
+      "summary": "以 12 为例（9+1+1+1 需 4 个，而 4+4+4 仅需 3 个），举反例反驳直觉上的贪心策略。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 320000,
+      "endMs": 488000,
+      "topic": "对 Perfect Squares 进行图建模",
+      "summary": "将 0~n 视为图节点，相差完全平方数连接有向边，将问题转化为求无权图中 n 到 0 的最短路径。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 488000,
+      "endMs": 735000,
+      "topic": "基线 BFS 代码实现与 MLE 缺陷分析",
+      "summary": "编写基线 BFS 代码，分析由于未去重导致冗余节点指数级扩展引发 Memory Limit Exceeded 的原因。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 735000,
+      "endMs": 1054000,
+      "topic": "代码优化：Visited 数组与提前返回",
+      "summary": "加入 visited 布尔数组去重，并在 a == 0 时提前返回 step+1，提交运行速度提升约 3 倍。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 1054000,
+      "endMs": 1280880,
+      "topic": "扩展练习：Word Ladder & Word Ladder II",
+      "summary": "展示扩展练习题 LeetCode 127 Word Ladder 和 LeetCode 126 Word Ladder II，提倡课后练习与思考。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解如何将看似非图论的问题（如 Perfect Squares）建模为无权图的求最短路径问题",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "掌握使用队列（Queue）实现图的广度优先遍历（BFS）求解无权图最短路径的方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "理解图遍历中 visited 数组去重的关键作用，避免重复节点入队导致 Memory Limit Exceeded (MLE)",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "广度优先遍历",
+      "namesObserved": [
+        "BFS",
+        "广度优先遍历"
+      ],
+      "role": "applies",
+      "definition": "在无权图中利用队列按层扩展探索邻接节点，可用于求解无权图的最短路径问题。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "图建模",
+      "namesObserved": [
+        "建模",
+        "建模为图论问题"
+      ],
+      "role": "introduces",
+      "definition": "将题目中的状态抽象为节点，状态之间的合转换规则抽象为边，从而将算法问题转化为图论问题。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "完全平方数",
+      "namesObserved": [
+        "完全平方数",
+        "Perfect Squares"
+      ],
+      "role": "applies",
+      "definition": "可以表示为某个整数的平方的数，如 1, 4, 9, 16 ...",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "279",
+    "titleObserved": "Perfect Squares",
+    "statement": "给出一个正整数 n，寻找最少的完全平方数，使它们的和为 n。",
+    "constraints": [
+      "n 为正整数 (n > 0)"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "贪心解法：每次优先减去小于等于当前剩余数值的最大完全平方数。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [
+        "贪心策略不成立。例如 12 贪心得到 9+1+1+1（需 4 个），而最优解为 4+4+4（需 3 个）。"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "intermediate",
+      "idea": "图建模 BFS：将 0 到 n 的每个数字视为节点，两数相差完全平方数则连有向边，用队列从 n 出发 BFS 求到 0 的最短路径（未使用 visited 去重）。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [
+        "由于图节点存在多条路径到达同一数字，未去重会导致大量重复节点推入队列，引发 Memory Limit Exceeded (MLE)。"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "id": "solution-003",
+      "stage": "optimized",
+      "idea": "在图建模 BFS 基础上增加 visited 布尔数组标记已入队节点避免重复入队，并在生成下一节点状态为 0 时提前返回 step + 1。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-002"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    int numSquares(int n) {\n        assert( n > 0 );\n        queue< pair<int,int> > q;\n        q.push( make_pair( n , 0 ) );\n        while( !q.empty() ){\n            int num = q.front().first;\n            int step = q.front().second;\n            q.pop();\n            if( num == 0 )\n                return step;\n            for( int i = 1 ; num - i*i >= 0 ; i++ )\n                q.push( make_pair( num - i*i , step + 1 ) );\n        }\n        throw invalid_argument(\"No Solution.\");\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-003",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    int numSquares(int n) {\n        assert( n > 0 );\n        queue< pair<int,int> > q;\n        q.push( make_pair( n , 0 ) );\n        vector<bool> visited(n+1, false);\n        visited[n] = true;\n        while( !q.empty() ){\n            int num = q.front().first;\n            int step = q.front().second;\n            q.pop();\n            for( int i = 1 ; ; i++ ){\n                int a = num - i * i;\n                if( a < 0 )\n                    break;\n                if( a == 0 )\n                    return step + 1;\n                if( !visited[a] ){\n                    q.push( make_pair( a , step + 1 ) );\n                    visited[a] = true;\n                }\n            }\n        }\n        throw invalid_argument(\"No Solution.\");\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-002",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "q",
+          "role": "queue",
+          "meaning": "存储 BFS 遍历过程中的 (num, step) 二元组队列",
+          "updateRule": "初始化推入 (n, 0)；出队头部元素；将可达未访问节点 (a, step + 1) 入队",
+          "evidenceIds": [
+            "ev-005",
+            "ev-006"
+          ]
+        },
+        {
+          "symbol": "visited",
+          "role": "visited_array",
+          "meaning": "大小为 n + 1 的布尔数组，标记数字 0~n 是否已经被推入队列/访问过",
+          "updateRule": "初始 visited[n] = true，其余为 false；当生成新节点 a = num - i*i 且 !visited[a] 时，将 visited[a] 设为 true",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "当队首取出 (num, step)，对 i = 1, 2, ... 计算 a = num - i*i >= 0",
+          "updates": "转移到新数值状态 a，对应步数更新为 step + 1",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-005",
+            "ev-006"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当生成新状态 a = num - i*i == 0 时，提前返回 step + 1",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "由于 1 是完全平方数，任何正整数 n 都可以表示为 n 个 1 的和，因此问题必然存在解，算法必能在有界步数内终止并找到路径。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [],
+  "edgeCases": [
+    {
+      "statement": "正整数 n 的解的存在性：由于 1 是完全平方数，任何正整数 n 均可由 n 个 1 相加构成，因此该问题不存在无解边界。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "图 BFS 未使用 visited 数组去重：由于图存在多条路径到达同一节点，不加去重会导致大量重复节点推入队列，引发 Memory Limit Exceeded (MLE)。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "误用贪心算法：每次减去不超过当前数的最大完全平方数不一定得到最少个数（如 12 贪心得到 9+1+1+1 需 4 个，而 4+4+4 仅需 3 个）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "面试中遇到寻找“最少步骤/最短变换路径”类问题且无明确图结构时，应考虑对状态与转移进行图建模（节点与边的定义）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "警惕贪心算法陷阱，在没有严格数学证明前，通过举反例（如 12 = 9+1+1+1 vs 4+4+4）否定贪心假设。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "在实现图的 BFS 时，必须注意使用 visited 机制去重，并在确定目标节点时做提前返回优化。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:06-04",
+      "to": "lesson:06-05",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "上小节介绍了队列在树中的层序遍历（广度优先遍历），本小节将 BFS 扩展到在无权图中求解最短路径问题。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "from": "lesson:06-05",
+      "to": "lesson:08-07",
+      "type": "alternative_to",
+      "status": "provisional",
+      "rationale": "本课使用 BFS 解决图最短路径与建图问题，与后续章节的图遍历算法形成扩展关系。",
+      "confidence": 0.7,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 85000,
+      "assetId": "asset:video-06-05",
+      "locator": null,
+      "observation": "老师回顾上一小节树的层序遍历，引出图的广度优先遍历（BFS），并说明通过建图可以使用 BFS 解决很多看似非图论的最短路径问题。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 85000,
+      "endMs": 224000,
+      "assetId": "asset:video-06-05",
+      "locator": null,
+      "observation": "展示 LeetCode 279 Perfect Squares 题面及示例 n=12 (4+4+4->3) 和 n=13 (4+9->2)，并论证因 1 为完全平方数，任何正整数 n 必然有解。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 224000,
+      "endMs": 320000,
+      "assetId": "asset:video-06-05",
+      "locator": null,
+      "observation": "分析贪心解法的局限性，以 12 = 9+1+1+1 (4个) 对比 4+4+4 (3个) 证明贪心策略不成立。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 320000,
+      "endMs": 488000,
+      "assetId": "asset:video-06-05",
+      "locator": null,
+      "observation": "给出图建模方案：节点 0~n，若两数相差完全平方数连有向边，将原问题转化为求无权图从 n 到 0 的最短路径，并通过示意图演示 4~9 节点的结构。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 488000,
+      "endMs": 735000,
+      "assetId": "asset:video-06-05",
+      "locator": null,
+      "observation": "在 CLion 中编写 C++ BFS 代码，说明未加入 visited 去重机制会导致重复节点入队，从而引发 Memory Limit Exceeded。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 735000,
+      "endMs": 1054000,
+      "assetId": "asset:video-06-05",
+      "locator": null,
+      "observation": "对代码进行优化：增加 vector<bool> visited 数组避免重复入队，并在 a == 0 时提前返回 step + 1，提到提速约 3 倍。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 1054000,
+      "endMs": 1280880,
+      "assetId": "asset:video-06-05",
+      "locator": null,
+      "observation": "展示练习题 LeetCode 127 Word Ladder 与 LeetCode 126 Word Ladder II，讲解题意并鼓励课后练习。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

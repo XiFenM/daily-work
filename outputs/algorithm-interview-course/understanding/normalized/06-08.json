@@ -1,0 +1,362 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "06-08",
+  "chapterId": "06",
+  "titleObserved": "两种关于 topK 问题求解思路的套路",
+  "contentKind": "concept",
+  "actualDurationSeconds": null,
+  "timeline": [
+    {
+      "startMs": null,
+      "endMs": null,
+      "topic": "优先队列 Top K 回顾与练习",
+      "summary": "文本回顾本章用优先队列求解 Top K，并列出 LeetCode 215 与面试题 17.14 两道相关练习。",
+      "evidenceIds": ["ev-001", "ev-002"]
+    },
+    {
+      "startMs": null,
+      "endMs": null,
+      "topic": "优先队列复杂度",
+      "summary": "文本直接给出优先队列思路的时间复杂度 O(nlogk) 与空间复杂度 O(k)。",
+      "evidenceIds": ["ev-003"]
+    },
+    {
+      "startMs": null,
+      "endMs": null,
+      "topic": "快速排序思想的对照与开放问题",
+      "summary": "文本称快速排序思想可用 O(n) 时间、O(1) 空间解决 Top K，并要求读者比较优先队列方案的优势，但没有在正文中给出答案或实现。",
+      "evidenceIds": ["ev-004", "ev-005"]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "识别优先队列与快速排序思想是文本列出的两类 Top K 求解方向。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-001", "ev-004"]
+    },
+    {
+      "statement": "记住文本给出的优先队列方案复杂度 O(nlogk) 时间与 O(k) 空间。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-003"]
+    },
+    {
+      "statement": "思考文本提出但未回答的开放问题：当优先队列方案的文本复杂度看起来更差时，它解决 Top K 的优势是什么。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-005"]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Top K 问题",
+      "namesObserved": ["topK 问题"],
+      "role": "reinforces",
+      "definition": "文本把 topK 称作一类问题，并列出 LeetCode 215「数组中的第 K 个最大元素」与面试题 17.14「最小 K 个数」；正文没有给出形式化定义。",
+      "evidenceIds": ["ev-001", "ev-002", "ev-004"]
+    },
+    {
+      "canonicalName": "优先队列 Top K",
+      "namesObserved": ["优先队列的思路"],
+      "role": "reinforces",
+      "definition": "文本给出的 Top K 求解方向之一，复杂度口径为 O(nlogk) 时间、O(k) 空间。",
+      "evidenceIds": ["ev-001", "ev-003"]
+    },
+    {
+      "canonicalName": "快速排序思想解决 Top K",
+      "namesObserved": ["快速排序算法的思想"],
+      "role": "contrasts",
+      "definition": "文本列出的另一种 Top K 方向，并直接标为 O(n) 时间、O(1) 空间；正文没有给出算法步骤、情形限定或证明。",
+      "evidenceIds": ["ev-004"]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "使用优先队列处理 Top K；文本没有给出本节具体代码，只直接给出复杂度。",
+      "timeComplexity": "O(nlogk)",
+      "spaceComplexity": "O(k)",
+      "limitations": [],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": ["ev-001", "ev-003"]
+    },
+    {
+      "id": "solution-002",
+      "stage": "alternative",
+      "idea": "使用快速排序算法的思想解决 Top K；文本没有给出 partition、选择过程、复杂度情形或代码。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [
+        "正文没有说明 O(n) 是最坏、平均还是期望口径",
+        "正文没有说明是否允许修改输入或如何处理最坏情况"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": ["ev-004"]
+    }
+  ],
+  "codeArtifacts": [],
+  "stateModels": [],
+  "correctness": {
+    "method": "unknown",
+    "claims": [],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [
+      "本课同时比较两类方案，顶层不合并为单一复杂度"
+    ],
+    "evidenceIds": ["ev-003", "ev-004"]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "优先队列 Top K 时间复杂度",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(nlogk)",
+      "expressionNormalized": "O(n log k)",
+      "normalizationSourceClass": "course_text",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "输入数据规模",
+          "domainOrRelationship": null,
+          "evidenceIds": ["ev-003"]
+        },
+        {
+          "symbol": "k",
+          "meaning": "Top K 中的 k",
+          "domainOrRelationship": null,
+          "evidenceIds": ["ev-003"]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "文本把优先队列思路的时间复杂度写为 O(nlogk)。",
+        "sourceClass": "course_text",
+        "evidenceIds": ["ev-003"]
+      },
+      "evidenceIds": ["ev-003"]
+    },
+    {
+      "id": "cx-002",
+      "subject": "优先队列 Top K 辅助空间复杂度",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(k)",
+      "expressionNormalized": "O(k)",
+      "normalizationSourceClass": "course_text",
+      "variables": [
+        {
+          "symbol": "k",
+          "meaning": "Top K 中的 k",
+          "domainOrRelationship": null,
+          "evidenceIds": ["ev-003"]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "文本把优先队列思路的空间复杂度写为 O(k)。",
+        "sourceClass": "course_text",
+        "evidenceIds": ["ev-003"]
+      },
+      "evidenceIds": ["ev-003"]
+    },
+    {
+      "id": "cx-003",
+      "subject": "快速排序思想 Top K 时间复杂度",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_text",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "输入数据规模",
+          "domainOrRelationship": null,
+          "evidenceIds": ["ev-004"]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [
+        {
+          "statement": "正文未说明复杂度情形与算法细节。",
+          "sourceClass": "editorial_inference",
+          "evidenceIds": ["ev-004"]
+        }
+      ],
+      "conclusion": {
+        "statement": "文本把快速排序思想的时间复杂度写为 O(n)。",
+        "sourceClass": "course_text",
+        "evidenceIds": ["ev-004"]
+      },
+      "evidenceIds": ["ev-004"]
+    },
+    {
+      "id": "cx-004",
+      "subject": "快速排序思想 Top K 辅助空间复杂度",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(1)",
+      "expressionNormalized": "O(1)",
+      "normalizationSourceClass": "course_text",
+      "variables": [],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [
+        {
+          "statement": "正文未说明递归栈、是否原地修改输入或具体实现。",
+          "sourceClass": "editorial_inference",
+          "evidenceIds": ["ev-004"]
+        }
+      ],
+      "conclusion": {
+        "statement": "文本把快速排序思想的空间复杂度写为 O(1)。",
+        "sourceClass": "course_text",
+        "evidenceIds": ["ev-004"]
+      },
+      "evidenceIds": ["ev-004"]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "文本列出 LeetCode 215「数组中的第 K 个最大元素」作为相关练习。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-002"]
+    },
+    {
+      "statement": "文本列出面试题 17.14「最小 K 个数」作为相关练习。",
+      "sourceClass": "course_text",
+      "evidenceIds": ["ev-002"]
+    }
+  ],
+  "edgeCases": [],
+  "implementationPitfalls": [
+    {
+      "statement": "不要把正文中的“快速排序算法的思想”自动补写成带有确定最坏界、partition 细节或输入修改契约的完整 Quickselect 实现。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-004"]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "比较 Top K 方案时，除了 Big O 还应先明确数据是否流式到达、是否允许修改输入、k 与 n 的关系以及需要第 k 个元素还是完整前 k 个集合；这些问题是对文本开放题的编辑展开，不是正文答案。",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-005"]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:06-07",
+      "to": "lesson:06-08",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "06-08 开头回顾使用优先队列解决 Top K，并把讨论扩展为与快速排序思想的比较；具体课次映射仍需结合 06-07 视频双侧复核。",
+      "confidence": 0.95,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-06-08",
+      "locator": "标题后第 1 段",
+      "observation": "文本回顾本小节使用优先队列思路求解 Top K 问题。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-06-08",
+      "locator": "第 2–3 段",
+      "observation": "文本列出 LeetCode 215「数组中的第 K 个最大元素」和面试题 17.14「最小 K 个数」两道相关问题。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-06-08",
+      "locator": "第 4 段",
+      "observation": "文本直接写出优先队列思路时间复杂度 O(nlogk)、空间复杂度 O(k)。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-06-08",
+      "locator": "第 5 段",
+      "observation": "文本称可以使用快速排序算法的思想，以 O(n) 时间、O(1) 空间解决 Top K，但没有给出实现、证明或复杂度情形。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-06-08",
+      "locator": "第 6 段",
+      "observation": "文本提出开放问题：优先队列方案的时间和空间渐进式更差时，它解决 Top K 的优势是什么；正文没有给出答案。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "text",
+      "startMs": null,
+      "endMs": null,
+      "assetId": "asset:text-06-08",
+      "locator": "第 7 段",
+      "observation": "文本推荐了一篇外部力扣题解链接，但没有在本地教程中复述其内容。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "solutionProgression[1]",
+      "reason": "正文使用“快速排序算法的思想”并写 O(n)/O(1)，但没有说明是否具体指 Quickselect、复杂度是平均还是期望、递归栈是否计入空间，也没有提供实现或证明。",
+      "recommendedCheck": "正式笔记如实保留文本口径，同时把算法名称、复杂度情形和空间模型标为未说明；不得用常见 Quickselect 知识替换原文。"
+    },
+    {
+      "field": "interviewPlaybook",
+      "reason": "正文只提出优先队列方案优势的开放问题，没有给出答案。",
+      "recommendedCheck": "任何关于流式数据、不修改输入、最坏界或工程便利性的回答必须标为编辑分析，而不是课程直接结论。"
+    },
+    {
+      "field": "evidence[5]",
+      "reason": "教程包含一个外部力扣链接，本项目没有在本次处理里打开或引用该网页内容。",
+      "recommendedCheck": "只记录链接存在，不把网页内容并入本课证据。"
+    }
+  ],
+  "provenance": {
+    "model": null,
+    "requestId": null,
+    "promptVersion": "text-evidence-v1",
+    "generatedAt": "2026-07-31T06:05:00.000Z"
+  }
+}

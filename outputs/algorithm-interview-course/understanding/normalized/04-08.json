@@ -1,0 +1,572 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "04-08",
+  "chapterId": "04",
+  "titleObserved": "220. Contains Duplicate III",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 654.28,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 64000,
+      "topic": "题目引入与条件分析",
+      "summary": "介绍 LeetCode 220 号问题 Contains Duplicate III，分析题目要求的索引差不超过 k 且数值差不超过 t 的条件。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 64000,
+      "endMs": 239000,
+      "topic": "滑动窗口与顺序查找表思路",
+      "summary": "结合滑动窗口思路，说明在窗口元素集合中查找满足 v - t <= x <= v + t 的元素，需要查找表具备顺序性并支持 ceil/floor 或 lower_bound 操作。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 239000,
+      "endMs": 408000,
+      "topic": "C++ 代码实现与复杂度分析",
+      "summary": "在上一节代码基础上修改，使用 std::set 实现顺序查找表，并讲解 lower_bound 的用法及 O(N log N) 时间复杂度和 O(K) 空间复杂度。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 408000,
+      "endMs": 491000,
+      "topic": "LeetCode 提交与整型溢出坑点",
+      "summary": "将代码提交至 LeetCode 发现 Wrong Answer，分析测试用例中由于 32 位整型相加减产生的溢出问题。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 491000,
+      "endMs": 591000,
+      "topic": "类型转换修复与最终 Accepted",
+      "summary": "将 set<int> 修改为 set<long long>，并将计算过程强转为 long long 类型，再次提交获得 Accepted。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 591000,
+      "endMs": 654280,
+      "topic": "本章总结",
+      "summary": "总结查找表相关问题，强调 map/set 在算法面试中的重要性及与面试官沟通变量范围的实用建议。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解并掌握利用滑动窗口与二分搜索树（有序查找表）解决区间范围内数值匹配问题",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "掌握 C++ std::set 中 lower_bound 方法在范围查找中的具体应用",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "识别整型加减运算中的整型溢出（Integer Overflow）陷阱并使用 64 位整型（long long）进行修复",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "有序查找表",
+      "namesObserved": [
+        "具有顺序性的查找表",
+        "二叉搜索树底层实现的查找表"
+      ],
+      "role": "introduces",
+      "definition": "利用二叉搜索树等底层结构维护元素顺序性的查找表，支持寻找大于等于或小于等于给定值的元素操作（如 ceil、floor、lower_bound）。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "滑动窗口",
+      "namesObserved": [
+        "滑动窗口"
+      ],
+      "role": "applies",
+      "definition": "在数组上维护固定大小（不超过 k）的连续元素区间，随着遍历向右滑动，实时插入新元素并移除超窗元素。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "整型溢出",
+      "namesObserved": [
+        "整形溢出"
+      ],
+      "role": "reinforces",
+      "definition": "当数值计算结果超过 32 位 signed int 表达范围（例如 INT_MAX 2147483647 与正数相加）时产生的数值wrap-around现象。",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "220",
+    "titleObserved": "Contains Duplicate III",
+    "statement": "给出一个整形数组nums，是否存在索引i和j，使得nums[i]和nums[j]之间的差别不超过给定的整数t，且i和j之间的差别不超过给定的整数k。",
+    "constraints": [
+      "|nums[i] - nums[j]| <= t",
+      "|i - j| <= k"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "intermediate",
+      "idea": "维护大小不超过 k 的滑动窗口查找表 record（使用 std::set<int>），针对当前元素 nums[i]，利用 lower_bound 查找 >= nums[i] - t 的最小元素，检查其是否 <= nums[i] + t。",
+      "timeComplexity": "O(N log N)",
+      "spaceComplexity": "O(K)",
+      "limitations": [
+        "当 nums[i] + t 或 nums[i] - t 超过 32 位整型范围时，会出现整型溢出导致 Wrong Answer。"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "optimized",
+      "idea": "在滑动窗口 + std::set 的基础上，将查找表容器类型改为 std::set<long long>，并在计算 lower_bound 查询边界时将 nums[i] 和 t 强制转换为 long long，防止整型溢出。",
+      "timeComplexity": "O(N log N)",
+      "spaceComplexity": "O(K)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-002"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t) {\n        set<int> record;\n        for (int i = 0; i < nums.size(); i++) {\n            if (record.lower_bound(nums[i] - t) != record.end() &&\n                *record.lower_bound(nums[i] - t) <= nums[i] + t)\n                return true;\n            record.insert(nums[i]);\n            if (record.size() == k + 1)\n                record.erase(nums[i - k]);\n        }\n        return false;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t) {\n        set<long long> record;\n        for (int i = 0; i < nums.size(); i++) {\n            if (record.lower_bound((long long)nums[i] - (long long)t) != record.end() &&\n                *record.lower_bound((long long)nums[i] - (long long)t) <= (long long)nums[i] + (long long)t)\n                return true;\n            record.insert(nums[i]);\n            if (record.size() == k + 1)\n                record.erase(nums[i - k]);\n        }\n        return false;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "sliding_window",
+      "variables": [
+        {
+          "symbol": "record",
+          "role": "lookup_table",
+          "meaning": "保存当前长度不超过 k 的滑动窗口内的元素集合",
+          "updateRule": "每轮插入 nums[i]，当 record.size() == k + 1 时删除 nums[i - k]",
+          "evidenceIds": [
+            "ev-002",
+            "ev-003"
+          ]
+        },
+        {
+          "symbol": "i",
+          "role": "pointer",
+          "meaning": "当前正在处理的数组 nums 下标",
+          "updateRule": "i++",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "regions": [
+        {
+          "notation": "record",
+          "meaning": "窗口 [i - k, i - 1] 内的所有元素",
+          "evidenceIds": [
+            "ev-002",
+            "ev-003"
+          ]
+        }
+      ],
+      "invariant": {
+        "statement": "保持 record 中最多有 k 个元素",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "transitions": [
+        {
+          "condition": "record.lower_bound(nums[i] - t) != record.end() && *record.lower_bound(nums[i] - t) <= nums[i] + t",
+          "updates": "return true",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        },
+        {
+          "condition": "record.size() == k + 1",
+          "updates": "record.erase(nums[i - k])",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "termination": null,
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "只要查找表中存在满足 >= v - t 且 <= v + t 的元素，即证明存在元素与当前元素差值的绝对值不超过 t",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": [
+      "ev-003"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "containsNearbyAlmostDuplicate",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(nlogn)",
+      "expressionNormalized": "O(n log n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "role": "input_size",
+          "meaning": "数组 nums 的长度",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "对于数组中的每一个元素，在基于二叉搜索树实现的 std::set 中执行 lower_bound、insert 和 erase 操作的时间复杂度均是 log n",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "整体时间复杂度为 O(n log n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "containsNearbyAlmostDuplicate",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(k)",
+      "expressionNormalized": "O(k)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "k",
+          "role": "parameter",
+          "meaning": "允许的最大索引差，也是查找表 record 存储的最大元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "查找表 record 中最多维持 k + 1 个元素，占用的额外空间与 k 成正比",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "空间复杂度为 O(k)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "inequality",
+      "sourceKind": "shown_in_video",
+      "rawText": "fabs(v - x) <= t",
+      "normalizedText": "|v - x| <= t",
+      "variables": [
+        {
+          "symbol": "v",
+          "meaning": "当前处理的新元素值",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "symbol": "x",
+          "meaning": "窗口中待寻找的目标元素值",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "symbol": "t",
+          "meaning": "允许的最大数值差",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "formula-002",
+      "kind": "inequality",
+      "sourceKind": "shown_in_video",
+      "rawText": "v - t <= x <= v + t",
+      "normalizedText": "v - t <= x <= v + t",
+      "variables": [
+        {
+          "symbol": "v",
+          "meaning": "当前处理的新元素值",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "symbol": "t",
+          "meaning": "允许的最大数值差",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "experiments": [],
+  "examples": [],
+  "edgeCases": [
+    {
+      "statement": "输入数组为 [0, 2147483647]，k = 1，t = 2147483647，计算 nums[i] + t 时触发 32 位整型溢出",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在 32 位整型系统或 LeetCode 测试用例中，直接对 int 类型的 nums[i] 和 t 进行 nums[i] + t 或 nums[i] - t 运算会发生整型溢出，需要将 set 及计算表达式强转为 64 位整型（long long）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "在面试中遇到计算数值差或和的问题，如果考虑到可能有整型溢出的坑点，应及时与面试官沟通确认变量的取值范围",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:04-07",
+      "to": "lesson:04-08",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "本课次在 04-07 Contain Duplicate II（相等判断）的基础上扩展为 Contain Duplicate III（差值不超过 t 的范围判断），继续复用了滑动窗口与查找表的组合框架，但将哈希查找表升级为支持顺序查找的二叉搜索树查找表。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 64000,
+      "assetId": "asset:video-04-08",
+      "locator": "00:00 - 01:04",
+      "observation": "幻灯片展示题目 220. Contains Duplicate III 题面：给出整形数组 nums，问是否存在索引 i 和 j，使得 nums[i] 和 nums[j] 差别不超过 t，且 i 和 j 差别不超过 k。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 64000,
+      "endMs": 239000,
+      "assetId": "asset:video-04-08",
+      "locator": "01:04 - 03:59",
+      "observation": "通过滑动窗口图示演示在 [l+1, l+k] 窗口内寻找满足 |v - x| <= t 即 v - t <= x <= v + t 的元素；指出查找表若具有顺序性，可调用 ceil(v - t) 或 C++ 中的 lower_bound(v - t) 并验证其是否 <= v + t。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 239000,
+      "endMs": 408000,
+      "assetId": "asset:video-04-08",
+      "locator": "03:59 - 06:48",
+      "observation": "屏幕编写 C++ 代码，将 unordered_set 改为 set<int>，加入 record.lower_bound(nums[i] - t) 判断条件。老师标注注释：时间复杂度 O(nlogn)，空间复杂度 O(k)。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 408000,
+      "endMs": 491000,
+      "assetId": "asset:video-04-08",
+      "locator": "06:48 - 08:11",
+      "observation": "在 LeetCode 提交代码，系统返回 Submission Result: Wrong Answer。测试用例 Input: [0, 2147483647], k=1, t=2147483647。分析原因为 nums[i] + t 触发 32 位整型溢出。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 491000,
+      "endMs": 591000,
+      "assetId": "asset:video-04-08",
+      "locator": "08:11 - 09:51",
+      "observation": "在 IDE 中将 set<int> 修改为 set<long long>，并将查询点强制转换为 (long long)nums[i] - (long long)t 和 (long long)nums[i] + (long long)t。重新提交后 LeetCode 显示 Accepted。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 591000,
+      "endMs": 654280,
+      "assetId": "asset:video-04-08",
+      "locator": "09:51 - 10:54",
+      "observation": "老师对第四章查找表问题进行小结，建议在面试中主动向面试官了解变量数据范围以防溢出。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "6491c9ebc7c6463089ea4720dce1660a",
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": "2026-07-29T11:29:27.000Z"
+  }
+}

@@ -1,0 +1,448 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "08-08",
+  "chapterId": "08",
+  "titleObserved": "回溯法是经典人工智能的基础 N Queens",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1521.96,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 65000,
+      "topic": "回溯法与经典人工智能",
+      "summary": "讲解回溯法是经典/传统人工智能的核心基础，与现代基于机器学习的人工智能技术路径进行区分与概述。",
+      "evidenceIds": ["ev-001"]
+    },
+    {
+      "startMs": 65000,
+      "endMs": 170000,
+      "topic": "N-Queens 题面与示例说明",
+      "summary": "介绍 LeetCode 51 N-Queens 题目要求，以 4 皇后与 8 皇后棋盘为例，讲解棋盘冲突规则（同行、同列、对角线）及字符串格式的输出表达。",
+      "evidenceIds": ["ev-002"]
+    },
+    {
+      "startMs": 170000,
+      "endMs": 393000,
+      "topic": "4 皇后递归回溯树与剪枝流程",
+      "summary": "以 4 皇后为例，按行逐层摆放皇后，演示搜索树的展开、冲突检测以及无法继续摆放时的回溯过程。",
+      "evidenceIds": ["ev-003"]
+    },
+    {
+      "startMs": 393000,
+      "endMs": 683000,
+      "topic": "列与对角线冲突的快速判断方法",
+      "summary": "推导使用布尔数组进行冲突标记的方法：col[i]标记列，dia1[i+j]标记对角线1（右上到左下），dia2[i-j+n-1]标记对角线2（左上到右下）。",
+      "evidenceIds": ["ev-004"]
+    },
+    {
+      "startMs": 683000,
+      "endMs": 1245000,
+      "topic": "N-Queens 代码实现",
+      "summary": "逐行编写并讲解 C++ 代码实现，包含递归函数 putQueen、棋盘生成函数 generateBoard 及递归终止条件与状态恢复（回溯）。",
+      "evidenceIds": ["ev-005"]
+    },
+    {
+      "startMs": 1245000,
+      "endMs": 1318000,
+      "topic": "测试与运行验证",
+      "summary": "在 main 函数中测试 n=4 与 n=8 的情况，在 IDE 中编译运行并验证打印出的所有皇后棋盘解。",
+      "evidenceIds": ["ev-006"]
+    },
+    {
+      "startMs": 1318000,
+      "endMs": 1374000,
+      "topic": "相关问题：N-Queens II",
+      "summary": "介绍 LeetCode 52 (N-Queens II)，说明其只需计算解的个数，可以结合优化思路进行求解。",
+      "evidenceIds": ["ev-007"]
+    },
+    {
+      "startMs": 1374000,
+      "endMs": 1521960,
+      "topic": "补充思考题与章节总结",
+      "summary": "提出 LeetCode 37 (Sudoku Solver 解数独) 练习题，总结递归与回溯法章节，引出下一章动态规划的主题。",
+      "evidenceIds": ["ev-008"]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解 N 皇后问题的棋盘约束规则（同行、同列、两条斜对角线不能同时出现两个皇后）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-002"]
+    },
+    {
+      "statement": "掌握用递归回溯按行摆放皇后的树状搜索与剪枝框架。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-003", "ev-005"]
+    },
+    {
+      "statement": "掌握用一维布尔数组和坐标公式（i+j 与 i-j+n-1）以 O(1) 时间快速判断列和两条对角线冲突的技巧。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-004"]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Backtracking",
+      "namesObserved": ["回溯法", "递归回溯"],
+      "role": "introduces",
+      "definition": "在搜索树中按深度优先方式尝试候选解，当发现当前路径不满足约束时返回上一层并撤销选择（回溯）的算法。",
+      "evidenceIds": ["ev-001", "ev-003", "ev-005"]
+    },
+    {
+      "canonicalName": "N-Queens Problem",
+      "namesObserved": ["N 皇后问题", "n皇后问题", "八皇后问题"],
+      "role": "applies",
+      "definition": "在 n*n 的棋盘上摆放 n 个皇后，使得任意两个皇后不能处于同一行、同一列或同一对角线上。",
+      "evidenceIds": ["ev-002"]
+    },
+    {
+      "canonicalName": "Pruning",
+      "namesObserved": ["剪枝"],
+      "role": "applies",
+      "definition": "在递归搜索过程中，提前判断当前节点不合法或无法产生解，直接截断该分支不继续深入递归。",
+      "evidenceIds": ["ev-003", "ev-004"]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "51",
+    "titleObserved": "51. N-Queens",
+    "statement": "求 n 皇后问题的所有解。将 n 个皇后摆放在 n*n 的棋盘格中，使得横、竖和两个对角线方向均不会同时出现两个皇后。",
+    "constraints": [
+      "输入 n 为棋盘大小与皇后数量。",
+      "输出包含所有合法棋盘布局的集合，每个布局用字符串数组表示，字符 '.' 表示空格，'Q' 表示皇后。"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": ["ev-002"]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "按行递归摆放皇后，每行尝试列 i (0 到 n-1)。使用三个辅助布尔数组 col、dia1、dia2 快速检查当前位置是否与已有皇后冲突；若无冲突则标记状态、递归处理下一行、最后撤销标记并回溯。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": ["code-001"],
+      "stateModelIds": ["state-001"],
+      "evidenceIds": ["ev-003", "ev-004", "ev-005"]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "partial",
+      "code": "using namespace std;\n\nclass Solution {\nprivate:\n    vector<vector<string>> res;\n    vector<bool> col, dia1, dia2;\n\n    void putQueen(int n, int index, vector<int>& row){\n        if( index == n ){\n            res.push_back( generateBoard(n, row) );\n            return;\n        }\n\n        for( int i = 0 ; i < n ; i ++ ){\n            // 尝试将第index行的皇后摆放在第i列\n            if( !col[i] && !dia1[index+i] && !dia2[index-i+n-1] ){\n                row.push_back(i);\n                col[i] = true;\n                dia1[index+i] = true;\n                dia2[index-i+n-1] = true;\n                putQueen(n, index+1, row);\n                col[i] = false;\n                dia1[index+i] = false;\n                dia2[index-i+n-1] = false;\n                row.pop_back();\n            }\n        }\n\n        return;\n    }\n\n    vector<string> generateBoard( int n, vector<int>& row ){\n        assert( row.size() == n );\n        vector<string> board(n, string(n, '.'));\n        for( int i = 0 ; i < n ; i ++ )\n            board[i][row[i]] = 'Q';\n        return board;\n    }\n\npublic:\n    vector<vector<string>> solveNQueens(int n) {\n        res.clear();\n\n        col = vector<bool>(n, false);\n        dia1 = vector<bool>(2*n-1, false);\n        dia2 = vector<bool>(2*n-1, false);\n\n        vector<int> row;\n        putQueen(n, 0, row);\n\n        return res;\n    }\n};",
+      "ocrUncertainties": [
+        "IDE 将第 1 行显示为折叠的“#include ...”，具体头文件不可见；规范化代码只保留屏幕可核对的 using namespace std 与 Solution 类实现，本地编译时另加最小头文件脚手架。"
+      ],
+      "verification": "compiled",
+      "evidenceIds": ["ev-005"]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "index",
+          "role": "recursion_depth",
+          "meaning": "当前递归处理的行号，从 0 到 n-1",
+          "updateRule": "每层递归递增 index+1",
+          "evidenceIds": ["ev-005"]
+        },
+        {
+          "symbol": "row",
+          "role": "partial_solution",
+          "meaning": "存储已摆放皇后的列位置，row[r] 表示第 r 行皇后所在的列索引",
+          "updateRule": "选择列 i 时 row.push_back(i)，回溯时 row.pop_back()",
+          "evidenceIds": ["ev-005"]
+        },
+        {
+          "symbol": "col",
+          "role": "visitation_mask",
+          "meaning": "大小为 n 的布尔数组，col[i] 为 true 表示第 i 列已有皇后",
+          "updateRule": "递归前设为 true，递归后置为 false",
+          "evidenceIds": ["ev-004", "ev-005"]
+        },
+        {
+          "symbol": "dia1",
+          "role": "visitation_mask",
+          "meaning": "大小为 2n-1 的布尔数组，dia1[index+i] 为 true 表示对角线 1 (右上-左下，和为 index+i) 已有皇后",
+          "updateRule": "递归前设为 true，递归后置为 false",
+          "evidenceIds": ["ev-004", "ev-005"]
+        },
+        {
+          "symbol": "dia2",
+          "role": "visitation_mask",
+          "meaning": "大小为 2n-1 的布尔数组，dia2[index-i+n-1] 为 true 表示对角线 2 (左上-右下，差加 n-1 为 index-i+n-1) 已有皇后",
+          "updateRule": "递归前设为 true，递归后置为 false",
+          "evidenceIds": ["ev-004", "ev-005"]
+        }
+      ],
+      "regions": [],
+      "invariant": {
+        "statement": "进入 putQueen(n, index, row) 时，row 恰好记录第 0 到 index-1 行各自选择的列，且 col、dia1、dia2 恰好标记这些皇后占用的列与两类对角线；当前部分棋盘不存在冲突",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": ["ev-003", "ev-004", "ev-005"]
+      },
+      "transitions": [
+        {
+          "condition": "!col[i] && !dia1[index+i] && !dia2[index-i+n-1]",
+          "updates": "选择：row.push_back(i); col[i]=true; dia1[index+i]=true; dia2[index-i+n-1]=true; 递归：putQueen(n, index+1, row); 撤销：col[i]=false; dia1[index+i]=false; dia2[index-i+n-1]=false; row.pop_back();",
+          "preserves": {
+            "statement": "候选通过三项冲突检查后，选择并标记会建立下一层的不变量；递归返回后按相反顺序撤销标记与 row 元素，恢复当前层进入该候选之前的状态",
+            "sourceClass": "editorial_inference",
+            "evidenceIds": ["ev-004", "ev-005"]
+          },
+          "evidenceIds": ["ev-005"]
+        }
+      ],
+      "termination": {
+        "statement": "当 index == n 时表示已成功在所有 n 行中摆放了皇后，把当前 row 转换成棋盘解放入结果集 res 并返回。",
+        "sourceClass": "course_direct",
+        "evidenceIds": ["ev-005"]
+      },
+      "evidenceIds": ["ev-004", "ev-005"]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "加入 res 的每个棋盘都恰有每行一个皇后，且列与两类对角线均无冲突，因此所有输出都是合法解",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": ["ev-003", "ev-004", "ev-005"]
+      },
+      {
+        "statement": "每一行的所有列都会被依次尝试，代码只剪掉与已有皇后冲突的候选，因此任何合法布局都对应搜索树中的一条未被错误剪除的路径",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": ["ev-003", "ev-005"]
+      }
+    ],
+    "stateModelIds": ["state-001"],
+    "obligations": [
+      {
+        "phase": "initialization",
+        "statement": "solveNQueens 先清空 res，把 col、dia1、dia2 全部初始化为 false，并以空 row 和 index=0 进入递归，满足根状态不变量",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": ["ev-005"]
+      },
+      {
+        "phase": "preservation",
+        "statement": "三项冲突检查保证新皇后与当前部分解兼容；选择后同步更新 row 与三个标记数组，递归返回后全部撤销，使兄弟候选从相同父状态开始",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": ["ev-004", "ev-005"]
+      },
+      {
+        "phase": "termination",
+        "statement": "index 每次递归增加 1，达到 n 时立即记录解并返回；每层 for 循环也只有 n 个候选，因此搜索有限",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": ["ev-005"]
+      },
+      {
+        "phase": "postcondition",
+        "statement": "根调用返回后，res 中只含合法棋盘，且按行选择能够形成的每个合法布局都已被枚举一次",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": ["ev-003", "ev-004", "ev-005"]
+      }
+    ]
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "formula",
+      "sourceKind": "shown_in_video",
+      "rawText": "i + j",
+      "normalizedText": "i + j",
+      "variables": [
+        {
+          "symbol": "i",
+          "meaning": "行索引",
+          "domainOrRelationship": "0 <= i < n",
+          "evidenceIds": ["ev-004"]
+        },
+        {
+          "symbol": "j",
+          "meaning": "列索引",
+          "domainOrRelationship": "0 <= j < n",
+          "evidenceIds": ["ev-004"]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": ["ev-004"]
+    },
+    {
+      "id": "formula-002",
+      "kind": "formula",
+      "sourceKind": "shown_in_video",
+      "rawText": "i - j + n - 1",
+      "normalizedText": "i - j + n - 1",
+      "variables": [
+        {
+          "symbol": "i",
+          "meaning": "行索引",
+          "domainOrRelationship": "0 <= i < n",
+          "evidenceIds": ["ev-004"]
+        },
+        {
+          "symbol": "j",
+          "meaning": "列索引",
+          "domainOrRelationship": "0 <= j < n",
+          "evidenceIds": ["ev-004"]
+        },
+        {
+          "symbol": "n",
+          "meaning": "棋盘边长",
+          "domainOrRelationship": "n > 0",
+          "evidenceIds": ["ev-004"]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": ["ev-004"]
+    }
+  ],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "当 n=4 时，输出两个解：解 1 为 [\".Q..\", \"...Q\", \"Q...\", \"..Q.\"]，解 2 为 [\"..Q.\", \"Q...\", \"...Q\", \".Q..\"]。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-002", "ev-006"]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "课程代码按 n >= 1 的题目输入设计；当 n == 0 时，表达式 2*n-1 不能作为这份实现的安全 vector 长度",
+      "sourceClass": "editorial_inference",
+      "evidenceIds": ["ev-005"]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "对角线 2 的映射公式为 index - i + n - 1，若漏写 + n - 1 会导致数组下标出现负数引发越界。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-004", "ev-005"]
+    },
+    {
+      "statement": "在递归返回后，必须将 col、dia1、dia2 标志位重新置为 false 并弹出 row 的最后一个元素，否则会影响后续分支的尝试。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-005"]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "LeetCode 52 (N-Queens II) 只需要求出 N 皇后的解的个数，可以复用相同回溯框架并继续研究课程提到的多种优化思路。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-007"]
+    },
+    {
+      "statement": "课程把 LeetCode 37 (Sudoku Solver 解数独) 列为回溯法练习，题目页展示了 Snapchat 和 Uber 标识，但没有在本课展开完整解法。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-008"]
+    }
+  ],
+  "relationCandidates": [],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 65000,
+      "assetId": "asset:video-08-08",
+      "locator": "00:00 - 01:05",
+      "observation": "讲师引入回溯法，强调回溯法是经典/传统人工智能的基础，传统 AI 在很大程度上就是搜索与剪枝。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 65000,
+      "endMs": 170000,
+      "assetId": "asset:video-08-08",
+      "locator": "01:05 - 02:50",
+      "observation": "展示 LeetCode 51. N-Queens 题目，解释 n 皇后摆放规则（横、竖、两对角线方向均不能同时出现两个皇后）及 n=4 时的格式化输出结果。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 170000,
+      "endMs": 393000,
+      "assetId": "asset:video-08-08",
+      "locator": "02:50 - 06:33",
+      "observation": "通过 4x4 棋盘图示说明按行逐层摆放皇后的递归搜索树，演示在某位置冲突时剪枝并回溯到上一行重新选择的过程。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 393000,
+      "endMs": 683000,
+      "assetId": "asset:video-08-08",
+      "locator": "06:33 - 11:23",
+      "observation": "详细推导冲突标记方法：竖向用 col[i]；对角线1（右上到左下）共 2n-1 条，索引为 i+j；对角线2（左上到右下）共 2n-1 条，索引为 i-j+n-1。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 683000,
+      "endMs": 1245000,
+      "assetId": "asset:video-08-08",
+      "locator": "11:23 - 20:45",
+      "observation": "屏幕编写完整 C++ 解法代码，包含 solveNQueens、私有递归函数 putQueen 及棋盘构造函数 generateBoard，展示显式的状态修改与回溯恢复步骤。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 1245000,
+      "endMs": 1318000,
+      "assetId": "asset:video-08-08",
+      "locator": "20:45 - 21:58",
+      "observation": "在 IDE 中通过 main 函数运行 n=4（屏幕打印出 2 个棋盘解），随后改为 n=8 并滚动查看大量棋盘输出；模型音频证据记录讲师称共有 92 个解。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 1318000,
+      "endMs": 1374000,
+      "assetId": "asset:video-08-08",
+      "locator": "21:58 - 22:54",
+      "observation": "展示 LeetCode 52. N-Queens II 幻灯片，说明该题求解的个数，Zenefits 面试题。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 1374000,
+      "endMs": 1521960,
+      "assetId": "asset:video-08-08",
+      "locator": "22:54 - 25:21.96",
+      "observation": "展示 LeetCode 37. Sudoku Solver (Snapchat, Uber 面试题)，留作练习；总结递归与回溯法章节，预告下一章动态规划。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "7ae2ec60ac3842d7a678029a34d1928d",
+    "promptVersion": "video-evidence-v1.5",
+    "generatedAt": "2026-07-31T09:06:19.000Z"
+  }
+}

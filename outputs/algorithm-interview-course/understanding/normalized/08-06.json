@@ -1,0 +1,362 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "08-06",
+  "chapterId": "08",
+  "titleObserved": "二维平面上的回溯法 Word Search",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1305.16,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 30000,
+      "topic": "课程引入与二维平面回溯概要",
+      "summary": "介绍由一维数组回溯向二维平面回溯问题的拓展，核心思路一致但存在具体编程技巧。",
+      "evidenceIds": ["ev-001"]
+    },
+    {
+      "startMs": 30000,
+      "endMs": 123000,
+      "topic": "LeetCode 79 Word Search 题意讲解",
+      "summary": "讲解 Word Search 题目要求：在二维字符网格中寻找目标单词，可横向或纵向连接，每个位置字符在单次路径中只能使用一次。",
+      "evidenceIds": ["ev-002"]
+    },
+    {
+      "startMs": 123000,
+      "endMs": 368000,
+      "topic": "样例分析与动画匹配演练",
+      "summary": "通过 3x4 字母网格示例，演示 ABCCED、SEE 与 ABCB 的匹配/回溯过程，强调字符冲突与已访问位置的退回逻辑。",
+      "evidenceIds": ["ev-003"]
+    },
+    {
+      "startMs": 368000,
+      "endMs": 468000,
+      "topic": "网格搜索的递归树模型",
+      "summary": "将 2D 平面搜索建模为四叉递归树（上、右、下、左），说明规模缩减与树形搜索关系。",
+      "evidenceIds": ["ev-004"]
+    },
+    {
+      "startMs": 468000,
+      "endMs": 705000,
+      "topic": "代码实现：主函数框架与 searchWord 递归契约",
+      "summary": "在 C++ 中编写 exist 函数的双重循环驱动，并定义私有递归函数 searchWord 及其参数语义。",
+      "evidenceIds": ["ev-005"]
+    },
+    {
+      "startMs": 705000,
+      "endMs": 933000,
+      "topic": "编程技巧：四方向偏移量数组",
+      "summary": "引入 d[4][2] 偏移量数组，将四方向顺时针移动逻辑化简为一个 4 次迭代的 for 循环。",
+      "evidenceIds": ["ev-006"]
+    },
+    {
+      "startMs": 933000,
+      "endMs": 1070000,
+      "topic": "代码实现：越界检查函数 inArea",
+      "summary": "实现辅助函数 inArea(x, y) 检查新坐标是否在网格合法行列范围内 [0, m) 与 [0, n)。",
+      "evidenceIds": ["ev-007"]
+    },
+    {
+      "startMs": 1070000,
+      "endMs": 1200000,
+      "topic": "代码实现：visited 访问数组与回溯状态恢复",
+      "summary": "使用 visited 二维布尔数组标记路径，展现“标记占有 -> 递归四方向 -> 撤销标记 (visited=false)”的回溯核心逻辑。",
+      "evidenceIds": ["ev-008"]
+    },
+    {
+      "startMs": 1200000,
+      "endMs": 1305160,
+      "topic": "visited 初始化与全程序总结",
+      "summary": "在 exist 中对 visited 进行 m*n 规模的 false 初始化，并总结二维平面回溯解题要点。",
+      "evidenceIds": ["ev-009"]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "掌握在二维平面网格上运用递归与回溯算法寻找字符路径的方法。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-001", "ev-004"]
+    },
+    {
+      "statement": "掌握使用方向偏移量数组 d[4][2] 简化四方向（上右下左）坐标移动的代码技巧。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-006"]
+    },
+    {
+      "statement": "掌握在网格回溯中使用 visited 数组进行路径去重以及“选择-递归-撤销”的状态恢复机制。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-008"]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "回溯法",
+      "namesObserved": ["回溯法"],
+      "role": "applies",
+      "definition": "通过递归试探解空间树，当遇到不匹配或不合法状态时退回上一步并恢复状态的算法模式。",
+      "evidenceIds": ["ev-001", "ev-008"]
+    },
+    {
+      "canonicalName": "二维平面搜索",
+      "namesObserved": ["二维平面上使用回溯法"],
+      "role": "introduces",
+      "definition": "在矩阵/网格结构中，从某坐标出发向相邻格子（如上下左右）进行路径探寻的搜索算法。",
+      "evidenceIds": ["ev-001", "ev-004"]
+    },
+    {
+      "canonicalName": "方向偏移量数组",
+      "namesObserved": ["位移数组", "偏移量数组"],
+      "role": "introduces",
+      "definition": "将二维平面移动坐标变化（如上:-1,0；右:0,1；下:1,0；左:0,-1）预先存入的二维常量数组，用以简化多方向遍历代码。",
+      "evidenceIds": ["ev-006"]
+    },
+    {
+      "canonicalName": "访问标记数组",
+      "namesObserved": ["visited"],
+      "role": "introduces",
+      "definition": "用于记录当前搜索路径上哪些网格节点已被访问的布尔矩阵，避免同一节点在同一路径中被重复使用。",
+      "evidenceIds": ["ev-008"]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "79",
+    "titleObserved": "Word Search",
+    "statement": "给定一个二维平面的字母和一个单词，看是否可以在这个二维平面上找到该单词。找到该单词的规则是，从一个字母出发，可以横向或者纵向连接二维平面上的其他字母。同一个位置的字母只能使用一次。",
+    "constraints": [
+      "横向或纵向连接二维平面上的字母",
+      "同一个位置的字母只能使用一次"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": ["ev-002"]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "遍历二维网格中的每个坐标 (i, j) 作为起始点，调用递归函数 searchWord。searchWord 在当前位置与 word[index] 匹配时，将其在 visited 数组中标记为 true，随后利用方向偏移量数组依次向上下左右四个方向递归尝试匹配下一个字符 word[index+1]。若四个方向均无法成功匹配后续字符，则将 visited 标记恢复为 false 并返回 false（回溯）。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": ["code-001"],
+      "stateModelIds": ["state-001"],
+      "evidenceIds": ["ev-005", "ev-006", "ev-007", "ev-008", "ev-009"]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n#include <cassert>\n\nusing namespace std;\n\nclass Solution {\nprivate:\n    int d[4][2] = {{-1,0}, {0,1}, {1,0}, {0,-1}};\n    int m, n;\n    vector<vector<bool>> visited;\n\n    bool inArea(int x, int y) {\n        return x >= 0 && x < m && y >= 0 && y < n;\n    }\n\n    // 从board[startx][starty]开始，寻找word[index...word.size())\n    bool searchWord(const vector<vector<char>>& board, const string& word, int index, int startx, int starty) {\n        if (index == word.size() - 1) {\n            return board[startx][starty] == word[index];\n        }\n\n        if (board[startx][starty] == word[index]) {\n            visited[startx][starty] = true;\n            // 从startx, starty出发，向四个方向寻找\n            for (int i = 0; i < 4; i++) {\n                int newx = startx + d[i][0];\n                int newy = starty + d[i][1];\n                if (inArea(newx, newy) && !visited[newx][newy] && searchWord(board, word, index + 1, newx, newy)) {\n                    return true;\n                }\n            }\n            visited[startx][starty] = false;\n        }\n        return false;\n    }\n\npublic:\n    bool exist(vector<vector<char>>& board, string word) {\n        m = board.size();\n        assert(m > 0);\n        n = board[0].size();\n\n        visited = vector<vector<bool>>(m, vector<bool>(n, false));\n\n        for (int i = 0; i < board.size(); i++) {\n            for (int j = 0; j < board[i].size(); j++) {\n                if (searchWord(board, word, 0, i, j)) {\n                    return true;\n                }\n            }\n        }\n        return false;\n    }\n};\n\nint main() {\n    return 0;\n}",
+      "ocrUncertainties": [],
+      "verification": "compiled",
+      "evidenceIds": ["ev-005", "ev-006", "ev-007", "ev-008", "ev-009"]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "visited[startx][starty]",
+          "role": "path_visited_flag",
+          "meaning": "记录坐标 (startx, starty) 在当前搜索路径中是否已被访问使用",
+          "updateRule": "进入节点匹配成功时置 true，四方向递归失败后重置为 false",
+          "evidenceIds": ["ev-008"]
+        },
+        {
+          "symbol": "index",
+          "role": "target_word_index",
+          "meaning": "当前正在匹配的目标单词 word 的字符索引",
+          "updateRule": "向相邻有效格子递归时传入 index + 1",
+          "evidenceIds": ["ev-005", "ev-008"]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "board[startx][starty] == word[index]",
+          "updates": "visited[startx][starty] = true -> 遍历四方向调用 searchWord(..., index + 1, newx, newy)；成功时沿调用链直接返回 true，失败时 visited[startx][starty] = false 后返回 false",
+          "preserves": null,
+          "evidenceIds": ["ev-008"]
+        }
+      ],
+      "termination": {
+        "statement": "当 index == word.size() - 1 时，不再展开邻居，直接返回当前位置字符是否等于 word[index]。",
+        "sourceClass": "course_direct",
+        "evidenceIds": ["ev-005"]
+      },
+      "evidenceIds": ["ev-008"]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "在 searchWord 中，当前位置匹配后先设 visited 为 true；四方向均失败时恢复为 false，使其他分支仍可使用该位置。若某个方向成功，函数沿调用链直接返回 true，因此该成功路径无需为后续搜索恢复状态。",
+        "sourceClass": "editorial_inference",
+        "evidenceIds": ["ev-008"]
+      }
+    ],
+    "stateModelIds": ["state-001"],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "网格为 [['A','B','C','E'],['S','F','C','S'],['A','D','E','E']] 时，查找 'ABCCED' 返回 true，查找 'SEE' 返回 true，查找 'ABCB' 返回 false。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-003"]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "递归终止边界情况：当 index == word.size() - 1 时，直接返回 board[startx][starty] == word[index] 的比较结果。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-005"]
+    },
+    {
+      "statement": "网格边界安全：输入二维数组 board 必须至少有一行（m > 0），避免访问 board[0] 时发生越界异常。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-007", "ev-009"]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在多方向递归搜索失败后，容易忘记将 visited[startx][starty] 重置为 false，导致后续从其他路径访问该节点时错误被拦截。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-008"]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "二维平面网格搜索代码中，推荐定义 d[4][2] 方向偏移量数组与 inArea 越界检查函数，能大幅简化四方向分支代码并增强可读性。",
+      "sourceClass": "course_direct",
+      "evidenceIds": ["ev-006", "ev-007"]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:08-06",
+      "to": "lesson:08-07",
+      "type": "contrasts_with",
+      "status": "provisional",
+      "rationale": "08-06 的 visited 表示当前单词路径占用，失败回退时恢复；08-07 的 visited 表示陆地已归入连通块，递归返回后永久保留。两课最关键的联系是访问状态生命周期相反。",
+      "confidence": 0.9,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": ["ev-008"]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 30000,
+      "assetId": "asset:video-08-06",
+      "locator": null,
+      "observation": "视频幻灯片展示标题‘二维平面上使用回溯法’，口述说明之前回溯问题多在一维数组上，本节介绍二维平面上的回溯法。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 30000,
+      "endMs": 123000,
+      "assetId": "asset:video-08-06",
+      "locator": null,
+      "observation": "屏幕展示 LeetCode 79. Word Search 题面及 Facebook/Microsoft/Bloomberg 标签，给出在二维平面中寻找单词的规则与同一个位置字符只能使用一次的约束。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 123000,
+      "endMs": 368000,
+      "assetId": "asset:video-08-06",
+      "locator": null,
+      "observation": "屏幕展示 3x4 字符二维数组及 ABCCED => true, SEE => true, ABCB => false 样例，并动画演示沿着坐标查找字符以及遇到不匹配/已使用字符退回（回溯）的过程。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 368000,
+      "endMs": 468000,
+      "assetId": "asset:video-08-06",
+      "locator": null,
+      "observation": "屏幕展示递归树动画，从寻找 'ABCCED', 'A' 节点向 上、右、下、左 四个分支展开，解释网格搜索的递归结构。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 468000,
+      "endMs": 705000,
+      "assetId": "asset:video-08-06",
+      "locator": null,
+      "observation": "老师在 IDE 中编写 C++ 代码，写出 exist 函数的双重循环驱动以及私有函数 searchWord 的参数定义与递归基（index == word.size() - 1）。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 705000,
+      "endMs": 933000,
+      "assetId": "asset:video-08-06",
+      "locator": null,
+      "observation": "老师在类中定义 int d[4][2] = {{-1,0}, {0,1}, {1,0}, {0,-1}}，讲解上右下左四方向位移数组技巧，并在 searchWord 中用 0..3 的 for 循环进行坐标更新。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 933000,
+      "endMs": 1070000,
+      "assetId": "asset:video-08-06",
+      "locator": null,
+      "observation": "老师编写 inArea(x, y) 辅助函数，检查 0 <= x < m && 0 <= y < n，同时在 exist 中初始化成员变量 m 和 n 并添加 assert(m > 0)。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 1070000,
+      "endMs": 1200000,
+      "assetId": "asset:video-08-06",
+      "locator": null,
+      "observation": "老师引入 vector<vector<bool>> visited 数组，在 searchWord 中编写 visited[startx][starty] = true，递归调用后再写 visited[startx][starty] = false，重点讲解回溯与状态撤销。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 1200000,
+      "endMs": 1305160,
+      "assetId": "asset:video-08-06",
+      "locator": null,
+      "observation": "老师补全 exist 中 visited 的初始化代码（m 行 n 列 false），完成整个算法编写并做总结。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "b2cc59f231624aeea6bb58027715ca08",
+    "promptVersion": "video-evidence-v1.5",
+    "generatedAt": "2026-07-31T09:01:37.000Z"
+  }
+}

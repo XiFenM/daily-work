@@ -14,7 +14,7 @@ outputs/algorithm-interview-course/
   reports/                                 可再生成的中间报告
 ```
 
-`work/` 和 `outputs/` 都被 Git 忽略。原始课程素材需要另行备份，不能把 Git 忽略当作备份。
+Git 对本项目采用选择性归档：`incoming/` 中的课程源材料，以及 `work/`、`outputs/` 中的视频、音频、图片和其他二进制产物继续忽略；渲染 Prompt、请求快照、原始/规范化响应、重试记录和 QA 报告等 Markdown/JSON 过程证据纳入版本控制。历史快照仍由 `.prettierignore` 排除在批量格式化之外，避免归档时改写模型响应或已执行 Prompt。原始课程素材仍需另行备份，不能把 Git 忽略当作备份。目录占位与压缩参数分别见 `work/algorithm-interview-course/incoming/README.md` 和 `work/algorithm-interview-course/compressed/README.md`。
 
 ## 阶段 1：素材盘点与映射
 

@@ -1,0 +1,461 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "07-04",
+  "chapterId": "07",
+  "titleObserved": "注意递归的终止条件 Path Sum",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 724.2,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 21000,
+      "topic": "课程主题引入：注意递归的终止条件",
+      "summary": "介绍在设计递归算法时找到正确的递归终止条件的重要性，指出某些情况下递归终止条件存在陷阱。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 21000,
+      "endMs": 158000,
+      "topic": "LeetCode 112 Path Sum 题目讲解与递归结构分析",
+      "summary": "给出 LeetCode 112 题面：判断二叉树中是否存在一条从根到叶子的路径且节点和为 sum。分析递归分解结构：在左右子树中寻找和为 sum - root->val 的路径。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 158000,
+      "endMs": 288000,
+      "topic": "初步递归代码实现与错误展示",
+      "summary": "编写直觉式的递归实现，以 root == NULL 作为终止条件判断 sum == 0，指出该解法提交给 LeetCode 会返回 Wrong Answer。",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 288000,
+      "endMs": 461000,
+      "topic": "反例剖析：根到叶子节点路径定义与陷阱解析",
+      "summary": "使用单侧子树节点 counterexample 演示错误原因：当节点只有一个孩子时，访问空子树会误把非叶子节点当成路径终点，从而错误判断存在路径。",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 461000,
+      "endMs": 632000,
+      "topic": "修正递归终止条件与代码重构",
+      "summary": "修改终止条件：叶节点定义为 root->left == NULL && root->right == NULL，此时直接判断 root->val == sum；对 root == NULL 特判返回 false。并对代码进行逻辑或运算简写重构。",
+      "evidenceIds": [
+        "ev-008",
+        "ev-009"
+      ]
+    },
+    {
+      "startMs": 632000,
+      "endMs": 668000,
+      "topic": "练习题推荐 1：LeetCode 111 Minimum Depth of Binary Tree",
+      "summary": "回顾并推荐 LeetCode 111 题（求二叉树最低深度），强调其对根到叶节点路径定义和终止条件的要求。",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    },
+    {
+      "startMs": 668000,
+      "endMs": 724200,
+      "topic": "练习题推荐 2：LeetCode 404 Sum of Left Leaves",
+      "summary": "展示 LeetCode 404 题面（求所有左叶节点之和），分析左叶节点的特征与示例，提醒写递归时注意终止条件的微小差异。",
+      "evidenceIds": [
+        "ev-011"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "明确二叉树“根到叶子节点”路径的定义，即路径终端必须是左右孩子均为空的叶节点。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "掌握判断递归终止条件的正确视角，避免错误地把空节点 root == NULL 误判为到达叶子节点。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006",
+        "ev-008"
+      ]
+    },
+    {
+      "statement": "学会使用逻辑或运算简化二叉树左右子树递归调用的代码结构。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Recursion Termination Condition",
+      "namesObserved": [
+        "递归终止条件"
+      ],
+      "role": "introduces",
+      "definition": "递归算法中无需进一步递归调用即可直接返回结果的基准情况（Base Case）。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-008"
+      ]
+    },
+    {
+      "canonicalName": "Root-to-Leaf Path",
+      "namesObserved": [
+        "从根到叶子的路径"
+      ],
+      "role": "reinforces",
+      "definition": "起点为二叉树根节点、终点为叶节点（左右子树均为空）的一条完整路径。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-007"
+      ]
+    },
+    {
+      "canonicalName": "Leaf Node",
+      "namesObserved": [
+        "叶子节点",
+        "叶节点"
+      ],
+      "role": "applies",
+      "definition": "二叉树中左子树和右子树同时为空（root->left == NULL && root->right == NULL）的节点。",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "112",
+    "titleObserved": "112. Path Sum",
+    "statement": "给出一棵二叉树以及一个数字sum，判断在这棵二叉树上是否存在一条从根到叶子的路径，其路径上的所有节点和为sum。",
+    "constraints": [
+      "路径必须是从根节点到叶子节点",
+      "叶节点定义为左右孩子均为空的节点"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "直接把 root == NULL 当作递归终止条件，若空节点处 sum == 0 则返回 true，否则递归判断 left 或 right 是否满足 sum - root->val。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [
+        "对于只有一个孩子的非叶子节点，访问其空孩子时会触发 root == NULL 且 sum == 0，导致将非叶节点误判为路径终点返回 true。"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-004",
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "optimized",
+      "idea": "重新定义终止条件：首先若 root == NULL 返回 false；若 root 满足 root->left == NULL && root->right == NULL（叶子节点），直接返回 root->val == sum。非叶节点递归检查左右子树是否包含和为 sum - root->val 的路径。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-002",
+        "code-003"
+      ],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-008",
+        "ev-009"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    bool hasPathSum(TreeNode* root, int sum) {\n        if( root == NULL )\n            return sum == 0;\n        \n        if( hasPathSum( root->left, sum - root->val ) )\n            return true;\n        \n        if( hasPathSum( root->right, sum - root->val ) )\n            return true;\n        \n        return false;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    bool hasPathSum(TreeNode* root, int sum) {\n        if( root == NULL )\n            return false;\n        \n        if( root->left == NULL && root->right == NULL )\n            return root->val == sum;\n        \n        if( hasPathSum( root->left, sum - root->val ) )\n            return true;\n        \n        if( hasPathSum( root->right, sum - root->val ) )\n            return true;\n        \n        return false;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "id": "code-003",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    bool hasPathSum(TreeNode* root, int sum) {\n        if( root == NULL )\n            return false;\n        \n        if( root->left == NULL && root->right == NULL )\n            return root->val == sum;\n        \n        return hasPathSum( root->left, sum - root->val ) ||\n               hasPathSum( root->right, sum - root->val );\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "stateModels": [],
+  "correctness": {
+    "method": "recursive_contract",
+    "claims": [
+      {
+        "statement": "递归必须在真正达到二叉树叶节点（root->left == NULL && root->right == NULL）时终止判断节点值是否等于剩余 sum，空树/空指针直接返回 false。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-008"
+        ]
+      }
+    ],
+    "stateModelIds": [],
+    "obligations": [
+      {
+        "phase": "initialization",
+        "statement": "如果输入根节点为空（root == NULL），没有任何根到叶节点路径，返回 false。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-008"
+        ]
+      },
+      {
+        "phase": "termination",
+        "statement": "当到达叶节点（root->left == NULL && root->right == NULL）时，终止递归，结果取决于 root->val == sum。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-008"
+        ]
+      }
+    ]
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "二叉树根节点为5，左孩子4（包含孩子11->7,2），右孩子8（包含孩子13,4->1）；查找 sum=22。存在路径 5 -> 4 -> 11 -> 2，其和为 22，返回 true。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "二叉树节点5仅有右孩子8（8有左右孩子13和4），查找 sum=5。5非叶节点，不能算作有效根到叶子路径，程序应返回 false。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "输入空二叉树（root == NULL），直接返回 false。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    },
+    {
+      "statement": "节点只有一个孩子（如节点只有右孩子），其空左孩子不是叶节点，不能在此处触发成功终止条件。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "将 root == NULL 作为唯一的终止条件并在其中判断 return sum == 0。当节点单侧子树为空时会误触发该分支，把非叶节点当作路径结尾。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "面试中遇到树的“根到叶节点”路径问题时，务必明确叶节点的代码定义为 left == NULL && right == NULL，而不是简单的 root == NULL。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:07-04",
+      "to": "lesson:07-05",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "07-04 在 Path Sum 中强调了根到叶子路径终止条件的处理，07-05 进一步扩展为定义 Binary Tree Path 递归问题。",
+      "confidence": 0.8,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 21000,
+      "assetId": "asset:video-07-04",
+      "locator": "00:00 - 00:21",
+      "observation": "幻灯片展示标题《注意递归的终止条件》，老师讲解设计递归算法时找到正确的终止条件非常重要，某些问题终止条件存在陷阱。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 21000,
+      "endMs": 51000,
+      "assetId": "asset:video-07-04",
+      "locator": "00:21 - 00:51",
+      "observation": "幻灯片展示 LeetCode 112 Path Sum（Microsoft 面试题），要求判断二叉树是否存在从根到叶节点路径，节点和为 sum。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 51000,
+      "endMs": 158000,
+      "assetId": "asset:video-07-04",
+      "locator": "00:51 - 02:38",
+      "observation": "老师画图演示树结构（根为5），说明寻找和为22的路径示例（5->4->11->2）。讲解递归逻辑：在左右子树中寻找和为 sum - 5 (17) 的路径。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 158000,
+      "endMs": 260000,
+      "assetId": "asset:video-07-04",
+      "locator": "02:38 - 04:20",
+      "observation": "IDE 中展示初版代码：if(root == NULL) return sum == 0; 随后对 left 和 right 分别调用 hasPathSum(root->left, sum - root->val)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 260000,
+      "endMs": 288000,
+      "assetId": "asset:video-07-04",
+      "locator": "04:20 - 04:48",
+      "observation": "老师指出初版代码提交到 LeetCode 会返回 Wrong Answer，引导学员思考代码 Bug。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 288000,
+      "endMs": 373000,
+      "assetId": "asset:video-07-04",
+      "locator": "04:48 - 06:13",
+      "observation": "幻灯片展示反例：根节点为5，没有左孩子，只有右孩子8。目标 sum=5。初版代码在检查左孩子空节点时满足 root == NULL，且 sum - 5 = 0，从而错误地返回 true。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 373000,
+      "endMs": 461000,
+      "assetId": "asset:video-07-04",
+      "locator": "06:13 - 07:41",
+      "observation": "老师强调题目要求是从根到“叶子”的路径，节点5不是叶节点（因为有右孩子8）。错误根源在于递归终止条件只看 node == NULL，忽视了上一层父节点是否为叶节点。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 461000,
+      "endMs": 556000,
+      "assetId": "asset:video-07-04",
+      "locator": "07:41 - 09:16",
+      "observation": "IDE 中修改代码：增加特判 if(root == NULL) return false; 终止条件改为 if(root->left == NULL && root->right == NULL) return root->val == sum;。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 556000,
+      "endMs": 632000,
+      "assetId": "asset:video-07-04",
+      "locator": "09:16 - 10:32",
+      "observation": "IDE 中重构代码：使用 return hasPathSum(root->left, sum - root->val) || hasPathSum(root->right, sum - root->val); 替换两条单独的 if 语句。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-010",
+      "sourceType": "video_combined",
+      "startMs": 632000,
+      "endMs": 668000,
+      "assetId": "asset:video-07-04",
+      "locator": "10:32 - 11:08",
+      "observation": "幻灯片展示补充练习 1：111. Minimum Depth of Binary Tree，求从根到叶节点的最短路径长度，提示思考终止条件的定义。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-011",
+      "sourceType": "video_combined",
+      "startMs": 668000,
+      "endMs": 724200,
+      "assetId": "asset:video-07-04",
+      "locator": "11:08 - 12:04",
+      "observation": "幻灯片展示补充练习 2：404. Sum of Left Leaves (Facebook)，求所有左叶节点之和。示例树根3，左9，右20(左15右7)，左叶节点为9和15，答案为24。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

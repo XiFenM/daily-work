@@ -1,0 +1,437 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "08-03",
+  "chapterId": "08",
+  "titleObserved": "排列问题 Permutations",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1142.12,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 19000,
+      "topic": "课程引入与章节主题",
+      "summary": "介绍回溯算法的重要应用方向——排列问题。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 19000,
+      "endMs": 85000,
+      "topic": "LeetCode 46. Permutations 题意讲解",
+      "summary": "给出全排列问题的定义及输入无重复元素数组 [1, 2, 3] 的示例输出。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 85000,
+      "endMs": 255000,
+      "topic": "排列问题的递归树与回溯过程推导",
+      "summary": "以 [1,2,3] 为例通过树形结构推导如何逐个选择元素生成全排列并展示回溯路径。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 255000,
+      "endMs": 359000,
+      "topic": "形式化表达与元素冲突分析",
+      "summary": "给出全排列的递归逻辑表达式，对比电话号码组合问题，强调全排列中已使用元素会影响后续可选择范围。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 359000,
+      "endMs": 905000,
+      "topic": "C++ 代码实现：LeetCode 46 Permutations",
+      "summary": "在 IDE 中编写 generatePermutation 递归函数，使用 used 布尔数组记录元素使用状态并演示状态恢复与递归控制。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 905000,
+      "endMs": 1016000,
+      "topic": "状态恢复逻辑与调试建议",
+      "summary": "总结回溯算法中状态重置（pop_back 与 used[i]=false）的重要性，并建议通过打印日志或画递归树进行调试。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 1016000,
+      "endMs": 1142120,
+      "topic": "思考题：LeetCode 47. Permutations II",
+      "summary": "引入包含重复元素的全排列问题，展示输入 [1,1,2] 的输出结果并引导课后思考。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解如何利用递归树与回溯思想解决无重复元素数组的全排列问题（LeetCode 46）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "掌握使用布尔数组 `used` 记录选择状态，并在回溯返回时手动重置状态的编程模式。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "排列问题 Permutations",
+      "namesObserved": [
+        "排列问题",
+        "Permutations",
+        "全排列问题"
+      ],
+      "role": "introduces",
+      "definition": "从给定的无重复元素集合中，按照所有可能的顺序构造包含所有元素的组合排列的问题。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "回溯算法",
+      "namesObserved": [
+        "回溯算法",
+        "回溯法",
+        "回溯的过程"
+      ],
+      "role": "reinforces",
+      "definition": "通过深度优先搜索在树形解空间中探索所有可能性，并在递归返回时撤销先前所做选择以尝试其他路径的方法。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-005"
+      ]
+    },
+    {
+      "canonicalName": "状态重置",
+      "namesObserved": [
+        "状态的回溯",
+        "状态恢复",
+        "恢复原状"
+      ],
+      "role": "introduces",
+      "definition": "在回溯函数完成对当前分支的递归探索并返回前，将添加的候选元素移除并将访问标记重置为未使用的操作。",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "46",
+    "titleObserved": "46. Permutations",
+    "statement": "给定一个整形数组，其中的每一个元素都各不相同，返回这些元素所有排列的可能。",
+    "constraints": [
+      "输入为整形数组",
+      "其中的每一个元素都各不相同"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "使用递归回溯算法，维护当前已生成的排列向量 p 以及辅助布尔数组 used 标记元素是否已被使用。每层循环中依次选取未使用的元素加入 p 并标记 used[i]=true，递归向下生成下一个位置；在递归返回后，执行 p.pop_back() 并重置 used[i]=false 恢复状态。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [
+        "需要开辟辅助的 used 布尔数组来追踪元素使用状态"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <vector>\nusing namespace std;\n\nclass Solution {\nprivate:\n    vector<vector<int>> res;\n    vector<bool> used;\n\n    void generatePermutation(const vector<int>& nums, int index, vector<int>& p) {\n        if (index == nums.size()) {\n            res.push_back(p);\n            return;\n        }\n\n        for (int i = 0; i < nums.size(); i++) {\n            if (!used[i]) {\n                p.push_back(nums[i]);\n                used[i] = true;\n                generatePermutation(nums, index + 1, p);\n                p.pop_back();\n                used[i] = false;\n            }\n        }\n        return;\n    }\n\npublic:\n    vector<vector<int>> permute(vector<int>& nums) {\n        res.clear();\n        if (nums.size() == 0)\n            return res;\n\n        used = vector<bool>(nums.size(), false);\n        vector<int> p;\n        generatePermutation(nums, 0, p);\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "p",
+          "role": "partial solution",
+          "meaning": "保存当前递归路径上已经构建的元素排列（已选 index 个元素）",
+          "updateRule": "选定 nums[i] 时执行 push_back(nums[i])，在递归返回后执行 pop_back() 恢复",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "symbol": "used",
+          "role": "visited mask",
+          "meaning": "布尔数组，记录 nums[i] 是否已经在当前排列 p 中被占用",
+          "updateRule": "选定 nums[i] 时置为 true，递归返回后重置为 false",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "symbol": "index",
+          "role": "recursion depth",
+          "meaning": "当前正在处理并填充的排列位置索引（从 0 开始递增）",
+          "updateRule": "递归调用时传入 index + 1",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "遍历 i 从 0 至 nums.size()-1，且 !used[i]",
+          "updates": "p.push_back(nums[i]); used[i] = true; generatePermutation(nums, index + 1, p); p.pop_back(); used[i] = false;",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 index == nums.size() 时，说明当前排列 p 已包含 nums 中的所有元素，将 p 存入 res 结果集中并返回。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "recursive_contract",
+    "claims": [
+      {
+        "statement": "通过隐式树形递归探索与 used 布尔数组去重选择，能穷举所有无重复选择的元素顺序组合，从而生成输入数组的所有全排列。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002",
+          "ev-003",
+          "ev-004"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": [
+      {
+        "phase": "initialization",
+        "statement": "初始调用时 p 为空向量，index 为 0，used 数组全为 false，满足处理第 0 个位置的状态契约。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      {
+        "phase": "preservation",
+        "statement": "在递归推进前挑选 !used[i] 的元素入栈并标记 used[i]=true；在递归返回后恢复 p.pop_back() 和 used[i]=false，保障相邻搜索分支不受影响。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004",
+          "ev-005"
+        ]
+      },
+      {
+        "phase": "termination",
+        "statement": "当 index 达到 nums.size() 时说明排列构造完毕，保存结果并终止递归。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      }
+    ]
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "recurrence",
+      "sourceKind": "shown_in_video",
+      "rawText": "Perms(nums[0...n-1]) = {取出一个数字} + Perms(nums[{0...n-1} - 取出的数字])",
+      "normalizedText": "Perms(nums[0...n-1]) = {取出一个数字} + Perms(nums[{0...n-1} - 取出的数字])",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 nums 中的元素个数",
+          "domainOrRelationship": "正整数",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "对于输入 [1, 2, 3]，返回二维数组 [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]]。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "思考题（LeetCode 47）：对于包含重复元素的输入 [1, 1, 2]，返回不重复的全排列列表 [[1,1,2], [1,2,1], [2,1,1]]。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "当输入数组为空（nums.size() == 0）时，程序直接返回空的结果集 res。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "初学者编写回溯算法时容易忘记恢复状态（如忘记写 p.pop_back() 或 used[i] = false），导致后续分支搜索的状态污染与结果错误。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "面试中解答全排列问题时，首先需要确认输入数组是否包含重复元素；无重复元素时可用 used 数组跟踪元素占用并进行经典回溯。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-003",
+        "ev-006"
+      ]
+    }
+  ],
+  "relationCandidates": [],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 19000,
+      "endMs": 85000,
+      "assetId": "asset:video-08-03",
+      "locator": null,
+      "observation": "幻灯片展示 LeetCode 46. Permutations 题目，微软与 LinkedIn 面试题。给定元素各不相同的整形数组，返回所有排列可能。示例：[1,2,3] -> [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]]。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 85000,
+      "endMs": 255000,
+      "assetId": "asset:video-08-03",
+      "locator": null,
+      "observation": "讲解使用 [1,2,3] 构造排列的树形递归过程：根节点选择 1，剩余 [2,3] 构造排列；选 2 剩余 3 得到 1 2 3；回溯后再选 3 剩余 2 得到 1 3 2；以此类推展示整棵递归树与回溯过程。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 255000,
+      "endMs": 359000,
+      "assetId": "asset:video-08-03",
+      "locator": null,
+      "observation": "板书写出公式：Perms(nums[0...n-1]) = {取出一个数字} + Perms(nums[{0...n-1} - 取出的数字])。对比电话号码组合，说明全排列中选出元素会影响后续递归的可用数据范围。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 359000,
+      "endMs": 905000,
+      "assetId": "asset:video-08-03",
+      "locator": null,
+      "observation": "在 CLion 中敲写 C++ 代码：包含私有变量 vector<vector<int>> res; vector<bool> used; 函数 generatePermutation 与 permute，实现终止条件判断、循环遍历、used[i] 判断、push_back、used[i]=true、递归调用、pop_back 与 used[i]=false。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 905000,
+      "endMs": 1016000,
+      "assetId": "asset:video-08-03",
+      "locator": null,
+      "observation": "讲师强调回溯的本质是‘回到原位’，递归函数本身自动回退，但手动设置的变量（p 与 used）必须手动恢复。并建议通过打印输出信息或画递归树来调试代码。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 1016000,
+      "endMs": 1142120,
+      "assetId": "asset:video-08-03",
+      "locator": null,
+      "observation": "展示 LeetCode 47. Permutations II 题目（含重复元素）。示例：[1,1,2] -> [[1,1,2], [1,2,1], [2,1,1]]，指出存在重复元素时解法不同，留作思考题。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.5",
+    "generatedAt": null
+  }
+}

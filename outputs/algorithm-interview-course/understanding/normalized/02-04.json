@@ -1,0 +1,683 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "02-04",
+  "chapterId": "02",
+  "titleObserved": "复杂度试验",
+  "contentKind": "experiment",
+  "actualDurationSeconds": 893.48,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 62000,
+      "topic": "复杂度实验引言",
+      "summary": "介绍为什么需要通过实验来验证算法的时间复杂度，例如避免误将 O(n^2) 的算法当成 O(n log n)。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 62000,
+      "endMs": 144000,
+      "topic": "数据规模与实验方法论",
+      "summary": "回顾 1 秒内可处理的数据规模原则，并提出通过每次将数据规模提高两倍来观察算法耗时变化趋势的实验方法。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 144000,
+      "endMs": 256000,
+      "topic": "测试代码结构与辅助工具",
+      "summary": "展示头文件 MyAlgorithmTester.h 和 MyUtil.h，定义待测试的四种算法和测试用例生成函数。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 256000,
+      "endMs": 502000,
+      "topic": "O(N) 算法（findMax）的实验验证",
+      "summary": "运行 findMax 算法测试，观察数据规模每翻倍一次，运行耗时大约翻倍（2倍）的现象。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 502000,
+      "endMs": 598000,
+      "topic": "O(N^2) 算法（selectionSort）的实验验证",
+      "summary": "运行选择排序算法测试，验证当数据规模翻倍时，耗时变为原来的约 4 倍（2^2 倍）。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 598000,
+      "endMs": 798000,
+      "topic": "O(log N) 算法（binarySearch）的理论推导与实验验证",
+      "summary": "推导 log(2N)/log(N) = 1 + log2/logN，解释随着 N 增大耗时增加极不明显的现象，并运行实验验证。",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 798000,
+      "endMs": 893480,
+      "topic": "O(N log N) 算法（mergeSort）的实验验证与总结",
+      "summary": "运行自底向上的归并排序算法测试，观察耗时随数据规模翻倍呈稍大于 2 倍增长，总结与 O(N^2) 的本质区别。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "掌握通过将数据规模每次翻倍（2倍）并测量运行时间变化趋势来实验验证算法实际时间复杂度的做法。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "理解对于 O(N) 算法，规模翻倍时耗时增加约 2 倍；对于 O(N^2) 算法，规模翻倍时耗时增加约 4 倍。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "理解 O(log N) 算法在数据规模翻倍后效率增加的比例为 1 + log2/logN，随 N 增大增加量微乎其微。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "理解 O(N log N) 算法的增长趋势接近 O(N)（稍大于 2 倍），与 O(N^2) 有本质性能差距。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "复杂度实验",
+      "namesObserved": [
+        "复杂度实验",
+        "复杂度试验"
+      ],
+      "role": "introduces",
+      "definition": "通过不断扩大输入数据规模（如每次翻倍）并记录运行墙钟时间，根据耗时比例变化趋势验证算法时间复杂度的实践方法。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "二分查找",
+      "namesObserved": [
+        "binarySearch",
+        "二分查找法"
+      ],
+      "role": "applies",
+      "definition": "在有序数组中查找特定元素，时间复杂度为 O(log N) 的算法。",
+      "evidenceIds": [
+        "ev-003",
+        "ev-006"
+      ]
+    },
+    {
+      "canonicalName": "归并排序",
+      "namesObserved": [
+        "mergeSort",
+        "自底向上的归并排序"
+      ],
+      "role": "applies",
+      "definition": "分治法排序算法，时间复杂度为 O(N log N)。",
+      "evidenceIds": [
+        "ev-003",
+        "ev-008"
+      ]
+    },
+    {
+      "canonicalName": "选择排序",
+      "namesObserved": [
+        "selectionSort",
+        "选择排序法"
+      ],
+      "role": "applies",
+      "definition": "双重循环排序算法，时间复杂度为 O(N^2)。",
+      "evidenceIds": [
+        "ev-003",
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "namespace MyAlgorithmTester {\n    // O(logN)\n    int binarySearch(int arr[], int n, int target) {\n        int l = 0, r = n - 1;\n        while (l <= r) {\n            int mid = l + (r - l) / 2;\n            if (arr[mid] == target) return mid;\n            if (arr[mid] > target) r = mid - 1;\n            else l = mid + 1;\n        }\n        return -1;\n    }\n\n    // O(N)\n    int findMax(int arr[], int n) {\n        assert(n > 0);\n        int res = arr[0];\n        for (int i = 1; i < n; i++)\n            if (arr[i] > res)\n                res = arr[i];\n        return res;\n    }\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "int main() {\n    // 数据规模倍增测试 findMax\n    // O(N)\n    for (int i = 10; i <= 26; i++) {\n        int n = pow(2, i);\n        int *arr = MyUtil::generateRandomArray(n, 0, 100000000);\n\n        clock_t startTime = clock();\n        MyAlgorithmTester::findMax(arr, n);\n        clock_t endTime = clock();\n\n        cout << \"data size 2^\" << i << \" = \" << n << \"\\t\";\n        cout << \"Time cost: \" << double(endTime - startTime) / CLOCKS_PER_SEC << \"\";\n        delete[] arr;\n    }\n    return 0;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "experimental_validation",
+    "claims": [
+      {
+        "statement": "通过计算耗时之比（如耗时(2N)/耗时(N)），公式中的常数系数 C 在相除时被抵消，因此实验趋势只反映数据规模 N 的增长阶数。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      }
+    ]
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "findMax",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(N)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组元素个数",
+          "domainOrRelationship": "正整数",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "一次遍历数组，比较并记录最大值，进行 n 次比较和常数次赋值。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "findMax 算法的时间复杂度为 O(N)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003",
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "selectionSort",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(N^2)",
+      "expressionNormalized": "O(n^2)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "待排序数组元素个数",
+          "domainOrRelationship": "正整数",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "嵌套双重循环，外层 i 从 0 到 n-1，内层 j 从 i+1 到 n-1，比较次数累加求和为 O(n^2)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "选择排序的时间复杂度为 O(N^2)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003",
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003",
+        "ev-005"
+      ]
+    }
+  ],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "formula",
+      "sourceKind": "shown_in_video",
+      "rawText": "log2N / logN = (log2 + logN)/logN = 1 + log2/logN",
+      "normalizedText": "\\frac{\\log(2N)}{\\log(N)} = \\frac{\\log 2 + \\log N}{\\log N} = 1 + \\frac{\\log 2}{\\log N}",
+      "variables": [
+        {
+          "symbol": "N",
+          "meaning": "输入数据规模",
+          "domainOrRelationship": "正整数，通常为 2 的幂次",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "experiments": [
+    {
+      "id": "experiment-001",
+      "subject": "findMax 时间复杂度测试",
+      "purpose": {
+        "statement": "验证 O(N) 算法在数据规模倍增时的耗时增长趋势。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "setup": {
+        "language": "C++",
+        "compilerOrRuntime": "CLion / CMake",
+        "optimization": null,
+        "operatingSystem": "macOS",
+        "hardware": null,
+        "timer": "clock()",
+        "warmup": null,
+        "repetitions": null,
+        "inputGeneration": "generateRandomArray"
+      },
+      "measurements": [
+        {
+          "inputDescription": "2^11 = 2048 个随机整数",
+          "inputSize": "2048",
+          "observedValue": "7e-06",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "inputDescription": "2^12 = 4096 个随机整数",
+          "inputSize": "4096",
+          "observedValue": "1.3e-05",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "inputDescription": "2^26 = 67108864 个随机整数",
+          "inputSize": "67108864",
+          "observedValue": "0.244654",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "theoreticalExpectation": {
+        "statement": "数据规模每翻倍一次（2N），耗时理论增加约 2 倍。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "observation": {
+        "statement": "实验测量值显示下一行的耗时基本为上一行的 2 倍左右，呈线性关系。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "limitations": [],
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "experiment-002",
+      "subject": "selectionSort 时间复杂度测试",
+      "purpose": {
+        "statement": "验证 O(N^2) 算法在数据规模倍增时的耗时增长趋势。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "setup": {
+        "language": "C++",
+        "compilerOrRuntime": "CLion / CMake",
+        "optimization": null,
+        "operatingSystem": "macOS",
+        "hardware": null,
+        "timer": "clock()",
+        "warmup": null,
+        "repetitions": null,
+        "inputGeneration": "generateRandomArray"
+      },
+      "measurements": [
+        {
+          "inputDescription": "2^10 = 1024 个随机整数",
+          "inputSize": "1024",
+          "observedValue": "0.001774",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "inputDescription": "2^11 = 2048 个随机整数",
+          "inputSize": "2048",
+          "observedValue": "0.007317",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "inputDescription": "2^15 = 32768 个随机整数",
+          "inputSize": "32768",
+          "observedValue": "2.00809",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "theoreticalExpectation": {
+        "statement": "数据规模翻倍（2N），(2N)^2 = 4N^2，耗时应该增加 4 倍。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "observation": {
+        "statement": "数据规模每翻倍一次，测量耗时基本按照 4 倍关系比例递增。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "limitations": [],
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "experiment-003",
+      "subject": "binarySearch 时间复杂度测试",
+      "purpose": {
+        "statement": "验证 O(log N) 算法在极大数据规模下的运行耗时变化。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006",
+          "ev-007"
+        ]
+      },
+      "setup": {
+        "language": "C++",
+        "compilerOrRuntime": "CLion / CMake",
+        "optimization": null,
+        "operatingSystem": "macOS",
+        "hardware": null,
+        "timer": "clock()",
+        "warmup": null,
+        "repetitions": null,
+        "inputGeneration": "generateOrderedArray"
+      },
+      "measurements": [
+        {
+          "inputDescription": "2^10 = 1024 个有序整数",
+          "inputSize": "1024",
+          "observedValue": "2e-06",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        },
+        {
+          "inputDescription": "2^28 ≈ 2.68 亿个有序整数",
+          "inputSize": "268435456",
+          "observedValue": "1.2e-05",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "theoreticalExpectation": {
+        "statement": "即便数据规模放大到 2.68 亿，运行耗时增长极其有限（仅约 1 + log2/logN 倍）。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "observation": {
+        "statement": "从 1024 增加到 2.68 亿级别数据，耗时仅从 2 微秒增加到 12 微秒，验证了 O(log N) 极高的执行效率。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "limitations": [],
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    },
+    {
+      "id": "experiment-004",
+      "subject": "mergeSort 时间复杂度测试",
+      "purpose": {
+        "statement": "验证 O(N log N) 算法在数据规模倍增时的耗时增长趋势。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-008"
+        ]
+      },
+      "setup": {
+        "language": "C++",
+        "compilerOrRuntime": "CLion / CMake",
+        "optimization": null,
+        "operatingSystem": "macOS",
+        "hardware": null,
+        "timer": "clock()",
+        "warmup": null,
+        "repetitions": null,
+        "inputGeneration": "generateRandomArray"
+      },
+      "measurements": [
+        {
+          "inputDescription": "2^10 = 1024 个随机整数",
+          "inputSize": "1024",
+          "observedValue": "0.000142",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        },
+        {
+          "inputDescription": "2^26 = 67108864 个随机整数",
+          "inputSize": "67108864",
+          "observedValue": "13.5022",
+          "unit": "s",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        }
+      ],
+      "theoreticalExpectation": {
+        "statement": "数据规模翻倍时，耗时应约为 2 倍稍多一点（受 log N 影响）。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-008"
+        ]
+      },
+      "observation": {
+        "statement": "耗时增长比例略大于 2 倍，与 O(N) 级别相近，显著优于 O(N^2)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-008"
+        ]
+      },
+      "limitations": [],
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "examples": [],
+  "edgeCases": [],
+  "implementationPitfalls": [],
+  "interviewPlaybook": [],
+  "relationCandidates": [
+    {
+      "from": "lesson:02-03",
+      "to": "lesson:02-04",
+      "type": "applies",
+      "status": "provisional",
+      "rationale": "02-03 介绍了简单的复杂度分析理论，本课 02-04 进一步应用代码实验来实测和验证这些复杂度理论。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 62000,
+      "assetId": "asset:video-02-04",
+      "locator": "00:00-01:02",
+      "observation": "幻灯片展示“复杂度试验”，老师提出写程序时自以为写了 O(N log N)，但实际可能是 O(N^2)，引出需要通过实验测试算法复杂度。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 62000,
+      "endMs": 144000,
+      "assetId": "asset:video-02-04",
+      "locator": "01:02-02:24",
+      "observation": "PPT展示数据规模的概念（1s内可处理 10^4 对应 O(n^2)，10^8 对应 O(n)，10^7 对应 O(nlogn)），提出“每次将数据规模提高两倍，看时间的变化”这一观察趋势的方法。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 144000,
+      "endMs": 256000,
+      "assetId": "asset:video-02-04",
+      "locator": "02:24-04:16",
+      "observation": "展示 IDE 中 MyAlgorithmTester.h 和 MyUtil.h 的源代码，包含 binarySearch, findMax, mergeSort, selectionSort 及测试用例生成函数。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 256000,
+      "endMs": 502000,
+      "assetId": "asset:video-02-04",
+      "locator": "04:16-08:22",
+      "observation": "展示对 O(N) 算法 findMax 的测试代码和控制台运行结果，数据规模从 2^10 翻倍增长至 2^26，每次耗时约翻倍 2 倍。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 502000,
+      "endMs": 598000,
+      "assetId": "asset:video-02-04",
+      "locator": "08:22-09:58",
+      "observation": "展示对 O(N^2) 算法 selectionSort 的测试及运行结果，当数据规模翻倍时，耗时呈现 4 倍的增长比例。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 598000,
+      "endMs": 720000,
+      "assetId": "asset:video-02-04",
+      "locator": "09:58-12:00",
+      "observation": "讲操推导对数复杂度变化公式 log(2N)/log(N) = (log 2 + log N) / log N = 1 + log2 / logN，解释为何对数算法规模翻倍后耗时增加量微小。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 720000,
+      "endMs": 798000,
+      "assetId": "asset:video-02-04",
+      "locator": "12:00-13:18",
+      "observation": "展示二分查找 binarySearch 的运行测试结果，数据规模从 2^10 一直增加到 2^28（2.68 亿），耗时从 2 微秒仅增加至 12 微秒。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 798000,
+      "endMs": 893480,
+      "assetId": "asset:video-02-04",
+      "locator": "13:18-14:53",
+      "observation": "展示归并排序 mergeSort 的运行测试结果，耗时随规模翻倍呈现约 2 倍多一点的增长趋势，总结 O(N log N) 与 O(N^2) 的本质性能差异。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "6007371972d141deb7dd5f53496fba17",
+    "promptVersion": "video-evidence-v1.3",
+    "generatedAt": "2026-07-29T09:14:18.000Z"
+  }
+}

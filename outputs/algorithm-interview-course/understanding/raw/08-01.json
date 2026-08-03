@@ -1,0 +1,460 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "08-01",
+  "chapterId": "08",
+  "titleObserved": "树形问题 Letter Combinations of a Phone Number",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1092.522086,
+  "timeline": [
+    {
+      "startMs": 3000,
+      "endMs": 36000,
+      "topic": "章节引入：递归与回溯",
+      "summary": "回顾上一章二叉树结构中的递归应用，引出在更广义的计算问题中递归算法与回溯思想的普遍适用性。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 36000,
+      "endMs": 60000,
+      "topic": "概念介绍：树形问题",
+      "summary": "介绍“树形问题”概念，即本身未定义在二叉树等具体数据结构上，但解决思路本质呈现树状形态的问题。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 60000,
+      "endMs": 133000,
+      "topic": "题目引入：LeetCode 17 Letter Combinations of a Phone Number",
+      "summary": "给出按键手机九宫格映射规则，要求根据给定的数字字符串返回所有可能的字母组合。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 133000,
+      "endMs": 241000,
+      "topic": "边界条件与澄清问题",
+      "summary": "讨论面试时需与考官确认的边界：数字合法性（1、*、#）、空字符串处理以及结果顺序要求。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 241000,
+      "endMs": 360000,
+      "topic": "树形决策空间分析",
+      "summary": "以输入字符串 \"23\" 为例画出决策树，展示按位分支构建字母组合的过程。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 360000,
+      "endMs": 490000,
+      "topic": "递归函数的形式化抽象",
+      "summary": "将问题形式化定义为递归公式 s(digits[0...n-1]) = letter(digits[0]) + s(digits[1...n-1])，推导递归推进过程。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 490000,
+      "endMs": 1089000,
+      "topic": "C++ 代码实现与边界处理",
+      "summary": "在 C++ 中编写 letterMap 映射数组、findCombination 递归函数以及 letterCombinations 主接口，并处理空字符串特判。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解“树形问题（Tree-shaped problems）”的概念及其与递归/回溯算法的关系。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "掌握利用递归函数遍历树形决策空间以解决电话号码字母组合问题的方法。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "递归与回溯",
+      "namesObserved": [
+        "递归与回溯",
+        "回溯法"
+      ],
+      "role": "introduces",
+      "definition": "在计算机领域广泛应用的一种算法思想，通过递归函数探索问题的解空间树。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "树形问题",
+      "namesObserved": [
+        "树形问题"
+      ],
+      "role": "introduces",
+      "definition": "问题本身没有定义在一颗具体的二叉树结构中，但分析解决问题的思路本质上呈现一颗树的形状。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "17",
+    "titleObserved": "17. Letter Combinations of a Phone Number",
+    "statement": "给出一个数字字符串，返回这个数字字符串能表示的所有字母组合。",
+    "constraints": [
+      "给定的字符串中只包含 2、3、4、5、6、7、8、9、0 等数字字符（不需考虑 1、*、#）",
+      "对于空字符串返回空数组",
+      "多个解之间的顺序没有要求"
+    ],
+    "clarifyingQuestions": [
+      "字符串的合法性（是否包含 1、*、# 等）",
+      "输入为空字符串时的处理方式",
+      "返回的多个解之间是否有顺序要求"
+    ],
+    "evidenceIds": [
+      "ev-003",
+      "ev-004"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "将数字字符串中的每一位依次映射为可能的字母，构成树形决策路径。利用递归函数 findCombination 按位向下搜索组合，当处理完最后一位数字时将生成的字符串存入结果集。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-005",
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n#include <string>\n#include <cassert>\n\nusing namespace std;\n\nclass Solution {\nprivate:\n    const string letterMap[10] = {\n        \" \",    //0\n        \"\",     //1\n        \"abc\",  //2\n        \"def\",  //3\n        \"ghi\",  //4\n        \"jkl\",  //5\n        \"mno\",  //6\n        \"pqrs\", //7\n        \"tuv\",  //8\n        \"wxyz\"  //9\n    };\n\n    vector<string> res;\n\n    // s中保存了此时从digits[0...index-1]翻译得到的一个字母字符串\n    // 寻找和digits[index]匹配的字母，获得digits[0...index]翻译得到的解\n    void findCombination(const string &digits, int index, const string &s){\n        if(index == digits.size()){\n            // 保存s\n            res.push_back(s);\n            return;\n        }\n\n        char c = digits[index];\n        assert(c >= '0' && c <= '9' && c != '1');\n        string letters = letterMap[c - '0'];\n        for(int i = 0 ; i < letters.size() ; i ++){\n            findCombination(digits, index + 1, s + letters[i]);\n        }\n\n        return;\n    }\n\npublic:\n    vector<string> letterCombinations(string digits) {\n        res.clear();\n        if(digits == \"\")\n            return res;\n\n        findCombination(digits, 0, \"\");\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "index",
+          "role": "current position in digits string",
+          "meaning": "当前在输入数字字符串 digits 中正在处理的字符索引",
+          "updateRule": "index + 1",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        },
+        {
+          "symbol": "s",
+          "role": "partial solution string",
+          "meaning": "保存了此时从 digits[0...index-1] 翻译得到的一个字母字符串",
+          "updateRule": "s + letters[i]",
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "index < digits.size()",
+          "updates": "获取 digits[index] 对应的所有候选字母 string letters，遍历其中的每个字符 letters[i]，递归调用 findCombination(digits, index + 1, s + letters[i])",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-007"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 index == digits.size() 时，代表完成了一条完整的映射路径，将构建好的字符串 s 放入结果集中并返回",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005",
+        "ev-007"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "recursive_contract",
+    "claims": [
+      {
+        "statement": "通过递归函数 findCombination 维护前 index 个数字已被翻译为字符串 s 的契约，递归处理 index + 1 直至到达 digits 末尾完成全组合生成。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006",
+          "ev-007"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": [
+      {
+        "phase": "initialization",
+        "statement": "调用 findCombination(digits, 0, \"\")，初始 index 为 0，已翻译出的部分解字符串 s 为空字符串 \"\"。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      {
+        "phase": "preservation",
+        "statement": "在递归步骤中，获取 digits[index] 映射的所有可能字母，将每个字母拼接到 s 末尾，并推进索引至 index + 1，保持“s 保存 digits[0...index] 的翻译解”契约。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      {
+        "phase": "termination",
+        "statement": "当 index 等于 digits.size() 时达到基本情况（Base Case），表示所有数字字符均已处理完毕，此时的 s 是完整解，直接推入结果向量 res 并返回。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      }
+    ]
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "recurrence",
+      "sourceKind": "shown_in_video",
+      "rawText": "s(digits[0...n-1]) = letter(digits[0]) + s(digits[1...n-1])",
+      "normalizedText": "s(digits[0...n-1]) = letter(digits[0]) + s(digits[1...n-1])",
+      "variables": [
+        {
+          "symbol": "digits",
+          "meaning": "输入的数字字符串",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "symbol": "s(digits)",
+          "meaning": "digits 所能代表的字母字符串组合",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "symbol": "letter(digits[i])",
+          "meaning": "数字字符 digits[i] 所能代表的字母集合",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "输入 digits = \"23\"，2 映射为 \"abc\"，3 映射为 \"def\"，输出的 9 个组合为 [\"ad\", \"ae\", \"af\", \"bd\", \"be\", \"bf\", \"cd\", \"ce\", \"cf\"]。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-005"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "当输入 digits 为空字符串 \"\" 时，如果直接进入递归，index=0 满足 index == digits.size() 会向结果集中加入一个空字符串 \"\"，因此主函数需显式特判若 digits == \"\" 则直接返回空向量。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-007"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "数字 1 在按键上不对应任何字母（映射为空字符串），代码中需使用 assert 约束断言输入的字符不为 '1'。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-007"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "在面试中遇到字符串处理算法题时，编写具体逻辑前应先向面试官确认边界条件：如字符合法性（如是否包含1、*、#）、空字符串的处理方式以及多解的输出顺序是否有要求。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:07-07",
+      "to": "lesson:08-01",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "视频开头指出现此前在第07章学习了二叉树中的递归问题，本课（第08章第一课）进一步将递归扩展到更广义的树形问题。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "from": "lesson:08-01",
+      "to": "lesson:08-02",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "本课完成了树形问题的递归搜索代码，在结尾预告下一小节将深入探究代码背后的回溯思想与机制。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001",
+        "ev-007"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 3000,
+      "endMs": 36000,
+      "assetId": "asset:video-08-01",
+      "locator": null,
+      "observation": "老师讲解上一章二叉树中使用了递归，本章将讨论在更广泛的问题上使用递归算法以及经典的“回溯法”思想。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 36000,
+      "endMs": 60000,
+      "assetId": "asset:video-08-01",
+      "locator": null,
+      "observation": "幻灯片显示“树形问题”，老师解释树形问题本身没有定义在一颗具体的二叉树结构中，但解决问题的思路本质上呈现树的形状。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 60000,
+      "endMs": 133000,
+      "assetId": "asset:video-08-01",
+      "locator": null,
+      "observation": "展示 LeetCode 17. Letter Combinations of a Phone Number，屏幕给出九宫格键盘图示及题目要求：给出一个数字字符串，返回能表示的所有字母组合。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 133000,
+      "endMs": 241000,
+      "assetId": "asset:video-08-01",
+      "locator": null,
+      "observation": "讨论字符串合法性（2-9数字、不含1/*/#）、空字符串返回空、以及多解输出无顺序要求等边界问题。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 241000,
+      "endMs": 360000,
+      "assetId": "asset:video-08-01",
+      "locator": null,
+      "observation": "以 digits = \"23\" 为例在屏幕上画出以 2 为根节点、展开 a/b/c 三条分支，再由 3 展开 d/e/f 分支的树形决策图。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 360000,
+      "endMs": 490000,
+      "assetId": "asset:video-08-01",
+      "locator": null,
+      "observation": "屏幕推导公式 s(digits[0...n-1]) = letter(digits[0]) + s(digits[1...n-1])，形式化表达递归过程。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 490000,
+      "endMs": 1089000,
+      "assetId": "asset:video-08-01",
+      "locator": null,
+      "observation": "在 C++ 编辑器中编写 Solution 类，定义 letterMap 数组、res 向量、findCombination 递归函数以及 letterCombinations 接口并处理空字符串边界。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.5",
+    "generatedAt": null
+  }
+}

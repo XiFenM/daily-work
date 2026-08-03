@@ -1,0 +1,579 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "05-06",
+  "chapterId": "05",
+  "titleObserved": "双指针技术 / 19. Remove Nth Node From End of List",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1013.52,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 48000,
+      "topic": "双指针技术在链表中的应用引言",
+      "summary": "讲解在数组中使用的双指针/双索引技术，在链表这种线性结构中同样适用。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 48000,
+      "endMs": 131000,
+      "topic": "LeetCode 19 题面与边界条件讨论",
+      "summary": "给出删除链表倒数第 n 个节点的题目要求、示例，并讨论索引从1记还是0记以及 n 不合法时的处理。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 131000,
+      "endMs": 225000,
+      "topic": "解法一：两次遍历法",
+      "summary": "介绍先遍历一遍求链表长度 L，再遍历一遍删除第 L-n 个节点的基线解法及其复杂度。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 225000,
+      "endMs": 386000,
+      "topic": "解法二：双指针一次遍历法原理",
+      "summary": "利用虚拟头节点和保持步长为 n+1 的两个指针 p 和 q，同速前进实现一次遍历定位待删除节点的前驱节点。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 386000,
+      "endMs": 716000,
+      "topic": "双指针解法的 C++ 代码实现",
+      "summary": "在 C++ 编排代码，添加对 n 的断查 assert，实现双指针移动与节点删除，并正确释放内存。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 716000,
+      "endMs": 782000,
+      "topic": "思考题一：LeetCode 61 Rotate List",
+      "summary": "给出链表向右旋转 k 位的题目说明与示例。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 782000,
+      "endMs": 903000,
+      "topic": "思考题二：LeetCode 143 Reorder List",
+      "summary": "讲解重排链表（首尾交替连接）的要求与查找中点、反转后半部分的解法提示。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 903000,
+      "endMs": 1009000,
+      "topic": "思考题三：LeetCode 234 Palindrome Linked List",
+      "summary": "介绍回文链表判断问题，并提出使用 O(1) 空间复杂度解决的挑战。",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "掌握在链表上定义并使用双指针（双索引）解决定位及删除特定相对位置节点的方法",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "学会通过维护两个指针间固定步长距离（n+1），实现仅遍历一次链表即可删除倒数第 n 个节点",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "在链表删除操作中正确使用虚拟头节点（dummyHead）处理头节点可能被删除的边界情况并严谨释放动态内存",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Two Pointers",
+      "namesObserved": [
+        "双指针技术",
+        "双索引"
+      ],
+      "role": "introduces",
+      "definition": "在链表等线性结构上通过维护两个具体明确含义的指针来协同移动求解问题的技术。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "Dummy Head",
+      "namesObserved": [
+        "虚拟头节点",
+        "dummyHead"
+      ],
+      "role": "applies",
+      "definition": "在链表头部前额外创建的虚拟节点，以便统一对包含头节点在内的所有节点进行删除或修改操作。",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "19",
+    "titleObserved": "19. Remove Nth Node From End of List",
+    "statement": "给定一个链表，删除倒数第 n 个节点。",
+    "constraints": [
+      "保证 n 合法"
+    ],
+    "clarifyingQuestions": [
+      "n 是从 0 记还是从 1 记？",
+      "n 不合法（如负数或者大于链表长度）如何处理？"
+    ],
+    "evidenceIds": [
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "先遍历一遍链表计算出链表总长度 L，进而计算出待删除节点为正数第 L-n 个节点；再遍历一遍链表进行删除操作。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [
+        "需要遍历两遍链表"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "optimized",
+      "idea": "设置虚拟头节点 dummyHead，定义双指针 p 和 q 初始均指向 dummyHead。先让 q 向后移动 n+1 步，使 p 和 q 之间建立固定的节点间距；随后 p 与 q 同速向前移动，直到 q 指向 NULL。此时 p 正好指向待删除节点的前驱节点，直接修改指针并释放节点即可完成一次遍历删除。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "/// Definition for singly-linked list.\nstruct ListNode {\n    int val;\n    ListNode *next;\n    ListNode(int x) : val(x), next(NULL) {}\n};\n\nclass Solution {\npublic:\n    ListNode* removeNthFromEnd(ListNode* head, int n) {\n        assert( n >= 0 );\n\n        ListNode* dummyHead = new ListNode(0);\n        dummyHead->next = head;\n\n        ListNode* p = dummyHead;\n        ListNode* q = dummyHead;\n        for( int i = 0 ; i < n + 1 ; i ++ ){\n            assert( q );\n            q = q->next;\n        }\n\n        while( q != NULL ){\n            p = p->next;\n            q = q->next;\n        }\n\n        ListNode* delNode = p->next;\n        p->next = delNode->next;\n        delete delNode;\n\n        ListNode* retNode = dummyHead->next;\n        delete dummyHead;\n\n        return retNode;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-002",
+      "kind": "two_pointer",
+      "variables": [
+        {
+          "symbol": "p",
+          "role": "slow_pointer",
+          "meaning": "慢指针，最终将指向待删除节点的前驱节点",
+          "updateRule": "p = p->next",
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        },
+        {
+          "symbol": "q",
+          "role": "fast_pointer",
+          "meaning": "快指针，先行移动 n+1 步后与 p 保持固定间隔前进",
+          "updateRule": "q = q->next",
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": {
+        "statement": "指针 p 和 q 之间的节点步长距离始终保持为 n+1",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004",
+          "ev-005"
+        ]
+      },
+      "transitions": [
+        {
+          "condition": "q != NULL",
+          "updates": "p = p->next; q = q->next;",
+          "preserves": {
+            "statement": "保持 p 与 q 之间相距 n+1 个节点的距离不变",
+            "sourceClass": "course_direct",
+            "evidenceIds": [
+              "ev-004",
+              "ev-005"
+            ]
+          },
+          "evidenceIds": [
+            "ev-004",
+            "ev-005"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 q 指向 NULL 时，p 刚好指向待删除节点的前一个节点",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004",
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "当 q 移至 NULL 时，指针 p 必定指向倒数第 n 个节点的前驱节点，从而可以安全执行删除",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004",
+          "ev-005"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": "O(n)",
+    "space": "O(1)",
+    "assumptions": [
+      "n 表示链表中的节点总数"
+    ],
+    "evidenceIds": [
+      "ev-003",
+      "ev-005"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "解法一：两次遍历法",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "链表节点个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "解法一遍历两次链表，时间复杂度为 O(n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "解法一：两次遍历法",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(1)",
+      "expressionNormalized": "O(1)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "解法一空间复杂度为 O(1)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "cx-003",
+      "subject": "解法二：双指针一次遍历法",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "链表节点个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "解法二只遍历一遍链表，时间复杂度为 O(n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "cx-004",
+      "subject": "解法二：双指针一次遍历法",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(1)",
+      "expressionNormalized": "O(1)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "解法二只需常数个指针变量，空间复杂度为 O(1)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "链表 1->2->3->4->5->NULL，n = 2，删除倒数第 2 个节点（值为 4），返回 1->2->3->5",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "传入的 n 不合法（如 n < 0 或 n 超出链表总长度）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "待删除节点恰好是头节点（通过 dummyHead 统一处理）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在使用 C++ 操作链表节点删除时，若直接断开 next 指针而不执行 delete delNode 和 delete dummyHead，会导致内存泄漏",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "在循环中 q 向后移动 n+1 步时，需要对 q 进行非空断言（assert(q)），防止 n 超出链表范围引发空指针访问",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "当面试官问及如何优化两次遍历法时，提出维护固定步长距离的双指针实现一次遍历求解",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "面试中如无明确说明 n 的合法性，先与面试官确认 n 是否保证合法及不合法时的容错要求",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:03-06",
+      "to": "lesson:05-06",
+      "type": "same_pattern_as",
+      "status": "provisional",
+      "rationale": "视频在开头明确提及之前在数组问题中使用的双指针/双索引技术同样适用于链表这种线性结构。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 48000,
+      "assetId": "asset:video-05-06",
+      "locator": "00:00 - 00:48",
+      "observation": "老师引入双指针技术在链表中的应用，说明链表也是一种线性结构，很多问题可以使用两个指针求解。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 48000,
+      "endMs": 131000,
+      "assetId": "asset:video-05-06",
+      "locator": "00:48 - 02:11",
+      "observation": "幻灯片展示 LeetCode 19 题 Remove Nth Node From End of List 题面、示例及边界处理讨论。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 131000,
+      "endMs": 225000,
+      "assetId": "asset:video-05-06",
+      "locator": "02:11 - 03:45",
+      "observation": "分析解法一：先遍历一遍算链表长度 L，再遍历一遍删除第 L-n 个节点，时间复杂度 O(n)，空间复杂度 O(1)。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 225000,
+      "endMs": 386000,
+      "assetId": "asset:video-05-06",
+      "locator": "03:45 - 06:26",
+      "observation": "通过动画讲解双指针 p 和 q 的移动过程：加 dummyHead，q 先走 n+1 步，随后 p 与 q 同时前进直至 q 为 NULL。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 386000,
+      "endMs": 716000,
+      "assetId": "asset:video-05-06",
+      "locator": "06:26 - 11:56",
+      "observation": "在 IDE 中编写并讲解 removeNthFromEnd 函数代码，包含 dummyHead、assert 断言、指针移动及内存释放。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 716000,
+      "endMs": 782000,
+      "assetId": "asset:video-05-06",
+      "locator": "11:56 - 13:02",
+      "observation": "展示思考题 61. Rotate List 题面与示例。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 782000,
+      "endMs": 903000,
+      "assetId": "asset:video-05-06",
+      "locator": "13:02 - 15:03",
+      "observation": "展示思考题 143. Reorder List 题面与重新排列规则，提示找到链表中点并反转后半部分。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 903000,
+      "endMs": 1009000,
+      "assetId": "asset:video-05-06",
+      "locator": "15:03 - 16:49",
+      "observation": "展示思考题 234. Palindrome Linked List 题面，提问能否使用 O(1) 空间复杂度解决。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

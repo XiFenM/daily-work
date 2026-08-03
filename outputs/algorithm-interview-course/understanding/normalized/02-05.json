@@ -1,0 +1,682 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "02-05",
+  "chapterId": "02",
+  "titleObserved": "递归算法的复杂度分析",
+  "contentKind": "concept",
+  "actualDurationSeconds": 886.44,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 45000,
+      "topic": "递归复杂度常见误区澄清",
+      "summary": "澄清并非有递归调用的函数复杂度都是 O(nlogn)，强调递归算法复杂度分析需要具体问题具体分析。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 45000,
+      "endMs": 201000,
+      "topic": "单次递归调用的复杂度分析与二分查找示例",
+      "summary": "介绍递归函数中只进行一次递归调用的分析方法，以二分查找递归实现为例，说明递归深度与时间复杂度的关系。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 201000,
+      "endMs": 241000,
+      "topic": "单次递归调用通用公式与递归求和示例",
+      "summary": "给出单次递归调用的时间复杂度计算公式 O(T * depth)，并通过 sum(n) 递归求和代码进行示例说明。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 241000,
+      "endMs": 409000,
+      "topic": "递归求 x 的 n 次方（快速幂）示例",
+      "summary": "讲解使用递归求 x^n 的算法代码，分析其递归深度为 logn，整体时间复杂度为 O(logn)，优于 O(n) 连乘。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 409000,
+      "endMs": 657000,
+      "topic": "多次递归调用的复杂度分析与递归树模型",
+      "summary": "分析函数内进行两次递归调用 f(n-1)+f(n-1) 的情况，利用递归树统计节点总数，推导得出 O(2^n) 指数级复杂度。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 657000,
+      "endMs": 832000,
+      "topic": "归并排序 recursion tree 对比分析与分治算法复杂度",
+      "summary": "对比 mergeSort 说明为什么两次递归調用的归并排序复杂度是 O(nlogn)，指出其树深为 logn 且每层处理规模之和为 n。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 832000,
+      "endMs": 886440,
+      "topic": "主定理补充与小结",
+      "summary": "提及主定理（Master Theorem）可用于归纳递归函数计算时间复杂度的通用情况，并总结本节重点。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "掌握只有一次递归调用的递归函数复杂度分析方法（O(T * depth)）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "学会通过画递归树（Recursion Tree）统计调用次数来分析多次递归调用的算法复杂度。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "理解归并排序等分治算法树深为 logn 且每层数据规模逐层递减从而实现 O(nlogn) 复杂度的原因。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "递归深度",
+      "namesObserved": [
+        "递归深度",
+        "depth"
+      ],
+      "role": "introduces",
+      "definition": "递归调用链的最大层数/深度。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "递归树",
+      "namesObserved": [
+        "递归树"
+      ],
+      "role": "introduces",
+      "definition": "将递归调用的树状展开过程画出的树形结构，树节点对应函数调用，节点总数即为总调用次数。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "canonicalName": "主定理",
+      "namesObserved": [
+        "主定理",
+        "Master Theorem"
+      ],
+      "role": "mentions",
+      "definition": "归纳递归函数计算时间复杂度的通用数学定理。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "int binarySearch(int arr[], int l, int r, int target){\n    if( l > r )\n        return -1;\n\n    int mid = l + (r-l)/2;\n    if( arr[mid] == target )\n        return mid;\n    else if( arr[mid] > target )\n        return binarySearch(arr, l, mid-1, target);\n    else\n        return binarySearch(arr, mid+1, r, target);\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "int sum( int n ){\n    assert( n >= 0 );\n\n    if( n == 0 )\n        return 0;\n    return n + sum(n-1);\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "double pow( double x, int n ){\n    assert( n >= 0 );\n\n    if( n == 0 )\n        return 1.0;\n\n    double t = pow(x, n/2);\n    if( n%2 )\n        return x*t*t;\n\n    return t*t;\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "int f(int n){\n    assert( n >= 0 );\n\n    if( n == 0 )\n        return 1;\n\n    return f(n-1) + f(n-1);\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "code": "void mergeSort(int arr[], int l, int r){\n    if( l >= r )\n        return;\n\n    int mid = (l+r)/2;\n    mergeSort(arr, l, mid);\n    mergeSort(arr, mid+1, r);\n    merge(arr, l, mid, r);\n}",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "recursive_contract",
+    "claims": [
+      {
+        "statement": "pow(x, n) 算法利用 pow(x, n/2) 的结果 t，若 n 为奇数则返回 x*t*t，若 n 为偶数则返回 t*t。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      }
+    ]
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "只包含一次递归调用的递归算法通用分析模型",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(T * depth)",
+      "expressionNormalized": "O(T * depth)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "depth",
+          "meaning": "递归调用的深度",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "symbol": "T",
+          "meaning": "在每个递归函数中，除了递归调用外其他操作的时间复杂度",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "若递归函数中只进行一次递归调用，且递归深度为 depth，每次非递归操作时间复杂度为 T，则总体时间复杂度为 O(T * depth)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "每次递归函数中只进行一次递归调用",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "conclusion": {
+        "statement": "总体时间复杂度为 O(T * depth)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "递归二分查找算法 (binarySearch)",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(logn)",
+      "expressionNormalized": "O(log n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "查找数组的元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "每次递归调用对查找数组范围减半，递归深度为 logn。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        },
+        {
+          "statement": "单次函数内处理复杂度为 O(1)，因此总体时间复杂度为 O(logn)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-002"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "递归二分查找的时间复杂度为 O(logn)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-002"
+        ]
+      },
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "id": "cx-003",
+      "subject": "递归求和算法 (sum)",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "求和的上限规模",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "从 n 递归到 0，递归深度为 n，单次函数内无其他循环（O(1)），总体时间复杂度为 O(n)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "递归求和 sum(n) 的时间复杂度为 O(n)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "cx-004",
+      "subject": "递归快速幂算法 (pow)",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(logn)",
+      "expressionNormalized": "O(log n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "幂运算的指数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "每次递归将指数 n 除以 2，直到 n=0，递归深度为 logn。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "statement": "单次函数内部仅进行常数次乘法与条件判断（O(1)），总体时间复杂度为 O(logn)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "assumptions": [
+        {
+          "statement": "指数 n >= 0",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "conclusion": {
+        "statement": "递归求 x 的 n 次方算法时间复杂度为 O(logn)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "cx-005",
+      "subject": "双重递归调用算法 f(n) = f(n-1) + f(n-1)",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(2^n)",
+      "expressionNormalized": "O(2^n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "输入数据规模，对应递归树的深度",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "将递归过程画成递归树，求调用总次数即计算树的节点个数。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "statement": "树各层节点数为 2^0, 2^1, 2^2, ..., 2^n，求和得 2^(n+1) - 1。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "statement": "2^(n+1) - 1 属于 O(2^n) 指数级复杂度。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "双重递归调用 f(n-1)+f(n-1) 的时间复杂度为 O(2^n)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "id": "cx-006",
+      "subject": "归并排序算法 (mergeSort)",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(nlogn)",
+      "expressionNormalized": "O(n log n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "要排序的数组元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "归并排序递归树的深度为 logn。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "statement": "递归树每一层所有节点处理的数据规模相加均为 n（例如 1*8 = 2*4 = 4*2 = 8*1 = 8），且每层合并 merge 操作的总复杂度为 O(n)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        },
+        {
+          "statement": "共有 logn 层，每层处理 O(n) 的数据量，因此总体时间复杂度为 O(nlogn)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-006"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "归并排序的时间复杂度为 O(nlogn)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-006"
+        ]
+      },
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "summation",
+      "sourceKind": "shown_in_video",
+      "rawText": "2^0 + 2^1 + 2^2 + 2^3 + ... + 2^n = 2^(n+1) - 1",
+      "normalizedText": "2^0 + 2^1 + 2^2 + ... + 2^n = 2^(n+1) - 1",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "递归树的层数/深度",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "experiments": [],
+  "examples": [],
+  "edgeCases": [],
+  "implementationPitfalls": [
+    {
+      "statement": "在编写 pow(x, n) 等快速幂递归算法时，需注意 C++ 等语言中整型除法 n/2 当 n 为奇数时会产生舍位，需要单独处理奇数情况（x*t*t）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "思考题：如果 pow(x, n) 函数需要支持 n < 0 的负数次方计算，应该如何改写该递归函数？",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:02-03",
+      "to": "lesson:02-05",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "本课开头提到'这一小节我们继续深入时间复杂度这个话题，来看一看递归算法的复杂度分析'，顺承前面的简单复杂度分析。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "from": "lesson:02-05",
+      "to": "lesson:06-02",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "本课建立了递归树和递归深度的概念，为后续理解栈与递归的关系打下基础。",
+      "confidence": 0.8,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "from": "lesson:02-05",
+      "to": "lesson:09-01",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "老师在讲解 O(2^n) 指数级递归复杂度时指出，可以通过剪枝或动态规划等方法将指数级复杂度降为多项式级，预告了后续动态规划课程。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 45000,
+      "assetId": "asset:video-02-05",
+      "locator": "00:00-00:45",
+      "observation": "视频开篇幻灯片标题为《递归算法的复杂度分析》，老师澄清误区：不是有递归的函数就一定是 O(nlogn)，需要具体问题具体分析。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 45000,
+      "endMs": 201000,
+      "assetId": "asset:video-02-05",
+      "locator": "00:45-03:21",
+      "observation": "PPT展示递归二分查找 binarySearch 代码。分析如果递归函数中只进行一次递归调用，复杂度为 O(T * depth)，结合 binarySearch 的递归深度 logn 得到 O(logn)。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 201000,
+      "endMs": 241000,
+      "assetId": "asset:video-02-05",
+      "locator": "03:21-04:01",
+      "observation": "PPT展示 sum(n) 递归求和代码，分析递归深度为 n，单次函数内为 O(1)，总体时间复杂度 O(n)。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 241000,
+      "endMs": 409000,
+      "assetId": "asset:video-02-05",
+      "locator": "04:01-06:49",
+      "observation": "PPT展示 pow(x, n) 递归代码，讲解递归求 x^(n/2)，考虑 n 的奇偶性，递归深度为 logn，复杂度 O(logn)，并提出思考题：若 n < 0 该如何改写。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 409000,
+      "endMs": 657000,
+      "assetId": "asset:video-02-05",
+      "locator": "06:49-10:57",
+      "observation": "PPT展示 f(n) = f(n-1) + f(n-1) 代码及对应的二叉递归树，求和 2^0+...+2^n = 2^(n+1)-1 = O(2^n)。指出指数级算法非常慢，可以通过剪枝或动态规划优化。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 657000,
+      "endMs": 832000,
+      "assetId": "asset:video-02-05",
+      "locator": "10:57-13:52",
+      "observation": "PPT展示 mergeSort 代码及画出归并排序的递归树，根节点处理8个元素，下一层2个4，再下一层4个2，最后一层8个1。树深 logn，每层处理量之和为 n，得出 O(nlogn)。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 832000,
+      "endMs": 886440,
+      "assetId": "asset:video-02-05",
+      "locator": "13:52-14:46",
+      "observation": "PPT打出“递归函数的时间复杂度 主定理”，老师指出主定理归纳了递归函数复杂度的所有情况，面试中一般不考，但感兴趣可以查阅。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "50ddbe4cb57440e7b60059b165f6949a",
+    "promptVersion": "video-evidence-v1.3",
+    "generatedAt": "2026-07-29T09:19:32.000Z"
+  }
+}

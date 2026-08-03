@@ -1,0 +1,279 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "07-05",
+  "chapterId": "07",
+  "titleObserved": "257. Binary Tree Paths",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 814.881088,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 61000,
+      "topic": "课程引入与题目背景",
+      "summary": "介绍二叉树与递归问题中利用递归函数返回值的概念，引出 LeetCode 257 号问题 Binary Tree Paths。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 61000,
+      "endMs": 155000,
+      "topic": "题面要求与递归逻辑分析",
+      "summary": "讲解题意（输出二叉树从根到叶子节点的所有路径字符串），分析如何将大问题拆解为左右子树的路径求解并结合当前节点值拼接路径。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 155000,
+      "endMs": 385000,
+      "topic": "二叉树路径递归动画演示",
+      "summary": "使用包含 1 到 7 节点的二叉树图解，逐步演示自顶向下拆解与自底向上返回拼接路径的过程。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 385000,
+      "endMs": 694000,
+      "topic": "C++ 代码实现与边界处理",
+      "summary": "编写 binaryTreePaths 源码，讲解空节点边界判断、叶子节点终止条件以及遍历左右子树路径组合结果的过程。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 694000,
+      "endMs": 750000,
+      "topic": "思考题一：Path Sum II",
+      "summary": "布置思考题 LeetCode 113 Path Sum II，要求找出所有和为指定 sum 的根到叶子路径。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 750000,
+      "endMs": 814881,
+      "topic": "思考题二：Sum Root to Leaf Numbers",
+      "summary": "布置思考题 LeetCode 129 Sum Root to Leaf Numbers，节点值 0-9，求所有根到叶子路径组合成数字的总和。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解并掌握如何明确定义二叉树递归函数的语义，并利用其返回值来组织和构建更复杂的组合结果（如根到叶节点路径）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-004"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "二叉树根到叶子节点路径",
+      "namesObserved": [
+        "从根节点到叶子节点的路径"
+      ],
+      "role": "applies",
+      "definition": "二叉树中从根节点开始到没有任何子节点的叶子节点结束的一条连续节点序列。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "257",
+    "titleObserved": "257. Binary Tree Paths",
+    "statement": "给定一棵二叉树，返回所有表示从根节点到叶子节点路径的字符串。",
+    "constraints": [],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-001",
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "利用递归分别获取左子树和右子树的所有根到叶子路径字符串，再将当前根节点值与箭号字符串（'->'）组合拼接在子树每条路径的前面；当遇到叶子节点时，直接返回包含当前节点值的字符串。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-002",
+        "ev-003",
+        "ev-004"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "/// Definition for a binary tree node.\nstruct TreeNode {\n    int val;\n    TreeNode *left;\n    TreeNode *right;\n    TreeNode(int x) : val(x), left(NULL), right(NULL) {}\n};\n\nclass Solution {\npublic:\n    vector<string> binaryTreePaths(TreeNode* root) {\n        vector<string> res;\n        if(root == NULL)\n            return res;\n        if(root->left == NULL && root->right == NULL) {\n            res.push_back(to_string(root->val));\n            return res;\n        }\n        vector<string> leftS = binaryTreePaths(root->left);\n        for(int i = 0 ; i < leftS.size() ; i ++)\n            res.push_back(to_string(root->val) + \"->\" + leftS[i]);\n        vector<string> rightS = binaryTreePaths(root->right);\n        for(int i = 0 ; i < rightS.size() ; i ++)\n            res.push_back(to_string(root->val) + \"->\" + rightS[i]);\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "stateModels": [],
+  "correctness": {
+    "method": "recursive_contract",
+    "claims": [
+      {
+        "statement": "递归函数 binaryTreePaths(root) 的明确语义是返回以 root 为根节点的二叉树中所有从根节点到叶子节点的路径字符串列表。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      }
+    ],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "对于二叉树根节点为 1，左子节点为 2（2 的右子节点为 5），右子节点为 3，其所有根到叶子路径结果为 [\"1->2->5\", \"1->3\"]。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "当传入的根节点 root 为 NULL 时，树为空，直接返回空的路径字符串向量 res。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "当当前节点为叶子节点（root->left == NULL && root->right == NULL）时，将节点值转化为字符串存入结果向量后直接返回。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "implementationPitfalls": [],
+  "interviewPlaybook": [],
+  "relationCandidates": [
+    {
+      "from": "lesson:07-04",
+      "to": "lesson:07-05",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "课程承接上一小节关于递归终止条件的讨论，进一步拓展二叉树递归问题的定义与利用返回值组织复杂路径逻辑。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "from": "lesson:07-05",
+      "to": "lesson:07-06",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "本节引出简单的路径提取逻辑后，为后续更复杂的二叉树递归逻辑 Path Sum III 做铺垫。",
+      "confidence": 0.85,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 61000,
+      "assetId": "asset:video-07-05",
+      "locator": "00:00-01:01",
+      "observation": "引入 LeetCode 257 Binary Tree Paths，提及 Google、Facebook、Apple 面试题，介绍本节主题：理解与利用递归函数的返回值。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 61000,
+      "endMs": 155000,
+      "assetId": "asset:video-07-05",
+      "locator": "01:01-02:35",
+      "observation": "展示题目描述：给定一棵二叉树，返回所有表示从根节点到叶子节点路径的字符串。展示树示例与预期输出 [\"1->2->5\", \"1->3\"]。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 155000,
+      "endMs": 385000,
+      "assetId": "asset:video-07-05",
+      "locator": "02:35-06:25",
+      "observation": "通过包含 1 到 7 节点的二叉树图解演练递归过程：自顶向下拆化为左右子树路径问题，自底向上返回并拼接 \"root->path\"。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 385000,
+      "endMs": 694000,
+      "assetId": "asset:video-07-05",
+      "locator": "06:25-11:34",
+      "observation": "在 IDE 中编写 C++ 代码 binaryTreePaths，包含空树判断 root==NULL、叶子节点判断、左右子树递归调用及路径拼接，强调递归调用的明确语义。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 694000,
+      "endMs": 750000,
+      "assetId": "asset:video-07-05",
+      "locator": "11:34-12:30",
+      "observation": "展示思考题 1：LeetCode 113. Path Sum II (Bloomberg)，要求返回所有和为 sum 的根到叶子路径。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 750000,
+      "endMs": 814881,
+      "assetId": "asset:video-07-05",
+      "locator": "12:30-13:34",
+      "observation": "展示思考题 2：LeetCode 129. Sum Root to Leaf Numbers，节点值 0-9，求所有根到叶子路径表示数字之和。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

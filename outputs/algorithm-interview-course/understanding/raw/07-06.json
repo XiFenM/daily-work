@@ -1,0 +1,308 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "07-06",
+  "chapterId": "07",
+  "titleObserved": "稍复杂的递归逻辑 Path Sum III",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 851.16,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 65000,
+      "topic": "题目介绍：LeetCode 437 Path Sum III",
+      "summary": "介绍题目要求：在一棵二叉树中寻找节点值之和等于 sum 的路径数量，并说明路径不要求从根节点开始或在叶子节点结束，但必须向下走。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 65000,
+      "endMs": 127000,
+      "topic": "示例讲解与路径定义",
+      "summary": "结合二叉树示例讲解给定义 sum=8 时存在的 3 条符合要求的路径，强调路径的方向性与合法性定义。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 127000,
+      "endMs": 357000,
+      "topic": "算法思路与双重递归分解",
+      "summary": "分析将问题分解为三部分：包含当前根节点的路径（调用 findPath 辅助函数）、不包含根节点但在左子树中的路径（递归调用 pathSum）、不包含根节点但在右子树中的路径（递归调用 pathSum）。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 357000,
+      "endMs": 551000,
+      "topic": "实现 findPath 辅助递归函数与负数节点坑点",
+      "summary": "编写辅助函数 findPath 的代码，解释当 node->val == num 时不能直接返回，因为节点可能为负数，继续向下遍历可能找到额外和为 0 的路径组合。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 551000,
+      "endMs": 851160,
+      "topic": "实现 pathSum 主递归函数与总结",
+      "summary": "完成主函数 pathSum 的编写，整合三部分递归结果，总结双重递归逻辑结构，建议对递归不熟悉的同学用测试用例手动跟踪程序。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解 Path Sum III 题目对路径定义的宽泛性（不局限于根到叶子，只需从上向下）",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "掌握双重递归（递归中嵌套递归）的设计方法：区分包含当前节点与不包含当前节点的情况",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "掌握树节点包含负数时对递归终止条件和结果累加的影响",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "双重递归",
+      "namesObserved": [
+        "双重递归",
+        "递归嵌套"
+      ],
+      "role": "introduces",
+      "definition": "在解决二叉树问题时，主递归函数负责遍历树中的每一个节点，而在每个节点上又调用另一个递归函数来求解具体包含该节点的子路径问题。",
+      "evidenceIds": [
+        "ev-003",
+        "ev-005"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "437",
+    "titleObserved": "Path Sum III",
+    "statement": "给出一棵二叉树以及一个数字 sum，判断在这棵二叉树上存在多少条路径，其路径上的所有节点和为 sum。",
+    "constraints": [
+      "路径不一定起始于根节点，也不一定终止于叶子节点",
+      "路径可以从任意节点开始，但是只能是向下走的（从父节点到子节点）"
+    ],
+    "clarifyingQuestions": [
+      "树中节点的值是否可能为负数？（视频指出树中节点可能存在负数值）"
+    ],
+    "evidenceIds": [
+      "ev-001",
+      "ev-002",
+      "ev-004"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "使用双重递归思想：主递归函数 pathSum 负责遍历树中各个节点，计算以该节点为根的子树中和为 sum 的路径总数。路径总数拆分为：包含当前根节点的路径数量（由辅助递归函数 findPath 计算）+ 不包含当前根节点但在左子树中的路径数量（递归调用 pathSum）+ 不包含当前根节点但在右子树中的路径数量（递归调用 pathSum）。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [
+        "对每个节点都会发起一次 downwards 的深度优先搜索，存在重叠子问题和重复搜索"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n\nusing namespace std;\n\n/// Definition for a binary tree node.\nstruct TreeNode {\n    int val;\n    TreeNode *left;\n    TreeNode *right;\n    TreeNode(int x) : val(x), left(NULL), right(NULL) {}\n};\n\nclass Solution {\npublic:\n    // 在以root为根节点的二叉树中，寻找和为sum的路广，返回这样的路径个数\n    int pathSum(TreeNode* root, int sum) {\n        if( root == NULL )\n            return 0;\n\n        int res = findPath( root, sum );\n        res += pathSum( root->left, sum );\n        res += pathSum( root->right, sum );\n\n        return res;\n    }\n\nprivate:\n    // 在以node为根节点的二叉树中，寻找包含node的路广，和为sum\n    // 返回这样的路径个数\n    int findPath( TreeNode* node, int num ){\n        if( node == NULL )\n            return 0;\n\n        int res = 0;\n        if( node->val == num )\n            res += 1;\n\n        res += findPath( node->left, num - node->val );\n        res += findPath( node->right, num - node->val );\n\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "stateModels": [],
+  "correctness": {
+    "method": "recursive_contract",
+    "claims": [
+      {
+        "statement": "pathSum(root, sum) 计算以 root 为根的二叉树中所有满足和为 sum 的路径数量，完备地划分为：包含 root 的路径、完全在 root->left 中的路径、完全在 root->right 中的路径三部分。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003",
+          "ev-005"
+        ]
+      },
+      {
+        "statement": "findPath(node, num) 计算从 node 开始向下延伸且包含 node 节点、路径和为 num 的路径数量。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003",
+          "ev-004"
+        ]
+      }
+    ],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "对于根节点为 10 的二叉树，节点结构为 10->(5, -3)，5->(3, 2)，-3->(null, 11)，3->(3, -2)，2->(null, 1)，当目标 sum=8 时，存在 3 条路径：1. 5->3; 2. 5->2->1; 3. -3->11。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "传入的二叉树为空树（root == NULL），PathSum 和 findPath 均应直接返回 0。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "节点值包含负数，可能导致找到满足 node->val == num 后，继续向下延伸加减负数节点又能得到新的满足和为 num 的路径。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在 findPath 函数中，当判断 `node->val == num` 成立时，不能直接 `return 1`，而必须将 `res += 1` 并继续递归查找左右子树。因为树中可能存在负数或 0，后续路径延伸相加仍可能再次凑出和为 num 的路径。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "面试中如果题目给出数值组合或树路径问题，需要主动向面试官询问节点数值是否可能为负数，因为负数的存在会改变递归终止和结果累加的逻辑。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "对递归逻辑感觉模糊时，可以在纸上写出简单的测试用例，手动跟进画出递归调用树来帮助理解。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:07-05",
+      "to": "lesson:07-06",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "前一课次 07-05 讨论递归定义树路径问题 Binary Tree Path，本课次 07-06 进一步拓展到更复杂的二叉树路径求和与双重递归逻辑 Path Sum III。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001",
+        "ev-003"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 65000,
+      "assetId": "asset:video-07-06",
+      "locator": "00:00 - 01:05",
+      "observation": "视频展示题目 PPT，标题为 437. Path Sum III，讲解题目要求在二叉树中寻找所有和为 sum 的路径数量，路径不一定要从根节点开始或在叶子节点结束，但必须向下走。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 65000,
+      "endMs": 127000,
+      "assetId": "asset:video-07-06",
+      "locator": "01:05 - 02:07",
+      "observation": "视频展示一棵包含负数节点的二叉树图示，给定 sum=8，指出结果为 3，列举 3 条路径：5->3、5->2->1、-3->11，强调路径方向只能向下。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 127000,
+      "endMs": 357000,
+      "assetId": "asset:video-07-06",
+      "locator": "02:07 - 05:57",
+      "observation": "视频通过架构图说明解题思路：拆分为包含当前节点的 findPath 函数，以及不包含当前节点而在 left 和 right 子树中寻找的 pathSum 递归调用。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 357000,
+      "endMs": 551000,
+      "assetId": "asset:video-07-06",
+      "locator": "05:57 - 09:11",
+      "observation": "老师在 CLion 中编写 private 辅助函数 findPath 的 C++ 代码，特别强调当 node->val == num 时只能 res += 1 而不能直接 return 1，因为节点可能为负数。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 551000,
+      "endMs": 851160,
+      "assetId": "asset:video-07-06",
+      "locator": "09:11 - 14:11",
+      "observation": "老师编写 public 主函数 pathSum，整合 findPath(root, sum) + pathSum(root->left, sum) + pathSum(root->right, sum) 的逻辑，并总结递归嵌套递归的特点。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": null
+  }
+}

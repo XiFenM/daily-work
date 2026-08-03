@@ -1,0 +1,265 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "01-02",
+  "chapterId": "01",
+  "titleObserved": "算法面试只是面试的一部分",
+  "contentKind": "interview_strategy",
+  "actualDurationSeconds": 891.76,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 223000,
+      "topic": "算法面试优秀不意味着技术面试优秀",
+      "summary": "讲解算法面试只是技术面试的一部分。除了算法，技术面试还会考察简历项目经历、深度 Bug 处理经验以及面向对象、设计模式、网络、安全、内存、并发、系统设计（Scalability）等特定技术领域。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 223000,
+      "endMs": 634000,
+      "topic": "技术面试优秀不意味着能够拿到 Offer",
+      "summary": "指出技术面试只是整体面试的一部分。面试官还要了解候选人的过去与思考行为方式。强调项目经历在面试中的关键作用，并针对工作人士、研究生、本科生及跨专业或缺乏项目经验的同学提供了积累项目的具体建议（如实战课程、做小应用、解决小问题、整理优秀技术书代码等）。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 634000,
+      "endMs": 745000,
+      "topic": "行为类问题（Behavioral Questions）的准备",
+      "summary": "列举常见的行为类问题（最大挑战、犯过的错误、遭遇的失败、最享受的工作内容、冲突处理方式、最众不同之事），并建议候选人在回答时务必结合具体的实际项目经历阐述。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 745000,
+      "endMs": 877000,
+      "topic": "准备合适的问题向面试官提问",
+      "summary": "提问环节是展现个人关注点与专业思考的绝佳机会。列举了可以向面试官询问的问题类型，包括小组运行模式、项目后续规划、产品技术难点解决方案、技术选型标准以及技术深入学习机会等。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 877000,
+      "endMs": 891760,
+      "topic": "总结与课程过渡",
+      "summary": "强调尽管算法面试不是面试的全貌，但在绝大多数大公司面试中依然至关重要，并预告后续课程将正式进入算法面试的学习。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解算法面试在技术面试及整体招聘面试中的定位与占比。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "掌握除算法外，技术面试常考察的技术领域与项目准备方法。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "学会如何针对行为类问题（Behavioral Questions）结合具体项目经历进行回答。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "掌握面试结尾向面试官提问的策略及高质量问题的设计角度。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "技术面试",
+      "namesObserved": [
+        "技术面试"
+      ],
+      "role": "introduces",
+      "definition": "考核候选人技术能力、技术深度、项目经验与专业领域知识（如面向对象、并发、系统设计等）的面试环节。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "行为类问题",
+      "namesObserved": [
+        "行为类问题",
+        "Behavioral Questions"
+      ],
+      "role": "introduces",
+      "definition": "面试中通过了解候选人过去的实际行为和经历，评估其思考方式、性格特质、沟通与应对挑战能力的非纯技术问题。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "canonicalName": "系统设计",
+      "namesObserved": [
+        "系统设计",
+        "scalability"
+      ],
+      "role": "mentioned",
+      "definition": "考察系统在大规模使用下可能遇到的问题及架构扩展能力的面试领域。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [],
+  "correctness": {
+    "method": "unknown",
+    "claims": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "examples": [],
+  "edgeCases": [],
+  "implementationPitfalls": [],
+  "interviewPlaybook": [
+    {
+      "statement": "不要只准备算法题；要梳理简历中的项目经历，准备好关于印象最深的 Bug 以及相关专业领域（如面向对象、设计模式、网络、安全、并发、系统设计等）的技术点。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "缺乏丰富工作项目时，可以通过本科毕业设计、课程设计、线上实战课程、开发独立小应用（计划表/播放器等）、小工具（爬虫/数据分析等）或在 GitHub 上整理优质技术书籍的代码来积累项目经历。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "回答行为类问题（最大挑战、犯过的错误、遭遇的失败等）时，切忌泛泛而谈或过于抽象，必须与具体项目挂钩，阐述具体的场景、挑战与解决过程。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "面试末尾向面试官提问时，可以从团队运行模式、项目后续规划、产品具体技术实现/选型标准、技术深入学习机会等角度提问，展现专业度与积极性。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:01-01",
+      "to": "lesson:01-02",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "老师在 01-02 开头明确回顾了上一小节“算法面试不仅仅是正确回答问题”，并延伸到算法面试在技术面试和整体面试中的定位。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "from": "lesson:01-02",
+      "to": "lesson:01-03",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "先理解算法面试的范围与位置，再讨论如何具体准备算法面试。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "from": "lesson:07-03",
+      "to": "lesson:01-02",
+      "type": "revisits",
+      "status": "provisional",
+      "rationale": "07-03 的配套文本再次强调算法能力只是工程师面试评价的一部分。",
+      "confidence": 0.8,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 223000,
+      "assetId": "asset:video-01-02",
+      "locator": "00:00-03:43",
+      "observation": "讲解 PPT『算法面试优秀不意味着技术面试优秀』，说明算法面试只是技术面试的一部分，并列举项目经历、Bug 处理及面向对象、设计模式、网络、安全、内存、并发、系统设计等考察方面。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 223000,
+      "endMs": 634000,
+      "assetId": "asset:video-01-02",
+      "locator": "03:43-10:34",
+      "observation": "讲解 PPT『技术面试优秀不意味着能够拿到Offer』与『关于过去：参与项目至关重要』，详细分析工作人士、研究生、本科生及缺乏项目者的项目积累路径。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 634000,
+      "endMs": 745000,
+      "assetId": "asset:video-01-02",
+      "locator": "10:34-12:25",
+      "observation": "讲解 PPT 展示的行为类问题（最大挑战、犯过的错误、遭遇的失败、最享受的工作内容、处理冲突方式等），强调回答需与具体项目结合。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 745000,
+      "endMs": 877000,
+      "assetId": "asset:video-01-02",
+      "locator": "12:25-14:37",
+      "observation": "讲解 PPT『准备好合适的问题问面试官』，列举了团队运行模式、项目规划、具体技术难点与选型标准等可询问的问题。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 877000,
+      "endMs": 891760,
+      "assetId": "asset:video-01-02",
+      "locator": "14:37-14:51",
+      "observation": "讲解 PPT『算法面试仍然是非常重要的一部分』与『让我们一起玩儿转算法面试 :-)』，总结本节并过渡到后续算法课程。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.1",
+    "generatedAt": null
+  }
+}

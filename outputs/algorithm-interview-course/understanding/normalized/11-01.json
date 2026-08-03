@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "11-01",
+  "chapterId": "11",
+  "titleObserved": "玩儿转算法面试",
+  "contentKind": "conclusion",
+  "actualDurationSeconds": 169.88,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 41000,
+      "topic": "课程结语与重视基础",
+      "summary": "讲师指出课程例题多为中等及以下难度，强调算法面试重在考察基础，不要忽视基础知识。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 41000,
+      "endMs": 86000,
+      "topic": "LeetCode 平台与面试题联系",
+      "summary": "讲师在录制时推荐 LeetCode 作为练习工具，并表示国内外公司的算法面试题广泛参考其题目模型。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 86000,
+      "endMs": 113000,
+      "topic": "超越 Accepted 的解题思考",
+      "summary": "提醒学员做题时不能仅满足于获得 Accepted，要从设计、实现以及后续优化三个层面深入思考。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 113000,
+      "endMs": 150000,
+      "topic": "课程维护与分类认知",
+      "summary": "讲师在录制时表示课程计划持续维护并添加内容，希望学员掌握算法问题的分类与基本思考模式。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 150000,
+      "endMs": 169880,
+      "topic": "总结致谢与结语",
+      "summary": "表达对学员的感谢与求职祝福，展示声明及结语画面。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解算法面试重点考察基础知识与各类问题的思考模式。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "掌握超越 Accepted 的刷题思维：深入思考算法的设计、实现与优化。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "LeetCode",
+      "namesObserved": [
+        "LeetCode"
+      ],
+      "role": "applies",
+      "definition": "用于锻炼算法能力和准备算法面试的练习平台。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "canonicalName": "在线判题系统",
+      "namesObserved": [
+        "在线OJ平台",
+        "OJ平台"
+      ],
+      "role": "mentions",
+      "definition": null,
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [],
+  "codeArtifacts": [],
+  "stateModels": [],
+  "correctness": {
+    "method": "not_applicable",
+    "completeness": "not_applicable",
+    "claims": [],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [],
+  "edgeCases": [],
+  "implementationPitfalls": [],
+  "interviewPlaybook": [
+    {
+      "statement": "大多数算法面试问题侧重考察基础，所谓难题往往也是基于基础问题不断添加约束条件演化而来。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "做算法题时不能仅仅追求在 OJ 平台上获得 Accepted，必须思考算法如何设计、具体如何实现，以及实现后是否有更好的优化方案。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "relationCandidates": [],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_audio",
+      "startMs": 0,
+      "endMs": 41000,
+      "assetId": "asset:video-11-01",
+      "locator": "00:00-00:41",
+      "observation": "讲师对课程进行结语总结，指出课程例题多为中等难度及以下，强调大多数算法面试重点考察基础，提醒大家不要忽视基础，难题也是基于基础添加条件得来的。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_audio",
+      "startMs": 41000,
+      "endMs": 86000,
+      "assetId": "asset:video-11-01",
+      "locator": "00:41-01:26",
+      "observation": "讲师在录制时推荐 LeetCode，并表示国内外公司的算法面试题广泛参考其题目模型，鼓励多在 LeetCode 练习。该概括属于课程观点。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_audio",
+      "startMs": 86000,
+      "endMs": 113000,
+      "assetId": "asset:video-11-01",
+      "locator": "01:26-01:53",
+      "observation": "讲师提出做题建议：不能只追求在线 OJ 上获得 Accepted，而要思考如何设计、如何实现、实现后有没有更好的优化。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_audio",
+      "startMs": 113000,
+      "endMs": 150000,
+      "assetId": "asset:video-11-01",
+      "locator": "01:53-02:30",
+      "observation": "讲师在录制时表示课程计划持续维护与更新，并希望学员能对算法面试题的分类和基本思考模式形成清晰认识。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 150000,
+      "endMs": 169880,
+      "assetId": "asset:video-11-01",
+      "locator": "02:30-02:49",
+      "observation": "讲师向学员致谢并表达求职祝福，视频结束前显示版权声明画面。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "evidence.ev-002.company-interview-generalization",
+      "reason": "“国内外公司的算法面试题都重度参考 LeetCode 题目模型”是讲师在结语中的概括性判断；本课没有提供统计范围或当前平台数据，不能改写为经本项目独立验证的普遍事实。",
+      "recommendedCheck": "正式笔记保留为课程观点并使用归因措辞，不将其外推为当前所有公司的统一事实。"
+    },
+    {
+      "field": "evidence.ev-004.course-maintenance",
+      "reason": "持续维护与添加内容是视频录制时的课程承诺；本项目没有核查当前课程页面或后续更新状态。",
+      "recommendedCheck": "正式笔记注明时间边界；如需判断当前维护状态，应另查课程页面且不要倒灌为本视频证据。"
+    },
+    {
+      "field": "concepts.online-judge.definition",
+      "reason": "本课提到在线 OJ 与 Accepted，但没有在结语中重新定义在线判题系统的运行机制。",
+      "recommendedCheck": "本课概念定义保持 null；需要定义时引用 01-03 或 03-03 的既有课程证据。"
+    }
+  ],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "82e83d77452344108d9a09a1b643a1b6",
+    "promptVersion": "video-evidence-v1.7",
+    "generatedAt": "2026-08-03T04:07:51.000Z"
+  }
+}

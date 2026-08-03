@@ -1,0 +1,468 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "10-01",
+  "chapterId": "10",
+  "titleObserved": "贪心基础 Assign Cookies",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 735.44,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 27000,
+      "topic": "贪心算法简介",
+      "summary": "介绍贪心算法的特点：代码实现简单，但难点在于证明和确定问题是否适用贪心策略。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 27000,
+      "endMs": 169000,
+      "topic": "LeetCode 455 Assign Cookies 题面与样例",
+      "summary": "讲解 455 题 Assign Cookies 的题目背景、参数含义 g[i] 和 s[j] 以及两个具体样例。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 169000,
+      "endMs": 376000,
+      "topic": "贪心解法策略分析与排序必要性",
+      "summary": "分析优先将最大的饼干分配给最贪心小朋友的贪心选择策略，并说明对输入数组排序的必要性。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 376000,
+      "endMs": 616000,
+      "topic": "C++ 代码实现",
+      "summary": "展示完整 C++ 代码实现，使用降序排序和双指针进行贪心匹配。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 616000,
+      "endMs": 640000,
+      "topic": "算法复杂度分析",
+      "summary": "分析双指针遍历与排序的复杂度，指出总体时间复杂度为 O(n log n)。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 640000,
+      "endMs": 735440,
+      "topic": "课后练习与下节预告",
+      "summary": "给出练习题 LeetCode 392 Is Subsequence，并预告下一节探讨贪心算法与动态规划的关系。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解贪心算法的基本思想：在每一步选择中均采取局部最优选择",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "掌握 LeetCode 455 Assign Cookies 的贪心分配策略与双指针实现",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "理解贪心算法中对数据进行排序以确定选择极值的必要性",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "贪心算法",
+      "namesObserved": [
+        "贪心算法"
+      ],
+      "role": "introduces",
+      "definition": "在每一步选择中都采取在当前状态下最好或最优的选择",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "双指针",
+      "namesObserved": [
+        "两个索引",
+        "双指针"
+      ],
+      "role": "applies",
+      "definition": null,
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "子序列",
+      "namesObserved": [
+        "子序列"
+      ],
+      "role": "mentions",
+      "definition": "不需要连续的字符序列",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "455",
+    "titleObserved": "Assign Cookies",
+    "statement": "假设你想给小朋友们发饼干，每个小朋友最多只能拿到一块饼干。每个小朋友都有一个贪心指数 g(i)，即需要饼干大小的最小值。同时每块饼干都有一个大小值 s(j)。如果 s(j) >= g(i)，将饼干 j 分给小朋友 i，小朋友就会很开心。给定数组 s 和 g，问如何分配饼干才能让最多的小朋友开心。",
+    "constraints": [
+      "每个小朋友最多只能分到一块饼干",
+      "只有当 s(j) >= g(i) 时小朋友才会开心"
+    ],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "optimized",
+      "idea": "将饼干数组 s 和小朋友贪心指数数组 g 分别按从大到小排序。优先尝试用当前剩余最大的饼干满足当前剩余最贪心（需求最大）的小朋友。若能满足，则将该饼干分给该小朋友，双指针均向后移动；若不能满足，说明没有任何剩余饼干能满足该小朋友，放弃该小朋友，将小朋友指针移动到下一个需求较小的小朋友继续尝试。",
+      "timeComplexity": "O(n log n)",
+      "spaceComplexity": "O(1)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    int findContentChildren(vector<int>& g, vector<int>& s) {\n        sort(g.begin(), g.end(), greater<int>());\n        sort(s.begin(), s.end(), greater<int>());\n\n        int si = 0, gi = 0;\n        int res = 0;\n        while(gi < g.size() && si < s.size()) {\n            if(s[si] >= g[gi]) {\n                res++;\n                si++;\n                gi++;\n            }\n            else\n                gi++;\n        }\n\n        return res;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-001",
+      "kind": "two_pointer",
+      "variables": [
+        {
+          "symbol": "si",
+          "role": "cookie_pointer",
+          "meaning": "指向当前未分配的最大饼干在降序数组 s 中的下标索引",
+          "updateRule": "当 s[si] >= g[gi] 分配成功时，si++ 指向下一块次大饼干",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "symbol": "gi",
+          "role": "child_pointer",
+          "meaning": "指向当前未满足的最贪心小朋友在降序数组 g 中的下标索引",
+          "updateRule": "无论当前分配成功或失败，gi++ 均指向下一个次贪心的小朋友",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "symbol": "res",
+          "role": "result_counter",
+          "meaning": "累计获得开心的小朋友数量",
+          "updateRule": "当 s[si] >= g[gi] 时，res++",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "symbol": "s, g",
+          "role": "candidate_order",
+          "meaning": "从大到小（降序）排列的饼干大小数组与小朋友贪心指数数组",
+          "updateRule": "使用 std::sort 配合 greater<int>() 在扫描前排好序",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": null,
+      "transitions": [
+        {
+          "condition": "s[si] >= g[gi]",
+          "updates": "res++, si++, gi++",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-004"
+          ]
+        },
+        {
+          "condition": "s[si] < g[gi]",
+          "updates": "gi++",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "当 gi >= g.size() 或 si >= s.size() 时退出循环",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "exchange_argument",
+    "completeness": "partial",
+    "claims": [
+      {
+        "statement": "将最大的饼干分配给最贪心的小朋友，若能满足则为后续小朋友保留最大的选择富余；若不能满足，则该小朋友无法被任何剩余饼干满足",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": [
+      {
+        "phase": "greedy_choice",
+        "statement": "优先尝试用当前剩余最大的饼干满足当前剩余需求最大（最贪心）的小朋友",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      }
+    ]
+  },
+  "complexity": {
+    "time": "O(n log n)",
+    "space": "O(1)",
+    "assumptions": [
+      "n 为小朋友数组与饼干数组长度的最大值"
+    ],
+    "evidenceIds": [
+      "ev-005"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "Assign Cookies 降序双指针贪心解法",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n log n)",
+      "expressionNormalized": "O(n log n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "输入数组的元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "对 g 和 s 两个数组进行排序的时间复杂度为 O(n log n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "statement": "排序后使用 while 循环进行双指针线性扫描的时间复杂度为 O(n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "statement": "算法总体时间复杂度由排序主导，为 O(n log n)",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "该贪心算法的时间复杂度为 O(n log n)",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "g = [1, 2, 3], s = [1, 1] -> 结果为 1",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "g = [1, 2], s = [1, 2, 3] -> 结果为 2",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "edgeCases": [],
+  "implementationPitfalls": [
+    {
+      "statement": "贪心算法通常涉及极值选择，若题目未保证输入有序，在执行贪心扫描前必须先对数组进行排序",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "贪心算法的代码通常很短且思路简单，真正的难点在于证明和确定当前问题确实可以使用贪心算法解决",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:10-01",
+      "to": "lesson:10-02",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "视频结语说明下一小节将进一步介绍贪心算法与动态规划的关系",
+      "confidence": 1.0,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 27000,
+      "assetId": "asset:video-10-01",
+      "locator": "00:00 - 00:27",
+      "observation": "老师引出贪心算法章节，指出贪心算法代码简短，难点在于确定问题是否能够用贪心算法解决。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 32000,
+      "endMs": 169000,
+      "assetId": "asset:video-10-01",
+      "locator": "00:32 - 02:49",
+      "observation": "PPT展示 LeetCode 455 Assign Cookies 题面、g(i) 与 s(j) 的定义，以及两个示例和对应的期望返回值。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 169000,
+      "endMs": 376000,
+      "assetId": "asset:video-10-01",
+      "locator": "02:49 - 06:16",
+      "observation": "画图讲解贪心策略：优先将最大饼干分给最贪心的小朋友，并强调如果输入未排序，必须先对数组进行排序。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 376000,
+      "endMs": 616000,
+      "assetId": "asset:video-10-01",
+      "locator": "06:16 - 10:16",
+      "observation": "在编辑器中用 C++ 实现 Solution 类和 findContentChildren 函数，使用 greater<int>() 降序排序及 while 循环双指针匹配。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 616000,
+      "endMs": 640000,
+      "assetId": "asset:video-10-01",
+      "locator": "10:16 - 10:40",
+      "observation": "口述分析复杂度：while 循环为 O(n) 级别，排序为 O(n log n) 级别，整体复杂度为 O(n log n)。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 640000,
+      "endMs": 735440,
+      "assetId": "asset:video-10-01",
+      "locator": "10:40 - 12:15",
+      "observation": "PPT 展示练习题 LeetCode 392 Is Subsequence，并预告下一节将讲解贪心算法与动态规划的关系。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "correctness.obligations",
+      "reason": "视频中老师主要通过直头逻辑和反证拆解（最大饼干无法满足最贪心小朋友时任何饼干都无法满足）说明贪心规则的正确性，未按严格形式化 Exchange Argument 展示四项完全义务",
+      "recommendedCheck": "若需严格形式化逻辑证明，需由编辑在课程外补充数学归纳或替换证明"
+    }
+  ],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.7",
+    "generatedAt": null
+  }
+}

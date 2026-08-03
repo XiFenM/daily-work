@@ -1,0 +1,764 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "04-04",
+  "chapterId": "04",
+  "titleObserved": "一个使用查找表的经典问题",
+  "contentKind": "problem_walkthrough",
+  "actualDurationSeconds": 1017,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 131000,
+      "topic": "Two Sum 题目介绍与面试边界条件讨论",
+      "summary": "介绍 LeetCode 第 1 号问题 Two Sum 的题面、示例以及面试中需沟通确定的边界细节（索引基数、唯一解保证等）。",
+      "evidenceIds": [
+        "ev-001",
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 131000,
+      "endMs": 280000,
+      "topic": "暴力解法与排序双指针解法分析",
+      "summary": "分析 O(n^2) 暴力枚举解法以及 O(nlogn) 排序+双指针解法，指出排序会导致原数组索引丢失的问题。",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 280000,
+      "endMs": 448000,
+      "topic": "静态查找表思路及重复元素覆盖陷阱",
+      "summary": "讲解将所有元素预先存入查找表的思路，并演示一次性全量存入哈希表时重复元素索引被覆盖导致的缺陷。",
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 448000,
+      "endMs": 575000,
+      "topic": "动态构建查找表（边查边存）机制",
+      "summary": "通过图示讲解在遍历过程中仅查找当前元素之前的元素，并在未找到时才将当前元素存入查找表的方法，完美解决重复元素问题。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "startMs": 575000,
+      "endMs": 757000,
+      "topic": "C++ 代码实现与复杂度分析",
+      "summary": "使用 C++ unordered_map 编写动态查找表解法，添加无解异常处理，并分析 O(n) 时间与 O(n) 空间复杂度。",
+      "evidenceIds": [
+        "ev-008",
+        "ev-009"
+      ]
+    },
+    {
+      "startMs": 757000,
+      "endMs": 1017000,
+      "topic": "课后拓展练习题介绍",
+      "summary": "给出 15. 3Sum、18. 4Sum 以及 16. 3Sum Closest 三道拓展练习题，提示思考去重、多解顺序及是否必须使用查找表等细节。",
+      "evidenceIds": [
+        "ev-010",
+        "ev-011",
+        "ev-012"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "掌握 Two Sum 问题的不同解法（暴力、排序双指针、查找表）及其优缺点与适用场景。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-004",
+        "ev-005",
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "理解使用哈希表（Map）保存元素值与索引映射关系的必要性，区分 Set 与 Map 的应用场景。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "掌握“边查边存”的动态构建查找表技巧，避免重复元素在哈希表中相互覆盖的问题。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006",
+        "ev-007"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "Two Sum",
+      "namesObserved": [
+        "Two Sum",
+        "两数之和"
+      ],
+      "role": "introduces",
+      "definition": "在给定整型数组中寻找两个数字，使其和等于给定的 target，并返回这两个数字的索引值。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "查找表",
+      "namesObserved": [
+        "查找表",
+        "unordered_map",
+        "map"
+      ],
+      "role": "applies",
+      "definition": "用于将元素值映射到其对应索引的数据结构，通过 O(1) 均摊级别的查找快速判断互补元素是否存在。",
+      "evidenceIds": [
+        "ev-005",
+        "ev-008"
+      ]
+    },
+    {
+      "canonicalName": "3Sum",
+      "namesObserved": [
+        "15. 3Sum"
+      ],
+      "role": "mentions",
+      "definition": "在一个整型数组中寻找所有不重复的三元组 (a, b, c)，使得 a + b + c = 0。",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    },
+    {
+      "canonicalName": "4Sum",
+      "namesObserved": [
+        "18. 4Sum"
+      ],
+      "role": "mentions",
+      "definition": "在一个整型数组中寻找所有不重复的四元组 (a, b, c, d)，使得 a + b + c + d 等于给定 target。",
+      "evidenceIds": [
+        "ev-011"
+      ]
+    },
+    {
+      "canonicalName": "3Sum Closest",
+      "namesObserved": [
+        "16. 3Sum Closest"
+      ],
+      "role": "mentions",
+      "definition": "寻找整型数组中的三个元素 (a, b, c)，使得 a + b + c 的和最接近给定的 target。",
+      "evidenceIds": [
+        "ev-012"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "1",
+    "titleObserved": "1. Two Sum",
+    "statement": "给出一个整形数组nums。返回这个数组中两个数字的索引值i和j，使得nums[i] + nums[j] 等于一个给定的target值。两个索引不能相等。",
+    "constraints": [
+      "索引从0开始计算",
+      "保证有唯一解",
+      "两个索引不能相等（同一个数字不能使用两次）"
+    ],
+    "clarifyingQuestions": [
+      "索引从0开始计算还是从1开始计算？",
+      "没有解怎么办？",
+      "有多个解怎么办？保证有唯一解"
+    ],
+    "evidenceIds": [
+      "ev-001",
+      "ev-002"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "暴力解法：双重循环遍历所有数据对 (i, j) 组合，依次判断 nums[i] + nums[j] 是否等于 target。",
+      "timeComplexity": "O(n^2)",
+      "spaceComplexity": "O(1)",
+      "limitations": [
+        "在 LeetCode 或面试评测中会超时，不是最优解"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "intermediate",
+      "idea": "排序+双指针：先对数组排序 O(nlogn)，再使用双指针/索引对撞 O(n) 寻找满足和为 target 的两数。",
+      "timeComplexity": "O(nlogn)",
+      "spaceComplexity": null,
+      "limitations": [
+        "排序会改变原始元素的位置，导致索引信息丢失；排序前需要额外预处理记录原始索引"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "solution-003",
+      "stage": "intermediate",
+      "idea": "静态查找表（全量预存）：将数组中所有元素一次性存入哈希表，然后再遍历每个元素 a 查找 target - a。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "limitations": [
+        "当数组中包含相同数值的重复元素时，后存入的元素会覆盖之前元素的索引，导致无法正确处理重复元素组合"
+      ],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "id": "solution-004",
+      "stage": "optimized",
+      "idea": "动态查找表（边查边存）：遍历数组到元素 v 时，只在 v 之前的元素（已放入查找表）中查找 target - v；若找到则返回，若未找到再将 v 放入查找表。",
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-002"
+      ],
+      "stateModelIds": [
+        "state-001"
+      ],
+      "evidenceIds": [
+        "ev-007",
+        "ev-008",
+        "ev-009"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-003",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "partial",
+      "code": "unordered_map<int,int> record;\nfor(int i = 0; i < nums.size() ; i++)\n    record[nums[i]] = i;",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-004",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "#include <iostream>\n#include <vector>\n#include <cassert>\n#include <unordered_map>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        unordered_map<int,int> record;\n        for(int i = 0; i < nums.size() ; i++){\n            int complement = target - nums[i];\n            if(record.find(complement) != record.end()){\n                int res[2] = {i, record[complement]};\n                return vector<int>(res, res+2);\n            }\n            record[nums[i]] = i;\n        }\n        throw invalid_argument(\"The input has no solution\");\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "not_run",
+      "evidenceIds": [
+        "ev-008"
+      ]
+    }
+  ],
+  "stateModels": [
+    {
+      "id": "state-001",
+      "solutionStageId": "solution-004",
+      "kind": "other",
+      "variables": [
+        {
+          "symbol": "i",
+          "role": "loop_index",
+          "meaning": "当前正遍历到的数组 nums 下标",
+          "updateRule": "每轮循环递增 1",
+          "evidenceIds": [
+            "ev-007",
+            "ev-008"
+          ]
+        },
+        {
+          "symbol": "complement",
+          "role": "target_value",
+          "meaning": "当前元素所需的补数 target - nums[i]",
+          "updateRule": "每轮计算 complement = target - nums[i]",
+          "evidenceIds": [
+            "ev-008"
+          ]
+        },
+        {
+          "symbol": "record",
+          "role": "lookup_table",
+          "meaning": "哈希表，存储下标 0 到 i-1 内已遍历元素的 [数值 -> 原始下标] 映射",
+          "updateRule": "未找到 complement 时，执行 record[nums[i]] = i",
+          "evidenceIds": [
+            "ev-007",
+            "ev-008"
+          ]
+        }
+      ],
+      "regions": [],
+      "invariant": {
+        "statement": "在处理第 i 个元素时，record 中只包含下标在 [0, i-1] 范围内的元素及其对应的原始下标。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      },
+      "transitions": [
+        {
+          "condition": "record 中找到 complement",
+          "updates": "返回当前下标 i 和 record[complement] 组成的向量",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-008"
+          ]
+        },
+        {
+          "condition": "record 中未找到 complement",
+          "updates": "将 record[nums[i]] 赋值为 i，并进入下一个循环",
+          "preserves": null,
+          "evidenceIds": [
+            "ev-008"
+          ]
+        }
+      ],
+      "termination": {
+        "statement": "若循环结束仍未返回结果，则抛出 invalid_argument 异常。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-008"
+        ]
+      },
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    }
+  ],
+  "correctness": {
+    "method": "state_transition",
+    "claims": [
+      {
+        "statement": "通过在遍历当前元素 v 时只在 v 之前的元素（已放入查找表）中寻找 target - v，可以避免元素自身与自身匹配，并能正确处理重复数值。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-007"
+        ]
+      }
+    ],
+    "stateModelIds": [
+      "state-001"
+    ],
+    "obligations": []
+  },
+  "complexity": {
+    "time": "O(n)",
+    "space": "O(n)",
+    "assumptions": [
+      "unordered_map 的查找与插入平均时间复杂度为 O(1)"
+    ],
+    "evidenceIds": [
+      "ev-009"
+    ]
+  },
+  "complexityAnalyses": [
+    {
+      "id": "cx-001",
+      "subject": "Two Sum 暴力解法",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n^2)",
+      "expressionNormalized": "O(n^2)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 nums 的元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-003"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "暴力遍历所有数对组合的时间复杂度为 O(n^2)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-003"
+        ]
+      },
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "id": "cx-002",
+      "subject": "Two Sum 排序双指针解法",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(nlogn) + O(n) = O(nlogn)",
+      "expressionNormalized": "O(n log n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 nums 的元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "排序阶段耗时 O(nlogn)，后续双指针遍历耗时 O(n)，总耗时为 O(nlogn)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-004"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "排序双指针解法的时间复杂度为 O(nlogn)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-004"
+        ]
+      },
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "id": "cx-003",
+      "subject": "Two Sum 动态查找表解法时间复杂度",
+      "measure": "time",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 nums 的元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-009"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "遍历一遍数组 n 个元素，每个元素在哈希表中执行 O(1) 的查找和插入操作，总耗时 O(n)。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-009"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "动态查找表解法的时间复杂度为 O(n)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-009"
+        ]
+      },
+      "evidenceIds": [
+        "ev-009"
+      ]
+    },
+    {
+      "id": "cx-004",
+      "subject": "Two Sum 动态查找表解法空间复杂度",
+      "measure": "auxiliary_space",
+      "notation": "O",
+      "case": "unspecified",
+      "expressionObserved": "O(n)",
+      "expressionNormalized": "O(n)",
+      "normalizationSourceClass": "course_direct",
+      "variables": [
+        {
+          "symbol": "n",
+          "meaning": "数组 nums 的元素个数",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-009"
+          ]
+        }
+      ],
+      "costModel": null,
+      "derivationSteps": [
+        {
+          "statement": "使用查找表最多可能将 n 个元素全部存入哈希表，占用 O(n) 的辅助空间。",
+          "sourceClass": "course_direct",
+          "evidenceIds": [
+            "ev-009"
+          ]
+        }
+      ],
+      "assumptions": [],
+      "conclusion": {
+        "statement": "动态查找表解法的空间复杂度为 O(n)。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-009"
+        ]
+      },
+      "evidenceIds": [
+        "ev-009"
+      ]
+    }
+  ],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "示例：nums = [2, 7, 11, 15], target = 9，返回 [0, 1]（因为 nums[0] + nums[1] = 2 + 7 = 9）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "示例：3Sum 练习题 nums = [-1, 0, 1, 2, -1, -4]，结果为 [[-1, 0, 1], [-1, -1, 2]]。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    },
+    {
+      "statement": "示例：4Sum 练习题 nums = [1, 0, -1, 0, -2, 2], target = 0，结果为 [[-1, 0, 0, 1], [-2, -1, 1, 2], [-2, 0, 0, 2]]。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-011"
+      ]
+    },
+    {
+      "statement": "示例：3Sum Closest 练习题 nums = [-1, 2, 1, -4], target = 1，结果为 2（因为 -1 + 2 + 1 = 2 最接近 1）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-012"
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "statement": "数组中包含重复元素（如两个 42）时，若一次性预存所有元素，后一个 42 的索引会覆盖前一个 42，导致求和目标为 84 时无法查找到两个 42 的不同索引。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "在 Two Sum 中，不能只存元素存在性（Set），而必须使用 Map 保存元素值与原始索引的映射关系，因为题目要求返回索引。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "如果直接对数组排序，会丢失原始元素的索引信息，必须在排序前做索引关联预处理。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "在面试中遇到带有索引返回要求的问题时，首先要与面试官明确索引基数（从 0 开始还是从 1 开始）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "遇到无解或多解情况时，需沟通明确题目约束；在本题中题目保证了存在唯一解。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:03-06",
+      "to": "lesson:04-04",
+      "type": "contrasts_with",
+      "status": "provisional",
+      "rationale": "视频显式对比了 03-06 中的 Two Sum II（有序数组，使用双指针）与本课 04-04 中的 Two Sum（无序数组，使用查找表）。",
+      "confidence": 0.95,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-002",
+        "ev-004"
+      ]
+    },
+    {
+      "from": "lesson:04-04",
+      "to": "lesson:04-05",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "本课从 Two Sum 延伸出 3Sum 和 4Sum 问题，下一课 04-05 进一步扩展探讨 4Sum II 与键值灵活选择。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-010",
+        "ev-011"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 80000,
+      "assetId": "asset:video-04-04",
+      "locator": "00:00 - 01:20",
+      "observation": "幻灯片展示 LeetCode 1. Two Sum 题目描述：给定整型数组 nums 和 target，返回 nums[i] + nums[j] == target 的两个索引 i, j。示例 nums = [2, 7, 11, 15], target = 9 -> [0, 1]。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 80000,
+      "endMs": 131000,
+      "assetId": "asset:video-04-04",
+      "locator": "01:20 - 02:11",
+      "observation": "老师讨论面试边界：索引从0开始计算；无解或多解的沟通；本题保证有唯一解。并对比上一章 Two Sum II 输入有序，而本题数组无序。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 131000,
+      "endMs": 160000,
+      "assetId": "asset:video-04-04",
+      "locator": "02:11 - 02:40",
+      "observation": "幻灯片列出“暴力解法: O(n^2)”，老师说明遍历所有数对 (i, j) 组合并判断 nums[i]+nums[j] == target，在评测中会超时。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 160000,
+      "endMs": 242000,
+      "assetId": "asset:video-04-04",
+      "locator": "02:40 - 04:02",
+      "observation": "幻灯片展示“排序后，使用双索引对撞: O(nlogn) + O(n) = O(nlogn)”。老师强调排序会丢失原始索引，需额外预处理。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 242000,
+      "endMs": 323000,
+      "assetId": "asset:video-04-04",
+      "locator": "04:02 - 05:23",
+      "observation": "幻灯片展示“查找表。将所有元素放入查找表，之后对于每一个元素a，查找 target - a 是否存在。”老师指出因为需要返回索引，所以不能用 Set，必须用 Map 存储 [元素值 -> 索引]。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 323000,
+      "endMs": 448000,
+      "assetId": "asset:video-04-04",
+      "locator": "05:23 - 07:28",
+      "observation": "老师在编辑器中写出全量预存代码 `record[nums[i]] = i` 并进行缺陷分析：如果数组中有两个 42（索引分别为 7 和 9），全量预存后索引 9 会覆盖索引 7，若 target 为 84 则找不到解。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 448000,
+      "endMs": 575000,
+      "assetId": "asset:video-04-04",
+      "locator": "07:28 - 09:35",
+      "observation": "幻灯片演示动态查找表过程：遍历到元素 v 时，查找表只包含 v 之前的元素，在其中查找 target - v。若未找到，才将 v 放入查找表，既避免了重复元素覆盖问题，又避免了元素与自身匹配。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 575000,
+      "endMs": 703000,
+      "assetId": "asset:video-04-04",
+      "locator": "09:35 - 11:43",
+      "observation": "老师在 IDE 中编写 C++ unordered_map 解法完整代码，并在循环后加入 `throw invalid_argument(\"The input has no solution\");`。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 703000,
+      "endMs": 757000,
+      "assetId": "asset:video-04-04",
+      "locator": "11:43 - 12:37",
+      "observation": "老师在代码上方注释打字并口述分析：时间复杂度 O(n)，空间复杂度 O(n)。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-010",
+      "sourceType": "video_combined",
+      "startMs": 757000,
+      "endMs": 864000,
+      "assetId": "asset:video-04-04",
+      "locator": "12:37 - 14:24",
+      "observation": "幻灯片展示“15. 3Sum”练习题：a+b+c=0，寻找所有不重复的三元组，并引导思考三元组不重复的定义（内容不重复 vs 索引不重复）、解的顺序等。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-011",
+      "sourceType": "video_combined",
+      "startMs": 864000,
+      "endMs": 890000,
+      "assetId": "asset:video-04-04",
+      "locator": "14:24 - 14:50",
+      "observation": "幻灯片展示“18. 4Sum”练习题：a+b+c+d=target，寻找所有不同的四元组。",
+      "confidence": 1
+    },
+    {
+      "id": "ev-012",
+      "sourceType": "video_combined",
+      "startMs": 890000,
+      "endMs": 1017000,
+      "assetId": "asset:video-04-04",
+      "locator": "14:50 - 16:57",
+      "observation": "幻灯片展示“16. 3Sum Closest”练习题：寻找三个元素使得和最接近 target。老师指出该问题不是找特定值，可能不需要使用查找表，提醒具体问题具体分析。",
+      "confidence": 1
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "de4747004de44a2ea2783a68980e9b13",
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": "2026-07-29T11:37:11.000Z"
+  }
+}

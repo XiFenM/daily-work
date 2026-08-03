@@ -1,0 +1,474 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "07-01",
+  "chapterId": "07",
+  "titleObserved": "二叉树天然的递归结构",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 961.24,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 77000,
+      "topic": "二叉树与递归引入",
+      "summary": "介绍二叉树与递归的紧密联系，指出二叉树结构天然具备递归性质。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 77000,
+      "endMs": 272000,
+      "topic": "二叉树天然的递归结构与函数语义",
+      "summary": "结合前序遍历代码阐述二叉树的递归定义，强调设计递归函数时明确函数语义的重要性。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 272000,
+      "endMs": 425000,
+      "topic": "递归的核心要素与终止条件",
+      "summary": "总结递归函数的两大核心组成：递归终止条件与递归过程，并解释缺失终止条件导致系统栈溢出的原因。",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 425000,
+      "endMs": 647000,
+      "topic": "二叉树递归操作示例：contain 与 destroy",
+      "summary": "分析二叉树查找值 (contain) 与内存释放 (destroy) 的递归逻辑，展示如何根据函数语义组织递归代码。",
+      "evidenceIds": [
+        "ev-007",
+        "ev-008"
+      ]
+    },
+    {
+      "startMs": 647000,
+      "endMs": 860000,
+      "topic": "LeetCode 104 二叉树的最大深度",
+      "summary": "讲解 LeetCode 104 题意，在 C++ 编辑器中通过递归求解二叉树最大深度，并重构为简洁表达。",
+      "evidenceIds": [
+        "ev-009",
+        "ev-010",
+        "ev-011"
+      ]
+    },
+    {
+      "startMs": 860000,
+      "endMs": 915000,
+      "topic": "二叉树递归复习建议",
+      "summary": "建议复习二叉树的所有相关操作，反复体会明确函数语义在构建递归算法中的作用。",
+      "evidenceIds": [
+        "ev-012"
+      ]
+    },
+    {
+      "startMs": 915000,
+      "endMs": 961240,
+      "topic": "思考题：LeetCode 111 二叉树的最小深度",
+      "summary": "给出思考题 LeetCode 111，提示求最低深度时不能简单将 max 替换为 min 的陷阱。",
+      "evidenceIds": [
+        "ev-013"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解二叉树天然的递归结构及其递归定义（包含空树是二叉树的基本情况）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-005"
+      ]
+    },
+    {
+      "statement": "掌握递归函数的两大组成要素：递归终止条件与递归过程。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "学会通过明确函数语义组织二叉树的递归逻辑（如最大深度、查找、释放内存等）。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-007",
+        "ev-008",
+        "ev-010"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "二叉树天然递归结构",
+      "namesObserved": [
+        "二叉树天然的递归结构",
+        "递归结构"
+      ],
+      "role": "introduces",
+      "definition": "二叉树的左孩子和右孩子各自又是一棵二叉树，且空也是一棵二叉树，使得二叉树在结构上具备天然的递归定义。",
+      "evidenceIds": [
+        "ev-002",
+        "ev-005"
+      ]
+    },
+    {
+      "canonicalName": "递归终止条件",
+      "namesObserved": [
+        "递归终止条件"
+      ],
+      "role": "introduces",
+      "definition": "递归函数中用于停止继续向下递归调用的基准判定逻辑。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "递归过程",
+      "namesObserved": [
+        "递归过程"
+      ],
+      "role": "introduces",
+      "definition": "递归函数中将大问题划分为更小规模子问题并进行递归调用的逻辑部分。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "canonicalName": "函数语义",
+      "namesObserved": [
+        "函数的语义",
+        "表意",
+        "函数的语意"
+      ],
+      "role": "introduces",
+      "definition": "明确定义一个递归函数具体完成的任务和功能，根据该任务逻辑去组织代码而非陷于递归调用的运行细节。",
+      "evidenceIds": [
+        "ev-003",
+        "ev-012"
+      ]
+    }
+  ],
+  "problem": {
+    "platform": "LeetCode",
+    "problemId": "104",
+    "titleObserved": "Maximum Depth of Binary Tree",
+    "statement": "求一棵二叉树的最高深度（从根节点到叶子节点的最长路径长度）。",
+    "constraints": [],
+    "clarifyingQuestions": [],
+    "evidenceIds": [
+      "ev-009"
+    ]
+  },
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "baseline",
+      "idea": "根据函数 maxDepth 的语义（求以 root 为根的二叉树的最大深度），先递归分别求出左子树最大深度 leftMaxDepth 与右子树最大深度 rightMaxDepth，然后取二者较大值加上根节点自身的 1 得到结果。递归终止条件为 root 为 NULL 时返回 0。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-001"
+      ],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-010"
+      ]
+    },
+    {
+      "id": "solution-002",
+      "stage": "optimized",
+      "idea": "直接将左右子树的递归调用作为参数传给 std::max，省去局部变量定义，使逻辑更紧凑。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [],
+      "codeArtifactIds": [
+        "code-002"
+      ],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-011"
+      ]
+    }
+  ],
+  "codeArtifacts": [
+    {
+      "id": "code-001",
+      "solutionStageId": "solution-001",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    int maxDepth(TreeNode* root) {\n        if( root == NULL )\n            return 0;\n\n        int leftMaxDepth = maxDepth(root->left);\n        int rightMaxDepth = maxDepth(root->right);\n        return max(leftMaxDepth, rightMaxDepth) + 1;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "compiled",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    },
+    {
+      "id": "code-002",
+      "solutionStageId": "solution-002",
+      "language": "cpp",
+      "sourceKind": "shown_in_video",
+      "completeness": "complete",
+      "code": "class Solution {\npublic:\n    int maxDepth(TreeNode* root) {\n        if( root == NULL )\n            return 0;\n\n        return max( maxDepth(root->left), maxDepth(root->right) ) + 1;\n    }\n};",
+      "ocrUncertainties": [],
+      "verification": "compiled",
+      "evidenceIds": [
+        "ev-011"
+      ]
+    }
+  ],
+  "stateModels": [],
+  "correctness": {
+    "method": "recursive_contract",
+    "claims": [
+      {
+        "statement": "以 root 为根的二叉树的最大深度等于其左子树最大深度与右子树最大深度的较大值加 1；当 root 为空时深度为 0。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-010"
+        ]
+      }
+    ],
+    "stateModelIds": [],
+    "obligations": []
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [],
+  "experiments": [],
+  "examples": [],
+  "edgeCases": [
+    {
+      "statement": "二叉树为空（root == NULL）时，深度为 0。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-010"
+      ]
+    }
+  ],
+  "implementationPitfalls": [
+    {
+      "statement": "设计递归函数时如果缺少递归终止条件，会导致系统栈不停压入函数信息，最终引发系统栈溢出（Stack Overflow）错误。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "statement": "求解 LeetCode 111 二叉树的最小深度（Minimum Depth of Binary Tree）时存在陷阱，不能简单地把求最大深度的 max 替换为 min。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-013"
+      ]
+    }
+  ],
+  "interviewPlaybook": [
+    {
+      "statement": "在面试中如果只需要口述递归算法而非具体编程，必须清晰明确地描述出递归终止条件与递归过程这两部分。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "statement": "书写与理解递归代码的核心在于明确函数的语义（即函数具体完成什么任务），基于函数的语义组织逻辑，而非陷入代码具体如何在栈中运行的细节。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003",
+        "ev-012"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:06-02",
+      "to": "lesson:07-01",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "本课口述回顾上一章曾用栈理解递归，但未给出稳定课次 ID；映射到 06-02 属于编辑整理，仍需结合 06-02 的直接证据复核。",
+      "confidence": 0.75,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "from": "lesson:07-01",
+      "to": "lesson:08-01",
+      "type": "recommended_before",
+      "status": "provisional",
+      "rationale": "二叉树递归结构是后续树形问题与回溯递归的基础。",
+      "confidence": 0.7,
+      "basis": "editorial_hypothesis",
+      "evidenceIds": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 3000,
+      "endMs": 77000,
+      "assetId": "asset:video-07-01",
+      "locator": "00:03 - 01:17",
+      "observation": "幻灯片展示《二叉树和递归》，老师介绍递归在计算机算法中的重要作用，并回顾上一章栈与递归的联系。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 77000,
+      "endMs": 145000,
+      "assetId": "asset:video-07-01",
+      "locator": "01:17 - 02:25",
+      "observation": "幻灯片标题变为《二叉树天然的递归结构》，图示展示二叉树节点的左右孩子各自又是一棵二叉树。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 145000,
+      "endMs": 272000,
+      "assetId": "asset:video-07-01",
+      "locator": "02:25 - 04:32",
+      "observation": "幻灯片展示 preorder 递归代码，老师阐述函数的语义：明确定义函数做某项任务，基于该任务组织代码逻辑。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 272000,
+      "endMs": 339000,
+      "assetId": "asset:video-07-01",
+      "locator": "04:32 - 05:39",
+      "observation": "幻灯片标出递归函数的两部分：递归终止条件与递归过程。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 339000,
+      "endMs": 358000,
+      "assetId": "asset:video-07-01",
+      "locator": "05:39 - 05:58",
+      "observation": "幻灯片增加文字“空是一棵二叉树”，补充二叉树递归定义的终止条件。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 358000,
+      "endMs": 425000,
+      "assetId": "asset:video-07-01",
+      "locator": "05:58 - 07:05",
+      "observation": "老师讲解若缺乏递归终止条件，系统栈会无限压栈最终报系统栈溢出错误。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 425000,
+      "endMs": 540000,
+      "assetId": "asset:video-07-01",
+      "locator": "07:05 - 09:00",
+      "observation": "幻灯片展示 `contain(Node* node, Key key)` 代码，剖析递归终止条件（node == NULL 返回 false）与递归过程。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-008",
+      "sourceType": "video_combined",
+      "startMs": 540000,
+      "endMs": 647000,
+      "assetId": "asset:video-07-01",
+      "locator": "09:00 - 10:47",
+      "observation": "幻灯片展示 `destroy(Node* node)` 代码，讲解先释放左右子树再 delete node 自身的后序递归释放逻辑。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-009",
+      "sourceType": "video_combined",
+      "startMs": 647000,
+      "endMs": 683000,
+      "assetId": "asset:video-07-01",
+      "locator": "10:47 - 11:23",
+      "observation": "幻灯片展示题目 104. Maximum Depth of Binary Tree，说明求一棵二叉树最高深度的含义。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-010",
+      "sourceType": "video_combined",
+      "startMs": 683000,
+      "endMs": 814000,
+      "assetId": "asset:video-07-01",
+      "locator": "11:23 - 13:34",
+      "observation": "老师在 CLion 中编写 maxDepth 函数，先判断 root == NULL 返回 0，再用 leftMaxDepth 和 rightMaxDepth 计算并返回 max + 1。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-011",
+      "sourceType": "video_combined",
+      "startMs": 814000,
+      "endMs": 860000,
+      "assetId": "asset:video-07-01",
+      "locator": "13:34 - 14:20",
+      "observation": "老师将局部变量精简，重构代码为单行 `return max( maxDepth(root->left), maxDepth(root->right) ) + 1;`。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-012",
+      "sourceType": "video_combined",
+      "startMs": 860000,
+      "endMs": 915000,
+      "assetId": "asset:video-07-01",
+      "locator": "14:20 - 15:15",
+      "observation": "幻灯片展示《复习二叉树相关的所有操作》，老师总结强调明确函数语义在构造递归算法中的核心作用。",
+      "confidence": 0.95
+    },
+    {
+      "id": "ev-013",
+      "sourceType": "video_combined",
+      "startMs": 915000,
+      "endMs": 961240,
+      "assetId": "asset:video-07-01",
+      "locator": "15:15 - 16:01",
+      "observation": "幻灯片展示思考题 111. Minimum Depth of Binary Tree，老师特别提醒求最低深度有小陷阱，不能简单把 max 改成 min。",
+      "confidence": 0.95
+    }
+  ],
+  "uncertainties": [
+    {
+      "field": "codeArtifacts",
+      "reason": "两版 maxDepth 算法主体均由最终屏幕代码逐 token 核对，并分别在最小 TreeNode/头文件包装下通过 clang++ 语法编译；没有构造或运行测试用例。",
+      "recommendedCheck": "verification 保持 compiled，不得写成 tested 或课程现场运行通过。"
+    },
+    {
+      "field": "evidence[6..7]",
+      "reason": "contain 与 destroy 只作为幻灯片中的递归语义示例出现，不是本课在 IDE 中编写并核对的解题代码。",
+      "recommendedCheck": "可在笔记中解释两段讲解示例，但不要把它们登记为独立 codeArtifact 或声称已编译。"
+    },
+    {
+      "field": "timeline[6]",
+      "reason": "LeetCode 111 Minimum Depth of Binary Tree 仅作为末尾思考题出现；课程提示不能把 max 机械替换成 min，但未展示完整解法或代码。",
+      "recommendedCheck": "正式笔记保留这一陷阱提示，同时明确本课没有完成 Minimum Depth 题解。"
+    }
+  ],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": "38ebbe6072f84ce3940d3b8f049b3e2d",
+    "promptVersion": "video-evidence-v1.4",
+    "generatedAt": "2026-07-31T07:48:31.000Z"
+  }
+}

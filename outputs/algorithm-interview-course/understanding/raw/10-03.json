@@ -1,0 +1,363 @@
+{
+  "schemaVersion": "1.0",
+  "lessonId": "10-03",
+  "chapterId": "10",
+  "titleObserved": "贪心选择性质的证明",
+  "contentKind": "mixed",
+  "actualDurationSeconds": 923.32,
+  "timeline": [
+    {
+      "startMs": 0,
+      "endMs": 65000,
+      "topic": "贪心选择性质的基本定义",
+      "summary": "介绍贪心选择性质的定义：在最优化问题中，使用贪心方式作出选择后不会影响后续子问题的求解。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "startMs": 65000,
+      "endMs": 125000,
+      "topic": "反例法否定贪心算法：0-1背包问题",
+      "summary": "通过按单位价值（v/w）贪心选择的0-1背包反例，证明贪心策略无法保证获取全局最优解。",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "startMs": 125000,
+      "endMs": 190000,
+      "topic": "反例法否定贪心算法：LeetCode 279 完全平方数",
+      "summary": "展示完全平方数（n=12）问题中优先选最大平方数的直觉贪心失效反例（9+1+1+1 相比最优解 4+4+4）。",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    },
+    {
+      "startMs": 190000,
+      "endMs": 380000,
+      "topic": "贪心算法正确性证明方法探讨",
+      "summary": "讨论无法举出反例时，需要使用数学归纳法或反证法进行严谨数学证明。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    },
+    {
+      "startMs": 380000,
+      "endMs": 672000,
+      "topic": "区间不重叠问题的贪心选择性质证明",
+      "summary": "以按区间结尾排序选最早结束区间的策略为例，详细推导反证法/替换论证证明过程。",
+      "evidenceIds": [
+        "ev-005"
+      ]
+    },
+    {
+      "startMs": 672000,
+      "endMs": 769000,
+      "topic": "贪心选择性质证明通用模式总结",
+      "summary": "总结贪心算法A完全替代最优算法O且不影响求解最优解的证明框架，并给出Assign Cookies课后练习。",
+      "evidenceIds": [
+        "ev-006"
+      ]
+    },
+    {
+      "startMs": 769000,
+      "endMs": 923320,
+      "topic": "贪心算法在综合问题中的应用与总结",
+      "summary": "指出贪心思想常作为最小生成树、最短路径等复杂算法的一部分，并建议在LeetCode进行分类练习。",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "learningObjectives": [
+    {
+      "statement": "理解贪心选择性质的定义：求解最优化问题时作出局部贪心选择不会影响后续子问题的求解。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "statement": "掌握使用反例法否定不成立的贪心算法策略。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002",
+        "ev-003"
+      ]
+    },
+    {
+      "statement": "理解使用反证法（替换论证）证明贪心选择性质的数学证明思路。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005",
+        "ev-006"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "canonicalName": "贪心选择性质",
+      "namesObserved": [
+        "贪心选择性质"
+      ],
+      "role": "introduces",
+      "definition": "在求解一个最优化问题中，使用贪心的方式选择了一组内容之后，不会影响剩下的子问题的求解。",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    },
+    {
+      "canonicalName": "反证法",
+      "namesObserved": [
+        "反证法"
+      ],
+      "role": "applies",
+      "definition": "假设贪心选择得到的解不是最优的，通过将最优解中的步骤替换为贪心选择且证明不影响解的优劣或后续选择，从而推导出矛盾。",
+      "evidenceIds": [
+        "ev-004",
+        "ev-005",
+        "ev-006"
+      ]
+    },
+    {
+      "canonicalName": "数学归纳法",
+      "namesObserved": [
+        "数学归纳法"
+      ],
+      "role": "mentions",
+      "definition": "算法设计领域常用的数学证明方法，适用于存在显式变量 n 逐渐增加的情形。",
+      "evidenceIds": [
+        "ev-004"
+      ]
+    }
+  ],
+  "problem": null,
+  "solutionProgression": [
+    {
+      "id": "solution-001",
+      "stage": "observation",
+      "idea": "按区间结尾排序，每次选择结尾最早且与前一个已选区间不重叠的区间。",
+      "timeComplexity": null,
+      "spaceComplexity": null,
+      "limitations": [
+        "需要证明该贪心选择不会导致放弃更优的后续组合"
+      ],
+      "codeArtifactIds": [],
+      "stateModelIds": [],
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "codeArtifacts": [],
+  "stateModels": [],
+  "correctness": {
+    "method": "exchange_argument",
+    "completeness": "partial",
+    "claims": [
+      {
+        "statement": "区间调度问题按结尾最早排序选择不重叠区间具有贪心选择性质。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      }
+    ],
+    "stateModelIds": [],
+    "obligations": [
+      {
+        "phase": "greedy_choice",
+        "statement": "选择结尾最早且与前一区间不重叠的区间 [s(i), f(i)]，其中 f(i) 是当前所有可选区间中结尾最早的。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      {
+        "phase": "exchange_step",
+        "statement": "假设最优解在这一步选择 [s(j), f(j)] 且 f(j) > f(i)，用 [s(i), f(i)] 替换 [s(j), f(j)] 后，由于 f(i) 更早结束，不会影响后续区间的选择，同样可构成大小为 k 的解。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      },
+      {
+        "phase": "postcondition",
+        "statement": "推导出选择 [s(i), f(i)] 也能得到大小为 k 的最优解，与“贪心选择得到的解最多为 k-1”的假设矛盾，从而证明具有贪心选择性质。",
+        "sourceClass": "course_direct",
+        "evidenceIds": [
+          "ev-005"
+        ]
+      }
+    ]
+  },
+  "complexity": {
+    "time": null,
+    "space": null,
+    "assumptions": [],
+    "evidenceIds": []
+  },
+  "complexityAnalyses": [],
+  "formulaArtifacts": [
+    {
+      "id": "formula-001",
+      "kind": "inequality",
+      "sourceKind": "shown_in_video",
+      "rawText": "f(j) > f(i)",
+      "normalizedText": "f(j) > f(i)",
+      "variables": [
+        {
+          "symbol": "f(i)",
+          "meaning": "贪心选择区间的结尾时间",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        },
+        {
+          "symbol": "f(j)",
+          "meaning": "假设的最优解所选区间的结尾时间",
+          "domainOrRelationship": null,
+          "evidenceIds": [
+            "ev-005"
+          ]
+        }
+      ],
+      "completeness": "complete",
+      "ocrUncertainties": [],
+      "evidenceIds": [
+        "ev-005"
+      ]
+    }
+  ],
+  "experiments": [],
+  "examples": [
+    {
+      "statement": "0-1背包反例：容量为5，物品0(w=1,v=6), 物品1(w=2,v=10), 物品2(w=3,v=12)。按v/w贪心选0和1得价值16；而选1和2得价值22。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-002"
+      ]
+    },
+    {
+      "statement": "完全平方数反例：n=12。贪心选最大平方数9得到 9+1+1+1 (4个)；而最优解为 4+4+4 (3个)。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-003"
+      ]
+    }
+  ],
+  "edgeCases": [],
+  "implementationPitfalls": [],
+  "interviewPlaybook": [
+    {
+      "statement": "面试中很少会让现场证明贪心算法的严谨正确性，关键在于积累常见模型并能通过反例排除错误的贪心直觉。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    },
+    {
+      "statement": "纯粹考察贪心算法的问题通常实现非常简单，复杂问题中贪心思想常与最小生成树、最短路径等图算法结合。",
+      "sourceClass": "course_direct",
+      "evidenceIds": [
+        "ev-007"
+      ]
+    }
+  ],
+  "relationCandidates": [
+    {
+      "from": "lesson:10-02",
+      "to": "lesson:10-03",
+      "type": "extends",
+      "status": "provisional",
+      "rationale": "课程承接上一小节关于动态规划与贪心算法关系的讨论，进一步对贪心选择性质进行数学证明推导。",
+      "confidence": 0.9,
+      "basis": "explicit_in_lesson",
+      "evidenceIds": [
+        "ev-001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-001",
+      "sourceType": "video_combined",
+      "startMs": 0,
+      "endMs": 65000,
+      "assetId": "asset:video-10-03",
+      "locator": "00:00 - 01:05",
+      "observation": "幻灯片展示《贪心选择性质》，老师解释贪心选择性质的直观语义与难导性。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-002",
+      "sourceType": "video_combined",
+      "startMs": 65000,
+      "endMs": 125000,
+      "assetId": "asset:video-10-03",
+      "locator": "01:05 - 02:05",
+      "observation": "幻灯片展示0-1背包问题表格与容量5图示，通过单位价值贪心解16与最优解22对比举出反例。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-003",
+      "sourceType": "video_combined",
+      "startMs": 125000,
+      "endMs": 190000,
+      "assetId": "asset:video-10-03",
+      "locator": "02:05 - 03:10",
+      "observation": "幻灯片展示 279. Perfect Squares，说明 n=12 时贪心 9+1+1+1 劣于 4+4+4 的反例。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-004",
+      "sourceType": "video_combined",
+      "startMs": 190000,
+      "endMs": 380000,
+      "assetId": "asset:video-10-03",
+      "locator": "03:10 - 06:20",
+      "observation": "讲论举不出反例时如何证明贪心正确性，介绍数学归纳法与反证法的适用场景与思想。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-005",
+      "sourceType": "video_combined",
+      "startMs": 380000,
+      "endMs": 672000,
+      "assetId": "asset:video-10-03",
+      "locator": "06:20 - 11:12",
+      "observation": "展示区间保留问题，给出按结尾最早排序的贪心算法，并用替换论证 (f(i) < f(j)) 推演反证法证明过程。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-006",
+      "sourceType": "video_combined",
+      "startMs": 672000,
+      "endMs": 769000,
+      "assetId": "asset:video-10-03",
+      "locator": "11:12 - 12:49",
+      "observation": "总结贪心算法A替代最优算法O不影响最优解的抽象框架，提出用此思路证明 Assign Cookies 的思考题。",
+      "confidence": 1.0
+    },
+    {
+      "id": "ev-007",
+      "sourceType": "video_combined",
+      "startMs": 769000,
+      "endMs": 923320,
+      "assetId": "asset:video-10-03",
+      "locator": "12:49 - 15:23",
+      "observation": "幻灯片展示《贪心算法》，列举最小生成树与最短路径，给出算法面试中的贪心学习建议。",
+      "confidence": 1.0
+    }
+  ],
+  "uncertainties": [],
+  "provenance": {
+    "model": "google/gemini-3.6-flash",
+    "requestId": null,
+    "promptVersion": "video-evidence-v1.7",
+    "generatedAt": null
+  }
+}
