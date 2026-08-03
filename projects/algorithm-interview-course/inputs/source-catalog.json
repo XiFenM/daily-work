@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "sourceRoot": "work/algorithm-interview-course/incoming",
   "inventory": {
-    "scannedAt": "2026-07-31T08:47:07Z",
+    "scannedAt": "2026-08-03T01:06:00Z",
     "layout": "flat",
     "courseAssetCount": 70,
     "videoCount": 67,
@@ -14,7 +14,7 @@
       "duplicateLessonIds": [],
       "missingLessonIds": []
     },
-    "catalogScope": "chapters-01-08"
+    "catalogScope": "chapters-01-09"
   },
   "items": [
     {
@@ -1722,6 +1722,301 @@
       },
       "status": "processed",
       "notes": "目录标称 25:17；实际 25:21.960，相差约 4.960 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成。"
+    },
+    {
+      "assetId": "asset:video-09-01",
+      "kind": "video",
+      "originalFilename": "9-1 什么是动态规划_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/9-1 什么是动态规划_慕课网.mp4",
+      "sha256": "af3e3cd4ddecad7cfcc93c8a270e0be1f93df2a3539069a808eb1ab0265a290f",
+      "bytes": 110762225,
+      "lessonIds": ["09-01"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1230.96,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 20:27；实际 20:30.960，相差约 3.960 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成并核验。"
+    },
+    {
+      "assetId": "asset:video-09-02",
+      "kind": "video",
+      "originalFilename": "9-2 第一个动态规划问题 Climbing Stairs_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/9-2 第一个动态规划问题 Climbing Stairs_慕课网.mp4",
+      "sha256": "093624755398686b4fb870520d766e562cba91564d08d56ae61e797691fecd28",
+      "bytes": 77312259,
+      "lessonIds": ["09-02"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 842.68,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 14:02；实际 14:02.680，相差约 0.680 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成并核验。"
+    },
+    {
+      "assetId": "asset:video-09-03",
+      "kind": "video",
+      "originalFilename": "9-3 发现重叠子问题 Integer Break_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/9-3 发现重叠子问题 Integer Break_慕课网.mp4",
+      "sha256": "0534fa5557fd3209ca1cec2cc004335cf987632823ed7113cc19920158e4a645",
+      "bytes": 149163502,
+      "lessonIds": ["09-03"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1511,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 25:10；实际 25:11.000，相差约 1.000 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成并核验。"
+    },
+    {
+      "assetId": "asset:video-09-04",
+      "kind": "video",
+      "originalFilename": "9-4 状态的定义和状态转移 House Robber_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/9-4 状态的定义和状态转移 House Robber_慕课网.mp4",
+      "sha256": "c979084ab0efc76ecc79e062dee61c9c689ac19327681daf0d490eb144415bb6",
+      "bytes": 150851075,
+      "lessonIds": ["09-04"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1639.12,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 27:19；实际 27:19.120，相差约 0.120 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成并核验。"
+    },
+    {
+      "assetId": "asset:video-09-05",
+      "kind": "video",
+      "originalFilename": "9-5 0-1背包问题_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/9-5 0-1背包问题_慕课网.mp4",
+      "sha256": "be0408d64984f1c601bd6a0254251c212200bf7f98f8e115532a18e8b0e7d034",
+      "bytes": 199824394,
+      "lessonIds": ["09-05"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1957.92,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 32:37；实际 32:37.920，相差约 0.920 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成并核验。"
+    },
+    {
+      "assetId": "asset:video-09-06",
+      "kind": "video",
+      "originalFilename": "9-6 0-1背包问题的优化和变种_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/9-6 0-1背包问题的优化和变种_慕课网.mp4",
+      "sha256": "c87028e01066e2ac71be2bf5e3987060cdce3b27462d7c159f2e1fc101110012",
+      "bytes": 107683137,
+      "lessonIds": ["09-06"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1218.36,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 20:18；实际 20:18.360，相差约 0.360 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成并核验。"
+    },
+    {
+      "assetId": "asset:video-09-07",
+      "kind": "video",
+      "originalFilename": "9-7 面试中的0-1背包问题 Partition Equal Subset Sum_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/9-7 面试中的0-1背包问题 Partition Equal Subset Sum_慕课网.mp4",
+      "sha256": "416c8e47b4e5faa8b361a1246efe7d94a3781f5d5e5f453974defd8a70242079",
+      "bytes": 150623041,
+      "lessonIds": ["09-07"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1654.653968,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 27:34；实际约 27:34.654，相差约 0.654 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成并核验。"
+    },
+    {
+      "assetId": "asset:video-09-08",
+      "kind": "video",
+      "originalFilename": "9-8 LIS问题 Longest Increasing Subsequence_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/9-8 LIS问题 Longest Increasing Subsequence_慕课网.mp4",
+      "sha256": "60982095f2dd3dc1e975a1c9ac0ac711d09e12d13558f88d57891c7d13590f0e",
+      "bytes": 144004085,
+      "lessonIds": ["09-08"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1512.083447,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 25:12；实际约 25:12.083，相差约 0.083 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成并核验。"
+    },
+    {
+      "assetId": "asset:video-09-09",
+      "kind": "video",
+      "originalFilename": "9-9 LCS，最短路，求动态规划的具体解以及更多_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/9-9 LCS，最短路，求动态规划的具体解以及更多_慕课网.mp4",
+      "sha256": "1ca7229e6d92ab2aff85067f427504693aee5b67a71b6b34d86b68462816e6dd",
+      "bytes": 114557918,
+      "lessonIds": ["09-09"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 1264.76771,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 21:00；实际约 21:04.768，相差约 4.768 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成并核验。"
+    },
+    {
+      "assetId": "asset:text-09-10",
+      "kind": "text",
+      "originalFilename": "9-10 动态规划的经典问题.md",
+      "path": "work/algorithm-interview-course/incoming/9-10 动态规划的经典问题.md",
+      "sha256": "7a96f36dedd80ada40ef40b80ba1c4c5b935775efc7837afb9b6e34c14043cb5",
+      "bytes": 1115,
+      "lessonIds": ["09-10"],
+      "match": {
+        "method": "filename+title+content+manual",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "status": "processed",
+      "notes": "Markdown 文本教程，无视频时长；文件名、标题与 23 个正文段落共同确认其为第九章动态规划经典题清单，课次映射无歧义。"
     }
   ],
   "itemShape": {

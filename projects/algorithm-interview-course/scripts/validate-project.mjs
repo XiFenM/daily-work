@@ -179,9 +179,11 @@ for (const attempt of manifest.attempts ?? []) {
       `${attempt.attemptId} is accepted without passed validation.`,
     );
     if (
-      new Set(["video-evidence-v1.4", "video-evidence-v1.5"]).has(
-        attempt.promptVersion,
-      )
+      new Set([
+        "video-evidence-v1.4",
+        "video-evidence-v1.5",
+        "video-evidence-v1.6",
+      ]).has(attempt.promptVersion)
     ) {
       check(
         attempt.validation?.qaStatus === "completed",
