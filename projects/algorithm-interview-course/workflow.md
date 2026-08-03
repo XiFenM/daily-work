@@ -48,24 +48,24 @@ outputs/algorithm-interview-course/
 - 中文笔记的可读性和长度；
 - 单次成本、响应稳定性和模型输入限制。
 
-只有当前批次的新结构校准通过后才扩大该批次范围。
+只有当前批次的新结构校准通过后才扩大该批次范围。第九章已使用 `09-05` 完成 v1.6 校准并据此处理本章其余视频。
 
 ## 阶段 3：视频证据抽取
 
-1. 从 `prompts/video-evidence-v1.5.template.md` 渲染当前课次专用 Prompt。v1.2 在 v1.1 基础上增加多复杂度结论、公式和实验结构；v1.3 进一步收紧时间上限、对象结构、正确性方法和关系候选字段；v1.4 为代码密集课程增加解法—代码—状态模型引用、区间/指针/窗口语义和分阶段正确性义务；v1.5 进一步要求顶层只能是 JSON 对象，并补充递归契约、候选域、选择—递归—撤销和访问标记生命周期规则。历史调用继续保留原 Prompt 与哈希，渲染脚本仍支持显式选择 v1.3 或 v1.4。
+1. 从 `prompts/video-evidence-v1.6.template.md` 渲染当前课次专用 Prompt。v1.2 在 v1.1 基础上增加多复杂度结论、公式和实验结构；v1.3 进一步收紧时间上限、对象结构、正确性方法和关系候选字段；v1.4 为代码密集课程增加解法—代码—状态模型引用、区间/指针/窗口语义和分阶段正确性义务；v1.5 进一步要求顶层只能是 JSON 对象，并补充递归契约、候选域、选择—递归—撤销和访问标记生命周期规则；v1.6 为动态规划课程增加递归/记忆化/自底向上/空间压缩版本分离、状态定义与转移、初始化与遍历顺序、0-1 背包二维/一维语义、LIS/LCS/最短路与具体解恢复的证据规则。历史调用继续保留原 Prompt 与哈希，渲染脚本仍支持显式选择 v1.3、v1.4、v1.5 或 v1.6。
 2. 本地视频默认先尝试 `balanced` 压缩，副本写到明确的课次路径；仍超过 50 MB 时再评估 `strong`、分段或受控 URL。
 3. 原片永不覆盖；已有压缩副本先校验哈希和参数，不静默重建。
 4. 调用示例：
 
 ```bash
 ZENMUX_BASE_URL="https://zenmux.dev/api/v1" pnpm zenmux understand \
-  --input "work/algorithm-interview-course/incoming/8-1 树形问题 Letter Combinations of a Phone Number_慕课网.mp4" \
-  --prompt-file "work/algorithm-interview-course/prompts/08-01-video-evidence-v1.5.md" \
+  --input "work/algorithm-interview-course/incoming/9-5 0-1背包问题_慕课网.mp4" \
+  --prompt-file "work/algorithm-interview-course/prompts/09-05-video-evidence-v1.6.md" \
   --model "<live-video-capable-model>" \
   --extra-file "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json" \
   --compress balanced \
-  --compressed-out "work/algorithm-interview-course/compressed/08-01-balanced.mp4" \
-  --out "outputs/algorithm-interview-course/understanding/raw/08-01.json"
+  --compressed-out "work/algorithm-interview-course/compressed/09-05-balanced.mp4" \
+  --out "outputs/algorithm-interview-course/understanding/raw/09-05.json"
 ```
 
 模型必须从实时目录中确认支持 `video` 或适用的 `file` 输入。仓库 CLI 会把本地文件整体读入内存并编码为 Base64，默认上限 50 MB；不要仅靠大幅提高 `--max-local-mb` 处理超大文件。
@@ -73,8 +73,8 @@ ZENMUX_BASE_URL="https://zenmux.dev/api/v1" pnpm zenmux understand \
 `configs/zenmux-json-object-extra.json` 要求模型返回 JSON object，但它只保证 JSON 语法，不代替本地 schema 门禁。第二章校准时，`google/gemini-3.6-flash` 对完整课程 schema 的 `json_schema` 请求因嵌套深度和受支持关键字限制返回 HTTP 400，因此当前组合使用：
 
 1. `response_format: {"type": "json_object"}` 约束输出为 JSON；
-2. v1.5 Prompt 明确所有必填对象、枚举、视频时长上限、顶层对象边界，以及解法、代码和状态模型的引用关系；
-3. `normalize-lesson-evidence.mjs` 严格检查课次 ID、时长、证据引用、时间边界、对象形状、跨对象引用和正确性方法；v1.4 与 v1.5 的循环不变量还必须具有初始化、保持、终止和后置条件证据；
+2. v1.6 Prompt 明确所有必填对象、枚举、视频时长上限、顶层对象边界、解法—代码—状态模型引用关系，以及动态规划版本、状态、转移、遍历顺序和复杂度的证据边界；
+3. `normalize-lesson-evidence.mjs` 严格检查课次 ID、时长、证据引用、时间边界、对象形状、跨对象引用和正确性方法；v1.4 及以后版本的循环不变量还必须具有初始化、保持、终止和后置条件证据；v1.6 在第 9 章额外要求 `intermediate`/`optimized` 或含代码的解法绑定含变量/区域与转移的状态模型，但允许只被描述或否定且无代码的 `baseline`/`alternative`/`observation` 不补造状态；归纳法仍须具有基本情况、保持步骤和最终状态含义的直接证据；
 4. `validate-project.mjs` 对 manifest、规范化证据、笔记和关系图做跨文件对账。
 
 `build-response-format.mjs` 只用于评估某个供应商是否能无损表达 canonical schema；遇到供应商不支持的多类型 union 时会明确失败，不会静默选择其中一种类型生成有损 schema。
@@ -83,19 +83,19 @@ ZENMUX_BASE_URL="https://zenmux.dev/api/v1" pnpm zenmux understand \
 
 ```bash
 node projects/algorithm-interview-course/scripts/normalize-lesson-evidence.mjs \
-  --input "outputs/algorithm-interview-course/understanding/raw/03-01.json" \
-  --response "outputs/algorithm-interview-course/understanding/raw/03-01.json.response.json" \
-  --out "outputs/algorithm-interview-course/understanding/normalized/03-01.json" \
-  --lesson "03-01" \
-  --chapter "03" \
-  --asset-id "asset:video-03-01" \
+  --input "outputs/algorithm-interview-course/understanding/raw/09-05.json" \
+  --response "outputs/algorithm-interview-course/understanding/raw/09-05.json.response.json" \
+  --out "outputs/algorithm-interview-course/understanding/normalized/09-05.json" \
+  --lesson "09-05" \
+  --chapter "09" \
+  --asset-id "asset:video-09-05" \
   --duration "<ffprobe-seconds>" \
-  --prompt-version "video-evidence-v1.5"
+  --prompt-version "video-evidence-v1.6"
 ```
 
 每一次尝试都必须写入 `manifest.json` 的 `attempts`，包括 HTTP、网络和本地门禁失败；得到模型响应的尝试同时写入 `generations` 并标记 `accepted` 或 `rejected`。成功课次可使用 `register-understanding.mjs` 登记请求 ID、模型、输入输出、Prompt/压缩哈希和 token 用量。CLI 本身不会自动修改 manifest。
 
-`register-understanding.mjs` 只接受已完成人工 QA 的结果：人工核对代码关键 token、区间/指针/窗口/回溯状态语义和关键时间戳后，必须显式传入 `--qa-reviewed true`；省略该参数或传入其他值都会拒绝注册，不会写入 manifest/progress。项目验收还会要求所有已接受的 v1.4/v1.5 尝试都具有 `validation.qaStatus: "completed"`，并要求每份状态为 `lessonNote: "completed"` 的笔记同时具有 `qa: "completed"`。
+`register-understanding.mjs` 只接受已完成人工 QA 的结果：人工核对代码关键 token、区间/指针/窗口/回溯/动态规划状态语义、初始化、遍历方向和关键时间戳后，必须显式传入 `--qa-reviewed true`；省略该参数或传入其他值都会拒绝注册，不会写入 manifest/progress。项目验收还会要求所有已接受的 v1.4/v1.5/v1.6 尝试都具有 `validation.qaStatus: "completed"`，并要求每份状态为 `lessonNote: "completed"` 的笔记同时具有 `qa: "completed"`。
 
 代码验证状态分成两层：Prompt 与 normalizer 要求模型抽取结果中的 `codeArtifacts[].verification` 固定为 `not_run`，防止模型把课程现场运行或平台 Accepted 冒充本项目验证；人工 QA 若随后确实在本机完成语法编译或代表性测试，可以把 **normalized 证据**中的状态提升为 `compiled` 或 `tested`，并在正式笔记中记录脚手架、覆盖范围与未验证项。不得只依据视频画面提升本地验证状态。
 
@@ -134,12 +134,12 @@ node projects/algorithm-interview-course/scripts/normalize-lesson-evidence.mjs \
 
 ## 当前停止点
 
-课程素材已经到位并完成全量编号映射。第一至七章共 48 节课已走完阶段 1–6 的章节范围流程：
+课程素材已经到位并完成全量编号映射。第一至九章共 66 节课已走完阶段 1–6 的章节范围流程：
 
-- 46 个视频完成 SHA-256、FFprobe、画面抽样和压缩副本校验，`06-08`、`07-03` 两篇文本完成哈希与段落证据校验；
-- 46 个视频完成 ZenMux 视频理解、规范化证据和本地门禁，2 篇文本完成本地规范化证据；
-- 48 份单课笔记与 7 份章节综述已完成；
-- 概念词表和关系图已完成第七章校准；
+- 63 个视频完成 SHA-256、FFprobe、画面抽样和压缩副本校验，`06-08`、`07-03`、`09-10` 三篇文本完成哈希与段落证据校验；
+- 63 个视频完成 ZenMux 视频理解、规范化证据和本地门禁，3 篇文本完成本地规范化证据；
+- 66 份单课笔记与 9 份章节综述已完成；
+- 概念词表和关系图已完成第九章校准；
 - 原始响应、失败尝试、规范化证据、请求 ID、Prompt 和压缩副本均已审计到 `manifest.json`。
 
-第七章 6 个视频各发起 1 次到达服务端的理解请求，均一次取得可用结果；文本课 `07-03` 没有调用视频模型。人工 QA 逐帧核对并语法编译 9 份屏幕代码，校准 `07-04` 错误基线与叶子终止条件的证据边界，把 `07-03` 的流传叙述、外界推测、Max Howell 自述和作者评论分层记录，并将 `07-07` 的 LCA 复杂度按树高 `h` 表达，明确平衡树与退化树的差异；本地编译状态与课程现场 Wrong Answer、示例或口述结论分别记录。下一步从第八章 `08-01` 开始。
+第九章 9 个视频共发起 12 次到达服务端的理解请求：9 个结果通过门禁，`09-07` 两次和 `09-09` 一次结果因时间线越界被拒绝；全部调用合计 1,793,339 tokens，其中 accepted 结果为 1,329,482 tokens。人工 QA 分离递归、记忆化、自底向上、空间压缩及背包一维/二维状态，核对本章 17 份屏幕代码：16 份完成本地测试；另 1 份迭代 Fibonacci 代码在扩展到 `n = 0` 时由 AddressSanitizer 复现越界，作为课程实现的输入契约风险保留。下一步处理第十章贪心算法。

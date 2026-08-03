@@ -62,7 +62,8 @@ const promptVersion =
 const strictV13 = promptVersion === "video-evidence-v1.3";
 const strictV14 = promptVersion === "video-evidence-v1.4";
 const strictV15 = promptVersion === "video-evidence-v1.5";
-const strictV14OrLater = strictV14 || strictV15;
+const strictV16 = promptVersion === "video-evidence-v1.6";
+const strictV14OrLater = strictV14 || strictV15 || strictV16;
 const strictExtraction = strictV13 || strictV14OrLater;
 if (
   strictExtraction &&
@@ -852,6 +853,62 @@ if (strictV14OrLater) {
     throw new Error(
       "not_applicable correctness cannot include states or obligations.",
     );
+  }
+
+  if (strictV16 && normalized.chapterId === "09") {
+    for (const solution of normalized.solutionProgression) {
+      const requiresStateModel =
+        new Set(["intermediate", "optimized"]).has(solution.stage) ||
+        solution.codeArtifactIds.length > 0;
+      if (requiresStateModel && solution.stateModelIds.length === 0) {
+        throw new Error(
+          `${solution.id} requires a linked state model because it is intermediate/optimized or has code artifacts under video-evidence-v1.6 chapter 09 rules.`,
+        );
+      }
+    }
+
+    const linkedStateIds = new Set(
+      normalized.solutionProgression.flatMap(
+        (solution) => solution.stateModelIds,
+      ),
+    );
+    for (const stateId of linkedStateIds) {
+      const stateModel = stateById.get(stateId);
+      if (
+        stateModel.variables.length === 0 &&
+        stateModel.regions.length === 0
+      ) {
+        throw new Error(
+          `${stateId} requires an evidence-backed state variable or region for chapter 09 under video-evidence-v1.6.`,
+        );
+      }
+      if (stateModel.transitions.length === 0) {
+        throw new Error(
+          `${stateId} requires an evidence-backed transition for chapter 09 under video-evidence-v1.6.`,
+        );
+      }
+    }
+
+    if (normalized.correctness.method === "induction") {
+      if (normalized.correctness.stateModelIds.length === 0) {
+        throw new Error(
+          "induction requires a linked state model under video-evidence-v1.6.",
+        );
+      }
+      for (const phase of ["initialization", "preservation", "postcondition"]) {
+        const hasDirectObligation = normalized.correctness.obligations.some(
+          (candidate) =>
+            candidate.phase === phase &&
+            candidate.sourceClass === "course_direct" &&
+            candidate.evidenceIds.length > 0,
+        );
+        if (!hasDirectObligation) {
+          throw new Error(
+            `induction requires a course_direct ${phase} obligation under video-evidence-v1.6.`,
+          );
+        }
+      }
+    }
   }
 }
 

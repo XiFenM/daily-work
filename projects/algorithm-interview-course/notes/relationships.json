@@ -2390,10 +2390,10 @@
       "from": "lesson:02-05",
       "to": "lesson:09-01",
       "type": "recommended_before",
-      "strength": "medium",
-      "status": "provisional",
-      "rationale": "02-05 用重复的双分支递归推导 O(2^n)，并明确指出可用剪枝或动态规划把指数级成本降为多项式级，为第 9 章的动态规划动机提供单侧背景；09-01 尚未完成理解，缺少目标侧证据，因此暂不能保持 verified。",
-      "confidence": 0.82,
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "02-05 用递归树统计双分支调用并指出动态规划可避免指数级成本；09-01 用 Fibonacci 的实测、调用树和重复节点进入记忆化与自底向上方法，目标侧证据现已补齐。",
+      "confidence": 0.98,
       "evidence": [
         {
           "lessonId": "02-05",
@@ -2401,9 +2401,16 @@
           "startMs": 409000,
           "endMs": 657000,
           "locator": "ev-005 · 06:49-10:57"
+        },
+        {
+          "lessonId": "09-01",
+          "assetId": "asset:video-09-01",
+          "startMs": 257000,
+          "endMs": 457000,
+          "locator": "ev-005–ev-006 · 04:17-07:37"
         }
       ],
-      "createdBy": "outline-analysis-v1; downgraded-by chapter-07-review-v1"
+      "createdBy": "outline-analysis-v1; downgraded-by chapter-07-review-v1; verified-by chapter-09-review-v1"
     },
     {
       "id": "edge:outline:09-01:09-02",
@@ -2411,11 +2418,26 @@
       "to": "lesson:09-02",
       "type": "applies",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "从动态规划概念进入第一个具体问题。",
-      "confidence": 0.97,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "09-01 总结递归问题出现重叠子问题后可选择记忆化或自底向上动态规划；09-02 随即把同一三阶段方法应用到 Climbing Stairs。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "09-01",
+          "assetId": "asset:video-09-01",
+          "startMs": 1100000,
+          "endMs": 1230960,
+          "locator": "ev-016 · 18:20-20:30.960"
+        },
+        {
+          "lessonId": "09-02",
+          "assetId": "asset:video-09-02",
+          "startMs": 0,
+          "endMs": 626000,
+          "locator": "ev-001–ev-006 · 00:00-10:26"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-09-review-v1"
     },
     {
       "id": "edge:outline:09-02:09-03",
@@ -2423,11 +2445,26 @@
       "to": "lesson:09-03",
       "type": "extends",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "从入门问题进入重叠子问题的识别。",
-      "confidence": 0.93,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "09-02 用 Fibonacci 型计数问题建立重叠子问题、记忆化与填表；09-03 扩展到 Integer Break 最优化问题，并加入最优子结构及“停止拆分/继续拆分”两个候选。",
+      "confidence": 0.97,
+      "evidence": [
+        {
+          "lessonId": "09-02",
+          "assetId": "asset:video-09-02",
+          "startMs": 351000,
+          "endMs": 626000,
+          "locator": "ev-004–ev-006 · 05:51-10:26"
+        },
+        {
+          "lessonId": "09-03",
+          "assetId": "asset:video-09-03",
+          "startMs": 158000,
+          "endMs": 537000,
+          "locator": "ev-003–ev-004 · 02:38-08:57"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-09-review-v1"
     },
     {
       "id": "edge:outline:09-03:09-04",
@@ -2435,11 +2472,26 @@
       "to": "lesson:09-04",
       "type": "extends",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "从发现重叠子问题进入状态定义和状态转移。",
-      "confidence": 0.96,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "09-03 结尾明确预告下一节讨论状态和状态转移；09-04 随即用 House Robber 区分“状态定义说明函数做什么”和“转移说明函数怎么做”。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "09-03",
+          "assetId": "asset:video-09-03",
+          "startMs": 1295000,
+          "endMs": 1511000,
+          "locator": "ev-007 · 21:35-25:11"
+        },
+        {
+          "lessonId": "09-04",
+          "assetId": "asset:video-09-04",
+          "startMs": 422000,
+          "endMs": 738000,
+          "locator": "ev-004 · 07:02-12:18"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-09-review-v1"
     },
     {
       "id": "edge:outline:09-04:09-05",
@@ -2447,11 +2499,26 @@
       "to": "lesson:09-05",
       "type": "recommended_before",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "通用状态定义能力是理解 0-1 背包建模的基础。",
-      "confidence": 0.91,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "09-04 系统解释一维状态语义与转移；09-05 把同一建模方法扩展为“物品前缀 + 容量”二维状态，是理解 0-1 背包前的强推荐基础。",
+      "confidence": 0.97,
+      "evidence": [
+        {
+          "lessonId": "09-04",
+          "assetId": "asset:video-09-04",
+          "startMs": 422000,
+          "endMs": 738000,
+          "locator": "ev-004 · 07:02-12:18"
+        },
+        {
+          "lessonId": "09-05",
+          "assetId": "asset:video-09-05",
+          "startMs": 389000,
+          "endMs": 626000,
+          "locator": "ev-005 · 06:29-10:26"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-09-review-v1"
     },
     {
       "id": "edge:outline:09-05:09-06",
@@ -2459,11 +2526,26 @@
       "to": "lesson:09-06",
       "type": "extends",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "从标准 0-1 背包进入空间优化和变种。",
-      "confidence": 0.98,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "09-05 建立完整二维 0-1 背包表；09-06 开头直接回顾其 O(nC) 时间/空间和上一行依赖，再压缩为两行与一行并介绍变种。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "09-05",
+          "assetId": "asset:video-09-05",
+          "startMs": 1095000,
+          "endMs": 1957920,
+          "locator": "ev-007–ev-008 · 18:15-32:37.920"
+        },
+        {
+          "lessonId": "09-06",
+          "assetId": "asset:video-09-06",
+          "startMs": 0,
+          "endMs": 125000,
+          "locator": "ev-001–ev-002 · 00:00-02:05"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-09-review-v1"
     },
     {
       "id": "edge:outline:09-06:09-07",
@@ -2471,11 +2553,33 @@
       "to": "lesson:09-07",
       "type": "applies",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "将背包模型及其优化迁移到面试题。",
-      "confidence": 0.98,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "09-06 结尾明确预告下一节把 0-1 背包用于 LeetCode 面试题；09-07 把等和子集转成容量 sum/2 的布尔背包，并复用一维倒序更新。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "09-06",
+          "assetId": "asset:video-09-06",
+          "startMs": 1103000,
+          "endMs": 1218360,
+          "locator": "ev-011 · 18:23-20:18.360"
+        },
+        {
+          "lessonId": "09-07",
+          "assetId": "asset:video-09-07",
+          "startMs": 0,
+          "endMs": 374000,
+          "locator": "ev-001–ev-002 · 00:00-06:14"
+        },
+        {
+          "lessonId": "09-07",
+          "assetId": "asset:video-09-07",
+          "startMs": 944000,
+          "endMs": 1198000,
+          "locator": "ev-005 · 15:44-19:58"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-09-review-v1"
     },
     {
       "id": "edge:outline:09-04:09-08",
@@ -2483,35 +2587,269 @@
       "to": "lesson:09-08",
       "type": "applies",
       "strength": "strong",
-      "status": "provisional",
-      "rationale": "状态定义和转移思想应用于 LIS。",
-      "confidence": 0.92,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "status": "verified",
+      "rationale": "09-04 把状态定义与状态转移拆开讲解；09-08 将这一方法用于序列问题，定义 LIS(i) 为以 nums[i] 结尾的最优长度再枚举合法前驱。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "09-04",
+          "assetId": "asset:video-09-04",
+          "startMs": 422000,
+          "endMs": 738000,
+          "locator": "ev-004 · 07:02-12:18"
+        },
+        {
+          "lessonId": "09-08",
+          "assetId": "asset:video-09-08",
+          "startMs": 293000,
+          "endMs": 524000,
+          "locator": "ev-003 · 04:53-08:44"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-09-review-v1"
     },
     {
       "id": "edge:outline:09-08:09-09",
       "from": "lesson:09-08",
       "to": "lesson:09-09",
       "type": "extends",
-      "strength": "medium",
-      "status": "provisional",
-      "rationale": "从 LIS 扩展到 LCS、最短路和具体解恢复等主题。",
-      "confidence": 0.83,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "09-08 完成 LIS 状态与表格；09-09 不仅扩展到 LCS 和最短路，还直接重用 LIS 状态数组演示如何从最大值位置反向恢复一条具体序列。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "09-08",
+          "assetId": "asset:video-09-08",
+          "startMs": 293000,
+          "endMs": 1383000,
+          "locator": "ev-003–ev-006 · 04:53-23:03"
+        },
+        {
+          "lessonId": "09-09",
+          "assetId": "asset:video-09-09",
+          "startMs": 707000,
+          "endMs": 888000,
+          "locator": "ev-007 · 11:47-14:48"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; verified-by chapter-09-review-v1"
     },
     {
-      "id": "edge:outline:09-01:10-02",
-      "from": "lesson:09-01",
+      "id": "edge:video-outline:09-05:10-02",
+      "from": "lesson:09-05",
       "to": "lesson:10-02",
       "type": "contrasts_with",
       "strength": "strong",
       "status": "provisional",
-      "rationale": "动态规划与贪心的适用条件形成课程中的核心对照。",
-      "confidence": 0.95,
-      "evidence": [],
-      "createdBy": "outline-analysis-v1"
+      "rationale": "09-05 用容量 5 的反例证明按单位价值最高优先的局部规则不能保证一般 0-1 背包最优，比原 09-01 目录候选更直接；10-02 尚未处理，缺少目标侧证据，因此保持 provisional。",
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "lessonId": "09-05",
+          "assetId": "asset:video-09-05",
+          "startMs": 211000,
+          "endMs": 389000,
+          "locator": "ev-004 · 03:31-06:29"
+        }
+      ],
+      "createdBy": "outline-analysis-v1; redirected-by chapter-09-review-v1"
+    },
+    {
+      "id": "edge:video:08-08:09-01",
+      "from": "lesson:08-08",
+      "to": "lesson:09-01",
+      "type": "recommended_before",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "08-08 结尾在回溯章节总结后明确预告下一章动态规划；09-01 开头进入动态规划概念并以 Fibonacci 建立新章方法。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "08-08",
+          "assetId": "asset:video-08-08",
+          "startMs": 1374000,
+          "endMs": 1521960,
+          "locator": "ev-008 · 22:54-25:21.960"
+        },
+        {
+          "lessonId": "09-01",
+          "assetId": "asset:video-09-01",
+          "startMs": 0,
+          "endMs": 52000,
+          "locator": "ev-001 · 00:00-00:52"
+        }
+      ],
+      "createdBy": "chapter-09-review-v1"
+    },
+    {
+      "id": "edge:video:06-05:09-09",
+      "from": "lesson:06-05",
+      "to": "lesson:09-09",
+      "type": "extends",
+      "strength": "medium",
+      "status": "verified",
+      "rationale": "06-05 把 Perfect Squares 建模为无权图最短路径并用 BFS 分层求解；09-09 延伸到带边权记号的候选前驱松弛式。两课连接的是最短路建模范围，不表示 BFS 与 Dijkstra 是同一算法或互相替代。",
+      "confidence": 0.94,
+      "evidence": [
+        {
+          "lessonId": "06-05",
+          "assetId": "asset:video-06-05",
+          "startMs": 0,
+          "endMs": 85000,
+          "locator": "ev-001 · 00:00-01:25"
+        },
+        {
+          "lessonId": "06-05",
+          "assetId": "asset:video-06-05",
+          "startMs": 320000,
+          "endMs": 488000,
+          "locator": "ev-004 · 05:20-08:08"
+        },
+        {
+          "lessonId": "09-09",
+          "assetId": "asset:video-09-09",
+          "startMs": 571000,
+          "endMs": 707000,
+          "locator": "ev-006 · 09:31-11:47"
+        }
+      ],
+      "createdBy": "chapter-09-review-v1"
+    },
+    {
+      "id": "edge:video:09-09:09-05",
+      "from": "lesson:09-09",
+      "to": "lesson:09-05",
+      "type": "revisits",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "09-05 建立并填充完整 0-1 背包二维表；09-09 重新使用同类二维表，从右下角反向判断物品选择，把只求最优值扩展到恢复具体解。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "09-09",
+          "assetId": "asset:video-09-09",
+          "startMs": 888000,
+          "endMs": 1112000,
+          "locator": "ev-008 · 14:48-18:32"
+        },
+        {
+          "lessonId": "09-05",
+          "assetId": "asset:video-09-05",
+          "startMs": 1095000,
+          "endMs": 1957920,
+          "locator": "ev-007–ev-008 · 18:15-32:37.920"
+        }
+      ],
+      "createdBy": "chapter-09-review-v1"
+    },
+    {
+      "id": "edge:video:09-09:09-06",
+      "from": "lesson:09-09",
+      "to": "lesson:09-06",
+      "type": "revisits",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "09-06 把二维背包压缩成两行和一行；09-09 回访这一优化并指出只保留一维值数组、没有额外轨迹时会失去按物品层反向恢复具体方案所需的信息。",
+      "confidence": 0.98,
+      "evidence": [
+        {
+          "lessonId": "09-09",
+          "assetId": "asset:video-09-09",
+          "startMs": 888000,
+          "endMs": 1112000,
+          "locator": "ev-008 · 14:48-18:32"
+        },
+        {
+          "lessonId": "09-06",
+          "assetId": "asset:video-09-06",
+          "startMs": 45000,
+          "endMs": 912000,
+          "locator": "ev-002–ev-007 · 00:45-15:12"
+        }
+      ],
+      "createdBy": "chapter-09-review-v1"
+    },
+    {
+      "id": "edge:text-video:09-10:09-07",
+      "from": "lesson:09-10",
+      "to": "lesson:09-07",
+      "type": "revisits",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "09-10 的章末清单再次列出“分割等和子集”；09-07 已完整讲解同名问题的 0-1 背包建模。关系只表示题名级重访，不把 09-07 的题解倒灌为文本课内容。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "09-10",
+          "assetId": "asset:text-09-10",
+          "startMs": null,
+          "endMs": null,
+          "locator": "ev-009 · 标题后第 9 段"
+        },
+        {
+          "lessonId": "09-07",
+          "assetId": "asset:video-09-07",
+          "startMs": 0,
+          "endMs": 374000,
+          "locator": "ev-001–ev-002 · 00:00-06:14"
+        }
+      ],
+      "createdBy": "chapter-09-review-v1"
+    },
+    {
+      "id": "edge:text-video:09-10:09-08",
+      "from": "lesson:09-10",
+      "to": "lesson:09-08",
+      "type": "revisits",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "09-10 的章末清单再次列出“最长递增子序列”；09-08 已讲解 LIS 的定义、状态、转移和实现。关系只确认题名重访，文本课本身仍没有题解。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "09-10",
+          "assetId": "asset:text-09-10",
+          "startMs": null,
+          "endMs": null,
+          "locator": "ev-008 · 标题后第 8 段"
+        },
+        {
+          "lessonId": "09-08",
+          "assetId": "asset:video-09-08",
+          "startMs": 0,
+          "endMs": 1383000,
+          "locator": "ev-001–ev-006 · 00:00-23:03"
+        }
+      ],
+      "createdBy": "chapter-09-review-v1"
+    },
+    {
+      "id": "edge:text-video:09-10:09-09",
+      "from": "lesson:09-10",
+      "to": "lesson:09-09",
+      "type": "revisits",
+      "strength": "strong",
+      "status": "verified",
+      "rationale": "09-10 的章末清单再次列出“最长公共子序列”；09-09 已展示 LCS 定义、二维状态和转移。关系只确认题名重访，不声称文本清单重述了这些细节。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "lessonId": "09-10",
+          "assetId": "asset:text-09-10",
+          "startMs": null,
+          "endMs": null,
+          "locator": "ev-006 · 标题后第 6 段"
+        },
+        {
+          "lessonId": "09-09",
+          "assetId": "asset:video-09-09",
+          "startMs": 37000,
+          "endMs": 360000,
+          "locator": "ev-002–ev-003 · 00:37-06:00"
+        }
+      ],
+      "createdBy": "chapter-09-review-v1"
     },
     {
       "id": "edge:outline:10-01:10-02",

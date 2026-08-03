@@ -4,7 +4,7 @@
   "chapterCount": 11,
   "lessonCount": 70,
   "knownDurationLessonCount": 67,
-  "knownDurationSeconds": 66639.752435,
+  "knownDurationSeconds": 66652.29756,
   "unknownDurationLessonIds": ["06-08", "07-03", "09-10"],
   "normalizationNotes": [
     {
@@ -819,7 +819,7 @@
       "id": "09",
       "number": 9,
       "title": "动态规划基础",
-      "knownDurationSeconds": 12819,
+      "knownDurationSeconds": 12831.545125,
       "lessons": [
         {
           "id": "09-01",
@@ -830,7 +830,9 @@
           "titleNormalized": "什么是动态规划",
           "durationText": "20:27",
           "durationSeconds": 1227,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1230.96,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-09-01"]
         },
         {
           "id": "09-02",
@@ -841,7 +843,9 @@
           "titleNormalized": "第一个动态规划问题 Climbing Stairs",
           "durationText": "14:02",
           "durationSeconds": 842,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 842.68,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-09-02"]
         },
         {
           "id": "09-03",
@@ -852,7 +856,9 @@
           "titleNormalized": "发现重叠子问题 Integer Break",
           "durationText": "25:10",
           "durationSeconds": 1510,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1511,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-09-03"]
         },
         {
           "id": "09-04",
@@ -863,7 +869,9 @@
           "titleNormalized": "状态的定义和状态转移 House Robber",
           "durationText": "27:19",
           "durationSeconds": 1639,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1639.12,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-09-04"]
         },
         {
           "id": "09-05",
@@ -874,7 +882,9 @@
           "titleNormalized": "0-1 背包问题",
           "durationText": "32:37",
           "durationSeconds": 1957,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1957.92,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-09-05"]
         },
         {
           "id": "09-06",
@@ -885,7 +895,9 @@
           "titleNormalized": "0-1 背包问题的优化和变种",
           "durationText": "20:18",
           "durationSeconds": 1218,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1218.36,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-09-06"]
         },
         {
           "id": "09-07",
@@ -896,7 +908,9 @@
           "titleNormalized": "面试中的 0-1 背包问题 Partition Equal Subset Sum",
           "durationText": "27:34",
           "durationSeconds": 1654,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1654.653968,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-09-07"]
         },
         {
           "id": "09-08",
@@ -907,7 +921,9 @@
           "titleNormalized": "LIS 问题 Longest Increasing Subsequence",
           "durationText": "25:12",
           "durationSeconds": 1512,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1512.083447,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-09-08"]
         },
         {
           "id": "09-09",
@@ -918,7 +934,9 @@
           "titleNormalized": "LCS、最短路、求动态规划的具体解以及更多",
           "durationText": "21:00",
           "durationSeconds": 1260,
-          "contentKind": "unknown"
+          "actualDurationSeconds": 1264.76771,
+          "contentKind": "video",
+          "assetRefs": ["asset:video-09-09"]
         },
         {
           "id": "09-10",
@@ -929,7 +947,9 @@
           "titleNormalized": "动态规划的经典问题",
           "durationText": null,
           "durationSeconds": null,
-          "contentKind": "unknown"
+          "actualDurationSeconds": null,
+          "contentKind": "text",
+          "assetRefs": ["asset:text-09-10"]
         }
       ]
     },

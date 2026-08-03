@@ -170,6 +170,105 @@ const makeV14Fixture = () => ({
   },
 });
 
+const makeV16DpFixture = () => {
+  const fixture = makeV14Fixture();
+  fixture.lessonId = "09-05";
+  fixture.chapterId = "09";
+  fixture.titleObserved = "0-1 背包问题";
+  fixture.timeline[0] = {
+    startMs: 0,
+    endMs: 930520,
+    topic: "0-1 背包状态定义与转移",
+    summary: "定义二维状态并从选与不选两个分支得到转移。",
+    evidenceIds: ["ev-001"],
+  };
+  fixture.learningObjectives = [sourced("理解 0-1 背包的状态与转移。")];
+  fixture.concepts = [
+    {
+      canonicalName: "0-1 knapsack dynamic programming",
+      namesObserved: ["0-1 背包"],
+      role: "introduces",
+      definition: "每件物品最多选择一次的背包状态模型。",
+      evidenceIds: ["ev-001"],
+    },
+  ];
+  fixture.problem = {
+    platform: null,
+    problemId: null,
+    titleObserved: "0-1 背包问题",
+    statement: "从若干物品中选择总重量不超过容量的组合。",
+    constraints: ["每件物品最多选择一次"],
+    clarifyingQuestions: [],
+    evidenceIds: ["ev-001"],
+  };
+  fixture.solutionProgression[0] = {
+    id: "solution-001",
+    stage: "baseline",
+    idea: "用物品前缀和容量定义二维状态。",
+    timeComplexity: "O(nC)",
+    spaceComplexity: "O(nC)",
+    limitations: [],
+    codeArtifactIds: ["code-001"],
+    stateModelIds: ["state-001"],
+    evidenceIds: ["ev-001"],
+  };
+  fixture.codeArtifacts[0] = {
+    ...fixture.codeArtifacts[0],
+    code: "dp[i][c] = max(dp[i - 1][c], v[i] + dp[i - 1][c - w[i]]);",
+  };
+  fixture.stateModels[0] = {
+    id: "state-001",
+    solutionStageId: "solution-001",
+    kind: "other",
+    variables: [
+      {
+        symbol: "dp[i][c]",
+        role: "state value",
+        meaning: "考虑前 i 件物品且容量为 c 时的最大价值",
+        updateRule: "比较不选第 i 件与选择第 i 件的结果",
+        evidenceIds: ["ev-001"],
+      },
+    ],
+    regions: [
+      {
+        notation: "0 <= i <= n, 0 <= c <= C",
+        meaning: "二维状态表的有效物品前缀与容量范围",
+        evidenceIds: ["ev-001"],
+      },
+    ],
+    invariant: null,
+    transitions: [
+      {
+        condition: "w[i] <= c",
+        updates: "dp[i][c] = max(dp[i - 1][c], v[i] + dp[i - 1][c - w[i]])",
+        preserves: null,
+        evidenceIds: ["ev-001"],
+      },
+    ],
+    termination: sourced("最终从 dp[n][C] 读取答案。"),
+    evidenceIds: ["ev-001"],
+  };
+  fixture.correctness = {
+    method: "state_transition",
+    claims: [sourced("每个状态比较选择与不选择当前物品。")],
+    stateModelIds: ["state-001"],
+    obligations: [],
+  };
+  fixture.complexity = {
+    time: "O(nC)",
+    space: "O(nC)",
+    assumptions: ["n 为物品数，C 为背包容量"],
+    evidenceIds: ["ev-001"],
+  };
+  fixture.evidence[0] = {
+    ...fixture.evidence[0],
+    assetId: "asset:video-09-05",
+    observation: "画面和讲解展示二维 0-1 背包状态及选与不选转移。",
+  };
+  fixture.provenance.promptVersion = "video-evidence-v1.6";
+  return fixture;
+};
+
 const runNormalizer = async (raw, promptVersion = "video-evidence-v1.4") => {
   const temporaryDirectory = await mkdtemp(
     resolve(tmpdir(), "lesson-evidence-test-"),
@@ -202,13 +301,13 @@ const runNormalizer = async (raw, promptVersion = "video-evidence-v1.4") => {
         "--out",
         outputPath,
         "--lesson",
-        "03-01",
+        raw.lessonId,
         "--chapter",
-        "03",
+        raw.chapterId,
         "--asset-id",
-        "asset:video-03-01",
+        raw.evidence[0].assetId,
         "--duration",
-        "930.52",
+        String(raw.actualDurationSeconds),
         "--prompt-version",
         promptVersion,
       ],
@@ -388,5 +487,149 @@ describe("normalize-lesson-evidence video-evidence-v1.4", () => {
     expect(result.status).toBe(0);
     expect(result.normalized.correctness.method).toBe("not_applicable");
     expect(result.normalized).not.toHaveProperty("stateModels");
+  });
+});
+
+describe("normalize-lesson-evidence video-evidence-v1.6 DP gates", () => {
+  it("accepts an evidence-backed dynamic-programming state and transition", async () => {
+    const result = await runNormalizer(
+      makeV16DpFixture(),
+      "video-evidence-v1.6",
+    );
+
+    expect(result.status).toBe(0);
+    expect(result.normalized.provenance.promptVersion).toBe(
+      "video-evidence-v1.6",
+    );
+    expect(result.normalized.stateModels[0].kind).toBe("other");
+  });
+
+  it("rejects a coded chapter 09 baseline without a linked state model", async () => {
+    const fixture = makeV16DpFixture();
+    fixture.solutionProgression[0].stateModelIds = [];
+    fixture.stateModels = [];
+    fixture.correctness = {
+      method: "unknown",
+      claims: [],
+      stateModelIds: [],
+      obligations: [],
+    };
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.6");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain("requires a linked state model");
+  });
+
+  it.each(["baseline", "alternative", "observation"])(
+    "accepts a described, uncoded %s stage without a state model",
+    async (stage) => {
+      const fixture = makeV16DpFixture();
+      fixture.solutionProgression[0].stage = stage;
+      fixture.solutionProgression[0].codeArtifactIds = [];
+      fixture.solutionProgression[0].stateModelIds = [];
+      fixture.codeArtifacts = [];
+      fixture.stateModels = [];
+      fixture.correctness = {
+        method: "unknown",
+        claims: [],
+        stateModelIds: [],
+        obligations: [],
+      };
+
+      const result = await runNormalizer(fixture, "video-evidence-v1.6");
+
+      expect(result.status).toBe(0);
+      expect(result.normalized.solutionProgression[0].stateModelIds).toEqual(
+        [],
+      );
+    },
+  );
+
+  it.each(["intermediate", "optimized"])(
+    "rejects an uncoded %s stage without a state model",
+    async (stage) => {
+      const fixture = makeV16DpFixture();
+      fixture.solutionProgression[0].stage = stage;
+      fixture.solutionProgression[0].codeArtifactIds = [];
+      fixture.solutionProgression[0].stateModelIds = [];
+      fixture.codeArtifacts = [];
+      fixture.stateModels = [];
+      fixture.correctness = {
+        method: "unknown",
+        claims: [],
+        stateModelIds: [],
+        obligations: [],
+      };
+
+      const result = await runNormalizer(fixture, "video-evidence-v1.6");
+
+      expect(result.status).not.toBe(0);
+      expect(result.stderr).toContain("requires a linked state model");
+    },
+  );
+
+  it("rejects a linked DP state without a variable or region", async () => {
+    const fixture = makeV16DpFixture();
+    fixture.stateModels[0].variables = [];
+    fixture.stateModels[0].regions = [];
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.6");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain("state variable or region");
+  });
+
+  it("rejects a linked DP state without a transition", async () => {
+    const fixture = makeV16DpFixture();
+    fixture.stateModels[0].transitions = [];
+    fixture.correctness = {
+      method: "unknown",
+      claims: [],
+      stateModelIds: [],
+      obligations: [],
+    };
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.6");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain("evidence-backed transition");
+  });
+
+  it("rejects induction without direct base, step, and result obligations", async () => {
+    const fixture = makeV16DpFixture();
+    fixture.correctness.method = "induction";
+    fixture.correctness.obligations = [];
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.6");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain(
+      "induction requires a course_direct initialization obligation",
+    );
+  });
+
+  it("accepts induction with direct base, step, and result obligations", async () => {
+    const fixture = makeV16DpFixture();
+    fixture.correctness.method = "induction";
+    fixture.correctness.obligations = [
+      {
+        phase: "initialization",
+        ...sourced("容量或物品前缀为空时，基本状态成立。"),
+      },
+      {
+        phase: "preservation",
+        ...sourced("假设较小物品前缀的状态正确，转移比较选与不选。"),
+      },
+      {
+        phase: "postcondition",
+        ...sourced("完成全部物品后，dp[n][C] 表示所求最大价值。"),
+      },
+    ];
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.6");
+
+    expect(result.status).toBe(0);
+    expect(result.normalized.correctness.method).toBe("induction");
   });
 });

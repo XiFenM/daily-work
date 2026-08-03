@@ -235,7 +235,13 @@
         "04-05",
         "04-06",
         "04-07",
-        "04-08"
+        "04-08",
+        "09-01",
+        "09-02",
+        "09-03",
+        "09-04",
+        "09-05",
+        "09-07"
       ],
       "evidenceRefs": [
         "01-04:ev-002",
@@ -256,7 +262,18 @@
         "04-07:ev-004",
         "04-07:ev-005",
         "04-08:ev-002",
-        "04-08:ev-003"
+        "04-08:ev-003",
+        "09-01:ev-006",
+        "09-01:ev-009",
+        "09-01:ev-010",
+        "09-02:ev-004",
+        "09-02:ev-005",
+        "09-03:ev-003",
+        "09-03:ev-005",
+        "09-04:ev-003",
+        "09-04:ev-005",
+        "09-05:ev-006",
+        "09-07:ev-004"
       ]
     },
     {
@@ -661,14 +678,20 @@
       "aliases": ["递归深度分析", "每层工作量"],
       "definition": "递归复杂度不能由“出现递归”直接猜测；单分支递归可结合每次调用成本与递归深度，多分支递归则需统计调用树节点或各层总工作量。",
       "status": "verified",
-      "lessonRefs": ["02-05"],
+      "lessonRefs": ["02-05", "09-01", "09-03", "09-04"],
       "evidenceRefs": [
         "02-05:ev-001",
         "02-05:ev-002",
         "02-05:ev-003",
         "02-05:ev-004",
         "02-05:ev-005",
-        "02-05:ev-006"
+        "02-05:ev-006",
+        "09-01:ev-005",
+        "09-01:ev-006",
+        "09-03:ev-002",
+        "09-03:ev-003",
+        "09-04:ev-002",
+        "09-04:ev-003"
       ]
     },
     {
@@ -679,8 +702,15 @@
       "aliases": ["调用树"],
       "definition": "把每次递归调用表示为树节点，并通过节点总数或每层成本之和推导多分支递归的总时间。",
       "status": "verified",
-      "lessonRefs": ["02-05"],
-      "evidenceRefs": ["02-05:ev-005", "02-05:ev-006"]
+      "lessonRefs": ["02-05", "09-01", "09-02", "09-03", "09-04"],
+      "evidenceRefs": [
+        "02-05:ev-005",
+        "02-05:ev-006",
+        "09-01:ev-006",
+        "09-02:ev-004",
+        "09-03:ev-003",
+        "09-04:ev-003"
+      ]
     },
     {
       "id": "concept:amortized-complexity",
@@ -2380,6 +2410,418 @@
         "08-08:ev-005",
         "08-08:ev-006"
       ]
+    },
+    {
+      "id": "algorithm:dynamic-programming",
+      "type": "algorithm",
+      "nameZh": "动态规划",
+      "nameEn": "Dynamic programming",
+      "aliases": ["DP", "自底向上动态规划"],
+      "definition": "把原问题表示为有重叠关系的子问题状态，只计算并保存每个状态一次，再按依赖顺序通过状态转移组合答案；完整建模还必须说明状态语义、初始化、计算顺序与答案位置。",
+      "status": "verified",
+      "lessonRefs": [
+        "09-01",
+        "09-02",
+        "09-03",
+        "09-04",
+        "09-05",
+        "09-06",
+        "09-07",
+        "09-08",
+        "09-09"
+      ],
+      "evidenceRefs": [
+        "09-01:ev-013",
+        "09-01:ev-015",
+        "09-01:ev-016",
+        "09-02:ev-006",
+        "09-03:ev-004",
+        "09-03:ev-006",
+        "09-04:ev-004",
+        "09-04:ev-006",
+        "09-05:ev-005",
+        "09-05:ev-007",
+        "09-06:ev-001",
+        "09-06:ev-002",
+        "09-07:ev-002",
+        "09-07:ev-005",
+        "09-08:ev-003",
+        "09-08:ev-006",
+        "09-09:ev-001",
+        "09-09:ev-003"
+      ]
+    },
+    {
+      "id": "pattern:memoization",
+      "type": "pattern",
+      "nameZh": "记忆化搜索",
+      "nameEn": "Memoization",
+      "aliases": ["自顶向下动态规划", "缓存子问题"],
+      "definition": "以决定子问题的全部参数为缓存键；命中时直接返回，未命中时递归求值并保存，从而避免同一状态被重复展开。",
+      "status": "verified",
+      "lessonRefs": ["09-01", "09-02", "09-03", "09-04", "09-05", "09-07"],
+      "evidenceRefs": [
+        "09-01:ev-009",
+        "09-01:ev-010",
+        "09-01:ev-012",
+        "09-02:ev-005",
+        "09-03:ev-005",
+        "09-04:ev-005",
+        "09-05:ev-006",
+        "09-07:ev-004"
+      ]
+    },
+    {
+      "id": "concept:overlapping-subproblems",
+      "type": "concept",
+      "nameZh": "重叠子问题",
+      "nameEn": "Overlapping subproblems",
+      "aliases": ["重复子问题", "重复计算"],
+      "definition": "递归展开的不同路径会再次到达参数和语义相同的子问题；这说明结果可以缓存或按表格顺序复用，但不单独构成完整正确性证明。",
+      "status": "verified",
+      "lessonRefs": ["09-01", "09-02", "09-03", "09-04"],
+      "evidenceRefs": [
+        "09-01:ev-006",
+        "09-01:ev-016",
+        "09-02:ev-004",
+        "09-03:ev-003",
+        "09-03:ev-004",
+        "09-04:ev-003"
+      ]
+    },
+    {
+      "id": "concept:optimal-substructure",
+      "type": "concept",
+      "nameZh": "最优子结构",
+      "nameEn": "Optimal substructure",
+      "aliases": ["子问题最优解组合"],
+      "definition": "原问题的最优值可以由一个或多个更小子问题的最优值参与组合；仍需证明状态定义、选择覆盖、转移和边界与原问题一致。",
+      "status": "verified",
+      "lessonRefs": ["09-03", "09-04", "09-05"],
+      "evidenceRefs": [
+        "09-03:ev-004",
+        "09-03:ev-005",
+        "09-04:ev-003",
+        "09-04:ev-004",
+        "09-05:ev-001",
+        "09-05:ev-005"
+      ]
+    },
+    {
+      "id": "concept:dp-state-definition",
+      "type": "concept",
+      "nameZh": "动态规划状态定义",
+      "nameEn": "Dynamic-programming state definition",
+      "aliases": ["状态语义", "DP 表项语义"],
+      "definition": "用一句可核验的话说明状态函数或表项的每个维度、输入范围和值所代表的计数、最值或可达性；状态变化会连带改变初始化、转移、遍历顺序和答案位置。",
+      "status": "verified",
+      "lessonRefs": ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09"],
+      "evidenceRefs": [
+        "09-04:ev-004",
+        "09-04:ev-007",
+        "09-05:ev-005",
+        "09-06:ev-002",
+        "09-06:ev-006",
+        "09-07:ev-002",
+        "09-08:ev-003",
+        "09-09:ev-003",
+        "09-09:ev-006"
+      ]
+    },
+    {
+      "id": "concept:state-transition-equation",
+      "type": "concept",
+      "nameZh": "状态转移方程",
+      "nameEn": "State-transition equation",
+      "aliases": ["状态转移", "递推式"],
+      "definition": "根据当前状态可作出的互斥或覆盖完整的选择，把它表示为已知更小状态的组合；转移必须与状态语义、适用条件和计算顺序共同解释。",
+      "status": "verified",
+      "lessonRefs": [
+        "09-03",
+        "09-04",
+        "09-05",
+        "09-06",
+        "09-07",
+        "09-08",
+        "09-09"
+      ],
+      "evidenceRefs": [
+        "09-03:ev-005",
+        "09-03:ev-006",
+        "09-04:ev-004",
+        "09-05:ev-005",
+        "09-06:ev-002",
+        "09-06:ev-006",
+        "09-07:ev-002",
+        "09-08:ev-003",
+        "09-09:ev-003",
+        "09-09:ev-006"
+      ]
+    },
+    {
+      "id": "pattern:top-down-bottom-up-duality",
+      "type": "pattern",
+      "nameZh": "自顶向下与自底向上",
+      "nameEn": "Top-down and bottom-up dynamic programming",
+      "aliases": ["记忆化与递推", "递归缓存与填表"],
+      "definition": "同一子问题关系既可以按需递归并缓存，也可以从基本状态按依赖顺序填表；两者常共享数学状态，但代码缓存键、控制流、栈空间与物理存储必须分别记录。",
+      "status": "verified",
+      "lessonRefs": ["09-01", "09-02", "09-03", "09-04", "09-05", "09-07"],
+      "evidenceRefs": [
+        "09-01:ev-012",
+        "09-01:ev-013",
+        "09-01:ev-014",
+        "09-01:ev-016",
+        "09-02:ev-005",
+        "09-02:ev-006",
+        "09-03:ev-005",
+        "09-03:ev-006",
+        "09-04:ev-005",
+        "09-04:ev-006",
+        "09-05:ev-006",
+        "09-05:ev-007",
+        "09-07:ev-004",
+        "09-07:ev-005"
+      ]
+    },
+    {
+      "id": "problem:fibonacci-sequence",
+      "type": "problem",
+      "nameZh": "斐波那契数列",
+      "nameEn": "Fibonacci sequence",
+      "aliases": ["Fibonacci", "fib"],
+      "definition": "课程用相邻两项之和的递推关系比较纯递归、记忆化和自底向上实现；幻灯片写 F(0)=1，而三版代码与 fib(10)=55 的运行结果使用 F(0)=0，这一冲突需保留。",
+      "status": "verified",
+      "lessonRefs": ["09-01", "09-02"],
+      "evidenceRefs": [
+        "09-01:ev-002",
+        "09-01:ev-003",
+        "09-01:ev-009",
+        "09-01:ev-013",
+        "09-02:ev-006"
+      ]
+    },
+    {
+      "id": "problem:leetcode-70",
+      "type": "problem",
+      "nameZh": "爬楼梯",
+      "nameEn": "Climbing Stairs",
+      "aliases": ["LeetCode 70"],
+      "definition": "每次走 1 阶或 2 阶，求爬上 n 阶的走法数；课程从最后一步的两个互斥来源建立递归，再改为记忆化和自底向上表格。",
+      "status": "verified",
+      "lessonRefs": ["09-02"],
+      "evidenceRefs": [
+        "09-02:ev-001",
+        "09-02:ev-002",
+        "09-02:ev-003",
+        "09-02:ev-005",
+        "09-02:ev-006"
+      ]
+    },
+    {
+      "id": "problem:leetcode-343",
+      "type": "problem",
+      "nameZh": "整数拆分",
+      "nameEn": "Integer Break",
+      "aliases": ["LeetCode 343"],
+      "definition": "把正整数至少拆成两部分并最大化乘积；对第一部分 j，课程同时比较停止拆分的 j*(i-j) 与继续拆分的 j*best(i-j)。",
+      "status": "verified",
+      "lessonRefs": ["09-03"],
+      "evidenceRefs": [
+        "09-03:ev-001",
+        "09-03:ev-003",
+        "09-03:ev-004",
+        "09-03:ev-005",
+        "09-03:ev-006"
+      ]
+    },
+    {
+      "id": "problem:leetcode-198",
+      "type": "problem",
+      "nameZh": "打家劫舍",
+      "nameEn": "House Robber",
+      "aliases": ["LeetCode 198"],
+      "definition": "从线性房屋中选择互不相邻的房屋并最大化价值；课程以房屋后缀为状态，枚举该后缀中第一间被偷的房屋，并分别实现记忆化与二次自底向上版本。",
+      "status": "verified",
+      "lessonRefs": ["09-04"],
+      "evidenceRefs": [
+        "09-04:ev-001",
+        "09-04:ev-003",
+        "09-04:ev-004",
+        "09-04:ev-005",
+        "09-04:ev-006"
+      ]
+    },
+    {
+      "id": "problem:zero-one-knapsack",
+      "type": "problem",
+      "nameZh": "0-1 背包",
+      "nameEn": "0-1 Knapsack",
+      "aliases": ["01 背包", "每件物品最多一次"],
+      "definition": "在容量约束下从不同物品中每件最多选择一次，最大化总价值；课程以物品前缀和容量为二维状态，比较不选与容量允许时选择当前物品。",
+      "status": "verified",
+      "lessonRefs": ["09-05", "09-06", "09-07", "09-09"],
+      "evidenceRefs": [
+        "09-05:ev-002",
+        "09-05:ev-005",
+        "09-05:ev-006",
+        "09-05:ev-007",
+        "09-06:ev-001",
+        "09-06:ev-002",
+        "09-07:ev-002",
+        "09-07:ev-005",
+        "09-09:ev-008"
+      ]
+    },
+    {
+      "id": "pattern:knapsack-space-compression",
+      "type": "pattern",
+      "nameZh": "背包状态空间压缩",
+      "nameEn": "Knapsack state-space compression",
+      "aliases": ["滚动数组", "两行背包", "一维背包"],
+      "definition": "利用第 i 个物品状态只依赖上一物品层的关系，把完整二维表压缩为两行或一行；它减少辅助空间但不自动减少状态计算量。",
+      "status": "verified",
+      "lessonRefs": ["09-06", "09-07", "09-09"],
+      "evidenceRefs": [
+        "09-06:ev-002",
+        "09-06:ev-003",
+        "09-06:ev-004",
+        "09-06:ev-005",
+        "09-06:ev-006",
+        "09-06:ev-007",
+        "09-07:ev-005",
+        "09-09:ev-008"
+      ]
+    },
+    {
+      "id": "pitfall:knapsack-capacity-iteration-direction",
+      "type": "pitfall",
+      "nameZh": "一维 0-1 背包容量方向错误",
+      "nameEn": "Wrong capacity direction in one-dimensional 0-1 knapsack",
+      "aliases": ["容量倒序", "同一物品重复使用"],
+      "definition": "一维 0-1 背包必须从大容量向小容量更新，使较小容量仍代表上一物品层；正序可能读取当前轮刚写入的值并重复使用同一物品。",
+      "status": "verified",
+      "lessonRefs": ["09-06", "09-07"],
+      "evidenceRefs": ["09-06:ev-006", "09-06:ev-007", "09-07:ev-005"]
+    },
+    {
+      "id": "problem:leetcode-416",
+      "type": "problem",
+      "nameZh": "分割等和子集",
+      "nameEn": "Partition Equal Subset Sum",
+      "aliases": ["LeetCode 416"],
+      "definition": "判断正整数数组能否分为两个等和子集；总和为偶数时转成每个数字最多使用一次、能否恰好凑出 sum/2 的布尔 0-1 背包。",
+      "status": "verified",
+      "lessonRefs": ["09-07", "09-10"],
+      "evidenceRefs": [
+        "09-07:ev-001",
+        "09-07:ev-002",
+        "09-07:ev-004",
+        "09-07:ev-005",
+        "09-10:ev-009"
+      ]
+    },
+    {
+      "id": "problem:leetcode-300",
+      "type": "problem",
+      "nameZh": "最长递增子序列",
+      "nameEn": "Longest Increasing Subsequence",
+      "aliases": ["LeetCode 300", "LIS"],
+      "definition": "求整数序列的最长严格上升子序列长度；课程定义 LIS(i) 为以 nums[i] 结尾的最优长度，枚举所有更早且更小的结尾，并从全表取最大值。",
+      "status": "verified",
+      "lessonRefs": ["09-08", "09-09", "09-10"],
+      "evidenceRefs": [
+        "09-08:ev-001",
+        "09-08:ev-003",
+        "09-08:ev-004",
+        "09-08:ev-005",
+        "09-08:ev-006",
+        "09-09:ev-007",
+        "09-10:ev-008"
+      ]
+    },
+    {
+      "id": "problem:longest-common-subsequence",
+      "type": "problem",
+      "nameZh": "最长公共子序列",
+      "nameEn": "Longest Common Subsequence",
+      "aliases": ["LCS", "最长公共序列"],
+      "definition": "求两个序列共同拥有的最长子序列；课程展示二维状态及字符相等/不等时的转移，把递归、记忆化与自底向上实现留作练习。",
+      "status": "verified",
+      "lessonRefs": ["09-09", "09-10"],
+      "evidenceRefs": [
+        "09-09:ev-002",
+        "09-09:ev-003",
+        "09-09:ev-004",
+        "09-09:ev-005",
+        "09-10:ev-006"
+      ]
+    },
+    {
+      "id": "algorithm:dijkstra",
+      "type": "algorithm",
+      "nameZh": "Dijkstra 单源最短路径",
+      "nameEn": "Dijkstra's single-source shortest-path algorithm",
+      "aliases": ["dijkstra", "单源最短路径"],
+      "definition": "课程在动态规划延伸中用 shortestPath(x)=min(shortestPath(a)+w(a→x)) 展示前驱松弛关系；本课没有展开完整选点机制、权重条件、代码或复杂度，因此概念边界只到该课程视角。",
+      "status": "verified",
+      "lessonRefs": ["09-09"],
+      "evidenceRefs": ["09-09:ev-006"]
+    },
+    {
+      "id": "pattern:dp-solution-reconstruction",
+      "type": "pattern",
+      "nameZh": "动态规划具体解恢复",
+      "nameEn": "Dynamic-programming solution reconstruction",
+      "aliases": ["DP 反向追溯", "前驱恢复", "求具体解"],
+      "definition": "从最优终点依据表格值、前驱或选择记录反向移动，恢复一组产生最优值的具体选择；并列最优时可能存在多个合法前驱。",
+      "status": "verified",
+      "lessonRefs": ["09-09"],
+      "evidenceRefs": ["09-09:ev-007", "09-09:ev-008"]
+    },
+    {
+      "id": "pitfall:space-compression-loses-history",
+      "type": "pitfall",
+      "nameZh": "空间压缩覆盖恢复信息",
+      "nameEn": "Space compression overwrites reconstruction history",
+      "aliases": ["一维表无法直接回溯", "历史层丢失"],
+      "definition": "09-06 提供滚动与一维表覆盖早期物品层的压缩机制；09-09 明确指出，若没有额外保存前驱或选择信息，只剩最终最优值不足以沿原二维历史直接恢复具体方案。",
+      "status": "verified",
+      "lessonRefs": ["09-06", "09-09"],
+      "evidenceRefs": ["09-06:ev-002", "09-06:ev-007", "09-09:ev-008"]
+    },
+    {
+      "id": "problem:complete-knapsack",
+      "type": "problem",
+      "nameZh": "完全背包",
+      "nameEn": "Complete knapsack",
+      "aliases": ["每种物品可无限使用"],
+      "definition": "课程列出的背包变种：每种物品可以无限使用。课程还利用固定容量把正重量物品的可用次数有限化，并提出按 1、2、4、8……分组后转成 0-1 物品；但没有给出完整状态、代码或复杂度。严格的 M_i 上界、remainder 与专用完全背包 DP 比较属于编辑边界。",
+      "status": "verified",
+      "lessonRefs": ["09-06"],
+      "evidenceRefs": ["09-06:ev-008"]
+    },
+    {
+      "id": "problem:multiple-knapsack",
+      "type": "problem",
+      "nameZh": "多重背包",
+      "nameEn": "Multiple knapsack",
+      "aliases": ["有数量上限的背包", "num(i) 件物品"],
+      "definition": "课程列出的背包变种：第 i 种物品有给定数量 num(i)；本课只介绍约束和变体方向，没有展示完整实现。",
+      "status": "verified",
+      "lessonRefs": ["09-06"],
+      "evidenceRefs": ["09-06:ev-009"]
+    },
+    {
+      "id": "problem:multi-dimensional-knapsack",
+      "type": "problem",
+      "nameZh": "多维费用背包",
+      "nameEn": "Multi-dimensional knapsack",
+      "aliases": ["多约束背包", "体积与重量背包"],
+      "definition": "课程列出的背包变种：物品同时占用重量、体积等多个容量维度，状态表相应增加维度；本课没有提供完整转移或代码。",
+      "status": "verified",
+      "lessonRefs": ["09-06"],
+      "evidenceRefs": ["09-06:ev-010"]
     }
   ],
   "conceptShape": {
