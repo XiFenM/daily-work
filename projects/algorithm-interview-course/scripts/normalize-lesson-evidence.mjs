@@ -872,6 +872,39 @@ if (strictV14OrLater) {
     );
   }
 
+  if (
+    strictV17 &&
+    (normalized.correctness.method === "not_applicable") !==
+      (normalized.correctness.completeness === "not_applicable")
+  ) {
+    throw new Error(
+      "correctness.method and correctness.completeness must agree on not_applicable under video-evidence-v1.7.",
+    );
+  }
+
+  const isPureConclusion =
+    normalized.contentKind === "conclusion" &&
+    normalized.problem === null &&
+    normalized.solutionProgression.length === 0 &&
+    normalized.codeArtifacts.length === 0 &&
+    normalized.stateModels.length === 0 &&
+    normalized.correctness.claims.length === 0 &&
+    normalized.complexity.time === null &&
+    normalized.complexity.space === null &&
+    normalized.complexity.evidenceIds.length === 0 &&
+    normalized.complexityAnalyses.length === 0 &&
+    normalized.formulaArtifacts.length === 0 &&
+    normalized.experiments.length === 0;
+  if (
+    strictV17 &&
+    isPureConclusion &&
+    normalized.correctness.method !== "not_applicable"
+  ) {
+    throw new Error(
+      "A pure conclusion without algorithmic material must use not_applicable correctness under video-evidence-v1.7.",
+    );
+  }
+
   if (strictV17 && normalized.chapterId === "10") {
     const completeness = normalized.correctness.completeness;
     const hasCorrectnessMaterial =
@@ -887,15 +920,6 @@ if (strictV14OrLater) {
         "Chapter 10 algorithmic material must mark correctness.completeness as complete or partial under video-evidence-v1.7.",
       );
     }
-    if (
-      (normalized.correctness.method === "not_applicable") !==
-      (completeness === "not_applicable")
-    ) {
-      throw new Error(
-        "correctness.method and correctness.completeness must agree on not_applicable under video-evidence-v1.7.",
-      );
-    }
-
     for (const solution of normalized.solutionProgression) {
       const requiresStateModel =
         new Set(["intermediate", "optimized"]).has(solution.stage) ||

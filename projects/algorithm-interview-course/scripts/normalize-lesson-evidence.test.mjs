@@ -914,16 +914,28 @@ describe("normalize-lesson-evidence video-evidence-v1.7 greedy gates", () => {
 
     expect(result.status).not.toBe(0);
     expect(result.stderr).toContain(
-      "must mark correctness.completeness as complete or partial",
+      "must agree on not_applicable under video-evidence-v1.7",
     );
   });
 
-  it("accepts matching not_applicable values for a non-algorithm lesson", async () => {
+  it("accepts matching not_applicable values for a chapter 11 conclusion", async () => {
     const fixture = makeV17GreedyFixture();
+    fixture.lessonId = "11-01";
+    fixture.chapterId = "11";
+    fixture.contentKind = "conclusion";
     fixture.problem = null;
     fixture.solutionProgression = [];
     fixture.codeArtifacts = [];
     fixture.stateModels = [];
+    fixture.complexity = {
+      time: null,
+      space: null,
+      assumptions: [],
+      evidenceIds: [],
+    };
+    fixture.complexityAnalyses = [];
+    fixture.formulaArtifacts = [];
+    fixture.experiments = [];
     fixture.correctness = {
       method: "not_applicable",
       completeness: "not_applicable",
@@ -936,6 +948,65 @@ describe("normalize-lesson-evidence video-evidence-v1.7 greedy gates", () => {
 
     expect(result.status).toBe(0);
     expect(result.normalized.correctness.completeness).toBe("not_applicable");
+  });
+
+  it("rejects unknown correctness for a pure chapter 11 conclusion", async () => {
+    const fixture = makeV17GreedyFixture();
+    fixture.lessonId = "11-01";
+    fixture.chapterId = "11";
+    fixture.contentKind = "conclusion";
+    fixture.problem = null;
+    fixture.solutionProgression = [];
+    fixture.codeArtifacts = [];
+    fixture.stateModels = [];
+    fixture.correctness = {
+      method: "unknown",
+      completeness: "unknown",
+      claims: [],
+      stateModelIds: [],
+      obligations: [],
+    };
+    fixture.complexity = {
+      time: null,
+      space: null,
+      assumptions: [],
+      evidenceIds: [],
+    };
+    fixture.complexityAnalyses = [];
+    fixture.formulaArtifacts = [];
+    fixture.experiments = [];
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain(
+      "pure conclusion without algorithmic material must use not_applicable",
+    );
+  });
+
+  it("rejects mismatched not_applicable values for a chapter 11 conclusion", async () => {
+    const fixture = makeV17GreedyFixture();
+    fixture.lessonId = "11-01";
+    fixture.chapterId = "11";
+    fixture.contentKind = "conclusion";
+    fixture.problem = null;
+    fixture.solutionProgression = [];
+    fixture.codeArtifacts = [];
+    fixture.stateModels = [];
+    fixture.correctness = {
+      method: "unknown",
+      completeness: "not_applicable",
+      claims: [],
+      stateModelIds: [],
+      obligations: [],
+    };
+
+    const result = await runNormalizer(fixture, "video-evidence-v1.7");
+
+    expect(result.status).not.toBe(0);
+    expect(result.stderr).toContain(
+      "must agree on not_applicable under video-evidence-v1.7",
+    );
   });
 
   it("rejects a coded greedy solution without a linked state model", async () => {

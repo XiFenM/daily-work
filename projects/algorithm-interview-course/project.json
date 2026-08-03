@@ -4,9 +4,9 @@
   "platform": "knowledge-base",
   "aspectRatio": "source",
   "durationSeconds": null,
-  "status": "in-progress",
+  "status": "completed",
   "language": "zh-CN",
   "expectedLessons": 70,
-  "knownDurationSeconds": 66660.73756,
+  "knownDurationSeconds": 66665.61756,
   "tags": ["算法面试", "课程笔记", "视频理解", "知识图谱"]
 }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-03T03:07:00.000Z",
+  "updatedAt": "2026-08-03T04:24:52.000Z",
   "summary": {
     "expectedLessons": 70,
     "knownDurationLessons": 67,
@@ -8,15 +8,15 @@
     "discoveredAssets": 70,
     "discoveredVideos": 67,
     "discoveredTexts": 3,
-    "catalogedAssets": 69,
+    "catalogedAssets": 70,
     "mappedLessons": 70,
-    "hashVerifiedLessons": 69,
-    "probedLessons": 66,
-    "understoodLessons": 69,
-    "synthesizedLessons": 69,
-    "verifiedLessons": 69,
-    "synthesizedChapters": 10,
-    "verifiedRelationshipEdges": 93
+    "hashVerifiedLessons": 70,
+    "probedLessons": 67,
+    "understoodLessons": 70,
+    "synthesizedLessons": 70,
+    "verifiedLessons": 70,
+    "synthesizedChapters": 11,
+    "verifiedRelationshipEdges": 96
   },
   "defaultLessonState": {
     "sourceMapping": "mapped",
@@ -949,6 +949,20 @@
       "rejectedAttempts": 0,
       "transportFailures": 0,
       "acceptedAttemptId": "10-03-understanding-001"
+    },
+    "11-01": {
+      "sourceMapping": "mapped",
+      "mediaProbe": "completed",
+      "videoEvidence": "completed",
+      "textEvidence": "not-applicable",
+      "lessonNote": "completed",
+      "relationshipReview": "completed",
+      "qa": "completed",
+      "notes": "目录标称 02:45；FFprobe 实际 02:49.880，相差约 4.880 秒。SHA-256、12 帧联系表和片尾版权画面已核验；原片 12.492 MiB，低于 50 MB 上传门槛。经用户明确授权后使用原片完成 1 次 ZenMux 正式视频理解调用，无压缩、无重试；规范化证据、正式单课笔记、章节综述、关系校准与独立证据 QA 均已完成。",
+      "understandingAttempts": 1,
+      "rejectedAttempts": 0,
+      "transportFailures": 0,
+      "acceptedAttemptId": "11-01-understanding-001"
     }
   }
 }

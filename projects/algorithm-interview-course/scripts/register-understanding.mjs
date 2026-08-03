@@ -126,6 +126,8 @@ const createdAt =
     : new Date().toISOString();
 const promptSha256 = await sha256(promptPath);
 const compressedSha256 = await sha256(compressedPath);
+const requestMediaPath = toRepositoryPath(compressedPath);
+const requestMediaIsDerivative = requestMediaPath !== asset.path;
 const responseFormat = argumentsMap["response-format"] ?? "json_object";
 const baseUrl = argumentsMap["base-url"] ?? "https://zenmux.dev/api/v1";
 const usage = response.usage ?? {};
@@ -186,7 +188,7 @@ manifest.generations.push({
     ...(requestConfigPath ? [requestConfigPath] : []),
   ],
   outputs: [
-    toRepositoryPath(compressedPath),
+    ...(requestMediaIsDerivative ? [requestMediaPath] : []),
     toRepositoryPath(rawPath),
     toRepositoryPath(responsePath),
     toRepositoryPath(normalizedPath),
@@ -197,16 +199,25 @@ manifest.generations.push({
     promptSha256,
     responseFormat,
     compression: argumentsMap.compression ?? "balanced",
-    compressedBytes: compressedStat.size,
-    compressedSha256,
+    requestMedia: requestMediaIsDerivative ? "derivative" : "source",
+    requestMediaBytes: compressedStat.size,
+    requestMediaSha256: compressedSha256,
+    ...(requestMediaIsDerivative
+      ? {
+          compressedBytes: compressedStat.size,
+          compressedSha256,
+        }
+      : {}),
     sourceSha256: asset.sha256,
     maxLocalMb: Number(argumentsMap["max-local-mb"] ?? 50),
     attemptNumber,
     usage: usageRecord,
   },
-  notes: `单次调用成功；严格本地门禁核对 ${Math.round(
-    asset.media.durationSeconds * 1000,
-  )} ms 时长、证据引用、对象结构与代码 verification 后通过；人工代码/OCR QA 已完成。`,
+  notes:
+    argumentsMap.notes ??
+    `单次调用成功；严格本地门禁核对 ${Math.round(
+      asset.media.durationSeconds * 1000,
+    )} ms 时长、证据引用、对象结构与代码 verification 后通过；人工代码/OCR QA 已完成。`,
 });
 
 progress.lessons[lessonId] ??= structuredClone(progress.defaultLessonState);
@@ -239,8 +250,9 @@ process.stdout.write(
     attemptId,
     requestId: response.id,
     promptSha256,
-    compressedSha256,
-    compressedBytes: compressedStat.size,
+    requestMediaSha256: compressedSha256,
+    requestMediaBytes: compressedStat.size,
+    requestMediaIsDerivative,
     totalTokens: usageRecord.totalTokens,
     qaStatus: lessonState.qa,
   })}\n`,

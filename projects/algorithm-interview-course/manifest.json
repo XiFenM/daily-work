@@ -2328,6 +2328,35 @@
       "eligibleForSynthesis": true,
       "billingStatus": "reported_by_usage",
       "retryOfAttemptId": null
+    },
+    {
+      "attemptId": "11-01-understanding-001",
+      "lessonId": "11-01",
+      "attemptNumber": 1,
+      "attemptedAt": "2026-08-03T04:07:51.000Z",
+      "outcome": "accepted",
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "baseUrl": "https://zenmux.dev/api/v1",
+      "promptVersion": "video-evidence-v1.7",
+      "promptSha256": "047f4aad7d228cb79e1594024995b93a005c4f207da6b82e39619da3260e9479",
+      "responseFormat": "json_object",
+      "requestId": "82e83d77452344108d9a09a1b643a1b6",
+      "transport": {
+        "status": "completed",
+        "httpStatus": 200,
+        "failurePhase": null,
+        "requestMayHaveReachedServer": true
+      },
+      "validation": {
+        "status": "passed",
+        "validator": "normalize-lesson-evidence.mjs",
+        "errors": [],
+        "qaStatus": "completed"
+      },
+      "eligibleForSynthesis": true,
+      "billingStatus": "reported_by_usage",
+      "retryOfAttemptId": null
     }
   ],
   "generations": [
@@ -5450,6 +5479,47 @@
         }
       },
       "notes": "单次调用成功且首次归一化通过；核对 923320 ms 时长、10 条校准证据、反例与一步交换论证，正确性保持 exchange_argument/partial；本课无代码，代码测试不适用，人工画面与证明义务 QA 已完成。"
+    },
+    {
+      "kind": "understanding",
+      "attemptId": "11-01-understanding-001",
+      "lessonId": "11-01",
+      "outcome": "accepted",
+      "eligibleForSynthesis": true,
+      "provider": "zenmux",
+      "model": "google/gemini-3.6-flash",
+      "createdAt": "2026-08-03T04:07:51.000Z",
+      "requestId": "82e83d77452344108d9a09a1b643a1b6",
+      "inputs": [
+        "work/algorithm-interview-course/incoming/11-1 结语_慕课网.mp4",
+        "work/algorithm-interview-course/prompts/11-01-video-evidence-v1.7.md",
+        "projects/algorithm-interview-course/configs/zenmux-json-object-extra.json"
+      ],
+      "outputs": [
+        "outputs/algorithm-interview-course/understanding/raw/11-01.json",
+        "outputs/algorithm-interview-course/understanding/raw/11-01.json.response.json",
+        "outputs/algorithm-interview-course/understanding/normalized/11-01.json"
+      ],
+      "parameters": {
+        "baseUrl": "https://zenmux.dev/api/v1",
+        "promptVersion": "video-evidence-v1.7",
+        "promptSha256": "047f4aad7d228cb79e1594024995b93a005c4f207da6b82e39619da3260e9479",
+        "responseFormat": "json_object",
+        "compression": "none",
+        "requestMedia": "source",
+        "requestMediaBytes": 13098626,
+        "requestMediaSha256": "414cf80d449bd24e71cfb35bc4957d6f3baf6092eee4da484f31f0a2935c860a",
+        "sourceSha256": "414cf80d449bd24e71cfb35bc4957d6f3baf6092eee4da484f31f0a2935c860a",
+        "maxLocalMb": 50,
+        "attemptNumber": 1,
+        "usage": {
+          "promptTokens": 23109,
+          "completionTokens": 3953,
+          "reasoningTokens": 2006,
+          "totalTokens": 27062
+        }
+      },
+      "notes": "单次正式调用成功，未重复请求；直接使用 12.492 MiB 原片。严格门禁与人工 QA 核对 169880 ms 时长、5 段证据、纯结语结构和片尾画面后通过；将公司题库概括保留为课程观点，把持续维护限定为录制时承诺，并移除本课未直接给出的 OJ 机制定义。本课无题面、代码、复杂度或正确性证明。"
     }
   ]
 }

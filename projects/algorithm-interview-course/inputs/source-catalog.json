@@ -14,7 +14,7 @@
       "duplicateLessonIds": [],
       "missingLessonIds": []
     },
-    "catalogScope": "chapters-01-10"
+    "catalogScope": "chapters-01-11"
   },
   "items": [
     {
@@ -2110,6 +2110,37 @@
       },
       "status": "processed",
       "notes": "目录标称 15:19；实际 15:23.320，相差约 4.320 秒。12 帧联系表检查通过，课次映射无歧义；balanced 压缩副本已生成并核验。"
+    },
+    {
+      "assetId": "asset:video-11-01",
+      "kind": "video",
+      "originalFilename": "11-1 结语_慕课网.mp4",
+      "path": "work/algorithm-interview-course/incoming/11-1 结语_慕课网.mp4",
+      "sha256": "414cf80d449bd24e71cfb35bc4957d6f3baf6092eee4da484f31f0a2935c860a",
+      "bytes": 13098626,
+      "lessonIds": ["11-01"],
+      "match": {
+        "method": "filename+title+duration+media-probe+visual-qa",
+        "confidence": 1,
+        "reviewRequired": false
+      },
+      "media": {
+        "format": "mp4",
+        "durationSeconds": 169.88,
+        "width": 1920,
+        "height": 1080,
+        "frameRate": 25,
+        "videoCodec": "h264",
+        "videoProfile": "High",
+        "pixelFormat": "yuv420p",
+        "audioCodec": "aac",
+        "audioSampleRate": 44100,
+        "audioChannels": 2,
+        "audioChannelLayout": "stereo",
+        "subtitleStreams": 0
+      },
+      "status": "processed",
+      "notes": "目录标称 02:45；实际 02:49.880，相差约 4.880 秒。12 帧联系表与片尾检查通过，课次映射无歧义；原片仅 12.492 MiB，正式理解直接使用原片而未采用有损副本。"
     }
   ],
   "itemShape": {
