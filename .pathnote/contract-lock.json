@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "checkerVersion": "1.0.0",
+  "publicationSchema": "urn:pathnote:schema:publication:v1",
+  "bundleSha256": "f5bb7eda51bba3c91efab7950f30b089aa7d627663e789743ced7ee16307b284",
+  "templates": {
+    "index.mdx": "7ddf35b18002b347efa7fefe7b56c40740d2481b76786673383c8413f9e90942",
+    "publication.json": "d735eb7a7739dded217e2bc114485e781c3ac7e872acf4d3aca33af0f397bc87"
+  },
+  "distributionSha256": "0341f42d2cf79d9f526e0c0b308ecb4b1f65f70e150ad9ebc61bf3c6cf4e7828"
+}

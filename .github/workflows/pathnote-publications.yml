@@ -1,0 +1,152 @@
+name: PathNote content
+
+on:
+  pull_request_target:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      head:
+        description: Commit SHA or ref to validate; leave empty for the current ref
+        required: false
+        type: string
+      trigger_site:
+        description: Trigger the configured preview build after validation
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: >-
+    pathnote-content-${{
+      github.event_name == 'pull_request_target' &&
+      format('pr-{0}', github.event.pull_request.number) ||
+      format('run-{0}', github.run_id)
+    }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request_target' }}
+
+jobs:
+  validate:
+    name: Validate publication packages
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      content_changed: >-
+        ${{ steps.check.outputs.pathnote_content_changed ||
+        steps.check_head.outputs.pathnote_content_changed ||
+        steps.check_manual.outputs.pathnote_content_changed }}
+
+    steps:
+      - name: Check out validation repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.base.sha || inputs.head || github.sha }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Use the trusted base checker for a pull request
+        if: github.event_name == 'pull_request_target'
+        shell: bash
+        env:
+          PATHNOTE_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PATHNOTE_HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
+          PATHNOTE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -Eeuo pipefail
+          mkdir -p "$RUNNER_TEMP/pathnote-checker"
+          git cat-file -e "${PATHNOTE_BASE_SHA}^{commit}"
+          git show "$PATHNOTE_BASE_SHA:.pathnote/pathnote-source-check.mjs" > "$RUNNER_TEMP/pathnote-checker/check.mjs"
+          git show "$PATHNOTE_BASE_SHA:.pathnote/contract-lock.json" > "$RUNNER_TEMP/pathnote-checker/contract-lock.json"
+          test -s "$RUNNER_TEMP/pathnote-checker/check.mjs"
+          test -s "$RUNNER_TEMP/pathnote-checker/contract-lock.json"
+          git fetch --no-tags --force \
+            "https://github.com/${PATHNOTE_HEAD_REPOSITORY}.git" \
+            "$PATHNOTE_HEAD_SHA"
+          git cat-file -e "${PATHNOTE_HEAD_SHA}^{commit}"
+          git checkout --detach "$PATHNOTE_HEAD_SHA"
+
+      - name: Validate pull request base and head
+        id: check
+        if: github.event_name == 'pull_request_target'
+        env:
+          PATHNOTE_AUTHORIZED_DISTRIBUTION_SHA256: ${{ vars.PATHNOTE_CHECKER_UPGRADE_SHA256 }}
+          PATHNOTE_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PATHNOTE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: >-
+          node "$RUNNER_TEMP/pathnote-checker/check.mjs"
+          --lock "$RUNNER_TEMP/pathnote-checker/contract-lock.json"
+          --repo-root "$GITHUB_WORKSPACE"
+          --source daily-work
+          --base "$PATHNOTE_BASE_SHA"
+          --head "$PATHNOTE_HEAD_SHA"
+          --github-output
+
+      - name: Validate main update
+        id: check_head
+        if: github.event_name == 'push'
+        env:
+          PATHNOTE_BASE_SHA: ${{ github.event.before }}
+          PATHNOTE_HEAD_SHA: ${{ github.sha }}
+        run: >-
+          node .pathnote/pathnote-source-check.mjs
+          --source daily-work
+          --base "$PATHNOTE_BASE_SHA"
+          --head "$PATHNOTE_HEAD_SHA"
+          --exact-base
+          --github-output
+
+      - name: Validate manually selected head
+        id: check_manual
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          PATHNOTE_HEAD_SHA: ${{ inputs.head || github.sha }}
+        run: >-
+          node .pathnote/pathnote-source-check.mjs
+          --source daily-work
+          --head "$PATHNOTE_HEAD_SHA"
+          --github-output
+
+  trigger-preview:
+    name: Trigger PathNote preview build
+    needs: validate
+    if: >-
+      vars.PATHNOTE_PREVIEW_TRIGGER_ENABLED == 'true' &&
+      ((github.event_name == 'push' && needs.validate.outputs.content_changed == 'true') ||
+      (github.event_name == 'workflow_dispatch' && inputs.trigger_site))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    environment: pathnote-preview
+    permissions: {}
+
+    steps:
+      - name: Request preview build
+        env:
+          PATHNOTE_PREVIEW_DEPLOY_HOOK_URL: ${{ secrets.PATHNOTE_PREVIEW_DEPLOY_HOOK_URL }}
+        shell: bash
+        run: |
+          case "${PATHNOTE_PREVIEW_DEPLOY_HOOK_URL:-}" in
+            https://*) ;;
+            *)
+              echo "PATHNOTE_PREVIEW_DEPLOY_HOOK_URL must be a non-empty HTTPS URL." >&2
+              exit 1
+              ;;
+          esac
+          curl \
+            --fail-with-body \
+            --retry 3 \
+            --retry-all-errors \
+            --connect-timeout 10 \
+            --max-time 60 \
+            --request POST \
+            --show-error \
+            --silent \
+            "$PATHNOTE_PREVIEW_DEPLOY_HOOK_URL"

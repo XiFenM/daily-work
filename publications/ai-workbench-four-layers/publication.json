@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "slug": "ai-workbench-four-layers",
+  "type": "article",
+  "status": "draft",
+  "title": "我的 AI 工作台为什么分成四层",
+  "summary": "说明 Daily Work AI Studio 如何把长期规则、可复用工作流、确定性工具和可参数化媒体工程分成四层，并处理跨平台初始化与数据生命周期。",
+  "language": "zh-CN",
+  "journeyAt": "2026-07-26",
+  "authors": [
+    {
+      "id": "xifenm",
+      "name": "XiFenM",
+      "roles": ["author"]
+    }
+  ],
+  "topics": ["ai-collaboration", "engineering-practice", "content-workflow"],
+  "rights": {
+    "basis": "original",
+    "holder": "XiFenM",
+    "license": {
+      "kind": "all-rights-reserved"
+    }
+  },
+  "reviews": {
+    "content": {
+      "status": "pending",
+      "note": "现有架构说明面向仓库维护者，需要改写为能够独立阅读的文章。"
+    },
+    "rights": {
+      "status": "pending",
+      "note": "需要确认第三方产品名称、文档链接和引用方式。"
+    },
+    "sensitive": {
+      "status": "pending",
+      "note": "需要检查密钥、请求 ID、内部输出路径和工作资料。"
+    }
+  },
+  "resources": [
+    {
+      "kind": "source",
+      "label": "架构与扩展原则",
+      "repositoryPath": "docs/architecture.md"
+    },
+    {
+      "kind": "repository",
+      "label": "Daily Work AI Studio 说明",
+      "repositoryPath": "README.md"
+    }
+  ],
+  "validation": {
+    "status": "not-run",
+    "summary": "尚未在准备发布的 revision 上运行仓库检查或核对外部产品的当前事实。"
+  },
+  "featured": false
+}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "slug": "replace-with-slug",
+  "type": "article",
+  "status": "draft",
+  "title": "请填写标题",
+  "summary": "请用一到两句话说明这份内容讨论的问题、采用的方法和适用范围。",
+  "language": "zh-CN",
+  "journeyAt": "2026-01-01",
+  "authors": [
+    {
+      "id": "xifenm",
+      "name": "XiFenM",
+      "roles": ["author"]
+    }
+  ],
+  "topics": ["learning-process"],
+  "rights": {
+    "basis": "original",
+    "holder": "XiFenM",
+    "license": {
+      "kind": "all-rights-reserved"
+    }
+  },
+  "reviews": {
+    "content": {
+      "status": "pending",
+      "note": "正文尚未完成内容审核。"
+    },
+    "rights": {
+      "status": "pending",
+      "note": "正文、图片、代码和数据尚未完成权利审核。"
+    },
+    "sensitive": {
+      "status": "pending",
+      "note": "正文和资源尚未完成敏感信息审核。"
+    }
+  },
+  "validation": {
+    "status": "not-run",
+    "summary": "尚未针对准备发布的 revision 执行验证。"
+  },
+  "featured": false
+}

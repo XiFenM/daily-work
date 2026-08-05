@@ -5,3 +5,4 @@ outputs
 work
 coverage
 dist
+.pathnote/pathnote-source-check.mjs

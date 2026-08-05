@@ -17,6 +17,8 @@
     "browser": "playwright-cli",
     "browser:install": "playwright-cli install-browser",
     "media:probe": "tsx tools/media/src/probe.ts",
+    "pathnote:check": "node .pathnote/pathnote-source-check.mjs --source daily-work",
+    "pathnote:check:staged": "node .pathnote/pathnote-source-check.mjs --source daily-work --staged",
     "video:studio": "pnpm --filter @daily-work/video studio",
     "video:render": "pnpm --filter @daily-work/video render",
     "video:still": "pnpm --filter @daily-work/video still",
