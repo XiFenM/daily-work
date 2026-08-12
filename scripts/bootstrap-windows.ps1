@@ -30,6 +30,15 @@ function Install-WingetPackage([string]$Id) {
   }
 }
 
+function Test-PythonCommand([string]$Command, [string[]]$Arguments) {
+  try {
+    $version = (& $Command @Arguments --version 2>&1).Trim()
+    return $LASTEXITCODE -eq 0 -and $version -match '^Python 3\.'
+  } catch {
+    return $false
+  }
+}
+
 if ($InstallSystemDeps) {
   $existingNode = Find-Command "node.exe"
   $nodeNeedsUpgrade = $true
@@ -46,6 +55,21 @@ if ($InstallSystemDeps) {
   }
   if (-not (Find-Command "ffmpeg.exe")) {
     Install-WingetPackage "Gyan.FFmpeg"
+  }
+  $hasPython = $false
+  if ($env:DAILY_WORK_PYTHON) {
+    $hasPython = Test-PythonCommand $env:DAILY_WORK_PYTHON @()
+  }
+  $pythonCommand = Find-Command "python.exe"
+  if (-not $hasPython -and $pythonCommand) {
+    $hasPython = Test-PythonCommand $pythonCommand.Source @()
+  }
+  $pyLauncher = Find-Command "py.exe"
+  if (-not $hasPython -and $pyLauncher) {
+    $hasPython = Test-PythonCommand $pyLauncher.Source @("-3")
+  }
+  if (-not $hasPython) {
+    Install-WingetPackage "Python.Python.3.13"
   }
   Refresh-ProcessPath
 }
@@ -64,6 +88,32 @@ if ($nodeMajor -lt 24) {
 $git = Find-Command "git.exe"
 if (-not $git) {
   throw "Git is required. Install it or rerun with -InstallSystemDeps."
+}
+
+$pythonPath = $null
+$pythonArgs = @()
+if ($env:DAILY_WORK_PYTHON -and (Test-PythonCommand $env:DAILY_WORK_PYTHON @())) {
+  $pythonPath = $env:DAILY_WORK_PYTHON
+} else {
+  $python = Find-Command "python.exe"
+  if ($python -and (Test-PythonCommand $python.Source @())) {
+    $pythonPath = $python.Source
+  } else {
+    $python = Find-Command "py.exe"
+    if ($python -and (Test-PythonCommand $python.Source @("-3"))) {
+      $pythonPath = $python.Source
+      $pythonArgs = @("-3")
+    }
+  }
+}
+if (-not $pythonPath) {
+  throw "Python 3 is required to materialize central Skills; see docs/environment-setup.md."
+}
+$pythonVersion = (& $pythonPath @pythonArgs --version 2>&1).Trim()
+if ($pythonArgs.Count -eq 0) {
+  $env:DAILY_WORK_PYTHON = $pythonPath
+} elseif (Test-Path Env:DAILY_WORK_PYTHON) {
+  Remove-Item Env:DAILY_WORK_PYTHON
 }
 
 $ffmpeg = Find-Command "ffmpeg.exe"
@@ -100,6 +150,7 @@ Write-Host "Windows environment"
 Write-Host "  Node:   $nodeVersion"
 Write-Host "  pnpm:   $pnpmVersion"
 Write-Host "  Git:    $(& git.exe --version)"
+Write-Host "  Python: $pythonVersion"
 Write-Host "  FFmpeg: $(if ($ffmpeg) { (& ffmpeg.exe -version | Select-Object -First 1) } else { 'not installed' })"
 
 if ($CheckOnly) {

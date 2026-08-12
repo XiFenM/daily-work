@@ -1,7 +1,7 @@
 import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { basename, dirname, extname, parse, resolve } from "node:path";
 import { lookup } from "mime-types";
-import type { ImageResponse } from "./client.js";
+import type { ImageResponse, VideoJob } from "./client.js";
 
 export const isRemoteInput = (value: string): boolean =>
   /^(https?:\/\/|data:)/i.test(value);
@@ -61,6 +61,23 @@ export function redactLargePayloads(value: unknown): unknown {
     const payloadLength = separator >= 0 ? value.length - separator - 1 : 0;
     return `${header},<redacted:${payloadLength} chars>`;
   }
+  if (typeof value === "string") {
+    try {
+      const url = new URL(value);
+      if (
+        ["http:", "https:"].includes(url.protocol) &&
+        (url.username || url.password || url.search || url.hash)
+      ) {
+        url.username = "";
+        url.password = "";
+        url.search = "";
+        url.hash = "";
+        return url.toString();
+      }
+    } catch {
+      // Ordinary response strings are not URLs and pass through unchanged.
+    }
+  }
   if (typeof value === "string" && value.length > 2_000) {
     return `<redacted:${value.length} chars>`;
   }
@@ -83,7 +100,9 @@ export async function downloadToFile(
 ): Promise<string> {
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error(`Download failed with HTTP ${response.status}: ${url}`);
+    throw new Error(
+      `Download failed with HTTP ${response.status}: ${String(redactLargePayloads(url))}`,
+    );
   }
   const absolutePath = resolve(outputPath);
   await mkdir(dirname(absolutePath), { recursive: true });
@@ -106,7 +125,17 @@ const indexedOutputPath = (
 export async function saveImageResponse(
   response: ImageResponse,
   requestedPath: string,
+  expectedCount: number,
 ): Promise<string[]> {
+  if (!Number.isSafeInteger(expectedCount) || expectedCount < 1) {
+    throw new Error("The requested image count must be a positive integer.");
+  }
+  if (response.data.length !== expectedCount) {
+    throw new Error(
+      `ZenMux returned ${response.data.length} image result(s), but ${expectedCount} were requested. No image outputs were written.`,
+    );
+  }
+
   const format =
     response.output_format ??
     extname(requestedPath).replace(/^\./, "") ??
@@ -134,5 +163,49 @@ export async function saveImageResponse(
     outputs.push(outputPath);
   }
 
+  return outputs;
+}
+
+const comparablePath = (path: string): string =>
+  process.platform === "win32" ? path.toLowerCase() : path;
+
+export async function saveVideoJob(
+  job: VideoJob,
+  requestedPath: string,
+  lastFramePath?: string,
+): Promise<string[]> {
+  const videoUrl = job.content?.video_url;
+  if (!videoUrl) {
+    throw new Error(`Video job ${job.id} succeeded without content.video_url.`);
+  }
+
+  const outputPath = resolve(requestedPath);
+  const metadataPath = `${outputPath}.job.json`;
+  const resolvedLastFramePath = lastFramePath
+    ? resolve(lastFramePath)
+    : undefined;
+  if (resolvedLastFramePath && !job.content?.last_frame_url) {
+    throw new Error(
+      `Video job ${job.id} succeeded without content.last_frame_url requested by --last-frame-out.`,
+    );
+  }
+  if (
+    resolvedLastFramePath &&
+    [outputPath, metadataPath]
+      .map(comparablePath)
+      .includes(comparablePath(resolvedLastFramePath))
+  ) {
+    throw new Error(
+      "--last-frame-out must differ from the video and job metadata paths.",
+    );
+  }
+
+  const outputs = [await downloadToFile(videoUrl, outputPath)];
+  await writeJson(metadataPath, job);
+  if (resolvedLastFramePath) {
+    outputs.push(
+      await downloadToFile(job.content!.last_frame_url!, resolvedLastFramePath),
+    );
+  }
   return outputs;
 }

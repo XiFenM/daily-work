@@ -1,6 +1,6 @@
 # Windows 与 Linux 环境初始化
 
-仓库使用同一套 Node.js、pnpm workspace、CLI 参数、`.env` 和产物目录。平台专用脚本只负责检查或安装系统依赖，随后都调用 `scripts/bootstrap.mjs` 完成一致的初始化。
+仓库使用同一套 Node.js、pnpm workspace、CLI 参数、`.env`、中央 Skill 子模块和 version 2 配置。平台专用脚本只负责检查或安装系统依赖，随后都调用 `scripts/bootstrap.mjs` 完成一致的初始化与 materialize。
 
 ## 支持范围
 
@@ -15,6 +15,7 @@
 - Node.js 24 或更高版本
 - pnpm 11；仓库锁定版本为 11.9.0
 - Git
+- Python 3；只用于运行中央仓库中仅依赖标准库的 Skill materializer
 - FFmpeg 与 FFprobe
 - Linux 渲染中文时安装 Noto CJK 字体
 
@@ -37,15 +38,16 @@ Set-ExecutionPolicy -Scope Process Bypass
 
 脚本会：
 
-1. 验证 Node.js 24+、pnpm、Git 和 FFmpeg；
+1. 验证 Node.js 24+、pnpm、Git、Python 3 和 FFmpeg；
 2. 在缺少全局 pnpm 时临时使用锁定版本；
 3. 创建本地 `.env`；
-4. 安装 workspace 依赖并验证仓库中已提交的项目 skills；
-5. 运行 `pnpm doctor`。
+4. 初始化固定的 `.agent-skills` 子模块，安装 workspace 依赖；
+5. 按 version 2 配置生成并验证 `.agents/skills/`；
+6. 运行 `pnpm repo:doctor`。
 
 ### 首次配置新 Windows 机器
 
-安装缺少的 Node.js LTS、Git 和 FFmpeg：
+安装缺少的 Node.js LTS、Git、Python 3 和 FFmpeg：
 
 ```powershell
 Set-ExecutionPolicy -Scope Process Bypass
@@ -84,7 +86,7 @@ bash scripts/bootstrap-linux.sh
 
 ### 首次配置远程服务器
 
-以下命令会通过 `apt-get` 安装 Git、FFmpeg、fontconfig 和 Noto CJK 字体，并安装 Playwright 浏览器及其 Linux 系统库：
+以下命令会通过 `apt-get` 安装 Git、Python 3、FFmpeg、fontconfig 和 Noto CJK 字体，并安装 Playwright 浏览器及其 Linux 系统库：
 
 ```bash
 bash scripts/bootstrap-linux.sh --install-system-deps --with-browser
@@ -111,9 +113,13 @@ bash scripts/bootstrap-linux.sh --check-only
 
 ```text
 pnpm bootstrap
-pnpm doctor
+pnpm skills:dry-run
+pnpm skills:check
+pnpm repo:doctor
 pnpm check
 ```
+
+`pnpm bootstrap` 会初始化当前仓库固定的子模块提交并运行 `skills:sync`；它不会 fetch 中央仓库的新版本，也不会推进子模块指针。若系统有多个 Python，可用 `DAILY_WORK_PYTHON` 指向要使用的解释器。
 
 安装 Playwright 浏览器：
 
@@ -133,13 +139,13 @@ pnpm bootstrap -- --with-browser-deps
 
 ```powershell
 # 推荐先尝试 balanced
-pnpm zenmux understand --input work/input.mp4 --prompt "生成详细课程笔记" --compress balanced --out outputs/demo/analysis.md
+pnpm zenmux understand --input work/managed/demo/input.mp4 --prompt-file projects/managed/demo/prompts/notes.txt --compress balanced --compressed-out work/managed/demo/input-balanced.mp4 --out outputs/managed/demo/analysis.md
 
 # 强压缩，并指定衍生文件位置
-pnpm zenmux understand --input work/input.mp4 --prompt "生成详细课程笔记" --compress strong --compressed-out work/input-for-understanding.mp4 --out outputs/demo/analysis.md
+pnpm zenmux understand --input work/managed/demo/input.mp4 --prompt-file projects/managed/demo/prompts/notes.txt --compress strong --compressed-out work/managed/demo/input-for-understanding.mp4 --out outputs/managed/demo/analysis.md
 ```
 
-三个档位依次为 `light`（最高 1080p/25 fps）、`balanced`（最高 720p/15 fps）和 `strong`（最高 540p/10 fps）。工具不会放大源画面或提高源帧率，也不会覆盖原视频或已有压缩文件。省略 `--compressed-out` 时，副本写入 `work/zenmux-compressed/`。
+三个档位依次为 `light`（最高 1080p/25 fps）、`balanced`（最高 720p/15 fps）和 `strong`（最高 540p/10 fps）。工具不会放大源画面或提高源帧率，也不会覆盖原视频或已有压缩文件。直接使用 CLI 且省略 `--compressed-out` 时，副本写入 `work/zenmux-compressed/`。当前受管 creator 路由不在一次计费操作中隐式压缩；需要时先把压缩作为独立本地操作，并把精确输出放到 `work/managed/<slug>/`，再由后续操作按摘要读取。
 
 该功能要求 `ffmpeg` 与 `ffprobe` 均在 `PATH` 中；Windows 和 Linux 初始化脚本已经安装或检查它们。本地文件默认最多内联 50 MB，并在压缩完成后检查。`--dry-run` 不调用 ZenMux API，但显式选择压缩时仍会转码并创建本地副本。CRF 压缩无法保证固定体积；副本仍超限时可换用更强档位、明确提高 `--max-local-mb`，或使用可访问 URL。
 
@@ -152,7 +158,7 @@ pnpm zenmux understand --input work/input.mp4 --prompt "生成详细课程笔记
 ```bash
 pnpm browser -s=research open https://example.com
 pnpm browser -s=research snapshot
-pnpm browser -s=research screenshot --filename=outputs/browser/example.png
+pnpm browser -s=research screenshot --filename=outputs/managed/browser/example.png
 pnpm browser -s=research close
 ```
 
@@ -181,7 +187,7 @@ Linux 初始化安装 `fonts-noto-cjk`，模板的字体栈优先使用 `Noto Sa
 
 - Windows 与 Linux 都从仓库根目录 `.env` 读取 ZenMux 密钥。
 - 不提交 `.env`；远程服务器使用仅当前用户可读的权限：`chmod 600 .env`。
-- 输入临时文件放 `work/`，输出放 `outputs/`，项目元数据放 `projects/`。
+- creator-workflow 管理的临时文件放 `work/managed/`，输出放 `outputs/managed/`，项目元数据放 `projects/managed/`，发布材料放 `publications/`。
 - 在两台机器之间同步源码时排除 `.env`、`node_modules/`、`work/` 和 `outputs/`；大型产物单独通过对象存储、`scp` 或 `rsync` 传输。
 
 ## 跨平台命令约定
@@ -205,13 +211,18 @@ pnpm check
 
 ```text
 pnpm install --frozen-lockfile
+git submodule update --init --recursive
+pnpm skills:dry-run
+pnpm skills:sync
 pnpm skills:check
-pnpm doctor
+pnpm repo:doctor
 pnpm check
 pnpm video:smoke
 ```
 
-初始化不会联网更新第三方 skills。需要主动更新 ZenMux、Remotion 和 Playwright skills 时，单独运行 `pnpm skills:update`，检查 Git diff 后再提交。
+初始化和 materialize 都不会联网升级 Skill。需要升级时，先在中央 `agent-skills` 仓库审阅并验证新提交，再显式更新 daily-work 的子模块指针，依次运行 `skills:dry-run`、`skills:sync` 和 `skills:check`，最后检查 Git diff。不要手改 `.agents/skills/`。
+
+Skill 更新不等于业务运行时升级。`apps/video/` 继续固定 Remotion 4.0.499；历史课程目录、PathNote 受控工具链与现有草稿也保持冻结，除非另有针对相应路径的明确任务。
 
 Playwright 升级后重新运行浏览器安装；远程服务器还应检查磁盘空间、可用内存、字体和 FFmpeg：
 

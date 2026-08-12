@@ -1,4 +1,0 @@
-interface:
-  display_name: "Creator Workflow"
-  short_description: "Plan, generate, compose, and verify media"
-  default_prompt: "Use $creator-workflow to turn this content idea into a verified media package."

@@ -26,6 +26,41 @@ const run = (args) => {
   }
 };
 
+const runGit = (args) => {
+  const result = spawnSync("git", args, {
+    cwd: root,
+    shell: false,
+    stdio: "inherit",
+  });
+  if (result.status !== 0) {
+    process.exit(result.status ?? 1);
+  }
+};
+
+const checkPython = () => {
+  const candidates = process.env.DAILY_WORK_PYTHON
+    ? [{ command: process.env.DAILY_WORK_PYTHON, prefix: [] }]
+    : process.platform === "win32"
+      ? [
+          { command: "py", prefix: ["-3"] },
+          { command: "python3", prefix: [] },
+          { command: "python", prefix: [] },
+        ]
+      : [
+          { command: "python3", prefix: [] },
+          { command: "python", prefix: [] },
+        ];
+  return candidates.some(({ command, prefix }) => {
+    const result = spawnSync(command, [...prefix, "--version"], {
+      cwd: root,
+      shell: false,
+      encoding: "utf8",
+    });
+    const version = `${result.stdout ?? ""}${result.stderr ?? ""}`.trim();
+    return result.status === 0 && /^Python 3\./.test(version);
+  });
+};
+
 const nodeMajor = Number(process.versions.node.split(".")[0]);
 if (nodeMajor < 24) {
   console.error(
@@ -36,6 +71,13 @@ if (nodeMajor < 24) {
 
 if (withBrowserDeps && process.platform !== "linux") {
   console.error("--with-browser-deps is only supported on Linux.");
+  process.exit(1);
+}
+
+if (!checkPython()) {
+  console.error(
+    "Python 3 is required to materialize central Skills. Set DAILY_WORK_PYTHON to an exact interpreter path.",
+  );
   process.exit(1);
 }
 
@@ -51,7 +93,9 @@ if (!existsSync(envPath)) {
   );
 }
 
+runGit(["submodule", "update", "--init", "--recursive"]);
 run(["install"]);
+run(["skills:sync"]);
 run(["skills:check"]);
 
 if (withBrowserDeps) {
@@ -60,4 +104,4 @@ if (withBrowserDeps) {
   run(["browser:install"]);
 }
 
-run(["doctor"]);
+run(["repo:doctor"]);

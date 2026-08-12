@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "source": ".agent-skills",
+  "skills": {
+    "creator-workflow": ["codex"],
+    "playwright-cli": ["codex"],
+    "remotion-best-practices": ["codex"],
+    "zenmux-context": ["codex"],
+    "zenmux-setup": ["codex"],
+    "zenmux-usage": ["codex"]
+  },
+  "config": {
+    "repository": ".agent-skills-config/repository.json",
+    "skills": {
+      "creator-workflow": ".agent-skills-config/creator-workflow.json"
+    }
+  }
+}

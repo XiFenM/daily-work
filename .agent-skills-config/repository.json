@@ -1,0 +1,32 @@
+{
+  "schema": "agent-skills.repository/v1",
+  "repository_id": "daily-work",
+  "language": "zh-CN",
+  "timezone": "Asia/Shanghai",
+  "facts": {
+    "guidelines": {
+      "path": "AGENTS.md",
+      "description": "Repository instructions, security boundaries, and validation policy."
+    },
+    "package": {
+      "path": "package.json",
+      "description": "Exact root package-script manifest for controlled repository adapters."
+    },
+    "project-template": {
+      "path": "projects/_template",
+      "description": "Tracked template collection for new durable creator projects."
+    },
+    "publication-contract": {
+      "path": ".pathnote/contract-lock.json",
+      "description": "Pinned PathNote publication validation contract."
+    },
+    "publication-template": {
+      "path": ".pathnote/templates/publication",
+      "description": "Tracked PathNote publication template collection."
+    },
+    "publication-validator": {
+      "path": ".pathnote/pathnote-source-check.mjs",
+      "description": "Pinned local PathNote source validator."
+    }
+  }
+}

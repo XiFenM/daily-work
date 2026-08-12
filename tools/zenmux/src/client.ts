@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { redactLargePayloads } from "./files.js";
 
 const imageDatumSchema = z
   .object({
@@ -69,14 +70,15 @@ export class ZenMuxHttpError extends Error {
   public readonly body: unknown;
 
   public constructor(status: number, body: unknown) {
+    const safeBody = redactLargePayloads(body);
     const detail =
-      typeof body === "object" && body !== null
-        ? JSON.stringify(body)
-        : String(body);
+      typeof safeBody === "object" && safeBody !== null
+        ? JSON.stringify(safeBody)
+        : String(safeBody);
     super(`ZenMux request failed with HTTP ${status}: ${detail}`);
     this.name = "ZenMuxHttpError";
     this.status = status;
-    this.body = body;
+    this.body = safeBody;
   }
 }
 

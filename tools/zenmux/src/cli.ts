@@ -1,14 +1,14 @@
 import "dotenv/config";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { basename, dirname, extname, resolve } from "node:path";
+import { mkdir, writeFile } from "node:fs/promises";
+import { dirname, extname, resolve } from "node:path";
 import { Command, InvalidArgumentError } from "commander";
 import { ZenMuxClient, type VideoJob } from "./client.js";
 import {
-  downloadToFile,
   inputFilename,
   isRemoteInput,
   redactLargePayloads,
   saveImageResponse,
+  saveVideoJob,
   toDataUrl,
   writeJson,
 } from "./files.js";
@@ -19,6 +19,7 @@ import {
   parseJsonObject,
   type JsonRecord,
 } from "./request-options.js";
+import { loadPrompt } from "./prompt.js";
 import {
   compressLocalVideo,
   parseVideoCompressionLevel,
@@ -64,19 +65,6 @@ const requireApiKey = (): string => {
   return key;
 };
 
-const loadPrompt = async (
-  prompt: string | undefined,
-  promptFile: string | undefined,
-): Promise<string> => {
-  if ((prompt === undefined) === (promptFile === undefined)) {
-    throw new Error("Specify exactly one of --prompt or --prompt-file.");
-  }
-  if (prompt !== undefined) {
-    return prompt;
-  }
-  return readFile(resolve(promptFile!), "utf8");
-};
-
 const createClient = (): ZenMuxClient =>
   new ZenMuxClient({
     apiKey: requireApiKey(),
@@ -99,6 +87,18 @@ const dryRunOrClient = (
     return undefined;
   }
   return createClient();
+};
+
+const validateImageOutput = (outputPath: string, format: string): void => {
+  if (!new Set(["png", "jpeg", "webp"]).has(format)) {
+    throw new Error("--format must be png, jpeg, or webp.");
+  }
+  const expectedExtension = `.${format}`;
+  if (extname(outputPath) !== expectedExtension) {
+    throw new Error(
+      `--out must end with ${expectedExtension} when --format is ${format}.`,
+    );
+  }
 };
 
 program
@@ -174,7 +174,8 @@ program
 program
   .command("image")
   .description("Generate one or more images and save them locally")
-  .requiredOption("-p, --prompt <text>", "image prompt")
+  .option("-p, --prompt <text>", "image prompt")
+  .option("--prompt-file <path>", "read the image prompt from a UTF-8 file")
   .option("-m, --model <slug>", "provider/model slug")
   .option("-o, --out <path>", "output image path", "outputs/images/image.png")
   .option("--size <size>", "image size", "1024x1024")
@@ -185,7 +186,8 @@ program
   .option("--dry-run", "print the request without calling the API", false)
   .action(
     async (options: {
-      prompt: string;
+      prompt?: string;
+      promptFile?: string;
       model?: string;
       out: string;
       size: string;
@@ -195,11 +197,20 @@ program
       extra: JsonRecord;
       dryRun: boolean;
     }) => {
+      validateImageOutput(options.out, options.format);
+      const prompt = await loadPrompt(options.prompt, options.promptFile);
+      if (!/^[1-9]\d*$/.test(options.count)) {
+        throw new Error("--count must be a positive integer.");
+      }
+      const count = Number.parseInt(options.count, 10);
+      if (!Number.isSafeInteger(count)) {
+        throw new Error("--count must be a positive safe integer.");
+      }
       const payload = {
         ...options.extra,
         model: requiredModel(options.model, "ZENMUX_IMAGE_MODEL"),
-        prompt: options.prompt,
-        n: Number.parseInt(options.count, 10),
+        prompt,
+        n: count,
         size: options.size,
         quality: options.quality,
         output_format: options.format,
@@ -212,7 +223,7 @@ program
       if (!client) return;
 
       const response = await client.generateImage(payload);
-      const paths = await saveImageResponse(response, options.out);
+      const paths = await saveImageResponse(response, options.out, count);
       await writeJson(`${resolve(options.out)}.response.json`, response);
       paths.forEach((path) => console.log(path));
     },
@@ -234,7 +245,8 @@ program
   .description(
     "Submit a native ZenMux video job, poll it, and download the result",
   )
-  .requiredOption("-p, --prompt <text>", "video prompt")
+  .option("-p, --prompt <text>", "video prompt")
+  .option("--prompt-file <path>", "read the video prompt from a UTF-8 file")
   .option("-m, --model <slug>", "provider/model slug")
   .option("-o, --out <path>", "output video path", "outputs/videos/video.mp4")
   .option("--resolution <value>", "for example 720p", "720p")
@@ -249,6 +261,10 @@ program
   .option("--generate-audio", "ask the provider to generate audio", false)
   .option("--return-last-frame", "return the generated last frame", false)
   .option(
+    "--last-frame-out <path>",
+    "download a returned last frame to this exact path",
+  )
+  .option(
     "--extra <json>",
     "additional native request fields",
     parseJsonObject,
@@ -258,7 +274,8 @@ program
   .option("--dry-run", "print the request without calling the API", false)
   .action(
     async (options: {
-      prompt: string;
+      prompt?: string;
+      promptFile?: string;
       model?: string;
       out: string;
       resolution: string;
@@ -272,11 +289,16 @@ program
       referenceAudio?: string;
       generateAudio: boolean;
       returnLastFrame: boolean;
+      lastFrameOut?: string;
       extra: JsonRecord;
       wait: boolean;
       dryRun: boolean;
     }) => {
-      const content: JsonRecord[] = [{ type: "text", text: options.prompt }];
+      if (options.lastFrameOut && !options.wait) {
+        throw new Error("--last-frame-out cannot be used with --no-wait.");
+      }
+      const prompt = await loadPrompt(options.prompt, options.promptFile);
+      const content: JsonRecord[] = [{ type: "text", text: prompt }];
       await appendMedia(
         content,
         "image_url",
@@ -312,7 +334,8 @@ program
         duration: Number.parseInt(options.duration, 10),
         seed: Number.parseInt(options.seed, 10),
         generate_audio: options.generateAudio,
-        return_last_frame: options.returnLastFrame,
+        return_last_frame:
+          options.returnLastFrame || options.lastFrameOut !== undefined,
       };
       const client = dryRunOrClient(
         options.dryRun,
@@ -330,7 +353,8 @@ program
       }
 
       const job = await waitForVideo(client, submitted.id);
-      await saveVideoJob(job, options.out);
+      const paths = await saveVideoJob(job, options.out, options.lastFrameOut);
+      paths.forEach((path) => console.log(path));
     },
   );
 
@@ -339,13 +363,27 @@ program
   .description("Query an existing native video job and optionally download it")
   .argument("<job-id>", "existing ZenMux video job ID")
   .option("-o, --out <path>", "download a succeeded video to this path")
-  .action(async (jobId: string, options: { out?: string }) => {
-    const job = await createClient().getVideo(jobId);
-    printJson(job);
-    if (options.out && job.status === "succeeded") {
-      await saveVideoJob(job, options.out);
-    }
-  });
+  .option(
+    "--last-frame-out <path>",
+    "download a returned last frame to this exact path",
+  )
+  .action(
+    async (jobId: string, options: { out?: string; lastFrameOut?: string }) => {
+      if (options.lastFrameOut && !options.out) {
+        throw new Error("--last-frame-out requires --out.");
+      }
+      const job = await createClient().getVideo(jobId);
+      printJson(job);
+      if (options.out && job.status === "succeeded") {
+        const paths = await saveVideoJob(
+          job,
+          options.out,
+          options.lastFrameOut,
+        );
+        paths.forEach((path) => console.log(path));
+      }
+    },
+  );
 
 program
   .command("understand")
@@ -468,26 +506,6 @@ async function waitForVideo(
         `${new Date().toISOString()} job=${job.id} status=${job.status}`,
       ),
   });
-}
-
-async function saveVideoJob(job: VideoJob, output: string): Promise<void> {
-  const videoUrl = job.content?.video_url;
-  if (!videoUrl) {
-    throw new Error(`Video job ${job.id} succeeded without content.video_url.`);
-  }
-  const outputPath = await downloadToFile(videoUrl, output);
-  await writeJson(`${resolve(output)}.job.json`, job);
-  console.log(outputPath);
-
-  if (job.content?.last_frame_url) {
-    const frameExtension =
-      extname(new URL(job.content.last_frame_url).pathname) || ".jpg";
-    const framePath = resolve(
-      dirname(outputPath),
-      `${basename(outputPath, extname(outputPath))}-last-frame${frameExtension}`,
-    );
-    console.log(await downloadToFile(job.content.last_frame_url, framePath));
-  }
 }
 
 await program.parseAsync();

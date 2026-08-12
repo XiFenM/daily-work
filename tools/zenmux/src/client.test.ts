@@ -71,6 +71,31 @@ describe("ZenMuxClient", () => {
     await expect(client.listModels()).rejects.toBeInstanceOf(ZenMuxHttpError);
   });
 
+  it("sanitizes signed URLs in provider errors before exposing them", async () => {
+    const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(
+      jsonResponse(
+        {
+          error: {
+            result_url:
+              "https://user:password@example.com/result.mp4?token=secret#preview",
+          },
+        },
+        500,
+      ),
+    );
+    const client = new ZenMuxClient({ apiKey: "test", fetchImpl });
+
+    const error = await client.listModels().catch((reason: unknown) => reason);
+
+    expect(error).toBeInstanceOf(ZenMuxHttpError);
+    expect((error as ZenMuxHttpError).body).toEqual({
+      error: { result_url: "https://example.com/result.mp4" },
+    });
+    expect((error as Error).message).not.toMatch(
+      /user|password|token=secret|#preview/,
+    );
+  });
+
   it("aggregates streamed chat deltas and final usage", async () => {
     const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(
       new Response(

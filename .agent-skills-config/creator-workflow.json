@@ -1,0 +1,543 @@
+{
+  "schema": "agent-skills.creator-workflow/v1",
+  "skill": "creator-workflow",
+  "repository_fact_refs": [
+    {
+      "fact_id": "guidelines",
+      "role": "repository-instructions",
+      "kind": "file"
+    },
+    {
+      "fact_id": "package",
+      "role": "package-manifest",
+      "kind": "file"
+    },
+    {
+      "fact_id": "project-template",
+      "role": "project-template",
+      "kind": "collection"
+    },
+    {
+      "fact_id": "publication-contract",
+      "role": "publication-contract",
+      "kind": "file"
+    },
+    {
+      "fact_id": "publication-template",
+      "role": "publication-template",
+      "kind": "collection"
+    },
+    {
+      "fact_id": "publication-validator",
+      "role": "validation-instructions",
+      "kind": "file"
+    }
+  ],
+  "storage": {
+    "state_root": ".creator-workflow",
+    "project_roots": [
+      {
+        "id": "managed-projects",
+        "path": "projects/managed"
+      }
+    ],
+    "work_roots": [
+      {
+        "id": "managed-work",
+        "path": "work/managed"
+      }
+    ],
+    "output_roots": [
+      {
+        "id": "managed-outputs",
+        "path": "outputs/managed"
+      }
+    ],
+    "publication_roots": [
+      {
+        "id": "pathnote-publications",
+        "path": "publications"
+      }
+    ]
+  },
+  "profiles": [
+    {
+      "id": "content-project",
+      "adapter": "generic-content-project-v1",
+      "project_root": "managed-projects",
+      "work_root": "managed-work",
+      "output_root": "managed-outputs",
+      "template_fact_ref": "project-template",
+      "routes": [
+        "browser-observe",
+        "browser-publish",
+        "media-probe",
+        "remotion-guidance",
+        "workspace-check",
+        "zenmux-context",
+        "zenmux-image",
+        "zenmux-models",
+        "zenmux-setup",
+        "zenmux-understand",
+        "zenmux-usage",
+        "zenmux-video-observe",
+        "zenmux-video-wait"
+      ]
+    },
+    {
+      "id": "pathnote-publication",
+      "adapter": "pathnote-publication-v1",
+      "publication_root": "pathnote-publications",
+      "template_fact_ref": "publication-template",
+      "contract_fact_ref": "publication-contract",
+      "routes": [
+        "browser-observe",
+        "browser-publish",
+        "pathnote-check",
+        "workspace-check"
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "id": "browser-observe",
+      "adapter": "selected-skill-v1",
+      "skill": "playwright-cli",
+      "effects": {
+        "billable": false,
+        "remote": true,
+        "destructive": false,
+        "publish": false
+      }
+    },
+    {
+      "id": "browser-publish",
+      "adapter": "selected-skill-v1",
+      "skill": "playwright-cli",
+      "effects": {
+        "billable": false,
+        "remote": true,
+        "destructive": false,
+        "publish": true
+      }
+    },
+    {
+      "id": "media-probe",
+      "adapter": "package-script-v2",
+      "manifest_fact_ref": "package",
+      "script": "media:probe",
+      "subcommands": ["run"],
+      "argument_bindings": [
+        {
+          "key": "input",
+          "kind": "input-path",
+          "authority": "user-provided",
+          "required": true,
+          "cardinality": "one"
+        }
+      ],
+      "output_bindings": [],
+      "effects": {
+        "billable": false,
+        "remote": false,
+        "destructive": false,
+        "publish": false
+      }
+    },
+    {
+      "id": "pathnote-check",
+      "adapter": "package-script-v2",
+      "manifest_fact_ref": "package",
+      "script": "pathnote:check",
+      "subcommands": ["run"],
+      "argument_bindings": [],
+      "output_bindings": [],
+      "effects": {
+        "billable": false,
+        "remote": false,
+        "destructive": false,
+        "publish": false
+      }
+    },
+    {
+      "id": "remotion-guidance",
+      "adapter": "selected-skill-v1",
+      "skill": "remotion-best-practices",
+      "effects": {
+        "billable": false,
+        "remote": false,
+        "destructive": false,
+        "publish": false
+      }
+    },
+    {
+      "id": "workspace-check",
+      "adapter": "package-script-v2",
+      "manifest_fact_ref": "package",
+      "script": "check",
+      "subcommands": ["run"],
+      "argument_bindings": [],
+      "output_bindings": [],
+      "effects": {
+        "billable": false,
+        "remote": false,
+        "destructive": false,
+        "publish": false
+      }
+    },
+    {
+      "id": "zenmux-context",
+      "adapter": "selected-skill-v1",
+      "skill": "zenmux-context",
+      "effects": {
+        "billable": false,
+        "remote": false,
+        "destructive": false,
+        "publish": false
+      }
+    },
+    {
+      "id": "zenmux-image",
+      "adapter": "package-script-v2",
+      "manifest_fact_ref": "package",
+      "script": "zenmux",
+      "subcommands": ["image"],
+      "argument_bindings": [
+        {
+          "key": "count",
+          "kind": "value",
+          "value_type": "int",
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "format",
+          "kind": "value",
+          "value_type": "string",
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "model",
+          "kind": "value",
+          "value_type": "string",
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "out",
+          "kind": "output-base",
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "prompt-file",
+          "kind": "input-path",
+          "authority": "user-provided",
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "quality",
+          "kind": "value",
+          "value_type": "string",
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "size",
+          "kind": "value",
+          "value_type": "string",
+          "required": true,
+          "cardinality": "one"
+        }
+      ],
+      "output_bindings": [
+        {
+          "id": "images",
+          "kind": "indexed-by-count",
+          "source_argument": "out",
+          "count_argument": "count",
+          "condition": { "kind": "always" }
+        },
+        {
+          "id": "response",
+          "kind": "suffix",
+          "source_argument": "out",
+          "suffix": ".response.json",
+          "condition": { "kind": "always" }
+        }
+      ],
+      "billing_bindings": {
+        "provider": { "kind": "literal", "value": "zenmux" },
+        "model_or_tier": { "kind": "argument", "argument": "model" },
+        "count": { "kind": "argument", "argument": "count" },
+        "request_bounds": {
+          "count": { "kind": "argument", "argument": "count" },
+          "format": { "kind": "argument", "argument": "format" },
+          "quality": { "kind": "argument", "argument": "quality" },
+          "size": { "kind": "argument", "argument": "size" }
+        }
+      },
+      "effects": {
+        "billable": true,
+        "remote": true,
+        "destructive": false,
+        "publish": false
+      }
+    },
+    {
+      "id": "zenmux-models",
+      "adapter": "package-script-v2",
+      "manifest_fact_ref": "package",
+      "script": "zenmux",
+      "subcommands": ["models"],
+      "argument_bindings": [
+        {
+          "key": "out",
+          "kind": "target-path",
+          "required": true,
+          "cardinality": "one"
+        }
+      ],
+      "output_bindings": [],
+      "effects": {
+        "billable": false,
+        "remote": true,
+        "destructive": false,
+        "publish": false
+      }
+    },
+    {
+      "id": "zenmux-setup",
+      "adapter": "selected-skill-v1",
+      "skill": "zenmux-setup",
+      "effects": {
+        "billable": false,
+        "remote": false,
+        "destructive": false,
+        "publish": false
+      }
+    },
+    {
+      "id": "zenmux-understand",
+      "adapter": "package-script-v2",
+      "manifest_fact_ref": "package",
+      "script": "zenmux",
+      "subcommands": ["understand"],
+      "argument_bindings": [
+        {
+          "key": "compress",
+          "kind": "value",
+          "value_type": "string",
+          "const": "none",
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "input",
+          "kind": "input-path",
+          "authority": "user-provided",
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "max-local-mb",
+          "kind": "value",
+          "value_type": "int",
+          "const": 50,
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "model",
+          "kind": "value",
+          "value_type": "string",
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "out",
+          "kind": "output-base",
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "prompt-file",
+          "kind": "input-path",
+          "authority": "user-provided",
+          "required": true,
+          "cardinality": "one"
+        }
+      ],
+      "output_bindings": [
+        {
+          "id": "response-metadata",
+          "kind": "suffix",
+          "source_argument": "out",
+          "suffix": ".response.json",
+          "condition": { "kind": "always" }
+        },
+        {
+          "id": "response-text",
+          "kind": "exact",
+          "source_argument": "out",
+          "condition": { "kind": "always" }
+        }
+      ],
+      "billing_bindings": {
+        "provider": { "kind": "literal", "value": "zenmux" },
+        "model_or_tier": { "kind": "argument", "argument": "model" },
+        "count": { "kind": "literal", "value": 1 },
+        "request_bounds": {
+          "compress": { "kind": "argument", "argument": "compress" },
+          "max-local-mb": {
+            "kind": "argument",
+            "argument": "max-local-mb"
+          },
+          "stream": { "kind": "literal", "value": false }
+        }
+      },
+      "effects": {
+        "billable": true,
+        "remote": true,
+        "destructive": false,
+        "publish": false
+      }
+    },
+    {
+      "id": "zenmux-usage",
+      "adapter": "selected-skill-v1",
+      "skill": "zenmux-usage",
+      "effects": {
+        "billable": false,
+        "remote": true,
+        "destructive": false,
+        "publish": false
+      }
+    },
+    {
+      "id": "zenmux-video-wait",
+      "adapter": "package-script-v2",
+      "manifest_fact_ref": "package",
+      "script": "zenmux",
+      "subcommands": ["video"],
+      "argument_bindings": [
+        {
+          "key": "duration",
+          "kind": "value",
+          "value_type": "int",
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "model",
+          "kind": "value",
+          "value_type": "string",
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "out",
+          "kind": "output-base",
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "prompt-file",
+          "kind": "input-path",
+          "authority": "user-provided",
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "ratio",
+          "kind": "value",
+          "value_type": "string",
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "resolution",
+          "kind": "value",
+          "value_type": "string",
+          "required": true,
+          "cardinality": "one"
+        },
+        {
+          "key": "seed",
+          "kind": "value",
+          "value_type": "int",
+          "required": true,
+          "cardinality": "one"
+        }
+      ],
+      "output_bindings": [
+        {
+          "id": "job",
+          "kind": "suffix",
+          "source_argument": "out",
+          "suffix": ".job.json",
+          "condition": { "kind": "always" }
+        },
+        {
+          "id": "video",
+          "kind": "exact",
+          "source_argument": "out",
+          "condition": { "kind": "always" }
+        }
+      ],
+      "billing_bindings": {
+        "provider": { "kind": "literal", "value": "zenmux" },
+        "model_or_tier": { "kind": "argument", "argument": "model" },
+        "count": { "kind": "literal", "value": 1 },
+        "request_bounds": {
+          "duration": { "kind": "argument", "argument": "duration" },
+          "generate-audio": { "kind": "literal", "value": false },
+          "ratio": { "kind": "argument", "argument": "ratio" },
+          "resolution": { "kind": "argument", "argument": "resolution" },
+          "return-last-frame": { "kind": "literal", "value": false },
+          "seed": { "kind": "argument", "argument": "seed" },
+          "wait": { "kind": "literal", "value": true }
+        }
+      },
+      "effects": {
+        "billable": true,
+        "remote": true,
+        "destructive": false,
+        "publish": false
+      }
+    },
+    {
+      "id": "zenmux-video-observe",
+      "adapter": "package-script-v2",
+      "manifest_fact_ref": "package",
+      "script": "zenmux",
+      "subcommands": ["video-status"],
+      "argument_bindings": [
+        {
+          "key": "job-id",
+          "kind": "value",
+          "value_type": "string",
+          "required": true,
+          "cardinality": "one"
+        }
+      ],
+      "output_bindings": [],
+      "observation_receipt_argument": "job-id",
+      "effects": {
+        "billable": false,
+        "remote": true,
+        "destructive": false,
+        "publish": false
+      }
+    }
+  ],
+  "protected_roots": [
+    ".pathnote",
+    "outputs/algorithm-interview-course",
+    "projects/algorithm-interview-course",
+    "publications/ai-workbench-four-layers",
+    "work/algorithm-interview-course"
+  ]
+}

@@ -58,7 +58,7 @@ run_as_root() {
 if [[ "$install_system_deps" == true ]]; then
   if command -v apt-get >/dev/null 2>&1; then
     run_as_root apt-get update
-    run_as_root apt-get install -y ca-certificates git ffmpeg fontconfig fonts-noto-cjk
+    run_as_root apt-get install -y ca-certificates git ffmpeg fontconfig fonts-noto-cjk python3
   else
     echo "Automatic system package installation currently supports Debian/Ubuntu only." >&2
     echo "Install Git, FFmpeg, fontconfig, and a Simplified Chinese font, then rerun without --install-system-deps." >&2
@@ -83,6 +83,16 @@ if ! command -v git >/dev/null 2>&1; then
   echo "Git is required. Install it or rerun with --install-system-deps on Debian/Ubuntu." >&2
   exit 1
 fi
+
+python_command="${DAILY_WORK_PYTHON:-}"
+if [[ -z "$python_command" ]]; then
+  python_command="$(command -v python3 || true)"
+fi
+if [[ -z "$python_command" ]] || ! python_version="$("$python_command" --version 2>&1)" || [[ "$python_version" != Python\ 3.* ]]; then
+  echo "Python 3 is required to materialize central Skills; see docs/environment-setup.md." >&2
+  exit 1
+fi
+export DAILY_WORK_PYTHON="$python_command"
 
 if ! command -v ffmpeg >/dev/null 2>&1; then
   echo "Warning: FFmpeg is not installed; final audio/video QA will be unavailable." >&2
@@ -115,6 +125,7 @@ echo "  OS:     $(uname -srm)"
 echo "  Node:   $node_version"
 echo "  pnpm:   $pnpm_version"
 echo "  Git:    $(git --version)"
+echo "  Python: $python_version"
 if command -v ffmpeg >/dev/null 2>&1; then
   echo "  FFmpeg: $(ffmpeg -version 2>/dev/null | sed -n '1p')"
 else

@@ -18,6 +18,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - uses: pnpm/action-setup@v4
         with:
           version: 11.9.0
@@ -36,5 +38,6 @@ jobs:
           bash -n scripts/bootstrap-linux.sh
           bash scripts/bootstrap-linux.sh --check-only
       - run: pnpm install --frozen-lockfile
-      - run: pnpm doctor
+      - run: pnpm skills:sync
+      - run: pnpm repo:doctor
       - run: pnpm check

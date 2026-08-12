@@ -5,6 +5,13 @@ node_modules/
 coverage/
 dist/
 
+# Materialized central Skills and local orchestration state
+.agents/skills/
+.agent-skills.state.json
+.agent-skills.lock
+.agent-skills.state.json.*.tmp
+.creator-workflow/
+
 # Secrets and local configuration
 .env
 .env.*

@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { spawnSync } from "node:child_process";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { release } from "node:os";
 import { Command } from "commander";
@@ -33,6 +33,19 @@ const commandVersion = (
   });
   if (result.error || result.status !== 0) return null;
   return (result.stdout || result.stderr).trim().split(/\r?\n/)[0] ?? null;
+};
+
+const packageVersion = (manifestPath: string): string | null => {
+  try {
+    const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
+      version?: unknown;
+    };
+    return typeof manifest.version === "string" && manifest.version
+      ? manifest.version
+      : null;
+  } catch {
+    return null;
+  }
 };
 
 program.action(({ strict }: { strict: boolean }) => {
@@ -84,15 +97,13 @@ program.action(({ strict }: { strict: boolean }) => {
       ? "node_modules is present"
       : "run pnpm install",
   });
-  const playwrightCliEntry = resolve(
+  const playwrightCliManifest = resolve(
     "node_modules",
     "@playwright",
     "cli",
-    "playwright-cli.js",
+    "package.json",
   );
-  const playwrightCliVersion = existsSync(playwrightCliEntry)
-    ? commandVersion(process.execPath, [playwrightCliEntry, "--version"])
-    : null;
+  const playwrightCliVersion = packageVersion(playwrightCliManifest);
   checks.push({
     level: playwrightCliVersion ? "ok" : "fail",
     name: "Playwright CLI",
@@ -122,20 +133,19 @@ program.action(({ strict }: { strict: boolean }) => {
 
   for (const skill of [
     "creator-workflow",
+    "playwright-cli",
+    "remotion-best-practices",
     "zenmux-context",
     "zenmux-setup",
     "zenmux-usage",
-    "remotion-best-practices",
-    "remotion-docs",
-    "playwright-cli",
   ]) {
     const found = existsSync(resolve(".agents", "skills", skill, "SKILL.md"));
     checks.push({
       level: found ? "ok" : "fail",
       name: `Skill ${skill}`,
       detail: found
-        ? "installed"
-        : "missing from checkout; restore the committed project skills",
+        ? "materialized"
+        : "missing; initialize .agent-skills and run pnpm skills:sync",
     });
   }
 

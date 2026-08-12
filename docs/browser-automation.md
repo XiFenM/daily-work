@@ -1,6 +1,6 @@
 # Playwright CLI 浏览器自动化
 
-仓库统一使用微软官方 `@playwright/cli` 和项目级 `playwright-cli` skill。Agent 通过页面快照获得稳定的元素 ref，再执行点击、输入、选择、上传、截图、网络检查或 Trace。旧的自制截图脚本已移除。
+仓库统一使用微软官方 `@playwright/cli` 和由中央 `.agent-skills` 子模块 materialize 的 `playwright-cli` skill。Agent 通过页面快照获得稳定的元素 ref，再执行点击、输入、选择、上传、截图、网络检查或 Trace。旧的自制截图脚本已移除。
 
 ## 选择连接方式
 
@@ -15,14 +15,18 @@
 
 ## 首次准备
 
-项目 skills 已随仓库提交。从仓库根目录安装依赖并验证 skills：
+中央 Skill 来源以子模块提交固定；生成的 `.agents/skills/` 不随 Git 提交。从仓库根目录初始化来源、安装依赖、生成并验证本地视图：
 
 ```powershell
+git submodule update --init --recursive
 pnpm install
+pnpm skills:sync
 pnpm skills:check
-pnpm doctor
+pnpm repo:doctor
 pnpm browser --help
 ```
+
+`skills:sync` 只使用当前固定提交和 version 2 配置，不会联网升级 `playwright-cli` 或其他 Skill。
 
 `@playwright/cli` 固定为项目依赖，因此 Agent 应使用 `pnpm browser <command>`，不要依赖机器上的全局版本。只有创建隔离浏览器会话时才可能需要下载浏览器：
 
@@ -78,7 +82,7 @@ pnpm browser -s=work-chrome snapshot
 pnpm browser -s=work-chrome click e15
 pnpm browser -s=work-chrome fill e21 "需要输入的内容"
 pnpm browser -s=work-chrome press Enter
-pnpm browser -s=work-chrome screenshot --filename=outputs/browser/current.png
+pnpm browser -s=work-chrome screenshot --filename=outputs/managed/browser/current.png
 ```
 
 页面跳转、弹窗或明显状态变化后重新执行 `snapshot`，不要长期复用旧 ref。可用以下命令辅助排错：
@@ -184,14 +188,14 @@ pnpm browser -s=debug-chrome detach
 ```powershell
 pnpm browser -s=research open https://example.com
 pnpm browser -s=research snapshot
-pnpm browser -s=research screenshot --filename=outputs/browser/example.png
+pnpm browser -s=research screenshot --filename=outputs/managed/browser/example.png
 pnpm browser -s=research close
 ```
 
 默认 profile 只在会话期间保留。只有明确需要跨重启复用时才使用 `--persistent`，并将自定义 profile 放在被 Git 忽略的 `work/`：
 
 ```powershell
-pnpm browser -s=research open https://example.com --profile=work/browser-profiles/research
+pnpm browser -s=research open https://example.com --profile=work/managed/browser-profiles/research
 ```
 
 ## 远程 Linux 服务器
@@ -201,7 +205,7 @@ pnpm browser -s=research open https://example.com --profile=work/browser-profile
 ```bash
 pnpm browser -s=research open https://example.com
 pnpm browser -s=research snapshot
-pnpm browser -s=research screenshot --filename=outputs/browser/example.png
+pnpm browser -s=research screenshot --filename=outputs/managed/browser/example.png
 pnpm browser -s=research close
 ```
 
@@ -222,8 +226,8 @@ Linux 系统依赖和初始化命令见 [environment-setup.md](environment-setup
 3. 使用有语义的命名会话，避免多个任务互相操作标签页。
 4. 先 `snapshot`，再使用 ref 操作；页面变化后重新快照。
 5. 不调用 Cookie 读取命令，不用 `eval` 提取凭证，不把登录状态写入仓库。
-6. 发布、发送、购买、删除和最终提交表单只在用户明确授权的范围内执行。
-7. 将可交付截图、PDF、Trace 和录像写入 `outputs/<project>/`；临时快照留在被忽略的 `.playwright-cli/` 或 `work/`。
+6. 发布、发送、购买、删除和最终提交表单只在用户对具体目标明确授权的范围内执行；一次授权不得复用于后续目标或失败重试。
+7. 将可交付截图、PDF、Trace 和录像写入 `outputs/managed/<project>/`；临时快照留在被忽略的 `.playwright-cli/` 或 `work/managed/<project>/`。
 8. 接管的浏览器用 `detach`；CLI 自己打开的隔离浏览器才用 `close`。
 
 ## 常见问题

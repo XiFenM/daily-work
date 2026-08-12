@@ -1,7 +1,12 @@
 node_modules
 pnpm-lock.yaml
+.agent-skills
 .agents/skills
+.agent-skills.state.json
+.pathnote
 outputs
+projects/algorithm-interview-course
+publications/ai-workbench-four-layers
 work
 coverage
 dist
